@@ -31246,6 +31246,66 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(200);
+
+	var _Header = __webpack_require__(269);
+
+	var _Header2 = _interopRequireDefault(_Header);
+
+	var _Main = __webpack_require__(270);
+
+	var _Main2 = _interopRequireDefault(_Main);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Home = function (_React$Component) {
+	        _inherits(Home, _React$Component);
+
+	        function Home() {
+	                _classCallCheck(this, Home);
+
+	                return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+	        }
+
+	        _createClass(Home, [{
+	                key: 'render',
+	                value: function render() {
+	                        return _react2.default.createElement(
+	                                'div',
+	                                { className: 'frame' },
+	                                _react2.default.createElement(_Header2.default, null),
+	                                _react2.default.createElement(_Main2.default, null)
+	                        );
+	                }
+	        }]);
+
+	        return Home;
+	}(_react2.default.Component);
+
+	exports.default = Home;
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
@@ -31265,319 +31325,101 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Home = function (_React$Component) {
-	  _inherits(Home, _React$Component);
+	var Logo = function (_React$Component) {
+	  _inherits(Logo, _React$Component);
 
-	  function Home() {
-	    _classCallCheck(this, Home);
+	  function Logo() {
+	    _classCallCheck(this, Logo);
 
-	    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+	    return _possibleConstructorReturn(this, (Logo.__proto__ || Object.getPrototypeOf(Logo)).call(this));
 	  }
 
-	  _createClass(Home, [{
+	  _createClass(Logo, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'frame' },
+	        { className: 'logo' },
 	        _react2.default.createElement(
-	          'header',
-	          { className: 'header', id: 'header' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'logo' },
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              _react2.default.createElement('img', { src: 'css/images/logos/logo.png', alt: 'logo-empresa' }),
-	              'Wolf'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'nav',
-	            { className: 'nav' },
-	            _react2.default.createElement(
-	              'ul',
-	              null,
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon rocha' },
-	                  _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Rochas'
-	                ),
-	                _react2.default.createElement(
-	                  'ul',
-	                  null,
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                      'a',
-	                      { href: '#' },
-	                      'Nuevo Rocha'
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                      'a',
-	                      { href: '#' },
-	                      'Ver Rochas'
-	                    )
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon actividad' },
-	                  _react2.default.createElement('i', { className: 'fa fa-coffee', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Actividades'
-	                ),
-	                _react2.default.createElement(
-	                  'ul',
-	                  null,
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                      'a',
-	                      { href: '#' },
-	                      'Nueva Actividad'
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                      'a',
-	                      { href: '#' },
-	                      'Informe Abastecimiento'
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                      'a',
-	                      { href: '#' },
-	                      'Informe Producci\xF3n'
-	                    )
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon abastecimiento' },
-	                  _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Abastecimiento'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon comercial' },
-	                  _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Comercial'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon dam' },
-	                  _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Dam'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon desarrollo' },
-	                  _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Desarrollo'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon despacho' },
-	                  _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Despacho'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon gerencia' },
-	                  _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Gerencia'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon instalaciones' },
-	                  _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Instalaciones'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon prevencion' },
-	                  _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Prevenci\xF3n'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon produccion' },
-	                  _react2.default.createElement('i', { className: 'fa fa-gavel', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Producci\xF3n'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon reclamo' },
-	                  _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Reclamos'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon sillas' },
-	                  _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Sillas'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'icon sistema' },
-	                  _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' })
-	                ),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Sistema'
-	                )
-	              )
-	            )
-	          )
-	        ),
+	          'h1',
+	          null,
+	          _react2.default.createElement('img', { src: this.props.logo, alt: 'logo-empresa' }),
+	          'Wolf'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Logo;
+	}(_react2.default.Component);
+
+	exports.default = Logo;
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(200);
+
+	var _Logo = __webpack_require__(268);
+
+	var _Logo2 = _interopRequireDefault(_Logo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Header = function (_React$Component) {
+	  _inherits(Header, _React$Component);
+
+	  function Header() {
+	    _classCallCheck(this, Header);
+
+	    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this));
+	  }
+
+	  _createClass(Header, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'header',
+	        { className: 'header', id: 'header' },
+	        _react2.default.createElement(_Logo2.default, { logo: 'bundle/css/images/logos/logo.png' }),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'main', id: 'main' },
+	          'nav',
+	          { className: 'nav' },
 	          _react2.default.createElement(
-	            'nav',
-	            { className: 'nav-config' },
+	            'ul',
+	            null,
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'name-user' },
+	              'li',
+	              null,
 	              _react2.default.createElement(
-	                'h2',
-	                null,
-	                'Crist\xF3bal Maturana'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'img-user' },
-	              _react2.default.createElement('img', { src: 'bundle/css/images/fondos/cristobal.jpg', alt: 'usuario' })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'content' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'breadcrumb' },
+	                'div',
+	                { className: 'icon rocha' },
+	                _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Rochas'
+	              ),
 	              _react2.default.createElement(
 	                'ul',
 	                null,
@@ -31587,7 +31429,7 @@
 	                  _react2.default.createElement(
 	                    'a',
 	                    { href: '#' },
-	                    'Pagina 1'
+	                    'Nuevo Rocha'
 	                  )
 	                ),
 	                _react2.default.createElement(
@@ -31596,7 +31438,34 @@
 	                  _react2.default.createElement(
 	                    'a',
 	                    { href: '#' },
-	                    'Pagina 2'
+	                    'Ver Rochas'
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon actividad' },
+	                _react2.default.createElement('i', { className: 'fa fa-coffee', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Actividades'
+	              ),
+	              _react2.default.createElement(
+	                'ul',
+	                null,
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#' },
+	                    'Nueva Actividad'
 	                  )
 	                ),
 	                _react2.default.createElement(
@@ -31605,8 +31474,292 @@
 	                  _react2.default.createElement(
 	                    'a',
 	                    { href: '#' },
-	                    'Pagina 3'
+	                    'Informe Abastecimiento'
 	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '#' },
+	                    'Informe Producci\xF3n'
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon abastecimiento' },
+	                _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Abastecimiento'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon comercial' },
+	                _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Comercial'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon dam' },
+	                _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Dam'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon desarrollo' },
+	                _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Desarrollo'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon despacho' },
+	                _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Despacho'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon gerencia' },
+	                _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Gerencia'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon instalaciones' },
+	                _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Instalaciones'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon prevencion' },
+	                _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Prevenci\xF3n'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon produccion' },
+	                _react2.default.createElement('i', { className: 'fa fa-gavel', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Producci\xF3n'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon reclamo' },
+	                _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Reclamos'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon sillas' },
+	                _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Sillas'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'icon sistema' },
+	                _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' })
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Sistema'
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Header;
+	}(_react2.default.Component);
+
+	exports.default = Header;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(200);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Main = function (_React$Component) {
+	  _inherits(Main, _React$Component);
+
+	  function Main() {
+	    _classCallCheck(this, Main);
+
+	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
+	  }
+
+	  _createClass(Main, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'main', id: 'main' },
+	        _react2.default.createElement(
+	          'nav',
+	          { className: 'nav-config' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'name-user' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Crist\xF3bal Maturana'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'img-user' },
+	            _react2.default.createElement('img', { src: 'bundle/css/images/fondos/cristobal.jpg', alt: 'usuario' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'content' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'breadcrumb' },
+	            _react2.default.createElement(
+	              'ul',
+	              null,
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#' },
+	                  'Pagina 1'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#' },
+	                  'Pagina 2'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#' },
+	                  'Pagina 3'
 	                )
 	              )
 	            )
@@ -31616,10 +31769,10 @@
 	    }
 	  }]);
 
-	  return Home;
+	  return Main;
 	}(_react2.default.Component);
 
-	exports.default = Home;
+	exports.default = Main;
 
 /***/ }
 /******/ ]);
