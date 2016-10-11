@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 import Header from './Header'
 import Main from './Main'
@@ -15,7 +14,7 @@ class Home extends React.Component {
       return (
               <div className="frame">
                       <Header/>
-                      <Main/>
+                      <Main content={this.props.content}/>
               </div>
       )
 

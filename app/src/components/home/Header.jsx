@@ -33,7 +33,7 @@ class Header extends React.Component {
                   </div>
                   <a href="#">Actividades</a>
                   <ul>
-                    <li><a href="#">Nueva Actividad</a></li>
+                    <li><Link to="/home/servicio">Nueva Actividad</Link></li>
                     <li><a href="#">Informe Abastecimiento</a></li>
                     <li><a href="#">Informe Producción</a></li>
                   </ul>

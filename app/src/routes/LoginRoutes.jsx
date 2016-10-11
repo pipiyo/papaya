@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
@@ -26,7 +25,7 @@ export default class LoginRoutes extends React.Component {
     console.log(path)
   }
 */
-//this.setState({filter: search})
+//this.setState({user: false})
   userFormSubmit(ev) {
     ev.preventDefault()
     let user = {

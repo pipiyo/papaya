@@ -21,6 +21,7 @@ class Main extends React.Component {
                 <li><a href="#">Pagina 3</a></li>
               </ul>
             </div>
+            {this.props.content}
           </div>
         </div>
       )
