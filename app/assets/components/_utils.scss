@@ -1,0 +1,349 @@
+/* -> Variables <- */
+
+$fontsPath: '../fonts/';
+$imagesPath: '../images/';
+
+/* -> Definiendo tipografia <- */
+
+@font-face {
+    font-family: 'Amble';
+    src: url($fontsPath +'fonts-cdec/Amble-Regular-webfont.eot');
+    src: url($imagesPath +'fonts-cdec/Amble-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url($fontsPath +'fonts-cdec/Amble-Regular-webfont.woff') format('woff'),
+        url($fontsPath +'fonts-cdec/Amble-Regular-webfont.ttf') format('truetype'),
+        url($fontsPath +'fonts-cdec/Amble-Regular-webfont.svg#AmbleRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Amble';
+    src: url($fontsPath +'fonts-cdec/Amble-Bold-webfont.eot');
+    src: url($fontsPath +'fonts-cdec/Amble-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url($fontsPath +'fonts-cdec/Amble-Bold-webfont.woff') format('woff'),
+        url($fontsPath +'fonts-cdec/Amble-Bold-webfont.ttf') format('truetype'),
+        url($fontsPath +'fonts-cdec/Amble-Bold-webfont.svg#AmbleBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Amble';
+    src: url($fontsPath +'fonts-cdec/Amble-Italic-webfont.eot');
+    src: url($fontsPath +'fonts-cdec/Amble-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+        url($fontsPath +'fonts-cdec/Amble-Italic-webfont.woff') format('woff'),
+        url($fontsPath +'fonts-cdec/Amble-Italic-webfont.ttf') format('truetype'),
+        url($fontsPath +'fonts-cdec/Amble-Italic-webfont.svg#AmbleBold') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: 'lucida_granderegular';
+    src: url($fontsPath +'fonts-lucida/lucidagranderegular.woff2') format('woff2'),
+         url($fontsPath +'fonts-lucida/lucidagranderegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+$fontAmble : 'Amble';
+$fontLucida : 'lucida_granderegular';
+
+
+
+/* -> Definiendo tamanos tipograficos <- */
+$fontMini : 11px;
+$fontTiny : 12px;
+$fontSmall : 14px;
+$fontRegular : 1em;
+$fontRegularBig : 18px;
+$fontRegularBigger : 20px;
+$fontBig : 24px;
+$fontBigger : 28px;
+$fontTall : 32px;
+$fontTaller : 36px;
+$fontReallyBig : 40px;
+$fontHuge : 48px;
+$fontHumongous : 64px;
+
+/* -> Genero un mapa de tamanos <- */
+$tipos : (
+    mini : $fontMini,
+    tiny : $fontTiny,
+    small : $fontSmall,
+    regular : $fontRegular,
+    regular-big : $fontRegularBig,
+    regular-bigger : $fontRegularBigger,
+    big : $fontBig,
+    tall : $fontTall,
+    taller : $fontTaller,
+    really-big : $fontReallyBig,
+    huge : $fontHuge,
+    humongous : $fontHumongous
+);
+
+
+/* -> Colores Sociales <- */
+$twitterColor : #55acee;
+$twitterColor_dark : darken( $twitterColor, 10%);
+$twitterColor_darker : darken( $twitterColor, 15%);
+$twitterColor_light : lighten( $twitterColor, 10%);
+$twitterColor_lighter : lighten( $twitterColor, 15%); 
+
+$facebookColor : #3b5998;
+$facebookColor_dark : darken( $facebookColor, 10%);
+$facebookColor_darker : darken( $facebookColor, 15%);
+$facebookColor_light : lighten( $facebookColor, 10%);
+$facebookColor_lighter : lighten( $facebookColor, 15%); 
+
+$googleColor : #df4a32;
+$googleColor_dark : darken( $googleColor, 10%);
+$googleColor_darker : darken( $googleColor, 15%);
+$googleColor_light : lighten( $googleColor, 10%);
+$googleColor_lighter : lighten( $googleColor, 15%); 
+
+$linkedInColor : #0077b5;
+$linkedInColor_dark : darken( $linkedInColor, 10%);
+$linkedInColor_darker : darken( $linkedInColor, 15%);
+$linkedInColor_light : lighten( $linkedInColor, 10%);
+$linkedInColor_lighter : lighten( $linkedInColor, 15%); 
+
+$issuuColor : #ee5226;
+$issuuColor_dark : darken( $issuuColor, 10%);
+$issuuColor_darker : darken( $issuuColor, 15%);
+$issuuColor_light : lighten( $issuuColor, 10%);
+$issuuColor_lighter : lighten( $issuuColor, 15%); 
+
+$youtubeColor : #de1d25;
+$youtubeColor_dark : darken( $youtubeColor, 10%);
+$youtubeColor_darker : darken( $youtubeColor, 15%);
+$youtubeColor_light : lighten( $youtubeColor, 10%);
+$youtubeColor_lighter : lighten( $youtubeColor, 15%);
+
+$instagramColor : #3a648d;
+$instagramColor_dark : darken( $instagramColor, 10%);
+$instagramColor_darker : darken( $instagramColor, 15%);
+$instagramColor_light : lighten( $instagramColor, 10%);
+$instagramColor_lighter : lighten( $instagramColor, 15%);
+
+
+/* -> genero un mapa de tamanos <- */
+$color_corporativo_darker : #2F3740;
+$color_corporativo_dark : #34404e; 
+$color_corporativo_regular : #63707f; 
+$color_corporativo_light : #535f6c;
+$color_corporativo_lighter : #f5f8fb; 
+$color_corporativo_lightest : #f5f8fb;
+
+$color_secundario_regular : #FFD34E; 
+
+
+$color_abastecimiento : #A7C520;
+$color_produccion: #225378; 
+$color_sillas : #63707f; 
+$color_rochas : #105B63;
+$color_despacho : #FFD34E; 
+$color_instalaciones : #DC3522;
+$color_comercial : #DC9C76;
+$color_dam : #C77966;
+$color_gerencia : #74A588;
+$color_prevencion : #723147;
+$color_reclamo : #CC4452;
+$color_sistema : #FF9311;
+$color_desarrollo : #D64700;
+$color_actividad : #CC1E2C;
+
+$color_valido : #8FB259;
+$color_error : #DC3522;
+
+$negro : #000;
+$gris_darker : #333;
+$gris_dark : #666;
+$gris : #CCC;
+$gris_light : #5E5F62;
+$gris_lighter: #d8d8d8;
+$gris_lightest: #E6E6E6;
+$gris-fondo: #F2F2F2;
+$blanco : #fff;
+
+/* -> genero un mapa de Colores<- */
+$colores : (
+    corporativo : (
+        darker : $color_corporativo_darker,
+        dark : $color_corporativo_dark,
+        regular : $color_corporativo_regular,
+        light : $color_corporativo_light,
+        lighter : $color_corporativo_lighter,
+        lightest : $color_corporativo_lightest
+    ),
+    gris : (
+        negro : $negro,
+        darker : $gris_darker,
+        dark : $gris_dark,
+        regular : $gris,
+        light : $gris_light,
+        lighter : $gris_lighter,
+        lightest : $gris_lightest,
+        blanco : $blanco,
+        fondo : $gris-fondo
+    )
+);
+/* -> colores extras <- */
+
+
+/* -> transition comun <- */
+$transition : all 200ms ease;
+
+/* -> Definiendo mediaqueries <- */
+$desktop : 1200px;
+$tablet_horizontal : 1024px;
+$tablet_vertical : 850px;
+$phablet : 640px;
+$phone : 320px;
+
+
+@mixin media-query( $type ){
+    @if $type == desktop-only {
+        @media only screen and (min-width: $desktop) { @content; }
+    }
+    @if $type == desktop-tablet {
+        @media only screen and (min-width: $tablet_horizontal) and (max-width: $desktop) { @content; }
+    }
+    @if $type == small-desktop-down {
+        @media only screen and (max-width: $desktop) { @content; }
+    }
+    @if $type == tablet-only {
+        @media only screen and (min-width: $tablet_vertical) and (max-width: $tablet_horizontal) { @content; }
+    }
+    @if $type == tablet-down {
+        @media only screen and (max-width: $tablet_horizontal) { @content; }
+    }
+    @if $type == vertical-tablet-up {
+        @media only screen and (min-width: $tablet_vertical) { @content; }
+    }
+    @if $type == vertical-tablet-down {
+        @media only screen and (max-width: $tablet_vertical) { @content; }
+    }
+    @if $type == phablet-only {
+        @media only screen and (min-width: $phablet) and (max-width: $tablet_vertical - 1) { @content; }
+    }
+    @if $type == phablet-down {
+        @media only screen and (max-width: $phablet) { @content; }
+    }
+    @if $type == phone-only {
+        @media only screen and (max-width: $phone) { @content; }
+    }
+}
+
+@mixin desktop-only { @include media-query(desktop-only) { @content }; }
+@mixin desktop-tablet { @include media-query(desktop-tablet) { @content }; }
+@mixin small-desktop-down { @include media-query(small-desktop-down) { @content }; }
+@mixin tablet-only { @include media-query(tablet-only) { @content }; }
+@mixin tablet-down { @include media-query(tablet-down) { @content }; }
+@mixin vertical-tablet-up { @include media-query(vertical-tablet-up) { @content }; }
+@mixin vertical-tablet-down { @include media-query(vertical-tablet-down) { @content }; }
+@mixin phablet-only { @include media-query(phablet-only) { @content }; }
+@mixin phablet-down { @include media-query(phablet-down) { @content }; }
+@mixin phone-only { @include media-query(phone-only) { @content }; }
+
+///// mapa de media queries
+$medias : (
+    desktop-only,
+    desktop-tablet,
+    small-desktop-down,
+    tablet-only,
+    tablet-down,
+    vertical-tablet-up,
+    vertical-tablet-down,
+    phablet-only,
+    phablet-down,
+    phone-only
+);
+
+
+@mixin image-replacement {
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    font-family: a;
+}
+
+@mixin reset-appearance {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background: none;
+    border-radius: 0px;
+    line-height: 1;
+    border: 0px;
+    outline: 0px;
+    padding: 0px;
+}
+
+@mixin image-replacement {
+    font-size: 0;
+    line-height: 0;
+    font-family: a;
+    color: transparent;
+}
+
+@mixin remove-select-arrow {
+    text-indent: 0.01px;
+    text-overflow: '';
+    &::-ms-expand { display: none; }
+}
+
+@mixin placeholder {
+    &::-webkit-input-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &::-ms-input-placeholder { @content; }
+}
+
+@mixin active-state {
+    &:active, &:hover, .no-touch &:active, .touch &:active, .touch &:hover {
+        @content;
+    }
+}
+
+@mixin btn-icon( $name ) {
+    &.icon-left.#{$name}:before, &.icon-right.#{$name}:after, , &.icon-top.#{$name}:before {
+        @content;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

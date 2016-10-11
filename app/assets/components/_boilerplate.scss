@@ -1,0 +1,674 @@
+/**
+ * En base, pero no igual, a las convenciones BEM y SMASCSS pero menos estricta para permitir incoherencias de diseno
+ */
+
+///////////////////////////////////
+////////// Ayudas
+///////////////////////////////////
+
+///
+/// Clases de fondos de color
+/// Imprime clases segun cada color definido en el array $colores
+/// formato: .bg-tipo-shade {} y text-tipo-shade
+/// ejemplo: .bg-corporativo-dark y .text-corporativo-dark
+///
+@each $type, $colors in $colores {
+    @each $shade, $color in $colors {
+        .bg-#{$type}-#{$shade} { background: $color; }
+        .text-#{$type}-#{$shade} { color: $color; }
+    }
+}
+
+
+///
+/// Clases de tamanos tipograficos
+/// Imprime clases segun cada tamano definido en el array $tipos
+/// formato: .text-tamano {}
+/// ejemplo: .text-huge
+///
+@each $name, $size in $tipos {
+    .text-#{$name} { font-size: $size; }
+}
+
+
+///
+/// Clases dependientes de media queries segun cada item definido en el array $medias
+///
+@each $mq in $medias {
+    @include media-query( $mq ) {
+        .hide-on-#{$mq} { display: none !important; }
+        .lefted-text-#{$mq} { text-align: left; }
+        .righted-text-#{$mq} { text-align: right; }
+        .centered-text-#{$mq} { text-align: center; }
+    }
+}
+
+// detector de mobile
+.device {
+    .hide-on-device { display: none !important; }
+}
+
+.no-device {
+    .only-on-device { display: none !important; }
+}
+
+/**** genericas ****/
+/**** genericas ****/
+/**** genericas ****/
+html{
+    height: 100%;
+}
+
+body{
+   font-family: $fontAmble;
+   line-height: 1.6em;
+   height: 100%;
+}
+h1,h2,h3,h4,h5,h6{
+   line-height: 1.2em;
+   font-family: $fontAmble;
+}
+p {
+    &:first-child { margin-top: 0; }
+    &:last-child { margin-bottom: 0; }
+}
+
+a {
+    color: $color_corporativo_light;
+    @include active-state {
+        text-decoration: none;
+        color: $gris;
+    }
+}
+
+a.external-link, .external-link a {
+    &:after {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-left: 5px;
+        vertical-align: middle;
+        
+    }
+}
+
+.lefted-text { text-align: left; }
+.righted-text { text-align: right; }
+.centered-text { text-align: center; }
+
+.uppercase { text-transform: uppercase; }
+
+/**** regulares ****/
+/**** regulares ****/
+/**** regulares ****/
+
+.regular-shadow {
+    box-shadow: 0 3px 3px rgba($negro, .1);
+}
+.regular-text{
+    margin: .75em 0 0 0;
+    color: $gris_darker;
+    font-size: $fontRegular;
+}
+.regular-module{
+    background: $blanco; 
+}
+.regular-aside{
+    background: $blanco;
+    border-top:solid .15em $gris_dark;
+    margin-bottom: 1em;
+}
+@include vertical-tablet-down{
+    .regular-aside{
+        margin-bottom: 0;
+        margin-top: 1em;
+    }
+}
+.regular-table {
+    width: 100%;
+    tr:nth-child(even) { background: $color_corporativo_lighter }
+    
+    th {
+        color: $blanco;
+        vertical-align: top;
+        background: $color_corporativo_darker;
+        padding: .8em $fontSmall;
+        font-family: $fontAmble;
+        font-size: 13px;
+        line-height: 1.1;
+        font-weight: bold;
+        text-align: left;
+    }
+    tbody{
+        border: solid 1px $color_corporativo_lighter; 
+    }
+    
+    td {
+        line-height: 1.1;
+        font-weight: normal;
+        font-size: $fontTiny;
+        color: $gris_darker;
+        padding: $fontSmall;
+    }
+}
+
+
+.regular-blockquote {
+    display: block;
+    width: 100%;
+    margin: 1.5em 0 1.5em 1.5em;
+    padding: 0 1em;
+    font-size: $fontRegularBigger;
+    font-style: italic;
+    color: $gris_light;
+    position: relative;
+
+    &:before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 100%;
+        background: $color_corporativo_regular;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 100%;
+    }
+
+    p {
+        margin: 0;
+        + p { margin-top: 1em; }
+    }
+
+    @include vertical-tablet-down {
+        margin: 1.5em 0;
+        font-size: $fontRegular;
+    }
+}
+
+.regular-ul {
+    list-style: none;
+    padding-left: 1.5em;
+    margin: 1.25em 0;
+    &:only-child { margin: 0; }
+
+    li {
+        margin: 10px 0;
+        position: relative;
+        &:before {
+            content: "\00bb";
+            position: absolute;
+            left: -1em;
+            color: $color_corporativo_regular;
+        }
+
+        &:first-child { margin-top: 0; }
+        &:last-child { margin-bottom: 0; }
+    }
+}
+
+.regular-ol {
+    @extend .regular-ul;
+    padding-left: 2.5em;
+    counter-reset: pretty_ol;
+
+    li {
+        counter-increment: pretty_ol;
+        margin: 15px 0;
+
+        &:before {
+            content: counter(pretty_ol);
+            line-height: 1em;
+            display: block;
+            color: $color_corporativo_regular;
+            font-weight: bold;
+            font-family: $fontAmble;
+            padding: .2em;
+            left: -1.5em;
+        }
+    }
+}
+
+.regular-content-table-holder {
+    width: 100%;
+
+    @include tablet-down {
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+
+        &:before {
+            content: "<- Desliza para ver la tabla ->";
+            display: block;
+            width: 100%;
+            padding: 1em;
+            text-align: center;
+            font-size: $fontSmall;
+            color: $color_corporativo_regular;
+        }
+
+        table {
+            width: auto;
+            min-width: 175%;
+            max-width: 300%;
+            touch-action: pan-x;
+        }
+    }
+}
+
+
+/**** frame ****/
+/**** frame ****/
+/**** frame ****/
+
+.frame{
+    display: table;
+    width: 100%;
+    height: 100%;
+    @include vertical-tablet-down {
+        display: block;
+    }
+    .header{
+        display: table-cell;
+        vertical-align: top;
+        width: 250px;
+        height: 100%;
+        @include vertical-tablet-down {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+    }
+    .main{
+        display: table-cell;
+        height: 100%;
+        vertical-align: top;
+        @include vertical-tablet-down {
+            width: 100%;
+            display: block;
+        }
+    }
+}
+
+/**** header ****/
+/**** header ****/
+/**** header ****/
+
+.header{
+    background: $color_corporativo_dark;
+    position:relative;
+    overflow: hidden;
+    .logo{
+        background: $color_corporativo_darker;
+        margin: 0 auto;
+        padding: .3em 0;
+        text-align: center;
+        img{
+            display: inline-block;
+            margin: auto;
+            max-width: 200px;
+            max-height: 60px;
+        }
+        h1{
+            display: inline-block;
+            margin: 0;
+            text-align: center;
+            color: $blanco;
+            font-size: $fontBig;
+            padding: 0;
+        }
+    }  
+}
+
+/**** nav ****/
+/**** nav ****/
+/**** nav ****/
+
+.nav{
+    ul{
+        margin:0;
+        padding:0;
+        list-style-type: none;
+        li{
+            display: block;
+            width: 100%;
+            position:relative;
+            padding: .4em .5em .4em 1em;
+            font-size: $fontRegular;
+            transition-property: background;
+            transition-duration: 1s;
+            transition-timing-function: linear;
+            &:hover{
+                background: $color_corporativo_light;
+                cursor: pointer;
+                > ul{
+                    display: block;
+                }
+            }
+            ul{
+                display: none;
+                li{
+                    padding: 0 0 0 3em;
+                    position: relative;
+                    &:hover{
+                        background:none;
+                    }
+                    &:before {
+                        content: "\00bb";
+                        position: absolute;
+                        left: 43px;
+                        color: $blanco;
+                    }
+                    a{
+                        font-size: $fontTiny;
+                        line-height: 110%;
+                        &:hover{
+                            color: $color_corporativo_dark ;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            a{
+                display: inline-block;
+                width: calc(100% - 30px);
+                position:relative;
+                padding-left: 1em;
+                vertical-align: middle;
+                text-decoration: none;
+                color: $color_corporativo_lighter;
+            }
+            .icon{
+                display: inline-block;
+                background: red;
+                text-align: center;
+                color: $blanco;
+                vertical-align: middle;
+                border-radius: 50%;
+                width: 25px;
+                height: 25px;
+                &.rocha{
+                    background: $color_rochas;
+                }
+                &.actividad{
+                    background: $color_actividad;
+                }
+                &.abastecimiento{
+                    background: $color_abastecimiento;
+                }
+                &.desarrollo{
+                    background: $color_desarrollo;
+                }
+                &.despacho{
+                    background: $color_despacho;
+                }
+                &.instalaciones{
+                    background: $color_instalaciones;
+                }
+                &.produccion{
+                    background: $color_produccion;
+                }
+                &.sillas{
+                    background: $color_sillas;
+                }
+                &.comercial{
+                    background: $color_comercial;
+                }
+                &.dam{
+                    background: $color_dam;
+                }
+                &.gerencia{
+                    background: $color_gerencia;
+                }
+                &.prevencion{
+                    background: $color_prevencion;
+                }
+                &.reclamo{
+                    background: $color_reclamo;
+                }
+                &.sistema{
+                    background: $color_sistema;
+                }
+            }
+        }   
+    }
+}
+
+
+/**** nav-config ****/
+/**** nav-config ****/
+/**** nav-config ****/
+
+.nav-config{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: .91em 1em;
+    width: 100%;
+    background: $color_corporativo_lighter;
+    .name-user{
+        h2{
+            padding: 0;
+            margin: 0;
+            text-transform: uppercase;
+            color: $color_corporativo_dark;
+            font-size: $fontSmall;
+            margin-right: 1em;
+        }
+    }
+    .img-user{
+        background: $color_corporativo_darker;
+        img{
+            vertical-align: middle;
+            border-radius: 10px;
+            max-width: 40px;
+            max-height:40px;
+        }
+    }
+}
+
+/**** content ****/
+/**** content ****/
+/**** content ****/
+
+.content{
+    .title{
+        padding: 1.5em  1em 1em 1em ;
+        width: 100%;
+        h3{
+            font-size: $fontRegularBigger;
+            font-weight: normal;
+            text-transform: uppercase;
+            color: $color_corporativo_dark;
+            margin: 0;
+        }
+    }
+    .breadcrumb{
+        background: $color_secundario_regular;
+        padding: .3em;
+        ul{
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            &:before{
+                content: "\f122";
+                font-family: FontAwesome;
+                font-weight: normal;
+                margin-left:.5em;
+                color: $blanco;
+                display: inline-block;
+            }
+            li{
+                display: inline-block;
+                margin-left:.5em;
+                a{
+                    color: $blanco;
+                    font-size: $fontTiny;
+                    text-decoration: none;
+                }
+                + li{
+                    &:before{
+                        content: "\f104";
+                        font-family: FontAwesome;
+                        font-weight: normal;
+                        margin-right:.5em;
+                        color: $blanco;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**** modulo form ****/
+/**** modulo form ****/
+/**** modulo form ****/
+
+.module-form{
+    display: flex;
+    padding: .5em 0;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 96%;
+    margin: auto; 
+    background: #f4f4f4;
+    + .module-form{
+        margin-top: 1em;
+    }
+    input,label,select{
+        display: block;
+       @include reset-appearance;
+    }
+    label{
+        margin-bottom: .3em;
+        color: $color_corporativo_dark;
+    }
+    select{
+        position:relative;
+        background-image: url(images/app-icons/flecha.png);
+        background-repeat: no-repeat;
+        background-size: 35px 35px;
+        background-position: center right;
+    }
+    input[type="text"],select, input[type="number"]{
+        border:solid 1px $gris;
+        padding: .5em .3em;
+        width: 100%;
+        background-color: $blanco;
+        @include active-state{
+            border: solid 1px $color_valido;
+        }
+    }
+    input[type="checkbox"]:checked{
+        + .checkbox{
+            width: 28px;
+            height: 28px;
+            border: solid 1px $color_valido;
+            &:before{
+                content: "\f00c";
+                font-family: FontAwesome;
+                color: $color_valido;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 5px;
+                left: 5px;
+            }
+        }
+    }
+    input[type="checkbox"]{
+        display: none;
+        + .checkbox{
+            position: relative;
+            background: $blanco;
+            width: 28px;
+            height: 28px;
+            border: solid 1px $gris;
+        }
+    }
+
+    input[type="radio"]:checked{
+        + .radio{
+            width: 28px;
+            height: 28px;
+            border: solid 1px $color_valido;
+            &:before{
+                content: "\f00c";
+                font-family: FontAwesome;
+                color: $color_valido;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 5px;
+                left: 5px;
+            }
+        }
+    }
+    input[type="radio"]{
+        display: none;
+        + .radio{
+            position: relative;
+            width: 28px;
+            border-radius: 50%;
+            height: 28px;
+            border: solid 1px $gris;
+        }
+    }
+
+    .item-form{
+        padding: .5em 1em;
+        width: 33.33%;
+        &.title{
+            width: 100%;
+            padding: 1em 1em;
+            h4{
+                margin:0;
+                padding: 0;
+            }
+        }
+
+        &.button{
+            width: 100%;
+            padding: 1em 1em;
+            input[type="submit"]{
+                width: 200px;
+                color: $blanco;
+                float: right;
+                display: block;
+                padding: 1em;
+                background: $color_corporativo_darker;
+                 @include active-state{
+                    cursor: pointer;
+                    background: $color_corporativo_dark;
+                }
+            }
+        }
+
+        &.opc{
+            width: 100%;
+            .cr-title{
+                margin-top: .3em;
+                margin-bottom: .1em;
+            }
+            .name-check,.name-radio{
+                margin-top: .8em;
+                float: left;
+                margin-right: 10px;
+            }
+            .checkbox,.radio{
+                margin-top: .3em;
+                float: left;
+                margin-right: 20px;
+            }
+        }
+        @include vertical-tablet-down {
+            width: 50%;
+        }
+         @include phablet-down {
+            width: 100%;
+        }
+    }
+}
+
+

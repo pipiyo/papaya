@@ -1,0 +1,45 @@
+// Import gridle :
+@import 'gridle/gridle';
+
+@include gridle_setup((
+    context : 12,
+    gutter-width : 32px,
+    debug : false
+));
+
+@include gridle_register_state ( tablet , (
+    max-width : $tablet_horizontal,
+    gutter-width : 28px
+));
+
+@include gridle_register_state ( smalltablet , (
+    max-width : $tablet_vertical,
+    gutter-width : 18px
+));
+
+@include gridle_register_state ( mobile , (
+    max-width : $phablet,
+    gutter-width : 10px,
+    context : 4
+));
+
+// // Generate classes :
+@include gridle_generate_classes();
+
+
+.container {
+    margin: 0 auto;
+    max-width: 100%;
+    .row-wolf{
+        margin: 0;
+    }
+
+    @include desktop-tablet {
+    }
+    @include tablet-down {
+    }
+    @include vertical-tablet-down {
+    }
+    @include phablet-down {
+    }
+}
