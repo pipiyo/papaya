@@ -1,4 +1,5 @@
 import React from 'react'
+import Nav from './Nav'
 import { Link } from 'react-router'
 
 class Main extends React.Component {
@@ -10,14 +11,7 @@ class Main extends React.Component {
   render() {
       return (
         <div className="main" id="main">
-          <nav className="nav-config">
-            <div className="name-user">
-              <h2>Cristóbal Maturana</h2>
-            </div>
-            <div className="img-user">
-              <img src="bundle/css/images/fondos/cristobal.jpg" alt="usuario"/>
-            </div>
-          </nav>
+          <Nav nombre="Jeancarlo"/>
 
           <div className="content">
             <div className="breadcrumb">
