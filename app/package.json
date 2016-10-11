@@ -18,6 +18,7 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-mixin": "^3.0.5",
+    "react-router": "^2.8.1",
     "reflux": "^0.4.1"
   },
   "devDependencies": {
