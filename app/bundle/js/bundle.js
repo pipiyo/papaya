@@ -31569,7 +31569,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'img-user' },
-	              _react2.default.createElement('img', { src: 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
+	              _react2.default.createElement('img', { src: 'bundle/css/images/fondos/cristobal.jpg', alt: 'usuario' })
 	            )
 	          ),
 	          _react2.default.createElement(
