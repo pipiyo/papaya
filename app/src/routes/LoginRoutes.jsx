@@ -13,7 +13,7 @@ export default class LoginRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = { user: true } 
+    this.state = { msj: 'Usuario no valido' } 
   }
 /*
   handleSubmit(event) {
@@ -21,7 +21,7 @@ export default class LoginRoutes extends React.Component {
     const userName = event.target.elements[0].value
     const repo = event.target.elements[1].value
     const path = '/home'
-    browserHistory.push(path)
+
     console.log(path)
   }
 */
@@ -40,7 +40,7 @@ export default class LoginRoutes extends React.Component {
     if (this.state.check) {
       return (
             <div>
-              <h1>{this.state.check}</h1>
+              <h1>{this.state.msj}</h1>
               <LoginFrom onSubmit={ this.userFormSubmit.bind(this) } />
             </div>
       )

@@ -14,12 +14,14 @@
   "author": "pipiyo",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.14.0",
     "jquery": "^3.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-mixin": "^3.0.5",
     "react-router": "^2.8.1",
-    "reflux": "^0.4.1"
+    "reflux": "^0.4.1",
+    "socket.io": "^1.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",

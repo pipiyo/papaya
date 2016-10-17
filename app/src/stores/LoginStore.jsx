@@ -1,19 +1,24 @@
 import Reflux from 'reflux'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
+import getUrl from '../Config'
+import io from 'socket.io-client'
 import LoginActions from '../actions/LoginActions'
 
 let LoginStore = Reflux.createStore({
   listenables: [LoginActions],
-  check: false,
+  check: true,
+  init: function() {
+    this.socket = io( getUrl );
+    this.socket.on('login', (data) => {
+      if (data) {
+        hashHistory.push('home')
+      } else {
+        this.trigger(this.check)
+      }
+    })
+  },
   checkUser: function (user) {
-
-  	if (user.userName == 'fcb') {
-		browserHistory.push('/home')
-  	} else {
-  		this.check = 'el usuario no es valido'
-  		this.trigger(this.check)
-  	}
-    
+  this.socket.emit('login', user)
   }
 })
 

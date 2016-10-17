@@ -13,7 +13,7 @@ class Nav extends React.Component {
               <h2>{this.props.nombre}</h2>
             </div>
             <div className="img-user">
-              <img src="bundle/css/images/fondos/cristobal.jpg" alt="usuario"/>
+              <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
             </div>
           </nav>
       )

@@ -21,11 +21,10 @@ class Main extends React.Component {
                 <li><a href="#">Pagina 3</a></li>
               </ul>
             </div>
-            {this.props.content}
+            {this.props.content || "Aqui suculento index"}
           </div>
         </div>
       )
-
   }
 
 }

@@ -6,7 +6,6 @@ export default class ServicioRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = { user: true } 
   }
 
   render() {

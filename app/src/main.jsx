@@ -1,5 +1,3 @@
-//require('../bundle/css/main.css')
-
 import React from 'react' 
 import ReactDOM from 'react-dom' 
 
@@ -8,14 +6,14 @@ import Servicio from './routes/ServicioRoutes'
 
 import Home from './routes/HomeRoutes'
 
-import { Router, Route, Link, browserHistory } from 'react-router'
-
+import { Router, Route, Redirect, hashHistory, IndexRoute } from 'react-router'
 
 ReactDOM.render((
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={Login}/>
-    <Route path="/home" component={Home}>	
-    	<Route path="/home/servicio" component={Servicio}/>  
+    <Route path="home" component={Home}>	
+    	<Route path="servicio" component={Servicio}/> 
     </Route>
+    <Route path="*" component={Servicio} />
   </Router>
 ), document.getElementById('app'))

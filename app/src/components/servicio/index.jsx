@@ -8,7 +8,7 @@ class ServicioIndex extends React.Component {
 
   render() {
       return (
-              <h1>Aqui el index de servicio</h1>
+              <h1>Aqui los servcios</h1>
       )
 
   }

@@ -13,7 +13,7 @@ class Header extends React.Component {
   render() {
       return (
         <header className="header" id="header">
-            <Logo logo="bundle/css/images/logos/logo.png"/>
+            <Logo logo="css/images/logos/logo.png"/>
 
             <nav className="nav">
               <ul>
