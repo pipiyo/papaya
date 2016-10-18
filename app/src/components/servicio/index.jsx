@@ -1,5 +1,8 @@
 import React from 'react'
 
+import Title from './Title'
+import Form from './Form'
+
 class ServicioIndex extends React.Component {
 
   constructor() {
@@ -8,7 +11,10 @@ class ServicioIndex extends React.Component {
 
   render() {
       return (
-              <h1>Aqui los servcios</h1>
+        <div>
+            <Title />
+            <Form />
+        </div>   
       )
 
   }

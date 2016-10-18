@@ -22,10 +22,6 @@ class Header extends React.Component {
                     <i className="fa fa-rocket" aria-hidden="true"></i>
                   </div>
                   <a href="#">Rochas</a>
-                  <ul>
-                    <li><a href="#">Nuevo Rocha</a></li>
-                    <li><a href="#">Ver Rochas</a></li>
-                  </ul>
                 </li>
                 <li>
                   <div className="icon actividad">
@@ -34,8 +30,6 @@ class Header extends React.Component {
                   <a href="#">Actividades</a>
                   <ul>
                     <li><Link to="/home/servicio">Nueva Actividad</Link></li>
-                    <li><a href="#">Informe Abastecimiento</a></li>
-                    <li><a href="#">Informe Producción</a></li>
                   </ul>
                 </li>
                 <li>
@@ -43,6 +37,9 @@ class Header extends React.Component {
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </div>
                   <a href="#">Abastecimiento</a>
+                  <ul>
+                    <li><Link to="/home/abastecimiento">Informe Abastecimiento</Link></li>
+                  </ul>
                 </li>
                 <li>
                   <div className="icon comercial">

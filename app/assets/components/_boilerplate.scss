@@ -336,9 +336,9 @@ a.external-link, .external-link a {
             padding: .4em .5em .4em 1em;
             font-size: $fontRegular;
             transition-property: background;
-            transition-duration: 1s;
+            transition-duration: .3s;
             transition-timing-function: linear;
-            &:hover{
+            &:hover, &.active{
                 background: $color_corporativo_light;
                 cursor: pointer;
                 > ul{
@@ -445,7 +445,6 @@ a.external-link, .external-link a {
     justify-content: flex-end;
     padding: .91em 1em;
     width: 100%;
-    background: $color_corporativo_lighter;
     .name-user{
         h2{
             padding: 0;
@@ -530,9 +529,9 @@ a.external-link, .external-link a {
     padding: .5em 0;
     flex-wrap: wrap;
     align-items: center;
-    width: 96%;
-    margin: auto; 
-    background: #f4f4f4;
+    margin: 0 1em;
+    width: calc(100% - 2em); 
+    background: $gris_lighter;
     + .module-form{
         margin-top: 1em;
     }
@@ -546,10 +545,10 @@ a.external-link, .external-link a {
     }
     select{
         position:relative;
-        background-image: url(images/app-icons/flecha.png);
+        background-image: url(images/app-icons/down-arrow.svg);
         background-repeat: no-repeat;
-        background-size: 35px 35px;
-        background-position: center right;
+        background-size: 15px 15px;
+        background-position: 98% center;
     }
     input[type="text"],select, input[type="number"]{
         border:solid 1px $gris;
@@ -623,8 +622,12 @@ a.external-link, .external-link a {
             width: 100%;
             padding: 1em 1em;
             h4{
-                margin:0;
-                padding: 0;
+                margin: 0;
+                font-size: $fontRegular;
+                color: $color_corporativo_dark;
+                text-transform: uppercase;
+                border-bottom: solid 1px $color_corporativo_dark;
+                padding: 0 0 1em 0;
             }
         }
 
@@ -671,4 +674,181 @@ a.external-link, .external-link a {
     }
 }
 
+/**** modulo filter ****/
+/**** modulo filter ****/
+/**** modulo filter ****/
 
+.module-filter{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 .5em 1em .5em;
+    border: solid 1px $gris_lighter;
+    width: calc(100% - 2em); 
+    .item-filter{
+        padding: 1em;
+        width: 25%;
+        &.title-filter{
+            padding: 0;
+            width: 100%;
+        }
+    }
+    input,label,select{
+        display: block;
+       @include reset-appearance;
+    }
+    label{
+        margin-bottom: .3em;
+        color: $color_corporativo_dark;
+    }
+    select{
+        position:relative;
+        background-image: url(images/app-icons/down-arrow.svg);
+        background-repeat: no-repeat;
+        background-size: 15px 15px;
+        background-position: 98% center;
+    }
+    input[type="text"],select, input[type="number"]{
+        border:solid 1px $gris;
+        padding: .5em .3em;
+        width: 100%;
+        background-color: $blanco;
+        &.date{
+            background-image: url(images/app-icons/calendar.svg);
+            background-repeat: no-repeat;
+            background-size: 15px 15px;
+            background-position: 98% center;
+        }
+        @include active-state{
+            border: solid 1px $color_valido;
+        }
+    }
+    input[type="checkbox"]:checked{
+        + .checkbox{
+            width: 28px;
+            height: 28px;
+            border: solid 1px $color_valido;
+            &:before{
+                content: "\f00c";
+                font-family: FontAwesome;
+                color: $color_valido;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 5px;
+                left: 5px;
+            }
+        }
+    }
+    input[type="checkbox"]{
+        display: none;
+        + .checkbox{
+            position: relative;
+            background: $blanco;
+            width: 28px;
+            height: 28px;
+            border: solid 1px $gris;
+        }
+    }
+
+    input[type="radio"]:checked{
+        + .radio{
+            width: 28px;
+            height: 28px;
+            border: solid 1px $color_valido;
+            &:before{
+                content: "\f00c";
+                font-family: FontAwesome;
+                color: $color_valido;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 5px;
+                left: 5px;
+            }
+        }
+    }
+    input[type="radio"]{
+        display: none;
+        + .radio{
+            position: relative;
+            width: 28px;
+            border-radius: 50%;
+            height: 28px;
+            border: solid 1px $gris;
+        }
+    }
+    h4{
+        margin: 0;
+        font-size: $fontRegular;
+        font-weight: normal;
+        text-transform: uppercase;
+        padding: 1em;
+        background: $gris_lighter;
+        color: $color_corporativo_dark;
+    }
+}
+
+/**** modulo actividad ****/
+/**** modulo actividad ****/
+/**** modulo actividad ****/
+
+.module-actividad{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 .5em;
+    width: calc(100% - 2em); 
+    .item-actividad{
+        &.abastecimiento{.title-actividad{background: $color_abastecimiento;}}
+        padding: 1em 0;
+        margin: 0 1em;
+        width: calc(33.33% - 2em);
+        .title-actividad{
+            padding: .5em;
+            overflow: hidden;
+            a{
+                text-decoration: none;
+                color: $blanco;
+                &:hover{
+                    color : $gris;
+                    cursor: pointer;
+                }
+            }
+            h4{
+
+                color: $blanco;
+                margin: 0;
+                padding: 4px 0 0 0;
+                width: calc(100% - 60px);
+                float: left;
+            }
+            p{
+                color: $blanco;
+                text-align: center;
+                margin: 0;
+                padding: 0 .2em;
+                width: 30px;
+                float: left;
+            }
+        }
+        .description-actividad{
+            padding: .5em;
+            border: solid 1px $color_abastecimiento;
+            .opc{
+                + .opc{
+                    margin-top: .5em;
+                }
+                    
+            }
+            h5{
+                margin: 0;
+                padding: 0;
+            }
+            p{
+                color: $color_corporativo_dark;
+                font-size: $fontTiny;
+                margin: 0;
+            }
+        }
+    }
+
+}
