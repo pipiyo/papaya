@@ -12,8 +12,7 @@ $array = array( array('nombre' => 'yoli',
 				array('nombre' => 'werytu',
 					  'id' => '5') );
 
-$array2 = array( 'user' => $_POST['user'] );
 
-echo json_encode($array2);
+echo json_encode($array);
 
 ?>

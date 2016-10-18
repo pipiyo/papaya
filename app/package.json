@@ -16,6 +16,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "jquery": "^3.1.1",
+    "mysql": "^2.11.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-mixin": "^3.0.5",
