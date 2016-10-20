@@ -338,7 +338,7 @@ a.external-link, .external-link a {
             transition-property: background;
             transition-duration: .3s;
             transition-timing-function: linear;
-            &:hover, &.active{
+            &.active{
                 background: $color_corporativo_light;
                 cursor: pointer;
                 > ul{
@@ -356,24 +356,28 @@ a.external-link, .external-link a {
                     &:before {
                         content: "\00bb";
                         position: absolute;
-                        left: 43px;
+                        left: 35px;
                         color: $blanco;
                     }
                     a{
                         font-size: $fontTiny;
                         line-height: 110%;
                         &:hover{
-                            color: $color_corporativo_dark ;
+                            color: $gris_lightest ;
                             cursor: pointer;
                         }
                     }
                 }
             }
+            p{
+                display: inline-block;
+                margin: 0;
+                padding: 0 0 0 .5em;
+            }
             a{
                 display: inline-block;
-                width: calc(100% - 30px);
+                width: 100%;
                 position:relative;
-                padding-left: 1em;
                 vertical-align: middle;
                 text-decoration: none;
                 color: $color_corporativo_lighter;
@@ -404,6 +408,12 @@ a.external-link, .external-link a {
                 }
                 &.instalaciones{
                     background: $color_instalaciones;
+                }
+                &.integracion{
+                    background: $color_integracion;
+                }
+                &.planificacion{
+                    background: $color_planificacion;
                 }
                 &.produccion{
                     background: $color_produccion;
@@ -456,7 +466,6 @@ a.external-link, .external-link a {
         }
     }
     .img-user{
-        background: $color_corporativo_darker;
         img{
             vertical-align: middle;
             border-radius: 10px;
@@ -796,12 +805,77 @@ a.external-link, .external-link a {
     display: flex;
     flex-wrap: wrap;
     margin: 0 .5em;
-    width: calc(100% - 2em); 
+    width: calc(100% - 2em);
+    .item-rocha{
+        padding: 0;
+        border: solid 1px $color_rochas;
+        h3{
+            a{
+                color: $blanco;
+                &:hover{
+                    color : $gris;
+                    cursor: pointer;
+                }
+            }
+            margin: 0;
+            font-weight: normal;
+            position: relative;
+            font-size: $fontRegular;
+            padding: 1em;
+            color: $blanco;
+            background: $color_rochas;
+            &:hover{
+                background: $color_rochas_hover;
+                cursor: pointer;
+            }
+            &:after{
+                content: "\f078";
+                font-family: FontAwesome;
+                font-weight: normal;
+                position: absolute;
+                right: 1em;
+                top: 1em;
+            }
+        }
+        .item-box{
+            padding-bottom: 1em;
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
+        .item-rocha-info{
+            padding: 1em 1em 0 1em;
+            h5{
+                margin: 0;
+                padding: 0;
+            }
+            p{
+                margin: 0;
+                font-weight: normal;
+                padding: 0;
+                display: inline;
+                font-size: $fontTiny;
+            }
+            .opc{
+                + .opc{
+                    margin-top: .5em;
+                }       
+            }
+        }
+    } 
     .item-actividad{
-        &.abastecimiento{.title-actividad{background: $color_abastecimiento;}}
         padding: 1em 0;
         margin: 0 1em;
-        width: calc(33.33% - 2em);
+        width: calc(50% - 2em);
+        .item-actividades{
+            margin: 1em 1em 0 1em;
+            &.abastecimiento{.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
+        &.produccion{.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
+        &.despacho{.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
+        &.instalaciones{.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
+        &.integracion{.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}
+        }
         .title-actividad{
             padding: .5em;
             overflow: hidden;
@@ -814,7 +888,7 @@ a.external-link, .external-link a {
                 }
             }
             h4{
-
+                font-size: $fontRegular;
                 color: $blanco;
                 margin: 0;
                 padding: 4px 0 0 0;
@@ -832,7 +906,6 @@ a.external-link, .external-link a {
         }
         .description-actividad{
             padding: .5em;
-            border: solid 1px $color_abastecimiento;
             .opc{
                 + .opc{
                     margin-top: .5em;

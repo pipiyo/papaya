@@ -1,78 +1,34 @@
 import React from 'react'
+import Content from './Content'
 
 class Servicio extends React.Component {
 
   constructor() {
     super()
+
   }
 
   render() {
+    // solo para prueba
+    let o = "1";
+    let u = "2"
       return (
         <div class="module-actividad">
-          <div class="item-actividad abastecimiento">
-            <div class="title-actividad">
-                <h4><a href="#">1000</a> - <a href="#"> LC-2015</a></h4> 
-                <p><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-            </div>
-            <div class="description-actividad">
-                <div class="opc">
-                    <h5>Descripción: </h5>
-                    <p>Cajoneras Linea Bozz (2 Puestos).</p>
-                </div>
-                <div class="opc">
-                    <h5>Cliente: </h5>
-                    <p>AFP Planvital S.A.</p>
-                </div>
-                <div class="opc">
-                    <h5>Fecha </h5>
-                    <p>Desde 2016-05-19 / Hasta 2016-05-19 / Días 4</p>
-                </div>
-            </div>                            
-          </div>
-          <div class="item-actividad abastecimiento">
-            <div class="title-actividad">
-                <h4><a href="#">1000</a> - <a href="#"> LC-2015</a></h4> 
-                <p><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-            </div>
-            <div class="description-actividad">
-                <div class="opc">
-                    <h5>Descripción: </h5>
-                    <p>Cajoneras Linea Bozz (2 Puestos).</p>
-                </div>
-                <div class="opc">
-                    <h5>Cliente: </h5>
-                    <p>AFP Planvital S.A.</p>
-                </div>
-                <div class="opc">
-                    <h5>Fecha </h5>
-                    <p>Desde 2016-05-19 / Hasta 2016-05-19 / Días 4</p>
-                </div>
-            </div>                            
-          </div>
-          <div class="item-actividad abastecimiento">
-            <div class="title-actividad">
-                <h4><a href="#">1000</a> - <a href="#"> LC-2015</a></h4> 
-                <p><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-            </div>
-            <div class="description-actividad">
-                <div class="opc">
-                    <h5>Descripción: </h5>
-                    <p>Cajoneras Linea Bozz (2 Puestos).</p>
-                </div>
-                <div class="opc">
-                    <h5>Cliente: </h5>
-                    <p>AFP Planvital S.A.</p>
-                </div>
-                <div class="opc">
-                    <h5>Fecha </h5>
-                    <p>Desde 2016-05-19 / Hasta 2016-05-19 / Días 4</p>
-                </div>
-            </div>                            
-          </div>
 
+            <div class="item-actividad">
+                <div class="item-rocha">
+                    <h3 data-key="uno" onClick={this.props.click} ><a> S&S 716-CM-B </a> - Ilustre Municipalidad de Chillán </h3>
+                    <Content test={ o } />
+                </div>                            
+            </div>
+
+            <div class="item-actividad">
+                <div class="item-rocha">
+                    <h3 data-key="dos" onClick={this.props.click} ><a> S&S 716-CM-B </a> - Ilustre Municipalidad de Chillán </h3>
+                    <Content test={ u } />
+                </div>                            
+            </div>
+            
         </div>
       )
 

@@ -7,15 +7,24 @@ class InformeIndex extends React.Component {
 
   constructor() {
     super()
+   // this.state = {num:[]}
+  }
+
+  /* Agrega clase active información de rocha */
+  atestClass(ev){
+    ev.preventDefault()
+    //this.setState({num:[]});
+    let valor = ev.currentTarget.getAttribute("data-key")    
   }
 
   render() {
+
       return (         
         <div>
           
           <Title />
           <Filtro />
-          <Servicio />
+          <Servicio click={this.atestClass.bind(this)} />
 
         </div>
       )

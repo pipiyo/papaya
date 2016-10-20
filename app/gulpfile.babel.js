@@ -26,9 +26,10 @@
 
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import browserSync from 'browser-sync';
 
 const $ = gulpLoadPlugins();
-
+const reload = browserSync.reload;
 
 // Compile and automatically prefix stylesheets
 gulp.task('styles', () => {
@@ -63,3 +64,19 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('bundle/css'));
 });
 
+gulp.task('serve', ['styles'], () => {
+  browserSync({
+    notify: false,
+    // Customize the Browsersync console logging prefix
+    logPrefix: 'WSK',
+    // Allow scroll syncing across breakpoints
+    scrollElementMapping: ['main', '.mdl-layout'],
+    // Run as an https by uncommenting 'https: true'
+    // Note: this uses an unsigned certificate which on first access
+    //       will present a certificate warning in the browser.
+    // https: true,
+    server: ['.tmp', 'bundle'],
+    port: 3000
+  });
+  gulp.watch(['./assets/**/*.{scss,css}'], ['styles', reload]);
+});

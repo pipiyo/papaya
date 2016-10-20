@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
   socket.on('login', (data, check = true) => {
 
       request.post({
-        uri: "http://local.rocha/apirest/apirest.php",
+        uri: "http://localhost:8888/apirest/apirest.php",
         form: {
           user: data.userName,
           pass: data.pass
