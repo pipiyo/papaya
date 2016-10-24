@@ -325,6 +325,10 @@ a.external-link, .external-link a {
 /**** nav ****/
 
 .nav{
+    .btn-burger{
+        display: none;
+
+    }
     ul{
         margin:0;
         padding:0;
@@ -433,14 +437,33 @@ a.external-link, .external-link a {
                 &.prevencion{
                     background: $color_prevencion;
                 }
-                &.reclamo{
-                    background: $color_reclamo;
+                &.reclamos{
+                    background: $color_reclamos;
                 }
                 &.sistema{
                     background: $color_sistema;
                 }
             }
         }   
+    }
+    @include vertical-tablet-down {
+        .nav-item{
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
+        .btn-burger{
+            text-align: right;
+            width: 100%;
+            font-size: 2em;
+            padding: .2em;
+            display: block;
+            color: $blanco;
+            &:hover{
+                color: $color_corporativo_light;
+            }
+        }
     }
 }
 
@@ -464,6 +487,34 @@ a.external-link, .external-link a {
             font-size: $fontSmall;
             margin-right: 1em;
         }
+    }
+    .notificacion-user{
+        margin-right: 2em;
+        position: relative;
+        background-image: url(images/app-icons/notificacion-icon.svg);
+        background-size: 100%; 
+        width: 20px;
+        height: 20px;
+        p{
+            position: absolute;
+            color: $blanco;
+            font-size: 10px;
+            width: 17px;
+            height: 17px;
+            line-height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            text-decoration: none;
+            background: #FE2E2E;
+            display: block; 
+            top: 15px;
+            left: 15px;
+        }
+        &:hover > p{
+            background: #f25757;
+            cursor: pointer;
+        }
+       
     }
     .img-user{
         img{
@@ -489,6 +540,24 @@ a.external-link, .external-link a {
             text-transform: uppercase;
             color: $color_corporativo_dark;
             margin: 0;
+        }
+    }
+    .button{
+        overflow: hidden;
+        margin-bottom: 1em;
+        a{
+            margin: 0 1em;
+            background: $color_corporativo_darker;
+            padding: .5em;
+            text-decoration: none;
+            color: $blanco;
+            float: right;
+            text-align: center;
+            max-width: 200px;
+            display: block;
+            &:hover{
+                background: $color_corporativo_dark;
+            }
         }
     }
     .breadcrumb{
@@ -544,6 +613,9 @@ a.external-link, .external-link a {
     + .module-form{
         margin-top: 1em;
     }
+    &.button{
+        margin-top: 0;
+    }
     input,label,select{
         display: block;
        @include reset-appearance;
@@ -564,6 +636,12 @@ a.external-link, .external-link a {
         padding: .5em .3em;
         width: 100%;
         background-color: $blanco;
+        &.date{
+            background-image: url(images/app-icons/calendar.svg);
+            background-repeat: no-repeat;
+            background-size: 15px 15px;
+            background-position: 98% center;
+        }
         @include active-state{
             border: solid 1px $color_valido;
         }
@@ -696,6 +774,12 @@ a.external-link, .external-link a {
     .item-filter{
         padding: 1em;
         width: 25%;
+        @include vertical-tablet-down {
+            width: 50%;
+        }
+        @include phablet-down {
+            width: 100%;
+        }
         &.title-filter{
             padding: 0;
             width: 100%;
@@ -804,12 +888,24 @@ a.external-link, .external-link a {
 .module-actividad{
     display: flex;
     flex-wrap: wrap;
-    margin: 0 .5em;
-    width: calc(100% - 2em);
+    width: 100%;
     .item-rocha{
         padding: 0;
         border: solid 1px $color_rochas;
         h3{
+            position: relative;
+            padding-right: 2em;
+            margin: 0;
+            padding: 1em;
+            font-weight: normal;
+            font-size: $fontRegular;
+            color: $blanco;
+            background: $color_rochas;
+            p{
+                position: absolute;
+                right: 10px;
+                top: 0px;
+            }
             a{
                 color: $blanco;
                 &:hover{
@@ -817,35 +913,50 @@ a.external-link, .external-link a {
                     cursor: pointer;
                 }
             }
-            margin: 0;
-            font-weight: normal;
-            position: relative;
-            font-size: $fontRegular;
-            padding: 1em;
-            color: $blanco;
-            background: $color_rochas;
             &:hover{
                 background: $color_rochas_hover;
                 cursor: pointer;
+            }
+            &.atrasado{
+                &:before{
+                    content: "\f06a";
+                    color:#fe2e2e;
+                    font-size: 1.2em;
+                    font-family: FontAwesome;
+                    font-weight: normal;
+                    position: absolute;
+                    right: -10px;
+                    top: -15px;
+                }
+            }
+            &.active{
+                &:after{
+                    content: "\f077";
+                }
             }
             &:after{
                 content: "\f078";
                 font-family: FontAwesome;
                 font-weight: normal;
                 position: absolute;
-                right: 1em;
+                right: .5em;
                 top: 1em;
             }
         }
+        &.abastecimiento{border:solid 1px $color_abastecimiento; h3{background: $color_abastecimiento;&:after{content: none;}}}
+        &.produccion{border:solid 1px $color_produccion; h3{background: $color_produccion;&:after{content: none;}}}
+        &.despacho{border:solid 1px $color_despacho; h3{background: $color_despacho;&:after{content: none;}}}
+        &.instalaciones{border:solid 1px $color_instalaciones; h3{background: $color_instalaciones;&:after{content: none;}}}
+        &.integracion{border:solid 1px $color_integracion; h3{background: $color_integracion;&:after{content: none;}}}
+
         .item-box{
             padding-bottom: 1em;
-            display: none;
-            &.active{
-                display: block;
-            }
+            display: block;
         }
         .item-rocha-info{
             padding: 1em 1em 0 1em;
+            display: flex;
+            flex-wrap: wrap;
             h5{
                 margin: 0;
                 padding: 0;
@@ -858,9 +969,17 @@ a.external-link, .external-link a {
                 font-size: $fontTiny;
             }
             .opc{
+                width: 100%;
                 + .opc{
                     margin-top: .5em;
-                }       
+                }
+                &.sub{
+                    width: 50%;
+                    margin-top: .5em;
+                    @include vertical-tablet-down {
+                        width: 100%;
+                    }
+                }           
             }
         }
     } 
@@ -868,13 +987,19 @@ a.external-link, .external-link a {
         padding: 1em 0;
         margin: 0 1em;
         width: calc(50% - 2em);
+        @include vertical-tablet-down {
+            width: calc(100% - 2em);
+        }
+        &.sub{
+            width: calc(100% - 2em);
+        }
         .item-actividades{
             margin: 1em 1em 0 1em;
             &.abastecimiento{.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
-        &.produccion{.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
-        &.despacho{.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
-        &.instalaciones{.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
-        &.integracion{.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}
+            &.produccion{.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
+            &.despacho{.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
+            &.instalaciones{.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
+            &.integracion{.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}
         }
         .title-actividad{
             padding: .5em;
@@ -901,16 +1026,25 @@ a.external-link, .external-link a {
                 margin: 0;
                 padding: 0 .2em;
                 width: 30px;
-                float: left;
+                float: right;
             }
         }
         .description-actividad{
             padding: .5em;
+            display: flex;
+            flex-wrap: wrap;
             .opc{
+                width: 100%;
                 + .opc{
                     margin-top: .5em;
                 }
-                    
+                &.sub{
+                    margin-top: .5em;
+                    width: 50%;
+                    @include vertical-tablet-down {
+                        width: 100%;
+                    }
+                }    
             }
             h5{
                 margin: 0;

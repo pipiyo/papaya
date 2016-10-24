@@ -10,7 +10,7 @@ class Area extends React.Component {
   render() {
       return (
             <li data-active={this.props.num}>
-              <a href="#" data-click={this.props.num} onClick={this.props.click} >
+              <a href="#" data-click={this.props.num} onClick={this.props.submenu} >
                 <div className={this.props.icon}>
                  {this.props.img}
                 </div>

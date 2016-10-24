@@ -1,7 +1,7 @@
 import Reflux from 'reflux'
 
 let ServicioActions = Reflux.createActions([
-  'ingresarServicio'
+  'formArea'
 ])
 
 export default ServicioActions

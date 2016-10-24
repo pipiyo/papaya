@@ -12,7 +12,7 @@ class Form extends React.Component {
       return (
         <form>
           <fieldset> 
-            <Item />
+            <Item area={this.props.area} formArea={this.props.formArea} />
           </fieldset> 
         </form> 
       )

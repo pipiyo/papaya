@@ -10,7 +10,7 @@ class Home extends React.Component {
     this.state = { active : 'active' }
     this.menu = [
       {id:"1",img: <i className="fa fa-rocket" aria-hidden="true"></i>, name: "Rochas", icon: "icon rocha", "item": false},
-      {id:"2",img: <i className="fa fa-coffee" aria-hidden="true"></i>, name: "Actividades", icon: "icon actividad", "item":[{id:"1",nombre:"Nueva Actividad",ruta:"/home/servicio"},{id:"2",nombre:"test",ruta:"/home/servicio"}]},
+      {id:"2",img: <i className="fa fa-coffee" aria-hidden="true"></i>, name: "Actividades", icon: "icon actividad", "item":[{id:"1",nombre:"Nueva Actividad",ruta:"/home/servicio"}]},
       {id:"3",img: <i className="fa fa-shopping-cart" aria-hidden="true"></i>, name: "Abastecimiento", icon: "icon abastecimiento" , "item":[{id:"1",nombre:"Informe Abastecimiento",ruta:"/home/abastecimiento"}]},
       {id:"4",img: <i className="fa fa-suitcase" aria-hidden="true"></i>, name: "Comercial", icon: "icon comercial", "item": false},
       {id:"5",img: <i className="fa fa-pencil" aria-hidden="true"></i>, name: "Dam" , icon: "icon dam", "item": false},
@@ -27,9 +27,15 @@ class Home extends React.Component {
       {id:"16",img: <i className="fa fa-bolt" aria-hidden="true"></i>, name: "Sistema" , icon: "icon sistema", "item": false},
     ]
   }
+  /* Agrega clase active para desplegar sub-menus */
+  navMovil(ev){
+    ev.preventDefault()
+    let x = document.querySelectorAll(".nav-item")
+    x[0].classList.toggle('active')
+  }
 
-  /* Agrega Clase active para sub-menus */
-  headerClass(ev){
+  /* Agrega clase active para desplegar sub-menus */
+  subMenus(ev){
     ev.preventDefault()
     let x = document.querySelectorAll("[data-click]")
     let z = document.querySelectorAll("[data-active]")
@@ -41,7 +47,7 @@ class Home extends React.Component {
 
       return (
         <div className="frame">
-          <Header menu={ this.menu }  click={this.headerClass.bind(this)} />
+          <Header menu={ this.menu }  submenu={this.subMenus.bind(this)} navmovil={this.navMovil.bind(this)} />
           <Main content={this.props.content}/>
         </div>
       )

@@ -13,7 +13,7 @@ class ServicioIndex extends React.Component {
       return (
         <div>
             <Title />
-            <Form />
+            <Form area={this.props.area} formArea={this.props.formArea} />
         </div>   
       )
 

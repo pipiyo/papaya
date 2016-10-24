@@ -11,7 +11,7 @@ class Main extends React.Component {
   render() {
       return (
         <div className="main" id="main">
-          <Nav nombre="Jeancarlo"/>
+          <Nav nombre="Cristóbal Maturana"/>
 
           <div className="content">
             <div className="breadcrumb">

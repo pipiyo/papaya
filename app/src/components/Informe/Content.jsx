@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 class Content extends React.Component {
 
@@ -26,8 +27,8 @@ class Content extends React.Component {
                     
           <div class="item-actividades abastecimiento">
               <div class="title-actividad">
-                  <h4><a href="#">1000</a> - <a href="#"> LC-2015</a></h4> 
-                  <p><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></p>
+                  <h4><Link to="/home/detalle-actividad">10001</Link> - <a href="#"> LC-2015</a></h4> 
+                  <p><Link to="/home/detalle-actividad"><i class="fa fa-eye" aria-hidden="true"></i></Link></p>
                   <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
               </div>
               <div class="description-actividad">

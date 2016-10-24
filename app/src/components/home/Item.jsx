@@ -20,13 +20,14 @@ class Item extends React.Component {
         for(i=0;i<valor.length;i++){
           sub.push(<li key={valor[i]['id']}><Link to={valor[i]['ruta']}>{valor[i]['nombre']}</Link></li>)
         }
-        rows.push(<Area click={this.props.click} img={menu.img} icon={menu.icon} name={menu.name} key={menu.id} sub={sub} num={e} />)
+        rows.push(<Area submenu={this.props.submenu} img={menu.img} icon={menu.icon} name={menu.name} key={menu.id} sub={sub} num={e} />)
         e++
       })
 
       return (
         <nav className="nav">
-          <ul>
+          <a onClick={this.props.navmovil} class="btn-burger" href=""> <i class="fa fa-bars" aria-hidden="true"></i> </a>
+          <ul class="nav-item">
             { rows }
           </ul>
         </nav> 

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import Login from './routes/LoginRoutes'
 import Servicio from './routes/ServicioRoutes'
 import Abastecimiento from './routes/AbastecimientoRoutes'
+import DetalleInforme from './routes/DetalleInformeRoutes'
 
 import Home from './routes/HomeRoutes'
 
@@ -15,6 +16,7 @@ ReactDOM.render((
     <Route path="home" component={Home}>	
     	<Route path="servicio" component={Servicio}/> 
     	<Route path="abastecimiento" component={Abastecimiento}/> 
+    	<Route path="detalle-actividad" component={DetalleInforme}/> 
     </Route>
     <Route path="*" component={Servicio} />
   </Router>

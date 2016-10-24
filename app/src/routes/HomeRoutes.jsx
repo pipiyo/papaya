@@ -7,8 +7,8 @@ export default class HomeRoutes extends React.Component {
   constructor() {
     super()
     console.log( window.location.hash.substr(0) )
-	console.log( window.location.hash.substr(1) )
-	console.log( window.location.hash.substr(2) )
+	  console.log( window.location.hash.substr(1) )
+	  console.log( window.location.hash.substr(2) )
   }
 
   render() {
