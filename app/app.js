@@ -8,7 +8,10 @@ const request = require('request')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 
-const Store = new RedisStore({})
+require('./env').config()
+
+
+const Store = new RedisStore({ ttl: 120 })
 
 
 const con = require('./srcApirest/connection')
@@ -27,7 +30,7 @@ con.connect( (err) => {
 
 const sessionMiddleware = session({
   store: Store,
-  secret: 'asdfghjk',
+  secret: '$2y$10$MzQxNzNjYjM4ZjA3Zjg5ZG',
   saveUninitialized: false,
   resave: false
 })
@@ -55,7 +58,7 @@ io.sockets.on('connection', (socket) => {
 
   socket.on('login', (data, check = true) => {
       request.post({
-        uri: "http://local.rocha/apirest/apirest.php",
+        uri: process.env.apiLogin,
         form: {
           user: data.userName,
           pass: data.pass
@@ -72,8 +75,8 @@ io.sockets.on('connection', (socket) => {
           socket.request.session.user = 'lonjiman'
           socket.request.session.save()
 
-          console.log( `LOGIN id ${socket.request.session.id}`  )
-          console.log( `LOGIN ID ${socket.request.sessionID}`  )
+          //console.log( `LOGIN id ${socket.request.session.id}`  )
+          //console.log( `LOGIN ID ${socket.request.sessionID}`  )
 
           //console.log( `LOGIN SOCKET ID ${socket.id}` )
 
@@ -89,8 +92,8 @@ io.sockets.on('connection', (socket) => {
   socket.on('checklogin', () => {
 
           //console.log( `CHECK SOCKET ID ${socket.id}` )
-          console.log( `CHECK id ${socket.request.session.id}`  )
-          console.log( `CHECK ID ${socket.request.sessionID}`  )
+          //console.log( `CHECK id ${socket.request.session.id}`  )
+          //console.log( `CHECK ID ${socket.request.sessionID}`  )
    // console.log( socket.request.sessionID )
    //console.log( socket )
    
@@ -102,7 +105,9 @@ io.sockets.on('connection', (socket) => {
     })
 */
   if (!socket.request.session.user) {
+    
     io.emit('checklogin', false )
+    //console.log( socket.request.res )
   } else {
     io.emit('checklogin', true )
   }
@@ -113,7 +118,7 @@ io.sockets.on('connection', (socket) => {
 })
 
 
-app.get('*', (request, response) => {
+app.all('*', (request, response) => {
 
 /*
   if (!request.sessionID) {
@@ -129,9 +134,12 @@ app.get('*', (request, response) => {
     })
 */
 
+
+
   if (!request.session.on) {
     request.session.on = true
   }
+
 
   console.log( `ROUTER id ${request.session.id}` )
   console.log( `ROUTER ID ${request.sessionID}` )
