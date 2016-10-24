@@ -4,11 +4,21 @@ const express = require('express')
 const path = require('path')
 const port = process.env.PORT || 8080
 const http = require('http')
-const engine = require('socket.io')
 const request = require('request')
-const con = require('./srcApirest/connection');
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
+
+require('./env').config()
+
+
+const Store = new RedisStore({ ttl: 120 })
+
+
+const con = require('./srcApirest/connection')
 
 const app = express()
+
+app.use(express.static(__dirname + '/bundle'))
 
 con.connect( (err) => {
   if (err) throw err
@@ -18,39 +28,123 @@ con.connect( (err) => {
 
 // '$2y$10$MzQxNzNjYjM4ZjA3Zjg5ZG'
 
-app.use(express.static(__dirname + '/bundle'))
-
-app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
+const sessionMiddleware = session({
+  store: Store,
+  secret: '$2y$10$MzQxNzNjYjM4ZjA3Zjg5ZG',
+  saveUninitialized: false,
+  resave: false
 })
+
+//app.use(cookieParser())
+app.use(sessionMiddleware)
+
+
 
 let server = http.createServer(app).listen(port, () => {
   console.log('Estamos en el ' + port)
 })
 
-const io = engine.listen(server);
+const io = require('socket.io')(server)
 
-io.on('connection', (socket) => {
-  
+io.use( (socket, next) => {
+  sessionMiddleware(socket.request, socket.request.res, next)
+} )
+
+
+
+
+
+io.sockets.on('connection', (socket) => {
+
   socket.on('login', (data, check = true) => {
-
       request.post({
-        uri: "http://local.papaya:8888/apirest/apirest.php",
+        uri: process.env.apiLogin,
         form: {
           user: data.userName,
           pass: data.pass
         }
       }, (error, response, data) => {
         if (error) throw error
-        console.log( data )
         if(data == 1){
+          /*
+          socket.request.session.user = 'lonji'
+          socket.request.session.save()
+          console.log( socket.request.session.user )
+          */
+
+          socket.request.session.user = 'lonjiman'
+          socket.request.session.save()
+
+          //console.log( `LOGIN id ${socket.request.session.id}`  )
+          //console.log( `LOGIN ID ${socket.request.sessionID}`  )
+
+          //console.log( `LOGIN SOCKET ID ${socket.id}` )
+
           io.emit('login', check)
         }else{
           check = false
           io.emit('login', check)
         }
       })
-  
+
   })
+
+  socket.on('checklogin', () => {
+
+          //console.log( `CHECK SOCKET ID ${socket.id}` )
+          //console.log( `CHECK id ${socket.request.session.id}`  )
+          //console.log( `CHECK ID ${socket.request.sessionID}`  )
+   // console.log( socket.request.sessionID )
+   //console.log( socket )
+   
+   /*
+    Store.get( `sess:${socket.request.sessionID}`, (err, session) =>{
+      console.log( err )
+      console.log( session )
+      io.emit('checklogin', session )
+    })
+*/
+  if (!socket.request.session.user) {
+    
+    io.emit('checklogin', false )
+    //console.log( socket.request.res )
+  } else {
+    io.emit('checklogin', true )
+  }
+
+
+  })
+
+})
+
+
+app.all('*', (request, response) => {
+
+/*
+  if (!request.sessionID) {
+    request.session.save()
+  }
+  */
+/*
+    Store.get( `sess:${request.sessionID}`, (err, session) =>{
+      if (err) throw err 
+      if(!session){
+        request.session.save()
+      } 
+    })
+*/
+
+
+
+  if (!request.session.on) {
+    request.session.on = true
+  }
+
+
+  console.log( `ROUTER id ${request.session.id}` )
+  console.log( `ROUTER ID ${request.sessionID}` )
+
+  response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
+
 
 })

@@ -14,13 +14,16 @@
   "author": "pipiyo",
   "license": "MIT",
   "dependencies": {
+    "connect-redis": "^3.1.0",
     "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "jquery": "^3.1.1",
     "mysql": "^2.11.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-mixin": "^3.0.5",
     "react-router": "^2.8.1",
+    "redis": "^2.6.2",
     "reflux": "^0.4.1",
     "socket.io": "^1.5.0"
   },

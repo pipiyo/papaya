@@ -23474,7 +23474,7 @@
 	var LoginStore = _reflux2.default.createStore({
 	  listenables: [_LoginActions2.default],
 	  check: true,
-	  init: function init() {
+	  checkUser: function checkUser(user) {
 	    var _this = this;
 
 	    this.socket = (0, _socket2.default)(_Config2.default);
@@ -23485,8 +23485,6 @@
 	        _this.trigger(_this.check);
 	      }
 	    });
-	  },
-	  checkUser: function checkUser(user) {
 	    this.socket.emit('login', user);
 	  }
 	});
@@ -38738,13 +38736,31 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _dec, _class;
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
 	var _home = __webpack_require__(332);
 
 	var _home2 = _interopRequireDefault(_home);
+
+	var _HomeActions = __webpack_require__(344);
+
+	var _HomeActions2 = _interopRequireDefault(_HomeActions);
+
+	var _HomeStore = __webpack_require__(345);
+
+	var _HomeStore2 = _interopRequireDefault(_HomeStore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38754,7 +38770,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var HomeRoutes = function (_React$Component) {
+	var HomeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_HomeStore2.default, 'var')), _dec(_class = function (_React$Component) {
 	  _inherits(HomeRoutes, _React$Component);
 
 	  function HomeRoutes() {
@@ -38769,6 +38785,11 @@
 	  }
 
 	  _createClass(HomeRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _HomeActions2.default.checkLogin();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(_home2.default, { content: this.props.children });
@@ -38776,8 +38797,7 @@
 	  }]);
 
 	  return HomeRoutes;
-	}(_react2.default.Component);
-
+	}(_react2.default.Component)) || _class);
 	exports.default = HomeRoutes;
 
 /***/ },
@@ -39745,6 +39765,71 @@
 	}(_react2.default.Component);
 
 	exports.default = ItemDespacho;
+
+/***/ },
+/* 344 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HomeActions = _reflux2.default.createActions(['checkLogin']);
+
+	exports.default = HomeActions;
+
+/***/ },
+/* 345 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	var _HomeActions = __webpack_require__(344);
+
+	var _HomeActions2 = _interopRequireDefault(_HomeActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HomeStore = _reflux2.default.createStore({
+	  listenables: [_HomeActions2.default],
+	  checkLogin: function checkLogin() {
+	    this.socket = (0, _socket2.default)(_Config2.default);
+	    this.socket.on('checklogin', function (data) {
+	      if (!data) {
+	        _reactRouter.hashHistory.push('/');
+	      }
+	    });
+	    this.socket.emit('checklogin');
+	  }
+	});
+
+	exports.default = HomeStore;
 
 /***/ }
 /******/ ]);

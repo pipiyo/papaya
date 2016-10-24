@@ -7,8 +7,8 @@ import LoginActions from '../actions/LoginActions'
 let LoginStore = Reflux.createStore({
   listenables: [LoginActions],
   check: true,
-  init: function() {
-    this.socket = io( getUrl );
+  checkUser: function (user) {
+    this.socket = io( getUrl )
     this.socket.on('login', (data) => {
       if (data) {
         hashHistory.push('home')
@@ -16,8 +16,6 @@ let LoginStore = Reflux.createStore({
         this.trigger(this.check)
       }
     })
-  },
-  checkUser: function (user) {
   this.socket.emit('login', user)
   }
 })
