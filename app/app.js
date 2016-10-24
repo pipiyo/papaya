@@ -72,7 +72,7 @@ io.sockets.on('connection', (socket) => {
           console.log( socket.request.session.user )
           */
 
-          socket.request.session.user = 'lonjiman'
+          socket.request.session.user = data.userName
           socket.request.session.save()
 
           //console.log( `LOGIN id ${socket.request.session.id}`  )
@@ -141,7 +141,7 @@ app.all('*', (request, response) => {
   }
 
 
-  console.log( `ROUTER id ${request.session.id}` )
+  console.log( "hola" )
   console.log( `ROUTER ID ${request.sessionID}` )
 
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
