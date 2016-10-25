@@ -37212,7 +37212,6 @@
 	        default:
 	          area = "";
 	      }
-	      console.log(area);
 	      return _react2.default.createElement(
 	        'div',
 	        null,

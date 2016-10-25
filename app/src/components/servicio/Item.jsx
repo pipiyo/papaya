@@ -29,7 +29,6 @@ class Item extends React.Component {
       default:
         area = ""
       }
-    console.log(area);
       return (
         <div>
           <div className="module-form">
