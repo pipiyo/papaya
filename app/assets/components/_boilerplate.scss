@@ -492,10 +492,12 @@ a.external-link, .external-link a {
         margin-right: 2em;
         position: relative;
         background-image: url(images/app-icons/notificacion-icon.svg);
-        background-size: 100%; 
-        width: 20px;
-        height: 20px;
-        p{
+        background-size: 80%; 
+        background-position: center center;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+        .notificacion-num{
             position: absolute;
             color: $blanco;
             font-size: 10px;
@@ -507,8 +509,8 @@ a.external-link, .external-link a {
             text-decoration: none;
             background: #FE2E2E;
             display: block; 
-            top: 15px;
-            left: 15px;
+            top: 20px;
+            left: 22px;
         }
         &:hover > p{
             background: #f25757;
@@ -755,7 +757,7 @@ a.external-link, .external-link a {
         @include vertical-tablet-down {
             width: 50%;
         }
-         @include phablet-down {
+        @include phablet-down {
             width: 100%;
         }
     }
@@ -1058,4 +1060,91 @@ a.external-link, .external-link a {
         }
     }
 
+}
+
+/**** module notification ****/
+/**** module notification ****/
+/**** module notification ****/
+
+.module-notification{
+    border: solid $color_corporativo_darker 3px;
+    background: $blanco;
+    position: absolute;
+    width: 300px;
+    top: 37px;
+    left: -277px;
+    z-index: 1;
+    display: block;
+    &:before{
+        content: "\f0d8";
+        color:$color_corporativo_darker;
+        font-size: 1.6em;
+        font-family: FontAwesome;
+        font-weight: normal;
+        position: absolute;
+        right: -2px;
+        top: -19px;
+    }
+    @include phablet-down {
+        width: 200px;
+        left: 0px;
+        top: 38px;
+        &:before{
+            right: 175px;
+            top: -19px;
+        }
+    }
+    .item-notification{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        + .item-notification{
+            border-top: solid 1px $color_corporativo_darker;
+        }
+        .img-notification{
+            width: 50px;
+            padding: .5em;
+            text-align: center;
+            img{
+                border-radius: 50%;
+                max-width: 40px;
+            }
+            @include phablet-down {
+                width: 30px;
+                img{
+                    max-width: 20px;
+                }
+            }
+        }
+        .content-notification{
+            padding: .5em;
+            width: calc(100% - 50px);
+            p{
+                margin: 0;
+                padding: 0;
+                font-weight: bold;
+                line-height: 110%;
+                font-size: fontRegular;
+                + p{
+                    font-size: $fontSmall;
+                    font-weight: normal;
+                }
+            }
+            @include phablet-down {
+                p{
+                    font-size: $fontTiny;
+                    + p{
+                        font-size: $fontTiny;
+                    }
+                }
+            }
+        }
+    }
+    h6{
+        background: $color_corporativo_darker;
+        color: $blanco;
+        margin: 0;
+        padding: .5em;
+    }
+    
 }

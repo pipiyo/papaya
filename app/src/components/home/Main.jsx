@@ -11,7 +11,7 @@ class Main extends React.Component {
   render() {
       return (
         <div className="main" id="main">
-          <Nav nombre="Cristóbal Maturana"/>
+          <Nav notification={this.props.notification} navnotification={this.props.navnotification} nombre="Cristóbal Maturana"/>
 
           <div className="content">
             <div className="breadcrumb">

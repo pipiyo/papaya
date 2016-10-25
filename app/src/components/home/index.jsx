@@ -7,10 +7,10 @@ class Home extends React.Component {
 
   constructor() {
     super()
-    this.state = { active : 'active' }
+    this.state = { active : 'active', notification : null }
     this.menu = [
       {id:"1",img: <i className="fa fa-rocket" aria-hidden="true"></i>, name: "Rochas", icon: "icon rocha", "item": false},
-      {id:"2",img: <i className="fa fa-coffee" aria-hidden="true"></i>, name: "Actividades", icon: "icon actividad", "item":[{id:"1",nombre:"Nueva Actividad",ruta:"/home/servicio"}]},
+      {id:"2",img: <i className="fa fa-coffee" aria-hidden="true"></i>, name: "Actividades", icon: "icon actividad", "item":[{id:"1",nombre:"Nueva Actividad",ruta:"/home/actividad"}]},
       {id:"3",img: <i className="fa fa-shopping-cart" aria-hidden="true"></i>, name: "Abastecimiento", icon: "icon abastecimiento" , "item":[{id:"1",nombre:"Informe Abastecimiento",ruta:"/home/abastecimiento"}]},
       {id:"4",img: <i className="fa fa-suitcase" aria-hidden="true"></i>, name: "Comercial", icon: "icon comercial", "item": false},
       {id:"5",img: <i className="fa fa-pencil" aria-hidden="true"></i>, name: "Dam" , icon: "icon dam", "item": false},
@@ -34,6 +34,12 @@ class Home extends React.Component {
     x[0].classList.toggle('active')
   }
 
+  /* Agrega clase notificación active */
+  navNotification(ev){
+    ev.preventDefault();
+    (this.state.notification == null ) ? this.setState({notification:'active'}) : this.setState({notification:null});
+  }
+
   /* Agrega clase active para desplegar sub-menus */
   subMenus(ev){
     ev.preventDefault()
@@ -47,8 +53,8 @@ class Home extends React.Component {
 
       return (
         <div className="frame">
-          <Header menu={ this.menu }  submenu={this.subMenus.bind(this)} navmovil={this.navMovil.bind(this)} />
-          <Main content={this.props.content}/>
+          <Header menu={ this.menu } submenu={this.subMenus.bind(this)} navmovil={this.navMovil.bind(this)} />
+          <Main notification={this.state.notification} navnotification={this.navNotification.bind(this)} content={this.props.content}/>
         </div>
       )
 
