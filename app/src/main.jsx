@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import Login from './routes/LoginRoutes'
 import Servicio from './routes/ServicioRoutes'
+import SubServicio from './routes/SubServicioRoutes'
 import Abastecimiento from './routes/AbastecimientoRoutes'
 import DetalleInforme from './routes/DetalleInformeRoutes'
 
@@ -14,9 +15,10 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={Login}/>
     <Route path="home" component={Home}>	
-    	<Route path="servicio" component={Servicio}/> 
+    	<Route path="actividad" component={Servicio}/>
     	<Route path="abastecimiento" component={Abastecimiento}/> 
     	<Route path="detalle-actividad" component={DetalleInforme}/> 
+        <Route path="detalle-actividad/sub-actividad" component={SubServicio}/>
     </Route>
     <Route path="*" component={Servicio} />
   </Router>

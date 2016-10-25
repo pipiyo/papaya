@@ -1,6 +1,6 @@
 import React from 'react'
 
-class ItemSillas extends React.Component {
+class ItemProduccion extends React.Component {
 
   constructor() {
     super()
@@ -10,7 +10,7 @@ class ItemSillas extends React.Component {
       return (
         <div className="module-form">
           <div className="item-form title">
-              <h4>Sillas</h4>
+              <h4>Producción</h4>
           </div>
           <div className="item-form">
             <label>Ejecutor</label>
@@ -20,6 +20,11 @@ class ItemSillas extends React.Component {
           <div className="item-form">
             <label>OC</label>
             <input type="text" id="oc" />
+          </div>
+
+          <div className="item-form">
+            <label>Vale</label>
+            <input type="text" id="vale" />
           </div>
 
           <div className="item-form">
@@ -50,4 +55,4 @@ class ItemSillas extends React.Component {
 
 }
 
-export default ItemSillas
+export default ItemProduccion

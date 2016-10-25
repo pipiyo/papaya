@@ -13,7 +13,6 @@ class Servicio extends React.Component {
     let uno,dos,i;
     let o = "1";
     let u = "2"
-    console.log(this.props.rocha)
     for(i=0; i < this.props.rocha.length; i++) { 
         (this.props.rocha[i] == "dos") ? dos = <Content test={ u } /> : dos; 
         (this.props.rocha[i] == "uno") ? uno = <Content test={ o } /> : uno;       

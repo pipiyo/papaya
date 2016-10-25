@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 class Form extends React.Component {
 
@@ -9,7 +10,7 @@ class Form extends React.Component {
   render() {
       return (
         <div class="button">
-          <a href="#"> Nueva Sub Actividad </a>
+          <Link to="/home/detalle-actividad/sub-actividad"> Nueva Sub Actividad </Link>
         </div>
       )
 

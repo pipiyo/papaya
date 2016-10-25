@@ -1,4 +1,5 @@
 import React from 'react'
+import Notification from './Notification'
 
 class Nav extends React.Component {
 
@@ -7,13 +8,16 @@ class Nav extends React.Component {
   }
 
   render() {
+      let notification;
+      (this.props.notification == null) ? notification = "" : notification = <Notification />;
       return (
           <nav className="nav-config">
-            <a className="notificacion-user">
+            <div className="notificacion-user" onClick={this.props.navnotification}>
               <p class="notificacion-num">
                 21
               </p>
-            </a>
+              { notification }
+            </div>
             <div className="name-user">
               <h2>{this.props.nombre}</h2>
             </div>

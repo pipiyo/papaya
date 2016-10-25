@@ -38,8 +38,6 @@ const sessionMiddleware = session({
 //app.use(cookieParser())
 app.use(sessionMiddleware)
 
-
-
 let server = http.createServer(app).listen(port, () => {
   console.log('Estamos en el ' + port)
 })
@@ -49,10 +47,6 @@ const io = require('socket.io')(server)
 io.use( (socket, next) => {
   sessionMiddleware(socket.request, socket.request.res, next)
 } )
-
-
-
-
 
 io.sockets.on('connection', (socket) => {
 
@@ -72,7 +66,7 @@ io.sockets.on('connection', (socket) => {
           console.log( socket.request.session.user )
           */
 
-          socket.request.session.user = 'lonjiman'
+          socket.request.session.user = 'lonji'
           socket.request.session.save()
 
           //console.log( `LOGIN id ${socket.request.session.id}`  )
@@ -105,7 +99,6 @@ io.sockets.on('connection', (socket) => {
     })
 */
   if (!socket.request.session.user) {
-    
     io.emit('checklogin', false )
     //console.log( socket.request.res )
   } else {
@@ -117,7 +110,7 @@ io.sockets.on('connection', (socket) => {
 
 })
 
-
+  
 app.all('*', (request, response) => {
 
 /*
