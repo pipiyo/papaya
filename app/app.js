@@ -69,8 +69,8 @@ io.sockets.on('connection', (socket) => {
           socket.request.session.user = 'lonji'
           socket.request.session.save()
 
-          //console.log( `LOGIN id ${socket.request.session.id}`  )
-          //console.log( `LOGIN ID ${socket.request.sessionID}`  )
+          console.log( `LOGIN id ${socket.request.session.id}`  )
+          console.log( `LOGIN ID ${socket.request.sessionID}`  )
 
           //console.log( `LOGIN SOCKET ID ${socket.id}` )
 
