@@ -3,10 +3,10 @@
 let mysql = require('mysql')
 
 let connection = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root',
-  password : '',
-  database: 'mueblesydise'
+  host     : process.env.dbHost,
+  user     : process.env.dbuser,
+  password : process.env.dbPassword,
+  database : process.env.dbDatabase
 })
 
 module.exports = connection
