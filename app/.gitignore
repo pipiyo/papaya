@@ -2,5 +2,5 @@
 /.tmp/
 /.sass-cache/
 /srcApirest/connection.js
-/dump.rbd
+dump.rbd
 env.js
