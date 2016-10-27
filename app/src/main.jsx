@@ -15,7 +15,7 @@ import Instalacion from './routes/InstalacionRoutes'
 import Sillas from './routes/SillasRoutes'
 import Produccion from './routes/ProduccionRoutes'
 import Planificacion from './routes/PlanificacionRoutes'
-
+import Notificacion from './routes/NotificacionRoutes'
 import DetalleInforme from './routes/DetalleInformeRoutes'
 import Home from './routes/HomeRoutes'
 
@@ -38,7 +38,7 @@ ReactDOM.render((
         <Route path="planificacion" component={Planificacion}/>
         <Route path="reclamo" component={Reclamo}/>
         <Route path="informe-reclamo" component={InformeReclamo}/>
-
+        <Route path="notificacion" component={Notificacion}/>
     	<Route path="detalle-actividad" component={DetalleInforme}/> 
         <Route path="detalle-actividad/sub-actividad" component={SubServicio}/>
     </Route>

@@ -117,6 +117,10 @@
 
 	var _PlanificacionRoutes2 = _interopRequireDefault(_PlanificacionRoutes);
 
+	var _NotificacionRoutes = __webpack_require__(386);
+
+	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
+
 	var _DetalleInformeRoutes = __webpack_require__(355);
 
 	var _DetalleInformeRoutes2 = _interopRequireDefault(_DetalleInformeRoutes);
@@ -148,6 +152,7 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: 'planificacion', component: _PlanificacionRoutes2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'reclamo', component: _ReclamoRoutes2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'informe-reclamo', component: _InformeReclamoRoutes2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad', component: _DetalleInformeRoutes2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/sub-actividad', component: _SubServicioRoutes2.default })
 	    ),
@@ -36962,31 +36967,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dec, _class;
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactMixin = __webpack_require__(174);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
 	var _servicio = __webpack_require__(312);
 
 	var _servicio2 = _interopRequireDefault(_servicio);
-
-	var _ServicioStore = __webpack_require__(320);
-
-	var _ServicioStore2 = _interopRequireDefault(_ServicioStore);
-
-	var _ServicioActions = __webpack_require__(321);
-
-	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36996,7 +36983,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	var ServicioRoutes = function (_React$Component) {
 	  _inherits(ServicioRoutes, _React$Component);
 
 	  function ServicioRoutes() {
@@ -37006,19 +36993,15 @@
 	  }
 
 	  _createClass(ServicioRoutes, [{
-	    key: 'formArea',
-	    value: function formArea(value) {
-	      _ServicioActions2.default.formArea(value.target.value);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_servicio2.default, { area: this.state.data, formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_servicio2.default, null);
 	    }
 	  }]);
 
 	  return ServicioRoutes;
-	}(_react2.default.Component)) || _class);
+	}(_react2.default.Component);
+
 	exports.default = ServicioRoutes;
 
 /***/ },
@@ -37045,6 +37028,22 @@
 
 	var _Form2 = _interopRequireDefault(_Form);
 
+	var _ItemProduccion = __webpack_require__(316);
+
+	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
+
+	var _ItemSillas = __webpack_require__(317);
+
+	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
+
+	var _ItemInstalacion = __webpack_require__(318);
+
+	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
+
+	var _ItemDespacho = __webpack_require__(319);
+
+	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37059,17 +37058,41 @@
 	  function ServicioIndex() {
 	    _classCallCheck(this, ServicioIndex);
 
-	    return _possibleConstructorReturn(this, (ServicioIndex.__proto__ || Object.getPrototypeOf(ServicioIndex)).call(this));
+	    var _this = _possibleConstructorReturn(this, (ServicioIndex.__proto__ || Object.getPrototypeOf(ServicioIndex)).call(this));
+
+	    _this.state = { area: "" };
+	    return _this;
 	  }
 
 	  _createClass(ServicioIndex, [{
+	    key: 'formArea',
+	    value: function formArea(ev) {
+	      switch (ev.target.value) {
+	        case "Produccion":
+	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
+	          break;
+	        case "Instalacion":
+	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, null) });
+	          break;
+	        case "Sillas":
+	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, null) });
+	          break;
+	        case "Despacho":
+	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, null) });
+	          break;
+	        default:
+	          this.setState({ area: "" });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Form2.default, { area: this.props.area, formArea: this.props.formArea })
+	        _react2.default.createElement(_Form2.default, { area: this.state.area, formArea: this.formArea.bind(this) })
 	      );
 	    }
 	  }]);
@@ -37197,7 +37220,7 @@
 /* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -37208,22 +37231,6 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _ItemProduccion = __webpack_require__(316);
-
-	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
-
-	var _ItemSillas = __webpack_require__(317);
-
-	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
-
-	var _ItemInstalacion = __webpack_require__(318);
-
-	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
-
-	var _ItemDespacho = __webpack_require__(319);
-
-	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37243,215 +37250,199 @@
 	  }
 
 	  _createClass(Item, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      var area = void 0;
-	      switch (this.props.area) {
-	        case "Produccion":
-	          area = _react2.default.createElement(_ItemProduccion2.default, null);
-	          break;
-	        case "Instalacion":
-	          area = _react2.default.createElement(_ItemInstalacion2.default, null);
-	          break;
-	        case "Sillas":
-	          area = _react2.default.createElement(_ItemSillas2.default, null);
-	          break;
-	        case "Despacho":
-	          area = _react2.default.createElement(_ItemDespacho2.default, null);
-	          break;
-	        default:
-	          area = "";
-	      }
+
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'module-form' },
+	          "div",
+	          { className: "module-form" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form title' },
+	            "div",
+	            { className: "item-form title" },
 	            _react2.default.createElement(
-	              'h4',
+	              "h4",
 	              null,
-	              'Nueva Actividad'
+	              "Nueva Actividad"
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Servicio'
+	              "Servicio"
 	            ),
 	            _react2.default.createElement(
-	              'select',
-	              { id: 'area', onChange: this.props.formArea },
+	              "select",
+	              { id: "area", onChange: this.props.formArea },
 	              _react2.default.createElement(
-	                'option',
-	                { value: '' },
-	                'Seleccion\xE9'
+	                "option",
+	                { value: "" },
+	                "Seleccion\xE9"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Adquisiciones' },
-	                'Adquisiciones'
+	                "option",
+	                { value: "Adquisiciones" },
+	                "Adquisiciones"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Bodega' },
-	                'Bodega'
+	                "option",
+	                { value: "Bodega" },
+	                "Bodega"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Desarrollo' },
-	                'Desarrollo'
+	                "option",
+	                { value: "Desarrollo" },
+	                "Desarrollo"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Despacho' },
-	                'Despacho'
+	                "option",
+	                { value: "Despacho" },
+	                "Despacho"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Instalacion' },
-	                'Instalacion'
+	                "option",
+	                { value: "Instalacion" },
+	                "Instalacion"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Prevenci\xF3n de Riesgos' },
-	                'Prevenci\xF3n de Riesgos'
+	                "option",
+	                { value: "Prevenci\xF3n de Riesgos" },
+	                "Prevenci\xF3n de Riesgos"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Produccion' },
-	                'Produccion'
+	                "option",
+	                { value: "Produccion" },
+	                "Produccion"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sillas' },
-	                'Sillas'
+	                "option",
+	                { value: "Sillas" },
+	                "Sillas"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sistema' },
-	                'Sistema'
+	                "option",
+	                { value: "Sistema" },
+	                "Sistema"
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Categor\xEDa'
+	              "Categor\xEDa"
 	            ),
 	            _react2.default.createElement(
-	              'select',
-	              { id: 'categoria' },
+	              "select",
+	              { id: "categoria" },
 	              _react2.default.createElement(
-	                'option',
-	                { value: '' },
-	                'Seleccion\xE9'
+	                "option",
+	                { value: "" },
+	                "Seleccion\xE9"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'proyecto' },
-	                'Proyecto'
+	                "option",
+	                { value: "proyecto" },
+	                "Proyecto"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'solicitud' },
-	                'Solicitud'
+	                "option",
+	                { value: "solicitud" },
+	                "Solicitud"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'solicitud' },
-	                'Proceso'
+	                "option",
+	                { value: "solicitud" },
+	                "Proceso"
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Supervisor'
+	              "Supervisor"
 	            ),
-	            _react2.default.createElement('input', { id: 'supervisor', type: 'text' })
+	            _react2.default.createElement("input", { id: "supervisor", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Fecha Inicio'
+	              "Fecha Inicio"
 	            ),
-	            _react2.default.createElement('input', { className: 'date', id: 'fechaInicio', type: 'text' })
+	            _react2.default.createElement("input", { className: "date", id: "fechaInicio", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Fecha Entrega'
+	              "Fecha Entrega"
 	            ),
-	            _react2.default.createElement('input', { className: 'date', id: 'fechaEntrega', type: 'text' })
+	            _react2.default.createElement("input", { className: "date", id: "fechaEntrega", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'D\xEDas'
+	              "D\xEDas"
 	            ),
-	            _react2.default.createElement('input', { type: 'number', className: 'date', id: 'dias' })
+	            _react2.default.createElement("input", { type: "number", className: "date", id: "dias" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Descripci\xF3n'
+	              "Descripci\xF3n"
 	            ),
-	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
+	            _react2.default.createElement("input", { id: "descripcion", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Observaci\xF3n'
+	              "Observaci\xF3n"
 	            ),
-	            _react2.default.createElement('input', { id: 'Observacion', type: 'text' })
+	            _react2.default.createElement("input", { id: "Observacion", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'FI'
+	              "FI"
 	            ),
-	            _react2.default.createElement('input', { type: 'number', id: 'fi' })
+	            _react2.default.createElement("input", { type: "number", id: "fi" })
 	          )
 	        ),
-	        area,
+	        this.props.area,
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'module-form button' },
+	          "div",
+	          { className: "module-form button" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form button' },
-	            _react2.default.createElement('input', { type: 'submit', value: 'Enviar' })
+	            "div",
+	            { className: "item-form button" },
+	            _react2.default.createElement("input", { type: "submit", value: "Enviar" })
 	          )
 	        )
 	      );
@@ -38077,56 +38068,8 @@
 	exports.default = ItemDespacho;
 
 /***/ },
-/* 320 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _ServicioActions = __webpack_require__(321);
-
-	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ServicioStore = _reflux2.default.createStore({
-	  listenables: [_ServicioActions2.default],
-	  formArea: function formArea(data) {
-	    var mensaje = '' + data;
-	    this.trigger(mensaje);
-	  }
-	});
-
-	exports.default = ServicioStore;
-
-/***/ },
-/* 321 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ServicioActions = _reflux2.default.createActions(['formArea']);
-
-	exports.default = ServicioActions;
-
-/***/ },
+/* 320 */,
+/* 321 */,
 /* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -38139,31 +38082,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dec, _class;
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactMixin = __webpack_require__(174);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
 	var _subServicio = __webpack_require__(323);
 
 	var _subServicio2 = _interopRequireDefault(_subServicio);
-
-	var _SubServicioStore = __webpack_require__(331);
-
-	var _SubServicioStore2 = _interopRequireDefault(_SubServicioStore);
-
-	var _SubServicioActions = __webpack_require__(332);
-
-	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38173,7 +38098,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_SubServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	var ServicioRoutes = function (_React$Component) {
 	  _inherits(ServicioRoutes, _React$Component);
 
 	  function ServicioRoutes() {
@@ -38183,19 +38108,15 @@
 	  }
 
 	  _createClass(ServicioRoutes, [{
-	    key: 'formArea',
-	    value: function formArea(value) {
-	      _SubServicioActions2.default.formArea(value.target.value);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_subServicio2.default, { area: this.state.data, formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_subServicio2.default, null);
 	    }
 	  }]);
 
 	  return ServicioRoutes;
-	}(_react2.default.Component)) || _class);
+	}(_react2.default.Component);
+
 	exports.default = ServicioRoutes;
 
 /***/ },
@@ -38222,6 +38143,22 @@
 
 	var _Form2 = _interopRequireDefault(_Form);
 
+	var _ItemProduccion = __webpack_require__(327);
+
+	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
+
+	var _ItemSillas = __webpack_require__(328);
+
+	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
+
+	var _ItemInstalacion = __webpack_require__(329);
+
+	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
+
+	var _ItemDespacho = __webpack_require__(330);
+
+	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38236,17 +38173,41 @@
 	  function ServicioIndex() {
 	    _classCallCheck(this, ServicioIndex);
 
-	    return _possibleConstructorReturn(this, (ServicioIndex.__proto__ || Object.getPrototypeOf(ServicioIndex)).call(this));
+	    var _this = _possibleConstructorReturn(this, (ServicioIndex.__proto__ || Object.getPrototypeOf(ServicioIndex)).call(this));
+
+	    _this.state = { area: "" };
+	    return _this;
 	  }
 
 	  _createClass(ServicioIndex, [{
+	    key: 'formArea',
+	    value: function formArea(ev) {
+	      switch (ev.target.value) {
+	        case "Produccion":
+	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
+	          break;
+	        case "Instalacion":
+	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, null) });
+	          break;
+	        case "Sillas":
+	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, null) });
+	          break;
+	        case "Despacho":
+	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, null) });
+	          break;
+	        default:
+	          this.setState({ area: "" });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Form2.default, { area: this.props.area, formArea: this.props.formArea })
+	        _react2.default.createElement(_Form2.default, { area: this.state.area, formArea: this.formArea.bind(this) })
 	      );
 	    }
 	  }]);
@@ -38374,7 +38335,7 @@
 /* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -38385,22 +38346,6 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _ItemProduccion = __webpack_require__(327);
-
-	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
-
-	var _ItemSillas = __webpack_require__(328);
-
-	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
-
-	var _ItemInstalacion = __webpack_require__(329);
-
-	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
-
-	var _ItemDespacho = __webpack_require__(330);
-
-	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38420,216 +38365,198 @@
 	  }
 
 	  _createClass(Item, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      var area = void 0;
-	      switch (this.props.area) {
-	        case "Produccion":
-	          area = _react2.default.createElement(_ItemProduccion2.default, null);
-	          break;
-	        case "Instalacion":
-	          area = _react2.default.createElement(_ItemInstalacion2.default, null);
-	          break;
-	        case "Sillas":
-	          area = _react2.default.createElement(_ItemSillas2.default, null);
-	          break;
-	        case "Despacho":
-	          area = _react2.default.createElement(_ItemDespacho2.default, null);
-	          break;
-	        default:
-	          area = "";
-	      }
-	      console.log(area);
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'module-form' },
+	          "div",
+	          { className: "module-form" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form title' },
+	            "div",
+	            { className: "item-form title" },
 	            _react2.default.createElement(
-	              'h4',
+	              "h4",
 	              null,
-	              'Nueva Sub Actividad'
+	              "Nueva Sub Actividad"
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Servicio'
+	              "Servicio"
 	            ),
 	            _react2.default.createElement(
-	              'select',
-	              { id: 'area', onChange: this.props.formArea },
+	              "select",
+	              { id: "area", onChange: this.props.formArea },
 	              _react2.default.createElement(
-	                'option',
-	                { value: '' },
-	                'Seleccion\xE9'
+	                "option",
+	                { value: "" },
+	                "Seleccion\xE9"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Adquisiciones' },
-	                'Adquisiciones'
+	                "option",
+	                { value: "Adquisiciones" },
+	                "Adquisiciones"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Bodega' },
-	                'Bodega'
+	                "option",
+	                { value: "Bodega" },
+	                "Bodega"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Desarrollo' },
-	                'Desarrollo'
+	                "option",
+	                { value: "Desarrollo" },
+	                "Desarrollo"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Despacho' },
-	                'Despacho'
+	                "option",
+	                { value: "Despacho" },
+	                "Despacho"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Instalacion' },
-	                'Instalacion'
+	                "option",
+	                { value: "Instalacion" },
+	                "Instalacion"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Prevenci\xF3n de Riesgos' },
-	                'Prevenci\xF3n de Riesgos'
+	                "option",
+	                { value: "Prevenci\xF3n de Riesgos" },
+	                "Prevenci\xF3n de Riesgos"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Produccion' },
-	                'Produccion'
+	                "option",
+	                { value: "Produccion" },
+	                "Produccion"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sillas' },
-	                'Sillas'
+	                "option",
+	                { value: "Sillas" },
+	                "Sillas"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sistema' },
-	                'Sistema'
+	                "option",
+	                { value: "Sistema" },
+	                "Sistema"
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Categor\xEDa'
+	              "Categor\xEDa"
 	            ),
 	            _react2.default.createElement(
-	              'select',
-	              { id: 'categoria' },
+	              "select",
+	              { id: "categoria" },
 	              _react2.default.createElement(
-	                'option',
-	                { value: '' },
-	                'Seleccion\xE9'
+	                "option",
+	                { value: "" },
+	                "Seleccion\xE9"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'proyecto' },
-	                'Proyecto'
+	                "option",
+	                { value: "proyecto" },
+	                "Proyecto"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'solicitud' },
-	                'Solicitud'
+	                "option",
+	                { value: "solicitud" },
+	                "Solicitud"
 	              ),
 	              _react2.default.createElement(
-	                'option',
-	                { value: 'solicitud' },
-	                'Proceso'
+	                "option",
+	                { value: "solicitud" },
+	                "Proceso"
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Supervisor'
+	              "Supervisor"
 	            ),
-	            _react2.default.createElement('input', { id: 'supervisor', type: 'text' })
+	            _react2.default.createElement("input", { id: "supervisor", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Fecha Inicio'
+	              "Fecha Inicio"
 	            ),
-	            _react2.default.createElement('input', { className: 'date', id: 'fechaInicio', type: 'text' })
+	            _react2.default.createElement("input", { className: "date", id: "fechaInicio", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Fecha Entrega'
+	              "Fecha Entrega"
 	            ),
-	            _react2.default.createElement('input', { className: 'date', id: 'fechaEntrega', type: 'text' })
+	            _react2.default.createElement("input", { className: "date", id: "fechaEntrega", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'D\xEDas'
+	              "D\xEDas"
 	            ),
-	            _react2.default.createElement('input', { type: 'number', className: 'date', id: 'dias' })
+	            _react2.default.createElement("input", { type: "number", className: "date", id: "dias" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Descripci\xF3n'
+	              "Descripci\xF3n"
 	            ),
-	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
+	            _react2.default.createElement("input", { id: "descripcion", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'Observaci\xF3n'
+	              "Observaci\xF3n"
 	            ),
-	            _react2.default.createElement('input', { id: 'Observacion', type: 'text' })
+	            _react2.default.createElement("input", { id: "Observacion", type: "text" })
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
+	            "div",
+	            { className: "item-form" },
 	            _react2.default.createElement(
-	              'label',
+	              "label",
 	              null,
-	              'FI'
+	              "FI"
 	            ),
-	            _react2.default.createElement('input', { type: 'number', id: 'fi' })
+	            _react2.default.createElement("input", { type: "number", id: "fi" })
 	          )
 	        ),
-	        area,
+	        this.props.area,
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'module-form button' },
+	          "div",
+	          { className: "module-form button" },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form button' },
-	            _react2.default.createElement('input', { type: 'submit', value: 'Enviar' })
+	            "div",
+	            { className: "item-form button" },
+	            _react2.default.createElement("input", { type: "submit", value: "Enviar" })
 	          )
 	        )
 	      );
@@ -39255,56 +39182,8 @@
 	exports.default = ItemDespacho;
 
 /***/ },
-/* 331 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _SubServicioActions = __webpack_require__(332);
-
-	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ServicioStore = _reflux2.default.createStore({
-	  listenables: [_SubServicioActions2.default],
-	  formArea: function formArea(data) {
-	    var mensaje = '' + data;
-	    this.trigger(mensaje);
-	  }
-	});
-
-	exports.default = ServicioStore;
-
-/***/ },
-/* 332 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ServicioActions = _reflux2.default.createActions(['formArea']);
-
-	exports.default = ServicioActions;
-
-/***/ },
+/* 331 */,
+/* 332 */,
 /* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -39317,27 +39196,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dec, _class;
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _reactMixin = __webpack_require__(174);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _ServicioReclamoStore = __webpack_require__(373);
-
-	var _ServicioReclamoStore2 = _interopRequireDefault(_ServicioReclamoStore);
-
-	var _ServicioReclamoActions = __webpack_require__(374);
-
-	var _ServicioReclamoActions2 = _interopRequireDefault(_ServicioReclamoActions);
 
 	var _servicioReclamo = __webpack_require__(334);
 
@@ -39351,7 +39212,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServicioReclamoRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioReclamoStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	var ServicioReclamoRoutes = function (_React$Component) {
 	  _inherits(ServicioReclamoRoutes, _React$Component);
 
 	  function ServicioReclamoRoutes() {
@@ -39361,19 +39222,15 @@
 	  }
 
 	  _createClass(ServicioReclamoRoutes, [{
-	    key: 'formArea',
-	    value: function formArea(value) {
-	      _ServicioReclamoActions2.default.formArea(value.target.value);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_servicioReclamo2.default, { area: this.state.data, formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_servicioReclamo2.default, null);
 	    }
 	  }]);
 
 	  return ServicioReclamoRoutes;
-	}(_react2.default.Component)) || _class);
+	}(_react2.default.Component);
+
 	exports.default = ServicioReclamoRoutes;
 
 /***/ },
@@ -39391,6 +39248,22 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _ItemProduccion = __webpack_require__(338);
+
+	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
+
+	var _ItemSillas = __webpack_require__(339);
+
+	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
+
+	var _ItemInstalacion = __webpack_require__(340);
+
+	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
+
+	var _ItemDespacho = __webpack_require__(341);
+
+	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	var _Title = __webpack_require__(335);
 
@@ -39414,17 +39287,41 @@
 	  function ServicioIndex() {
 	    _classCallCheck(this, ServicioIndex);
 
-	    return _possibleConstructorReturn(this, (ServicioIndex.__proto__ || Object.getPrototypeOf(ServicioIndex)).call(this));
+	    var _this = _possibleConstructorReturn(this, (ServicioIndex.__proto__ || Object.getPrototypeOf(ServicioIndex)).call(this));
+
+	    _this.state = { area: "" };
+	    return _this;
 	  }
 
 	  _createClass(ServicioIndex, [{
+	    key: 'formArea',
+	    value: function formArea(ev) {
+	      switch (ev.target.value) {
+	        case "Produccion":
+	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
+	          break;
+	        case "Instalacion":
+	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, null) });
+	          break;
+	        case "Sillas":
+	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, null) });
+	          break;
+	        case "Despacho":
+	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, null) });
+	          break;
+	        default:
+	          this.setState({ area: "" });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Form2.default, { area: this.props.area, formArea: this.props.formArea })
+	        _react2.default.createElement(_Form2.default, { area: this.state.area, formArea: this.formArea.bind(this) })
 	      );
 	    }
 	  }]);
@@ -39552,10 +39449,10 @@
 /* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -39563,22 +39460,6 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _ItemProduccion = __webpack_require__(338);
-
-	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
-
-	var _ItemSillas = __webpack_require__(339);
-
-	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
-
-	var _ItemInstalacion = __webpack_require__(340);
-
-	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
-
-	var _ItemDespacho = __webpack_require__(341);
-
-	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39589,241 +39470,224 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Item = function (_React$Component) {
-	  _inherits(Item, _React$Component);
+	    _inherits(Item, _React$Component);
 
-	  function Item() {
-	    _classCallCheck(this, Item);
+	    function Item() {
+	        _classCallCheck(this, Item);
 
-	    return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
-	  }
-
-	  _createClass(Item, [{
-	    key: 'render',
-	    value: function render() {
-	      var area = void 0;
-	      switch (this.props.area) {
-	        case "Produccion":
-	          area = _react2.default.createElement(_ItemProduccion2.default, null);
-	          break;
-	        case "Instalacion":
-	          area = _react2.default.createElement(_ItemInstalacion2.default, null);
-	          break;
-	        case "Sillas":
-	          area = _react2.default.createElement(_ItemSillas2.default, null);
-	          break;
-	        case "Despacho":
-	          area = _react2.default.createElement(_ItemDespacho2.default, null);
-	          break;
-	        default:
-	          area = "";
-	      }
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'module-form' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form title' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Nueva Actividad reclamo'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Reclamo'
-	            ),
-	            _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Servicio'
-	            ),
-	            _react2.default.createElement(
-	              'select',
-	              { id: 'area', onChange: this.props.formArea },
-	              _react2.default.createElement(
-	                'option',
-	                { value: '' },
-	                'Seleccion\xE9'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Adquisiciones' },
-	                'Adquisiciones'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Bodega' },
-	                'Bodega'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Desarrollo' },
-	                'Desarrollo'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Despacho' },
-	                'Despacho'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Instalacion' },
-	                'Instalacion'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Prevenci\xF3n de Riesgos' },
-	                'Prevenci\xF3n de Riesgos'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Produccion' },
-	                'Produccion'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sillas' },
-	                'Sillas'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'Sistema' },
-	                'Sistema'
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Categor\xEDa'
-	            ),
-	            _react2.default.createElement(
-	              'select',
-	              { id: 'categoria' },
-	              _react2.default.createElement(
-	                'option',
-	                { value: '' },
-	                'Seleccion\xE9'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'proyecto' },
-	                'Proyecto'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'solicitud' },
-	                'Solicitud'
-	              ),
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'solicitud' },
-	                'Proceso'
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Supervisor'
-	            ),
-	            _react2.default.createElement('input', { id: 'supervisor', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Fecha Inicio'
-	            ),
-	            _react2.default.createElement('input', { className: 'date', id: 'fechaInicio', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Fecha Entrega'
-	            ),
-	            _react2.default.createElement('input', { className: 'date', id: 'fechaEntrega', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'D\xEDas'
-	            ),
-	            _react2.default.createElement('input', { type: 'number', className: 'date', id: 'dias' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Descripci\xF3n'
-	            ),
-	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Observaci\xF3n'
-	            ),
-	            _react2.default.createElement('input', { id: 'Observacion', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'FI'
-	            ),
-	            _react2.default.createElement('input', { type: 'number', id: 'fi' })
-	          )
-	        ),
-	        area,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'module-form button' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form button' },
-	            _react2.default.createElement('input', { type: 'submit', value: 'Enviar' })
-	          )
-	        )
-	      );
+	        return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 	    }
-	  }]);
 
-	  return Item;
+	    _createClass(Item, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "module-form" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form title" },
+	                        _react2.default.createElement(
+	                            "h4",
+	                            null,
+	                            "Nueva Actividad reclamo"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Reclamo"
+	                        ),
+	                        _react2.default.createElement("input", { id: "reclamo", type: "text" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Servicio"
+	                        ),
+	                        _react2.default.createElement(
+	                            "select",
+	                            { id: "area", onChange: this.props.formArea },
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "" },
+	                                "Seleccion\xE9"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Adquisiciones" },
+	                                "Adquisiciones"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Bodega" },
+	                                "Bodega"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Desarrollo" },
+	                                "Desarrollo"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Despacho" },
+	                                "Despacho"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Instalacion" },
+	                                "Instalacion"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Prevenci\xF3n de Riesgos" },
+	                                "Prevenci\xF3n de Riesgos"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Produccion" },
+	                                "Produccion"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Sillas" },
+	                                "Sillas"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "Sistema" },
+	                                "Sistema"
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Categor\xEDa"
+	                        ),
+	                        _react2.default.createElement(
+	                            "select",
+	                            { id: "categoria" },
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "" },
+	                                "Seleccion\xE9"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "proyecto" },
+	                                "Proyecto"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "solicitud" },
+	                                "Solicitud"
+	                            ),
+	                            _react2.default.createElement(
+	                                "option",
+	                                { value: "solicitud" },
+	                                "Proceso"
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Supervisor"
+	                        ),
+	                        _react2.default.createElement("input", { id: "supervisor", type: "text" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Fecha Inicio"
+	                        ),
+	                        _react2.default.createElement("input", { className: "date", id: "fechaInicio", type: "text" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Fecha Entrega"
+	                        ),
+	                        _react2.default.createElement("input", { className: "date", id: "fechaEntrega", type: "text" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "D\xEDas"
+	                        ),
+	                        _react2.default.createElement("input", { type: "number", className: "date", id: "dias" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Descripci\xF3n"
+	                        ),
+	                        _react2.default.createElement("input", { id: "descripcion", type: "text" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Observaci\xF3n"
+	                        ),
+	                        _react2.default.createElement("input", { id: "Observacion", type: "text" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "FI"
+	                        ),
+	                        _react2.default.createElement("input", { type: "number", id: "fi" })
+	                    )
+	                ),
+	                this.props.area,
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "module-form button" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form button" },
+	                        _react2.default.createElement("input", { type: "submit", value: "Enviar" })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Item;
 	}(_react2.default.Component);
 
 	exports.default = Item;
@@ -42679,7 +42543,7 @@
 /* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -42690,6 +42554,8 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(198);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42709,61 +42575,66 @@
 	  }
 
 	  _createClass(Notification, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "module-notification" },
+	        'div',
+	        { className: 'module-notification' },
 	        _react2.default.createElement(
-	          "h6",
+	          'h6',
 	          null,
-	          "Notificaciones"
+	          'Notificaciones'
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "item-notification" },
+	          'a',
+	          { className: 'item-notification' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "img-notification" },
-	            _react2.default.createElement("img", { src: "css/images/fondos/cristobal.jpg", alt: "usuario" })
+	            'div',
+	            { className: 'img-notification' },
+	            _react2.default.createElement('img', { src: 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "content-notification" },
+	            'div',
+	            { className: 'content-notification' },
 	            _react2.default.createElement(
-	              "p",
+	              'p',
 	              null,
-	              "Nuevo Rocha"
+	              'Nuevo Rocha'
 	            ),
 	            _react2.default.createElement(
-	              "p",
+	              'p',
 	              null,
-	              " Se ingreso rocha 2055"
+	              ' Se ingreso rocha 2055'
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "item-notification" },
+	          'a',
+	          { className: 'item-notification' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "img-notification" },
-	            _react2.default.createElement("img", { src: "css/images/fondos/cristobal.jpg", alt: "usuario" })
+	            'div',
+	            { className: 'img-notification' },
+	            _react2.default.createElement('img', { src: 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "content-notification" },
+	            'div',
+	            { className: 'content-notification' },
 	            _react2.default.createElement(
-	              "p",
+	              'p',
 	              null,
-	              "Nuevo Rocha"
+	              'Nuevo Rocha'
 	            ),
 	            _react2.default.createElement(
-	              "p",
+	              'p',
 	              null,
-	              " Se ingreso rocha 2055"
+	              ' Se ingreso rocha 2055'
 	            )
 	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: 'home/notificacion', className: 'view-all-notification', href: '#' },
+	          ' ver todas'
 	        )
 	      );
 	    }
@@ -42840,56 +42711,8 @@
 	exports.default = HomeStore;
 
 /***/ },
-/* 373 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _ServicioReclamoActions = __webpack_require__(374);
-
-	var _ServicioReclamoActions2 = _interopRequireDefault(_ServicioReclamoActions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ServicioReclamoStore = _reflux2.default.createStore({
-	  listenables: [_ServicioReclamoActions2.default],
-	  formArea: function formArea(data) {
-	    var mensaje = '' + data;
-	    this.trigger(mensaje);
-	  }
-	});
-
-	exports.default = ServicioReclamoStore;
-
-/***/ },
-/* 374 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ServicioReclamoActions = _reflux2.default.createActions(['formArea']);
-
-	exports.default = ServicioReclamoActions;
-
-/***/ },
+/* 373 */,
+/* 374 */,
 /* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -44125,6 +43948,220 @@
 	}(_react2.default.Component);
 
 	exports.default = Content;
+
+/***/ },
+/* 386 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _notificacion = __webpack_require__(387);
+
+	var _notificacion2 = _interopRequireDefault(_notificacion);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AbastecimientoRoutes = function (_React$Component) {
+	  _inherits(AbastecimientoRoutes, _React$Component);
+
+	  function AbastecimientoRoutes() {
+	    _classCallCheck(this, AbastecimientoRoutes);
+
+	    return _possibleConstructorReturn(this, (AbastecimientoRoutes.__proto__ || Object.getPrototypeOf(AbastecimientoRoutes)).call(this));
+	  }
+
+	  _createClass(AbastecimientoRoutes, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_notificacion2.default, null);
+	    }
+	  }]);
+
+	  return AbastecimientoRoutes;
+	}(_react2.default.Component);
+
+	exports.default = AbastecimientoRoutes;
+
+/***/ },
+/* 387 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Title = __webpack_require__(388);
+
+	var _Title2 = _interopRequireDefault(_Title);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NotificacionIndex = function (_React$Component) {
+	  _inherits(NotificacionIndex, _React$Component);
+
+	  function NotificacionIndex() {
+	    _classCallCheck(this, NotificacionIndex);
+
+	    return _possibleConstructorReturn(this, (NotificacionIndex.__proto__ || Object.getPrototypeOf(NotificacionIndex)).call(this));
+	  }
+
+	  _createClass(NotificacionIndex, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_Title2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module-notification-all' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'item-notification' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'img-notification' },
+	              _react2.default.createElement('img', { src: 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'content-notification' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#' },
+	                  ' Nuevo Rocha'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                ' Se ingreso rocha 2055 -> Crist\xF3bal Maturana'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'item-notification' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'img-notification' },
+	              _react2.default.createElement('img', { src: 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'content-notification' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#' },
+	                  ' Nuevo Rocha'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                ' Se ingreso rocha 2055 -> Crist\xF3bal Maturana'
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return NotificacionIndex;
+	}(_react2.default.Component);
+
+	exports.default = NotificacionIndex;
+
+/***/ },
+/* 388 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Title = function (_React$Component) {
+		_inherits(Title, _React$Component);
+
+		function Title() {
+			_classCallCheck(this, Title);
+
+			return _possibleConstructorReturn(this, (Title.__proto__ || Object.getPrototypeOf(Title)).call(this));
+		}
+
+		_createClass(Title, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					{ className: "title" },
+					_react2.default.createElement(
+						"h3",
+						null,
+						"Notificaciones"
+					)
+				);
+			}
+		}]);
+
+		return Title;
+	}(_react2.default.Component);
+
+	exports.default = Title;
 
 /***/ }
 /******/ ]);

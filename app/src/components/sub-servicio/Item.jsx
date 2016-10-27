@@ -1,10 +1,5 @@
 import React from 'react'
 
-import ItemProduccion from './ItemProduccion'
-import ItemSillas from './ItemSillas'
-import ItemInstalacion from './ItemInstalacion'
-import ItemDespacho from './ItemDespacho'
-
 class Item extends React.Component {
 
   constructor() {
@@ -12,24 +7,6 @@ class Item extends React.Component {
   }
 
   render() {
-    let area;
-    switch(this.props.area) {
-      case "Produccion":
-        area = <ItemProduccion />
-      break;
-      case "Instalacion":
-        area = <ItemInstalacion />
-      break;
-      case "Sillas":
-        area = <ItemSillas />
-      break;
-      case "Despacho":
-        area = <ItemDespacho />
-      break;
-      default:
-        area = ""
-      }
-    console.log(area);
       return (
         <div>
           <div className="module-form">
@@ -99,7 +76,7 @@ class Item extends React.Component {
             </div>
           </div>
 
-          { area }
+          { this.props.area }
 
           <div className="module-form button">
             <div className="item-form button">

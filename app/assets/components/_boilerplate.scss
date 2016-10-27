@@ -729,10 +729,13 @@ a.external-link, .external-link a {
                 float: right;
                 display: block;
                 padding: 1em;
-                background: $color_corporativo_darker;
-                 @include active-state{
+                background: $color_secundario_regular;
+                @include active-state{
                     cursor: pointer;
-                    background: $color_corporativo_dark;
+                    background: $color_secundario_light;
+                }
+                &:disabled{
+                    background: $gris_dark;
                 }
             }
         }
@@ -1098,6 +1101,12 @@ a.external-link, .external-link a {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover{
+            color: $color_corporativo_darker;
+            cursor: pointer;
+        }
         + .item-notification{
             border-top: solid 1px $color_corporativo_darker;
         }
@@ -1140,11 +1149,81 @@ a.external-link, .external-link a {
             }
         }
     }
+    .view-all-notification{
+        display: block;
+        text-decoration: none;
+        color: $blanco;
+        text-transform: uppercase;
+        font-size: $fontTiny;
+        text-align: center;
+        background: $color_corporativo_darker;
+        &:hover{
+            background: $color_corporativo_dark;
+            cursor: pointer;
+        }
+    }
     h6{
+        text-transform: uppercase;
         background: $color_corporativo_darker;
         color: $blanco;
         margin: 0;
         padding: .5em;
     }
     
+}
+
+
+/**** module notification all ****/
+/**** module notification all****/
+/**** module notification all****/
+
+.module-notification-all{
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 2em);
+    align-items: center;
+    margin: 0 1em; 
+    a{
+        text-decoration: none;
+        cursor: pointer;
+        &:hover{
+            color: $color_corporativo_darker;
+        }
+    }
+    .item-notification{
+        width: 100%;
+        padding:0 1em;
+        display: flex;
+        background: $gris-fondo;
+        //border: solid 1px $color_corporativo_darker;
+        flex-wrap: wrap;
+        align-items: center;
+        + .item-notification{
+            margin-top: 1em;
+        }
+    }
+    .img-notification{
+        width: 50px;
+        padding: .5em 0;
+        text-align: center;
+        img{
+            border-radius: 50%;
+            max-width: 50px;
+        }
+    }
+    .content-notification{
+        padding: .5em;
+        width: calc(100% - 60px);
+        p{
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            line-height: 120%;
+            font-size: fontRegular;
+            + p{
+                font-size: $fontSmall;
+                font-weight: normal;
+            }
+        }
+    }
 }
