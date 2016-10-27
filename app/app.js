@@ -11,7 +11,7 @@ const RedisStore = require('connect-redis')(session)
 require('./env').config()
 
 
-const Store = new RedisStore({ ttl: 120 })
+const Store = new RedisStore({ ttl: 10020 })
 
 
 const con = require('./srcApirest/connection')
