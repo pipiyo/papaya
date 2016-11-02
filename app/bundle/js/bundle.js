@@ -37019,6 +37019,7 @@
 	    value: function addServicio(ev) {
 	      ev.preventDefault();
 	      var servicio = {
+	        "reclamo": "",
 	        "area": ev.target.elements['area'].value,
 	        "categoria": ev.target.elements['categoria'].value,
 	        "supervisor": ev.target.elements['supervisor'].value,
@@ -37052,7 +37053,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.data);
 	      return _react2.default.createElement(_servicio2.default, { mensaje: this.state.data, addServicio: this.addServicio.bind(this) });
 	    }
 	  }]);
@@ -39430,9 +39430,27 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _dec, _class;
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _ServicioReclamoActions = __webpack_require__(385);
+
+	var _ServicioReclamoActions2 = _interopRequireDefault(_ServicioReclamoActions);
+
+	var _ServicioReclamoStore = __webpack_require__(386);
+
+	var _ServicioReclamoStore2 = _interopRequireDefault(_ServicioReclamoStore);
 
 	var _servicioReclamo = __webpack_require__(332);
 
@@ -39446,25 +39464,63 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServicioReclamoRoutes = function (_React$Component) {
+	var ServicioReclamoRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioReclamoStore2.default, 'data')), _dec(_class = function (_React$Component) {
 	  _inherits(ServicioReclamoRoutes, _React$Component);
 
 	  function ServicioReclamoRoutes() {
 	    _classCallCheck(this, ServicioReclamoRoutes);
 
-	    return _possibleConstructorReturn(this, (ServicioReclamoRoutes.__proto__ || Object.getPrototypeOf(ServicioReclamoRoutes)).call(this));
+	    var _this = _possibleConstructorReturn(this, (ServicioReclamoRoutes.__proto__ || Object.getPrototypeOf(ServicioReclamoRoutes)).call(this));
+
+	    _this.state = { data: "" };
+	    return _this;
 	  }
 
 	  _createClass(ServicioReclamoRoutes, [{
+	    key: 'addServicio',
+	    value: function addServicio(ev) {
+	      ev.preventDefault();
+	      var servicio = {
+	        "reclamo": ev.target.elements['reclamo'].value,
+	        "area": ev.target.elements['area'].value,
+	        "categoria": ev.target.elements['categoria'].value,
+	        "supervisor": ev.target.elements['supervisor'].value,
+	        "fechaInicio": ev.target.elements['fechaInicio'].value,
+	        "fechaEntrega": ev.target.elements['fechaEntrega'].value,
+	        "dias": ev.target.elements['dias'].value,
+	        "descripcion": ev.target.elements['descripcion'].value,
+	        "observacion": ev.target.elements['observacion'].value,
+	        "rocha": ev.target.elements['rocha'].value,
+	        "direccion": ev.target.elements['direccion'] ? ev.target.elements['direccion'].value : "",
+	        "guia": ev.target.elements['guia'] ? ev.target.elements['guia'].value : "",
+	        "comuna": ev.target.elements['comuna'] ? ev.target.elements['comuna'].value : "",
+	        "m3": ev.target.elements['m3'] ? ev.target.elements['m3'].value : "",
+	        "fi": ev.target.elements['fi'] ? ev.target.elements['fi'].value : "",
+	        "tm": ev.target.elements['tm'] ? ev.target.elements['tm'].value : "",
+	        "to": ev.target.elements['to'] ? ev.target.elements['to'].value : "",
+	        "os": ev.target.elements['os'] ? ev.target.elements['os'].value : "",
+	        "lider": ev.target.elements['lider'] ? ev.target.elements['lider'].value : "",
+	        "puestos": ev.target.elements['puestos'] ? ev.target.elements['puestos'].value : "",
+	        "instalador1": ev.target.elements['instalador1'] ? ev.target.elements['instalador1'].value : "",
+	        "instalador2": ev.target.elements['instalador2'] ? ev.target.elements['instalador2'].value : "",
+	        "instalador3": ev.target.elements['instalador3'] ? ev.target.elements['instalador3'].value : "",
+	        "proceso": ev.target.elements['proceso'] ? ev.target.elements['proceso'].value : "",
+	        "vale": ev.target.elements['vale'] ? ev.target.elements['vale'].value : "",
+	        "ejecutor": ev.target.elements['ejecutor'] ? ev.target.elements['ejecutor'].value : "",
+	        "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
+	        "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
+	      };
+	      _ServicioReclamoActions2.default.addServicio(servicio);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_servicioReclamo2.default, null);
+	      return _react2.default.createElement(_servicioReclamo2.default, { mensaje: this.state.data, addServicio: this.addServicio.bind(this) });
 	    }
 	  }]);
 
 	  return ServicioReclamoRoutes;
-	}(_react2.default.Component);
-
+	}(_react2.default.Component)) || _class);
 	exports.default = ServicioReclamoRoutes;
 
 /***/ },
@@ -39483,6 +39539,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Title = __webpack_require__(337);
+
+	var _Title2 = _interopRequireDefault(_Title);
+
+	var _Form = __webpack_require__(338);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
 	var _ItemProduccion = __webpack_require__(333);
 
 	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
@@ -39498,14 +39562,6 @@
 	var _ItemDespacho = __webpack_require__(336);
 
 	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
-
-	var _Title = __webpack_require__(337);
-
-	var _Title2 = _interopRequireDefault(_Title);
-
-	var _Form = __webpack_require__(338);
-
-	var _Form2 = _interopRequireDefault(_Form);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39550,12 +39606,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Form2.default, { area: this.state.area, formArea: this.formArea.bind(this) })
+	        _react2.default.createElement(_Title2.default, { mensaje: this.props.mensaje }),
+	        _react2.default.createElement(_Form2.default, { addServicio: this.props.addServicio, area: this.state.area, formArea: this.formArea.bind(this) })
 	      );
 	    }
 	  }]);
@@ -39622,16 +39677,6 @@
 	            "Ejecutor"
 	          ),
 	          _react2.default.createElement("input", { id: "ejecutor", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "OC"
-	          ),
-	          _react2.default.createElement("input", { type: "text", id: "oc" })
 	        ),
 	        _react2.default.createElement(
 	          "div",
@@ -39782,6 +39827,44 @@
 	            "Ejecutor"
 	          ),
 	          _react2.default.createElement("input", { id: "ejecutor", type: "text" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-form" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "Direcci\xF3n"
+	          ),
+	          _react2.default.createElement("input", { type: "text", id: "direccion" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-form" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "Comuna"
+	          ),
+	          _react2.default.createElement(
+	            "select",
+	            { id: "comuna" },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "" },
+	              "Seleccion\xE9"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "1" },
+	              "Puente Alto"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "2" },
+	              "La Florida"
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(
 	          "div",
@@ -39984,7 +40067,7 @@
 	            null,
 	            "Instalador"
 	          ),
-	          _react2.default.createElement("input", { id: "instalador", type: "text" })
+	          _react2.default.createElement("input", { id: "instalador1", type: "text" })
 	        ),
 	        _react2.default.createElement(
 	          "div",
@@ -39994,7 +40077,7 @@
 	            null,
 	            "Instalador"
 	          ),
-	          _react2.default.createElement("input", { id: "instalador1", type: "text" })
+	          _react2.default.createElement("input", { id: "instalador2", type: "text" })
 	        ),
 	        _react2.default.createElement(
 	          "div",
@@ -40034,15 +40117,25 @@
 	            ),
 	            _react2.default.createElement(
 	              "option",
-	              { value: "puente alto" },
+	              { value: "1" },
 	              "Puente Alto"
 	            ),
 	            _react2.default.createElement(
 	              "option",
-	              { value: "la florida" },
+	              { value: "2" },
 	              "La Florida"
 	            )
 	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-form" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "OS"
+	          ),
+	          _react2.default.createElement("input", { type: "number", id: "os" })
 	        )
 	      );
 	    }
@@ -40139,13 +40232,61 @@
 	            ),
 	            _react2.default.createElement(
 	              "option",
-	              { value: "puente alto" },
+	              { value: "1" },
 	              "Puente Alto"
 	            ),
 	            _react2.default.createElement(
 	              "option",
-	              { value: "la florida" },
+	              { value: "2" },
 	              "La Florida"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-form" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "Vehiculo"
+	          ),
+	          _react2.default.createElement(
+	            "select",
+	            { id: "vehiculo" },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "" },
+	              "Seleccion\xE9"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { values: "CBWT-96 (Camion 1)" },
+	              "CBWT-96 (Camion 1)"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { values: "CRBC-30 (Camion 2)" },
+	              "CRBC-30 (Camion 2)"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { values: "FXVD-65 (Camion 3)" },
+	              "FXVD-65 (Camion 3)"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { values: "CFDL-32 (Furgon 1)" },
+	              "CFDL-32 (Furgon 1)"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { values: "FYYC-66 (Furgon 2)" },
+	              "FYYC-66 (Furgon 2)"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { values: "DDVG-61 (Camioneta)" },
+	              "DDVG-61 (Camioneta)"
 	            )
 	          )
 	        ),
@@ -40165,9 +40306,39 @@
 	          _react2.default.createElement(
 	            "label",
 	            null,
-	            "TP"
+	            "FI"
 	          ),
-	          _react2.default.createElement("input", { type: "text", id: "tp" })
+	          _react2.default.createElement("input", { type: "number", id: "fi" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-form" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "TM"
+	          ),
+	          _react2.default.createElement("input", { type: "text", id: "tm" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-form" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "TO"
+	          ),
+	          _react2.default.createElement("input", { type: "text", id: "to" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-form" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "OS"
+	          ),
+	          _react2.default.createElement("input", { type: "text", id: "os" })
 	        )
 	      );
 	    }
@@ -40223,7 +40394,8 @@
 	          _react2.default.createElement(
 	            "h3",
 	            null,
-	            "Formulario ingreso actividad reclamo"
+	            "Formulario ingreso actividad ",
+	            this.props.mensaje
 	          )
 	        )
 	      );
@@ -40277,7 +40449,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        null,
+	        { onSubmit: this.props.addServicio },
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
@@ -40328,6 +40500,7 @@
 	    _createClass(Item, [{
 	        key: "render",
 	        value: function render() {
+
 	            return _react2.default.createElement(
 	                "div",
 	                null,
@@ -40340,7 +40513,7 @@
 	                        _react2.default.createElement(
 	                            "h4",
 	                            null,
-	                            "Nueva Actividad reclamo"
+	                            "Nueva Actividad"
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -40352,6 +40525,16 @@
 	                            "Reclamo"
 	                        ),
 	                        _react2.default.createElement("input", { id: "reclamo", type: "text" })
+	                    ),
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "item-form" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            null,
+	                            "Rocha"
+	                        ),
+	                        _react2.default.createElement("input", { id: "rocha", type: "text" })
 	                    ),
 	                    _react2.default.createElement(
 	                        "div",
@@ -40402,7 +40585,7 @@
 	                            _react2.default.createElement(
 	                                "option",
 	                                { value: "Produccion" },
-	                                "Produccion"
+	                                "Producci\xF3n"
 	                            ),
 	                            _react2.default.createElement(
 	                                "option",
@@ -40507,17 +40690,7 @@
 	                            null,
 	                            "Observaci\xF3n"
 	                        ),
-	                        _react2.default.createElement("input", { id: "Observacion", type: "text" })
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "item-form" },
-	                        _react2.default.createElement(
-	                            "label",
-	                            null,
-	                            "FI"
-	                        ),
-	                        _react2.default.createElement("input", { type: "number", id: "fi" })
+	                        _react2.default.createElement("input", { id: "observacion", type: "text" })
 	                    )
 	                ),
 	                this.props.area,
@@ -44394,6 +44567,71 @@
 	});
 
 	exports.default = HomeStore;
+
+/***/ },
+/* 385 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ServicioReclamoActions = _reflux2.default.createActions(['addServicio']);
+
+	exports.default = ServicioReclamoActions;
+
+/***/ },
+/* 386 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _ServicioReclamoActions = __webpack_require__(385);
+
+	var _ServicioReclamoActions2 = _interopRequireDefault(_ServicioReclamoActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ServicioReclamoStore = _reflux2.default.createStore({
+	  listenables: [_ServicioReclamoActions2.default],
+	  addServicio: function addServicio(data) {
+	    var _this = this;
+
+	    this.socket = (0, _socket2.default)(_Config2.default);
+	    this.socket.emit('servicio', data);
+	    this.socket.on('mensaje', function (mensaje) {
+	      _this.trigger(mensaje);
+	    });
+	  }
+	});
+
+	exports.default = ServicioReclamoStore;
 
 /***/ }
 /******/ ]);

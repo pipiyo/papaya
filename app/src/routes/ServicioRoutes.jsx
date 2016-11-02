@@ -18,6 +18,7 @@ export default class ServicioRoutes extends React.Component {
   addServicio(ev) {
     ev.preventDefault()
     let servicio = {
+      "reclamo": "",
       "area": ev.target.elements['area'].value,
       "categoria": ev.target.elements['categoria'].value,
       "supervisor": ev.target.elements['supervisor'].value,
@@ -51,7 +52,6 @@ export default class ServicioRoutes extends React.Component {
  
 
   render() {
-  	  console.log(this.state.data)
       return (
         <ServicioIndex mensaje={this.state.data} addServicio={this.addServicio.bind(this)} />       
       )

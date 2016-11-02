@@ -5,18 +5,24 @@ class Item extends React.Component {
   constructor() {
     super()
   }
-
+  
   render() {
+
       return (
         <div>
           <div className="module-form">
             <div className="item-form title">
-                <h4>Nueva Actividad reclamo</h4>
+                <h4>Nueva Actividad</h4>
             </div>
 
             <div className="item-form">
                 <label>Reclamo</label>
                 <input id="reclamo" type="text" />
+            </div>
+
+            <div className="item-form">
+                <label>Rocha</label>
+                <input id="rocha" type="text" />
             </div>
 
             <div className="item-form">
@@ -29,7 +35,7 @@ class Item extends React.Component {
                 <option value="Despacho">Despacho</option>
                 <option value="Instalacion">Instalacion</option>
                 <option value="Prevención de Riesgos">Prevención de Riesgos</option>
-                <option value="Produccion">Produccion</option>
+                <option value="Produccion">Producción</option>
                 <option value="Sillas">Sillas</option>
                 <option value="Sistema">Sistema</option>
               </select>
@@ -72,16 +78,10 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Observación</label>
-                <input id="Observacion" type="text"/>
-            </div>
-
-            <div className="item-form">
-                <label>FI</label>
-                <input type="number" id="fi" />
+                <input id="observacion" type="text"/>
             </div>
           </div>
-
-          { this.props.area }
+          {this.props.area}
 
           <div className="module-form button">
             <div className="item-form button">

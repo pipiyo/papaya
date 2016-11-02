@@ -108,6 +108,8 @@ io.sockets.on('connection', (socket) => {
 
   })
 
+
+  /* Ingreso Servicio */
   socket.on('servicio', (data) => {
     let servicio = {  
                       NOMBRE_SERVICIO: data.area, 
@@ -135,9 +137,10 @@ io.sockets.on('connection', (socket) => {
                       EJECUTOR: data.ejecutor,
                       VALE: data.vale, 
                       TRANSPORTE: data.vehiculo,    
-                      CANTIDAD: data.cantidad
+                      CANTIDAD: data.cantidad,
+                      RECLAMOS: data.reclamo
                     }
-    let mensaje = '(-> Se ingreso servicio ' + data.area + ')'
+    let mensaje = '(> Se ingreso servicio ' + data.area + ')'
 
     con.query('INSERT INTO `servicio` SET ?',servicio, (err) => {
     if (!err)

@@ -1,11 +1,11 @@
 import React from 'react'
 
+import Title from './Title'
+import Form from './Form'
 import ItemProduccion from './ItemProduccion'
 import ItemSillas from './ItemSillas'
 import ItemInstalacion from './ItemInstalacion'
 import ItemDespacho from './ItemDespacho'
-import Title from './Title'
-import Form from './Form'
 
 class ServicioIndex extends React.Component {
 
@@ -34,11 +34,10 @@ class ServicioIndex extends React.Component {
   }
 
   render() {
-
       return (
         <div>
-            <Title />
-            <Form area={this.state.area} formArea={this.formArea.bind(this)} />
+            <Title mensaje={this.props.mensaje} />
+            <Form addServicio={this.props.addServicio} area={this.state.area} formArea={this.formArea.bind(this)} />
         </div>   
       )
 

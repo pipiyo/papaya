@@ -30,16 +30,16 @@ class ItemInstalacion extends React.Component {
                 <option value="barniz">Servicio Técnico</option>
                 <option value="barniz">Otros</option>
               </select>
-          </div>
-
-          <div className="item-form">
-            <label>Instalador</label>
-            <input id="instalador" type="text"/>
           </div> 
 
           <div className="item-form">
             <label>Instalador</label>
             <input id="instalador1" type="text"/>
+          </div> 
+
+          <div className="item-form">
+            <label>Instalador</label>
+            <input id="instalador2" type="text"/>
           </div>   
 
           <div className="item-form">
@@ -56,10 +56,15 @@ class ItemInstalacion extends React.Component {
             <label>Comuna</label>
              <select id="comuna">
                 <option value="">Seleccioné</option>
-                <option value="puente alto">Puente Alto</option>
-                <option value="la florida">La Florida</option>
+                <option value="1">Puente Alto</option>
+                <option value="2">La Florida</option>
               </select>
           </div>  
+
+          <div className="item-form">
+            <label>OS</label>
+            <input type="number"  id="os" />
+          </div> 
 
         </div>
       )
