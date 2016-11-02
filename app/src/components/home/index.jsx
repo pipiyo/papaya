@@ -14,7 +14,7 @@ class Home extends React.Component {
       {id:"3",img: <i className="fa fa-shopping-cart" aria-hidden="true"></i>, name: "Abastecimiento", icon: "icon abastecimiento" , "item":[{id:"1",nombre:"Informe Abastecimiento",ruta:"/home/abastecimiento"}]},
       {id:"4",img: <i className="fa fa-suitcase" aria-hidden="true"></i>, name: "Comercial", icon: "icon comercial", "item":[{id:"1",nombre:"Informe Comercial",ruta:"/home/comercial"}]},
       {id:"5",img: <i className="fa fa-pencil" aria-hidden="true"></i>, name: "Dam" , icon: "icon dam", "item": false},
-      {id:"6",img: <i className="fa fa-lightbulb-o" aria-hidden="true"></i>, name: "Técnica", icon: "icon desarrollo", "item":[{id:"1",nombre:"Informe Técnica",ruta:"/home/tecnica"}]},
+      {id:"6",img: <i className="fa fa-lightbulb-o" aria-hidden="true"></i>, name: "Desarrollo", icon: "icon desarrollo", "item":[{id:"1",nombre:"Informe Técnica",ruta:"/home/tecnica"}]},
       {id:"7",img: <i className="fa fa-truck" aria-hidden="true"></i>, name: "Despacho", icon: "icon despacho","item":[{id:"1",nombre:"Informe Despacho",ruta:"/home/despacho"}]},
       {id:"8",img: <i className="fa fa-user" aria-hidden="true"></i>, name: "Gerencia", icon: "icon gerencia", "item": false},
       {id:"9",img: <i className="fa fa-wrench" aria-hidden="true"></i>, name: "Integración", icon: "icon integracion", "item": false},

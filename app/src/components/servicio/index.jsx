@@ -34,11 +34,10 @@ class ServicioIndex extends React.Component {
   }
 
   render() {
-
       return (
         <div>
-            <Title />
-            <Form area={this.state.area} formArea={this.formArea.bind(this)} />
+            <Title mensaje={this.props.mensaje} />
+            <Form addServicio={this.props.addServicio} area={this.state.area} formArea={this.formArea.bind(this)} />
         </div>   
       )
 

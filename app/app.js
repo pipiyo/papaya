@@ -108,6 +108,47 @@ io.sockets.on('connection', (socket) => {
 
   })
 
+  socket.on('servicio', (data) => {
+    let servicio = {  
+                      NOMBRE_SERVICIO: data.area, 
+                      CATEGORIA: data.categoria, 
+                      SUPERVISOR: data.supervisor,
+                      FECHA_INICIO: data.fechaInicio,
+                      FECHA_ENTREGA: data.fechaEntrega,
+                      DESCRIPCION: data.descripcion,
+                      OBSERVACIONES: data.observacion,
+                      CODIGO_PROYECTO : data.rocha,
+                      DIRECCION : data.direccion,
+                      GUIA_DESPACHO: data.guia,
+                      CODIGO_COMUNA: data.comuna,
+                      M3: data.m3,
+                      FI: data.fi,
+                      TM: data.tm,
+                      TP: data.to,
+                      OS: data.os,
+                      LIDER: data.lider,
+                      PUESTOS: data.puestos,
+                      PROCESO: data.proceso,    
+                      INSTALADOR_1: data.instalador1,
+                      INSTALADOR_2: data.instalador2,
+                      INSTALADOR_3: data.instalador3,
+                      EJECUTOR: data.ejecutor,
+                      VALE: data.vale, 
+                      TRANSPORTE: data.vehiculo,    
+                      CANTIDAD: data.cantidad
+                    }
+    let mensaje = '(-> Se ingreso servicio ' + data.area + ')'
+
+    con.query('INSERT INTO `servicio` SET ?',servicio, (err) => {
+    if (!err)
+      console.log('Se ingreso servicio ' + data.area);
+    else
+      console.log('Error no se pudo ingresar servicio '+ err);
+    })
+
+    io.emit('mensaje', mensaje)
+  })
+
 })
 
   

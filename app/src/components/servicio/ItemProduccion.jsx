@@ -18,11 +18,6 @@ class ItemProduccion extends React.Component {
           </div>
 
           <div className="item-form">
-            <label>OC</label>
-            <input type="text" id="oc" />
-          </div>
-
-          <div className="item-form">
             <label>Vale</label>
             <input type="text" id="vale" />
           </div>

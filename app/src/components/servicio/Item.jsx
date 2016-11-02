@@ -16,6 +16,11 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
+                <label>Rocha</label>
+                <input id="rocha" type="text" />
+            </div>
+
+            <div className="item-form">
               <label>Servicio</label>
               <select id="area" onChange={this.props.formArea}>
                 <option value="">Seleccioné</option>
@@ -25,7 +30,7 @@ class Item extends React.Component {
                 <option value="Despacho">Despacho</option>
                 <option value="Instalacion">Instalacion</option>
                 <option value="Prevención de Riesgos">Prevención de Riesgos</option>
-                <option value="Produccion">Produccion</option>
+                <option value="Produccion">Producción</option>
                 <option value="Sillas">Sillas</option>
                 <option value="Sistema">Sistema</option>
               </select>
@@ -68,12 +73,7 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Observación</label>
-                <input id="Observacion" type="text"/>
-            </div>
-
-            <div className="item-form">
-                <label>FI</label>
-                <input type="number" id="fi" />
+                <input id="observacion" type="text"/>
             </div>
           </div>
           {this.props.area}
