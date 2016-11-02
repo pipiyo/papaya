@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import Login from './routes/LoginRoutes'
 import Servicio from './routes/ServicioRoutes'
 import SubServicio from './routes/SubServicioRoutes'
-import ServicioReclamo from './routes/ServicioReclamoRoutes'
 import Reclamo from './routes/ReclamoRoutes'
 import InformeReclamo from './routes/InformeReclamoRoutes'
 import Abastecimiento from './routes/AbastecimientoRoutes'
@@ -26,8 +25,7 @@ ReactDOM.render((
     <Route path="/" component={Login}/>
     <Route path="home" component={Home}>	
 
-    	<Route path="actividad" component={Servicio}/>
-        <Route path="actividad-reclamo" component={ServicioReclamo}/>
+    	<Route path="actividad/:tipo" component={Servicio}/>
     	<Route path="abastecimiento" component={Abastecimiento}/>
         <Route path="comercial" component={Comercial}/> 
         <Route path="tecnica" component={Tecnica}/> 

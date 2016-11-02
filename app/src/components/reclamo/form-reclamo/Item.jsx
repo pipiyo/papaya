@@ -16,7 +16,7 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Numero</label>
-                <input id="numero" type="number" />
+                <input id="reclamo" type="number" />
             </div>
 
             <div className="item-form">

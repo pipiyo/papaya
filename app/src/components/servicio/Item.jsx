@@ -4,16 +4,34 @@ class Item extends React.Component {
 
   constructor() {
     super()
+    this.state = {reclamo:""}
   }
-  
-  render() {
 
+  componentWillUpdate(nextProps, nextState){
+    if(nextProps.tipo == "reclamo"){
+      this.state.reclamo = <div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>
+    }else{
+      this.state.reclamo = ""
+    }
+  }
+
+  componentWillMount(){
+    if(this.props.tipo == "reclamo"){
+      this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
+    }else{
+      this.setState({reclamo:""})
+    }
+  }
+
+  render() {
       return (
         <div>
           <div className="module-form">
             <div className="item-form title">
                 <h4>Nueva Actividad</h4>
             </div>
+
+             {this.state.reclamo} 
 
             <div className="item-form">
                 <label>Rocha</label>

@@ -11,8 +11,8 @@ class ReclamoIndex extends React.Component {
   render() {
       return (
         <div>
-            <Title />
-            <Form />
+            <Title mensaje={this.props.mensaje} />
+            <Form addReclamo={this.props.addReclamo} />
         </div>   
       )
 

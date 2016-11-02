@@ -9,9 +9,9 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form>
+        <form onSubmit={this.props.addReclamo}>
           <fieldset> 
-            <Item/>
+            <Item />
           </fieldset> 
         </form> 
       )

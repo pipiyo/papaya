@@ -6,19 +6,42 @@ import ServicioActions from '../actions/ServicioActions'
 import ServicioStore from '../stores/ServicioStore'
 
 import ServicioIndex from '../components/servicio'
+import ItemProduccion from '../components/servicio/ItemProduccion.jsx'
+import ItemSillas from '../components/servicio/ItemSillas.jsx'
+import ItemInstalacion from '../components/servicio/ItemInstalacion.jsx'
+import ItemDespacho from '../components/servicio/ItemDespacho.jsx'
 
 @ReactMixin.decorate(Reflux.connect(ServicioStore, 'data'))
 export default class ServicioRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = {data:""}
+    this.state = {data:"", area: ""}
+  }
+
+  formArea(ev) {
+     switch(ev.target.value) {
+      case "Produccion":
+        this.setState({area:<ItemProduccion />}) 
+      break;
+      case "Instalacion":
+        this.setState({area:<ItemInstalacion />}) 
+      break;
+      case "Sillas":
+        this.setState({area:<ItemSillas />}) 
+      break;
+      case "Despacho":
+        this.setState({area:<ItemDespacho />}) 
+      break;
+      default:
+        this.setState({area:""}) 
+    }
   }
 
   addServicio(ev) {
     ev.preventDefault()
     let servicio = {
-      "reclamo": "",
+      "reclamo": (ev.target.elements['reclamo']) ? ev.target.elements['reclamo'].value : "",
       "area": ev.target.elements['area'].value,
       "categoria": ev.target.elements['categoria'].value,
       "supervisor": ev.target.elements['supervisor'].value,
@@ -47,13 +70,23 @@ export default class ServicioRoutes extends React.Component {
       "vehiculo" : (ev.target.elements['vehiculo']) ? ev.target.elements['vehiculo'].value : "", 
       "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : ""          
     }
-    ServicioActions.addServicio(servicio); 
+    ServicioActions.addServicio(servicio);
+
+    if(ev.target.elements['area']){ev.target.elements['area'].options[0].selected = "selected"}
+    if(ev.target.elements['categoria']){ev.target.elements['categoria'].options[0].selected = "selected"}
+    if(ev.target.elements['fechaInicio']){ev.target.elements['fechaInicio'].value = ""}
+    if(ev.target.elements['fechaEntrega']){ev.target.elements['fechaEntrega'].value = ""}
+    if(ev.target.elements['supervisor']){ev.target.elements['supervisor'].value = ""}
+    if(ev.target.elements['descripcion']){ev.target.elements['descripcion'].value = ""}
+    if(ev.target.elements['observacion']){ev.target.elements['observacion'].value = ""}
+    if(ev.target.elements['dias']){ev.target.elements['dias'].value = ""}
+    this.setState({area:""})   
   }
  
 
   render() {
       return (
-        <ServicioIndex mensaje={this.state.data} addServicio={this.addServicio.bind(this)} />       
+        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
       )
   }
 
