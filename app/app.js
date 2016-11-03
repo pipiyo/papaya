@@ -151,7 +151,7 @@ io.sockets.on('connection', (socket) => {
       console.log('Error no se pudo ingresar servicio '+ err);
     })
 
-    io.emit('mensaje', mensaje)
+    socket.emit('mensaje', mensaje)
   })
 
   /* Ingreso Reclamo */
@@ -175,8 +175,15 @@ io.sockets.on('connection', (socket) => {
       console.log('Error no se pudo ingresar reclamo '+ err);
     })
     console.log(data)
-    io.emit('mensaje', mensaje)
+    socket.emit('mensaje', mensaje)
   })
+
+   /* Informes */
+  socket.on('informe', (data) => {
+    console.log(data)
+    socket.emit('item', "valor")
+  })
+
 
 })
 
