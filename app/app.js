@@ -179,9 +179,16 @@ io.sockets.on('connection', (socket) => {
   })
 
    /* Informes */
-  socket.on('informe', (data) => {
-    console.log(data)
-    socket.emit('item', "valor")
+  socket.on('informe', (data, cant) => {
+    con.query('SELECT * from servicio where estado = "EN PROCESO" and NOMBRE_SERVICIO = "'+data+'" limit '+ cant +' ', function(err, rows, fields) {
+    console.log(cant)
+    if (!err)
+      socket.emit('item', rows)
+    else
+      console.log('Error ' + err);
+    });
+
+    
   })
 
 

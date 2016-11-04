@@ -41804,11 +41804,11 @@
 
 	var InformeStore = _reflux2.default.createStore({
 	  listenables: [_InformeActions2.default],
-	  viewInformes: function viewInformes(data) {
+	  viewInformes: function viewInformes(data, cant) {
 	    var _this = this;
 
 	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.emit('informe', data);
+	    this.socket.emit('informe', data, cant);
 	    this.socket.on('item', function (item) {
 	      _this.trigger(item);
 	    });
@@ -42364,12 +42364,10 @@
 	  function HomeRoutes() {
 	    _classCallCheck(this, HomeRoutes);
 
-	    var _this = _possibleConstructorReturn(this, (HomeRoutes.__proto__ || Object.getPrototypeOf(HomeRoutes)).call(this));
-
-	    console.log(window.location.hash.substr(0));
-	    console.log(window.location.hash.substr(1));
-	    console.log(window.location.hash.substr(2));
-	    return _this;
+	    return _possibleConstructorReturn(this, (HomeRoutes.__proto__ || Object.getPrototypeOf(HomeRoutes)).call(this));
+	    //  console.log( window.location.hash.substr(0) )
+	    // console.log( window.location.hash.substr(1) )
+	    // console.log( window.location.hash.substr(2) )
 	  }
 
 	  _createClass(HomeRoutes, [{
@@ -43153,23 +43151,63 @@
 	  function InformeRoutes() {
 	    _classCallCheck(this, InformeRoutes);
 
-	    return _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
+	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
+
+	    _this.state = { view: 20, sum: 40 };
+	    return _this;
 	  }
 
 	  _createClass(InformeRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _InformeActions2.default.viewInformes(this.props.params.area);
+	      this.setState({ view: 20 });
+	      _InformeActions2.default.viewInformes(this.props.params.area, this.state.view);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      _InformeActions2.default.viewInformes(nextProps.params.area);
+	    value: function componentWillReceiveProps(nextProps, nextState) {
+	      this.setState({ view: 20 });
+	      _InformeActions2.default.viewInformes(nextProps.params.area, this.state.view);
+	    }
+	  }, {
+	    key: 'viewMore',
+	    value: function viewMore() {
+	      this.setState({ sum: this.state.view + this.state.sum });
+	      console.log(this.state.view);
+	      _InformeActions2.default.viewInformes(this.props.params, this.state.sum);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_informe2.default, null);
+	      var i = 0;
+	      console.log("Nuevo Objetos");
+	      for (var valor in this.state.data) {
+	        console.log(this.state.data[valor]);
+	        i++;
+	      }
+
+	      if (this.state.data) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_informe2.default, null),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.viewMore.bind(this) },
+	            ' Ver M\xE1s'
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Cargando ...'
+	          )
+	        );
+	      }
 	    }
 	  }]);
 

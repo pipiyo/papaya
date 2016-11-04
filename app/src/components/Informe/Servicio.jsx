@@ -33,7 +33,6 @@ class Servicio extends React.Component {
                     { dos }
                 </div>                            
             </div>
-            
         </div>
       )
 
