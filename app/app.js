@@ -26,8 +26,6 @@ con.connect( (err) => {
     
     })
 
-// '$2y$10$MzQxNzNjYjM4ZjA3Zjg5ZG'
-
 const sessionMiddleware = session({
   store: Store,
   secret: '$2y$10$MzQxNzNjYjM4ZjA3Zjg5ZG',
@@ -35,7 +33,7 @@ const sessionMiddleware = session({
   resave: false
 })
 
-//app.use(cookieParser())
+
 app.use(sessionMiddleware)
 
 let server = http.createServer(app).listen(port, () => {
@@ -50,61 +48,50 @@ io.use( (socket, next) => {
 
 io.sockets.on('connection', (socket) => {
 
-  socket.on('login', (data, check = true) => {
+  socket.on('login', (data, callback) => {
+
       request.post({
         uri: process.env.apiLogin,
         form: {
           user: data.userName,
           pass: data.pass
         }
-      }, (error, response, data) => {
-        if (error) throw error
-        if(data == 1){
-          /*
-          socket.request.session.user = 'lonji'
+      }, (error, response, auht) => {
+        if (error) throw console
+          
+          auht = JSON.parse(auht)
+
+        if(auht.on){
+          
+          socket.request.session.name = auht.name
+          socket.request.session.type = auht.type
           socket.request.session.save()
-          console.log( socket.request.session.user )
-          */
 
-          socket.request.session.user = 'lonji'
-          socket.request.session.save()
+          auht.on = socket.request.sessionID
 
-          console.log( `LOGIN id ${socket.request.session.id}`  )
-          console.log( `LOGIN ID ${socket.request.sessionID}`  )
-
-          //console.log( `LOGIN SOCKET ID ${socket.id}` )
-
-          io.emit('login', check)
+          callback(auht)
         }else{
-          check = false
-          io.emit('login', check)
+
+          callback(false)
         }
       })
 
   })
 
-  socket.on('checklogin', () => {
 
-          //console.log( `CHECK SOCKET ID ${socket.id}` )
-          //console.log( `CHECK id ${socket.request.session.id}`  )
-          //console.log( `CHECK ID ${socket.request.sessionID}`  )
-   // console.log( socket.request.sessionID )
-   //console.log( socket )
-   
-   /*
-    Store.get( `sess:${socket.request.sessionID}`, (err, session) =>{
-      console.log( err )
-      console.log( session )
-      io.emit('checklogin', session )
-    })
-*/
-  if (!socket.request.session.user) {
-    io.emit('checklogin', false )
-    //console.log( socket.request.res )
-  } else {
-    io.emit('checklogin', true )
-  }
 
+  socket.on('checkUser', (data, callback) => {
+
+      Store.get( data, (err, session) =>{
+        if (err) throw err
+        console.log( err )
+        console.log( session )
+        if (session) {
+          callback( session.name, session.type, data )
+        } else {
+         callback( session, session, session ) 
+        }
+      })
 
   })
 
@@ -194,34 +181,15 @@ io.sockets.on('connection', (socket) => {
 
 })
 
+
   
-app.all('*', (request, response) => {
+app.all('*', (request, response, next) => {
 
 /*
   if (!request.sessionID) {
     request.session.save()
   }
   */
-/*
-    Store.get( `sess:${request.sessionID}`, (err, session) =>{
-      if (err) throw err 
-      if(!session){
-        request.session.save()
-      } 
-    })
-*/
-
-
-
-  if (!request.session.on) {
-    request.session.on = true
-  }
-
-
-  console.log( `ROUTER id ${request.session.id}` )
-  console.log( `ROUTER ID ${request.sessionID}` )
-
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
 
-
-})
+} )

@@ -97,9 +97,15 @@
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
+<<<<<<< HEAD
 	var _InicioRoutes = __webpack_require__(381);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
+=======
+	var _AuthRoutes = __webpack_require__(359);
+
+	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
+>>>>>>> reparar-session
 
 	var _reactRouter = __webpack_require__(198);
 
@@ -107,6 +113,7 @@
 
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
+<<<<<<< HEAD
 	    { history: _reactRouter.hashHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _LoginRoutes2.default }),
 	    _react2.default.createElement(
@@ -120,6 +127,21 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad', component: _DetalleInformeRoutes2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/sub-actividad', component: _SubServicioRoutes2.default })
+=======
+	    { history: _reactRouter.browserHistory },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _LoginRoutes2.default }),
+	    _react2.default.createElement(
+	        _reactRouter.Route,
+	        { component: _AuthRoutes2.default },
+	        _react2.default.createElement(
+	            _reactRouter.Route,
+	            { path: 'home', component: _HomeRoutes2.default },
+	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad', component: _ServicioRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'abastecimiento', component: _AbastecimientoRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad', component: _DetalleInformeRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/sub-actividad', component: _SubServicioRoutes2.default })
+	        )
+>>>>>>> reparar-session
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _ServicioRoutes2.default })
 	), document.getElementById('app'));
@@ -21581,7 +21603,8 @@
 
 	    var _this = _possibleConstructorReturn(this, (LoginRoutes.__proto__ || Object.getPrototypeOf(LoginRoutes)).call(this));
 
-	    _this.state = { msj: 'Usuario no valido' };
+	    _this.state = { msj: 'paso' };
+	    _this.state = { msj2: 'No paso' };
 	    return _this;
 	  }
 	  /*
@@ -21605,26 +21628,25 @@
 	        "userName": ev.target.elements[0].value,
 	        "pass": ev.target.elements[1].value
 	      };
-	      _LoginActions2.default.checkUser(user);
+	      _LoginActions2.default.login(user);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      console.log(this.state.check);
 	      if (this.state.check) {
+	        return _react2.default.createElement(_Login2.default, { onSubmit: this.userFormSubmit.bind(this) });
+	      } else {
 	        return _react2.default.createElement(
 	          'div',
 	          null,
 	          _react2.default.createElement(
 	            'h1',
 	            null,
-	            this.state.msj
+	            this.state.msj2
 	          ),
 	          _react2.default.createElement(_Login2.default, { onSubmit: this.userFormSubmit.bind(this) })
 	        );
-	      } else {
-	        return _react2.default.createElement(_Login2.default, {
-	          onSubmit: this.userFormSubmit.bind(this) });
 	      }
 	    }
 	  }]);
@@ -23463,7 +23485,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var LoginActions = _reflux2.default.createActions(['checkUser']);
+	var LoginActions = _reflux2.default.createActions(['login', 'checkUser']);
 
 	exports.default = LoginActions;
 
@@ -23497,21 +23519,50 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var socket = (0, _socket2.default)(_Config2.default);
+
+
+	//import AuthStore from '../stores/AuthStore'
+
 	var LoginStore = _reflux2.default.createStore({
 	  listenables: [_LoginActions2.default],
-	  check: true,
-	  checkUser: function checkUser(user) {
+	  check: false,
+	  jwtsecret: false,
+	  login: function login(user) {
 	    var _this = this;
 
-	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.on('login', function (data) {
-	      if (data) {
-	        _reactRouter.hashHistory.push('home');
+	    socket.emit('login', user, function (token) {
+
+	      if (token) {
+	        console.log(token);
+	        _this.storeUser(token);
+	        _reactRouter.browserHistory.push('home');
 	      } else {
 	        _this.trigger(_this.check);
 	      }
 	    });
-	    this.socket.emit('login', user);
+	  },
+	  storeUser: function storeUser(token) {
+	    localStorage.setItem('name', token.name);
+	    localStorage.setItem('type', token.type);
+	    localStorage.setItem('on', token.on);
+	    this.trigger(token);
+	  },
+	  checkUser: function checkUser() {
+
+	    socket.emit('checkUser', localStorage.getItem('on'), function (name, type, on) {
+	      if (name) {
+
+	        localStorage.setItem('name', name);
+	        localStorage.setItem('type', type);
+	        localStorage.setItem('on', on);
+	      } else {
+	        localStorage.removeItem('name');
+	        localStorage.removeItem('type');
+	        localStorage.removeItem('on');
+	        _reactRouter.browserHistory.push('/');
+	      }
+	    });
 	  }
 	});
 
@@ -29450,7 +29501,7 @@
 	});
 	exports.getUrl = getUrl;
 	function getUrl() {
-		return 'http://localhost:8888';
+		return 'http://localhost:9097';
 	}
 
 /***/ },
@@ -42324,8 +42375,6 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dec, _class;
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -42346,9 +42395,23 @@
 
 	var _HomeActions2 = _interopRequireDefault(_HomeActions);
 
+<<<<<<< HEAD
 	var _HomeStore = __webpack_require__(379);
+=======
+	var _reactRouter = __webpack_require__(198);
+
+	var _HomeStore = __webpack_require__(356);
+>>>>>>> reparar-session
 
 	var _HomeStore2 = _interopRequireDefault(_HomeStore);
+
+	var _AuthStore = __webpack_require__(357);
+
+	var _AuthStore2 = _interopRequireDefault(_AuthStore);
+
+	var _AuthActions = __webpack_require__(358);
+
+	var _AuthActions2 = _interopRequireDefault(_AuthActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42358,32 +42421,83 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var HomeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_HomeStore2.default, 'var')), _dec(_class = function (_React$Component) {
+	//@ReactMixin.decorate(Reflux.connect(AuthStore, 'user'))
+	var HomeRoutes = function (_React$Component) {
 	  _inherits(HomeRoutes, _React$Component);
 
-	  function HomeRoutes() {
+	  function HomeRoutes(props) {
 	    _classCallCheck(this, HomeRoutes);
 
+<<<<<<< HEAD
 	    return _possibleConstructorReturn(this, (HomeRoutes.__proto__ || Object.getPrototypeOf(HomeRoutes)).call(this));
 	    //  console.log( window.location.hash.substr(0) )
 	    // console.log( window.location.hash.substr(1) )
 	    // console.log( window.location.hash.substr(2) )
+=======
+	    return _possibleConstructorReturn(this, (HomeRoutes.__proto__ || Object.getPrototypeOf(HomeRoutes)).call(this, props));
+	    //console.log( window.location.hash.substr(0) )
+	    //console.log( window.location.hash.substr(1) )
+	    //console.log( window.location.hash.substr(2) )
+>>>>>>> reparar-session
 	  }
 
 	  _createClass(HomeRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _HomeActions2.default.checkLogin();
+	      //HomeActions.checkLogin()
+
+	      /*
+	          if (!AuthStore.name) {
+	            browserHistory.push('/')
+	          }
+	      */
+
+	      console.log('componentWillMount');
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps() {
+	      /*
+	      if (!this.state.var) {
+	        browserHistory.push('/')
+	      }
+	      */
+	      //AuthActions.getUser()
+
+	      //AuthActions.getUser()
+
+	      console.log('componentWillReceiveProps');
+	    }
+	  }, {
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate() {
+
+	      console.log('shouldComponentUpdate');
+	      return true;
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
+
+	      console.log('componentWillUpdate');
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+
+	      console.log('componentDidUpdate');
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(_home2.default, { content: this.props.children });
 	    }
 	  }]);
 
 	  return HomeRoutes;
-	}(_react2.default.Component)) || _class);
+	}(_react2.default.Component);
+
 	exports.default = HomeRoutes;
 
 /***/ },
@@ -43067,8 +43181,6 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _reactRouter = __webpack_require__(198);
-
 	var _Config = __webpack_require__(261);
 
 	var _Config2 = _interopRequireDefault(_Config);
@@ -43085,21 +43197,34 @@
 
 	var HomeStore = _reflux2.default.createStore({
 	  listenables: [_HomeActions2.default],
+	  hola: 'hola',
+	  init: function init() {
+	    this.trigger(this.hola);
+	  },
 	  checkLogin: function checkLogin() {
-	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.on('checklogin', function (data) {
-	      if (!data) {
-	        _reactRouter.hashHistory.push('/');
-	      }
-	    });
-	    this.socket.emit('checklogin');
+
+	    this.trigger(this.hola);
+
+	    /*
+	        this.socket = io( getUrl )
+	        this.socket.on('checklogin', (data) => {
+	          if (!data) {
+	            hashHistory.push('/')
+	          }
+	        })
+	        this.socket.emit('checklogin')
+	        */
 	  }
 	});
 
 	exports.default = HomeStore;
 
 /***/ },
+<<<<<<< HEAD
 /* 380 */
+=======
+/* 357 */
+>>>>>>> reparar-session
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43107,6 +43232,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+<<<<<<< HEAD
 	exports.default = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -43267,6 +43393,118 @@
 
 /***/ },
 /* 382 */
+=======
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _AuthActions = __webpack_require__(358);
+
+	var _AuthActions2 = _interopRequireDefault(_AuthActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AuthStore = _reflux2.default.createStore({
+	  listenables: [_AuthActions2.default],
+	  getInitialState: function getInitialState() {
+	    return this.state = 'hola';
+	  }
+	});
+
+	/*
+	  init: function () {
+	    this.socket = io(getUrl)
+	    this.socket.on('connect', () => {
+	      this.getUser()
+	    });
+	  },
+	  
+	  getUser: function () {
+
+
+	this.socket = io(getUrl)
+
+	    this.socket = io(getUrl)
+	    this.socket.emit('getUser', (user) =>{
+	      console.log( user )
+	      if (!user) {
+	        browserHistory.push('/')
+	      }
+	    })
+
+
+
+	  console.log( localStorage.getItem('jwt') )
+
+	  this.socket.emit('getUser', localStorage.getItem('jwt'), (token) =>{
+
+	      console.log( token )
+	      this.trigger( token )
+	    
+	  })
+
+	  
+	  this.trigger( localStorage.getItem('jwt') )
+
+
+	  }
+
+	  */
+	exports.default = AuthStore;
+
+	/*
+	class AuthStore {
+
+	  constructor() {
+	    this._name = null
+	    this._type = null
+	  }
+
+	  save(user) {
+	    this._name = user.name
+	    this._type = user.type
+	  }
+
+	  get name() {
+	    return this._name;
+	  }
+
+	  get type() {
+	    return this._type;
+	  }
+
+
+	  set name(value) {
+	    this._name = value
+	  }
+
+	  set type(value) {
+	    this._type = value
+	  }
+
+	  isLoggedIn() {
+	    return !!this._name;
+	  }
+	}
+
+	export default new AuthStore()
+
+
+	*/
+
+/***/ },
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43275,12 +43513,54 @@
 	  value: true
 	});
 
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AuthActions = _reflux2.default.createActions(['getUser']);
+
+	exports.default = AuthActions;
+
+/***/ },
+/* 359 */
+>>>>>>> reparar-session
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+<<<<<<< HEAD
+=======
+	exports.default = undefined;
+>>>>>>> reparar-session
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+<<<<<<< HEAD
+=======
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _LoginActions = __webpack_require__(196);
+
+	var _LoginActions2 = _interopRequireDefault(_LoginActions);
+
+>>>>>>> reparar-session
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43289,6 +43569,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 	var InicioIndex = function (_React$Component) {
 	  _inherits(InicioIndex, _React$Component);
 
@@ -43317,6 +43598,42 @@
 	}(_react2.default.Component);
 
 	exports.default = InicioIndex;
+=======
+	var AuthRoutes = function (_React$Component) {
+	  _inherits(AuthRoutes, _React$Component);
+
+	  function AuthRoutes() {
+	    _classCallCheck(this, AuthRoutes);
+
+	    var _this = _possibleConstructorReturn(this, (AuthRoutes.__proto__ || Object.getPrototypeOf(AuthRoutes)).call(this));
+
+	    console.log('hola aqui el AUTH');
+	    return _this;
+	  }
+
+	  _createClass(AuthRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _LoginActions2.default.checkUser();
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps() {
+
+	      _LoginActions2.default.checkUser();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return this.props.children;
+	    }
+	  }]);
+
+	  return AuthRoutes;
+	}(_react2.default.Component);
+
+	exports.default = AuthRoutes;
+>>>>>>> reparar-session
 
 /***/ }
 /******/ ]);

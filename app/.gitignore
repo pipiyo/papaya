@@ -3,5 +3,8 @@
 /.sass-cache/
 /srcApirest/connection.js
 dump.rbd
-env.js
 /src/Config/index.jsx
+../dump.rbd
+/bundle/index.html
+/bundle/js/bundle.js
+env.js
