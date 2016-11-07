@@ -27,11 +27,11 @@ export default class HomeRoutes extends React.Component {
 
 
   componentWillMount(){
-    HomeActions.checkLogin()
+    // HomeActions.checkLogin()
     
-    if (!AuthStore.name) {
-      browserHistory.push('/')
-    }
+    // if (!AuthStore.name) {
+    //   browserHistory.push('/')
+    // }
 
      console.log( 'componentWillMount' )
   }

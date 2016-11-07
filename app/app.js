@@ -48,8 +48,9 @@ io.use( (socket, next) => {
 
 io.sockets.on('connection', (socket) => {
 
-  socket.on('login', (data, callback) => {
+  socket.on('login', ( data, callback) => {
 
+      console.log(data)
       request.post({
         uri: process.env.apiLogin,
         form: {
@@ -57,7 +58,8 @@ io.sockets.on('connection', (socket) => {
           pass: data.pass
         }
       }, (error, response, auht) => {
-        if (error) throw console
+        console.log( error )
+        if (error) throw error
           
           auht = JSON.parse(auht)
 
