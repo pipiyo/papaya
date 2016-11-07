@@ -29,6 +29,17 @@ class Content extends React.Component {
     return "item-actividades " + area
   }
 
+  validador(nombre,validador,fecha){
+    let text
+    if(validador == "" || validador == null || validador == 0 || !validador){
+      text = ""
+    }
+    else{
+      text = <div class="opc"><h5>{nombre}</h5><p>{ (fecha)?validador.substring(0,10):validador}</p></div>
+    }
+    return text
+  }
+
   render() {
       return (                
         <div class={this.viewServicio()}>
@@ -38,18 +49,16 @@ class Content extends React.Component {
               <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
           </div>
           <div class="description-actividad">
-              <div class="opc">
-                  <h5>Descripción: </h5>
-                  <p>Cajoneras Linea Bozz (2 Puestos).</p>
-              </div>
-              <div class="opc">
-                  <h5>Cliente: </h5>
-                  <p>AFP Planvital S.A.</p>
-              </div>
-              <div class="opc">
-                  <h5>Fecha </h5>
-                  <p>Desde 2016-05-19 / Hasta 2016-05-19 / Días 4</p>
-              </div>
+              {this.validador("Descripción:",this.props.datos.DESCRIPCION)}
+              {this.validador("Fecha Ingreso:",this.props.datos.FECHA_INGRESO,true)}
+              {this.validador("Fecha Entrega:",this.props.datos.FECHA_ENTREGA,true)}
+              {this.validador("Estado:",this.props.datos.ESTADO)}
+              {this.validador("Supervisor:",this.props.datos.SUPERVISOR)}
+              {this.validador("Dirección:",this.props.datos.DIRECCION)}
+              {this.validador("TP:",this.props.datos.TP)}
+              {this.validador("TO:",this.props.datos.TO)}
+              {this.validador("OS:",this.props.datos.OS)}
+              {this.validador("FI:",this.props.datos.FI)}
           </div>
         </div>
       )

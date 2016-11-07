@@ -41495,6 +41495,30 @@
 	            return "item-actividades " + area;
 	        }
 	    }, {
+	        key: 'validador',
+	        value: function validador(nombre, _validador, fecha) {
+	            var text = void 0;
+	            if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	                text = "";
+	            } else {
+	                text = _react2.default.createElement(
+	                    'div',
+	                    { className: 'opc' },
+	                    _react2.default.createElement(
+	                        'h5',
+	                        null,
+	                        nombre
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        fecha ? _validador.substring(0, 10) : _validador
+	                    )
+	                );
+	            }
+	            return text;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -41542,48 +41566,16 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'description-actividad' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'opc' },
-	                        _react2.default.createElement(
-	                            'h5',
-	                            null,
-	                            'Descripci\xF3n: '
-	                        ),
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'Cajoneras Linea Bozz (2 Puestos).'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'opc' },
-	                        _react2.default.createElement(
-	                            'h5',
-	                            null,
-	                            'Cliente: '
-	                        ),
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'AFP Planvital S.A.'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'opc' },
-	                        _react2.default.createElement(
-	                            'h5',
-	                            null,
-	                            'Fecha '
-	                        ),
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4'
-	                        )
-	                    )
+	                    this.validador("Descripción:", this.props.datos.DESCRIPCION),
+	                    this.validador("Fecha Ingreso:", this.props.datos.FECHA_INGRESO, true),
+	                    this.validador("Fecha Entrega:", this.props.datos.FECHA_ENTREGA, true),
+	                    this.validador("Estado:", this.props.datos.ESTADO),
+	                    this.validador("Supervisor:", this.props.datos.SUPERVISOR),
+	                    this.validador("Dirección:", this.props.datos.DIRECCION),
+	                    this.validador("TP:", this.props.datos.TP),
+	                    this.validador("TO:", this.props.datos.TO),
+	                    this.validador("OS:", this.props.datos.OS),
+	                    this.validador("FI:", this.props.datos.FI)
 	                )
 	            );
 	        }
