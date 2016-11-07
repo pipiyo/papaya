@@ -7,25 +7,24 @@ class ContentRocha extends React.Component {
     super()
   }
 
+  validador(nombre,validador,fecha){
+    let text
+    if(validador == "" || validador == null || validador == 0 || !validador){
+      text = ""
+    }
+    else{
+      text = <div class="opc"><h5>{nombre}</h5><p>{ (fecha)?validador.substring(0,10):validador}</p></div>
+    }
+    return text
+  }
+
   render() {
       return (
         <div class="item-rocha-info">
-            <div class="opc">
-                <h5>Ejecutivo:</h5>
-                <p>{this.props.datos.EJECUTIVO}</p>
-            </div>
-            <div class="opc">
-                <h5>Obra:</h5>
-                <p>{this.props.datos.OBRA}</p>
-            </div>
-            <div class="opc">
-                <h5>Fecha Ingreso:</h5>
-                <p>{this.props.datos.FECHA_INGRESO.substring(0,10)}</p>
-            </div>
-            <div class="opc">
-                <h5>Fecha entrega:</h5>
-                <p>{this.props.datos.FECHA_CONFIRMACION.substring(0,10)}</p>
-            </div>
+            {this.validador("Ejecutivo:",this.props.datos.EJECUTIVO)}
+            {this.validador("Obra:",this.props.datos.OBRA)}
+            {this.validador("Fecha Ingreso:",this.props.datos.FECHA_INGRESO,true)}
+            {this.validador("Fecha Entrega:",this.props.datos.FECHA_CONFIRMACION,true)}
         </div>
       )
 

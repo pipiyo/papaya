@@ -180,8 +180,7 @@ io.sockets.on('connection', (socket) => {
 
    /* Informes */
   socket.on('informe', (data, cant) => {
-    con.query('SELECT proyecto.CODIGO_PROYECTO, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO = "'+data+'" limit '+cant +' ', function(err, rows, fields) {
-    console.log(cant)
+    con.query('SELECT proyecto.CODIGO_PROYECTO, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' order by CODIGO_PROYECTO limit '+cant +' ', function(err, rows, fields) {
     if (!err)
       socket.emit('item', rows)
     else

@@ -40864,27 +40864,55 @@
 
 	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
 
-	    _this.state = { view: 20, sum: 40 };
+	    _this.state = { view: 100, sum: 200, servicio: "" };
 	    return _this;
 	  }
 
 	  _createClass(InformeRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.setState({ sum: 40 });
-	      _InformeActions2.default.viewInformes(this.props.params.area, this.state.view);
+	      this.setState({ sum: 200 });
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.view);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps, nextState) {
-	      this.setState({ sum: 40 });
-	      _InformeActions2.default.viewInformes(nextProps.params.area, this.state.view);
+	      this.setState({ sum: 200 });
+	      _InformeActions2.default.viewInformes(this.servicio(nextProps.params.area), this.state.view);
 	    }
 	  }, {
 	    key: 'viewMore',
 	    value: function viewMore() {
 	      this.setState({ sum: this.state.view + this.state.sum });
-	      _InformeActions2.default.viewInformes(this.props.params.area, this.state.sum);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum);
+	    }
+	  }, {
+	    key: 'servicio',
+	    value: function servicio(_servicio) {
+	      switch (_servicio) {
+	        case "abastecimiento":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones")';
+	          break;
+	        case "despacho":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Despacho")';
+	          break;
+	        case "instalacion":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Instalacion")';
+	          break;
+	        case "produccion":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Produccion")';
+	          break;
+	        case "desarrollo":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Desarrollo")';
+	          break;
+	        case "planificacion":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion")';
+	          break;
+	        case "comercial":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion")';
+	          break;
+	      }
+	      return this.state.servicio;
 	    }
 	  }, {
 	    key: 'render',
@@ -41026,10 +41054,15 @@
 	    return _this;
 	  }
 
-	  /* Agrega clase active información de servicio */
-
-
 	  _createClass(InformeIndex, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps, nextState) {
+	      this.state.servicio = [];
+	    }
+
+	    /* Agrega clase active información de servicio */
+
+	  }, {
 	    key: 'activeClass',
 	    value: function activeClass(ev) {
 	      ev.preventDefault();
@@ -41439,11 +41472,34 @@
 	    }
 
 	    _createClass(Content, [{
+	        key: 'viewServicio',
+	        value: function viewServicio() {
+	            var area = void 0;
+	            switch (this.props.datos.NOMBRE_SERVICIO) {
+	                case "Adquisiciones":
+	                    area = "abastecimiento";
+	                    break;
+	                case "Despacho":
+	                    area = "despacho";
+	                    break;
+	                case "Instalacion":
+	                    area = "instalaciones";
+	                    break;
+	                case "Produccion":
+	                    area = "produccion";
+	                    break;
+	                case "Desarrollo":
+	                    area = "desarrollo";
+	                    break;
+	            }
+	            return "item-actividades " + area;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'item-actividades abastecimiento' },
+	                { className: this.viewServicio() },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'title-actividad' },
@@ -41545,7 +41601,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -41565,81 +41621,53 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var ContentRocha = function (_React$Component) {
-	    _inherits(ContentRocha, _React$Component);
+	  _inherits(ContentRocha, _React$Component);
 
-	    function ContentRocha() {
-	        _classCallCheck(this, ContentRocha);
+	  function ContentRocha() {
+	    _classCallCheck(this, ContentRocha);
 
-	        return _possibleConstructorReturn(this, (ContentRocha.__proto__ || Object.getPrototypeOf(ContentRocha)).call(this));
+	    return _possibleConstructorReturn(this, (ContentRocha.__proto__ || Object.getPrototypeOf(ContentRocha)).call(this));
+	  }
+
+	  _createClass(ContentRocha, [{
+	    key: 'validador',
+	    value: function validador(nombre, _validador, fecha) {
+	      var text = void 0;
+	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	        text = "";
+	      } else {
+	        text = _react2.default.createElement(
+	          'div',
+	          { className: 'opc' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            nombre
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            fecha ? _validador.substring(0, 10) : _validador
+	          )
+	        );
+	      }
+	      return text;
 	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'item-rocha-info' },
+	        this.validador("Ejecutivo:", this.props.datos.EJECUTIVO),
+	        this.validador("Obra:", this.props.datos.OBRA),
+	        this.validador("Fecha Ingreso:", this.props.datos.FECHA_INGRESO, true),
+	        this.validador("Fecha Entrega:", this.props.datos.FECHA_CONFIRMACION, true)
+	      );
+	    }
+	  }]);
 
-	    _createClass(ContentRocha, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'item-rocha-info' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'opc' },
-	                    _react2.default.createElement(
-	                        'h5',
-	                        null,
-	                        'Ejecutivo:'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        this.props.datos.EJECUTIVO
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'opc' },
-	                    _react2.default.createElement(
-	                        'h5',
-	                        null,
-	                        'Obra:'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        this.props.datos.OBRA
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'opc' },
-	                    _react2.default.createElement(
-	                        'h5',
-	                        null,
-	                        'Fecha Ingreso:'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        this.props.datos.FECHA_INGRESO.substring(0, 10)
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'opc' },
-	                    _react2.default.createElement(
-	                        'h5',
-	                        null,
-	                        'Fecha entrega:'
-	                    ),
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        this.props.datos.FECHA_CONFIRMACION.substring(0, 10)
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return ContentRocha;
+	  return ContentRocha;
 	}(_react2.default.Component);
 
 	exports.default = ContentRocha;

@@ -7,9 +7,31 @@ class Content extends React.Component {
     super()
   }
 
+  viewServicio(){
+    let area;
+    switch (this.props.datos.NOMBRE_SERVICIO) {
+    case "Adquisiciones":
+        area = "abastecimiento";
+        break;
+    case "Despacho":
+        area = "despacho";
+        break;
+    case "Instalacion":
+        area = "instalaciones";
+        break;
+    case "Produccion":
+        area = "produccion";
+        break;
+    case "Desarrollo":
+        area = "desarrollo";
+        break;
+    }
+    return "item-actividades " + area
+  }
+
   render() {
       return (                
-        <div class="item-actividades abastecimiento">
+        <div class={this.viewServicio()}>
           <div class="title-actividad">
               <h4><Link to="/home/detalle-actividad">{this.props.datos.CODIGO_SERVICIO}</Link> - <a href="#"> {this.props.datos.CODIGO_PROYECTO} </a></h4> 
               <p><Link to="/home/detalle-actividad"><i class="fa fa-eye" aria-hidden="true"></i></Link></p>

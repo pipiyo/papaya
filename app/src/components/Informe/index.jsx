@@ -9,6 +9,9 @@ class InformeIndex extends React.Component {
     super()
     this.state = {servicio:[]}
   }
+  componentWillReceiveProps(nextProps, nextState){
+    this.state.servicio = []
+  }
 
   /* Agrega clase active información de servicio */
   activeClass(ev){
