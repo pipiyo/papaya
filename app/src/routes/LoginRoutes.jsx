@@ -37,6 +37,7 @@ export default class LoginRoutes extends React.Component {
   }
 
   render() {
+    console.log(this.state.check)
     if (this.state.check) {
       return (
             <div>

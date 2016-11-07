@@ -21,7 +21,7 @@ class Main extends React.Component {
                 <li><a href="#">Pagina 3</a></li>
               </ul>
             </div>
-            {this.props.content || "Aqui suculento index"}
+            { /*React.cloneElement(this.props.content, {siteArea: "test"}) */ this.props.content}
           </div>
         </div>
       )

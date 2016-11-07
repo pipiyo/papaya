@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 class Notification extends React.Component {
 
@@ -10,7 +11,7 @@ class Notification extends React.Component {
       return (
         <div class="module-notification">
           <h6>Notificaciones</h6>
-          <div class="item-notification">
+          <a class="item-notification">
               <div class="img-notification">
                 <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
               </div>
@@ -18,8 +19,8 @@ class Notification extends React.Component {
                 <p>Nuevo Rocha</p>
                 <p> Se ingreso rocha 2055</p>
               </div>
-          </div>
-          <div class="item-notification">
+          </a>
+          <a class="item-notification">
               <div class="img-notification">
                 <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
               </div>
@@ -27,7 +28,8 @@ class Notification extends React.Component {
                 <p>Nuevo Rocha</p>
                 <p> Se ingreso rocha 2055</p>
               </div>
-          </div>
+          </a>
+          <Link to="home/notificacion" class="view-all-notification" href="#"> ver todas</Link>
         </div>
       )
 

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Item from './Item'
 
 class Form extends React.Component {
@@ -10,9 +9,9 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form onSubmit={this.props.addServicio}>
+        <form onSubmit={this.props.addReclamo}>
           <fieldset> 
-            <Item tipo={this.props.tipo} area={this.props.area} formArea={this.props.formArea} />
+            <Item />
           </fieldset> 
         </form> 
       )

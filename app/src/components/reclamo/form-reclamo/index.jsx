@@ -1,9 +1,8 @@
 import React from 'react'
-
 import Title from './Title'
 import Form from './Form'
 
-class ServicioIndex extends React.Component {
+class ReclamoIndex extends React.Component {
 
   constructor() {
     super()
@@ -13,7 +12,7 @@ class ServicioIndex extends React.Component {
       return (
         <div>
             <Title mensaje={this.props.mensaje} />
-            <Form tipo={this.props.tipo} addServicio={this.props.addServicio} area={this.props.area} formArea={this.props.formArea} />
+            <Form addReclamo={this.props.addReclamo} />
         </div>   
       )
 
@@ -21,4 +20,4 @@ class ServicioIndex extends React.Component {
 
 }
 
-export default ServicioIndex
+export default ReclamoIndex

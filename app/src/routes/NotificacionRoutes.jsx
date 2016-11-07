@@ -1,6 +1,6 @@
 import React from 'react'
 
-import InformeIndex from '../components/informe'
+import NotificacionIndex from '../components/notificacion'
 
 export default class AbastecimientoRoutes extends React.Component {
 
@@ -10,7 +10,7 @@ export default class AbastecimientoRoutes extends React.Component {
 
   render() {
       return (
-        <InformeIndex />       
+        <NotificacionIndex />       
       )
   }
 
