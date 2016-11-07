@@ -13,7 +13,8 @@ export default class LoginRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = { msj: 'Usuario no valido' } 
+    this.state = { msj: 'paso' } 
+    this.state = { msj2: 'No paso' } 
   }
 /*
   handleSubmit(event) {
@@ -32,22 +33,21 @@ export default class LoginRoutes extends React.Component {
       "userName": ev.target.elements[0].value,
       "pass": ev.target.elements[1].value     
     }
-    LoginActions.checkUser(user)
+    LoginActions.login(user)
 
   }
 
   render() {
     if (this.state.check) {
       return (
-            <div>
-              <h1>{this.state.msj}</h1>
               <LoginFrom onSubmit={ this.userFormSubmit.bind(this) } />
-            </div>
       )
     } else {
       return (
-            <LoginFrom 
-              onSubmit={ this.userFormSubmit.bind(this) } />
+            <div>
+              <h1>{this.state.msj2}</h1>
+              <LoginFrom onSubmit={ this.userFormSubmit.bind(this) } />
+            </div>
       )
     }
   }
