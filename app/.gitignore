@@ -5,6 +5,6 @@
 dump.rbd
 /src/Config/index.jsx
 ../dump.rbd
-/bundle/index.html
-/bundle/js/bundle.js
+./bundle/index.html
+./bundle/js/bundle.js
 env.js

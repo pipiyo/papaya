@@ -7,10 +7,13 @@ class InformeIndex extends React.Component {
 
   constructor() {
     super()
-    this.state = {rocha:[]}
+    this.state = {servicio:[]}
+  }
+  componentWillReceiveProps(nextProps, nextState){
+    this.state.servicio = []
   }
 
-  /* Agrega clase active información de rocha */
+  /* Agrega clase active información de servicio */
   activeClass(ev){
     ev.preventDefault()
     let i;
@@ -18,22 +21,22 @@ class InformeIndex extends React.Component {
     let estado = ev.currentTarget.classList.toggle('active')
 
     if(estado){
-        this.state.rocha.push(valor);
+        this.state.servicio.push(valor);
     }else{
-      for(i=0; i < this.state.rocha.length; i++) { 
-        (this.state.rocha[i] == valor ) ? this.state.rocha.splice(i,1)  : ""
+      for(i=0; i < this.state.servicio.length; i++) { 
+        (this.state.servicio[i] == valor ) ? this.state.servicio.splice(i,1)  : ""
       } 
     }
-    this.setState({rocha:this.state.rocha});
+    this.setState({servicio:this.state.servicio});
   }
 
   render() {
       return (         
         <div>
           
-          <Title />
+          <Title servicioTitle={this.props.servicio}/>
           <Filtro />
-          <Servicio rocha={this.state.rocha} click={this.activeClass.bind(this)} />
+          <Servicio servicioTitle={this.props.servicio} datos={this.props.datos} viewMore={this.props.viewMore} servicio={this.state.servicio} click={this.activeClass.bind(this)} />
 
         </div>
       )

@@ -12,36 +12,52 @@ export default class InformeRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = {view:20, sum:40}
+    this.state = {view:100, sum:200, servicio:""}
   }
   componentWillMount(){
-    this.setState({view:20})
-  	InformeActions.viewInformes(this.props.params.area,this.state.view);
+    this.setState({sum:200})
+  	InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.view);
   }
   componentWillReceiveProps(nextProps, nextState){
-     this.setState({view:20})
-    InformeActions.viewInformes(nextProps.params.area,this.state.view);
+     this.setState({sum:200})
+    InformeActions.viewInformes(this.servicio(nextProps.params.area),this.state.view);
   }
   viewMore(){
     this.setState({sum:this.state.view + this.state.sum})
-    console.log(this.state.view)
-    InformeActions.viewInformes(this.props.params,this.state.sum);
+    InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.sum);
+  }
+  servicio(servicio){
+    switch (servicio) {
+      case "abastecimiento":
+          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones")'
+          break;
+      case "despacho":
+          this.state.servicio = 'NOMBRE_SERVICIO IN ("Despacho")'
+          break;
+      case "instalacion":
+          this.state.servicio = 'NOMBRE_SERVICIO IN ("Instalacion")'
+          break;
+      case "produccion":
+          this.state.servicio= 'NOMBRE_SERVICIO IN ("Produccion")'
+          break;
+      case "desarrollo":
+          this.state.servicio = 'NOMBRE_SERVICIO IN ("Desarrollo")'
+          break;
+      case "planificacion":
+          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion")'
+          break;
+      case "comercial":
+          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion")'
+          break;
+    }
+    return this.state.servicio
   }
 
   render() {
-    let i = 0;
-    console.log("Nuevo Objetos")
-    for (var valor in this.state.data){
-        console.log(this.state.data[valor])
-        i++;
-    }
-    
-   
     if(this.state.data){
       return (
         <div>
-          <InformeIndex />
-          <button onClick={this.viewMore.bind(this)}> Ver Más</button>   
+          <InformeIndex servicio={this.props.params.area} datos={this.state.data} viewMore={this.viewMore.bind(this)} />  
         </div>  
       )
     }else{

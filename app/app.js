@@ -48,8 +48,9 @@ io.use( (socket, next) => {
 
 io.sockets.on('connection', (socket) => {
 
-  socket.on('login', (data, callback) => {
+  socket.on('login', ( data, callback) => {
 
+      console.log(data)
       request.post({
         uri: process.env.apiLogin,
         form: {
@@ -57,7 +58,8 @@ io.sockets.on('connection', (socket) => {
           pass: data.pass
         }
       }, (error, response, auht) => {
-        if (error) throw console
+        console.log( error )
+        if (error) throw error
           
           auht = JSON.parse(auht)
 
@@ -167,15 +169,12 @@ io.sockets.on('connection', (socket) => {
 
    /* Informes */
   socket.on('informe', (data, cant) => {
-    con.query('SELECT * from servicio where estado = "EN PROCESO" and NOMBRE_SERVICIO = "'+data+'" limit '+ cant +' ', function(err, rows, fields) {
-    console.log(cant)
+    con.query('SELECT proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' order by CODIGO_PROYECTO limit '+cant +' ', function(err, rows, fields) {
     if (!err)
       socket.emit('item', rows)
     else
       console.log('Error ' + err);
-    });
-
-    
+    }); 
   })
 
 

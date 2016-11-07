@@ -7,69 +7,60 @@ class Content extends React.Component {
     super()
   }
 
+  viewServicio(){
+    let area;
+    switch (this.props.datos.NOMBRE_SERVICIO) {
+    case "Adquisiciones":
+        area = "abastecimiento";
+        break;
+    case "Despacho":
+        area = "despacho";
+        break;
+    case "Instalacion":
+        area = "instalaciones";
+        break;
+    case "Produccion":
+        area = "produccion";
+        break;
+    case "Desarrollo":
+        area = "desarrollo";
+        break;
+    }
+    return "item-actividades " + area
+  }
+
+  validador(nombre,validador,fecha){
+    let text
+    if(validador == "" || validador == null || validador == 0 || !validador){
+      text = ""
+    }
+    else{
+      text = <div class="opc"><h5>{nombre}</h5><p>{ (fecha)?validador.substring(0,10):validador}</p></div>
+    }
+    return text
+  }
+
   render() {
-      return (
-        <div class="item-box" data-num={this.props.test}>
-          <div class="item-rocha-info">
-              <div class="opc">
-                  <h5>Ejecutivo:</h5>
-                  <p>Felipe Fernando Cavieres Belmar</p>
-              </div>
-              <div class="opc">
-                  <h5>Fecha Emisión:</h5>
-                  <p>2016-02-02</p>
-              </div>
-              <div class="opc">
-                  <h5>Fecha entrega:</h5>
-                  <p>2016-02-02</p>
-              </div>
+      return (                
+        <div class={this.viewServicio()}>
+          <div class="title-actividad">
+              <h4><Link to="/home/detalle-actividad">{this.props.datos.CODIGO_SERVICIO}</Link> - <a href="#"> {this.props.datos.CODIGO_PROYECTO} </a></h4> 
+              <p><Link to="/home/detalle-actividad"><i class="fa fa-eye" aria-hidden="true"></i></Link></p>
+              <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
           </div>
-                    
-          <div class="item-actividades abastecimiento">
-              <div class="title-actividad">
-                  <h4><Link to="/home/detalle-actividad">10001</Link> - <a href="#"> LC-2015</a></h4> 
-                  <p><Link to="/home/detalle-actividad"><i class="fa fa-eye" aria-hidden="true"></i></Link></p>
-                  <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-              </div>
-              <div class="description-actividad">
-                  <div class="opc">
-                      <h5>Descripción: </h5>
-                      <p>Cajoneras Linea Bozz (2 Puestos).</p>
-                  </div>
-                  <div class="opc">
-                      <h5>Cliente: </h5>
-                      <p>AFP Planvital S.A.</p>
-                  </div>
-                  <div class="opc">
-                      <h5>Fecha </h5>
-                      <p>Desde 2016-05-19 / Hasta 2016-05-19 / Días 4</p>
-                  </div>
-              </div>
+          <div class="description-actividad">
+              {this.validador("Descripción:",this.props.datos.DESCRIPCION)}
+              {this.validador("Fecha Ingreso:",this.props.datos.FECHA_INGRESO,true)}
+              {this.validador("Fecha Entrega:",this.props.datos.FECHA_ENTREGA,true)}
+              {this.validador("Estado:",this.props.datos.ESTADO)}
+              {this.validador("Supervisor:",this.props.datos.SUPERVISOR)}
+              {this.validador("Dirección:",this.props.datos.DIRECCION)}
+              {this.validador("TP:",this.props.datos.TP)}
+              {this.validador("TO:",this.props.datos.TO)}
+              {this.validador("OS:",this.props.datos.OS)}
+              {this.validador("FI:",this.props.datos.FI)}
           </div>
-
-          <div class="item-actividades produccion">
-              <div class="title-actividad">
-                  <h4><a href="#">1000</a> - <a href="#"> LC-2015</a></h4> 
-                  <p><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                  <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-              </div>
-              <div class="description-actividad">
-                  <div class="opc">
-                      <h5>Descripción: </h5>
-                      <p>Cajoneras Linea Bozz (2 Puestos).</p>
-                  </div>
-                  <div class="opc">
-                      <h5>Cliente: </h5>
-                      <p>AFP Planvital S.A.</p>
-                  </div>
-                  <div class="opc">
-                      <h5>Fecha </h5>
-                      <p>Desde 2016-05-19 / Hasta 2016-05-19 / Días 4</p>
-                  </div>
-              </div>
-          </div>
-
-        </div> 
+        </div>
       )
 
   }

@@ -1,7 +1,7 @@
 import Reflux from 'reflux'
 
 let InformeActions = Reflux.createActions([
-  'viewInformes'
+  'viewInformes','viewInformesServicio'
 ])
 
 export default InformeActions
