@@ -17,19 +17,12 @@ import AuthActions from '../actions/AuthActions'
 //@ReactMixin.decorate(Reflux.connect(AuthStore, 'user'))
 export default class HomeRoutes extends React.Component {
 
-<<<<<<< HEAD
+
   constructor() {
     super()
    //  console.log( window.location.hash.substr(0) )
 	  // console.log( window.location.hash.substr(1) )
 	  // console.log( window.location.hash.substr(2) )
-=======
-  constructor(props) {
-    super(props)
-    //console.log( window.location.hash.substr(0) )
-	  //console.log( window.location.hash.substr(1) )
-	  //console.log( window.location.hash.substr(2) )
->>>>>>> reparar-session
   }
 
 

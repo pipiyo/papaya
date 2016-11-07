@@ -81,31 +81,29 @@
 
 	var _InformeReclamoRoutes2 = _interopRequireDefault(_InformeReclamoRoutes);
 
-	var _InformeRoutes = __webpack_require__(380);
+	var _InformeRoutes = __webpack_require__(344);
 
 	var _InformeRoutes2 = _interopRequireDefault(_InformeRoutes);
 
-	var _NotificacionRoutes = __webpack_require__(357);
+	var _NotificacionRoutes = __webpack_require__(352);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
 
-	var _DetalleInformeRoutes = __webpack_require__(360);
+	var _DetalleInformeRoutes = __webpack_require__(355);
 
 	var _DetalleInformeRoutes2 = _interopRequireDefault(_DetalleInformeRoutes);
 
-	var _HomeRoutes = __webpack_require__(369);
+	var _HomeRoutes = __webpack_require__(362);
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
-<<<<<<< HEAD
-	var _InicioRoutes = __webpack_require__(381);
+	var _InicioRoutes = __webpack_require__(363);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
-=======
-	var _AuthRoutes = __webpack_require__(359);
+
+	var _AuthRoutes = __webpack_require__(365);
 
 	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
->>>>>>> reparar-session
 
 	var _reactRouter = __webpack_require__(198);
 
@@ -113,21 +111,6 @@
 
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
-<<<<<<< HEAD
-	    { history: _reactRouter.hashHistory },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _LoginRoutes2.default }),
-	    _react2.default.createElement(
-	        _reactRouter.Route,
-	        { path: 'home', component: _HomeRoutes2.default },
-	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _InicioRoutes2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'actividad/:tipo', component: _ServicioRoutes2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'informe/:area', component: _InformeRoutes2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'reclamo', component: _ReclamoRoutes2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'informe-reclamo', component: _InformeReclamoRoutes2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad', component: _DetalleInformeRoutes2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/sub-actividad', component: _SubServicioRoutes2.default })
-=======
 	    { history: _reactRouter.browserHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _LoginRoutes2.default }),
 	    _react2.default.createElement(
@@ -136,12 +119,15 @@
 	        _react2.default.createElement(
 	            _reactRouter.Route,
 	            { path: 'home', component: _HomeRoutes2.default },
-	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad', component: _ServicioRoutes2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'abastecimiento', component: _AbastecimientoRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _InicioRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad/:tipo', component: _ServicioRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'informe/:area', component: _InformeRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'reclamo', component: _ReclamoRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'informe-reclamo', component: _InformeReclamoRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad', component: _DetalleInformeRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/sub-actividad', component: _SubServicioRoutes2.default })
 	        )
->>>>>>> reparar-session
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _ServicioRoutes2.default })
 	), document.getElementById('app'));
@@ -40861,8 +40847,189 @@
 	exports.default = Content;
 
 /***/ },
-/* 344 */,
+/* 344 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _dec, _class;
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _InformeActions = __webpack_require__(345);
+
+	var _InformeActions2 = _interopRequireDefault(_InformeActions);
+
+	var _InformeStore = __webpack_require__(346);
+
+	var _InformeStore2 = _interopRequireDefault(_InformeStore);
+
+	var _informe = __webpack_require__(347);
+
+	var _informe2 = _interopRequireDefault(_informe);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InformeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_InformeStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	  _inherits(InformeRoutes, _React$Component);
+
+	  function InformeRoutes() {
+	    _classCallCheck(this, InformeRoutes);
+
+	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
+
+	    _this.state = { view: 20, sum: 40 };
+	    return _this;
+	  }
+
+	  _createClass(InformeRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.setState({ view: 20 });
+	      _InformeActions2.default.viewInformes(this.props.params.area, this.state.view);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps, nextState) {
+	      this.setState({ view: 20 });
+	      _InformeActions2.default.viewInformes(nextProps.params.area, this.state.view);
+	    }
+	  }, {
+	    key: 'viewMore',
+	    value: function viewMore() {
+	      this.setState({ sum: this.state.view + this.state.sum });
+	      console.log(this.state.view);
+	      _InformeActions2.default.viewInformes(this.props.params, this.state.sum);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var i = 0;
+	      console.log("Nuevo Objetos");
+	      for (var valor in this.state.data) {
+	        console.log(this.state.data[valor]);
+	        i++;
+	      }
+
+	      if (this.state.data) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_informe2.default, null),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.viewMore.bind(this) },
+	            ' Ver M\xE1s'
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Cargando ...'
+	          )
+	        );
+	      }
+	    }
+	  }]);
+
+	  return InformeRoutes;
+	}(_react2.default.Component)) || _class);
+	exports.default = InformeRoutes;
+
+/***/ },
 /* 345 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InformeActions = _reflux2.default.createActions(['viewInformes']);
+
+	exports.default = InformeActions;
+
+/***/ },
+/* 346 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _InformeActions = __webpack_require__(345);
+
+	var _InformeActions2 = _interopRequireDefault(_InformeActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InformeStore = _reflux2.default.createStore({
+	  listenables: [_InformeActions2.default],
+	  viewInformes: function viewInformes(data, cant) {
+	    var _this = this;
+
+	    this.socket = (0, _socket2.default)(_Config2.default);
+	    this.socket.emit('informe', data, cant);
+	    this.socket.on('item', function (item) {
+	      _this.trigger(item);
+	    });
+	  }
+	});
+
+	exports.default = InformeStore;
+
+/***/ },
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40877,15 +41044,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Filtro = __webpack_require__(346);
+	var _Filtro = __webpack_require__(348);
 
 	var _Filtro2 = _interopRequireDefault(_Filtro);
 
-	var _Title = __webpack_require__(347);
+	var _Title = __webpack_require__(349);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Servicio = __webpack_require__(348);
+	var _Servicio = __webpack_require__(350);
 
 	var _Servicio2 = _interopRequireDefault(_Servicio);
 
@@ -40948,7 +41115,7 @@
 	exports.default = InformeIndex;
 
 /***/ },
-/* 346 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41110,7 +41277,7 @@
 	exports.default = Filtro;
 
 /***/ },
-/* 347 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41163,7 +41330,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 348 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41178,7 +41345,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Content = __webpack_require__(349);
+	var _Content = __webpack_require__(351);
 
 	var _Content2 = _interopRequireDefault(_Content);
 
@@ -41263,7 +41430,7 @@
 	exports.default = Servicio;
 
 /***/ },
-/* 349 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41533,14 +41700,7 @@
 	exports.default = Content;
 
 /***/ },
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */,
-/* 355 */,
-/* 356 */,
-/* 357 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41556,7 +41716,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _notificacion = __webpack_require__(358);
+	var _notificacion = __webpack_require__(353);
 
 	var _notificacion2 = _interopRequireDefault(_notificacion);
 
@@ -41590,7 +41750,7 @@
 	exports.default = AbastecimientoRoutes;
 
 /***/ },
-/* 358 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41605,7 +41765,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(359);
+	var _Title = __webpack_require__(354);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
@@ -41701,7 +41861,7 @@
 	exports.default = NotificacionIndex;
 
 /***/ },
-/* 359 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41754,7 +41914,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 360 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41770,7 +41930,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _detalleInforme = __webpack_require__(363);
+	var _detalleInforme = __webpack_require__(356);
 
 	var _detalleInforme2 = _interopRequireDefault(_detalleInforme);
 
@@ -41804,72 +41964,7 @@
 	exports.default = DetalleInformeRoutes;
 
 /***/ },
-/* 361 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var InformeActions = _reflux2.default.createActions(['viewInformes']);
-
-	exports.default = InformeActions;
-
-/***/ },
-/* 362 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _reactRouter = __webpack_require__(198);
-
-	var _InformeActions = __webpack_require__(361);
-
-	var _InformeActions2 = _interopRequireDefault(_InformeActions);
-
-	var _Config = __webpack_require__(261);
-
-	var _Config2 = _interopRequireDefault(_Config);
-
-	var _socket = __webpack_require__(262);
-
-	var _socket2 = _interopRequireDefault(_socket);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var InformeStore = _reflux2.default.createStore({
-	  listenables: [_InformeActions2.default],
-	  viewInformes: function viewInformes(data, cant) {
-	    var _this = this;
-
-	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.emit('informe', data, cant);
-	    this.socket.on('item', function (item) {
-	      _this.trigger(item);
-	    });
-	  }
-	});
-
-	exports.default = InformeStore;
-
-/***/ },
-/* 363 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41884,23 +41979,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(364);
+	var _Title = __webpack_require__(357);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(365);
+	var _Form = __webpack_require__(358);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _ActividadTitle = __webpack_require__(366);
+	var _ActividadTitle = __webpack_require__(359);
 
 	var _ActividadTitle2 = _interopRequireDefault(_ActividadTitle);
 
-	var _ActividadContent = __webpack_require__(367);
+	var _ActividadContent = __webpack_require__(360);
 
 	var _ActividadContent2 = _interopRequireDefault(_ActividadContent);
 
-	var _SubActividad = __webpack_require__(368);
+	var _SubActividad = __webpack_require__(361);
 
 	var _SubActividad2 = _interopRequireDefault(_SubActividad);
 
@@ -41958,7 +42053,7 @@
 	exports.default = DetalleInformeIndex;
 
 /***/ },
-/* 364 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42011,7 +42106,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 365 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42066,7 +42161,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 366 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42133,7 +42228,7 @@
 	exports.default = ActividadTitle;
 
 /***/ },
-/* 367 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42237,7 +42332,7 @@
 	exports.default = ActividadContent;
 
 /***/ },
-/* 368 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42363,7 +42458,7 @@
 	exports.default = SubActividad;
 
 /***/ },
-/* 369 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42387,29 +42482,25 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _home = __webpack_require__(370);
+	var _home = __webpack_require__(366);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _HomeActions = __webpack_require__(378);
+	var _HomeActions = __webpack_require__(374);
 
 	var _HomeActions2 = _interopRequireDefault(_HomeActions);
 
-<<<<<<< HEAD
-	var _HomeStore = __webpack_require__(379);
-=======
 	var _reactRouter = __webpack_require__(198);
 
-	var _HomeStore = __webpack_require__(356);
->>>>>>> reparar-session
+	var _HomeStore = __webpack_require__(375);
 
 	var _HomeStore2 = _interopRequireDefault(_HomeStore);
 
-	var _AuthStore = __webpack_require__(357);
+	var _AuthStore = __webpack_require__(376);
 
 	var _AuthStore2 = _interopRequireDefault(_AuthStore);
 
-	var _AuthActions = __webpack_require__(358);
+	var _AuthActions = __webpack_require__(377);
 
 	var _AuthActions2 = _interopRequireDefault(_AuthActions);
 
@@ -42425,20 +42516,13 @@
 	var HomeRoutes = function (_React$Component) {
 	  _inherits(HomeRoutes, _React$Component);
 
-	  function HomeRoutes(props) {
+	  function HomeRoutes() {
 	    _classCallCheck(this, HomeRoutes);
 
-<<<<<<< HEAD
 	    return _possibleConstructorReturn(this, (HomeRoutes.__proto__ || Object.getPrototypeOf(HomeRoutes)).call(this));
 	    //  console.log( window.location.hash.substr(0) )
 	    // console.log( window.location.hash.substr(1) )
 	    // console.log( window.location.hash.substr(2) )
-=======
-	    return _possibleConstructorReturn(this, (HomeRoutes.__proto__ || Object.getPrototypeOf(HomeRoutes)).call(this, props));
-	    //console.log( window.location.hash.substr(0) )
-	    //console.log( window.location.hash.substr(1) )
-	    //console.log( window.location.hash.substr(2) )
->>>>>>> reparar-session
 	  }
 
 	  _createClass(HomeRoutes, [{
@@ -42501,7 +42585,57 @@
 	exports.default = HomeRoutes;
 
 /***/ },
-/* 370 */
+/* 363 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _inicio = __webpack_require__(364);
+
+	var _inicio2 = _interopRequireDefault(_inicio);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InicioRoutes = function (_React$Component) {
+	  _inherits(InicioRoutes, _React$Component);
+
+	  function InicioRoutes() {
+	    _classCallCheck(this, InicioRoutes);
+
+	    return _possibleConstructorReturn(this, (InicioRoutes.__proto__ || Object.getPrototypeOf(InicioRoutes)).call(this));
+	  }
+
+	  _createClass(InicioRoutes, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_inicio2.default, null);
+	    }
+	  }]);
+
+	  return InicioRoutes;
+	}(_react2.default.Component);
+
+	exports.default = InicioRoutes;
+
+/***/ },
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42516,11 +42650,138 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(371);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InicioIndex = function (_React$Component) {
+	  _inherits(InicioIndex, _React$Component);
+
+	  function InicioIndex() {
+	    _classCallCheck(this, InicioIndex);
+
+	    return _possibleConstructorReturn(this, (InicioIndex.__proto__ || Object.getPrototypeOf(InicioIndex)).call(this));
+	  }
+
+	  _createClass(InicioIndex, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Hola Mundo'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return InicioIndex;
+	}(_react2.default.Component);
+
+	exports.default = InicioIndex;
+
+/***/ },
+/* 365 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _LoginActions = __webpack_require__(196);
+
+	var _LoginActions2 = _interopRequireDefault(_LoginActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AuthRoutes = function (_React$Component) {
+	  _inherits(AuthRoutes, _React$Component);
+
+	  function AuthRoutes() {
+	    _classCallCheck(this, AuthRoutes);
+
+	    var _this = _possibleConstructorReturn(this, (AuthRoutes.__proto__ || Object.getPrototypeOf(AuthRoutes)).call(this));
+
+	    console.log('hola aqui el AUTH');
+	    return _this;
+	  }
+
+	  _createClass(AuthRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _LoginActions2.default.checkUser();
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps() {
+
+	      _LoginActions2.default.checkUser();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return this.props.children;
+	    }
+	  }]);
+
+	  return AuthRoutes;
+	}(_react2.default.Component);
+
+	exports.default = AuthRoutes;
+
+/***/ },
+/* 366 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Header = __webpack_require__(367);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Main = __webpack_require__(375);
+	var _Main = __webpack_require__(371);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -42593,7 +42854,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 371 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42608,11 +42869,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Logo = __webpack_require__(372);
+	var _Logo = __webpack_require__(368);
 
 	var _Logo2 = _interopRequireDefault(_Logo);
 
-	var _Item = __webpack_require__(373);
+	var _Item = __webpack_require__(369);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -42651,7 +42912,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 372 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42707,7 +42968,7 @@
 	exports.default = Logo;
 
 /***/ },
-/* 373 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42724,7 +42985,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _Area = __webpack_require__(374);
+	var _Area = __webpack_require__(370);
 
 	var _Area2 = _interopRequireDefault(_Area);
 
@@ -42800,7 +43061,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 374 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42869,7 +43130,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 375 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42884,7 +43145,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(376);
+	var _Nav = __webpack_require__(372);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -42964,7 +43225,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 376 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42979,7 +43240,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Notification = __webpack_require__(377);
+	var _Notification = __webpack_require__(373);
 
 	var _Notification2 = _interopRequireDefault(_Notification);
 
@@ -43042,7 +43303,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 377 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43148,7 +43409,7 @@
 	exports.default = Notification;
 
 /***/ },
-/* 378 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43168,7 +43429,7 @@
 	exports.default = HomeActions;
 
 /***/ },
-/* 379 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43189,7 +43450,7 @@
 
 	var _socket2 = _interopRequireDefault(_socket);
 
-	var _HomeActions = __webpack_require__(378);
+	var _HomeActions = __webpack_require__(374);
 
 	var _HomeActions2 = _interopRequireDefault(_HomeActions);
 
@@ -43220,11 +43481,7 @@
 	exports.default = HomeStore;
 
 /***/ },
-<<<<<<< HEAD
-/* 380 */
-=======
-/* 357 */
->>>>>>> reparar-session
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43232,168 +43489,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-<<<<<<< HEAD
-	exports.default = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _dec, _class;
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactMixin = __webpack_require__(174);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _InformeActions = __webpack_require__(361);
-
-	var _InformeActions2 = _interopRequireDefault(_InformeActions);
-
-	var _InformeStore = __webpack_require__(362);
-
-	var _InformeStore2 = _interopRequireDefault(_InformeStore);
-
-	var _informe = __webpack_require__(345);
-
-	var _informe2 = _interopRequireDefault(_informe);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var InformeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_InformeStore2.default, 'data')), _dec(_class = function (_React$Component) {
-	  _inherits(InformeRoutes, _React$Component);
-
-	  function InformeRoutes() {
-	    _classCallCheck(this, InformeRoutes);
-
-	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
-
-	    _this.state = { view: 20, sum: 40 };
-	    return _this;
-	  }
-
-	  _createClass(InformeRoutes, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.setState({ view: 20 });
-	      _InformeActions2.default.viewInformes(this.props.params.area, this.state.view);
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps, nextState) {
-	      this.setState({ view: 20 });
-	      _InformeActions2.default.viewInformes(nextProps.params.area, this.state.view);
-	    }
-	  }, {
-	    key: 'viewMore',
-	    value: function viewMore() {
-	      this.setState({ sum: this.state.view + this.state.sum });
-	      console.log(this.state.view);
-	      _InformeActions2.default.viewInformes(this.props.params, this.state.sum);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var i = 0;
-	      console.log("Nuevo Objetos");
-	      for (var valor in this.state.data) {
-	        console.log(this.state.data[valor]);
-	        i++;
-	      }
-
-	      if (this.state.data) {
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_informe2.default, null),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.viewMore.bind(this) },
-	            ' Ver M\xE1s'
-	          )
-	        );
-	      } else {
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            'Cargando ...'
-	          )
-	        );
-	      }
-	    }
-	  }]);
-
-	  return InformeRoutes;
-	}(_react2.default.Component)) || _class);
-	exports.default = InformeRoutes;
-
-/***/ },
-/* 381 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _inicio = __webpack_require__(382);
-
-	var _inicio2 = _interopRequireDefault(_inicio);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var InicioRoutes = function (_React$Component) {
-	  _inherits(InicioRoutes, _React$Component);
-
-	  function InicioRoutes() {
-	    _classCallCheck(this, InicioRoutes);
-
-	    return _possibleConstructorReturn(this, (InicioRoutes.__proto__ || Object.getPrototypeOf(InicioRoutes)).call(this));
-	  }
-
-	  _createClass(InicioRoutes, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_inicio2.default, null);
-	    }
-	  }]);
-
-	  return InicioRoutes;
-	}(_react2.default.Component);
-
-	exports.default = InicioRoutes;
-
-/***/ },
-/* 382 */
-=======
 
 	var _reflux = __webpack_require__(176);
 
@@ -43409,7 +43504,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _AuthActions = __webpack_require__(358);
+	var _AuthActions = __webpack_require__(377);
 
 	var _AuthActions2 = _interopRequireDefault(_AuthActions);
 
@@ -43504,7 +43599,7 @@
 	*/
 
 /***/ },
-/* 358 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43522,118 +43617,6 @@
 	var AuthActions = _reflux2.default.createActions(['getUser']);
 
 	exports.default = AuthActions;
-
-/***/ },
-/* 359 */
->>>>>>> reparar-session
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-<<<<<<< HEAD
-=======
-	exports.default = undefined;
->>>>>>> reparar-session
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-<<<<<<< HEAD
-=======
-	var _reactMixin = __webpack_require__(174);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _reactRouter = __webpack_require__(198);
-
-	var _LoginActions = __webpack_require__(196);
-
-	var _LoginActions2 = _interopRequireDefault(_LoginActions);
-
->>>>>>> reparar-session
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-<<<<<<< HEAD
-	var InicioIndex = function (_React$Component) {
-	  _inherits(InicioIndex, _React$Component);
-
-	  function InicioIndex() {
-	    _classCallCheck(this, InicioIndex);
-
-	    return _possibleConstructorReturn(this, (InicioIndex.__proto__ || Object.getPrototypeOf(InicioIndex)).call(this));
-	  }
-
-	  _createClass(InicioIndex, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Hola Mundo'
-	        )
-	      );
-	    }
-	  }]);
-
-	  return InicioIndex;
-	}(_react2.default.Component);
-
-	exports.default = InicioIndex;
-=======
-	var AuthRoutes = function (_React$Component) {
-	  _inherits(AuthRoutes, _React$Component);
-
-	  function AuthRoutes() {
-	    _classCallCheck(this, AuthRoutes);
-
-	    var _this = _possibleConstructorReturn(this, (AuthRoutes.__proto__ || Object.getPrototypeOf(AuthRoutes)).call(this));
-
-	    console.log('hola aqui el AUTH');
-	    return _this;
-	  }
-
-	  _createClass(AuthRoutes, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      _LoginActions2.default.checkUser();
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-
-	      _LoginActions2.default.checkUser();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return this.props.children;
-	    }
-	  }]);
-
-	  return AuthRoutes;
-	}(_react2.default.Component);
-
-	exports.default = AuthRoutes;
->>>>>>> reparar-session
 
 /***/ }
 /******/ ]);
