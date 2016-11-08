@@ -37199,11 +37199,6 @@
 
 	var ServicioStore = _reflux2.default.createStore({
 	  listenables: [_ServicioActions2.default],
-	  getInitialState: function getInitialState() {
-	    socket.emit('comunas', function () {});
-	    return this.obj = { mensaje: null, comunas: null };
-	  },
-	  sendObj: function sendObj() {},
 	  addServicio: function addServicio(data) {
 	    var _this = this;
 
@@ -40902,7 +40897,7 @@
 
 	var _InformeActions2 = _interopRequireDefault(_InformeActions);
 
-	var _InformeStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../stores/InformeStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _InformeStore = __webpack_require__(346);
 
 	var _InformeStore2 = _interopRequireDefault(_InformeStore);
 
@@ -41051,7 +41046,50 @@
 	exports.default = InformeActions;
 
 /***/ },
-/* 346 */,
+/* 346 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _InformeActions = __webpack_require__(345);
+
+	var _InformeActions2 = _interopRequireDefault(_InformeActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var socket = _socket2.default.connect(_Config2.default.url + 'servicio');
+
+	var InformeStore = _reflux2.default.createStore({
+	  listenables: [_InformeActions2.default],
+	  viewInformes: function viewInformes(data, cant, estado, codigo, vendedor, categoria, fecha, cliente) {
+	    var _this = this;
+
+	    socket.emit('informe', data, cant, estado, codigo, vendedor, categoria, fecha, cliente);
+	    socket.on('item', function (item) {
+	      _this.trigger(item);
+	    });
+	  }
+	});
+
+	exports.default = InformeStore;
+
+/***/ },
 /* 347 */
 /***/ function(module, exports, __webpack_require__) {
 

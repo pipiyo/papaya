@@ -6,15 +6,6 @@ const socket = io.connect( `${Env.url}servicio` )
 
 let ServicioStore = Reflux.createStore({
   listenables: [ServicioActions],
-  getInitialState: function() {
-  	socket.emit('comunas', () => {
-
-  	})
-    return this.obj = { mensaje: null , comunas: null  }
-  },
-  sendObj: function(){
-
-  },
   addServicio: function(data){
   	socket.emit('servicio', data)
   	socket.on('mensaje', (mensaje) =>{

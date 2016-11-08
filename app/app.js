@@ -105,7 +105,7 @@ let servicio = io
   socket.on('comunas', (callback) => {
 
 
-    connection.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas`', function(err, rows, fields) {
+    con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas`', function(err, rows, fields) {
       if (err) console.log( err ) 
 
       console.log(rows[0].nombre, rows[0].codigo )
@@ -210,7 +210,7 @@ let servicio = io
 
   })
 
-
+})
 
 
   
@@ -223,4 +223,4 @@ app.all('*', (request, response, next) => {
   */
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
 
-} )
+})
