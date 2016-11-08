@@ -25,6 +25,9 @@ class Content extends React.Component {
     case "Desarrollo":
         area = "desarrollo";
         break;
+    case "Sillas":
+        area = "sillas";
+        break;
     }
     return "item-actividades " + area
   }
@@ -44,12 +47,13 @@ class Content extends React.Component {
       return (                
         <div class={this.viewServicio()}>
           <div class="title-actividad">
-              <h4><Link to="/home/detalle-actividad">{this.props.datos.CODIGO_SERVICIO}</Link> - <a href="#"> {this.props.datos.CODIGO_PROYECTO} </a></h4> 
+              <h4><Link to="/home/detalle-actividad">{this.props.datos.CODIGO_SERVICIO}</Link> - <a href="#"> {this.props.datos.CODIGO_PROYECTO + " / " + this.props.datos.DESCRIPCION }</a></h4> 
               <p><Link to="/home/detalle-actividad"><i class="fa fa-eye" aria-hidden="true"></i></Link></p>
               <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
           </div>
           <div class="description-actividad">
               {this.validador("Descripción:",this.props.datos.DESCRIPCION)}
+              {this.validador("Proceso:",this.props.datos.PROCESO)}
               {this.validador("Fecha Ingreso:",this.props.datos.FECHA_INGRESO,true)}
               {this.validador("Fecha Entrega:",this.props.datos.FECHA_ENTREGA,true)}
               {this.validador("Estado:",this.props.datos.ESTADO)}
