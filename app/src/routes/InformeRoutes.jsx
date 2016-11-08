@@ -12,19 +12,19 @@ export default class InformeRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = {view:100, sum:200, servicio:""}
+    this.state = {view:100, sum:200, servicio:"", fecha: "", codigo : "", estado : 'proyecto.ESTADO IN ("EN PROCESO")', vendedor : "", categoria : ""}
   }
   componentWillMount(){
     this.setState({sum:200})
-  	InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.view);
+  	InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.view,this.state.estado,this.state.codigo,this.state.vendedor,this.state.categoria,this.state.fecha);
   }
   componentWillReceiveProps(nextProps, nextState){
      this.setState({sum:200})
-    InformeActions.viewInformes(this.servicio(nextProps.params.area),this.state.view);
+    InformeActions.viewInformes(this.servicio(nextProps.params.area),this.state.view,this.state.estado,this.state.codigo,this.state.vendedor,this.state.categoria,this.state.fecha);
   }
   viewMore(){
     this.setState({sum:this.state.view + this.state.sum})
-    InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.sum);
+    InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.sum,this.state.estado,this.state.codigo,this.state.vendedor,this.state.categoria,this.state.fecha);
   }
   servicio(servicio){
     switch (servicio) {
@@ -52,12 +52,29 @@ export default class InformeRoutes extends React.Component {
     }
     return this.state.servicio
   }
+  filtro(){
+    let fechaI = document.getElementById("fechaInicio").value;
+    let fechaE = document.getElementById("fechaEntrega").value;
+    let codigo = document.getElementById("codigo").value;
+    let estado = document.getElementById("estado").value;
+    let vendedor = document.getElementById("vendedor").value;
+    let categoria = document.getElementById("categoria").value;;
+    
+    (codigo != "")?this.state.codigo = ' and proyecto.CODIGO_PROYECTO like "%'+ codigo +'%"':this.state.codigo = "";
+    (vendedor != "")?this.state.vendedor = ' and proyecto.EJECUTIVO like "%'+ vendedor +'%"':this.state.vendedor = "";
+    (categoria != "")?this.state.categoria = ' and servicio.CATEGORIA like "%'+ categoria +'%"':this.state.categoria = "";
+    (fechaI != "" && fechaE != "")?this.state.fecha = ' and proyecto.FECHA_CONFIRMACION BETWEEN "'+ fechaI +'" and "'+ fechaE +'"':this.state.fecha = "";
+
+    this.state.estado = 'proyecto.ESTADO IN ("'+ estado +'")'
+
+    InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.sum,this.state.estado,this.state.codigo,this.state.vendedor,this.state.categoria,this.state.fecha);
+  }
 
   render() {
     if(this.state.data){
       return (
         <div>
-          <InformeIndex servicio={this.props.params.area} datos={this.state.data} viewMore={this.viewMore.bind(this)} />  
+          <InformeIndex cuenta={this.state.data.cuenta} servicio={this.props.params.area} datos={this.state.data.valor} viewMore={this.viewMore.bind(this) } filtro={this.filtro.bind(this)} />  
         </div>  
       )
     }else{

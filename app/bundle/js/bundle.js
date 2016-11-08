@@ -40901,7 +40901,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
 
-	    _this.state = { view: 100, sum: 200, servicio: "" };
+	    _this.state = { view: 100, sum: 200, servicio: "", fecha: "", codigo: "", estado: 'proyecto.ESTADO IN ("EN PROCESO")', vendedor: "", categoria: "" };
 	    return _this;
 	  }
 
@@ -40909,19 +40909,19 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      this.setState({ sum: 200 });
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.view);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps, nextState) {
 	      this.setState({ sum: 200 });
-	      _InformeActions2.default.viewInformes(this.servicio(nextProps.params.area), this.state.view);
+	      _InformeActions2.default.viewInformes(this.servicio(nextProps.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
 	    }
 	  }, {
 	    key: 'viewMore',
 	    value: function viewMore() {
 	      this.setState({ sum: this.state.view + this.state.sum });
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
 	    }
 	  }, {
 	    key: 'servicio',
@@ -40952,13 +40952,32 @@
 	      return this.state.servicio;
 	    }
 	  }, {
+	    key: 'filtro',
+	    value: function filtro() {
+	      var fechaI = document.getElementById("fechaInicio").value;
+	      var fechaE = document.getElementById("fechaEntrega").value;
+	      var codigo = document.getElementById("codigo").value;
+	      var estado = document.getElementById("estado").value;
+	      var vendedor = document.getElementById("vendedor").value;
+	      var categoria = document.getElementById("categoria").value;;
+
+	      codigo != "" ? this.state.codigo = ' and proyecto.CODIGO_PROYECTO like "%' + codigo + '%"' : this.state.codigo = "";
+	      vendedor != "" ? this.state.vendedor = ' and proyecto.EJECUTIVO like "%' + vendedor + '%"' : this.state.vendedor = "";
+	      categoria != "" ? this.state.categoria = ' and servicio.CATEGORIA like "%' + categoria + '%"' : this.state.categoria = "";
+	      fechaI != "" && fechaE != "" ? this.state.fecha = ' and proyecto.FECHA_CONFIRMACION BETWEEN "' + fechaI + '" and "' + fechaE + '"' : this.state.fecha = "";
+
+	      this.state.estado = 'proyecto.ESTADO IN ("' + estado + '")';
+
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (this.state.data) {
 	        return _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2.default.createElement(_informe2.default, { servicio: this.props.params.area, datos: this.state.data, viewMore: this.viewMore.bind(this) })
+	          _react2.default.createElement(_informe2.default, { cuenta: this.state.data.cuenta, servicio: this.props.params.area, datos: this.state.data.valor, viewMore: this.viewMore.bind(this), filtro: this.filtro.bind(this) })
 	        );
 	      } else {
 	        return _react2.default.createElement(
@@ -41030,11 +41049,11 @@
 
 	var InformeStore = _reflux2.default.createStore({
 	  listenables: [_InformeActions2.default],
-	  viewInformes: function viewInformes(data, cant) {
+	  viewInformes: function viewInformes(data, cant, estado, codigo, vendedor, categoria, fecha) {
 	    var _this = this;
 
 	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.emit('informe', data, cant);
+	    this.socket.emit('informe', data, cant, estado, codigo, vendedor, categoria, fecha);
 	    this.socket.on('item', function (item) {
 	      _this.trigger(item);
 	    });
@@ -41123,8 +41142,8 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, { servicioTitle: this.props.servicio }),
-	        _react2.default.createElement(_Filtro2.default, null),
-	        _react2.default.createElement(_Servicio2.default, { servicioTitle: this.props.servicio, datos: this.props.datos, viewMore: this.props.viewMore, servicio: this.state.servicio, click: this.activeClass.bind(this) })
+	        _react2.default.createElement(_Filtro2.default, { filtro: this.props.filtro }),
+	        _react2.default.createElement(_Servicio2.default, { cuenta: this.props.cuenta, servicioTitle: this.props.servicio, datos: this.props.datos, viewMore: this.props.viewMore, servicio: this.state.servicio, click: this.activeClass.bind(this) })
 	      );
 	    }
 	  }]);
@@ -41181,7 +41200,7 @@
 	                        null,
 	                        " Fecha Inicio "
 	                    ),
-	                    _react2.default.createElement("input", { type: "text", className: "date" })
+	                    _react2.default.createElement("input", { onChange: this.props.filtro, id: "fechaInicio", type: "text", className: "date" })
 	                ),
 	                _react2.default.createElement(
 	                    "div",
@@ -41191,7 +41210,7 @@
 	                        null,
 	                        " Fecha Entrega "
 	                    ),
-	                    _react2.default.createElement("input", { type: "text", className: "date" })
+	                    _react2.default.createElement("input", { onChange: this.props.filtro, id: "fechaEntrega", type: "text", className: "date" })
 	                ),
 	                _react2.default.createElement(
 	                    "div",
@@ -41201,7 +41220,7 @@
 	                        null,
 	                        " C\xF3digo Rocha"
 	                    ),
-	                    _react2.default.createElement("input", { type: "text" })
+	                    _react2.default.createElement("input", { onChange: this.props.filtro, id: "codigo", type: "text" })
 	                ),
 	                _react2.default.createElement(
 	                    "div",
@@ -41213,20 +41232,25 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        "select",
-	                        null,
+	                        { onChange: this.props.filtro, id: "estado" },
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
+	                            { value: "En Proceso" },
 	                            "En Proceso"
 	                        ),
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
+	                            { value: "ACTA" },
+	                            "Acta"
+	                        ),
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "OK" },
 	                            "OK"
 	                        ),
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
+	                            { value: "Nula" },
 	                            "Nulo"
 	                        )
 	                    )
@@ -41241,21 +41265,21 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        "select",
-	                        null,
+	                        { onChange: this.props.filtro, id: "vendedor" },
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
-	                            "En Proceso"
+	                            { value: "" },
+	                            "Seleccione"
 	                        ),
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
-	                            "OK"
+	                            { value: "Amanda Godoy Santis" },
+	                            "Amanda Godoy Santis"
 	                        ),
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
-	                            "Nulo"
+	                            { value: "Maria de los Angeles Nu\xF1ez Duarte" },
+	                            "Maria de los Angeles Nu\xF1ez Duarte"
 	                        )
 	                    )
 	                ),
@@ -41269,21 +41293,26 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        "select",
-	                        null,
+	                        { onChange: this.props.filtro, id: "categoria" },
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
-	                            "En Proceso"
+	                            { value: "" },
+	                            "Seleccione"
 	                        ),
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
-	                            "OK"
+	                            { value: "Proyecto" },
+	                            "Proyecto"
 	                        ),
 	                        _react2.default.createElement(
 	                            "option",
-	                            null,
-	                            "Nulo"
+	                            { value: "Solicitud" },
+	                            "Solicitud"
+	                        ),
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "Proceso" },
+	                            "Proceso"
 	                        )
 	                    )
 	                )
@@ -41453,6 +41482,19 @@
 	      return contenidoRocha;
 	    }
 	  }, {
+	    key: 'viewbutton',
+	    value: function viewbutton() {
+	      var button = "";
+	      if (this.props.cuenta[0].total > this.props.datos.length) {
+	        button = _react2.default.createElement(
+	          'button',
+	          { className: 'view-more', onClick: this.props.viewMore },
+	          'Ver m\xE1s'
+	        );
+	      }
+	      return button;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -41460,9 +41502,9 @@
 	        { className: 'module-actividad' },
 	        this.viewRocha(),
 	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.props.viewMore },
-	          'Ver m\xE1s'
+	          'div',
+	          { className: 'content-view-more' },
+	          this.viewbutton()
 	        )
 	      );
 	    }

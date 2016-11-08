@@ -168,10 +168,11 @@ io.sockets.on('connection', (socket) => {
   })
 
    /* Informes */
-  socket.on('informe', (data, cant) => {
-    con.query('SELECT proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' order by CODIGO_PROYECTO limit '+cant +' ', function(err, rows, fields) {
+  socket.on('informe', (data, cant, estado, codigo, vendedor, categoria,fecha) => {
+    con.query('SELECT proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+'  order by CODIGO_PROYECTO limit '+cant +'; select count(proyecto.CODIGO_PROYECTO) as total FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+'', function(err, rows, fields) {
+      console.log("aqui codigo " + fecha)
     if (!err)
-      socket.emit('item', rows)
+      socket.emit('item', { valor:rows[0], cuenta:rows[1]})
     else
       console.log('Error ' + err);
     }); 

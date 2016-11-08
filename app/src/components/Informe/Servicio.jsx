@@ -48,12 +48,20 @@ class Servicio extends React.Component {
 
     return contenidoRocha
   }
-
+  viewbutton(){
+    let button = "";
+    if(this.props.cuenta[0].total > this.props.datos.length){
+      button = <button class="view-more" onClick={this.props.viewMore}>Ver más</button>
+    }
+    return button
+  }
   render() {
       return (
         <div class="module-actividad">
             { this.viewRocha() }
-            <button onClick={this.props.viewMore}>Ver más</button>
+            <div class="content-view-more">
+              {this.viewbutton()}
+            </div>
         </div>
       )
 

@@ -6,9 +6,9 @@ import io from 'socket.io-client'
 
 let InformeStore = Reflux.createStore({
   listenables: [InformeActions],
-  viewInformes: function(data,cant){
+  viewInformes: function(data,cant,estado,codigo, vendedor,categoria,fecha){
   	this.socket = io( getUrl )
-  	this.socket.emit('informe', data, cant)
+  	this.socket.emit('informe', data,cant,estado,codigo,vendedor,categoria,fecha)
   	this.socket.on('item', (item) =>{
   		this.trigger(item)
   	})
