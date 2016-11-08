@@ -954,7 +954,7 @@ a.external-link, .external-link a {
         &.instalaciones{border:solid 1px $color_instalaciones; h3{background: $color_instalaciones;&:after{content: none;}}}
         &.integracion{border:solid 1px $color_integracion; h3{background: $color_integracion;&:after{content: none;}}}
         &.desarrollo{border:solid 1px $color_desarrollo; h3{background: $color_desarrollo;&:after{content: none;}}}
-
+        &.sillas{border:solid 1px $color_desarrollo; h3{background: $color_sillas;&:after{content: none;}}}
         .item-box{
             padding-bottom: 1em;
             display: block;
@@ -1007,6 +1007,7 @@ a.external-link, .external-link a {
             &.instalaciones{.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
             &.integracion{.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}
             &.desarrollo{.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
+            &.sillas{.title-actividad{background: $color_sillas;}.description-actividad{border: solid 1px $color_sillas;}}
         }
         .title-actividad{
             padding: .5em;

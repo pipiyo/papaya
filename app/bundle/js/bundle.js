@@ -40933,6 +40933,9 @@
 	        case "despacho":
 	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Despacho")';
 	          break;
+	        case "sillas":
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Sillas")';
+	          break;
 	        case "instalacion":
 	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Instalacion")';
 	          break;
@@ -41421,10 +41424,33 @@
 	  }
 
 	  _createClass(Servicio, [{
+	    key: 'fechaActual',
+	    value: function fechaActual() {
+	      var hoy = new Date();
+	      var dd = hoy.getDate();
+	      var mm = hoy.getMonth() + 1; //hoy es 0!
+	      var yyyy = hoy.getFullYear();
+
+	      if (dd < 10) {
+	        dd = '0' + dd;
+	      }
+
+	      if (mm < 10) {
+	        mm = '0' + mm;
+	      }
+	      return yyyy + '-' + mm + '-' + dd;
+	    }
+	  }, {
+	    key: 'atraso',
+	    value: function atraso(fecha, fechaConfirmacion) {
+	      return "hola";
+	    }
+	  }, {
 	    key: 'viewRocha',
 	    value: function viewRocha() {
 	      var rocha = [];
 	      var cliente = [];
+	      var fechaConfirmacion = [];
 	      var contenidoRocha = [];
 	      var valor = void 0,
 	          i = void 0,
@@ -41435,6 +41461,7 @@
 	        if (rocha.indexOf(this.props.datos[valor].CODIGO_PROYECTO) <= -1) {
 	          rocha.push(this.props.datos[valor].CODIGO_PROYECTO);
 	          cliente.push(this.props.datos[valor].NOMBRE_CLIENTE);
+	          fechaConfirmacion.push(this.props.datos[valor].FECHA_CONFIRMACION);
 	        }
 	      }
 
@@ -41457,7 +41484,7 @@
 	            { className: 'item-rocha' },
 	            _react2.default.createElement(
 	              'h3',
-	              { 'data-key': rocha[i], onClick: this.props.click },
+	              { className: this.atraso(this.fechaActual(), fechaConfirmacion[i]), 'data-key': rocha[i], onClick: this.props.click },
 	              _react2.default.createElement(
 	                'a',
 	                null,
@@ -41497,6 +41524,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.atraso());
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'module-actividad' },
@@ -41570,6 +41598,9 @@
 	                case "Desarrollo":
 	                    area = "desarrollo";
 	                    break;
+	                case "Sillas":
+	                    area = "sillas";
+	                    break;
 	            }
 	            return "item-actividades " + area;
 	        }
@@ -41619,8 +41650,7 @@
 	                            'a',
 	                            { href: '#' },
 	                            ' ',
-	                            this.props.datos.CODIGO_PROYECTO,
-	                            ' '
+	                            this.props.datos.CODIGO_PROYECTO + " / " + this.props.datos.DESCRIPCION
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -41646,6 +41676,7 @@
 	                    'div',
 	                    { className: 'description-actividad' },
 	                    this.validador("Descripción:", this.props.datos.DESCRIPCION),
+	                    this.validador("Proceso:", this.props.datos.PROCESO),
 	                    this.validador("Fecha Ingreso:", this.props.datos.FECHA_INGRESO, true),
 	                    this.validador("Fecha Entrega:", this.props.datos.FECHA_ENTREGA, true),
 	                    this.validador("Estado:", this.props.datos.ESTADO),

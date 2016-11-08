@@ -34,6 +34,9 @@ export default class InformeRoutes extends React.Component {
       case "despacho":
           this.state.servicio = 'NOMBRE_SERVICIO IN ("Despacho")'
           break;
+      case "sillas":
+          this.state.servicio = 'NOMBRE_SERVICIO IN ("Sillas")'
+          break;
       case "instalacion":
           this.state.servicio = 'NOMBRE_SERVICIO IN ("Instalacion")'
           break;
