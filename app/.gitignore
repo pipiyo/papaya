@@ -6,5 +6,5 @@ dump.rdb
 /src/Config/index.jsx
 ../dump.rdb
 /bundle/index.html
-/bundle/js/bundle.js
+/bundle/js/*
 env.js

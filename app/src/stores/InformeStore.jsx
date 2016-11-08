@@ -1,15 +1,15 @@
 import Reflux from 'reflux'
-import { hashHistory } from 'react-router'
 import InformeActions from '../actions/InformeActions'
-import getUrl from '../Config'
+import Env from '../Config'
 import io from 'socket.io-client'
+const socket = io.connect( `${Env.url}servicio` )
 
 let InformeStore = Reflux.createStore({
   listenables: [InformeActions],
   viewInformes: function(data,cant,estado,codigo,vendedor,categoria,fecha,cliente){
-  	this.socket = io( getUrl )
-  	this.socket.emit('informe', data,cant,estado,codigo,vendedor,categoria,fecha,cliente)
-  	this.socket.on('item', (item) =>{
+  	socket = io( getUrl )
+  	socket.emit('informe', data,cant,estado,codigo,vendedor,categoria,fecha,cliente)
+  	socket.on('item', (item) =>{
   		this.trigger(item)
   	})
   }
