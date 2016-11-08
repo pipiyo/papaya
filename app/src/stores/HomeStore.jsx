@@ -1,6 +1,4 @@
 import Reflux from 'reflux'
-import getUrl from '../Config'
-import io from 'socket.io-client'
 import HomeActions from '../actions/HomeActions'
 
 let HomeStore = Reflux.createStore({

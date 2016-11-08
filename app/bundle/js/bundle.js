@@ -23505,7 +23505,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var socket = (0, _socket2.default)(_Config2.default);
+	var socket = _socket2.default.connect(_Config2.default.url + 'login');
 
 
 	//import AuthStore from '../stores/AuthStore'
@@ -29483,12 +29483,34 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
-	exports.getUrl = getUrl;
-	function getUrl() {
-		return 'http://localhost:9097';
-	}
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Env = function () {
+	  function Env() {
+	    _classCallCheck(this, Env);
+
+	    this._url = 'http://localhost:9097/';
+	  }
+
+	  _createClass(Env, [{
+	    key: 'url',
+	    get: function get() {
+	      return this._url;
+	    },
+	    set: function set(value) {
+	      this._url = value;
+	    }
+	  }]);
+
+	  return Env;
+	}();
+
+	exports.default = new Env();
 
 /***/ },
 /* 262 */
@@ -37173,14 +37195,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var socket = _socket2.default.connect(_Config2.default.url + 'servicio');
+
 	var ServicioStore = _reflux2.default.createStore({
 	  listenables: [_ServicioActions2.default],
 	  addServicio: function addServicio(data) {
 	    var _this = this;
 
-	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.emit('servicio', data);
-	    this.socket.on('mensaje', function (mensaje) {
+	    socket.emit('servicio', data);
+	    socket.on('mensaje', function (mensaje) {
 	      _this.trigger(mensaje);
 	    });
 	  }
@@ -39625,8 +39648,6 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _reactRouter = __webpack_require__(198);
-
 	var _ReclamoActions = __webpack_require__(332);
 
 	var _ReclamoActions2 = _interopRequireDefault(_ReclamoActions);
@@ -39641,14 +39662,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var socket = _socket2.default.connect(_Config2.default.url + 'servicio');
+
 	var ReclamoStore = _reflux2.default.createStore({
 	  listenables: [_ReclamoActions2.default],
 	  addReclamo: function addReclamo(data) {
 	    var _this = this;
 
-	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.emit('reclamo', data);
-	    this.socket.on('mensaje', function (mensaje) {
+	    socket.emit('reclamo', data);
+	    socket.on('mensaje', function (mensaje) {
 	      _this.trigger(mensaje);
 	    });
 	  }
@@ -41032,8 +41054,6 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _reactRouter = __webpack_require__(198);
-
 	var _InformeActions = __webpack_require__(345);
 
 	var _InformeActions2 = _interopRequireDefault(_InformeActions);
@@ -41048,14 +41068,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var socket = _socket2.default.connect(_Config2.default.url + 'servicio');
+
 	var InformeStore = _reflux2.default.createStore({
 	  listenables: [_InformeActions2.default],
 	  viewInformes: function viewInformes(data, cant, estado, codigo, vendedor, categoria, fecha) {
 	    var _this = this;
 
-	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.emit('informe', data, cant, estado, codigo, vendedor, categoria, fecha);
-	    this.socket.on('item', function (item) {
+	    socket.emit('informe', data, cant, estado, codigo, vendedor, categoria, fecha);
+	    socket.on('item', function (item) {
 	      _this.trigger(item);
 	    });
 	  }
@@ -43335,14 +43356,6 @@
 	var _reflux = __webpack_require__(176);
 
 	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _Config = __webpack_require__(261);
-
-	var _Config2 = _interopRequireDefault(_Config);
-
-	var _socket = __webpack_require__(262);
-
-	var _socket2 = _interopRequireDefault(_socket);
 
 	var _HomeActions = __webpack_require__(372);
 

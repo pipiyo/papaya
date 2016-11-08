@@ -1,8 +1,8 @@
 import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
-import getUrl from '../Config'
+import Env from '../Config'
 import io from 'socket.io-client'
-const socket = io( getUrl )
+const socket = io.connect( `${Env.url}login` )
 import LoginActions from '../actions/LoginActions'
 
 //import AuthStore from '../stores/AuthStore'
