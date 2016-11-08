@@ -43,6 +43,12 @@ class Content extends React.Component {
     return text
   }
 
+  okEstado(estado){
+    let ok
+    (estado == "OK")? ok = "description-actividad ok" : ok = "description-actividad";
+    return ok
+  }
+
   render() {
       return (                
         <div class={this.viewServicio()}>
@@ -51,7 +57,7 @@ class Content extends React.Component {
               <p><Link to="/home/detalle-actividad"><i class="fa fa-eye" aria-hidden="true"></i></Link></p>
               <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
           </div>
-          <div class="description-actividad">
+          <div class={this.okEstado(this.props.datos.ESTADO)}>
               {this.validador("Descripción:",this.props.datos.DESCRIPCION)}
               {this.validador("Proceso:",this.props.datos.PROCESO)}
               {this.validador("Fecha Ingreso:",this.props.datos.FECHA_INGRESO,true)}

@@ -177,14 +177,26 @@ io.sockets.on('connection', (socket) => {
   })
 
    /* Informes */
-  socket.on('informe', (data, cant, estado, codigo, vendedor, categoria,fecha) => {
-    con.query('SELECT proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.PROCESO, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+'  order by proyecto.FECHA_CONFIRMACION asc, proyecto.CODIGO_PROYECTO  limit '+cant +'; select count(proyecto.CODIGO_PROYECTO) as total FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+'', function(err, rows, fields) {
-      console.log("aqui codigo " + fecha)
-    if (!err)
-      socket.emit('item', { valor:rows[0], cuenta:rows[1]})
-    else
-      console.log('Error ' + err);
-    }); 
+  socket.on('informe', (data, cant, estado, codigo, vendedor, categoria, fecha, cliente) => {
+    if(data == "reclamo"){
+      let query = 'SELECT reclamos.CODIGO_RECLAMO, reclamos.RAZON, reclamos.AREA, proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.PROCESO, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto, reclamos WHERE reclamos.ROCHA = proyecto.CODIGO_PROYECTO and proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas") and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+' '+cliente+'  order by proyecto.FECHA_CONFIRMACION asc, proyecto.CODIGO_PROYECTO  limit '+cant +';'; 
+      con.query(query + 'select count(proyecto.CODIGO_PROYECTO) as total FROM servicio, proyecto,reclamos WHERE reclamos.ROCHA = proyecto.CODIGO_PROYECTO and proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas") and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+'', function(err, rows, fields) {
+      console.log(query)
+      if (!err)
+        socket.emit('item', { valor:rows[0], cuenta:rows[1]})
+      else
+        console.log('Error ' + err);
+      }); 
+    }else{
+      let query = 'SELECT proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.PROCESO, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+' '+cliente+'  order by proyecto.FECHA_CONFIRMACION asc, proyecto.CODIGO_PROYECTO  limit '+cant +';'; 
+      con.query(query + 'select count(proyecto.CODIGO_PROYECTO) as total FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and '+data+' and '+estado+' '+codigo+' '+vendedor+' '+categoria+' '+fecha+'', function(err, rows, fields) {
+      if (!err)
+        socket.emit('item', { valor:rows[0], cuenta:rows[1]})
+      else
+        console.log('Error ' + err);
+      });
+    }
+    
   })
 
 

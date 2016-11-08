@@ -47,6 +47,10 @@ class Filtro extends React.Component {
                   <option value="Proceso">Proceso</option>
               </select>
           </div>
+          <div class="item-filter">
+              <label>Cliente</label>
+              <input onChange={this.props.filtro} id="cliente" type="text"/>
+          </div>
         </div>
       )
 
