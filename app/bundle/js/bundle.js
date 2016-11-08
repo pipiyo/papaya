@@ -37199,6 +37199,11 @@
 
 	var ServicioStore = _reflux2.default.createStore({
 	  listenables: [_ServicioActions2.default],
+	  getInitialState: function getInitialState() {
+	    socket.emit('comunas', function () {});
+	    return this.obj = { mensaje: null, comunas: null };
+	  },
+	  sendObj: function sendObj() {},
 	  addServicio: function addServicio(data) {
 	    var _this = this;
 
