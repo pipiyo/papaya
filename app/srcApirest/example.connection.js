@@ -6,7 +6,8 @@ let connection = mysql.createConnection({
   host     : process.env.dbHost,
   user     : process.env.dbuser,
   password : process.env.dbPassword,
-  database : process.env.dbDatabase
+  database : process.env.dbDatabase,
+  multipleStatements: true
 })
 
 module.exports = connection

@@ -40901,7 +40901,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
 
-	    _this.state = { view: 100, sum: 200, servicio: "", fecha: "", codigo: "", estado: 'proyecto.ESTADO IN ("EN PROCESO")', vendedor: "", categoria: "" };
+	    _this.state = { view: 100, sum: 200, servicio: "", fecha: "", codigo: "", estado: 'proyecto.ESTADO IN ("EN PROCESO")', vendedor: "", categoria: "", cliente: "" };
 	    return _this;
 	  }
 
@@ -40909,19 +40909,19 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      this.setState({ sum: 200 });
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps, nextState) {
 	      this.setState({ sum: 200 });
-	      _InformeActions2.default.viewInformes(this.servicio(nextProps.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
+	      _InformeActions2.default.viewInformes(this.servicio(nextProps.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
 	    }
 	  }, {
 	    key: 'viewMore',
 	    value: function viewMore() {
 	      this.setState({ sum: this.state.view + this.state.sum });
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
 	    }
 	  }, {
 	    key: 'servicio',
@@ -40946,10 +40946,13 @@
 	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Desarrollo")';
 	          break;
 	        case "planificacion":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion")';
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas")';
 	          break;
 	        case "comercial":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion")';
+	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas")';
+	          break;
+	        case "reclamo":
+	          this.state.servicio = 'reclamo';
 	          break;
 	      }
 	      return this.state.servicio;
@@ -40962,16 +40965,18 @@
 	      var codigo = document.getElementById("codigo").value;
 	      var estado = document.getElementById("estado").value;
 	      var vendedor = document.getElementById("vendedor").value;
-	      var categoria = document.getElementById("categoria").value;;
+	      var categoria = document.getElementById("categoria").value;
+	      var cliente = document.getElementById("cliente").value;
 
 	      codigo != "" ? this.state.codigo = ' and proyecto.CODIGO_PROYECTO like "%' + codigo + '%"' : this.state.codigo = "";
 	      vendedor != "" ? this.state.vendedor = ' and proyecto.EJECUTIVO like "%' + vendedor + '%"' : this.state.vendedor = "";
 	      categoria != "" ? this.state.categoria = ' and servicio.CATEGORIA like "%' + categoria + '%"' : this.state.categoria = "";
+	      cliente != "" ? this.state.cliente = ' and proyecto.NOMBRE_CLIENTE like "%' + cliente + '%"' : this.state.cliente = "";
 	      fechaI != "" && fechaE != "" ? this.state.fecha = ' and proyecto.FECHA_CONFIRMACION BETWEEN "' + fechaI + '" and "' + fechaE + '"' : this.state.fecha = "";
 
 	      this.state.estado = 'proyecto.ESTADO IN ("' + estado + '")';
 
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
 	    }
 	  }, {
 	    key: 'render',
@@ -41052,11 +41057,11 @@
 
 	var InformeStore = _reflux2.default.createStore({
 	  listenables: [_InformeActions2.default],
-	  viewInformes: function viewInformes(data, cant, estado, codigo, vendedor, categoria, fecha) {
+	  viewInformes: function viewInformes(data, cant, estado, codigo, vendedor, categoria, fecha, cliente) {
 	    var _this = this;
 
 	    this.socket = (0, _socket2.default)(_Config2.default);
-	    this.socket.emit('informe', data, cant, estado, codigo, vendedor, categoria, fecha);
+	    this.socket.emit('informe', data, cant, estado, codigo, vendedor, categoria, fecha, cliente);
 	    this.socket.on('item', function (item) {
 	      _this.trigger(item);
 	    });
@@ -41318,6 +41323,16 @@
 	                            "Proceso"
 	                        )
 	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "item-filter" },
+	                    _react2.default.createElement(
+	                        "label",
+	                        null,
+	                        "Cliente"
+	                    ),
+	                    _react2.default.createElement("input", { onChange: this.props.filtro, id: "cliente", type: "text" })
 	                )
 	            );
 	        }
@@ -41424,26 +41439,75 @@
 	  }
 
 	  _createClass(Servicio, [{
-	    key: 'fechaActual',
-	    value: function fechaActual() {
-	      var hoy = new Date();
-	      var dd = hoy.getDate();
-	      var mm = hoy.getMonth() + 1; //hoy es 0!
-	      var yyyy = hoy.getFullYear();
+	    key: 'viewReclamo',
+	    value: function viewReclamo() {
+	      var rocha = [];
+	      var cliente = [];
+	      var fechaConfirmacion = [];
+	      var contenidoRocha = [];
+	      var reclamo = [];
+	      var razon = [];
+	      var valor = void 0,
+	          i = void 0,
+	          e = void 0,
+	          contentRocha = void 0,
+	          consulta = void 0;
 
-	      if (dd < 10) {
-	        dd = '0' + dd;
+	      for (valor in this.props.datos) {
+	        if (reclamo.indexOf(this.props.datos[valor].CODIGO_RECLAMO) <= -1) {
+	          reclamo.push(this.props.datos[valor].CODIGO_RECLAMO);
+	          rocha.push(this.props.datos[valor].CODIGO_PROYECTO);
+	          cliente.push(this.props.datos[valor].NOMBRE_CLIENTE);
+	          razon.push(this.props.datos[valor].RAZON);
+	          fechaConfirmacion.push(this.props.datos[valor].FECHA_CONFIRMACION);
+	        }
 	      }
 
-	      if (mm < 10) {
-	        mm = '0' + mm;
+	      for (i = 0; i < reclamo.length; i++) {
+	        var contenido = [];
+	        for (valor in this.props.datos) {
+	          if (this.props.datos[valor].CODIGO_RECLAMO == reclamo[i]) {
+	            contentRocha = _react2.default.createElement(_ContentRocha2.default, { datos: this.props.datos[valor] });
+	            for (e = 0; e < this.props.servicio.length; e++) {
+	              this.props.servicio[e] == this.props.datos[valor].CODIGO_RECLAMO ? contenido.push(_react2.default.createElement(_Content2.default, { key: valor, datos: this.props.datos[valor] })) : "";
+	            }
+	          }
+	        }
+
+	        contenidoRocha.push(_react2.default.createElement(
+	          'div',
+	          { className: 'item-actividad', key: i },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'item-rocha' },
+	            _react2.default.createElement(
+	              'h3',
+	              { className: this.atraso(this.fechaActual(), fechaConfirmacion[i]), 'data-key': reclamo[i], onClick: this.props.click },
+	              _react2.default.createElement(
+	                'a',
+	                null,
+	                ' ',
+	                rocha[i],
+	                ' - (',
+	                reclamo[i],
+	                '-',
+	                razon[i],
+	                ') '
+	              ),
+	              ' - ',
+	              cliente[i],
+	              ' '
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'item-box' },
+	              contentRocha,
+	              contenido
+	            )
+	          )
+	        ));
 	      }
-	      return yyyy + '-' + mm + '-' + dd;
-	    }
-	  }, {
-	    key: 'atraso',
-	    value: function atraso(fecha, fechaConfirmacion) {
-	      return "hola";
+	      return contenidoRocha;
 	    }
 	  }, {
 	    key: 'viewRocha',
@@ -41455,7 +41519,8 @@
 	      var valor = void 0,
 	          i = void 0,
 	          e = void 0,
-	          contentRocha = void 0;
+	          contentRocha = void 0,
+	          consulta = void 0;
 
 	      for (valor in this.props.datos) {
 	        if (rocha.indexOf(this.props.datos[valor].CODIGO_PROYECTO) <= -1) {
@@ -41505,8 +41570,38 @@
 	          )
 	        ));
 	      }
-
 	      return contenidoRocha;
+	    }
+	  }, {
+	    key: 'tipoInforme',
+	    value: function tipoInforme() {
+	      var informe = void 0;
+	      this.props.servicioTitle == "reclamo" ? informe = this.viewReclamo() : informe = this.viewRocha();
+	      return informe;
+	    }
+	  }, {
+	    key: 'fechaActual',
+	    value: function fechaActual() {
+	      var hoy = new Date();
+	      var dd = hoy.getDate();
+	      var mm = hoy.getMonth() + 1; //hoy es 0!
+	      var yyyy = hoy.getFullYear();
+
+	      if (dd < 10) {
+	        dd = '0' + dd;
+	      }
+
+	      if (mm < 10) {
+	        mm = '0' + mm;
+	      }
+	      return yyyy + '-' + mm + '-' + dd;
+	    }
+	  }, {
+	    key: 'atraso',
+	    value: function atraso(fecha, fechaConfirmacion) {
+	      var atraso = void 0;
+	      fecha > fechaConfirmacion ? atraso = "atrasado" : atraso = "";
+	      return atraso;
 	    }
 	  }, {
 	    key: 'viewbutton',
@@ -41524,11 +41619,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.atraso());
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'module-actividad' },
-	        this.viewRocha(),
+	        this.tipoInforme(),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content-view-more' },
@@ -41629,6 +41723,13 @@
 	            return text;
 	        }
 	    }, {
+	        key: 'okEstado',
+	        value: function okEstado(estado) {
+	            var ok = void 0;
+	            estado == "OK" ? ok = "description-actividad ok" : ok = "description-actividad";
+	            return ok;
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -41674,7 +41775,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'description-actividad' },
+	                    { className: this.okEstado(this.props.datos.ESTADO) },
 	                    this.validador("Descripción:", this.props.datos.DESCRIPCION),
 	                    this.validador("Proceso:", this.props.datos.PROCESO),
 	                    this.validador("Fecha Ingreso:", this.props.datos.FECHA_INGRESO, true),
@@ -42698,7 +42799,7 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
 	    _this.state = { active: 'active', notification: null };
-	    _this.menu = [{ id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": false }, { id: "2", img: _react2.default.createElement('i', { className: 'fa fa-coffee', 'aria-hidden': 'true' }), name: "Actividades", icon: "icon actividad", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/nueva" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Desarrollo", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Desarollo", ruta: "/home/informe/desarrollo" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalacion" }] }, { id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Informe Planificación", ruta: "/home/informe/planificacion" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/produccion" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/Informe-reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
+	    _this.menu = [{ id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": false }, { id: "2", img: _react2.default.createElement('i', { className: 'fa fa-coffee', 'aria-hidden': 'true' }), name: "Actividades", icon: "icon actividad", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/nueva" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Desarrollo", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Desarollo", ruta: "/home/informe/desarrollo" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalacion" }] }, { id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Informe Planificación", ruta: "/home/informe/planificacion" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/produccion" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
 	    return _this;
 	  }
 	  /* Agrega clase active para desplegar sub-menus */
