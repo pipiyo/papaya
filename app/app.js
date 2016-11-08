@@ -46,6 +46,15 @@ io.use( (socket, next) => {
   sessionMiddleware(socket.request, socket.request.res, next)
 } )
 
+
+
+
+
+
+
+
+
+
 io.sockets.on('connection', (socket) => {
 
   socket.on('login', ( data, callback) => {

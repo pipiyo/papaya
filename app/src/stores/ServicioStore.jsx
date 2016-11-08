@@ -1,5 +1,4 @@
 import Reflux from 'reflux'
-import { hashHistory } from 'react-router'
 import ServicioActions from '../actions/ServicioActions'
 import getUrl from '../Config'
 import io from 'socket.io-client'

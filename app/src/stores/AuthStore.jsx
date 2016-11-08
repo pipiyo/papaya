@@ -1,7 +1,4 @@
 import Reflux from 'reflux'
-import getUrl from '../Config'
-import io from 'socket.io-client'
-import { browserHistory } from 'react-router'
 
 import AuthActions from '../actions/AuthActions'
 
