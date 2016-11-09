@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 class SubActividad extends React.Component {
 
@@ -12,7 +13,7 @@ class SubActividad extends React.Component {
           <div class="item-actividades abastecimiento sub">
             <div class="title-actividad">
               <h4>10001 -  LC-2015</h4> 
-              <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p><Link to="/home/detalle-actividad/actualizar-actividad"><i class="fa fa-pencil" aria-hidden="true"></i></Link></p>
             </div>
             <div class="description-actividad sub">
               <div class="opc sub">

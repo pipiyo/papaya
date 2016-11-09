@@ -1,8 +1,8 @@
 import React from 'react'
 
-import ServicioIndex from '../components/sub-servicio'
+import ServicioIndex from '../components/update-sub-servicio'
 
-export default class SubServicioRoutes extends React.Component {
+export default class UpdateSubServicioRoutes extends React.Component {
 
   constructor() {
     super()

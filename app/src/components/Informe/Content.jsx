@@ -55,7 +55,7 @@ class Content extends React.Component {
           <div class="title-actividad">
               <h4><Link to="/home/detalle-actividad">{this.props.datos.CODIGO_SERVICIO}</Link> - <a href="#"> {this.props.datos.CODIGO_PROYECTO + " / " + this.props.datos.DESCRIPCION }</a></h4> 
               <p><Link to="/home/detalle-actividad"><i class="fa fa-eye" aria-hidden="true"></i></Link></p>
-              <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p><Link to="/home/actualizar-actividad"><i class="fa fa-pencil" aria-hidden="true"></i></Link></p>
           </div>
           <div class={this.okEstado(this.props.datos.ESTADO)}>
               {this.validador("Descripción:",this.props.datos.DESCRIPCION)}

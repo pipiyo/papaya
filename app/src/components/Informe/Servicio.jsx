@@ -43,7 +43,7 @@ class Servicio extends React.Component {
         <div class="item-actividad" key={ i }>
              <div class="item-rocha">
                  <h3 class={this.atraso(this.fechaActual(),fechaConfirmacion[i])} data-key={reclamo[i]} onClick={this.props.click} ><a> {rocha[i]} - ({reclamo[i]}-{razon[i]}) </a> - {cliente[i]} </h3>
-                 <div class="item-box">
+                 <div class="item-box orden">
                      {contentRocha}
                      {contenido}
                  </div>
@@ -84,7 +84,7 @@ class Servicio extends React.Component {
         <div class="item-actividad" key={ i }>
              <div class="item-rocha">
                  <h3 class={this.atraso(this.fechaActual(),fechaConfirmacion[i])} data-key={rocha[i]} onClick={this.props.click} ><a> {rocha[i]} </a> - {cliente[i]} </h3>
-                 <div class="item-box">
+                 <div class="item-box orden">
                      {contentRocha}
                      {contenido}
                  </div>
