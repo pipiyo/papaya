@@ -954,7 +954,8 @@ a.external-link, .external-link a {
         &.instalaciones{border:solid 1px $color_instalaciones; h3{background: $color_instalaciones;&:after{content: none;}}}
         &.integracion{border:solid 1px $color_integracion; h3{background: $color_integracion;&:after{content: none;}}}
         &.desarrollo{border:solid 1px $color_desarrollo; h3{background: $color_desarrollo;&:after{content: none;}}}
-        &.sillas{border:solid 1px $color_desarrollo; h3{background: $color_sillas;&:after{content: none;}}}
+        &.sillas{border:solid 1px $color_sillas; h3{background: $color_sillas;&:after{content: none;}}}
+        &.father{border:solid 1px $color_rochas; h3{background: $color_rochas;&:after{content: none;}}}
         .item-box{
             padding-bottom: 1em;
             display: block;
@@ -978,14 +979,7 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
-                }
-                &.sub{
-                    width: 50%;
-                    margin-top: .5em;
-                    @include vertical-tablet-down {
-                        width: 100%;
-                    }
-                }           
+                }          
             }
         }
     } 
@@ -999,6 +993,12 @@ a.external-link, .external-link a {
         &.sub{
             width: calc(100% - 2em);
         }
+        
+        .content-actividades{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .item-actividades{
             margin: 1em 1em 0 1em;
             &.abastecimiento{.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
@@ -1008,7 +1008,15 @@ a.external-link, .external-link a {
             &.integracion{.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}
             &.desarrollo{.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
             &.sillas{.title-actividad{background: $color_sillas;}.description-actividad{border: solid 1px $color_sillas;}}
+
+            &.sub{
+                width: calc(50% - 2em);
+                @include vertical-tablet-down {
+                    width: 100%;
+                }
+            }
         }
+       
         .title-actividad{
             padding: .5em;
             overflow: hidden;
@@ -1045,14 +1053,7 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
-                }
-                &.sub{
-                    margin-top: .5em;
-                    width: 50%;
-                    @include vertical-tablet-down {
-                        width: 100%;
-                    }
-                }    
+                }   
             }
             &.ok{
                 background: #E3F6CE;

@@ -31,7 +31,7 @@ class Servicio extends React.Component {
     for(i=0; i < reclamo.length; i++){
       let contenido = []
       for (valor in this.props.datos){
-        if(this.props.datos[valor].CODIGO_RECLAMO == reclamo[i]){
+        if(this.props.datos[valor].CODIGO_RECLAMO == reclamo[i] && this.props.datos[valor].RECLAMOS == reclamo[i] ){
           contentRocha = <ContentRocha datos={this.props.datos[valor]}/>
           for(e=0; e < this.props.servicio.length; e++) { 
               (this.props.servicio[e] == this.props.datos[valor].CODIGO_RECLAMO) ? contenido.push (<Content key={valor} datos={this.props.datos[valor]} /> ) : ""; 

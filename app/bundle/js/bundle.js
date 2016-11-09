@@ -41485,7 +41485,7 @@
 	      for (i = 0; i < reclamo.length; i++) {
 	        var contenido = [];
 	        for (valor in this.props.datos) {
-	          if (this.props.datos[valor].CODIGO_RECLAMO == reclamo[i]) {
+	          if (this.props.datos[valor].CODIGO_RECLAMO == reclamo[i] && this.props.datos[valor].RECLAMOS == reclamo[i]) {
 	            contentRocha = _react2.default.createElement(_ContentRocha2.default, { datos: this.props.datos[valor] });
 	            for (e = 0; e < this.props.servicio.length; e++) {
 	              this.props.servicio[e] == this.props.datos[valor].CODIGO_RECLAMO ? contenido.push(_react2.default.createElement(_Content2.default, { key: valor, datos: this.props.datos[valor] })) : "";
@@ -42227,7 +42227,7 @@
 	            { className: 'item-actividad sub' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'item-rocha abastecimiento' },
+	              { className: 'item-rocha father' },
 	              _react2.default.createElement(_ActividadTitle2.default, null),
 	              _react2.default.createElement(
 	                'div',
@@ -42564,82 +42564,250 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "item-actividades abastecimiento" },
+	        { className: "content-actividades" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "title-actividad" },
+	          { className: "item-actividades abastecimiento sub" },
 	          _react2.default.createElement(
-	            "h4",
-	            null,
-	            "10001 -  LC-2015"
+	            "div",
+	            { className: "title-actividad" },
+	            _react2.default.createElement(
+	              "h4",
+	              null,
+	              "10001 -  LC-2015"
+	            ),
+	            _react2.default.createElement(
+	              "p",
+	              null,
+	              _react2.default.createElement(
+	                "a",
+	                { href: "" },
+	                _react2.default.createElement("i", { className: "fa fa-pencil", "aria-hidden": "true" })
+	              )
+	            )
 	          ),
 	          _react2.default.createElement(
-	            "p",
-	            null,
+	            "div",
+	            { className: "description-actividad sub" },
 	            _react2.default.createElement(
-	              "a",
-	              { href: "" },
-	              _react2.default.createElement("i", { className: "fa fa-pencil", "aria-hidden": "true" })
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Descripci\xF3n: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Cajoneras Linea Bozz (2 Puestos)."
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Cliente: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "AFP Planvital S.A."
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Observaci\xF3n: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Pocas cosas"
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Fecha "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4"
+	              )
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { className: "description-actividad" },
+	          { className: "item-actividades abastecimiento sub" },
 	          _react2.default.createElement(
 	            "div",
-	            { className: "opc sub" },
+	            { className: "title-actividad" },
 	            _react2.default.createElement(
-	              "h5",
+	              "h4",
 	              null,
-	              "Descripci\xF3n: "
+	              "10001 -  LC-2015"
 	            ),
 	            _react2.default.createElement(
 	              "p",
 	              null,
-	              "Cajoneras Linea Bozz (2 Puestos)."
+	              _react2.default.createElement(
+	                "a",
+	                { href: "" },
+	                _react2.default.createElement("i", { className: "fa fa-pencil", "aria-hidden": "true" })
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            "div",
-	            { className: "opc sub" },
+	            { className: "description-actividad sub" },
 	            _react2.default.createElement(
-	              "h5",
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Descripci\xF3n: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Cajoneras Linea Bozz (2 Puestos)."
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Cliente: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "AFP Planvital S.A."
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Observaci\xF3n: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Pocas cosas"
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Fecha "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4"
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "item-actividades abastecimiento sub" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "title-actividad" },
+	            _react2.default.createElement(
+	              "h4",
 	              null,
-	              "Cliente: "
+	              "10001 -  LC-2015"
 	            ),
 	            _react2.default.createElement(
 	              "p",
 	              null,
-	              "AFP Planvital S.A."
+	              _react2.default.createElement(
+	                "a",
+	                { href: "" },
+	                _react2.default.createElement("i", { className: "fa fa-pencil", "aria-hidden": "true" })
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            "div",
-	            { className: "opc sub" },
+	            { className: "description-actividad sub" },
 	            _react2.default.createElement(
-	              "h5",
-	              null,
-	              "Observaci\xF3n: "
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Descripci\xF3n: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Cajoneras Linea Bozz (2 Puestos)."
+	              )
 	            ),
 	            _react2.default.createElement(
-	              "p",
-	              null,
-	              "Pocas cosas"
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "opc sub" },
-	            _react2.default.createElement(
-	              "h5",
-	              null,
-	              "Fecha "
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Cliente: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "AFP Planvital S.A."
+	              )
 	            ),
 	            _react2.default.createElement(
-	              "p",
-	              null,
-	              "Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4"
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Observaci\xF3n: "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Pocas cosas"
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "opc sub" },
+	              _react2.default.createElement(
+	                "h5",
+	                null,
+	                "Fecha "
+	              ),
+	              _react2.default.createElement(
+	                "p",
+	                null,
+	                "Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4"
+	              )
 	            )
 	          )
 	        )

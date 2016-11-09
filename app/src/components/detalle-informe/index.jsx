@@ -19,7 +19,7 @@ class DetalleInformeIndex extends React.Component {
           <div class="module-actividad">
             <div class="item-actividad sub">
 
-              <div class="item-rocha abastecimiento">
+              <div class="item-rocha father">
                 <ActividadTitle />
 
                 <div class="item-box">
