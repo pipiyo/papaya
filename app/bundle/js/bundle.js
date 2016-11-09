@@ -21619,7 +21619,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.check);
+
 	      if (this.state.check) {
 	        return _react2.default.createElement(_Login2.default, { onSubmit: this.userFormSubmit.bind(this) });
 	      } else {
@@ -23520,7 +23520,6 @@
 	    socket.emit('login', user, function (token) {
 
 	      if (token) {
-	        console.log(token);
 	        _this.storeUser(token);
 	        _reactRouter.browserHistory.push('home');
 	      } else {
@@ -37014,6 +37013,10 @@
 
 	var _ServicioStore2 = _interopRequireDefault(_ServicioStore);
 
+	var _FormIngresoServicioStore = __webpack_require__(379);
+
+	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
+
 	var _servicio = __webpack_require__(314);
 
 	var _servicio2 = _interopRequireDefault(_servicio);
@@ -37048,10 +37051,7 @@
 	  function ServicioRoutes() {
 	    _classCallCheck(this, ServicioRoutes);
 
-	    var _this = _possibleConstructorReturn(this, (ServicioRoutes.__proto__ || Object.getPrototypeOf(ServicioRoutes)).call(this));
-
-	    _this.state = { data: "", area: "" };
-	    return _this;
+	    return _possibleConstructorReturn(this, (ServicioRoutes.__proto__ || Object.getPrototypeOf(ServicioRoutes)).call(this));
 	  }
 
 	  _createClass(ServicioRoutes, [{
@@ -37139,6 +37139,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.state.comunas);
+	      console.log(this.state.vehiculos);
 	      return _react2.default.createElement(_servicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.data, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
 	    }
 	  }]);
@@ -37185,6 +37187,10 @@
 
 	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
 
+	var _FormIngresoServicioStore = __webpack_require__(379);
+
+	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
+
 	var _Config = __webpack_require__(261);
 
 	var _Config2 = _interopRequireDefault(_Config);
@@ -37199,12 +37205,21 @@
 
 	var ServicioStore = _reflux2.default.createStore({
 	  listenables: [_ServicioActions2.default],
-	  addServicio: function addServicio(data) {
+	  obj: { comunas: null, vehiculos: null, mensaje: null },
+	  init: function init() {
 	    var _this = this;
+
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this.obj.comunas = comunas;
+	      _this.obj.vehiculos = vehiculos;
+	    });
+	  },
+	  addServicio: function addServicio(data) {
+	    var _this2 = this;
 
 	    socket.emit('servicio', data);
 	    socket.on('mensaje', function (mensaje) {
-	      _this.trigger(mensaje);
+	      _this2.trigger(mensaje);
 	    });
 	  }
 	});
@@ -42669,35 +42684,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactMixin = __webpack_require__(174);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
 	var _home = __webpack_require__(364);
 
 	var _home2 = _interopRequireDefault(_home);
-
-	var _HomeActions = __webpack_require__(372);
-
-	var _HomeActions2 = _interopRequireDefault(_HomeActions);
-
-	var _reactRouter = __webpack_require__(198);
-
-	var _HomeStore = __webpack_require__(373);
-
-	var _HomeStore2 = _interopRequireDefault(_HomeStore);
-
-	var _AuthStore = __webpack_require__(374);
-
-	var _AuthStore2 = _interopRequireDefault(_AuthStore);
-
-	var _AuthActions = __webpack_require__(375);
-
-	var _AuthActions2 = _interopRequireDefault(_AuthActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42721,50 +42710,6 @@
 	  }
 
 	  _createClass(HomeRoutes, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      // HomeActions.checkLogin()
-
-	      // if (!AuthStore.name) {
-	      //   browserHistory.push('/')
-	      // }
-
-	      console.log('componentWillMount');
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-	      /*
-	      if (!this.state.var) {
-	        browserHistory.push('/')
-	      }
-	      */
-	      //AuthActions.getUser()
-
-	      //AuthActions.getUser()
-
-	      console.log('componentWillReceiveProps');
-	    }
-	  }, {
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate() {
-
-	      console.log('shouldComponentUpdate');
-	      return true;
-	    }
-	  }, {
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate() {
-
-	      console.log('componentWillUpdate');
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-
-	      console.log('componentDidUpdate');
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 
@@ -43425,198 +43370,10 @@
 	exports.default = Notification;
 
 /***/ },
-/* 372 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var HomeActions = _reflux2.default.createActions(['checkLogin']);
-
-	exports.default = HomeActions;
-
-/***/ },
-/* 373 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _HomeActions = __webpack_require__(372);
-
-	var _HomeActions2 = _interopRequireDefault(_HomeActions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var HomeStore = _reflux2.default.createStore({
-	  listenables: [_HomeActions2.default],
-	  hola: 'hola',
-	  init: function init() {
-	    this.trigger(this.hola);
-	  },
-	  checkLogin: function checkLogin() {
-
-	    this.trigger(this.hola);
-
-	    /*
-	        this.socket = io( getUrl )
-	        this.socket.on('checklogin', (data) => {
-	          if (!data) {
-	            hashHistory.push('/')
-	          }
-	        })
-	        this.socket.emit('checklogin')
-	        */
-	  }
-	});
-
-	exports.default = HomeStore;
-
-/***/ },
-/* 374 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _AuthActions = __webpack_require__(375);
-
-	var _AuthActions2 = _interopRequireDefault(_AuthActions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var AuthStore = _reflux2.default.createStore({
-	  listenables: [_AuthActions2.default],
-	  getInitialState: function getInitialState() {
-	    return this.state = 'hola';
-	  }
-	});
-
-	/*
-	  init: function () {
-	    this.socket = io(getUrl)
-	    this.socket.on('connect', () => {
-	      this.getUser()
-	    });
-	  },
-	  
-	  getUser: function () {
-
-
-	this.socket = io(getUrl)
-
-	    this.socket = io(getUrl)
-	    this.socket.emit('getUser', (user) =>{
-	      console.log( user )
-	      if (!user) {
-	        browserHistory.push('/')
-	      }
-	    })
-
-
-
-	  console.log( localStorage.getItem('jwt') )
-
-	  this.socket.emit('getUser', localStorage.getItem('jwt'), (token) =>{
-
-	      console.log( token )
-	      this.trigger( token )
-	    
-	  })
-
-	  
-	  this.trigger( localStorage.getItem('jwt') )
-
-
-	  }
-
-	  */
-	exports.default = AuthStore;
-
-	/*
-	class AuthStore {
-
-	  constructor() {
-	    this._name = null
-	    this._type = null
-	  }
-
-	  save(user) {
-	    this._name = user.name
-	    this._type = user.type
-	  }
-
-	  get name() {
-	    return this._name;
-	  }
-
-	  get type() {
-	    return this._type;
-	  }
-
-
-	  set name(value) {
-	    this._name = value
-	  }
-
-	  set type(value) {
-	    this._type = value
-	  }
-
-	  isLoggedIn() {
-	    return !!this._name;
-	  }
-	}
-
-	export default new AuthStore()
-
-
-	*/
-
-/***/ },
-/* 375 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var AuthActions = _reflux2.default.createActions(['getUser']);
-
-	exports.default = AuthActions;
-
-/***/ },
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
 /* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -43744,8 +43501,6 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _reactRouter = __webpack_require__(198);
-
 	var _LoginActions = __webpack_require__(196);
 
 	var _LoginActions2 = _interopRequireDefault(_LoginActions);
@@ -43764,10 +43519,8 @@
 	  function AuthRoutes() {
 	    _classCallCheck(this, AuthRoutes);
 
-	    var _this = _possibleConstructorReturn(this, (AuthRoutes.__proto__ || Object.getPrototypeOf(AuthRoutes)).call(this));
-
-	    console.log('hola aqui el AUTH');
-	    return _this;
+	    return _possibleConstructorReturn(this, (AuthRoutes.__proto__ || Object.getPrototypeOf(AuthRoutes)).call(this));
+	    //console.log( 'hola aqui el AUTH' )
 	  }
 
 	  _createClass(AuthRoutes, [{
@@ -43792,6 +43545,51 @@
 	}(_react2.default.Component);
 
 	exports.default = AuthRoutes;
+
+/***/ },
+/* 379 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var FormIngresoServicioStore = function () {
+	  function FormIngresoServicioStore() {
+	    _classCallCheck(this, FormIngresoServicioStore);
+
+	    this._comunas = null;
+	    this._vehiculos = null;
+	  }
+
+	  _createClass(FormIngresoServicioStore, [{
+	    key: "comunas",
+	    get: function get() {
+	      return this._comunas;
+	    },
+	    set: function set(value) {
+	      this._comunas = value;
+	    }
+	  }, {
+	    key: "vehiculos",
+	    get: function get() {
+	      return this._vehiculos;
+	    },
+	    set: function set(value) {
+	      this._vehiculos = value;
+	    }
+	  }]);
+
+	  return FormIngresoServicioStore;
+	}();
+
+	exports.default = new FormIngresoServicioStore();
 
 /***/ }
 /******/ ]);

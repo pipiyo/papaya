@@ -5,6 +5,8 @@ import Reflux from 'reflux'
 import ServicioActions from '../actions/ServicioActions'
 import ServicioStore from '../stores/ServicioStore'
 
+import FormIngresoServicioStore from '../stores/FormIngresoServicioStore'
+
 import ServicioIndex from '../components/servicio'
 import ItemProduccion from '../components/servicio/ItemProduccion.jsx'
 import ItemSillas from '../components/servicio/ItemSillas.jsx'
@@ -16,7 +18,7 @@ export default class ServicioRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = {data:"", area: ""}
+
   }
 
   formArea(ev) {
@@ -85,6 +87,8 @@ export default class ServicioRoutes extends React.Component {
  
 
   render() {
+      console.log( this.state.comunas )
+      console.log( this.state.vehiculos )
       return (
         <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
       )

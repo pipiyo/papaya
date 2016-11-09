@@ -101,14 +101,18 @@ let servicio = io
 
 
 
-  /* Trae Comunas */
-  socket.on('comunas', (callback) => {
+  /* Trae Detalle Form ingreso servicio */
+  socket.on('formingresoservicio', (callback) => {
 
 
-    con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas`', function(err, rows, fields) {
+    con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas`; select `ID` AS id, `PATENTE` AS patente FROM `vehiculo`', function(err, rows, fields) {
+      
       if (err) console.log( err ) 
 
-      console.log(rows[0].nombre, rows[0].codigo )
+      console.log( rows[0], rows[1] )
+      
+      callback( rows[0], rows[1] )
+
     })
 
 
