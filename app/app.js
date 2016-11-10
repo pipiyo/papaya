@@ -163,6 +163,61 @@ let servicio = io
     socket.emit('mensaje', mensaje)
   })
 
+  /* Update Servicio */
+  socket.on('servicioUpdate', (data) => {
+    let servicio = {  
+                      CATEGORIA: data.categoria, 
+                      SUPERVISOR: data.supervisor,
+                      FECHA_INICIO: data.fechaInicio,
+                      FECHA_ENTREGA: data.fechaEntrega,
+                      DESCRIPCION: data.descripcion,
+                      OBSERVACIONES: data.observacion,
+                      CODIGO_SERVICIO : data.numero,
+                      DIRECCION : data.direccion,
+                      GUIA_DESPACHO: data.guia,
+                      CODIGO_COMUNA: data.comuna,
+                      M3: data.m3,
+                      FI: data.fi,
+                      TM: data.tm,
+                      TP: data.to,
+                      OS: data.os,
+                      LIDER: data.lider,
+                      PUESTOS: data.puestos,
+                      PROCESO: data.proceso,    
+                      INSTALADOR_1: data.instalador1,
+                      INSTALADOR_2: data.instalador2,
+                      INSTALADOR_3: data.instalador3,
+                      EJECUTOR: data.ejecutor,
+                      VALE: data.vale, 
+                      TRANSPORTE: data.vehiculo,    
+                      CANTIDAD: data.cantidad,
+                      RECLAMOS: data.reclamo,
+                      ESTADO: data.estado,
+                      DIAS: data.dias
+                    }
+    let mensaje = '(Se update servicio ' + data.numero + ')'
+
+    con.query('UPDATE servicio SET CATEGORIA = ?, SUPERVISOR = ?, FECHA_INICIO = ?, FECHA_ENTREGA = ?, DESCRIPCION = ?, OBSERVACIONES = ?, DIRECCION  = ?, GUIA_DESPACHO = ?, CODIGO_COMUNA = ?, M3 = ?, FI = ?, TM = ?, TP = ?, OS = ?, LIDER = ?, PUESTOS = ?, PROCESO = ?, INSTALADOR_1 = ?, INSTALADOR_2 = ?, INSTALADOR_3 = ?, EJECUTOR = ?, VALE = ?, TRANSPORTE = ?, CANTIDAD = ?, RECLAMOS = ?, ESTADO = ?, DIAS = ?  WHERE CODIGO_SERVICIO = ?', [data.categoria, data.supervisor, data.fechaInicio, data.fechaEntrega, data.descripcion, data.observacion, data.direccion, data.guia, data.comuna, data.m3, data.fi, data.tm, data.to, data.os, data.lider, data.puestos, data.proceso, data.instalador1, data.instalador2, data.instalador3, data.ejecutor, data.vale, data.vehiculo, data.cantidad, data.reclamo, data.estado, data.dias, data.numero], function(err, results) {
+    if (!err)
+      console.log('Se actualizo servicio ' + data.numero);
+    else
+      console.log('Error no se pudo ingresar servicio '+ err);
+    })
+
+    socket.emit('mensaje', mensaje)
+  })
+
+  /* Listar Servicio */
+  socket.on('servicioListar', (id) => {
+      let query = 'SELECT * FROM servicio WHERE CODIGO_SERVICIO = "'+id+'"'; 
+      con.query(query, function(err, rows, fields) {
+      if (!err)
+        socket.emit('items', rows)
+      else
+        console.log('Error ' + err);
+      }); 
+  })
+
   /* Ingreso Reclamo */
   socket.on('reclamo', (data) => {
     let reclamo = {  

@@ -1,7 +1,7 @@
 import Reflux from 'reflux'
 
 let ServicioActions = Reflux.createActions([
-	'addServicio'
+	'addServicio','servicio','updateServicio'
 ])
 
 export default ServicioActions

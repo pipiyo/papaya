@@ -32,11 +32,6 @@ class ItemSillas extends React.Component {
           </div>
 
           <div className="item-form">
-            <label>OC</label>
-            <input type="text" id="oc" />
-          </div>
-
-          <div className="item-form">
             <label>Proceso</label>
             <select id="proceso">
                 <option value="">Proceso</option>
