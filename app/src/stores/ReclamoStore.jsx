@@ -2,7 +2,7 @@ import Reflux from 'reflux'
 import ReclamoActions from '../actions/ReclamoActions'
 import Env from '../Config'
 import io from 'socket.io-client'
-const socket = io.connect( `${Env.url}servicio` )
+const socket = io.connect( `${Env.url}reclamo` )
 
 let ReclamoStore = Reflux.createStore({
   listenables: [ReclamoActions],

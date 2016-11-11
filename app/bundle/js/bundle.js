@@ -69,39 +69,39 @@
 
 	var _ServicioRoutes2 = _interopRequireDefault(_ServicioRoutes);
 
-	var _SubServicioRoutes = __webpack_require__(322);
+	var _SubServicioRoutes = __webpack_require__(323);
 
 	var _SubServicioRoutes2 = _interopRequireDefault(_SubServicioRoutes);
 
-	var _ReclamoRoutes = __webpack_require__(331);
+	var _ReclamoRoutes = __webpack_require__(332);
 
 	var _ReclamoRoutes2 = _interopRequireDefault(_ReclamoRoutes);
 
-	var _InformeReclamoRoutes = __webpack_require__(338);
+	var _InformeReclamoRoutes = __webpack_require__(339);
 
 	var _InformeReclamoRoutes2 = _interopRequireDefault(_InformeReclamoRoutes);
 
-	var _InformeRoutes = __webpack_require__(344);
+	var _InformeRoutes = __webpack_require__(345);
 
 	var _InformeRoutes2 = _interopRequireDefault(_InformeRoutes);
 
-	var _NotificacionRoutes = __webpack_require__(353);
+	var _NotificacionRoutes = __webpack_require__(354);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
 
-	var _DetalleInformeRoutes = __webpack_require__(356);
+	var _DetalleInformeRoutes = __webpack_require__(357);
 
 	var _DetalleInformeRoutes2 = _interopRequireDefault(_DetalleInformeRoutes);
 
-	var _HomeRoutes = __webpack_require__(363);
+	var _HomeRoutes = __webpack_require__(364);
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
-	var _InicioRoutes = __webpack_require__(376);
+	var _InicioRoutes = __webpack_require__(373);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
 
-	var _AuthRoutes = __webpack_require__(378);
+	var _AuthRoutes = __webpack_require__(375);
 
 	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
 
@@ -37013,27 +37013,27 @@
 
 	var _ServicioStore2 = _interopRequireDefault(_ServicioStore);
 
-	var _FormIngresoServicioStore = __webpack_require__(379);
+	var _FormIngresoServicioStore = __webpack_require__(314);
 
 	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
 
-	var _servicio = __webpack_require__(314);
+	var _servicio = __webpack_require__(315);
 
 	var _servicio2 = _interopRequireDefault(_servicio);
 
-	var _ItemProduccion = __webpack_require__(318);
+	var _ItemProduccion = __webpack_require__(319);
 
 	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
 
-	var _ItemSillas = __webpack_require__(319);
+	var _ItemSillas = __webpack_require__(320);
 
 	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
 
-	var _ItemInstalacion = __webpack_require__(320);
+	var _ItemInstalacion = __webpack_require__(321);
 
 	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
 
-	var _ItemDespacho = __webpack_require__(321);
+	var _ItemDespacho = __webpack_require__(322);
 
 	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
@@ -37045,7 +37045,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	var ServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(ServicioRoutes, _React$Component);
 
 	  function ServicioRoutes() {
@@ -37055,6 +37055,15 @@
 	  }
 
 	  _createClass(ServicioRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+
+	      if (this.state.obj.comunas == 'comunas') {
+
+	        _ServicioActions2.default.formTrigger();
+	      }
+	    }
+	  }, {
 	    key: 'formArea',
 	    value: function formArea(ev) {
 	      switch (ev.target.value) {
@@ -37062,13 +37071,13 @@
 	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
 	          break;
 	        case "Instalacion":
-	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas }) });
 	          break;
 	        case "Sillas":
-	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas }) });
 	          break;
 	        case "Despacho":
-	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, { comunas: this.state.obj.comunas, vehiculos: this.state.obj.vehiculos }) });
 	          break;
 	        default:
 	          this.setState({ area: "" });
@@ -37139,9 +37148,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.comunas);
-	      console.log(this.state.vehiculos);
-	      return _react2.default.createElement(_servicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.data, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
+	      //console.log( this.state.obj.comunas )
+	      //console.log( this.state.obj.vehiculos )
+	      //console.log( this.state.obj.mensaje )
+	      return _react2.default.createElement(_servicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
 	    }
 	  }]);
 
@@ -37165,7 +37175,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ServicioActions = _reflux2.default.createActions(['addServicio']);
+	var ServicioActions = _reflux2.default.createActions(['addServicio', 'formTrigger']);
 
 	exports.default = ServicioActions;
 
@@ -37187,7 +37197,7 @@
 
 	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
 
-	var _FormIngresoServicioStore = __webpack_require__(379);
+	var _FormIngresoServicioStore = __webpack_require__(314);
 
 	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
 
@@ -37205,21 +37215,39 @@
 
 	var ServicioStore = _reflux2.default.createStore({
 	  listenables: [_ServicioActions2.default],
-	  obj: { comunas: null, vehiculos: null, mensaje: null },
+	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: 'mensaje' },
 	  init: function init() {
+	    this.getObj();
+	  },
+	  getObj: function getObj() {
 	    var _this = this;
 
 	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
 	      _this.obj.comunas = comunas;
 	      _this.obj.vehiculos = vehiculos;
+	      _this.obj.mensaje = 'HOLA BLD';
+	    });
+	  },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  formTrigger: function formTrigger() {
+	    var _this2 = this;
+
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this2.obj.comunas = comunas;
+	      _this2.obj.vehiculos = vehiculos;
+	      _this2.obj.mensaje = 'HOLA BLD';
+	      _this2.trigger(_this2.obj);
 	    });
 	  },
 	  addServicio: function addServicio(data) {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    socket.emit('servicio', data);
 	    socket.on('mensaje', function (mensaje) {
-	      _this2.trigger(mensaje);
+	      _this3.obj.mensaje = mensaje;
+	      _this3.trigger(_this3.obj);
 	    });
 	  }
 	});
@@ -37228,6 +37256,51 @@
 
 /***/ },
 /* 314 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var FormIngresoServicioStore = function () {
+	  function FormIngresoServicioStore() {
+	    _classCallCheck(this, FormIngresoServicioStore);
+
+	    this._comunas = null;
+	    this._vehiculos = null;
+	  }
+
+	  _createClass(FormIngresoServicioStore, [{
+	    key: "comunas",
+	    get: function get() {
+	      return this._comunas;
+	    },
+	    set: function set(value) {
+	      this._comunas = value;
+	    }
+	  }, {
+	    key: "vehiculos",
+	    get: function get() {
+	      return this._vehiculos;
+	    },
+	    set: function set(value) {
+	      this._vehiculos = value;
+	    }
+	  }]);
+
+	  return FormIngresoServicioStore;
+	}();
+
+	exports.default = new FormIngresoServicioStore();
+
+/***/ },
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37242,11 +37315,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(315);
+	var _Title = __webpack_require__(316);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(316);
+	var _Form = __webpack_require__(317);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -37285,7 +37358,7 @@
 	exports.default = ServicioIndex;
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37343,7 +37416,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37358,7 +37431,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Item = __webpack_require__(317);
+	var _Item = __webpack_require__(318);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -37400,7 +37473,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37677,7 +37750,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37827,7 +37900,7 @@
 	exports.default = ItemProduccion;
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37905,21 +37978,13 @@
 	          _react2.default.createElement(
 	            "select",
 	            { id: "comuna" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38015,7 +38080,7 @@
 	exports.default = ItemSillas;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38166,21 +38231,13 @@
 	          _react2.default.createElement(
 	            "select",
 	            { id: "comuna" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38203,7 +38260,7 @@
 	exports.default = ItemInstalacion;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38281,21 +38338,13 @@
 	          _react2.default.createElement(
 	            "select",
 	            { id: "comuna" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38309,41 +38358,13 @@
 	          _react2.default.createElement(
 	            "select",
 	            { id: "vehiculo" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CBWT-96 (Camion 1)" },
-	              "CBWT-96 (Camion 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CRBC-30 (Camion 2)" },
-	              "CRBC-30 (Camion 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FXVD-65 (Camion 3)" },
-	              "FXVD-65 (Camion 3)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CFDL-32 (Furgon 1)" },
-	              "CFDL-32 (Furgon 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FYYC-66 (Furgon 2)" },
-	              "FYYC-66 (Furgon 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "DDVG-61 (Camioneta)" },
-	              "DDVG-61 (Camioneta)"
-	            )
+	            this.props.vehiculos.map(function (vehiculo) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: vehiculo.id, key: vehiculo.id },
+	                vehiculo.patente
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38406,7 +38427,7 @@
 	exports.default = ItemDespacho;
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38422,7 +38443,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _subServicio = __webpack_require__(323);
+	var _subServicio = __webpack_require__(324);
 
 	var _subServicio2 = _interopRequireDefault(_subServicio);
 
@@ -38456,7 +38477,7 @@
 	exports.default = ServicioRoutes;
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38471,27 +38492,27 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(324);
+	var _Title = __webpack_require__(325);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(325);
+	var _Form = __webpack_require__(326);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _ItemProduccion = __webpack_require__(327);
+	var _ItemProduccion = __webpack_require__(328);
 
 	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
 
-	var _ItemSillas = __webpack_require__(328);
+	var _ItemSillas = __webpack_require__(329);
 
 	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
 
-	var _ItemInstalacion = __webpack_require__(329);
+	var _ItemInstalacion = __webpack_require__(330);
 
 	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
 
-	var _ItemDespacho = __webpack_require__(330);
+	var _ItemDespacho = __webpack_require__(331);
 
 	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
@@ -38554,7 +38575,7 @@
 	exports.default = ServicioIndex;
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38611,7 +38632,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38626,7 +38647,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Item = __webpack_require__(326);
+	var _Item = __webpack_require__(327);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -38668,7 +38689,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38905,7 +38926,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39065,7 +39086,7 @@
 	exports.default = ItemProduccion;
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39215,7 +39236,7 @@
 	exports.default = ItemSillas;
 
 /***/ },
-/* 329 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39393,7 +39414,7 @@
 	exports.default = ItemInstalacion;
 
 /***/ },
-/* 330 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39518,7 +39539,7 @@
 	exports.default = ItemDespacho;
 
 /***/ },
-/* 331 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39544,15 +39565,15 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _ReclamoActions = __webpack_require__(332);
+	var _ReclamoActions = __webpack_require__(333);
 
 	var _ReclamoActions2 = _interopRequireDefault(_ReclamoActions);
 
-	var _ReclamoStore = __webpack_require__(333);
+	var _ReclamoStore = __webpack_require__(334);
 
 	var _ReclamoStore2 = _interopRequireDefault(_ReclamoStore);
 
-	var _formReclamo = __webpack_require__(334);
+	var _formReclamo = __webpack_require__(335);
 
 	var _formReclamo2 = _interopRequireDefault(_formReclamo);
 
@@ -39630,7 +39651,7 @@
 	exports.default = ReclamoRoutes;
 
 /***/ },
-/* 332 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39650,7 +39671,7 @@
 	exports.default = ReclamoActions;
 
 /***/ },
-/* 333 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39663,7 +39684,7 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _ReclamoActions = __webpack_require__(332);
+	var _ReclamoActions = __webpack_require__(333);
 
 	var _ReclamoActions2 = _interopRequireDefault(_ReclamoActions);
 
@@ -39677,7 +39698,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var socket = _socket2.default.connect(_Config2.default.url + 'servicio');
+	var socket = _socket2.default.connect(_Config2.default.url + 'reclamo');
 
 	var ReclamoStore = _reflux2.default.createStore({
 	  listenables: [_ReclamoActions2.default],
@@ -39694,7 +39715,7 @@
 	exports.default = ReclamoStore;
 
 /***/ },
-/* 334 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39709,11 +39730,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(335);
+	var _Title = __webpack_require__(336);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(336);
+	var _Form = __webpack_require__(337);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -39752,7 +39773,7 @@
 	exports.default = ReclamoIndex;
 
 /***/ },
-/* 335 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39810,7 +39831,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 336 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39825,7 +39846,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Item = __webpack_require__(337);
+	var _Item = __webpack_require__(338);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -39867,7 +39888,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 337 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40151,7 +40172,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 338 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40167,7 +40188,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _informeReclamo = __webpack_require__(339);
+	var _informeReclamo = __webpack_require__(340);
 
 	var _informeReclamo2 = _interopRequireDefault(_informeReclamo);
 
@@ -40201,7 +40222,7 @@
 	exports.default = ReclamoRoutes;
 
 /***/ },
-/* 339 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40216,15 +40237,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Filtro = __webpack_require__(340);
+	var _Filtro = __webpack_require__(341);
 
 	var _Filtro2 = _interopRequireDefault(_Filtro);
 
-	var _Title = __webpack_require__(341);
+	var _Title = __webpack_require__(342);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Servicio = __webpack_require__(342);
+	var _Servicio = __webpack_require__(343);
 
 	var _Servicio2 = _interopRequireDefault(_Servicio);
 
@@ -40287,7 +40308,7 @@
 	exports.default = InformeIndex;
 
 /***/ },
-/* 340 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40459,7 +40480,7 @@
 	exports.default = Filtro;
 
 /***/ },
-/* 341 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -40512,7 +40533,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 342 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40527,7 +40548,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Content = __webpack_require__(343);
+	var _Content = __webpack_require__(344);
 
 	var _Content2 = _interopRequireDefault(_Content);
 
@@ -40612,7 +40633,7 @@
 	exports.default = Servicio;
 
 /***/ },
-/* 343 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40882,7 +40903,7 @@
 	exports.default = Content;
 
 /***/ },
-/* 344 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40908,15 +40929,15 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _InformeActions = __webpack_require__(345);
+	var _InformeActions = __webpack_require__(346);
 
 	var _InformeActions2 = _interopRequireDefault(_InformeActions);
 
-	var _InformeStore = __webpack_require__(346);
+	var _InformeStore = __webpack_require__(347);
 
 	var _InformeStore2 = _interopRequireDefault(_InformeStore);
 
-	var _informe = __webpack_require__(347);
+	var _informe = __webpack_require__(348);
 
 	var _informe2 = _interopRequireDefault(_informe);
 
@@ -41041,7 +41062,7 @@
 	exports.default = InformeRoutes;
 
 /***/ },
-/* 345 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41061,7 +41082,7 @@
 	exports.default = InformeActions;
 
 /***/ },
-/* 346 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41074,7 +41095,7 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _InformeActions = __webpack_require__(345);
+	var _InformeActions = __webpack_require__(346);
 
 	var _InformeActions2 = _interopRequireDefault(_InformeActions);
 
@@ -41105,7 +41126,7 @@
 	exports.default = InformeStore;
 
 /***/ },
-/* 347 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41120,15 +41141,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Filtro = __webpack_require__(348);
+	var _Filtro = __webpack_require__(349);
 
 	var _Filtro2 = _interopRequireDefault(_Filtro);
 
-	var _Title = __webpack_require__(349);
+	var _Title = __webpack_require__(350);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Servicio = __webpack_require__(350);
+	var _Servicio = __webpack_require__(351);
 
 	var _Servicio2 = _interopRequireDefault(_Servicio);
 
@@ -41196,7 +41217,7 @@
 	exports.default = InformeIndex;
 
 /***/ },
-/* 348 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41378,7 +41399,7 @@
 	exports.default = Filtro;
 
 /***/ },
-/* 349 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41432,7 +41453,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 350 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41447,11 +41468,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Content = __webpack_require__(351);
+	var _Content = __webpack_require__(352);
 
 	var _Content2 = _interopRequireDefault(_Content);
 
-	var _ContentRocha = __webpack_require__(352);
+	var _ContentRocha = __webpack_require__(353);
 
 	var _ContentRocha2 = _interopRequireDefault(_ContentRocha);
 
@@ -41672,7 +41693,7 @@
 	exports.default = Servicio;
 
 /***/ },
-/* 351 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41832,7 +41853,7 @@
 	exports.default = Content;
 
 /***/ },
-/* 352 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41910,7 +41931,7 @@
 	exports.default = ContentRocha;
 
 /***/ },
-/* 353 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41926,7 +41947,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _notificacion = __webpack_require__(354);
+	var _notificacion = __webpack_require__(355);
 
 	var _notificacion2 = _interopRequireDefault(_notificacion);
 
@@ -41960,7 +41981,7 @@
 	exports.default = AbastecimientoRoutes;
 
 /***/ },
-/* 354 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41975,7 +41996,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(355);
+	var _Title = __webpack_require__(356);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
@@ -42071,7 +42092,7 @@
 	exports.default = NotificacionIndex;
 
 /***/ },
-/* 355 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42124,7 +42145,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 356 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42140,7 +42161,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _detalleInforme = __webpack_require__(357);
+	var _detalleInforme = __webpack_require__(358);
 
 	var _detalleInforme2 = _interopRequireDefault(_detalleInforme);
 
@@ -42174,7 +42195,7 @@
 	exports.default = DetalleInformeRoutes;
 
 /***/ },
-/* 357 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42189,23 +42210,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(358);
+	var _Title = __webpack_require__(359);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(359);
+	var _Form = __webpack_require__(360);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _ActividadTitle = __webpack_require__(360);
+	var _ActividadTitle = __webpack_require__(361);
 
 	var _ActividadTitle2 = _interopRequireDefault(_ActividadTitle);
 
-	var _ActividadContent = __webpack_require__(361);
+	var _ActividadContent = __webpack_require__(362);
 
 	var _ActividadContent2 = _interopRequireDefault(_ActividadContent);
 
-	var _SubActividad = __webpack_require__(362);
+	var _SubActividad = __webpack_require__(363);
 
 	var _SubActividad2 = _interopRequireDefault(_SubActividad);
 
@@ -42263,7 +42284,7 @@
 	exports.default = DetalleInformeIndex;
 
 /***/ },
-/* 358 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42316,7 +42337,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 359 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42371,7 +42392,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 360 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42438,7 +42459,7 @@
 	exports.default = ActividadTitle;
 
 /***/ },
-/* 361 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42542,7 +42563,7 @@
 	exports.default = ActividadContent;
 
 /***/ },
-/* 362 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42668,7 +42689,7 @@
 	exports.default = SubActividad;
 
 /***/ },
-/* 363 */
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42684,7 +42705,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _home = __webpack_require__(364);
+	var _home = __webpack_require__(365);
 
 	var _home2 = _interopRequireDefault(_home);
 
@@ -42723,7 +42744,7 @@
 	exports.default = HomeRoutes;
 
 /***/ },
-/* 364 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42738,11 +42759,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(365);
+	var _Header = __webpack_require__(366);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Main = __webpack_require__(369);
+	var _Main = __webpack_require__(370);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -42815,7 +42836,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 365 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42830,11 +42851,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Logo = __webpack_require__(366);
+	var _Logo = __webpack_require__(367);
 
 	var _Logo2 = _interopRequireDefault(_Logo);
 
-	var _Item = __webpack_require__(367);
+	var _Item = __webpack_require__(368);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -42873,7 +42894,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 366 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42929,7 +42950,7 @@
 	exports.default = Logo;
 
 /***/ },
-/* 367 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42946,7 +42967,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _Area = __webpack_require__(368);
+	var _Area = __webpack_require__(369);
 
 	var _Area2 = _interopRequireDefault(_Area);
 
@@ -43022,7 +43043,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 368 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43091,7 +43112,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 369 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43106,7 +43127,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(370);
+	var _Nav = __webpack_require__(371);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -43186,7 +43207,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 370 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43201,7 +43222,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Notification = __webpack_require__(371);
+	var _Notification = __webpack_require__(372);
 
 	var _Notification2 = _interopRequireDefault(_Notification);
 
@@ -43264,7 +43285,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 371 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43370,11 +43391,7 @@
 	exports.default = Notification;
 
 /***/ },
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */,
-/* 376 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43390,7 +43407,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _inicio = __webpack_require__(377);
+	var _inicio = __webpack_require__(374);
 
 	var _inicio2 = _interopRequireDefault(_inicio);
 
@@ -43424,7 +43441,7 @@
 	exports.default = InicioRoutes;
 
 /***/ },
-/* 377 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43477,7 +43494,7 @@
 	exports.default = InicioIndex;
 
 /***/ },
-/* 378 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43545,51 +43562,6 @@
 	}(_react2.default.Component);
 
 	exports.default = AuthRoutes;
-
-/***/ },
-/* 379 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var FormIngresoServicioStore = function () {
-	  function FormIngresoServicioStore() {
-	    _classCallCheck(this, FormIngresoServicioStore);
-
-	    this._comunas = null;
-	    this._vehiculos = null;
-	  }
-
-	  _createClass(FormIngresoServicioStore, [{
-	    key: "comunas",
-	    get: function get() {
-	      return this._comunas;
-	    },
-	    set: function set(value) {
-	      this._comunas = value;
-	    }
-	  }, {
-	    key: "vehiculos",
-	    get: function get() {
-	      return this._vehiculos;
-	    },
-	    set: function set(value) {
-	      this._vehiculos = value;
-	    }
-	  }]);
-
-	  return FormIngresoServicioStore;
-	}();
-
-	exports.default = new FormIngresoServicioStore();
 
 /***/ }
 /******/ ]);

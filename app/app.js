@@ -105,7 +105,7 @@ let servicio = io
   socket.on('formingresoservicio', (callback) => {
 
 
-    con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas`; select `ID` AS id, `PATENTE` AS patente FROM `vehiculo`', function(err, rows, fields) {
+    con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas` ORDER BY `NOMBRE_COMUNA` ASC; select `ID` AS id, `PATENTE` AS patente FROM `vehiculo` ORDER BY `PATENTE` ASC', function(err, rows, fields) {
       
       if (err) console.log( err ) 
 
@@ -167,29 +167,6 @@ let servicio = io
     socket.emit('mensaje', mensaje)
   })
 
-  /* Ingreso Reclamo */
-  socket.on('reclamo', (data) => {
-    let reclamo = {  
-                      AREA: data.area,
-                      ROCHA : data.rocha,
-                      FECHA_INICIO: data.fechaInicio,
-                      FECHA_TERMINO: data.fechaEntrega,
-                      ESTADO: "EN PROCESO",
-                      RAZON: data.razon,
-                      AREA1: data.area1,
-                      AREA2: data.area1
-                    }
-    let mensaje = '(Se ingreso Reclamo ' + data.area + ')'
-
-    con.query('INSERT INTO `reclamos` SET ?',reclamo, (err) => {
-    if (!err)
-      console.log('Se ingreso reclamo ' + data.area);
-    else
-      console.log('Error no se pudo ingresar reclamo '+ err);
-    })
-    console.log(data)
-    socket.emit('mensaje', mensaje)
-  })
 
    /* Informes */
   socket.on('informe', (data, cant, estado, codigo, vendedor, categoria, fecha, cliente) => {
@@ -216,6 +193,37 @@ let servicio = io
 
 })
 
+
+
+let reclamo = io
+  .of('/reclamo')
+  .on('connection', (socket) => {
+
+  /* Ingreso Reclamo */
+  socket.on('reclamo', (data) => {
+    let reclamo = {  
+                      AREA: data.area,
+                      ROCHA : data.rocha,
+                      FECHA_INICIO: data.fechaInicio,
+                      FECHA_TERMINO: data.fechaEntrega,
+                      ESTADO: "EN PROCESO",
+                      RAZON: data.razon,
+                      AREA1: data.area1,
+                      AREA2: data.area1
+                    }
+    let mensaje = '(Se ingreso Reclamo ' + data.area + ')'
+
+    con.query('INSERT INTO `reclamos` SET ?',reclamo, (err) => {
+    if (!err)
+      console.log('Se ingreso reclamo ' + data.area);
+    else
+      console.log('Error no se pudo ingresar reclamo '+ err);
+    })
+    console.log(data)
+    socket.emit('mensaje', mensaje)
+  })
+
+})
 
   
 app.all('*', (request, response, next) => {
