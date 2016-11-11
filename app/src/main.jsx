@@ -28,7 +28,7 @@ ReactDOM.render((
             <Route path="actualizar-actividad/:id" component={UpdateServicio}/>
             <Route path="reclamo" component={Reclamo}/>
             <Route path="notificacion" component={Notificacion}/>
-        	<Route path="detalle-actividad" component={DetalleInforme}/> 
+        	<Route path="detalle-actividad/:id" component={DetalleInforme}/> 
             <Route path="detalle-actividad/sub-actividad" component={SubServicio}/>
             <Route path="detalle-actividad/actualizar-actividad" component={UpdateSubServicio}/>
         </Route>

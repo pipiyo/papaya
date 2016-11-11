@@ -129,7 +129,7 @@
 	            _react2.default.createElement(_reactRouter.Route, { path: 'actualizar-actividad/:id', component: _UpdateServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'reclamo', component: _ReclamoRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad', component: _DetalleInformeRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/:id', component: _DetalleInformeRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/sub-actividad', component: _SubServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/actualizar-actividad', component: _UpdateSubServicioRoutes2.default })
 	        )
@@ -39920,9 +39920,27 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _dec, _class;
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _SubServicioActions = __webpack_require__(391);
+
+	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
+
+	var _SubServicioStore = __webpack_require__(392);
+
+	var _SubServicioStore2 = _interopRequireDefault(_SubServicioStore);
 
 	var _subServicio = __webpack_require__(332);
 
@@ -39936,7 +39954,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var SubServicioRoutes = function (_React$Component) {
+	var SubServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_SubServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
 	  _inherits(SubServicioRoutes, _React$Component);
 
 	  function SubServicioRoutes() {
@@ -39953,8 +39971,7 @@
 	  }]);
 
 	  return SubServicioRoutes;
-	}(_react2.default.Component);
-
+	}(_react2.default.Component)) || _class);
 	exports.default = SubServicioRoutes;
 
 /***/ },
@@ -43652,6 +43669,11 @@
 	      return "/home/actualizar-actividad/" + id;
 	    }
 	  }, {
+	    key: 'idServicioRutaDetalle',
+	    value: function idServicioRutaDetalle(id) {
+	      return "/home/detalle-actividad/" + id;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -43665,7 +43687,7 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: '/home/detalle-actividad' },
+	              { to: this.idServicioRutaDetalle(this.props.datos.CODIGO_SERVICIO) },
 	              this.props.datos.CODIGO_SERVICIO
 	            ),
 	            ' - ',
@@ -43681,7 +43703,7 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: '/home/detalle-actividad' },
+	              { to: this.idServicioRutaDetalle(this.props.datos.CODIGO_SERVICIO) },
 	              _react2.default.createElement('i', { className: 'fa fa-eye', 'aria-hidden': 'true' })
 	            )
 	          ),
@@ -44024,9 +44046,27 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _dec, _class;
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _SubServicioActions = __webpack_require__(391);
+
+	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
+
+	var _SubServicioStore = __webpack_require__(392);
+
+	var _SubServicioStore2 = _interopRequireDefault(_SubServicioStore);
 
 	var _detalleInforme = __webpack_require__(369);
 
@@ -44040,7 +44080,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DetalleInformeRoutes = function (_React$Component) {
+	var DetalleInformeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_SubServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
 	  _inherits(DetalleInformeRoutes, _React$Component);
 
 	  function DetalleInformeRoutes() {
@@ -44050,15 +44090,31 @@
 	  }
 
 	  _createClass(DetalleInformeRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _SubServicioActions2.default.subServicio(this.props.params.id);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_detalleInforme2.default, null);
+	      if (this.state.data) {
+	        return _react2.default.createElement(_detalleInforme2.default, { datos: this.state.data });
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Cargando'
+	          )
+	        );
+	      }
 	    }
 	  }]);
 
 	  return DetalleInformeRoutes;
-	}(_react2.default.Component);
-
+	}(_react2.default.Component)) || _class);
 	exports.default = DetalleInformeRoutes;
 
 /***/ },
@@ -44111,10 +44167,21 @@
 	  function DetalleInformeIndex() {
 	    _classCallCheck(this, DetalleInformeIndex);
 
-	    return _possibleConstructorReturn(this, (DetalleInformeIndex.__proto__ || Object.getPrototypeOf(DetalleInformeIndex)).call(this));
+	    var _this = _possibleConstructorReturn(this, (DetalleInformeIndex.__proto__ || Object.getPrototypeOf(DetalleInformeIndex)).call(this));
+
+	    _this.state = { servicio: [] };
+	    return _this;
 	  }
 
 	  _createClass(DetalleInformeIndex, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var valor = void 0;
+	      for (valor in this.props.datos.sub) {
+	        this.state.servicio.push(_react2.default.createElement(_SubActividad2.default, { key: valor, datos: this.props.datos.sub[valor] }));
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -44131,12 +44198,16 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'item-rocha father' },
-	              _react2.default.createElement(_ActividadTitle2.default, null),
+	              _react2.default.createElement(_ActividadTitle2.default, { datos: this.props.datos }),
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'item-box' },
-	                _react2.default.createElement(_ActividadContent2.default, null),
-	                _react2.default.createElement(_SubActividad2.default, null)
+	                _react2.default.createElement(_ActividadContent2.default, { datos: this.props.datos }),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'content-actividades' },
+	                  this.state.servicio
+	                )
 	              )
 	            )
 	          )
@@ -44262,7 +44333,7 @@
 /* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -44292,29 +44363,25 @@
 	  }
 
 	  _createClass(ActividadTitle, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        null,
 	        _react2.default.createElement(
-	          "h3",
-	          { className: "atrasado" },
+	          'h3',
+	          null,
 	          _react2.default.createElement(
-	            "a",
+	            'a',
 	            null,
-	            " S&S 716-CM-B "
+	            ' ',
+	            this.props.datos.servicio[0].CODIGO_PROYECTO,
+	            ' - ',
+	            this.props.datos.servicio[0].CODIGO_SERVICIO,
+	            ' '
 	          ),
-	          " - Ilustre Municipalidad de Chill\xE1n",
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            _react2.default.createElement(
-	              "a",
-	              { href: "" },
-	              _react2.default.createElement("i", { className: "fa fa-pencil", "aria-hidden": "true" })
-	            )
-	          )
+	          ' - ',
+	          this.props.datos.servicio[0].DESCRIPCION
 	        )
 	      );
 	    }
@@ -44359,67 +44426,39 @@
 	  }
 
 	  _createClass(ActividadContent, [{
+	    key: "validador",
+	    value: function validador(nombre, _validador, fecha) {
+	      var text = void 0;
+	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	        text = "";
+	      } else {
+	        text = _react2.default.createElement(
+	          "div",
+	          { className: "opc" },
+	          _react2.default.createElement(
+	            "h5",
+	            null,
+	            nombre
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            null,
+	            fecha ? _validador.substring(0, 10) : _validador
+	          )
+	        );
+	      }
+	      return text;
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "item-rocha-info" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "opc sub" },
-	          _react2.default.createElement(
-	            "h5",
-	            null,
-	            "Ejecutivo:"
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            "Felipe Fernando Cavieres Belmar"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "opc sub" },
-	          _react2.default.createElement(
-	            "h5",
-	            null,
-	            "Observaci\xF3n:"
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            "Muchas cosas"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "opc sub" },
-	          _react2.default.createElement(
-	            "h5",
-	            null,
-	            "Fecha Emisi\xF3n:"
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            "2016-02-02"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "opc sub" },
-	          _react2.default.createElement(
-	            "h5",
-	            null,
-	            "Fecha entrega:"
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            "2016-02-02"
-	          )
-	        )
+	        this.validador("Area:", this.props.datos.servicio[0].NOMBRE_SERVICIO),
+	        this.validador("Estado:", this.props.datos.servicio[0].ESTADO),
+	        this.validador("Fecha inicio:", this.props.datos.servicio[0].FECHA_INICIO, true),
+	        this.validador("Fecha entrega:", this.props.datos.servicio[0].FECHA_ENTREGA, true)
 	      );
 	    }
 	  }]);
@@ -44465,256 +44504,102 @@
 	  }
 
 	  _createClass(SubActividad, [{
+	    key: 'viewServicio',
+	    value: function viewServicio() {
+	      var area = void 0;
+	      switch (this.props.datos.SUB_NOMBRE_SERVICIO) {
+	        case "Adquisiciones":
+	          area = "abastecimiento";
+	          break;
+	        case "Despacho":
+	          area = "despacho";
+	          break;
+	        case "Instalacion":
+	          area = "instalaciones";
+	          break;
+	        case "Produccion":
+	          area = "produccion";
+	          break;
+	        case "Desarrollo":
+	          area = "desarrollo";
+	          break;
+	        case "Sillas":
+	          area = "sillas";
+	          break;
+	      }
+	      return "item-actividades sub " + area;
+	    }
+	  }, {
+	    key: 'validador',
+	    value: function validador(nombre, _validador, fecha) {
+	      var text = void 0;
+	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	        text = "";
+	      } else {
+	        text = _react2.default.createElement(
+	          'div',
+	          { className: 'opc' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            nombre
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            fecha ? _validador.substring(0, 10) : _validador
+	          )
+	        );
+	      }
+	      return text;
+	    }
+	  }, {
+	    key: 'okEstado',
+	    value: function okEstado(estado) {
+	      var ok = void 0;
+	      estado == "OK" ? ok = "description-actividad sub ok " : ok = "description-actividad sub";
+	      return ok;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'content-actividades' },
+	        { className: this.viewServicio() },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'item-actividades abastecimiento sub' },
+	          { className: 'title-actividad' },
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'title-actividad' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              '10001 -  LC-2015'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/home/detalle-actividad/actualizar-actividad' },
-	                _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' })
-	              )
-	            )
+	            'h4',
+	            null,
+	            this.props.datos.CODIGO_PROYECTO,
+	            ' -  ',
+	            this.props.datos.CODIGO_SUBSERVICIO
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { className: 'description-actividad sub' },
+	            'p',
+	            null,
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Descripci\xF3n: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Cajoneras Linea Bozz (2 Puestos).'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Cliente: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'AFP Planvital S.A.'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Observaci\xF3n: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Pocas cosas'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Fecha '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4'
-	              )
+	              _reactRouter.Link,
+	              { to: '/home/detalle-actividad/actualizar-actividad' },
+	              _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' })
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'item-actividades abastecimiento sub' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'title-actividad' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              '10001 -  LC-2015'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '' },
-	                _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'description-actividad sub' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Descripci\xF3n: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Cajoneras Linea Bozz (2 Puestos).'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Cliente: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'AFP Planvital S.A.'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Observaci\xF3n: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Pocas cosas'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Fecha '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4'
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'item-actividades abastecimiento sub' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'title-actividad' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              '10001 -  LC-2015'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '' },
-	                _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'description-actividad sub' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Descripci\xF3n: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Cajoneras Linea Bozz (2 Puestos).'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Cliente: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'AFP Planvital S.A.'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Observaci\xF3n: '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Pocas cosas'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'opc sub' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Fecha '
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Desde 2016-05-19 / Hasta 2016-05-19 / D\xEDas 4'
-	              )
-	            )
-	          )
+	          { className: this.okEstado(this.props.datos.SUB_ESTADO) },
+	          this.validador("Descripción:", this.props.datos.SUB_DESCRIPCION),
+	          this.validador("Proceso:", this.props.datos.SUB_PROCESO),
+	          this.validador("Fecha Ingreso:", this.props.datos.SUB_FECHA_INGRESO, true),
+	          this.validador("Fecha Entrega:", this.props.datos.SUB_FECHA_ENTREGA, true),
+	          this.validador("Estado:", this.props.datos.SUB_ESTADO),
+	          this.validador("Supervisor:", this.props.datos.SUB_SUPERVISOR),
+	          this.validador("Dirección:", this.props.datos.SUB_DIRECCION),
+	          this.validador("TP:", this.props.datos.SUB_TP),
+	          this.validador("TO:", this.props.datos.SUB_TO),
+	          this.validador("OS:", this.props.datos.SUB_OS),
+	          this.validador("FI:", this.props.datos.SUB_FI)
 	        )
 	      );
 	    }
@@ -45865,6 +45750,74 @@
 	}(_react2.default.Component);
 
 	exports.default = AuthRoutes;
+
+/***/ },
+/* 391 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SubServicioActions = _reflux2.default.createActions(['addSubServicio', 'subServicio', 'updateSubServicio']);
+
+	exports.default = SubServicioActions;
+
+/***/ },
+/* 392 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _SubServicioActions = __webpack_require__(391);
+
+	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var socket = _socket2.default.connect(_Config2.default.url + 'subServicio');
+
+	var SubServicioStore = _reflux2.default.createStore({
+	  listenables: [_SubServicioActions2.default],
+	  getInitialState: function getInitialState() {},
+	  subServicio: function subServicio(data) {
+	    var _this = this;
+
+	    socket.emit('servicioListar', data);
+	    socket.on('items', function (items) {
+	      _this.trigger(items);
+	    });
+	    console.log("Hola");
+	  }
+	});
+
+	exports.default = SubServicioStore;
 
 /***/ }
 /******/ ]);
