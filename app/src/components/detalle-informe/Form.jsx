@@ -6,11 +6,14 @@ class Form extends React.Component {
   constructor() {
     super()
   }
+  rutaIngresoServicio(){
+    return "/home/sub-actividad/"+this.props.datos.servicio[0].CODIGO_SERVICIO
+  }
 
   render() {
       return (
         <div class="button">
-          <Link to="/home/detalle-actividad/sub-actividad"> Nueva Sub Actividad </Link>
+          <Link to={this.rutaIngresoServicio()}> Nuevas Sub Actividad </Link>
         </div>
       )
 

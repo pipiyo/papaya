@@ -130,7 +130,7 @@
 	            _react2.default.createElement(_reactRouter.Route, { path: 'reclamo', component: _ReclamoRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/:id', component: _DetalleInformeRoutes2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/sub-actividad', component: _SubServicioRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'sub-actividad/:id', component: _SubServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/actualizar-actividad', component: _UpdateSubServicioRoutes2.default })
 	        )
 	    ),
@@ -44188,7 +44188,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Form2.default, null),
+	        _react2.default.createElement(_Form2.default, { datos: this.props.datos }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'module-actividad' },
@@ -44310,6 +44310,11 @@
 	  }
 
 	  _createClass(Form, [{
+	    key: 'rutaIngresoServicio',
+	    value: function rutaIngresoServicio() {
+	      return "/home/sub-actividad/" + this.props.datos.servicio[0].CODIGO_SERVICIO;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -44317,8 +44322,8 @@
 	        { className: 'button' },
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: '/home/detalle-actividad/sub-actividad' },
-	          ' Nueva Sub Actividad '
+	          { to: this.rutaIngresoServicio() },
+	          ' Nuevas Sub Actividad '
 	        )
 	      );
 	    }

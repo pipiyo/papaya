@@ -21,7 +21,7 @@ class DetalleInformeIndex extends React.Component {
       return (         
         <div>
           <Title />
-          <Form />
+          <Form datos={this.props.datos} />
 
           <div class="module-actividad">
             <div class="item-actividad sub">
