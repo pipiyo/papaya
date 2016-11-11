@@ -18,8 +18,17 @@ class ItemSillas extends React.Component {
           </div>
 
           <div className="item-form">
-            <label>OC</label>
-            <input type="text" id="oc" />
+            <label>Dirección</label>
+            <input type="text" id="direccion" />
+          </div>
+
+          <div className="item-form">
+            <label>Comuna</label>
+             <select id="comuna">
+                <option value="">Seleccioné</option>
+                <option value="1">Puente Alto</option>
+                <option value="2">La Florida</option>
+              </select>
           </div>
 
           <div className="item-form">

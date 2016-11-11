@@ -30,7 +30,7 @@ ReactDOM.render((
             <Route path="notificacion" component={Notificacion}/>
         	<Route path="detalle-actividad/:id" component={DetalleInforme}/> 
             <Route path="sub-actividad/:id" component={SubServicio}/>
-            <Route path="detalle-actividad/actualizar-actividad" component={UpdateSubServicio}/>
+            <Route path="actualizar-subactividad/:id" component={UpdateSubServicio}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

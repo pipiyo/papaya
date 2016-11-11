@@ -18,8 +18,8 @@ let ServicioStore = Reflux.createStore({
   },
   updateServicio: function(data){
     socket.emit('servicioUpdate', data)
-    socket.on('mensaje', (mensaje) =>{
-      browserHistory.push('home')
+    socket.on('update', (update) =>{
+      browserHistory.push('/home')
     })
   },
   servicio: function(data){

@@ -2,8 +2,41 @@ import React from 'react'
 
 class ItemProduccion extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.state ={
+                  ejecutor:this.validador(props.datos[0].SUB_EJECUTOR),
+                  vale:this.validador(props.datos[0].SUB_VALE),
+                  cantidad:this.validador(props.datos[0].SUB_PUESTOS),
+                }
+  }
+  componentDidMount(){
+    let i
+
+    let numero1 = document.getElementById("proceso")
+    for(i = 0; numero1.length > i; i++){
+      if(numero1.options[i].value.toLowerCase() == this.props.datos[0].SUB_PROCESO.toLowerCase()){numero1.options[i].selected = "selected"}
+    }
+  }
+
+  validador(validador,fecha){
+    let text
+    if(validador == "" || validador == null || validador == 0 || !validador){
+      text = ""
+    }
+    else{
+      text = (fecha)?validador.substring(0,10):validador
+    }
+    return text
+  }
+
+  onChange(e) {
+    this.setState({ 
+                    ejecutor:document.getElementById("ejecutor").value,
+                    vale:document.getElementById("vale").value,
+                    direccion:document.getElementById("direccion").value,
+                    cantidad:document.getElementById("cantidad").value,
+                  })
   }
 
   render() {
@@ -14,17 +47,12 @@ class ItemProduccion extends React.Component {
           </div>
           <div className="item-form">
             <label>Ejecutor</label>
-            <input id="ejecutor" type="text"/>
-          </div>
-
-          <div className="item-form">
-            <label>OC</label>
-            <input type="text" id="oc" />
+            <input value={this.state.ejecutor} onChange={this.onChange.bind(this)} id="ejecutor" type="text"/>
           </div>
 
           <div className="item-form">
             <label>Vale</label>
-            <input type="text" id="vale" />
+            <input value={this.state.vale} onChange={this.onChange.bind(this)} type="text" id="vale" />
           </div>
 
           <div className="item-form">
@@ -45,7 +73,7 @@ class ItemProduccion extends React.Component {
 
           <div className="item-form">
             <label>Cantidad</label>
-            <input type="text" id="cantidad" />
+            <input value={this.state.cantidad} onChange={this.onChange.bind(this)} type="text" id="cantidad" />
           </div> 
 
         </div>

@@ -10,9 +10,9 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form>
+        <form onSubmit={this.props.updateServicio}>
           <fieldset> 
-            <Item area={this.props.area} formArea={this.props.formArea} />
+            <Item datos={this.props.datos} tipo={this.props.tipo} area={this.props.area}  />
           </fieldset> 
         </form> 
       )

@@ -41,7 +41,6 @@ class Item extends React.Component {
   }
 
   onChange(e) {
-    console.log(document.getElementById("numero").value)
     this.setState({ codigo: document.getElementById("numero").value,
                     supervisor: document.getElementById("supervisor").value,
                     fechaInicio: document.getElementById("fechaInicio").value,

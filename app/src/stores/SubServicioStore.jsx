@@ -15,8 +15,25 @@ let SubServicioStore = Reflux.createStore({
   	socket.on('items', (items) =>{
   		this.trigger(items)
   	})
-    console.log("Hola");
-  }
+  },
+  addSubServicio: function(data){
+    socket.emit('addSubServicio', data)
+    socket.on('mensaje', (mensaje) =>{
+      this.trigger(mensaje)
+    })
+  },
+  subServicioUpdate: function(data){
+    socket.emit('servicioListarUnico', data)
+    socket.on('datos', (datos) =>{
+      this.trigger(datos)
+    })
+  },
+  updateSubServicio: function(data,ruta){
+    socket.emit('subServicioUpdate', data)
+    socket.on('update', (update) =>{
+      browserHistory.push(ruta)
+    })
+  },
 })
 
 export default SubServicioStore

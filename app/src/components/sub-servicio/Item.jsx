@@ -4,6 +4,23 @@ class Item extends React.Component {
 
   constructor() {
     super()
+    this.state = {reclamo:""}
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    if(nextProps.tipo == "reclamo"){
+      this.state.reclamo = <div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>
+    }else{
+      this.state.reclamo = ""
+    }
+  }
+
+  componentWillMount(){
+    if(this.props.tipo == "reclamo"){
+      this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
+    }else{
+      this.setState({reclamo:""})
+    }
   }
 
   render() {
@@ -24,7 +41,7 @@ class Item extends React.Component {
                 <option value="Despacho">Despacho</option>
                 <option value="Instalacion">Instalacion</option>
                 <option value="Prevención de Riesgos">Prevención de Riesgos</option>
-                <option value="Produccion">Produccion</option>
+                <option value="Produccion">Producción</option>
                 <option value="Sillas">Sillas</option>
                 <option value="Sistema">Sistema</option>
               </select>
@@ -67,16 +84,10 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Observación</label>
-                <input id="Observacion" type="text"/>
-            </div>
-
-            <div className="item-form">
-                <label>FI</label>
-                <input type="number" id="fi" />
+                <input id="observacion" type="text"/>
             </div>
           </div>
-
-          { this.props.area }
+          {this.props.area}
 
           <div className="module-form button">
             <div className="item-form button">

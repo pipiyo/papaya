@@ -49,12 +49,16 @@ class SubActividad extends React.Component {
     return ok
   }
 
+  rutaActualizar(){
+    return "/home/actualizar-subactividad/" + this.props.datos.CODIGO_SUBSERVICIO
+  }
+
   render() {
       return (
           <div class={this.viewServicio()}>
             <div class="title-actividad">
               <h4>{this.props.datos.CODIGO_PROYECTO} -  {this.props.datos.CODIGO_SUBSERVICIO}</h4> 
-              <p><Link to="/home/detalle-actividad/actualizar-actividad"><i class="fa fa-pencil" aria-hidden="true"></i></Link></p>
+              <p><Link to={this.rutaActualizar()}><i class="fa fa-pencil" aria-hidden="true"></i></Link></p>
             </div>
             <div class={this.okEstado(this.props.datos.SUB_ESTADO)}>
               {this.validador("Descripción:",this.props.datos.SUB_DESCRIPCION)}
