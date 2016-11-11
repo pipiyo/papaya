@@ -948,21 +948,32 @@ a.external-link, .external-link a {
                 top: 1em;
             }
         }
+        .item-box{
+            padding-bottom: 1em;
+            display: block;
+            &.orden{
+                display: flex;
+                flex-wrap: wrap;
+                .item-actividades{
+                    width: 100%;
+                }
+            }
+        }
+
         &.abastecimiento{border:solid 1px $color_abastecimiento; h3{background: $color_abastecimiento;&:after{content: none;}}}
         &.produccion{border:solid 1px $color_produccion; h3{background: $color_produccion;&:after{content: none;}}}
         &.despacho{border:solid 1px $color_despacho; h3{background: $color_despacho;&:after{content: none;}}}
         &.instalaciones{border:solid 1px $color_instalaciones; h3{background: $color_instalaciones;&:after{content: none;}}}
         &.integracion{border:solid 1px $color_integracion; h3{background: $color_integracion;&:after{content: none;}}}
         &.desarrollo{border:solid 1px $color_desarrollo; h3{background: $color_desarrollo;&:after{content: none;}}}
-        &.sillas{border:solid 1px $color_desarrollo; h3{background: $color_sillas;&:after{content: none;}}}
-        .item-box{
-            padding-bottom: 1em;
-            display: block;
-        }
+        &.sillas{border:solid 1px $color_sillas; h3{background: $color_sillas;&:after{content: none;}}}
+        &.father{border:solid 1px $color_rochas; h3{background: $color_rochas;&:after{content: none;}}}
+
         .item-rocha-info{
             padding: 1em 1em 0 1em;
             display: flex;
             flex-wrap: wrap;
+            order: 1;
             h5{
                 margin: 0;
                 padding: 0;
@@ -978,14 +989,7 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
-                }
-                &.sub{
-                    width: 50%;
-                    margin-top: .5em;
-                    @include vertical-tablet-down {
-                        width: 100%;
-                    }
-                }           
+                }          
             }
         }
     } 
@@ -999,16 +1003,30 @@ a.external-link, .external-link a {
         &.sub{
             width: calc(100% - 2em);
         }
+        
+        .content-actividades{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .item-actividades{
             margin: 1em 1em 0 1em;
-            &.abastecimiento{.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
-            &.produccion{.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
-            &.despacho{.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
-            &.instalaciones{.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
-            &.integracion{.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}
-            &.desarrollo{.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
-            &.sillas{.title-actividad{background: $color_sillas;}.description-actividad{border: solid 1px $color_sillas;}}
+            &.abastecimiento{order:2;.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
+            &.desarrollo{order:3;.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
+            &.produccion{order:4;.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
+            &.sillas{order:5;.title-actividad{background: $color_sillas;}.description-actividad{border: solid 1px $color_sillas;}}
+            &.despacho{order:6;.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
+            &.instalaciones{order:7;.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
+            &.integracion{order:8;.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}      
+
+            &.sub{
+                width: calc(50% - 2em);
+                @include vertical-tablet-down {
+                    width: 100%;
+                }
+            }
         }
+       
         .title-actividad{
             padding: .5em;
             overflow: hidden;
@@ -1045,14 +1063,7 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
-                }
-                &.sub{
-                    margin-top: .5em;
-                    width: 50%;
-                    @include vertical-tablet-down {
-                        width: 100%;
-                    }
-                }    
+                }   
             }
             &.ok{
                 background: #E3F6CE;

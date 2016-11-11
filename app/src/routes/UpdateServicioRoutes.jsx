@@ -2,55 +2,57 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
-import SubServicioActions from '../actions/SubServicioActions'
-import SubServicioStore from '../stores/SubServicioStore'
+import ServicioActions from '../actions/ServicioActions'
+import ServicioStore from '../stores/ServicioStore'
 
-import ServicioIndex from '../components/sub-servicio'
-import ItemProduccion from '../components/sub-servicio/ItemProduccion.jsx'
-import ItemSillas from '../components/sub-servicio/ItemSillas.jsx'
-import ItemInstalacion from '../components/sub-servicio/ItemInstalacion.jsx'
-import ItemDespacho from '../components/sub-servicio/ItemDespacho.jsx'
+import ServicioIndex from '../components/update-servicio'
+import ItemProduccion from '../components/update-servicio/ItemProduccion.jsx'
+import ItemSillas from '../components/update-servicio/ItemSillas.jsx'
+import ItemInstalacion from '../components/update-servicio/ItemInstalacion.jsx'
+import ItemDespacho from '../components/update-servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'data'))
-export default class SubServicioRoutes extends React.Component {
+@ReactMixin.decorate(Reflux.connect(ServicioStore, 'servicio'))
+export default class UpdateServicioRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = {data:"", area: ""}
+    this.state = {area: ""}
   }
 
-  formArea(ev) {
-     switch(ev.target.value) {
+  componentWillMount(){
+    ServicioActions.servicio(this.props.params.id);
+  }
+  formArea(area) {
+     switch(area) {
       case "Produccion":
-        this.setState({area:<ItemProduccion />}) 
+        this.state.area = <ItemProduccion datos={this.state.servicio} /> 
       break;
       case "Instalacion":
-        this.setState({area:<ItemInstalacion />}) 
+        this.state.area = <ItemInstalacion datos={this.state.servicio} />
       break;
       case "Sillas":
-        this.setState({area:<ItemSillas />}) 
+        this.state.area = <ItemSillas datos={this.state.servicio} />
       break;
       case "Despacho":
-        this.setState({area:<ItemDespacho />}) 
+        this.state.area = <ItemDespacho datos={this.state.servicio} />
       break;
       default:
-        this.setState({area:""}) 
+        this.state.area = ""
     }
   }
 
-  addServicio(ev) {
+  updateServicio(ev) {
     ev.preventDefault()
     let servicio = {
-      "codigo_servicio": this.props.params.id,
-      "area": ev.target.elements['area'].value,
       "categoria": ev.target.elements['categoria'].value,
+      "estado": ev.target.elements['estado'].value,
       "supervisor": ev.target.elements['supervisor'].value,
       "fechaInicio": ev.target.elements['fechaInicio'].value,
       "fechaEntrega": ev.target.elements['fechaEntrega'].value,  
       "dias": ev.target.elements['dias'].value,
       "descripcion": ev.target.elements['descripcion'].value ,
       "observacion": ev.target.elements['observacion'].value,
-      "rocha": "",
+      "numero": ev.target.elements['numero'].value,
       "direccion" : (ev.target.elements['direccion']) ? ev.target.elements['direccion'].value : "",
       "guia" : (ev.target.elements['guia'] ) ? ev.target.elements['guia'].value : "",
       "comuna" : (ev.target.elements['comuna']) ? ev.target.elements['comuna'].value : "",
@@ -70,24 +72,21 @@ export default class SubServicioRoutes extends React.Component {
       "vehiculo" : (ev.target.elements['vehiculo']) ? ev.target.elements['vehiculo'].value : "", 
       "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : ""          
     }
-    SubServicioActions.addSubServicio(servicio);
-
-    if(ev.target.elements['area']){ev.target.elements['area'].options[0].selected = "selected"}
-    if(ev.target.elements['categoria']){ev.target.elements['categoria'].options[0].selected = "selected"}
-    if(ev.target.elements['fechaInicio']){ev.target.elements['fechaInicio'].value = ""}
-    if(ev.target.elements['fechaEntrega']){ev.target.elements['fechaEntrega'].value = ""}
-    if(ev.target.elements['supervisor']){ev.target.elements['supervisor'].value = ""}
-    if(ev.target.elements['descripcion']){ev.target.elements['descripcion'].value = ""}
-    if(ev.target.elements['observacion']){ev.target.elements['observacion'].value = ""}
-    if(ev.target.elements['dias']){ev.target.elements['dias'].value = ""}
-    this.setState({area:""})   
+    ServicioActions.updateServicio(servicio); 
   }
  
 
   render() {
+      if(this.state.servicio) {
+        this.formArea(this.state.servicio[0].NOMBRE_SERVICIO)
       return (
-        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
+        <ServicioIndex datos={this.state.servicio} tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} updateServicio={this.updateServicio.bind(this)} />       
       )
+      }else{
+        return (
+          <div><h1>Cargando</h1></div>     
+        )
+      }
   }
 
 }

@@ -1,4 +1,5 @@
 import Reflux from 'reflux'
+import { browserHistory } from 'react-router'
 import ServicioActions from '../actions/ServicioActions'
 
 import FormIngresoServicioStore from '../stores/FormIngresoServicioStore'
@@ -23,7 +24,18 @@ let ServicioStore = Reflux.createStore({
   	socket.on('mensaje', (mensaje) =>{
   		this.trigger(mensaje)
   	})
-  	
+  },
+  updateServicio: function(data){
+    socket.emit('servicioUpdate', data)
+    socket.on('update', (update) =>{
+      browserHistory.push('/home')
+    })
+  },
+  servicio: function(data){
+  	socket.emit('servicioListar', data)
+  	socket.on('items', (items) =>{
+  		this.trigger(items)
+  	})
   }
 })
 
