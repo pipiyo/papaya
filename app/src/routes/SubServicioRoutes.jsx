@@ -11,12 +11,16 @@ import ItemSillas from '../components/sub-servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/sub-servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/sub-servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'data'))
+@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'obj'))
 export default class SubServicioRoutes extends React.Component {
 
   constructor() {
     super()
     this.state = {data:"", area: ""}
+  }
+
+  componentWillMount(){
+    SubServicioActions.formTrigger()
   }
 
   formArea(ev) {
@@ -86,7 +90,7 @@ export default class SubServicioRoutes extends React.Component {
 
   render() {
       return (
-        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
+        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.obj.mensaje} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
       )
   }
 

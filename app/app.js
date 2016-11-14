@@ -224,18 +224,18 @@ let subServicio = io
   .on('connection', function (socket) {
 
   /* Sub Servicio */
-  socket.on('servicioListar', (data) => {
+  socket.on('allSubServicio', (data) => {
       let query = 'SELECT `CODIGO_PROYECTO`,`DESCRIPCION`,`OBSERVACIONES`,`CODIGO_SERVICIO`, `FECHA_INICIO`, `FECHA_ENTREGA`, `CODIGO_SUBSERVICIO`, `SUB_CODIGO_SERVICIO`, `SUB_NOMBRE_SERVICIO`, `SUB_FECHA_INICIO`, `SUB_FECHA_ENTREGA`, `SUB_REALIZADOR`, `SUB_SUPERVISOR`, `SUB_OBSERVACIONES`, `SUB_ESTADO`, `SUB_CODIGO_USUARIO`, `SUB_CODIGO_PROYECTO`, `SUB_DESCRIPCION`, `SUB_DIRECCION`, `SUB_TPTMFI`, `SUB_GUIA_DESPACHO`, `SUB_CODIGO_OC`, `SUB_INSTALADOR_1`, `SUB_INSTALADOR_2`, `SUB_INSTALADOR_3`, `SUB_INSTALADOR_4`, `SUB_LIDER`, `SUB_DIAS`, `SUB_PREDECESOR`, `SUB_PUESTOS`, `SUB_PROCESO`, `SUB_EJECUTOR`, `SUB_DOCUMENTO_SERVICIO_TECNICO`, `SUB_TIPO_SERVICIO`, `SUB_TECNICO_1`, `SUB_TECNICO_2`, `SUB_CODIGO_RADICADO`, `SUB_TRANSPORTE`, `SUB_FECHA_REALIZACION`, `SUB_RECLAMOS`, `SUB_OC`, `SUB_FECHA_PRIMERA_ENTREGA`, `SUB_CATEGORIA`, `SUB_CANTIDAD`, `SUB_BODEGA`, `SUB_FI`, `SUB_ORDEN_SERVICIO`, `SUB_VALE`, `SUB_CODIGO_COMUNA`, `SUB_PROGRESO`, `SUB_M3`, `SUB_FACTURA`, `SUB_MONTO_FACTURA`, `SUB_RECEPCION`, `SUB_ARCHIVO`, `SUB_TM`, `SUB_TP`, `SUB_OS` FROM `sub_servicio`, `servicio` WHERE servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO and servicio.CODIGO_SERVICIO = "'+data+'";'; 
       let query1 = 'SELECT * FROM servicio WHERE CODIGO_SERVICIO = "'+data+'"'; 
       con.query(query+query1 , function(err, rows, fields) {
       if (!err)
-        socket.emit('items', { sub:rows[0], servicio:rows[1]})
+        socket.emit('okAllSubServicio', { sub:rows[0], servicio:rows[1]})
       else
         console.log('Error ' + err);
       }); 
   })
 
-  /* Listar Servicio */
+  /* Search Sub Servicio */
   socket.on('servicioListarUnico', (id) => {
       let query = 'SELECT * FROM sub_servicio WHERE CODIGO_SUBSERVICIO = "'+id+'"'; 
       con.query(query, function(err, rows, fields) {
@@ -280,17 +280,17 @@ let subServicio = io
                     SUB_ESTADO: "EN PROCESO",
                     SUB_DIAS: data.dias
                   }
-    let mensaje = '(Se ingreso servicio ' + data.area + ')'
+    let okAddSubServicio = '(Se ingreso sub servicio ' + data.area + ')'
 
     con.query('INSERT INTO `sub_servicio` SET ?',servicio, (err) => {
       console.log(err)
     if (!err)
-      console.log('Se ingreso servicio ' + data.area);
+      console.log(okAddSubServicio);
     else
       console.log('Error no se pudo ingresar sub-servicio '+ err);
     })
 
-    socket.emit('mensaje', mensaje)
+    socket.emit('okAddSubServicio', okAddSubServicio)
   })
 
    /* Update Servicio */

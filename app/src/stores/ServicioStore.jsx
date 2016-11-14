@@ -35,7 +35,6 @@ let ServicioStore = Reflux.createStore({
       this.obj.servicio = ''
       this.trigger(this.obj)
     })
-    
   },
   addServicio: function(data){ 
   	socket.emit('addServicio', data)
