@@ -13,11 +13,21 @@ import ItemSillas from '../components/servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(ServicioStore, 'data'))
+@ReactMixin.decorate(Reflux.connect(ServicioStore, 'obj'))
 export default class ServicioRoutes extends React.Component {
 
   constructor() {
     super()
+
+  }
+
+  componentWillMount(){
+  
+    if (this.state.obj.comunas == 'comunas') {
+
+      ServicioActions.formTrigger()
+    }
+      
 
   }
 
@@ -27,13 +37,13 @@ export default class ServicioRoutes extends React.Component {
         this.setState({area:<ItemProduccion />}) 
       break;
       case "Instalacion":
-        this.setState({area:<ItemInstalacion />}) 
+        this.setState({area:<ItemInstalacion comunas={this.state.obj.comunas} />}) 
       break;
       case "Sillas":
-        this.setState({area:<ItemSillas />}) 
+        this.setState({area:<ItemSillas comunas={this.state.obj.comunas} />}) 
       break;
       case "Despacho":
-        this.setState({area:<ItemDespacho />}) 
+        this.setState({area:<ItemDespacho comunas={this.state.obj.comunas} vehiculos={this.state.obj.vehiculos} />}) 
       break;
       default:
         this.setState({area:""}) 
@@ -87,10 +97,11 @@ export default class ServicioRoutes extends React.Component {
  
 
   render() {
-      console.log( this.state.comunas )
-      console.log( this.state.vehiculos )
+      //console.log( this.state.obj.comunas )
+      //console.log( this.state.obj.vehiculos )
+      //console.log( this.state.obj.mensaje )
       return (
-        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
+        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.obj.mensaje} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
       )
   }
 
