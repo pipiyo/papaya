@@ -22,13 +22,9 @@ export default class ServicioRoutes extends React.Component {
   }
 
   componentWillMount(){
-  
     if (this.state.obj.comunas == 'comunas') {
-
       ServicioActions.formTrigger()
     }
-      
-
   }
 
   formArea(ev) {

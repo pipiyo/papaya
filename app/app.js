@@ -123,7 +123,7 @@ let servicio = io
 
 
   /* Ingreso Servicio */
-  socket.on('servicio', (data) => {
+  socket.on('addServicio', (data) => {
     let servicio = {  
                       NOMBRE_SERVICIO: data.area, 
                       CATEGORIA: data.categoria, 
@@ -155,7 +155,7 @@ let servicio = io
                       ESTADO: "EN PROCESO",
                       DIAS: data.dias
                     }
-    let mensaje = '(Se ingreso servicio ' + data.area + ')'
+    let okAddServicio = '(Se ingreso servicio ' + data.area + ')'
 
     con.query('INSERT INTO `servicio` SET ?',servicio, (err) => {
     if (!err)
@@ -164,14 +164,14 @@ let servicio = io
       console.log('Error no se pudo ingresar servicio '+ err);
     })
 
-    socket.emit('mensaje', mensaje)
+    socket.emit('okAddServicio', okAddServicio)
   })
 
 
   /* Update Servicio */
-  socket.on('servicioUpdate', (data) => {
+  socket.on('updateServicio', (data) => {
 
-    let mensaje = '(Se update servicio ' + data.numero + ')'
+    let okUpdateServicio = '(Se update servicio ' + data.numero + ')'
 
     con.query('UPDATE servicio SET CATEGORIA = ?, SUPERVISOR = ?, FECHA_INICIO = ?, FECHA_ENTREGA = ?, DESCRIPCION = ?, OBSERVACIONES = ?, DIRECCION  = ?, GUIA_DESPACHO = ?, CODIGO_COMUNA = ?, M3 = ?, FI = ?, TM = ?, TP = ?, OS = ?, LIDER = ?, PUESTOS = ?, PROCESO = ?, INSTALADOR_1 = ?, INSTALADOR_2 = ?, INSTALADOR_3 = ?, EJECUTOR = ?, VALE = ?, TRANSPORTE = ?, CANTIDAD = ?, RECLAMOS = ?, ESTADO = ?, DIAS = ?  WHERE CODIGO_SERVICIO = ?', [data.categoria, data.supervisor, data.fechaInicio, data.fechaEntrega, data.descripcion, data.observacion, data.direccion, data.guia, data.comuna, data.m3, data.fi, data.tm, data.to, data.os, data.lider, data.puestos, data.proceso, data.instalador1, data.instalador2, data.instalador3, data.ejecutor, data.vale, data.vehiculo, data.cantidad, data.reclamo, data.estado, data.dias, data.numero], function(err, results) {
     if (!err)
@@ -180,15 +180,15 @@ let servicio = io
       console.log('Error no se pudo ingresar servicio '+ err);
     })
 
-    socket.emit('update', mensaje)
+    socket.emit('okUpdateServicio', okUpdateServicio)
   })
 
   /* Listar Servicio */
-  socket.on('servicioListar', (id) => {
+  socket.on('searchServicio', (id) => {
       let query = 'SELECT * FROM servicio WHERE CODIGO_SERVICIO = "'+id+'"'; 
       con.query(query, function(err, rows, fields) {
       if (!err)
-        socket.emit('items', rows)
+        socket.emit('okSearchServicio', rows)
       else
         console.log('Error ' + err);
       }); 
