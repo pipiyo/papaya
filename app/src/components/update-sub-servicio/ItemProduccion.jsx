@@ -10,6 +10,13 @@ class ItemProduccion extends React.Component {
                   cantidad:this.validador(props.datos[0].SUB_PUESTOS),
                 }
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+                  ejecutor:this.validador(nextProps.datos[0].SUB_EJECUTOR),
+                  vale:this.validador(nextProps.datos[0].SUB_VALE),
+                  cantidad:this.validador(nextProps.datos[0].SUB_PUESTOS),
+                });
+  }
   componentDidMount(){
     let i
 

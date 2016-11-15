@@ -11,12 +11,16 @@ import ItemSillas from '../components/sub-servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/sub-servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/sub-servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'data'))
+@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'obj'))
 export default class SubServicioRoutes extends React.Component {
 
   constructor() {
     super()
     this.state = {data:"", area: ""}
+  }
+
+  componentWillMount(){
+    SubServicioActions.formTrigger()
   }
 
   formArea(ev) {
@@ -25,13 +29,13 @@ export default class SubServicioRoutes extends React.Component {
         this.setState({area:<ItemProduccion />}) 
       break;
       case "Instalacion":
-        this.setState({area:<ItemInstalacion />}) 
+        this.setState({area:<ItemInstalacion comunas={this.state.obj.comunas} />}) 
       break;
       case "Sillas":
-        this.setState({area:<ItemSillas />}) 
+        this.setState({area:<ItemSillas comunas={this.state.obj.comunas} />}) 
       break;
       case "Despacho":
-        this.setState({area:<ItemDespacho />}) 
+        this.setState({area:<ItemDespacho comunas={this.state.obj.comunas} vehiculos={this.state.obj.vehiculos} />}) 
       break;
       default:
         this.setState({area:""}) 
@@ -86,7 +90,7 @@ export default class SubServicioRoutes extends React.Component {
 
   render() {
       return (
-        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
+        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.obj.mensaje} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
       )
   }
 

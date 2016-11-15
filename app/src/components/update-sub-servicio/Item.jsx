@@ -16,6 +16,19 @@ class Item extends React.Component {
                   observaciones : this.validador(props.datos[0].SUB_OBSERVACIONES)
                 }
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+                  codigo:this.validador(nextProps.datos[0].CODIGO_SUBSERVICIO),
+                  dias:this.validador(nextProps.datos[0].SUB_DIAS),
+                  categoria:this.validador(nextProps.datos[0].SUB_CATEGORIA),
+                  supervisor : this.validador(nextProps.datos[0].SUB_SUPERVISOR),
+                  estado : this.validador(nextProps.datos[0].SUB_ESTADO),
+                  fechaInicio : this.validador(nextProps.datos[0].SUB_FECHA_INICIO,true),
+                  fechaEntrega : this.validador(nextProps.datos[0].SUB_FECHA_INICIO,true),
+                  descripcion : this.validador(nextProps.datos[0].SUB_DESCRIPCION),
+                  observaciones : this.validador(nextProps.datos[0].SUB_OBSERVACIONES)
+                });
+  }
   componentDidMount(){
     let i
     let numero = document.getElementById("categoria")

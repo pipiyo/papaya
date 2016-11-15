@@ -100,8 +100,11 @@ class ItemInstalacion extends React.Component {
             <label>Comuna</label>
              <select id="comuna">
                 <option value="">Seleccioné</option>
-                <option value="1">Puente Alto</option>
-                <option value="321">La Florida</option>
+                 {
+                  this.props.comunas.map( (comuna) => {
+                    return <option value={comuna.codigo} key={comuna.codigo}>{comuna.nombre}</option>
+                  })
+                } 
               </select>
           </div>  
 

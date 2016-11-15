@@ -11,7 +11,7 @@ import ItemSillas from '../components/update-servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/update-servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/update-servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(ServicioStore, 'servicio'))
+@ReactMixin.decorate(Reflux.connect(ServicioStore, 'obj'))
 export default class UpdateServicioRoutes extends React.Component {
 
   constructor() {
@@ -20,21 +20,22 @@ export default class UpdateServicioRoutes extends React.Component {
   }
 
   componentWillMount(){
-    ServicioActions.servicio(this.props.params.id);
+    ServicioActions.formTrigger()
+    ServicioActions.searchServicio(this.props.params.id);
   }
   formArea(area) {
      switch(area) {
       case "Produccion":
-        this.state.area = <ItemProduccion datos={this.state.servicio} /> 
+        this.state.area = <ItemProduccion datos={this.state.obj.servicio} /> 
       break;
       case "Instalacion":
-        this.state.area = <ItemInstalacion datos={this.state.servicio} />
+        this.state.area = <ItemInstalacion comunas={this.state.obj.comunas} datos={this.state.obj.servicio} />
       break;
       case "Sillas":
-        this.state.area = <ItemSillas datos={this.state.servicio} />
+        this.state.area = <ItemSillas comunas={this.state.obj.comunas} datos={this.state.obj.servicio} />
       break;
       case "Despacho":
-        this.state.area = <ItemDespacho datos={this.state.servicio} />
+        this.state.area = <ItemDespacho vehiculos={this.state.obj.vehiculos} comunas={this.state.obj.comunas} datos={this.state.obj.servicio} />
       break;
       default:
         this.state.area = ""
@@ -77,10 +78,10 @@ export default class UpdateServicioRoutes extends React.Component {
  
 
   render() {
-      if(this.state.servicio) {
-        this.formArea(this.state.servicio[0].NOMBRE_SERVICIO)
+      if(this.state.obj.servicio) {
+        this.formArea(this.state.obj.servicio[0].NOMBRE_SERVICIO)
       return (
-        <ServicioIndex datos={this.state.servicio} tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} updateServicio={this.updateServicio.bind(this)} />       
+        <ServicioIndex datos={this.state.obj.servicio} tipo={this.props.params.tipo} area={this.state.area} updateServicio={this.updateServicio.bind(this)} />       
       )
       }else{
         return (

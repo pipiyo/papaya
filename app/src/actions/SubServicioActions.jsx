@@ -1,7 +1,11 @@
 import Reflux from 'reflux'
 
 let SubServicioActions = Reflux.createActions([
-	'addSubServicio','subServicio','updateSubServicio','subServicioUpdate'
+	'addSubServicio',
+	'allSubServicio',
+	'updateSubServicio',
+	'searchSubServicio',
+	'formTrigger'
 ])
 
 export default SubServicioActions
