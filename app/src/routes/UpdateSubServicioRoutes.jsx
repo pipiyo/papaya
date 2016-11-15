@@ -22,20 +22,22 @@ export default class UpdateSubServicioRoutes extends React.Component {
 
   componentWillMount(){
     SubServicioActions.searchSubServicio(this.props.params.id);
+    SubServicioActions.formTrigger()
   }
+
   formArea(area) {
      switch(area) {
       case "Produccion":
-        this.state.area = <ItemProduccion datos={this.state.servicio} /> 
+        this.state.area = <ItemProduccion datos={this.state.obj.search} /> 
       break;
       case "Instalacion":
-        this.state.area = <ItemInstalacion datos={this.state.servicio} />
+        this.state.area = <ItemInstalacion datos={this.state.obj.search} />
       break;
       case "Sillas":
-        this.state.area = <ItemSillas datos={this.state.servicio} />
+        this.state.area = <ItemSillas datos={this.state.obj.search} />
       break;
       case "Despacho":
-        this.state.area = <ItemDespacho datos={this.state.servicio} />
+        this.state.area = <ItemDespacho datos={this.state.obj.search} />
       break;
       default:
         this.state.area = ""

@@ -10,6 +10,13 @@ class ItemSillas extends React.Component {
                   cantidad:this.validador(props.datos[0].SUB_PUESTOS),
                 }
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+                  direccion:this.validador(nextProps.datos[0].SUB_DIRECCION),
+                  ejecutor:this.validador(nextProps.datos[0].SUB_EJECUTOR),
+                  cantidad:this.validador(nextProps.datos[0].SUB_PUESTOS),
+                });
+  }
   componentDidMount(){
     let i
     let numero = document.getElementById("comuna")
