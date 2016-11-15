@@ -2,12 +2,12 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
-import SubServicioActions from '../actions/SubServicioActions'
-import SubServicioStore from '../stores/SubServicioStore'
+import DetalleInformeActions from '../actions/DetalleInformeActions'
+import DetalleInformeStore from '../stores/DetalleInformeStore'
 
 import DetalleInforme from '../components/detalle-informe'
 
-@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'data'))
+@ReactMixin.decorate(Reflux.connect(DetalleInformeStore, 'obj'))
 export default class DetalleInformeRoutes extends React.Component {
 
   constructor() {
@@ -15,14 +15,13 @@ export default class DetalleInformeRoutes extends React.Component {
   }
 
   componentWillMount(){
-  	SubServicioActions.subServicio(this.props.params.id);
+  	DetalleInformeActions.allSubServicio(this.props.params.id);
   }
-
+  
   render() {
-    console.log(this.state.data)
-    if(this.state.data){  
+    if(this.state.obj.subServicio){  
       return (
-        <DetalleInforme datos={this.state.data} />       
+        <DetalleInforme datos={this.state.obj.subServicio} />       
       )
     }else{
       return (

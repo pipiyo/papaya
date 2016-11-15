@@ -1,10 +1,10 @@
 import Reflux from 'reflux'
 
-let ServicioActions = Reflux.createActions([
+let UpdateServicioActions = Reflux.createActions([
 	'addServicio',
 	'updateServicio',
 	'searchServicio',
 	'formTrigger'
 ])
 
-export default ServicioActions
+export default UpdateServicioActions

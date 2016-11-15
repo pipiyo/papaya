@@ -16,7 +16,6 @@ let LoginStore = Reflux.createStore({
   socket.emit('login', user, (token) =>{
 
     if (token) {
-      console.log( token )
       this.storeUser( token )
       browserHistory.push('home')
     } else {

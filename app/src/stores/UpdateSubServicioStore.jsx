@@ -1,13 +1,13 @@
 import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
-import SubServicioActions from '../actions/SubServicioActions'
+import UpdateSubServicioActions from '../actions/UpdateSubServicioActions'
 import Env from '../Config'
 import io from 'socket.io-client'
 const socket = io.connect( `${Env.url}subServicio` )
 
-let SubServicioStore = Reflux.createStore({
-  listenables: [SubServicioActions],
-  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: ''},
+let UpdateSubServicioStore = Reflux.createStore({
+  listenables: [UpdateSubServicioActions],
+  obj: { comunas: 'comunas', vehiculos: 'vehiculos', search: ''},
   init: function() {
     this.getObj()
   },
@@ -15,7 +15,6 @@ let SubServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.mensaje = ''
       this.obj.search = ''
     })
   },
@@ -26,19 +25,24 @@ let SubServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.mensaje = ''
       this.obj.search = ''
       this.trigger(this.obj)
     })
-    
   },
-  addSubServicio: function(data){
-    socket.emit('addSubServicio', data)
-    socket.on('okAddSubServicio', (okAddSubServicio) =>{
-      this.obj.mensaje = okAddSubServicio
+  updateSubServicio: function(data,ruta){
+    socket.emit('updateSubServicio', data)
+    socket.on('okUpdateSubServicio', (okUpdateSubServicio) =>{
+      browserHistory.push(ruta)
+    })
+  },
+  searchSubServicio: function(data){
+    socket.emit('searchSubServicio', data)
+    socket.on('okSearchSubServicio', (okSearchSubServicio) =>{
+      this.obj.search = okSearchSubServicio
       this.trigger(this.obj)
     })
-  }
+  },
+  
 })
 
-export default SubServicioStore
+export default UpdateSubServicioStore

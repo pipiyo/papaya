@@ -1,0 +1,5 @@
+dump.rdb
+/app/bundle/js/bundle.js
+/app/bundle/index.html
+/app/.gitignore.swp
+/app/dump.rdb

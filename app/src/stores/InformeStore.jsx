@@ -6,10 +6,10 @@ const socket = io.connect( `${Env.url}servicio` )
 
 let InformeStore = Reflux.createStore({
   listenables: [InformeActions],
-  viewInformes: function(data,cant,estado,codigo,vendedor,categoria,fecha,cliente){
-  	socket.emit('informe', data,cant,estado,codigo,vendedor,categoria,fecha,cliente)
-  	socket.on('item', (item) =>{
-  		this.trigger(item)
+  viewInformes: function(data,cant,estado,codigo,vendedor,categoria,fechai,cliente,fechae){
+  	socket.emit('viewInformes', data,cant,estado,codigo,vendedor,categoria,fechai,cliente,fechae)
+  	socket.on('okViewInformes', (okViewInformes) =>{
+  		this.trigger(okViewInformes)
   	})
   }
 })

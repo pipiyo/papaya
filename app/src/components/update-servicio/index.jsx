@@ -12,7 +12,7 @@ class ServicioIndex extends React.Component {
   render() {
       return (
         <div>
-            <Title mensaje={this.props.mensaje} />
+            <Title />
             <Form datos={this.props.datos} tipo={this.props.tipo} updateServicio={this.props.updateServicio} area={this.props.area} />
         </div>   
       )

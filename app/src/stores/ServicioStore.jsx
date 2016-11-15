@@ -1,31 +1,44 @@
 import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
 import ServicioActions from '../actions/ServicioActions'
+
+import FormIngresoServicioStore from '../stores/FormIngresoServicioStore'
+
 import Env from '../Config'
 import io from 'socket.io-client'
 const socket = io.connect( `${Env.url}servicio` )
 
+
+
 let ServicioStore = Reflux.createStore({
   listenables: [ServicioActions],
-  getInitialState: function() {
-
+  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: 'mensaje' },
+  init: function() {
+    this.getObj()
   },
-  addServicio: function(data){
-  	socket.emit('servicio', data)
-  	socket.on('mensaje', (mensaje) =>{
-  		this.trigger(mensaje)
-  	})
-  },
-  updateServicio: function(data){
-    socket.emit('servicioUpdate', data)
-    socket.on('update', (update) =>{
-      browserHistory.push('/home')
+  getObj: function() {
+    socket.emit('formingresoservicio', (comunas, vehiculos) => {
+      this.obj.comunas = comunas
+      this.obj.vehiculos = vehiculos
+      this.obj.mensaje = ''
     })
   },
-  servicio: function(data){
-  	socket.emit('servicioListar', data)
-  	socket.on('items', (items) =>{
-  		this.trigger(items)
+  getInitialState: function() {
+    return this.obj
+  },
+  formTrigger: function() {
+    socket.emit('formingresoservicio', (comunas, vehiculos) => {
+      this.obj.comunas = comunas
+      this.obj.vehiculos = vehiculos
+      this.obj.mensaje = ''
+      this.trigger(this.obj)
+    })
+  },
+  addServicio: function(data){ 
+  	socket.emit('addServicio', data)
+  	socket.on('okAddServicio', (okAddServicio) =>{
+      this.obj.mensaje = okAddServicio
+  		this.trigger(this.obj)
   	})
   }
 })

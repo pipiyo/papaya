@@ -21624,7 +21624,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.check);
+
 	      if (this.state.check) {
 	        return _react2.default.createElement(_Login2.default, { onSubmit: this.userFormSubmit.bind(this) });
 	      } else {
@@ -23525,7 +23525,6 @@
 	    socket.emit('login', user, function (token) {
 
 	      if (token) {
-	        console.log(token);
 	        _this.storeUser(token);
 	        _reactRouter.browserHistory.push('home');
 	      } else {
@@ -37019,6 +37018,10 @@
 
 	var _ServicioStore2 = _interopRequireDefault(_ServicioStore);
 
+	var _FormIngresoServicioStore = __webpack_require__(314);
+
+	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
+
 	var _servicio = __webpack_require__(315);
 
 	var _servicio2 = _interopRequireDefault(_servicio);
@@ -37047,19 +37050,23 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	var ServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(ServicioRoutes, _React$Component);
 
 	  function ServicioRoutes() {
 	    _classCallCheck(this, ServicioRoutes);
 
-	    var _this = _possibleConstructorReturn(this, (ServicioRoutes.__proto__ || Object.getPrototypeOf(ServicioRoutes)).call(this));
-
-	    _this.state = { data: "", area: "" };
-	    return _this;
+	    return _possibleConstructorReturn(this, (ServicioRoutes.__proto__ || Object.getPrototypeOf(ServicioRoutes)).call(this));
 	  }
 
 	  _createClass(ServicioRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      if (this.state.obj.comunas == 'comunas') {
+	        _ServicioActions2.default.formTrigger();
+	      }
+	    }
+	  }, {
 	    key: 'formArea',
 	    value: function formArea(ev) {
 	      switch (ev.target.value) {
@@ -37067,13 +37074,13 @@
 	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
 	          break;
 	        case "Instalacion":
-	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas }) });
 	          break;
 	        case "Sillas":
-	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas }) });
 	          break;
 	        case "Despacho":
-	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, { comunas: this.state.obj.comunas, vehiculos: this.state.obj.vehiculos }) });
 	          break;
 	        default:
 	          this.setState({ area: "" });
@@ -37144,7 +37151,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_servicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.data, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
+	      //console.log( this.state.obj.comunas )
+	      //console.log( this.state.obj.vehiculos )
+	      //console.log( this.state.obj.mensaje )
+	      return _react2.default.createElement(_servicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
 	    }
 	  }]);
 
@@ -37168,7 +37178,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ServicioActions = _reflux2.default.createActions(['addServicio', 'servicio', 'updateServicio']);
+	var ServicioActions = _reflux2.default.createActions(['addServicio', 'updateServicio', 'searchServicio', 'formTrigger']);
 
 	exports.default = ServicioActions;
 
@@ -37192,6 +37202,10 @@
 
 	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
 
+	var _FormIngresoServicioStore = __webpack_require__(314);
+
+	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
+
 	var _Config = __webpack_require__(261);
 
 	var _Config2 = _interopRequireDefault(_Config);
@@ -37206,27 +37220,39 @@
 
 	var ServicioStore = _reflux2.default.createStore({
 	  listenables: [_ServicioActions2.default],
-	  getInitialState: function getInitialState() {},
-	  addServicio: function addServicio(data) {
+	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: 'mensaje' },
+	  init: function init() {
+	    this.getObj();
+	  },
+	  getObj: function getObj() {
 	    var _this = this;
 
-	    socket.emit('servicio', data);
-	    socket.on('mensaje', function (mensaje) {
-	      _this.trigger(mensaje);
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this.obj.comunas = comunas;
+	      _this.obj.vehiculos = vehiculos;
+	      _this.obj.mensaje = '';
 	    });
 	  },
-	  updateServicio: function updateServicio(data) {
-	    socket.emit('servicioUpdate', data);
-	    socket.on('update', function (update) {
-	      _reactRouter.browserHistory.push('/home');
-	    });
+	  getInitialState: function getInitialState() {
+	    return this.obj;
 	  },
-	  servicio: function servicio(data) {
+	  formTrigger: function formTrigger() {
 	    var _this2 = this;
 
-	    socket.emit('servicioListar', data);
-	    socket.on('items', function (items) {
-	      _this2.trigger(items);
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this2.obj.comunas = comunas;
+	      _this2.obj.vehiculos = vehiculos;
+	      _this2.obj.mensaje = '';
+	      _this2.trigger(_this2.obj);
+	    });
+	  },
+	  addServicio: function addServicio(data) {
+	    var _this3 = this;
+
+	    socket.emit('addServicio', data);
+	    socket.on('okAddServicio', function (okAddServicio) {
+	      _this3.obj.mensaje = okAddServicio;
+	      _this3.trigger(_this3.obj);
 	    });
 	  }
 	});
@@ -37234,7 +37260,51 @@
 	exports.default = ServicioStore;
 
 /***/ },
-/* 314 */,
+/* 314 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var FormIngresoServicioStore = function () {
+	  function FormIngresoServicioStore() {
+	    _classCallCheck(this, FormIngresoServicioStore);
+
+	    this._comunas = null;
+	    this._vehiculos = null;
+	  }
+
+	  _createClass(FormIngresoServicioStore, [{
+	    key: "comunas",
+	    get: function get() {
+	      return this._comunas;
+	    },
+	    set: function set(value) {
+	      this._comunas = value;
+	    }
+	  }, {
+	    key: "vehiculos",
+	    get: function get() {
+	      return this._vehiculos;
+	    },
+	    set: function set(value) {
+	      this._vehiculos = value;
+	    }
+	  }]);
+
+	  return FormIngresoServicioStore;
+	}();
+
+	exports.default = new FormIngresoServicioStore();
+
+/***/ },
 /* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -37918,16 +37988,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38169,16 +38236,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38284,16 +38348,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38312,36 +38373,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CBWT-96 (Camion 1)" },
-	              "CBWT-96 (Camion 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CRBC-30 (Camion 2)" },
-	              "CRBC-30 (Camion 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FXVD-65 (Camion 3)" },
-	              "FXVD-65 (Camion 3)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CFDL-32 (Furgon 1)" },
-	              "CFDL-32 (Furgon 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FYYC-66 (Furgon 2)" },
-	              "FYYC-66 (Furgon 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "DDVG-61 (Camioneta)" },
-	              "DDVG-61 (Camioneta)"
-	            )
+	            this.props.vehiculos.map(function (vehiculo) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: vehiculo.patente, key: vehiculo.id },
+	                vehiculo.patente
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38430,13 +38468,13 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _ServicioActions = __webpack_require__(312);
+	var _UpdateServicioActions = __webpack_require__(324);
 
-	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
+	var _UpdateServicioActions2 = _interopRequireDefault(_UpdateServicioActions);
 
-	var _ServicioStore = __webpack_require__(313);
+	var _UpdateServicioStore = __webpack_require__(325);
 
-	var _ServicioStore2 = _interopRequireDefault(_ServicioStore);
+	var _UpdateServicioStore2 = _interopRequireDefault(_UpdateServicioStore);
 
 	var _updateServicio = __webpack_require__(326);
 
@@ -38466,7 +38504,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var UpdateServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_ServicioStore2.default, 'servicio')), _dec(_class = function (_React$Component) {
+	var UpdateServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_UpdateServicioStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(UpdateServicioRoutes, _React$Component);
 
 	  function UpdateServicioRoutes() {
@@ -38481,23 +38519,24 @@
 	  _createClass(UpdateServicioRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _ServicioActions2.default.servicio(this.props.params.id);
+	      _UpdateServicioActions2.default.formTrigger();
+	      _UpdateServicioActions2.default.searchServicio(this.props.params.id);
 	    }
 	  }, {
 	    key: 'formArea',
 	    value: function formArea(area) {
 	      switch (area) {
 	        case "Produccion":
-	          this.state.area = _react2.default.createElement(_ItemProduccion2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemProduccion2.default, { datos: this.state.obj.servicio });
 	          break;
 	        case "Instalacion":
-	          this.state.area = _react2.default.createElement(_ItemInstalacion2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas, datos: this.state.obj.servicio });
 	          break;
 	        case "Sillas":
-	          this.state.area = _react2.default.createElement(_ItemSillas2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas, datos: this.state.obj.servicio });
 	          break;
 	        case "Despacho":
-	          this.state.area = _react2.default.createElement(_ItemDespacho2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemDespacho2.default, { vehiculos: this.state.obj.vehiculos, comunas: this.state.obj.comunas, datos: this.state.obj.servicio });
 	          break;
 	        default:
 	          this.state.area = "";
@@ -38536,14 +38575,14 @@
 	        "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
 	        "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
 	      };
-	      _ServicioActions2.default.updateServicio(servicio);
+	      _UpdateServicioActions2.default.updateServicio(servicio);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      if (this.state.servicio) {
-	        this.formArea(this.state.servicio[0].NOMBRE_SERVICIO);
-	        return _react2.default.createElement(_updateServicio2.default, { datos: this.state.servicio, tipo: this.props.params.tipo, mensaje: this.state.data, area: this.state.area, updateServicio: this.updateServicio.bind(this) });
+	      if (this.state.obj.servicio) {
+	        this.formArea(this.state.obj.servicio[0].NOMBRE_SERVICIO);
+	        return _react2.default.createElement(_updateServicio2.default, { datos: this.state.obj.servicio, tipo: this.props.params.tipo, area: this.state.area, updateServicio: this.updateServicio.bind(this) });
 	      } else {
 	        return _react2.default.createElement(
 	          'div',
@@ -38563,8 +38602,105 @@
 	exports.default = UpdateServicioRoutes;
 
 /***/ },
-/* 324 */,
-/* 325 */,
+/* 324 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UpdateServicioActions = _reflux2.default.createActions(['addServicio', 'updateServicio', 'searchServicio', 'formTrigger']);
+
+	exports.default = UpdateServicioActions;
+
+/***/ },
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _UpdateServicioActions = __webpack_require__(324);
+
+	var _UpdateServicioActions2 = _interopRequireDefault(_UpdateServicioActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var socket = _socket2.default.connect(_Config2.default.url + 'servicio');
+
+	var UpdateServicioStore = _reflux2.default.createStore({
+	  listenables: [_UpdateServicioActions2.default],
+	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', servicio: '' },
+	  init: function init() {
+	    this.getObj();
+	  },
+	  getObj: function getObj() {
+	    var _this = this;
+
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this.obj.comunas = comunas;
+	      _this.obj.vehiculos = vehiculos;
+	      _this.obj.servicio = '';
+	    });
+	  },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  formTrigger: function formTrigger() {
+	    var _this2 = this;
+
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this2.obj.comunas = comunas;
+	      _this2.obj.vehiculos = vehiculos;
+	      _this2.obj.servicio = '';
+	      _this2.trigger(_this2.obj);
+	    });
+	  },
+	  updateServicio: function updateServicio(data) {
+	    socket.emit('updateServicio', data);
+	    socket.on('okUpdateServicio', function (okUpdateServicio) {
+	      _reactRouter.browserHistory.push('/home');
+	    });
+	  },
+	  searchServicio: function searchServicio(data) {
+	    var _this3 = this;
+
+	    socket.emit('searchServicio', data);
+	    socket.on('okSearchServicio', function (okSearchServicio) {
+	      _this3.obj.servicio = okSearchServicio;
+	      _this3.trigger(_this3.obj);
+	    });
+	  }
+	});
+
+	exports.default = UpdateServicioStore;
+
+/***/ },
 /* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -38611,7 +38747,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Title2.default, { mensaje: this.props.mensaje }),
+	        _react2.default.createElement(_Title2.default, null),
 	        _react2.default.createElement(_Form2.default, { datos: this.props.datos, tipo: this.props.tipo, updateServicio: this.props.updateServicio, area: this.props.area })
 	      );
 	    }
@@ -38667,8 +38803,7 @@
 	          _react2.default.createElement(
 	            "h3",
 	            null,
-	            "Formulario actualizar actividad ",
-	            this.props.mensaje
+	            "Formulario actualizar actividad"
 	          )
 	        )
 	      );
@@ -39306,16 +39441,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -39610,16 +39742,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "321" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -39780,21 +39909,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "21" },
-	              "La Reina"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -39813,41 +39934,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CBWT-96 (Camion 1)" },
-	              "CBWT-96 (Camion 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CRBC-30 (Camion 2)" },
-	              "CRBC-30 (Camion 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FXVD-65 (Camion 3)" },
-	              "FXVD-65 (Camion 3)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CFDL-32 (Furgon 1)" },
-	              "CFDL-32 (Furgon 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FYYC-66 (Furgon 2)" },
-	              "FYYC-66 (Furgon 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "DDVG-61 (Camioneta)" },
-	              "DDVG-61 (Camioneta)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Externo" },
-	              "Externo"
-	            )
+	            this.props.vehiculos.map(function (vehiculo) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: vehiculo.patente, key: vehiculo.id },
+	                vehiculo.patente
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -39972,7 +40065,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var SubServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_SubServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	var SubServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_SubServicioStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(SubServicioRoutes, _React$Component);
 
 	  function SubServicioRoutes() {
@@ -39985,6 +40078,11 @@
 	  }
 
 	  _createClass(SubServicioRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _SubServicioActions2.default.formTrigger();
+	    }
+	  }, {
 	    key: 'formArea',
 	    value: function formArea(ev) {
 	      switch (ev.target.value) {
@@ -39992,13 +40090,13 @@
 	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
 	          break;
 	        case "Instalacion":
-	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas }) });
 	          break;
 	        case "Sillas":
-	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas }) });
 	          break;
 	        case "Despacho":
-	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, null) });
+	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, { comunas: this.state.obj.comunas, vehiculos: this.state.obj.vehiculos }) });
 	          break;
 	        default:
 	          this.setState({ area: "" });
@@ -40069,7 +40167,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_subServicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.data, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_subServicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
 	    }
 	  }]);
 
@@ -40093,7 +40191,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SubServicioActions = _reflux2.default.createActions(['addSubServicio', 'subServicio', 'updateSubServicio', 'subServicioUpdate']);
+	var SubServicioActions = _reflux2.default.createActions(['addSubServicio', 'updateSubServicio', 'searchSubServicio', 'formTrigger']);
 
 	exports.default = SubServicioActions;
 
@@ -40131,35 +40229,41 @@
 
 	var SubServicioStore = _reflux2.default.createStore({
 	  listenables: [_SubServicioActions2.default],
-	  getInitialState: function getInitialState() {},
-	  subServicio: function subServicio(data) {
+	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: '' },
+	  init: function init() {
+	    this.getObj();
+	  },
+	  getObj: function getObj() {
 	    var _this = this;
 
-	    socket.emit('servicioListar', data);
-	    socket.on('items', function (items) {
-	      _this.trigger(items);
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this.obj.comunas = comunas;
+	      _this.obj.vehiculos = vehiculos;
+	      _this.obj.mensaje = '';
+	      _this.obj.search = '';
+	    });
+	  },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  formTrigger: function formTrigger() {
+	    var _this2 = this;
+
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this2.obj.comunas = comunas;
+	      _this2.obj.vehiculos = vehiculos;
+	      _this2.obj.mensaje = '';
+	      _this2.obj.search = '';
+	      _this2.trigger(_this2.obj);
 	    });
 	  },
 	  addSubServicio: function addSubServicio(data) {
-	    var _this2 = this;
-
-	    socket.emit('addSubServicio', data);
-	    socket.on('mensaje', function (mensaje) {
-	      _this2.trigger(mensaje);
-	    });
-	  },
-	  subServicioUpdate: function subServicioUpdate(data) {
 	    var _this3 = this;
 
-	    socket.emit('servicioListarUnico', data);
-	    socket.on('datos', function (datos) {
-	      _this3.trigger(datos);
-	    });
-	  },
-	  updateSubServicio: function updateSubServicio(data, ruta) {
-	    socket.emit('subServicioUpdate', data);
-	    socket.on('update', function (update) {
-	      _reactRouter.browserHistory.push(ruta);
+	    socket.emit('addSubServicio', data);
+	    socket.on('okAddSubServicio', function (okAddSubServicio) {
+	      _this3.obj.mensaje = okAddSubServicio;
+	      _this3.trigger(_this3.obj);
 	    });
 	  }
 	});
@@ -40839,16 +40943,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -41090,16 +41191,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -41205,16 +41303,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -41233,36 +41328,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CBWT-96 (Camion 1)" },
-	              "CBWT-96 (Camion 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CRBC-30 (Camion 2)" },
-	              "CRBC-30 (Camion 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FXVD-65 (Camion 3)" },
-	              "FXVD-65 (Camion 3)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CFDL-32 (Furgon 1)" },
-	              "CFDL-32 (Furgon 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FYYC-66 (Furgon 2)" },
-	              "FYYC-66 (Furgon 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "DDVG-61 (Camioneta)" },
-	              "DDVG-61 (Camioneta)"
-	            )
+	            this.props.vehiculos.map(function (vehiculo) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: vehiculo.patente, key: vehiculo.id },
+	                vehiculo.patente
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -41351,13 +41423,13 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _SubServicioActions = __webpack_require__(335);
+	var _UpdateSubServicioActions = __webpack_require__(394);
 
-	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
+	var _UpdateSubServicioActions2 = _interopRequireDefault(_UpdateSubServicioActions);
 
-	var _SubServicioStore = __webpack_require__(336);
+	var _UpdateSubServicioStore = __webpack_require__(395);
 
-	var _SubServicioStore2 = _interopRequireDefault(_SubServicioStore);
+	var _UpdateSubServicioStore2 = _interopRequireDefault(_UpdateSubServicioStore);
 
 	var _updateSubServicio = __webpack_require__(346);
 
@@ -41387,7 +41459,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var UpdateSubServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_SubServicioStore2.default, 'servicio')), _dec(_class = function (_React$Component) {
+	var UpdateSubServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_UpdateSubServicioStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(UpdateSubServicioRoutes, _React$Component);
 
 	  function UpdateSubServicioRoutes() {
@@ -41402,23 +41474,24 @@
 	  _createClass(UpdateSubServicioRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _SubServicioActions2.default.subServicioUpdate(this.props.params.id);
+	      _UpdateSubServicioActions2.default.formTrigger();
+	      _UpdateSubServicioActions2.default.searchSubServicio(this.props.params.id);
 	    }
 	  }, {
 	    key: 'formArea',
 	    value: function formArea(area) {
 	      switch (area) {
 	        case "Produccion":
-	          this.state.area = _react2.default.createElement(_ItemProduccion2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemProduccion2.default, { datos: this.state.obj.search });
 	          break;
 	        case "Instalacion":
-	          this.state.area = _react2.default.createElement(_ItemInstalacion2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas, datos: this.state.obj.search });
 	          break;
 	        case "Sillas":
-	          this.state.area = _react2.default.createElement(_ItemSillas2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas, datos: this.state.obj.search });
 	          break;
 	        case "Despacho":
-	          this.state.area = _react2.default.createElement(_ItemDespacho2.default, { datos: this.state.servicio });
+	          this.state.area = _react2.default.createElement(_ItemDespacho2.default, { vehiculos: this.state.obj.vehiculos, comunas: this.state.obj.comunas, datos: this.state.obj.search });
 	          break;
 	        default:
 	          this.state.area = "";
@@ -41457,15 +41530,15 @@
 	        "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
 	        "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
 	      };
-	      var ruta = "/home/detalle-actividad/" + this.state.servicio[0].SUB_CODIGO_SERVICIO;
-	      _SubServicioActions2.default.updateSubServicio(servicio, ruta);
+	      var ruta = "/home/detalle-actividad/" + this.state.obj.search[0].SUB_CODIGO_SERVICIO;
+	      _UpdateSubServicioActions2.default.updateSubServicio(servicio, ruta);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      if (this.state.servicio) {
-	        this.formArea(this.state.servicio[0].SUB_NOMBRE_SERVICIO);
-	        return _react2.default.createElement(_updateSubServicio2.default, { datos: this.state.servicio, tipo: this.props.params.tipo, mensaje: this.state.data, area: this.state.area, updateServicio: this.updateServicio.bind(this) });
+	      if (this.state.obj.search) {
+	        this.formArea(this.state.obj.search[0].SUB_NOMBRE_SERVICIO);
+	        return _react2.default.createElement(_updateSubServicio2.default, { datos: this.state.obj.search, tipo: this.props.params.tipo, area: this.state.area, updateServicio: this.updateServicio.bind(this) });
 	      } else {
 	        return _react2.default.createElement(
 	          'div',
@@ -41704,6 +41777,21 @@
 	  }
 
 	  _createClass(Item, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        codigo: this.validador(nextProps.datos[0].CODIGO_SUBSERVICIO),
+	        dias: this.validador(nextProps.datos[0].SUB_DIAS),
+	        categoria: this.validador(nextProps.datos[0].SUB_CATEGORIA),
+	        supervisor: this.validador(nextProps.datos[0].SUB_SUPERVISOR),
+	        estado: this.validador(nextProps.datos[0].SUB_ESTADO),
+	        fechaInicio: this.validador(nextProps.datos[0].SUB_FECHA_INICIO, true),
+	        fechaEntrega: this.validador(nextProps.datos[0].SUB_FECHA_INICIO, true),
+	        descripcion: this.validador(nextProps.datos[0].SUB_DESCRIPCION),
+	        observaciones: this.validador(nextProps.datos[0].SUB_OBSERVACIONES)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -41949,6 +42037,15 @@
 	  }
 
 	  _createClass(ItemProduccion, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        ejecutor: this.validador(nextProps.datos[0].SUB_EJECUTOR),
+	        vale: this.validador(nextProps.datos[0].SUB_VALE),
+	        cantidad: this.validador(nextProps.datos[0].SUB_PUESTOS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -42139,6 +42236,15 @@
 	  }
 
 	  _createClass(ItemSillas, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
+	        ejecutor: this.validador(nextProps.datos[0].SUB_EJECUTOR),
+	        cantidad: this.validador(nextProps.datos[0].SUB_PUESTOS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -42226,16 +42332,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -42365,6 +42468,19 @@
 	  }
 
 	  _createClass(ItemInstalacion, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
+	        lider: this.validador(nextProps.datos[0].LIDER),
+	        instalador1: this.validador(nextProps.datos[0].SUB_INSTALADOR_1),
+	        instalador2: this.validador(nextProps.datos[0].SUB_INSTALADOR_2),
+	        instalador3: this.validador(nextProps.datos[0].SUB_INSTALADOR_3),
+	        puestos: this.validador(nextProps.datos[0].SUB_PUESTOS),
+	        os: this.validador(nextProps.datos[0].SUB_OS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -42530,16 +42646,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "321" },
-	              "La Florida"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -42608,6 +42721,21 @@
 	  }
 
 	  _createClass(ItemDespacho, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        guia: this.validador(nextProps.datos[0].SUB_GUIA_DESPACHO),
+	        comuna: this.validador(nextProps.datos[0].SUB_CODIGO_COMUNA),
+	        vehiculo: this.validador(nextProps.datos[0].SUB_TRANSPORTE),
+	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
+	        m3: this.validador(nextProps.datos[0].SUB_M3),
+	        fi: this.validador(nextProps.datos[0].SUB_I),
+	        tm: this.validador(nextProps.datos[0].SUB_TM),
+	        to: this.validador(nextProps.datos[0].SUB_TP),
+	        os: this.validador(nextProps.datos[0].SUB_OS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -42700,21 +42828,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "1" },
-	              "Puente Alto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "2" },
-	              "La Florida"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "21" },
-	              "La Reina"
-	            )
+	            this.props.comunas.map(function (comuna) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: comuna.codigo, key: comuna.codigo },
+	                comuna.nombre
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -42733,41 +42853,13 @@
 	              { value: "" },
 	              "Seleccion\xE9"
 	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CBWT-96 (Camion 1)" },
-	              "CBWT-96 (Camion 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CRBC-30 (Camion 2)" },
-	              "CRBC-30 (Camion 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FXVD-65 (Camion 3)" },
-	              "FXVD-65 (Camion 3)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "CFDL-32 (Furgon 1)" },
-	              "CFDL-32 (Furgon 1)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "FYYC-66 (Furgon 2)" },
-	              "FYYC-66 (Furgon 2)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { values: "DDVG-61 (Camioneta)" },
-	              "DDVG-61 (Camioneta)"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Externo" },
-	              "Externo"
-	            )
+	            this.props.vehiculos.map(function (vehiculo) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: vehiculo.patente, key: vehiculo.id },
+	                vehiculo.patente
+	              );
+	            })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -42989,7 +43081,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var socket = _socket2.default.connect(_Config2.default.url + 'servicio');
+	var socket = _socket2.default.connect(_Config2.default.url + 'reclamo');
 
 	var ReclamoStore = _reflux2.default.createStore({
 	  listenables: [_ReclamoActions2.default],
@@ -43517,7 +43609,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
 
-	    _this.state = { view: 100, sum: 200, servicio: "", fecha: "", codigo: "", estado: 'proyecto.ESTADO IN ("EN PROCESO")', vendedor: "", categoria: "", cliente: "" };
+	    _this.state = { view: 100, sum: 200, servicio: "", fechai: "", fechae: "", codigo: "", estado: 'EN PROCESO', vendedor: "", categoria: "", cliente: "" };
 	    return _this;
 	  }
 
@@ -43525,47 +43617,47 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      this.setState({ sum: 200 });
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fechai, this.state.cliente, this.state.fechae);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps, nextState) {
 	      this.setState({ sum: 200 });
-	      _InformeActions2.default.viewInformes(this.servicio(nextProps.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
+	      _InformeActions2.default.viewInformes(this.servicio(nextProps.params.area), this.state.view, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fechai, this.state.cliente, this.state.fechae);
 	    }
 	  }, {
 	    key: 'viewMore',
 	    value: function viewMore() {
 	      this.setState({ sum: this.state.view + this.state.sum });
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fechai, this.state.cliente, this.state.fechae);
 	    }
 	  }, {
 	    key: 'servicio',
 	    value: function servicio(_servicio) {
 	      switch (_servicio) {
 	        case "abastecimiento":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones")';
+	          this.state.servicio = '"Adquisiciones"';
 	          break;
 	        case "despacho":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Despacho")';
+	          this.state.servicio = '"Despacho"';
 	          break;
 	        case "sillas":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Sillas")';
+	          this.state.servicio = '"Sillas"';
 	          break;
 	        case "instalacion":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Instalacion")';
+	          this.state.servicio = '"Instalacion"';
 	          break;
 	        case "produccion":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Produccion")';
+	          this.state.servicio = '"Produccion"';
 	          break;
 	        case "desarrollo":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Desarrollo")';
+	          this.state.servicio = '"Desarrollo"';
 	          break;
 	        case "planificacion":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas")';
+	          this.state.servicio = '"Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas"';
 	          break;
 	        case "comercial":
-	          this.state.servicio = 'NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas")';
+	          this.state.servicio = '"Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas"';
 	          break;
 	        case "reclamo":
 	          this.state.servicio = 'reclamo';
@@ -43584,15 +43676,39 @@
 	      var categoria = document.getElementById("categoria").value;
 	      var cliente = document.getElementById("cliente").value;
 
-	      codigo != "" ? this.state.codigo = ' and proyecto.CODIGO_PROYECTO like "%' + codigo + '%"' : this.state.codigo = "";
-	      vendedor != "" ? this.state.vendedor = ' and proyecto.EJECUTIVO like "%' + vendedor + '%"' : this.state.vendedor = "";
-	      categoria != "" ? this.state.categoria = ' and servicio.CATEGORIA like "%' + categoria + '%"' : this.state.categoria = "";
-	      cliente != "" ? this.state.cliente = ' and proyecto.NOMBRE_CLIENTE like "%' + cliente + '%"' : this.state.cliente = "";
-	      fechaI != "" && fechaE != "" ? this.state.fecha = ' and proyecto.FECHA_CONFIRMACION BETWEEN "' + fechaI + '" and "' + fechaE + '"' : this.state.fecha = "";
+	      if (codigo != "") {
+	        this.state.codigo = codigo;
+	      } else {
+	        this.state.codigo = "";
+	      }
+	      if (vendedor != "") {
+	        this.state.vendedor = vendedor;
+	      } else {
+	        this.state.vendedor = "";
+	      }
+	      if (categoria != "") {
+	        this.state.categoria = categoria;
+	      } else {
+	        this.state.categoria = "";
+	      }
+	      if (cliente != "") {
+	        this.state.cliente = cliente;
+	      } else {
+	        this.state.cliente = "";
+	      }
+	      if (fechaI != "") {
+	        this.state.fechai = fechaI;
+	      } else {
+	        this.state.fechai = "";
+	      }
+	      if (fechaE != "") {
+	        this.state.fechae = fechaE;
+	      } else {
+	        this.state.fechae = "";
+	      }
+	      this.state.estado = estado;
 
-	      this.state.estado = 'proyecto.ESTADO IN ("' + estado + '")';
-
-	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fecha, this.state.cliente);
+	      _InformeActions2.default.viewInformes(this.servicio(this.props.params.area), this.state.sum, this.state.estado, this.state.codigo, this.state.vendedor, this.state.categoria, this.state.fechai, this.state.cliente, this.state.fechae);
 	    }
 	  }, {
 	    key: 'render',
@@ -43673,12 +43789,12 @@
 
 	var InformeStore = _reflux2.default.createStore({
 	  listenables: [_InformeActions2.default],
-	  viewInformes: function viewInformes(data, cant, estado, codigo, vendedor, categoria, fecha, cliente) {
+	  viewInformes: function viewInformes(data, cant, estado, codigo, vendedor, categoria, fechai, cliente, fechae) {
 	    var _this = this;
 
-	    socket.emit('informe', data, cant, estado, codigo, vendedor, categoria, fecha, cliente);
-	    socket.on('item', function (item) {
-	      _this.trigger(item);
+	    socket.emit('viewInformes', data, cant, estado, codigo, vendedor, categoria, fechai, cliente, fechae);
+	    socket.on('okViewInformes', function (okViewInformes) {
+	      _this.trigger(okViewInformes);
 	    });
 	  }
 	});
@@ -44741,13 +44857,13 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _SubServicioActions = __webpack_require__(335);
+	var _DetalleInformeActions = __webpack_require__(392);
 
-	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
+	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
-	var _SubServicioStore = __webpack_require__(336);
+	var _DetalleInformeStore = __webpack_require__(393);
 
-	var _SubServicioStore2 = _interopRequireDefault(_SubServicioStore);
+	var _DetalleInformeStore2 = _interopRequireDefault(_DetalleInformeStore);
 
 	var _detalleInforme = __webpack_require__(374);
 
@@ -44761,7 +44877,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DetalleInformeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_SubServicioStore2.default, 'data')), _dec(_class = function (_React$Component) {
+	var DetalleInformeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_DetalleInformeStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(DetalleInformeRoutes, _React$Component);
 
 	  function DetalleInformeRoutes() {
@@ -44773,14 +44889,13 @@
 	  _createClass(DetalleInformeRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _SubServicioActions2.default.subServicio(this.props.params.id);
+	      _DetalleInformeActions2.default.allSubServicio(this.props.params.id);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.data);
-	      if (this.state.data) {
-	        return _react2.default.createElement(_detalleInforme2.default, { datos: this.state.data });
+	      if (this.state.obj.subServicio) {
+	        return _react2.default.createElement(_detalleInforme2.default, { datos: this.state.obj.subServicio });
 	      } else {
 	        return _react2.default.createElement(
 	          'div',
@@ -44856,12 +44971,14 @@
 	  }
 
 	  _createClass(DetalleInformeIndex, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'subServicio',
+	    value: function subServicio() {
+	      this.state.servicio = [];
 	      var valor = void 0;
 	      for (valor in this.props.datos.sub) {
 	        this.state.servicio.push(_react2.default.createElement(_SubActividad2.default, { key: valor, datos: this.props.datos.sub[valor] }));
 	      }
+	      return this.state.servicio;
 	    }
 	  }, {
 	    key: 'render',
@@ -44888,7 +45005,7 @@
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'content-actividades' },
-	                  this.state.servicio
+	                  this.subServicio()
 	                )
 	              )
 	            )
@@ -45319,35 +45436,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactMixin = __webpack_require__(174);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
 	var _home = __webpack_require__(381);
 
 	var _home2 = _interopRequireDefault(_home);
-
-	var _HomeActions = __webpack_require__(396);
-
-	var _HomeActions2 = _interopRequireDefault(_HomeActions);
-
-	var _reactRouter = __webpack_require__(198);
-
-	var _HomeStore = __webpack_require__(397);
-
-	var _HomeStore2 = _interopRequireDefault(_HomeStore);
-
-	var _AuthStore = __webpack_require__(398);
-
-	var _AuthStore2 = _interopRequireDefault(_AuthStore);
-
-	var _AuthActions = __webpack_require__(399);
-
-	var _AuthActions2 = _interopRequireDefault(_AuthActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45371,50 +45462,6 @@
 	  }
 
 	  _createClass(HomeRoutes, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      // HomeActions.checkLogin()
-
-	      // if (!AuthStore.name) {
-	      //   browserHistory.push('/')
-	      // }
-
-	      console.log('componentWillMount');
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-	      /*
-	      if (!this.state.var) {
-	        browserHistory.push('/')
-	      }
-	      */
-	      //AuthActions.getUser()
-
-	      //AuthActions.getUser()
-
-	      console.log('componentWillReceiveProps');
-	    }
-	  }, {
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate() {
-
-	      console.log('shouldComponentUpdate');
-	      return true;
-	    }
-	  }, {
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate() {
-
-	      console.log('componentWillUpdate');
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-
-	      console.log('componentDidUpdate');
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 
@@ -46206,8 +46253,6 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _reactRouter = __webpack_require__(198);
-
 	var _LoginActions = __webpack_require__(196);
 
 	var _LoginActions2 = _interopRequireDefault(_LoginActions);
@@ -46226,10 +46271,8 @@
 	  function AuthRoutes() {
 	    _classCallCheck(this, AuthRoutes);
 
-	    var _this = _possibleConstructorReturn(this, (AuthRoutes.__proto__ || Object.getPrototypeOf(AuthRoutes)).call(this));
-
-	    console.log('hola aqui el AUTH');
-	    return _this;
+	    return _possibleConstructorReturn(this, (AuthRoutes.__proto__ || Object.getPrototypeOf(AuthRoutes)).call(this));
+	    //console.log( 'hola aqui el AUTH' )
 	  }
 
 	  _createClass(AuthRoutes, [{
@@ -46256,17 +46299,13 @@
 	exports.default = AuthRoutes;
 
 /***/ },
-/* 392 */,
-/* 393 */,
-/* 394 */,
-/* 395 */,
-/* 396 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _reflux = __webpack_require__(176);
@@ -46275,12 +46314,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var HomeActions = _reflux2.default.createActions(['checkLogin']);
+	var DetalleInformeActions = _reflux2.default.createActions(['allSubServicio']);
 
-	exports.default = HomeActions;
+	exports.default = DetalleInformeActions;
 
 /***/ },
-/* 397 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46293,146 +46332,78 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _HomeActions = __webpack_require__(396);
+	var _reactRouter = __webpack_require__(198);
 
-	var _HomeActions2 = _interopRequireDefault(_HomeActions);
+	var _DetalleInformeActions = __webpack_require__(392);
+
+	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var HomeStore = _reflux2.default.createStore({
-	  listenables: [_HomeActions2.default],
-	  hola: 'hola',
+	var socket = _socket2.default.connect(_Config2.default.url + 'subServicio');
+
+	var DetalleInformeStore = _reflux2.default.createStore({
+	  listenables: [_DetalleInformeActions2.default],
+	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', subServicio: '' },
 	  init: function init() {
-	    this.trigger(this.hola);
+	    this.getObj();
 	  },
-	  checkLogin: function checkLogin() {
+	  getObj: function getObj() {
+	    var _this = this;
 
-	    this.trigger(this.hola);
-
-	    /*
-	        this.socket = io( getUrl )
-	        this.socket.on('checklogin', (data) => {
-	          if (!data) {
-	            hashHistory.push('/')
-	          }
-	        })
-	        this.socket.emit('checklogin')
-	        */
-	  }
-	});
-
-	exports.default = HomeStore;
-
-/***/ },
-/* 398 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _AuthActions = __webpack_require__(399);
-
-	var _AuthActions2 = _interopRequireDefault(_AuthActions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var AuthStore = _reflux2.default.createStore({
-	  listenables: [_AuthActions2.default],
-	  getInitialState: function getInitialState() {
-	    return this.state = 'hola';
-	  }
-	});
-
-	/*
-	  init: function () {
-	    this.socket = io(getUrl)
-	    this.socket.on('connect', () => {
-	      this.getUser()
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this.obj.comunas = comunas;
+	      _this.obj.vehiculos = vehiculos;
+	      _this.obj.subServicio = '';
 	    });
 	  },
-	  
-	  getUser: function () {
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  allSubServicio: function allSubServicio(data) {
+	    var _this2 = this;
 
-
-	this.socket = io(getUrl)
-
-	    this.socket = io(getUrl)
-	    this.socket.emit('getUser', (user) =>{
-	      console.log( user )
-	      if (!user) {
-	        browserHistory.push('/')
-	      }
-	    })
-
-
-
-	  console.log( localStorage.getItem('jwt') )
-
-	  this.socket.emit('getUser', localStorage.getItem('jwt'), (token) =>{
-
-	      console.log( token )
-	      this.trigger( token )
-	    
-	  })
-
-	  
-	  this.trigger( localStorage.getItem('jwt') )
-
-
+	    socket.emit('allSubServicio', data);
+	    socket.on('okAllSubServicio', function (okAllSubServicio) {
+	      _this2.obj.subServicio = okAllSubServicio;
+	      _this2.trigger(_this2.obj);
+	    });
 	  }
 
-	  */
-	exports.default = AuthStore;
+	});
 
-	/*
-	class AuthStore {
-
-	  constructor() {
-	    this._name = null
-	    this._type = null
-	  }
-
-	  save(user) {
-	    this._name = user.name
-	    this._type = user.type
-	  }
-
-	  get name() {
-	    return this._name;
-	  }
-
-	  get type() {
-	    return this._type;
-	  }
-
-
-	  set name(value) {
-	    this._name = value
-	  }
-
-	  set type(value) {
-	    this._type = value
-	  }
-
-	  isLoggedIn() {
-	    return !!this._name;
-	  }
-	}
-
-	export default new AuthStore()
-
-
-	*/
+	exports.default = DetalleInformeStore;
 
 /***/ },
-/* 399 */
+/* 394 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UpdateSubServicioActions = _reflux2.default.createActions(['updateSubServicio', 'searchSubServicio', 'formTrigger']);
+
+	exports.default = UpdateSubServicioActions;
+
+/***/ },
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46445,11 +46416,71 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
+	var _reactRouter = __webpack_require__(198);
+
+	var _UpdateSubServicioActions = __webpack_require__(394);
+
+	var _UpdateSubServicioActions2 = _interopRequireDefault(_UpdateSubServicioActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var AuthActions = _reflux2.default.createActions(['getUser']);
+	var socket = _socket2.default.connect(_Config2.default.url + 'subServicio');
 
-	exports.default = AuthActions;
+	var UpdateSubServicioStore = _reflux2.default.createStore({
+	  listenables: [_UpdateSubServicioActions2.default],
+	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', search: '' },
+	  init: function init() {
+	    this.getObj();
+	  },
+	  getObj: function getObj() {
+	    var _this = this;
+
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this.obj.comunas = comunas;
+	      _this.obj.vehiculos = vehiculos;
+	      _this.obj.search = '';
+	    });
+	  },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  formTrigger: function formTrigger() {
+	    var _this2 = this;
+
+	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
+	      _this2.obj.comunas = comunas;
+	      _this2.obj.vehiculos = vehiculos;
+	      _this2.obj.search = '';
+	      _this2.trigger(_this2.obj);
+	    });
+	  },
+	  updateSubServicio: function updateSubServicio(data, ruta) {
+	    socket.emit('updateSubServicio', data);
+	    socket.on('okUpdateSubServicio', function (okUpdateSubServicio) {
+	      _reactRouter.browserHistory.push(ruta);
+	    });
+	  },
+	  searchSubServicio: function searchSubServicio(data) {
+	    var _this3 = this;
+
+	    socket.emit('searchSubServicio', data);
+	    socket.on('okSearchSubServicio', function (okSearchSubServicio) {
+	      _this3.obj.search = okSearchSubServicio;
+	      _this3.trigger(_this3.obj);
+	    });
+	  }
+
+	});
+
+	exports.default = UpdateSubServicioStore;
 
 /***/ }
 /******/ ]);
