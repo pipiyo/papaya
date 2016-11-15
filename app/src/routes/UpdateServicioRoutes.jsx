@@ -2,8 +2,8 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
-import ServicioActions from '../actions/ServicioActions'
-import ServicioStore from '../stores/ServicioStore'
+import UpdateServicioActions from '../actions/UpdateServicioActions'
+import UpdateServicioStore from '../stores/UpdateServicioStore'
 
 import ServicioIndex from '../components/update-servicio'
 import ItemProduccion from '../components/update-servicio/ItemProduccion.jsx'
@@ -11,7 +11,7 @@ import ItemSillas from '../components/update-servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/update-servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/update-servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(ServicioStore, 'obj'))
+@ReactMixin.decorate(Reflux.connect(UpdateServicioStore, 'obj'))
 export default class UpdateServicioRoutes extends React.Component {
 
   constructor() {
@@ -20,8 +20,8 @@ export default class UpdateServicioRoutes extends React.Component {
   }
 
   componentWillMount(){
-    ServicioActions.formTrigger()
-    ServicioActions.searchServicio(this.props.params.id);
+    UpdateServicioActions.formTrigger()
+    UpdateServicioActions.searchServicio(this.props.params.id);
   }
   formArea(area) {
      switch(area) {
@@ -73,7 +73,7 @@ export default class UpdateServicioRoutes extends React.Component {
       "vehiculo" : (ev.target.elements['vehiculo']) ? ev.target.elements['vehiculo'].value : "", 
       "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : ""          
     }
-    ServicioActions.updateServicio(servicio); 
+    UpdateServicioActions.updateServicio(servicio); 
   }
  
 

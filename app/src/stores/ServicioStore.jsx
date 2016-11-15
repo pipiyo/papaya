@@ -12,7 +12,7 @@ const socket = io.connect( `${Env.url}servicio` )
 
 let ServicioStore = Reflux.createStore({
   listenables: [ServicioActions],
-  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: 'mensaje', servicio: '' },
+  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: 'mensaje' },
   init: function() {
     this.getObj()
   },
@@ -21,7 +21,6 @@ let ServicioStore = Reflux.createStore({
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
       this.obj.mensaje = ''
-      this.obj.servicio = ''
     })
   },
   getInitialState: function() {
@@ -32,7 +31,6 @@ let ServicioStore = Reflux.createStore({
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
       this.obj.mensaje = ''
-      this.obj.servicio = ''
       this.trigger(this.obj)
     })
   },
@@ -41,19 +39,6 @@ let ServicioStore = Reflux.createStore({
   	socket.on('okAddServicio', (okAddServicio) =>{
       this.obj.mensaje = okAddServicio
   		this.trigger(this.obj)
-  	})
-  },
-  updateServicio: function(data){
-    socket.emit('updateServicio', data)
-    socket.on('okUpdateServicio', (okUpdateServicio) =>{
-      browserHistory.push('/home')
-    })
-  },
-  searchServicio: function(data){
-  	socket.emit('searchServicio', data)
-  	socket.on('okSearchServicio', (okSearchServicio) =>{
-      this.obj.servicio = okSearchServicio
-      this.trigger(this.obj)
   	})
   }
 })
