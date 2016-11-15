@@ -38,7 +38,7 @@ class ItemDespacho extends React.Component {
              <select id="vehiculo">
                 {
                   this.props.vehiculos.map( (vehiculo) => {
-                    return <option value={vehiculo.id} key={vehiculo.id}>{vehiculo.patente}</option>
+                    return <option value={vehiculo.patente} key={vehiculo.id}>{vehiculo.patente}</option>
                   })
                 }
               </select>

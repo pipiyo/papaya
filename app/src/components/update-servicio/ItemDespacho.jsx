@@ -72,9 +72,11 @@ class ItemDespacho extends React.Component {
             <label>Comuna</label>
              <select id="comuna">
                 <option value="">Seleccioné</option>
-                <option value="1">Puente Alto</option>
-                <option value="2">La Florida</option>
-                <option value="21">La Reina</option>
+                 {
+                  this.props.comunas.map( (comuna) => {
+                    return <option value={comuna.codigo} key={comuna.codigo}>{comuna.nombre}</option>
+                  })
+                } 
               </select>
           </div>
 
@@ -82,13 +84,11 @@ class ItemDespacho extends React.Component {
             <label>Vehiculo</label>
              <select id="vehiculo">
                <option value="">Seleccioné</option>
-                <option values="CBWT-96 (Camion 1)">CBWT-96 (Camion 1)</option>
-                <option values="CRBC-30 (Camion 2)">CRBC-30 (Camion 2)</option>
-                <option values="FXVD-65 (Camion 3)">FXVD-65 (Camion 3)</option>
-                <option values="CFDL-32 (Furgon 1)">CFDL-32 (Furgon 1)</option>
-                <option values="FYYC-66 (Furgon 2)">FYYC-66 (Furgon 2)</option>
-                <option values="DDVG-61 (Camioneta)">DDVG-61 (Camioneta)</option>
-                <option value="Externo">Externo</option>
+                {
+                  this.props.vehiculos.map( (vehiculo) => {
+                    return <option value={vehiculo.patente} key={vehiculo.id}>{vehiculo.patente}</option>
+                  })
+                }
               </select>
           </div>
 

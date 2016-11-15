@@ -26,16 +26,16 @@ export default class UpdateServicioRoutes extends React.Component {
   formArea(area) {
      switch(area) {
       case "Produccion":
-        this.state.area = <ItemProduccion datos={this.state.servicio} /> 
+        this.state.area = <ItemProduccion datos={this.state.obj.servicio} /> 
       break;
       case "Instalacion":
-        this.state.area = <ItemInstalacion datos={this.state.servicio} />
+        this.state.area = <ItemInstalacion comunas={this.state.obj.comunas} datos={this.state.obj.servicio} />
       break;
       case "Sillas":
-        this.state.area = <ItemSillas datos={this.state.servicio} />
+        this.state.area = <ItemSillas comunas={this.state.obj.comunas} datos={this.state.obj.servicio} />
       break;
       case "Despacho":
-        this.state.area = <ItemDespacho datos={this.state.servicio} />
+        this.state.area = <ItemDespacho vehiculos={this.state.obj.vehiculos} comunas={this.state.obj.comunas} datos={this.state.obj.servicio} />
       break;
       default:
         this.state.area = ""
