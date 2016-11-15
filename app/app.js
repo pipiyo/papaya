@@ -14,7 +14,7 @@ require('./env').config()
 const Store = new RedisStore({ ttl: 10020 })
 
 
-const con = require('./srcApirest/connection')
+const con = require('./srcApirest/models/connection')
 
 const app = express()
 
