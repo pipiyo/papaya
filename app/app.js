@@ -108,8 +108,6 @@ let servicio = io
     con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas` ORDER BY `NOMBRE_COMUNA` ASC; select `ID` AS id, `PATENTE` AS patente FROM `vehiculo` ORDER BY `PATENTE` ASC', function(err, rows, fields) {
       
       if (err) console.log( err ) 
-
-      //console.log( rows[0], rows[1] )
       
       callback( rows[0], rows[1] )
 
@@ -234,6 +232,22 @@ let servicio = io
 let subServicio = io
   .of('/subServicio')
   .on('connection', function (socket) {
+
+  /* Trae Detalle Form ingreso servicio */
+  socket.on('formingresoservicio', (callback) => {
+
+
+    con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas` ORDER BY `NOMBRE_COMUNA` ASC; select `ID` AS id, `PATENTE` AS patente FROM `vehiculo` ORDER BY `PATENTE` ASC', function(err, rows, fields) {
+      
+      if (err) console.log( err ) 
+
+      callback( rows[0], rows[1] )
+
+    })
+
+
+  })
+
 
   /* Sub Servicio */
   socket.on('allSubServicio', (data) => {

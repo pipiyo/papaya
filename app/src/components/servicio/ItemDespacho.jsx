@@ -25,6 +25,7 @@ class ItemDespacho extends React.Component {
           <div className="item-form">
             <label>Comuna</label>
              <select id="comuna">
+             <option value="">Seleccioné</option>
                 {
                   this.props.comunas.map( (comuna) => {
                     return <option value={comuna.codigo} key={comuna.codigo}>{comuna.nombre}</option>
@@ -36,6 +37,7 @@ class ItemDespacho extends React.Component {
           <div className="item-form">
             <label>Vehiculo</label>
              <select id="vehiculo">
+             <option value="">Seleccioné</option>
                 {
                   this.props.vehiculos.map( (vehiculo) => {
                     return <option value={vehiculo.patente} key={vehiculo.id}>{vehiculo.patente}</option>

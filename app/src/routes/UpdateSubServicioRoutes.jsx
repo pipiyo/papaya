@@ -31,13 +31,13 @@ export default class UpdateSubServicioRoutes extends React.Component {
         this.state.area = <ItemProduccion datos={this.state.obj.search} /> 
       break;
       case "Instalacion":
-        this.state.area = <ItemInstalacion datos={this.state.obj.search} />
+        this.state.area = <ItemInstalacion comunas={this.state.obj.comunas} datos={this.state.obj.search} />
       break;
       case "Sillas":
-        this.state.area = <ItemSillas datos={this.state.obj.search} />
+        this.state.area = <ItemSillas comunas={this.state.obj.comunas} datos={this.state.obj.search} />
       break;
       case "Despacho":
-        this.state.area = <ItemDespacho datos={this.state.obj.search} />
+        this.state.area = <ItemDespacho vehiculos={this.state.obj.vehiculos} comunas={this.state.obj.comunas} datos={this.state.obj.search} />
       break;
       default:
         this.state.area = ""

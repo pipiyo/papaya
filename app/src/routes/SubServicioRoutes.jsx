@@ -29,13 +29,13 @@ export default class SubServicioRoutes extends React.Component {
         this.setState({area:<ItemProduccion />}) 
       break;
       case "Instalacion":
-        this.setState({area:<ItemInstalacion />}) 
+        this.setState({area:<ItemInstalacion comunas={this.state.obj.comunas} />}) 
       break;
       case "Sillas":
-        this.setState({area:<ItemSillas />}) 
+        this.setState({area:<ItemSillas comunas={this.state.obj.comunas} />}) 
       break;
       case "Despacho":
-        this.setState({area:<ItemDespacho />}) 
+        this.setState({area:<ItemDespacho comunas={this.state.obj.comunas} vehiculos={this.state.obj.vehiculos} />}) 
       break;
       default:
         this.setState({area:""}) 

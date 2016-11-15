@@ -55,6 +55,7 @@ class ItemInstalacion extends React.Component {
           <div className="item-form">
             <label>Comuna</label>
              <select id="comuna">
+              <option value="">Seleccioné</option>
                 {
                   this.props.comunas.map( (comuna) => {
                     return <option value={comuna.codigo} key={comuna.codigo}>{comuna.nombre}</option>
