@@ -236,11 +236,11 @@ let subServicio = io
   })
 
   /* Search Sub Servicio */
-  socket.on('servicioListarUnico', (id) => {
+  socket.on('searchSubServicio', (id) => {
       let query = 'SELECT * FROM sub_servicio WHERE CODIGO_SUBSERVICIO = "'+id+'"'; 
       con.query(query, function(err, rows, fields) {
       if (!err)
-        socket.emit('datos', rows)
+        socket.emit('okSearchSubServicio', rows)
       else
         console.log('Error ' + err);
       }); 
@@ -293,10 +293,10 @@ let subServicio = io
     socket.emit('okAddSubServicio', okAddSubServicio)
   })
 
-   /* Update Servicio */
-  socket.on('subServicioUpdate', (data) => {
+   /* Update Sub Servicio */
+  socket.on('updateSubServicio', (data) => {
     
-    let mensaje = '(Se update subservicio ' + data.numero + ')'
+    let okUpdateSubServicio = '(Se update subservicio ' + data.numero + ')'
 
     con.query('UPDATE sub_servicio SET SUB_CATEGORIA = ?, SUB_SUPERVISOR = ?, SUB_FECHA_INICIO = ?, SUB_FECHA_ENTREGA = ?, SUB_DESCRIPCION = ?, SUB_OBSERVACIONES = ?, SUB_DIRECCION  = ?, SUB_GUIA_DESPACHO = ?, SUB_CODIGO_COMUNA = ?, SUB_M3 = ?, SUB_FI = ?, SUB_TM = ?, SUB_TP = ?, SUB_OS = ?, SUB_LIDER = ?, SUB_PUESTOS = ?, SUB_PROCESO = ?, SUB_INSTALADOR_1 = ?, SUB_INSTALADOR_2 = ?, SUB_INSTALADOR_3 = ?, SUB_EJECUTOR = ?, SUB_VALE = ?, SUB_TRANSPORTE = ?, SUB_CANTIDAD = ?, SUB_RECLAMOS = ?, SUB_ESTADO = ?, SUB_DIAS = ?  WHERE CODIGO_SUBSERVICIO = ?', [data.categoria, data.supervisor, data.fechaInicio, data.fechaEntrega, data.descripcion, data.observacion, data.direccion, data.guia, data.comuna, data.m3, data.fi, data.tm, data.to, data.os, data.lider, data.puestos, data.proceso, data.instalador1, data.instalador2, data.instalador3, data.ejecutor, data.vale, data.vehiculo, data.cantidad, data.reclamo, data.estado, data.dias, data.numero], function(err, results) {
     if (!err)
@@ -305,7 +305,7 @@ let subServicio = io
       console.log('Error no se pudo ingresar servicio '+ err);
     })
 
-    socket.emit('update', mensaje)
+    socket.emit('okUpdateSubServicio', okUpdateSubServicio)
   })
 
 })

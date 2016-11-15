@@ -4,7 +4,7 @@ let SubServicioActions = Reflux.createActions([
 	'addSubServicio',
 	'allSubServicio',
 	'updateSubServicio',
-	'subServicioUpdate',
+	'searchSubServicio',
 	'formTrigger'
 ])
 

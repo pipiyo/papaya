@@ -7,7 +7,7 @@ const socket = io.connect( `${Env.url}subServicio` )
 
 let SubServicioStore = Reflux.createStore({
   listenables: [SubServicioActions],
-  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: '', subServicio: '' },
+  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: '', subServicio: '', search: ''},
   init: function() {
     this.getObj()
   },
@@ -17,6 +17,7 @@ let SubServicioStore = Reflux.createStore({
       this.obj.vehiculos = vehiculos
       this.obj.mensaje = ''
       this.obj.subServicio = ''
+      this.obj.search = ''
     })
   },
   getInitialState: function() {
@@ -27,7 +28,8 @@ let SubServicioStore = Reflux.createStore({
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
       this.obj.mensaje = ''
-      this.obj.servicio = ''
+      this.obj.subServicio = ''
+      this.obj.search = ''
       this.trigger(this.obj)
     })
     
@@ -43,22 +45,23 @@ let SubServicioStore = Reflux.createStore({
     socket.emit('addSubServicio', data)
     socket.on('okAddSubServicio', (okAddSubServicio) =>{
       this.obj.mensaje = okAddSubServicio
-      console.log("Test: "+ okAddSubServicio)
       this.trigger(this.obj)
     })
   },
-  subServicioUpdate: function(data){
-    socket.emit('servicioListarUnico', data)
-    socket.on('datos', (datos) =>{
-      this.trigger(datos)
-    })
-  },
   updateSubServicio: function(data,ruta){
-    socket.emit('subServicioUpdate', data)
-    socket.on('update', (update) =>{
+    socket.emit('updateSubServicio', data)
+    socket.on('okUpdateSubServicio', (okUpdateSubServicio) =>{
       browserHistory.push(ruta)
     })
   },
+  searchSubServicio: function(data){
+    socket.emit('searchSubServicio', data)
+    socket.on('okSearchSubServicio', (okSearchSubServicio) =>{
+      this.obj.search = okSearchSubServicio
+      this.trigger(this.obj)
+    })
+  },
+  
 })
 
 export default SubServicioStore

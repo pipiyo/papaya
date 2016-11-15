@@ -12,7 +12,7 @@ import ItemSillas from '../components/update-sub-servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/update-sub-servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/update-sub-servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'servicio'))
+@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'obj'))
 export default class UpdateSubServicioRoutes extends React.Component {
 
   constructor() {
@@ -21,7 +21,7 @@ export default class UpdateSubServicioRoutes extends React.Component {
   }
 
   componentWillMount(){
-    SubServicioActions.subServicioUpdate(this.props.params.id);
+    SubServicioActions.searchSubServicio(this.props.params.id);
   }
   formArea(area) {
      switch(area) {
@@ -73,16 +73,16 @@ export default class UpdateSubServicioRoutes extends React.Component {
       "vehiculo" : (ev.target.elements['vehiculo']) ? ev.target.elements['vehiculo'].value : "", 
       "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : ""          
     }
-    let ruta = "/home/detalle-actividad/"+this.state.servicio[0].SUB_CODIGO_SERVICIO
+    let ruta = "/home/detalle-actividad/"+this.state.obj.search[0].SUB_CODIGO_SERVICIO
     SubServicioActions.updateSubServicio(servicio,ruta); 
   }
  
 
   render() {
-      if(this.state.servicio) {
-        this.formArea(this.state.servicio[0].SUB_NOMBRE_SERVICIO)
+      if(this.state.obj.search) {
+        this.formArea(this.state.obj.search[0].SUB_NOMBRE_SERVICIO)
       return (
-        <ServicioIndex datos={this.state.servicio} tipo={this.props.params.tipo} mensaje={this.state.data} area={this.state.area} updateServicio={this.updateServicio.bind(this)} />       
+        <ServicioIndex datos={this.state.obj.search} tipo={this.props.params.tipo} area={this.state.area} updateServicio={this.updateServicio.bind(this)} />       
       )
       }else{
         return (
