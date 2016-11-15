@@ -45961,6 +45961,10 @@
 
 	var _Notification2 = _interopRequireDefault(_Notification);
 
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46008,7 +46012,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'img-user' },
-	          _react2.default.createElement('img', { src: 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
+	          _react2.default.createElement('img', { src: _Config2.default.url + 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
 	        )
 	      );
 	    }
