@@ -1,4 +1,6 @@
 import React from 'react'
+import DatePicker from 'react-datepicker'
+import moment  from 'moment'
 
 class Item extends React.Component {
 
@@ -10,8 +12,8 @@ class Item extends React.Component {
                   supervisor : this.validador(props.datos[0].SUB_SUPERVISOR),
                   estado : this.validador(props.datos[0].SUB_ESTADO),
                   dias : this.validador(props.datos[0].SUB_DIAS),
-                  fechaInicio : this.validador(props.datos[0].SUB_FECHA_INICIO,true),
-                  fechaEntrega : this.validador(props.datos[0].SUB_FECHA_INICIO,true),
+                  fechaInicio : moment(props.datos[0].SUB_FECHA_INICIO),
+                  fechaEntrega : moment(props.datos[0].SUB_FECHA_ENTREGA),
                   descripcion : this.validador(props.datos[0].SUB_DESCRIPCION),
                   observaciones : this.validador(props.datos[0].SUB_OBSERVACIONES)
                 }
@@ -23,12 +25,13 @@ class Item extends React.Component {
                   categoria:this.validador(nextProps.datos[0].SUB_CATEGORIA),
                   supervisor : this.validador(nextProps.datos[0].SUB_SUPERVISOR),
                   estado : this.validador(nextProps.datos[0].SUB_ESTADO),
-                  fechaInicio : this.validador(nextProps.datos[0].SUB_FECHA_INICIO,true),
-                  fechaEntrega : this.validador(nextProps.datos[0].SUB_FECHA_INICIO,true),
+                  fechaInicio : moment(nextProps.datos[0].SUB_FECHA_INICIO),
+                  fechaEntrega : moment(nextProps.datos[0].SUB_FECHA_ENTREGA),
                   descripcion : this.validador(nextProps.datos[0].SUB_DESCRIPCION),
                   observaciones : this.validador(nextProps.datos[0].SUB_OBSERVACIONES)
                 });
   }
+
   componentDidMount(){
     let i
     let numero = document.getElementById("categoria")
@@ -64,7 +67,13 @@ class Item extends React.Component {
                   })
   }
 
-  
+  fechaInicioDate(date){
+    this.setState({ fechaInicio: date });
+  }
+
+  fechaEntregaDate(date){
+    this.setState({ fechaEntrega: date });
+  }
 
   render() {
       return (
@@ -104,12 +113,12 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <input value={this.state.fechaInicio} onChange={this.onChange.bind(this)} class="date" id="fechaInicio" type="text"/>
+                <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
             </div>
 
             <div className="item-form">
                 <label>Fecha Entrega</label>
-                <input value={this.state.fechaEntrega} onChange={this.onChange.bind(this)} class="date" id="fechaEntrega" type="text"/>
+                <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
             </div>
 
             <div className="item-form">

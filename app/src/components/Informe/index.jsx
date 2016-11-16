@@ -34,7 +34,7 @@ class InformeIndex extends React.Component {
       return (         
         <div>
           <Title servicioTitle={this.props.servicio}/>
-          <Filtro filtro={this.props.filtro} />
+          <Filtro fechaInicioDate={this.props.fechaInicioDate} fechaEntregaDate={this.props.fechaEntregaDate} fechaInicio={this.props.fechaInicio} fechaEntrega={this.props.fechaEntrega} filtro={this.props.filtro} />
           <Servicio cuenta={this.props.cuenta} servicioTitle={this.props.servicio} datos={this.props.datos} viewMore={this.props.viewMore} servicio={this.state.servicio} click={this.activeClass.bind(this)} />
 
         </div>

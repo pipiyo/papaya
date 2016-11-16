@@ -2,8 +2,8 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
-import SubServicioActions from '../actions/SubServicioActions'
-import SubServicioStore from '../stores/SubServicioStore'
+import UpdateSubServicioActions from '../actions/UpdateSubServicioActions'
+import UpdateSubServicioStore from '../stores/UpdateSubServicioStore'
 
 import ServicioIndex from '../components/update-sub-servicio'
 
@@ -12,7 +12,7 @@ import ItemSillas from '../components/update-sub-servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/update-sub-servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/update-sub-servicio/ItemDespacho.jsx'
 
-@ReactMixin.decorate(Reflux.connect(SubServicioStore, 'obj'))
+@ReactMixin.decorate(Reflux.connect(UpdateSubServicioStore, 'obj'))
 export default class UpdateSubServicioRoutes extends React.Component {
 
   constructor() {
@@ -21,8 +21,8 @@ export default class UpdateSubServicioRoutes extends React.Component {
   }
 
   componentWillMount(){
-    SubServicioActions.searchSubServicio(this.props.params.id);
-    SubServicioActions.formTrigger()
+    UpdateSubServicioActions.formTrigger()
+    UpdateSubServicioActions.searchSubServicio(this.props.params.id);
   }
 
   formArea(area) {
@@ -76,7 +76,7 @@ export default class UpdateSubServicioRoutes extends React.Component {
       "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : ""          
     }
     let ruta = "/home/detalle-actividad/"+this.state.obj.search[0].SUB_CODIGO_SERVICIO
-    SubServicioActions.updateSubServicio(servicio,ruta); 
+    UpdateSubServicioActions.updateSubServicio(servicio,ruta); 
   }
  
 

@@ -1,21 +1,29 @@
 import React from 'react'
+import DatePicker from 'react-datepicker'
+import moment  from 'moment'
 
 class Filtro extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.state = {reclamo:"",fechaInicio:props.fechaInicio,fechaEntrega:props.fechaEntrega}
+  }
+
+  componentWillReceiveProps(nextProps){
+     this.setState({fechaInicio:nextProps.fechaInicio,fechaEntrega:nextProps.fechaEntrega})
   }
 
   render() {
+  
       return (
         <div class="module-filter">
           <div class="item-filter">
-             <label> Fecha Inicio </label>
-             <input onChange={this.props.filtro} id="fechaInicio" type="text" class="date" />
+              <label> Fecha Inicio </label>
+              <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.props.fechaInicioDate} />
           </div>
           <div class="item-filter">
               <label> Fecha Entrega </label>
-              <input onChange={this.props.filtro} id="fechaEntrega" type="text" class="date" />
+              <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.props.fechaEntregaDate} />
           </div>
           <div class="item-filter">
               <label> Código Rocha</label>
