@@ -13,7 +13,7 @@ let notificationSchema = new Schema({
 	area_servicio: String,
 	codigo_servicio: String,
 	categoria_servicio: String,
-	read_by: [ { user: String, read_at: new Date() } ]
+	read_by: [ { user: String, read_at: {type: Date, default: new Date() } } ]
 })
 
 let notification = mongoose.model("notification", notificationSchema)
