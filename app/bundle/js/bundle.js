@@ -56484,7 +56484,7 @@
 /* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -56495,6 +56495,14 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDatepicker = __webpack_require__(319);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	var _moment = __webpack_require__(320);
+
+	var _moment2 = _interopRequireDefault(_moment);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56510,249 +56518,266 @@
 	  function Item() {
 	    _classCallCheck(this, Item);
 
-	    return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
+	    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
+
+	    _this.state = {
+	      reclamo: "",
+	      fechaInicio: (0, _moment2.default)(),
+	      fechaEntrega: (0, _moment2.default)()
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Item, [{
-	    key: "render",
+	    key: 'fechaInicioDate',
+	    value: function fechaInicioDate(date) {
+	      this.setState({ fechaInicio: date });
+	    }
+	  }, {
+	    key: 'fechaEntregaDate',
+	    value: function fechaEntregaDate(date) {
+	      this.setState({ fechaEntrega: date });
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        null,
 	        _react2.default.createElement(
-	          "div",
-	          { className: "module-form" },
+	          'div',
+	          { className: 'module-form' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form title" },
+	            'div',
+	            { className: 'item-form title' },
 	            _react2.default.createElement(
-	              "h4",
+	              'h4',
 	              null,
-	              "Nuevo Reclamo"
+	              'Nuevo Reclamo'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Numero"
+	              'Numero'
 	            ),
-	            _react2.default.createElement("input", { id: "reclamo", type: "number" })
+	            _react2.default.createElement('input', { id: 'reclamo', type: 'number' })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Rocha"
+	              'Rocha'
 	            ),
-	            _react2.default.createElement("input", { id: "rocha", type: "text" })
+	            _react2.default.createElement('input', { id: 'rocha', type: 'text' })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Area"
+	              'Area'
 	            ),
 	            _react2.default.createElement(
-	              "select",
-	              { id: "area" },
+	              'select',
+	              { id: 'area' },
 	              _react2.default.createElement(
-	                "option",
-	                { value: "" },
-	                "Seleccion\xE9"
+	                'option',
+	                { value: '' },
+	                'Seleccion\xE9'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "tecnica" },
-	                "T\xE9cnica"
+	                'option',
+	                { value: 'tecnica' },
+	                'T\xE9cnica'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "comercial" },
-	                "Comercial"
+	                'option',
+	                { value: 'comercial' },
+	                'Comercial'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "produccion" },
-	                "Producci\xF3n"
+	                'option',
+	                { value: 'produccion' },
+	                'Producci\xF3n'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "despacho" },
-	                "Despacho"
+	                'option',
+	                { value: 'despacho' },
+	                'Despacho'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "instalacion" },
-	                "Instalaci\xF3n"
+	                'option',
+	                { value: 'instalacion' },
+	                'Instalaci\xF3n'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "cliente" },
-	                "Cliente"
+	                'option',
+	                { value: 'cliente' },
+	                'Cliente'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "proveedor" },
-	                "Proveedor"
+	                'option',
+	                { value: 'proveedor' },
+	                'Proveedor'
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Razon"
+	              'Razon'
 	            ),
 	            _react2.default.createElement(
-	              "select",
-	              { id: "razon" },
+	              'select',
+	              { id: 'razon' },
 	              _react2.default.createElement(
-	                "option",
-	                { value: "" },
-	                "Seleccion\xE9"
+	                'option',
+	                { value: '' },
+	                'Seleccion\xE9'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "Faltante material" },
-	                "Faltante material"
+	                'option',
+	                { value: 'Faltante material' },
+	                'Faltante material'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "Acabado diferente" },
-	                "Acabado diferente"
+	                'option',
+	                { value: 'Acabado diferente' },
+	                'Acabado diferente'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "Dimensi\xF3n diferente" },
-	                "Dimensi\xF3n diferente"
+	                'option',
+	                { value: 'Dimensi\xF3n diferente' },
+	                'Dimensi\xF3n diferente'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "Defecto de f\xE1brica" },
-	                "Defecto de f\xE1brica"
+	                'option',
+	                { value: 'Defecto de f\xE1brica' },
+	                'Defecto de f\xE1brica'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "dise\xF1o de producto" },
-	                "dise\xF1o de producto"
+	                'option',
+	                { value: 'dise\xF1o de producto' },
+	                'dise\xF1o de producto'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "Da\xF1os otros" },
-	                "Da\xF1os otros"
+	                'option',
+	                { value: 'Da\xF1os otros' },
+	                'Da\xF1os otros'
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Fecha Inicio"
+	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement("input", { className: "date", id: "fechaInicio", type: "text" })
+	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Fecha Entrega"
+	              'Fecha Entrega'
 	            ),
-	            _react2.default.createElement("input", { className: "date", id: "fechaEntrega", type: "text" })
+	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "D\xEDas"
+	              'D\xEDas'
 	            ),
-	            _react2.default.createElement("input", { type: "number", className: "date", id: "dias" })
+	            _react2.default.createElement('input', { type: 'number', className: 'date', id: 'dias' })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Descripci\xF3n"
+	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement("input", { id: "descripcion", type: "text" })
+	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form" },
+	            'div',
+	            { className: 'item-form' },
 	            _react2.default.createElement(
-	              "label",
+	              'label',
 	              null,
-	              "Area"
+	              'Area'
 	            ),
 	            _react2.default.createElement(
-	              "select",
-	              { id: "area1" },
+	              'select',
+	              { id: 'area1' },
 	              _react2.default.createElement(
-	                "option",
-	                { value: "" },
-	                "Seleccion\xE9"
+	                'option',
+	                { value: '' },
+	                'Seleccion\xE9'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "tecnica" },
-	                "T\xE9cnica"
+	                'option',
+	                { value: 'tecnica' },
+	                'T\xE9cnica'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "comercial" },
-	                "Comercial"
+	                'option',
+	                { value: 'comercial' },
+	                'Comercial'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "produccion" },
-	                "Producci\xF3n"
+	                'option',
+	                { value: 'produccion' },
+	                'Producci\xF3n'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "despacho" },
-	                "Despacho"
+	                'option',
+	                { value: 'despacho' },
+	                'Despacho'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "instalacion" },
-	                "Instalaci\xF3n"
+	                'option',
+	                { value: 'instalacion' },
+	                'Instalaci\xF3n'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "cliente" },
-	                "Cliente"
+	                'option',
+	                { value: 'cliente' },
+	                'Cliente'
 	              ),
 	              _react2.default.createElement(
-	                "option",
-	                { value: "proveedor" },
-	                "Proveedor"
+	                'option',
+	                { value: 'proveedor' },
+	                'Proveedor'
 	              )
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "module-form button" },
+	          'div',
+	          { className: 'module-form button' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "item-form button" },
-	            _react2.default.createElement("input", { type: "submit", value: "Enviar" })
+	            'div',
+	            { className: 'item-form button' },
+	            _react2.default.createElement('input', { type: 'submit', value: 'Enviar' })
 	          )
 	        )
 	      );
