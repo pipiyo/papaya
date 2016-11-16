@@ -1,4 +1,6 @@
 import React from 'react'
+import DatePicker from 'react-datepicker'
+import moment  from 'moment'
 
 class Item extends React.Component {
 
@@ -10,12 +12,13 @@ class Item extends React.Component {
                   supervisor : props.datos[0].SUPERVISOR,
                   estado : props.datos[0].ESTADO,
                   dias : props.datos[0].DIAS,
-                  fechaInicio : this.validador(props.datos[0].FECHA_INICIO,true),
-                  fechaEntrega : this.validador(props.datos[0].FECHA_INICIO,true),
+                  fechaInicio : moment(props.datos[0].FECHA_INICIO),
+                  fechaEntrega : moment(props.datos[0].FECHA_ENTREGA),
                   descripcion : props.datos[0].DESCRIPCION,
                   observaciones : props.datos[0].OBSERVACIONES
                 }
   }
+
   componentDidMount(){
     let i
     let numero = document.getElementById("categoria")
@@ -43,15 +46,19 @@ class Item extends React.Component {
   onChange(e) {
     this.setState({ codigo: document.getElementById("numero").value,
                     supervisor: document.getElementById("supervisor").value,
-                    fechaInicio: document.getElementById("fechaInicio").value,
-                    fechaEntrega: document.getElementById("fechaEntrega").value,
                     dias: document.getElementById("dias").value,
                     descripcion: document.getElementById("descripcion").value,
                     observaciones: document.getElementById("observacion").value,
                   })
   }
 
-  
+  fechaInicioDate(date){
+    this.setState({ fechaInicio: date });
+  }
+
+  fechaEntregaDate(date){
+    this.setState({ fechaEntrega: date });
+  }
 
   render() {
       return (
@@ -91,12 +98,12 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <input value={this.state.fechaInicio} onChange={this.onChange.bind(this)} class="date" id="fechaInicio" type="text"/>
+                <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
             </div>
 
             <div className="item-form">
-                <label>Fecha Entrega</label>
-                <input value={this.state.fechaEntrega} onChange={this.onChange.bind(this)} class="date" id="fechaEntrega" type="text"/>
+                <label>Fecha Entrega Cliente</label>
+                <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
             </div>
 
             <div className="item-form">

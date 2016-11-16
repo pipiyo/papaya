@@ -2,6 +2,9 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
+import DatePicker from 'react-datepicker'
+import moment  from 'moment'
+
 import InformeActions from '../actions/InformeActions'
 import InformeStore from '../stores/InformeStore'
 
@@ -12,7 +15,20 @@ export default class InformeRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = {view:100, sum:200, servicio:"", fechai: "",fechae: "", codigo : "", estado : 'EN PROCESO', vendedor : "", categoria : "", cliente : ""}
+    this.state = { 
+                    view:100, 
+                    sum:200, 
+                    servicio:"", 
+                    fechai: "",
+                    fechae: "", 
+                    codigo : "", 
+                    estado : 'EN PROCESO', 
+                    vendedor : "", 
+                    categoria : "", 
+                    cliente : "",
+                    fechaInicio: undefined,
+                    fechaEntrega:undefined
+                  }
   }
   componentWillMount(){
     this.setState({sum:200})
@@ -58,7 +74,7 @@ export default class InformeRoutes extends React.Component {
     }
     return this.state.servicio
   }
-  filtro(){
+  filtro(e,name){
     let fechaI = document.getElementById("fechaInicio").value;
     let fechaE = document.getElementById("fechaEntrega").value;
     let codigo = document.getElementById("codigo").value;
@@ -78,11 +94,45 @@ export default class InformeRoutes extends React.Component {
     InformeActions.viewInformes(this.servicio(this.props.params.area),this.state.sum,this.state.estado,this.state.codigo,this.state.vendedor,this.state.categoria,this.state.fechai,this.state.cliente,this.state.fechae);
   }
 
+  fechaInicioDate(date){
+    if(moment(date).isValid()){
+      document.getElementById("fechaInicio").value = moment(date).format("YYYY-MM-DD")
+      this.setState({ fechaInicio: date })
+      this.filtro();
+    }else{
+      document.getElementById("fechaInicio").value = ""
+      this.setState({ fechaInicio: undefined })
+      this.filtro();
+    }
+  }
+
+  fechaEntregaDate(date){
+    if(moment(date).isValid()){
+      document.getElementById("fechaEntrega").value = moment(date).format("YYYY-MM-DD")
+      this.setState({ fechaEntrega: date })
+      this.filtro();
+    }else{
+      document.getElementById("fechaEntrega").value = ""
+      this.setState({ fechaEntrega: undefined })
+      this.filtro();
+    }
+  }
+
   render() {
     if(this.state.data){
       return (
         <div>
-          <InformeIndex cuenta={this.state.data.cuenta} servicio={this.props.params.area} datos={this.state.data.valor} viewMore={this.viewMore.bind(this) } filtro={this.filtro.bind(this)} />  
+          <InformeIndex 
+            cuenta={this.state.data.cuenta} 
+            servicio={this.props.params.area} 
+            datos={this.state.data.valor} 
+            fechaInicio={this.state.fechaInicio} 
+            fechaEntrega={this.state.fechaEntrega} 
+            fechaInicioDate={this.fechaInicioDate.bind(this)} 
+            fechaEntregaDate={this.fechaEntregaDate.bind(this)} 
+            filtro={this.filtro.bind(this)} 
+            viewMore={this.viewMore.bind(this)} 
+          />  
         </div>  
       )
     }else{
