@@ -8,6 +8,8 @@ const request = require('request')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 
+const Notification = require("./srcApirest/models/notification")
+
 require('./env').config()
 
 
@@ -155,12 +157,25 @@ let servicio = io
                     }
     let okAddServicio = '(Se ingreso servicio ' + data.area + ')'
 
-    con.query('INSERT INTO `servicio` SET ?',servicio, (err) => {
-    if (!err)
-      console.log('Se ingreso servicio ' + data.area);
-    else
-      console.log('Error no se pudo ingresar servicio '+ err);
-    })
+  con.query('INSERT INTO `servicio` SET ?',servicio, (err, row) => {
+    if (!err) {
+      
+      let notification = new Notification({user: socket.request.session.name, 
+                                       slug: 'aqui el slug',
+                                       area_servicio: data.area,
+                                       codigo_servicio: row.insertId,
+                                       categoria_servicio: data.categoria })
+
+      notification.save().then( (doc) => {
+        console.log( doc )
+      }, (error) => {
+        console.log( error )
+      })
+
+    } else {
+      console.log('Error no se pudo ingresar servicio '+ err)
+    }
+  })
 
     socket.emit('okAddServicio', okAddServicio)
   })
