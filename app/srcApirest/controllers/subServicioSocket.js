@@ -1,4 +1,4 @@
-module.exports = (io, con) => {
+module.exports = (io, pool) => {
 
   io
   .of('/subServicio')
@@ -8,13 +8,14 @@ module.exports = (io, con) => {
   socket.on('formingresoservicio', (callback) => {
 
 
-    con.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas` ORDER BY `NOMBRE_COMUNA` ASC; select `ID` AS id, `PATENTE` AS patente FROM `vehiculo` ORDER BY `PATENTE` ASC', function(err, rows, fields) {
-      
-      if (err) console.log( err ) 
+      pool.getConnection( (err, connection) => {
+        connection.query('select `CODIGO_COMUNA` AS codigo, `NOMBRE_COMUNA` AS nombre from `comunas` ORDER BY `NOMBRE_COMUNA` ASC; select `ID` AS id, `PATENTE` AS patente FROM `vehiculo` ORDER BY `PATENTE` ASC', (err, rows, fields) => {
+          connection.release()
+          if (err) console.log( err ) 
+          callback( rows[0], rows[1] )
+        })
+      })
 
-      callback( rows[0], rows[1] )
-
-    })
 
 
   })
@@ -24,23 +25,40 @@ module.exports = (io, con) => {
   socket.on('allSubServicio', (data) => {
       let query = 'SELECT `CODIGO_PROYECTO`,`DESCRIPCION`,`OBSERVACIONES`,`CODIGO_SERVICIO`, `FECHA_INICIO`, `FECHA_ENTREGA`, `CODIGO_SUBSERVICIO`, `SUB_CODIGO_SERVICIO`, `SUB_NOMBRE_SERVICIO`, `SUB_FECHA_INICIO`, `SUB_FECHA_ENTREGA`, `SUB_REALIZADOR`, `SUB_SUPERVISOR`, `SUB_OBSERVACIONES`, `SUB_ESTADO`, `SUB_CODIGO_USUARIO`, `SUB_CODIGO_PROYECTO`, `SUB_DESCRIPCION`, `SUB_DIRECCION`, `SUB_TPTMFI`, `SUB_GUIA_DESPACHO`, `SUB_CODIGO_OC`, `SUB_INSTALADOR_1`, `SUB_INSTALADOR_2`, `SUB_INSTALADOR_3`, `SUB_INSTALADOR_4`, `SUB_LIDER`, `SUB_DIAS`, `SUB_PREDECESOR`, `SUB_PUESTOS`, `SUB_PROCESO`, `SUB_EJECUTOR`, `SUB_DOCUMENTO_SERVICIO_TECNICO`, `SUB_TIPO_SERVICIO`, `SUB_TECNICO_1`, `SUB_TECNICO_2`, `SUB_CODIGO_RADICADO`, `SUB_TRANSPORTE`, `SUB_FECHA_REALIZACION`, `SUB_RECLAMOS`, `SUB_OC`, `SUB_FECHA_PRIMERA_ENTREGA`, `SUB_CATEGORIA`, `SUB_CANTIDAD`, `SUB_BODEGA`, `SUB_FI`, `SUB_ORDEN_SERVICIO`, `SUB_VALE`, `SUB_CODIGO_COMUNA`, `SUB_PROGRESO`, `SUB_M3`, `SUB_FACTURA`, `SUB_MONTO_FACTURA`, `SUB_RECEPCION`, `SUB_ARCHIVO`, `SUB_TM`, `SUB_TP`, `SUB_OS` FROM `sub_servicio`, `servicio` WHERE servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO and servicio.CODIGO_SERVICIO = "'+data+'";' 
       let query1 = 'SELECT * FROM servicio WHERE CODIGO_SERVICIO = "'+data+'"' 
-      con.query(query+query1 , function(err, rows, fields) {
-      if (!err)
-        socket.emit('okAllSubServicio', { sub:rows[0], servicio:rows[1]})
-      else
-        console.log('Error ' + err)
-      }) 
+      
+
+      pool.getConnection( (err, connection) => {
+          connection.query(query+query1, (err, rows, fields) => {
+              connection.release()
+              if (!err)
+                socket.emit('okAllSubServicio', { sub:rows[0], servicio:rows[1]})
+              else
+                console.log('Error ' + err)
+          }) 
+      })
+
+
+
   })
 
   /* Search Sub Servicio */
   socket.on('searchSubServicio', (id) => {
       let query = 'SELECT * FROM sub_servicio WHERE CODIGO_SUBSERVICIO = "'+id+'"' 
-      con.query(query, function(err, rows, fields) {
-      if (!err)
-        socket.emit('okSearchSubServicio', rows)
-      else
-        console.log('Error ' + err)
+
+
+      pool.getConnection( (err, connection) => {
+          connection.query(query, (err, rows, fields) => {
+              connection.release()
+              if (!err)
+                socket.emit('okSearchSubServicio', rows)
+              else
+                console.log('Error ' + err)
+          })
       })
+
+
+
+
   })
 
 
@@ -79,13 +97,23 @@ module.exports = (io, con) => {
                   }
     let okAddSubServicio = '(Se ingreso sub servicio ' + data.area + ')'
 
-    con.query('INSERT INTO `sub_servicio` SET ?',servicio, (err) => {
-      console.log(err)
-    if (!err)
-      console.log(okAddSubServicio)
-    else
-      console.log('Error no se pudo ingresar sub-servicio '+ err)
-    })
+
+
+
+
+      pool.getConnection( (err, connection) => {
+        connection.query('INSERT INTO `sub_servicio` SET ?',servicio, (err) => {
+            connection.release()
+            if (!err) 
+              console.log(okAddSubServicio)
+            else
+              console.log('Error no se pudo ingresar sub-servicio '+ err)
+        })
+      })
+
+
+
+
 
     socket.emit('okAddSubServicio', okAddSubServicio)
   })
@@ -95,12 +123,19 @@ module.exports = (io, con) => {
     
     let okUpdateSubServicio = '(Se update subservicio ' + data.numero + ')'
 
-    con.query('UPDATE sub_servicio SET SUB_CATEGORIA = ?, SUB_SUPERVISOR = ?, SUB_FECHA_INICIO = ?, SUB_FECHA_ENTREGA = ?, SUB_DESCRIPCION = ?, SUB_OBSERVACIONES = ?, SUB_DIRECCION  = ?, SUB_GUIA_DESPACHO = ?, SUB_CODIGO_COMUNA = ?, SUB_M3 = ?, SUB_FI = ?, SUB_TM = ?, SUB_TP = ?, SUB_OS = ?, SUB_LIDER = ?, SUB_PUESTOS = ?, SUB_PROCESO = ?, SUB_INSTALADOR_1 = ?, SUB_INSTALADOR_2 = ?, SUB_INSTALADOR_3 = ?, SUB_EJECUTOR = ?, SUB_VALE = ?, SUB_TRANSPORTE = ?, SUB_CANTIDAD = ?, SUB_RECLAMOS = ?, SUB_ESTADO = ?, SUB_DIAS = ?  WHERE CODIGO_SUBSERVICIO = ?', [data.categoria, data.supervisor, data.fechaInicio, data.fechaEntrega, data.descripcion, data.observacion, data.direccion, data.guia, data.comuna, data.m3, data.fi, data.tm, data.to, data.os, data.lider, data.puestos, data.proceso, data.instalador1, data.instalador2, data.instalador3, data.ejecutor, data.vale, data.vehiculo, data.cantidad, data.reclamo, data.estado, data.dias, data.numero], function(err, results) {
-    if (!err)
-      console.log('Se actualizo servicio ' + data.numero)
-    else
-      console.log('Error no se pudo ingresar servicio '+ err)
-    })
+
+
+      pool.getConnection( (err, connection) => {
+        connection.query('UPDATE sub_servicio SET SUB_CATEGORIA = ?, SUB_SUPERVISOR = ?, SUB_FECHA_INICIO = ?, SUB_FECHA_ENTREGA = ?, SUB_DESCRIPCION = ?, SUB_OBSERVACIONES = ?, SUB_DIRECCION  = ?, SUB_GUIA_DESPACHO = ?, SUB_CODIGO_COMUNA = ?, SUB_M3 = ?, SUB_FI = ?, SUB_TM = ?, SUB_TP = ?, SUB_OS = ?, SUB_LIDER = ?, SUB_PUESTOS = ?, SUB_PROCESO = ?, SUB_INSTALADOR_1 = ?, SUB_INSTALADOR_2 = ?, SUB_INSTALADOR_3 = ?, SUB_EJECUTOR = ?, SUB_VALE = ?, SUB_TRANSPORTE = ?, SUB_CANTIDAD = ?, SUB_RECLAMOS = ?, SUB_ESTADO = ?, SUB_DIAS = ?  WHERE CODIGO_SUBSERVICIO = ?', [data.categoria, data.supervisor, data.fechaInicio, data.fechaEntrega, data.descripcion, data.observacion, data.direccion, data.guia, data.comuna, data.m3, data.fi, data.tm, data.to, data.os, data.lider, data.puestos, data.proceso, data.instalador1, data.instalador2, data.instalador3, data.ejecutor, data.vale, data.vehiculo, data.cantidad, data.reclamo, data.estado, data.dias, data.numero], (err, results) => {
+            connection.release()
+            if (!err)
+              console.log('Se actualizo servicio ' + data.numero)
+            else
+              console.log('Error no se pudo ingresar servicio '+ err)
+        })
+      })
+
+
 
     socket.emit('okUpdateSubServicio', okUpdateSubServicio)
   })

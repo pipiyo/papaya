@@ -1,7 +1,6 @@
 /node_modules/
 /.tmp/
 /.sass-cache/
-/srcApirest/connection.js
 dump.rdb
 /src/Config/index.jsx
 ../dump.rdb

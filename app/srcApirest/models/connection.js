@@ -2,12 +2,13 @@
 
 let mysql = require('mysql')
 
-let connection = mysql.createConnection({
+let pool = mysql.createPool({
   host     : process.env.dbHost,
   user     : process.env.dbuser,
   password : process.env.dbPassword,
   database : process.env.dbDatabase,
-  multipleStatements: true
+  multipleStatements: true,
+  connectionLimit : 100
 })
 
-module.exports = connection
+module.exports = pool
