@@ -16,17 +16,18 @@ require('./env').config()
 const Store = new RedisStore({ ttl: 10020 })
 
 
-const con = require('./srcApirest/models/connection')
+const pool = require('./srcApirest/models/connection')
 
 const app = express()
 
 app.use(express.static(__dirname + '/bundle'))
 
+/*
 con.connect( (err) => {
   if (err) throw err
   console.log('conexta3')
-    
     })
+*/
 
 const sessionMiddleware = session({
   store: Store,
@@ -51,20 +52,13 @@ io.use( (socket, next) => {
 
 require('./srcApirest/controllers/loginSocket')(io, request, Store)
 
-require('./srcApirest/controllers/servicioSocket')(io, con, Notification)
+require('./srcApirest/controllers/servicioSocket')(io, pool, Notification)
 
-require('./srcApirest/controllers/subServicioSocket')(io, con)
+require('./srcApirest/controllers/subServicioSocket')(io, pool)
 
-require('./srcApirest/controllers/reclamoSocket')(io, con)
+require('./srcApirest/controllers/reclamoSocket')(io, pool)
 
   
 app.all('*', (request, response, next) => {
-
-/*
-  if (!request.sessionID) {
-    request.session.save()
-  }
-  */
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
-
 })

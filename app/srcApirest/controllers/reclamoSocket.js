@@ -1,4 +1,4 @@
-module.exports = (io, con) => {
+module.exports = (io, pool) => {
 
   io
   .of('/reclamo')
@@ -18,12 +18,18 @@ module.exports = (io, con) => {
                     }
     let mensaje = '(Se ingreso Reclamo ' + data.area + ')'
 
-    con.query('INSERT INTO `reclamos` SET ?',reclamo, (err) => {
-    if (!err)
-      console.log('Se ingreso reclamo ' + data.area);
-    else
-      console.log('Error no se pudo ingresar reclamo '+ err)
+
+    pool.getConnection( (err, connection) => {
+        connection.query('INSERT INTO `reclamos` SET ?',reclamo, (err) => {
+            connection.release()
+            if (!err)
+              console.log('Se ingreso reclamo ' + data.area);
+            else
+              console.log('Error no se pudo ingresar reclamo '+ err)
+        })
     })
+
+
     console.log(data)
     socket.emit('mensaje', mensaje)
   })
