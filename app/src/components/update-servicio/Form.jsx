@@ -10,7 +10,7 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form onSubmit={this.props.updateServicio}>
+        <form autoComplete="off" onSubmit={this.props.updateServicio}>
           <fieldset> 
             <Item datos={this.props.datos} tipo={this.props.tipo} area={this.props.area}  />
           </fieldset> 

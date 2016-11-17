@@ -19,15 +19,15 @@ class Filtro extends React.Component {
         <div class="module-filter">
           <div class="item-filter">
               <label> Fecha Inicio </label>
-              <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.props.fechaInicioDate} />
+              <DatePicker autoComplete="off" class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.props.fechaInicioDate} />
           </div>
           <div class="item-filter">
               <label> Fecha Entrega </label>
-              <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.props.fechaEntregaDate} />
+              <DatePicker autoComplete="off" class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.props.fechaEntregaDate} />
           </div>
           <div class="item-filter">
               <label> Código Rocha</label>
-              <input onChange={this.props.filtro} id="codigo" type="text"/>
+              <input autoComplete="off" onChange={this.props.filtro} id="codigo" type="text"/>
           </div>
           <div class="item-filter">
               <label> Estado</label>
@@ -57,7 +57,7 @@ class Filtro extends React.Component {
           </div>
           <div class="item-filter">
               <label>Cliente</label>
-              <input onChange={this.props.filtro} id="cliente" type="text"/>
+              <input autoComplete="off" onChange={this.props.filtro} id="cliente" type="text"/>
           </div>
         </div>
       )

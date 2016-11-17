@@ -647,6 +647,14 @@ a.external-link, .external-link a {
         @include active-state{
             border: solid 1px $color_valido;
         }
+        &:required{
+            border:solid 1px $gris; 
+            box-shadow:none;
+        }
+        &:invalid{
+            border:solid 1px $gris;
+            box-shadow:none; 
+        }    
     }
     input[type="checkbox"]:checked{
         + .checkbox{

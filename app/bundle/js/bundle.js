@@ -37462,7 +37462,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.props.addServicio },
+	        { autoComplete: 'off', onSubmit: this.props.addServicio },
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
@@ -37517,7 +37517,11 @@
 
 	    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 
-	    _this.state = { reclamo: "", fechaInicio: (0, _moment2.default)(), fechaEntrega: (0, _moment2.default)() };
+	    _this.state = {
+	      reclamo: "",
+	      fechaInicio: (0, _moment2.default)(),
+	      fechaEntrega: (0, _moment2.default)()
+	    };
 	    return _this;
 	  }
 
@@ -37594,7 +37598,7 @@
 	              null,
 	              'Rocha'
 	            ),
-	            _react2.default.createElement('input', { id: 'rocha', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'rocha', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37606,7 +37610,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'area', onChange: this.props.formArea },
+	              { required: true, id: 'area', onChange: this.props.formArea },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -37669,7 +37673,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -37700,7 +37704,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37710,7 +37714,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37720,7 +37724,7 @@
 	              null,
 	              'Fecha Entrega Cliente'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37740,7 +37744,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -51915,7 +51919,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.props.updateServicio },
+	        { autoComplete: 'off', onSubmit: this.props.updateServicio },
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
@@ -52059,7 +52063,7 @@
 	              null,
 	              'N\xFAmero'
 	            ),
-	            _react2.default.createElement('input', { id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
+	            _react2.default.createElement('input', { required: true, id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52071,7 +52075,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'proyecto' },
@@ -52125,7 +52129,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52135,7 +52139,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52145,7 +52149,7 @@
 	              null,
 	              'Fecha Entrega Cliente'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52165,7 +52169,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53502,7 +53506,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.props.addServicio },
+	        { autoComplete: 'off', onSubmit: this.props.addServicio },
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
@@ -53635,7 +53639,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'area', onChange: this.props.formArea },
+	              { required: true, id: 'area', onChange: this.props.formArea },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -53698,7 +53702,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -53729,7 +53733,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53739,7 +53743,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53749,7 +53753,7 @@
 	              null,
 	              'Fecha Entrega'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53769,7 +53773,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53779,7 +53783,7 @@
 	              null,
 	              'Observaci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { id: 'observacion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'observacion', type: 'text' })
 	          )
 	        ),
 	        this.props.area,
@@ -55025,8 +55029,6 @@
 	    value: function onChange(e) {
 	      this.setState({ codigo: document.getElementById("numero").value,
 	        supervisor: document.getElementById("supervisor").value,
-	        fechaInicio: document.getElementById("fechaInicio").value,
-	        fechaEntrega: document.getElementById("fechaEntrega").value,
 	        dias: document.getElementById("dias").value,
 	        descripcion: document.getElementById("descripcion").value,
 	        observaciones: document.getElementById("observacion").value
@@ -55068,7 +55070,7 @@
 	              null,
 	              'N\xFAmero'
 	            ),
-	            _react2.default.createElement('input', { id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
+	            _react2.default.createElement('input', { required: true, readOnly: true, id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55080,7 +55082,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'proyecto' },
@@ -55108,7 +55110,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'estado' },
+	              { required: true, id: 'estado' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'OK' },
@@ -55134,7 +55136,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55144,7 +55146,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55154,7 +55156,7 @@
 	              null,
 	              'Fecha Entrega'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55174,7 +55176,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -57248,7 +57250,7 @@
 	                        null,
 	                        ' Fecha Inicio '
 	                    ),
-	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.props.fechaInicioDate })
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.props.fechaInicioDate })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -57258,7 +57260,7 @@
 	                        null,
 	                        ' Fecha Entrega '
 	                    ),
-	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.props.fechaEntregaDate })
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.props.fechaEntregaDate })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -57268,7 +57270,7 @@
 	                        null,
 	                        ' C\xF3digo Rocha'
 	                    ),
-	                    _react2.default.createElement('input', { onChange: this.props.filtro, id: 'codigo', type: 'text' })
+	                    _react2.default.createElement('input', { autoComplete: 'off', onChange: this.props.filtro, id: 'codigo', type: 'text' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -57372,7 +57374,7 @@
 	                        null,
 	                        'Cliente'
 	                    ),
-	                    _react2.default.createElement('input', { onChange: this.props.filtro, id: 'cliente', type: 'text' })
+	                    _react2.default.createElement('input', { autoComplete: 'off', onChange: this.props.filtro, id: 'cliente', type: 'text' })
 	                )
 	            );
 	        }
