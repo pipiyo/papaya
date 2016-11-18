@@ -89,6 +89,10 @@
 
 	var _InformeRoutes2 = _interopRequireDefault(_InformeRoutes);
 
+	var _InformeRochaRoutes = __webpack_require__(508);
+
+	var _InformeRochaRoutes2 = _interopRequireDefault(_InformeRochaRoutes);
+
 	var _NotificacionRoutes = __webpack_require__(484);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
@@ -126,6 +130,7 @@
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _InicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad/:tipo', component: _ServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'informe/:area', component: _InformeRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'informe-rochas', component: _InformeRochaRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'actualizar-actividad/:id', component: _UpdateServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'reclamo', component: _ReclamoRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
@@ -58910,7 +58915,7 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
 	    _this.state = { active: 'active', notification: null };
-	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": false }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
+	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }, { id: "3", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": false }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
 	    return _this;
 	  }
 	  /* Agrega clase active para desplegar sub-menus */
@@ -59696,6 +59701,419 @@
 	}(_react2.default.Component);
 
 	exports.default = AuthRoutes;
+
+/***/ },
+/* 508 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _informeRocha = __webpack_require__(509);
+
+	var _informeRocha2 = _interopRequireDefault(_informeRocha);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InformeRoutes = function (_React$Component) {
+	  _inherits(InformeRoutes, _React$Component);
+
+	  function InformeRoutes() {
+	    _classCallCheck(this, InformeRoutes);
+
+	    return _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
+	  }
+
+	  _createClass(InformeRoutes, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_informeRocha2.default, null)
+	      );
+	    }
+	  }]);
+
+	  return InformeRoutes;
+	}(_react2.default.Component);
+
+	exports.default = InformeRoutes;
+
+/***/ },
+/* 509 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InformeRochaIndex = function (_React$Component) {
+	  _inherits(InformeRochaIndex, _React$Component);
+
+	  function InformeRochaIndex() {
+	    _classCallCheck(this, InformeRochaIndex);
+
+	    return _possibleConstructorReturn(this, (InformeRochaIndex.__proto__ || Object.getPrototypeOf(InformeRochaIndex)).call(this));
+	  }
+
+	  _createClass(InformeRochaIndex, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "div",
+	          { className: "title" },
+	          _react2.default.createElement(
+	            "h3",
+	            null,
+	            "Informe Rocha"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "module-filter" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-filter" },
+	            _react2.default.createElement(
+	              "label",
+	              null,
+	              " Fecha Inicio "
+	            ),
+	            _react2.default.createElement("input", { autoComplete: "off", className: "date", id: "fechaInicio", type: "text" })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-filter" },
+	            _react2.default.createElement(
+	              "label",
+	              null,
+	              " Fecha Entrega "
+	            ),
+	            _react2.default.createElement("input", { autoComplete: "off", className: "date", id: "fechaEntrega", type: "text" })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-filter" },
+	            _react2.default.createElement(
+	              "label",
+	              null,
+	              " C\xF3digo Rocha"
+	            ),
+	            _react2.default.createElement("input", { autoComplete: "off", id: "codigo", type: "text" })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-filter" },
+	            _react2.default.createElement(
+	              "label",
+	              null,
+	              " Estado"
+	            ),
+	            _react2.default.createElement(
+	              "select",
+	              { id: "estado" },
+	              _react2.default.createElement(
+	                "option",
+	                { value: "En Proceso" },
+	                "En Proceso"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "ACTA" },
+	                "Acta"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "OK" },
+	                "OK"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "Nula" },
+	                "Nulo"
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-filter" },
+	            _react2.default.createElement(
+	              "label",
+	              null,
+	              "Vendedor"
+	            ),
+	            _react2.default.createElement(
+	              "select",
+	              { id: "vendedor" },
+	              _react2.default.createElement(
+	                "option",
+	                { value: "" },
+	                "Seleccione"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "Amanda Godoy Santis" },
+	                "Amanda Godoy Santis"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "Maria de los Angeles Nu\xF1ez Duarte" },
+	                "Maria de los Angeles Nu\xF1ez Duarte"
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-filter" },
+	            _react2.default.createElement(
+	              "label",
+	              null,
+	              "Categor\xEDa"
+	            ),
+	            _react2.default.createElement(
+	              "select",
+	              { id: "categoria" },
+	              _react2.default.createElement(
+	                "option",
+	                { value: "" },
+	                "Seleccione"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "Proyecto" },
+	                "Proyecto"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "Solicitud" },
+	                "Solicitud"
+	              ),
+	              _react2.default.createElement(
+	                "option",
+	                { value: "Proceso" },
+	                "Proceso"
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-filter" },
+	            _react2.default.createElement(
+	              "label",
+	              null,
+	              "Cliente"
+	            ),
+	            _react2.default.createElement("input", { autoComplete: "off", onChange: this.props.filtro, id: "cliente", type: "text" })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "module-informe" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "title-informe" },
+	              _react2.default.createElement(
+	                "h3",
+	                null,
+	                "M&D 3030"
+	              ),
+	              _react2.default.createElement(
+	                "a",
+	                { className: "icon-informe" },
+	                " ",
+	                _react2.default.createElement("i", { className: "fa fa-plus", "aria-hidden": "true" }),
+	                " "
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "content-informe" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "opc" },
+	                _react2.default.createElement(
+	                  "h5",
+	                  null,
+	                  "Fecha Entrega"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "2010-12-12"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "opc" },
+	                _react2.default.createElement(
+	                  "h5",
+	                  null,
+	                  "Fecha Entrega"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "2010-12-12"
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "title-informe" },
+	              _react2.default.createElement(
+	                "h3",
+	                null,
+	                "M&D 3030"
+	              ),
+	              _react2.default.createElement(
+	                "a",
+	                { className: "icon-informe" },
+	                " ",
+	                _react2.default.createElement("i", { className: "fa fa-plus", "aria-hidden": "true" }),
+	                " "
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "content-informe" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "opc" },
+	                _react2.default.createElement(
+	                  "h5",
+	                  null,
+	                  "Fecha Entrega"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "2010-12-12"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "opc" },
+	                _react2.default.createElement(
+	                  "h5",
+	                  null,
+	                  "Fecha Entrega"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "2010-12-12"
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "title-informe" },
+	              _react2.default.createElement(
+	                "h3",
+	                null,
+	                "M&D 3030"
+	              ),
+	              _react2.default.createElement(
+	                "a",
+	                { className: "icon-informe" },
+	                " ",
+	                _react2.default.createElement("i", { className: "fa fa-plus", "aria-hidden": "true" }),
+	                " "
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "content-informe" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "opc" },
+	                _react2.default.createElement(
+	                  "h5",
+	                  null,
+	                  "Fecha Entrega"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "2010-12-12"
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "opc" },
+	                _react2.default.createElement(
+	                  "h5",
+	                  null,
+	                  "Fecha Entrega"
+	                ),
+	                _react2.default.createElement(
+	                  "p",
+	                  null,
+	                  "2010-12-12"
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return InformeRochaIndex;
+	}(_react2.default.Component);
+
+	exports.default = InformeRochaIndex;
 
 /***/ }
 /******/ ]);

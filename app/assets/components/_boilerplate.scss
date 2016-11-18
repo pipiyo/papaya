@@ -1268,3 +1268,66 @@ a.external-link, .external-link a {
         }
     }
 }
+
+
+/**** modulo informe ****/
+/**** modulo informe ****/
+/**** modulo informe ****/
+/**** modulo informe ****/
+
+.module-informe{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .item{
+        width: 50%;
+        padding: 1em;
+        @include vertical-tablet-down {
+            width: 100%;
+        }
+        .title-informe{
+            position: relative;
+            padding: 1em;
+            background: #0B3861;
+            h3{
+                font-size: 1em;
+                font-weight: normal;
+                margin: 0;
+                width: 90%;
+                color: $blanco;
+                padding: 0;
+            }
+            .icon-informe{
+                position: absolute;
+                top: 13px;
+                color: $blanco;
+                right: 10px;
+                &:hover{
+                    color: $color_rochas;
+                    cursor: pointer;
+                }
+            }
+        }
+        .content-informe{
+            border: solid #0B3861 1px;
+            padding: 1em;
+            h5{
+                margin: 0;
+                padding: 0;
+            }
+            p{
+                margin: 0;
+                font-weight: normal;
+                padding: 0;
+                display: inline;
+                font-size: $fontTiny;
+            }
+            .opc{
+                width: 100%;
+                + .opc{
+                    margin-top: .5em;
+                }          
+            }
+        }
+    }
+}
