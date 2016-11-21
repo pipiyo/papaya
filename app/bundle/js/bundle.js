@@ -93,23 +93,23 @@
 
 	var _InformeRochaRoutes2 = _interopRequireDefault(_InformeRochaRoutes);
 
-	var _NotificacionRoutes = __webpack_require__(491);
+	var _NotificacionRoutes = __webpack_require__(492);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
 
-	var _DetalleInformeRoutes = __webpack_require__(494);
+	var _DetalleInformeRoutes = __webpack_require__(495);
 
 	var _DetalleInformeRoutes2 = _interopRequireDefault(_DetalleInformeRoutes);
 
-	var _HomeRoutes = __webpack_require__(503);
+	var _HomeRoutes = __webpack_require__(504);
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
-	var _InicioRoutes = __webpack_require__(512);
+	var _InicioRoutes = __webpack_require__(513);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
 
-	var _AuthRoutes = __webpack_require__(514);
+	var _AuthRoutes = __webpack_require__(515);
 
 	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
 
@@ -58495,7 +58495,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ContentRocha = __webpack_require__(515);
+	var _ContentRocha = __webpack_require__(491);
 
 	var _ContentRocha2 = _interopRequireDefault(_ContentRocha);
 
@@ -58598,6 +58598,84 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(198);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ContentRocha = function (_React$Component) {
+	  _inherits(ContentRocha, _React$Component);
+
+	  function ContentRocha() {
+	    _classCallCheck(this, ContentRocha);
+
+	    return _possibleConstructorReturn(this, (ContentRocha.__proto__ || Object.getPrototypeOf(ContentRocha)).call(this));
+	  }
+
+	  _createClass(ContentRocha, [{
+	    key: 'validador',
+	    value: function validador(nombre, _validador, fecha) {
+	      var text = void 0;
+	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	        text = "";
+	      } else {
+	        text = _react2.default.createElement(
+	          'div',
+	          { className: 'opc' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            nombre
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            fecha ? _validador.substring(0, 10) : _validador
+	          )
+	        );
+	      }
+	      return text;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'content-informe' },
+	        this.validador("Ejecutivo:", this.props.rocha.EJECUTIVO),
+	        this.validador("Obra:", this.props.rocha.OBRA),
+	        this.validador("Fecha Ingreso:", this.props.rocha.FECHA_INGRESO, true),
+	        this.validador("Fecha Entrega:", this.props.rocha.FECHA_CONFIRMACION, true)
+	      );
+	    }
+	  }]);
+
+	  return ContentRocha;
+	}(_react2.default.Component);
+
+	exports.default = ContentRocha;
+
+/***/ },
+/* 492 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.default = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -58606,7 +58684,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _notificacion = __webpack_require__(492);
+	var _notificacion = __webpack_require__(493);
 
 	var _notificacion2 = _interopRequireDefault(_notificacion);
 
@@ -58640,7 +58718,7 @@
 	exports.default = AbastecimientoRoutes;
 
 /***/ },
-/* 492 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58655,7 +58733,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(493);
+	var _Title = __webpack_require__(494);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
@@ -58751,7 +58829,7 @@
 	exports.default = NotificacionIndex;
 
 /***/ },
-/* 493 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58804,7 +58882,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 494 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58830,15 +58908,15 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _DetalleInformeActions = __webpack_require__(495);
+	var _DetalleInformeActions = __webpack_require__(496);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
-	var _DetalleInformeStore = __webpack_require__(496);
+	var _DetalleInformeStore = __webpack_require__(497);
 
 	var _DetalleInformeStore2 = _interopRequireDefault(_DetalleInformeStore);
 
-	var _detalleInforme = __webpack_require__(497);
+	var _detalleInforme = __webpack_require__(498);
 
 	var _detalleInforme2 = _interopRequireDefault(_detalleInforme);
 
@@ -58888,7 +58966,7 @@
 	exports.default = DetalleInformeRoutes;
 
 /***/ },
-/* 495 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58908,7 +58986,7 @@
 	exports.default = DetalleInformeActions;
 
 /***/ },
-/* 496 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58923,7 +59001,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _DetalleInformeActions = __webpack_require__(495);
+	var _DetalleInformeActions = __webpack_require__(496);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
@@ -58972,7 +59050,7 @@
 	exports.default = DetalleInformeStore;
 
 /***/ },
-/* 497 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58987,23 +59065,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(498);
+	var _Title = __webpack_require__(499);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(499);
+	var _Form = __webpack_require__(500);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _ActividadTitle = __webpack_require__(500);
+	var _ActividadTitle = __webpack_require__(501);
 
 	var _ActividadTitle2 = _interopRequireDefault(_ActividadTitle);
 
-	var _ActividadContent = __webpack_require__(501);
+	var _ActividadContent = __webpack_require__(502);
 
 	var _ActividadContent2 = _interopRequireDefault(_ActividadContent);
 
-	var _SubActividad = __webpack_require__(502);
+	var _SubActividad = __webpack_require__(503);
 
 	var _SubActividad2 = _interopRequireDefault(_SubActividad);
 
@@ -59078,7 +59156,7 @@
 	exports.default = DetalleInformeIndex;
 
 /***/ },
-/* 498 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59131,7 +59209,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 499 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59191,7 +59269,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 500 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59254,7 +59332,7 @@
 	exports.default = ActividadTitle;
 
 /***/ },
-/* 501 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59330,7 +59408,7 @@
 	exports.default = ActividadContent;
 
 /***/ },
-/* 502 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59477,7 +59555,7 @@
 	exports.default = SubActividad;
 
 /***/ },
-/* 503 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59493,7 +59571,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _home = __webpack_require__(504);
+	var _home = __webpack_require__(505);
 
 	var _home2 = _interopRequireDefault(_home);
 
@@ -59532,7 +59610,7 @@
 	exports.default = HomeRoutes;
 
 /***/ },
-/* 504 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59547,11 +59625,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(505);
+	var _Header = __webpack_require__(506);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Main = __webpack_require__(509);
+	var _Main = __webpack_require__(510);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -59624,7 +59702,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 505 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59639,11 +59717,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Logo = __webpack_require__(506);
+	var _Logo = __webpack_require__(507);
 
 	var _Logo2 = _interopRequireDefault(_Logo);
 
-	var _Item = __webpack_require__(507);
+	var _Item = __webpack_require__(508);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -59686,7 +59764,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 506 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59742,7 +59820,7 @@
 	exports.default = Logo;
 
 /***/ },
-/* 507 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59759,7 +59837,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _Area = __webpack_require__(508);
+	var _Area = __webpack_require__(509);
 
 	var _Area2 = _interopRequireDefault(_Area);
 
@@ -59835,7 +59913,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 508 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59904,7 +59982,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 509 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59919,7 +59997,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(510);
+	var _Nav = __webpack_require__(511);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -59999,7 +60077,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 510 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60014,7 +60092,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Notification = __webpack_require__(511);
+	var _Notification = __webpack_require__(512);
 
 	var _Notification2 = _interopRequireDefault(_Notification);
 
@@ -60081,7 +60159,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 511 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60187,7 +60265,7 @@
 	exports.default = Notification;
 
 /***/ },
-/* 512 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60203,7 +60281,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _inicio = __webpack_require__(513);
+	var _inicio = __webpack_require__(514);
 
 	var _inicio2 = _interopRequireDefault(_inicio);
 
@@ -60237,7 +60315,7 @@
 	exports.default = InicioRoutes;
 
 /***/ },
-/* 513 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60290,7 +60368,7 @@
 	exports.default = InicioIndex;
 
 /***/ },
-/* 514 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60358,84 +60436,6 @@
 	}(_react2.default.Component);
 
 	exports.default = AuthRoutes;
-
-/***/ },
-/* 515 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(198);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ContentRocha = function (_React$Component) {
-	  _inherits(ContentRocha, _React$Component);
-
-	  function ContentRocha() {
-	    _classCallCheck(this, ContentRocha);
-
-	    return _possibleConstructorReturn(this, (ContentRocha.__proto__ || Object.getPrototypeOf(ContentRocha)).call(this));
-	  }
-
-	  _createClass(ContentRocha, [{
-	    key: 'validador',
-	    value: function validador(nombre, _validador, fecha) {
-	      var text = void 0;
-	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
-	        text = "";
-	      } else {
-	        text = _react2.default.createElement(
-	          'div',
-	          { className: 'opc' },
-	          _react2.default.createElement(
-	            'h5',
-	            null,
-	            nombre
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            fecha ? _validador.substring(0, 10) : _validador
-	          )
-	        );
-	      }
-	      return text;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'content-informe' },
-	        this.validador("Ejecutivo:", this.props.rocha.EJECUTIVO),
-	        this.validador("Obra:", this.props.rocha.OBRA),
-	        this.validador("Fecha Ingreso:", this.props.rocha.FECHA_INGRESO, true),
-	        this.validador("Fecha Entrega:", this.props.rocha.FECHA_CONFIRMACION, true)
-	      );
-	    }
-	  }]);
-
-	  return ContentRocha;
-	}(_react2.default.Component);
-
-	exports.default = ContentRocha;
 
 /***/ }
 /******/ ]);
