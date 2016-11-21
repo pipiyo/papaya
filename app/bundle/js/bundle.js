@@ -89,23 +89,23 @@
 
 	var _InformeRoutes2 = _interopRequireDefault(_InformeRoutes);
 
-	var _NotificacionRoutes = __webpack_require__(484);
+	var _NotificacionRoutes = __webpack_require__(492);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
 
-	var _DetalleInformeRoutes = __webpack_require__(487);
+	var _DetalleInformeRoutes = __webpack_require__(495);
 
 	var _DetalleInformeRoutes2 = _interopRequireDefault(_DetalleInformeRoutes);
 
-	var _HomeRoutes = __webpack_require__(496);
+	var _HomeRoutes = __webpack_require__(504);
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
-	var _InicioRoutes = __webpack_require__(505);
+	var _InicioRoutes = __webpack_require__(513);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
 
-	var _AuthRoutes = __webpack_require__(507);
+	var _AuthRoutes = __webpack_require__(515);
 
 	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
 
@@ -57926,7 +57926,15 @@
 	exports.default = ContentRocha;
 
 /***/ },
-/* 484 */
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57942,7 +57950,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _notificacion = __webpack_require__(485);
+	var _notificacion = __webpack_require__(493);
 
 	var _notificacion2 = _interopRequireDefault(_notificacion);
 
@@ -57976,7 +57984,7 @@
 	exports.default = AbastecimientoRoutes;
 
 /***/ },
-/* 485 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57991,7 +57999,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(486);
+	var _Title = __webpack_require__(494);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
@@ -58087,7 +58095,7 @@
 	exports.default = NotificacionIndex;
 
 /***/ },
-/* 486 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58140,7 +58148,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 487 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58166,15 +58174,15 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _DetalleInformeActions = __webpack_require__(488);
+	var _DetalleInformeActions = __webpack_require__(496);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
-	var _DetalleInformeStore = __webpack_require__(489);
+	var _DetalleInformeStore = __webpack_require__(497);
 
 	var _DetalleInformeStore2 = _interopRequireDefault(_DetalleInformeStore);
 
-	var _detalleInforme = __webpack_require__(490);
+	var _detalleInforme = __webpack_require__(498);
 
 	var _detalleInforme2 = _interopRequireDefault(_detalleInforme);
 
@@ -58224,7 +58232,7 @@
 	exports.default = DetalleInformeRoutes;
 
 /***/ },
-/* 488 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58244,7 +58252,7 @@
 	exports.default = DetalleInformeActions;
 
 /***/ },
-/* 489 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58259,7 +58267,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _DetalleInformeActions = __webpack_require__(488);
+	var _DetalleInformeActions = __webpack_require__(496);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
@@ -58308,7 +58316,7 @@
 	exports.default = DetalleInformeStore;
 
 /***/ },
-/* 490 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58323,23 +58331,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(491);
+	var _Title = __webpack_require__(499);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(492);
+	var _Form = __webpack_require__(500);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _ActividadTitle = __webpack_require__(493);
+	var _ActividadTitle = __webpack_require__(501);
 
 	var _ActividadTitle2 = _interopRequireDefault(_ActividadTitle);
 
-	var _ActividadContent = __webpack_require__(494);
+	var _ActividadContent = __webpack_require__(502);
 
 	var _ActividadContent2 = _interopRequireDefault(_ActividadContent);
 
-	var _SubActividad = __webpack_require__(495);
+	var _SubActividad = __webpack_require__(503);
 
 	var _SubActividad2 = _interopRequireDefault(_SubActividad);
 
@@ -58414,7 +58422,7 @@
 	exports.default = DetalleInformeIndex;
 
 /***/ },
-/* 491 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58467,7 +58475,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 492 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58527,7 +58535,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 493 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58590,7 +58598,7 @@
 	exports.default = ActividadTitle;
 
 /***/ },
-/* 494 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58666,7 +58674,7 @@
 	exports.default = ActividadContent;
 
 /***/ },
-/* 495 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58813,7 +58821,7 @@
 	exports.default = SubActividad;
 
 /***/ },
-/* 496 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58829,7 +58837,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _home = __webpack_require__(497);
+	var _home = __webpack_require__(505);
 
 	var _home2 = _interopRequireDefault(_home);
 
@@ -58868,7 +58876,7 @@
 	exports.default = HomeRoutes;
 
 /***/ },
-/* 497 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58883,11 +58891,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(498);
+	var _Header = __webpack_require__(506);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Main = __webpack_require__(502);
+	var _Main = __webpack_require__(510);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -58960,7 +58968,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 498 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58975,11 +58983,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Logo = __webpack_require__(499);
+	var _Logo = __webpack_require__(507);
 
 	var _Logo2 = _interopRequireDefault(_Logo);
 
-	var _Item = __webpack_require__(500);
+	var _Item = __webpack_require__(508);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -59022,7 +59030,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 499 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59078,7 +59086,7 @@
 	exports.default = Logo;
 
 /***/ },
-/* 500 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59095,7 +59103,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _Area = __webpack_require__(501);
+	var _Area = __webpack_require__(509);
 
 	var _Area2 = _interopRequireDefault(_Area);
 
@@ -59171,7 +59179,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 501 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59240,7 +59248,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 502 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59255,7 +59263,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(503);
+	var _Nav = __webpack_require__(511);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -59335,7 +59343,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 503 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59350,7 +59358,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Notification = __webpack_require__(504);
+	var _Notification = __webpack_require__(512);
 
 	var _Notification2 = _interopRequireDefault(_Notification);
 
@@ -59417,7 +59425,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 504 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59523,7 +59531,7 @@
 	exports.default = Notification;
 
 /***/ },
-/* 505 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59539,7 +59547,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _inicio = __webpack_require__(506);
+	var _inicio = __webpack_require__(514);
 
 	var _inicio2 = _interopRequireDefault(_inicio);
 
@@ -59573,7 +59581,7 @@
 	exports.default = InicioRoutes;
 
 /***/ },
-/* 506 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59626,7 +59634,7 @@
 	exports.default = InicioIndex;
 
 /***/ },
-/* 507 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
