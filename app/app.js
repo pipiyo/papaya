@@ -8,15 +8,11 @@ const request = require('request')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 
-const Notification = require("./srcApirest/models/notification")
-
 require('./env').config()
 
 
 const Store = new RedisStore({ ttl: 10020 })
 
-
-const pool = require('./srcApirest/models/connection')
 
 const app = express()
 
@@ -49,16 +45,17 @@ io.use( (socket, next) => {
   sessionMiddleware(socket.request, socket.request.res, next)
 } )
 
+require('./srcApirest/controllers/notificationSocket')()
 
 require('./srcApirest/controllers/loginSocket')(io, request, Store)
 
-require('./srcApirest/controllers/servicioSocket')(io, pool, Notification)
+require('./srcApirest/controllers/servicioSocket')(io)
 
-require('./srcApirest/controllers/subServicioSocket')(io, pool)
+require('./srcApirest/controllers/subServicioSocket')(io)
 
-require('./srcApirest/controllers/reclamoSocket')(io, pool)
+require('./srcApirest/controllers/reclamoSocket')(io)
 
-require('./srcApirest/controllers/rochaSocket')(io, pool)
+require('./srcApirest/controllers/rochaSocket')(io)
 
   
 app.all('*', (request, response, next) => {

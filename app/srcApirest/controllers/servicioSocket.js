@@ -1,4 +1,7 @@
-module.exports = (io, pool, Notification) => {
+const pool = require('../models/connection')
+const Notification = require("../models/notification")
+
+module.exports = (io) => {
 
   io
   .of('/servicio')
@@ -58,15 +61,23 @@ module.exports = (io, pool, Notification) => {
           connection.release()
           if (!err) {
             let notification = new Notification({user: socket.request.session.name, 
-                                                 slug: 'aqui el slug',
-                                                 area_servicio: data.area,
-                                                 codigo_servicio: row.insertId,
-                                                 categoria_servicio: data.categoria })
+                                                 slug: `detalle-actividad/${row.insertId}`,
+                                                 area: data.area,
+                                                 asset: {
+                                                   codigo: row.insertId,
+                                                   categoria: data.categoria
+                                                 } })
+
+
+
             notification.save().then( (doc) => {
               console.log( doc )
             }, (error) => {
               console.log( error )
             })
+
+
+
           } else {
             console.log('Error no se pudo ingresar servicio '+ err)
           }
