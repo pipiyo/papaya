@@ -89,27 +89,27 @@
 
 	var _InformeRoutes2 = _interopRequireDefault(_InformeRoutes);
 
-	var _InformeRochaRoutes = __webpack_require__(508);
+	var _InformeRochaRoutes = __webpack_require__(484);
 
 	var _InformeRochaRoutes2 = _interopRequireDefault(_InformeRochaRoutes);
 
-	var _NotificacionRoutes = __webpack_require__(484);
+	var _NotificacionRoutes = __webpack_require__(491);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
 
-	var _DetalleInformeRoutes = __webpack_require__(487);
+	var _DetalleInformeRoutes = __webpack_require__(494);
 
 	var _DetalleInformeRoutes2 = _interopRequireDefault(_DetalleInformeRoutes);
 
-	var _HomeRoutes = __webpack_require__(496);
+	var _HomeRoutes = __webpack_require__(503);
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
-	var _InicioRoutes = __webpack_require__(505);
+	var _InicioRoutes = __webpack_require__(512);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
 
-	var _AuthRoutes = __webpack_require__(507);
+	var _AuthRoutes = __webpack_require__(514);
 
 	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
 
@@ -128,7 +128,7 @@
 	            _reactRouter.Route,
 	            { path: 'home', component: _HomeRoutes2.default },
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _InicioRoutes2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad/:tipo', component: _ServicioRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad/:rocha/:tipo', component: _ServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'informe/:area', component: _InformeRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'informe-rochas', component: _InformeRochaRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'actualizar-actividad/:id', component: _UpdateServicioRoutes2.default }),
@@ -37159,7 +37159,7 @@
 	      //console.log( this.state.obj.comunas )
 	      //console.log( this.state.obj.vehiculos )
 	      //console.log( this.state.obj.mensaje )
-	      return _react2.default.createElement(_servicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_servicio2.default, { rocha: this.props.params.rocha, tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
 	    }
 	  }]);
 
@@ -37357,7 +37357,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, { mensaje: this.props.mensaje }),
-	        _react2.default.createElement(_Form2.default, { tipo: this.props.tipo, addServicio: this.props.addServicio, area: this.props.area, formArea: this.props.formArea })
+	        _react2.default.createElement(_Form2.default, { rocha: this.props.rocha, tipo: this.props.tipo, addServicio: this.props.addServicio, area: this.props.area, formArea: this.props.formArea })
 	      );
 	    }
 	  }]);
@@ -37471,7 +37471,7 @@
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
-	          _react2.default.createElement(_Item2.default, { tipo: this.props.tipo, area: this.props.area, formArea: this.props.formArea })
+	          _react2.default.createElement(_Item2.default, { rocha: this.props.rocha, tipo: this.props.tipo, area: this.props.area, formArea: this.props.formArea })
 	        )
 	      );
 	    }
@@ -37523,6 +37523,7 @@
 	    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 
 	    _this.state = {
+	      valuerocha: "",
 	      reclamo: "",
 	      fechaInicio: (0, _moment2.default)(),
 	      fechaEntrega: (0, _moment2.default)()
@@ -37547,6 +37548,11 @@
 	      } else {
 	        this.state.reclamo = "";
 	      }
+	      if (nextProps.rocha == "ingreso") {
+	        this.state.valuerocha = "";
+	      } else {
+	        this.state.valuerocha = this.props.rocha;
+	      }
 	    }
 	  }, {
 	    key: 'componentWillMount',
@@ -37565,6 +37571,11 @@
 	      } else {
 	        this.setState({ reclamo: "" });
 	      }
+	      if (this.props.rocha == "ingreso") {
+	        this.setState({ valuerocha: "" });
+	      } else {
+	        this.setState({ valuerocha: this.props.rocha });
+	      }
 	    }
 	  }, {
 	    key: 'fechaInicioDate',
@@ -37575,6 +37586,11 @@
 	    key: 'fechaEntregaDate',
 	    value: function fechaEntregaDate(date) {
 	      this.setState({ fechaEntrega: date });
+	    }
+	  }, {
+	    key: 'onChange',
+	    value: function onChange(e) {
+	      this.setState({ valuerocha: document.getElementById("rocha").value });
 	    }
 	  }, {
 	    key: 'render',
@@ -37603,7 +37619,7 @@
 	              null,
 	              'Rocha'
 	            ),
-	            _react2.default.createElement('input', { required: true, id: 'rocha', type: 'text' })
+	            _react2.default.createElement('input', { required: true, onChange: this.onChange.bind(this), id: 'rocha', type: 'text', value: this.state.valuerocha })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -57945,11 +57961,652 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _dec, _class;
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _notificacion = __webpack_require__(485);
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactDatepicker = __webpack_require__(319);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	var _moment = __webpack_require__(320);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _InformeRochaActions = __webpack_require__(485);
+
+	var _InformeRochaActions2 = _interopRequireDefault(_InformeRochaActions);
+
+	var _InformeRochaStore = __webpack_require__(486);
+
+	var _InformeRochaStore2 = _interopRequireDefault(_InformeRochaStore);
+
+	var _informeRocha = __webpack_require__(487);
+
+	var _informeRocha2 = _interopRequireDefault(_informeRocha);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InformeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_InformeRochaStore2.default, 'obj')), _dec(_class = function (_React$Component) {
+	  _inherits(InformeRoutes, _React$Component);
+
+	  function InformeRoutes() {
+	    _classCallCheck(this, InformeRoutes);
+
+	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
+
+	    _this.state = { valor: 200, fechai: "", fechae: "" };
+	    return _this;
+	  }
+
+	  _createClass(InformeRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _InformeRochaActions2.default.allRocha(this.state.obj.filtro);
+	    }
+	  }, {
+	    key: 'filtro',
+	    value: function filtro() {
+	      var fechaI = document.getElementById("fechaInicio").value;
+	      var fechaE = document.getElementById("fechaEntrega").value;
+	      var codigo = document.getElementById("codigo").value;
+	      var estado = document.getElementById("estado").value;
+	      var vendedor = document.getElementById("vendedor").value;
+	      var cliente = document.getElementById("cliente").value;
+
+	      if (codigo != "") {
+	        this.state.obj.filtro.codigo = codigo;
+	      } else {
+	        this.state.obj.filtro.codigo = "";
+	      }
+	      if (vendedor != "") {
+	        this.state.obj.filtro.vendedor = vendedor;
+	      } else {
+	        this.state.obj.filtro.vendedor = "";
+	      }
+	      if (cliente != "") {
+	        this.state.obj.filtro.cliente = cliente;
+	      } else {
+	        this.state.obj.filtro.cliente = "";
+	      }
+	      if (fechaI != "") {
+	        this.state.obj.filtro.fechai = fechaI;
+	      } else {
+	        this.state.obj.filtro.fechai = "";
+	      }
+	      if (fechaE != "") {
+	        this.state.obj.filtro.fechae = fechaE;
+	      } else {
+	        this.state.obj.filtro.fechae = "";
+	      }
+	      this.state.obj.filtro.estado = estado;
+
+	      _InformeRochaActions2.default.allRocha(this.state.obj.filtro);
+	    }
+	  }, {
+	    key: 'fechaInicioDate',
+	    value: function fechaInicioDate(date) {
+	      if ((0, _moment2.default)(date).isValid()) {
+	        document.getElementById("fechaInicio").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	        this.setState({ fechaInicio: date });
+	        this.filtro();
+	      } else {
+	        document.getElementById("fechaInicio").value = "";
+	        this.setState({ fechaInicio: undefined });
+	        this.filtro();
+	      }
+	    }
+	  }, {
+	    key: 'fechaEntregaDate',
+	    value: function fechaEntregaDate(date) {
+	      if ((0, _moment2.default)(date).isValid()) {
+	        document.getElementById("fechaEntrega").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	        this.setState({ fechaEntrega: date });
+	        this.filtro();
+	      } else {
+	        document.getElementById("fechaEntrega").value = "";
+	        this.setState({ fechaEntrega: undefined });
+	        this.filtro();
+	      }
+	    }
+	  }, {
+	    key: 'viewMore',
+	    value: function viewMore() {
+	      this.setState({ valor: this.state.valor + 100 });
+	      this.state.obj.filtro.count = this.state.valor;
+	      _InformeRochaActions2.default.allRocha(this.state.obj.filtro);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.obj.rocha) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_informeRocha2.default, {
+	            rocha: this.state.obj.rocha.valor,
+	            cuenta: this.state.obj.rocha.cuenta,
+	            fechaInicio: this.state.fechaInicio,
+	            fechaEntrega: this.state.fechaEntrega,
+	            filtro: this.filtro.bind(this),
+	            viewMore: this.viewMore.bind(this),
+	            fechaInicioDate: this.fechaInicioDate.bind(this),
+	            fechaEntregaDate: this.fechaEntregaDate.bind(this)
+	          })
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Cargando'
+	          )
+	        );
+	      }
+	    }
+	  }]);
+
+	  return InformeRoutes;
+	}(_react2.default.Component)) || _class);
+	exports.default = InformeRoutes;
+
+/***/ },
+/* 485 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InformeRochaActions = _reflux2.default.createActions(['allRocha']);
+
+	exports.default = InformeRochaActions;
+
+/***/ },
+/* 486 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _InformeRochaActions = __webpack_require__(485);
+
+	var _InformeRochaActions2 = _interopRequireDefault(_InformeRochaActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var socket = _socket2.default.connect(_Config2.default.url + 'rocha');
+
+	var InformeRochaStore = _reflux2.default.createStore({
+	  listenables: [_InformeRochaActions2.default],
+	  obj: { rocha: '', filtro: { estado: "EN PROCESO", fechai: "", fechae: "", vendedor: "", cliente: "", codigo: "", count: 100 } },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  allRocha: function allRocha(data) {
+	    var _this = this;
+
+	    socket.emit('allRocha', data);
+	    socket.on('okAllRocha', function (okAllRocha) {
+	      _this.obj.rocha = okAllRocha;
+	      _this.trigger(_this.obj);
+	    });
+	  }
+	});
+
+	exports.default = InformeRochaStore;
+
+/***/ },
+/* 487 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Title = __webpack_require__(488);
+
+	var _Title2 = _interopRequireDefault(_Title);
+
+	var _Filtro = __webpack_require__(489);
+
+	var _Filtro2 = _interopRequireDefault(_Filtro);
+
+	var _Rocha = __webpack_require__(490);
+
+	var _Rocha2 = _interopRequireDefault(_Rocha);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InformeRochaIndex = function (_React$Component) {
+	  _inherits(InformeRochaIndex, _React$Component);
+
+	  function InformeRochaIndex() {
+	    _classCallCheck(this, InformeRochaIndex);
+
+	    return _possibleConstructorReturn(this, (InformeRochaIndex.__proto__ || Object.getPrototypeOf(InformeRochaIndex)).call(this));
+	  }
+
+	  _createClass(InformeRochaIndex, [{
+	    key: 'render',
+	    value: function render() {
+	      console.log();
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_Title2.default, null),
+	        _react2.default.createElement(_Filtro2.default, { fechaInicioDate: this.props.fechaInicioDate, fechaEntregaDate: this.props.fechaEntregaDate, fechaInicio: this.props.fechaInicio, fechaEntrega: this.props.fechaEntrega, filtro: this.props.filtro }),
+	        _react2.default.createElement(_Rocha2.default, { cuenta: this.props.cuenta, rocha: this.props.rocha, viewMore: this.props.viewMore })
+	      );
+	    }
+	  }]);
+
+	  return InformeRochaIndex;
+	}(_react2.default.Component);
+
+	exports.default = InformeRochaIndex;
+
+/***/ },
+/* 488 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Title = function (_React$Component) {
+	  _inherits(Title, _React$Component);
+
+	  function Title() {
+	    _classCallCheck(this, Title);
+
+	    return _possibleConstructorReturn(this, (Title.__proto__ || Object.getPrototypeOf(Title)).call(this));
+	  }
+
+	  _createClass(Title, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "title" },
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "Informe Rocha"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Title;
+	}(_react2.default.Component);
+
+	exports.default = Title;
+
+/***/ },
+/* 489 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDatepicker = __webpack_require__(319);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	var _moment = __webpack_require__(320);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Filtro = function (_React$Component) {
+	    _inherits(Filtro, _React$Component);
+
+	    function Filtro(props) {
+	        _classCallCheck(this, Filtro);
+
+	        var _this = _possibleConstructorReturn(this, (Filtro.__proto__ || Object.getPrototypeOf(Filtro)).call(this));
+
+	        _this.state = { fechaInicio: props.fechaInicio, fechaEntrega: props.fechaEntrega };
+	        return _this;
+	    }
+
+	    _createClass(Filtro, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setState({ fechaInicio: nextProps.fechaInicio, fechaEntrega: nextProps.fechaEntrega });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'module-filter' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Fecha Inicio '
+	                    ),
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.props.fechaInicioDate })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Fecha Entrega '
+	                    ),
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.props.fechaEntregaDate })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' C\xF3digo Rocha'
+	                    ),
+	                    _react2.default.createElement('input', { autoComplete: 'off', id: 'codigo', type: 'text', onChange: this.props.filtro })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Estado'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'estado', onChange: this.props.filtro },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'En Proceso' },
+	                            'En Proceso'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'ACTA' },
+	                            'Acta'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'OK' },
+	                            'OK'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Nula' },
+	                            'Nulo'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Vendedor'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'vendedor', onChange: this.props.filtro },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: '' },
+	                            'Seleccione'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Amanda Godoy Santis' },
+	                            'Amanda Godoy Santis'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Maria de los Angeles Nu\xF1ez Duarte' },
+	                            'Maria de los Angeles Nu\xF1ez Duarte'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Cliente'
+	                    ),
+	                    _react2.default.createElement('input', { autoComplete: 'off', onChange: this.props.filtro, id: 'cliente', type: 'text' })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Filtro;
+	}(_react2.default.Component);
+
+	exports.default = Filtro;
+
+/***/ },
+/* 490 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ContentRocha = __webpack_require__(515);
+
+	var _ContentRocha2 = _interopRequireDefault(_ContentRocha);
+
+	var _reactRouter = __webpack_require__(198);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Rocha = function (_React$Component) {
+	  _inherits(Rocha, _React$Component);
+
+	  function Rocha() {
+	    _classCallCheck(this, Rocha);
+
+	    return _possibleConstructorReturn(this, (Rocha.__proto__ || Object.getPrototypeOf(Rocha)).call(this));
+	  }
+
+	  _createClass(Rocha, [{
+	    key: 'idServicio',
+	    value: function idServicio(id) {
+	      return "/home/actividad/" + id + "/nueva/";
+	    }
+	  }, {
+	    key: 'viewRocha',
+	    value: function viewRocha() {
+	      var contenidoRocha = [];
+	      var valor = void 0;
+	      for (valor in this.props.rocha) {
+	        contenidoRocha.push(_react2.default.createElement(
+	          'div',
+	          { className: 'item', key: valor },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'title-informe' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              this.props.rocha[valor].CODIGO_PROYECTO,
+	              ' -  ',
+	              this.props.rocha[valor].NOMBRE_CLIENTE
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: this.idServicio(this.props.rocha[valor].CODIGO_PROYECTO), className: 'icon-informe' },
+	              ' ',
+	              _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' }),
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(_ContentRocha2.default, { rocha: this.props.rocha[valor] })
+	        ));
+	      }
+	      return contenidoRocha;
+	    }
+	  }, {
+	    key: 'viewbutton',
+	    value: function viewbutton() {
+	      var button = "";
+	      if (this.props.cuenta[0].total > this.props.rocha.length) {
+	        button = _react2.default.createElement(
+	          'button',
+	          { className: 'view-more', onClick: this.props.viewMore },
+	          'Ver m\xE1s'
+	        );
+	      }
+	      return button;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'module-informe' },
+	        this.viewRocha(),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'content-view-more' },
+	          this.viewbutton()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Rocha;
+	}(_react2.default.Component);
+
+	exports.default = Rocha;
+
+/***/ },
+/* 491 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _notificacion = __webpack_require__(492);
 
 	var _notificacion2 = _interopRequireDefault(_notificacion);
 
@@ -57983,7 +58640,7 @@
 	exports.default = AbastecimientoRoutes;
 
 /***/ },
-/* 485 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57998,7 +58655,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(486);
+	var _Title = __webpack_require__(493);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
@@ -58094,7 +58751,7 @@
 	exports.default = NotificacionIndex;
 
 /***/ },
-/* 486 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58147,7 +58804,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 487 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58173,15 +58830,15 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _DetalleInformeActions = __webpack_require__(488);
+	var _DetalleInformeActions = __webpack_require__(495);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
-	var _DetalleInformeStore = __webpack_require__(489);
+	var _DetalleInformeStore = __webpack_require__(496);
 
 	var _DetalleInformeStore2 = _interopRequireDefault(_DetalleInformeStore);
 
-	var _detalleInforme = __webpack_require__(490);
+	var _detalleInforme = __webpack_require__(497);
 
 	var _detalleInforme2 = _interopRequireDefault(_detalleInforme);
 
@@ -58231,7 +58888,7 @@
 	exports.default = DetalleInformeRoutes;
 
 /***/ },
-/* 488 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58251,7 +58908,7 @@
 	exports.default = DetalleInformeActions;
 
 /***/ },
-/* 489 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58266,7 +58923,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _DetalleInformeActions = __webpack_require__(488);
+	var _DetalleInformeActions = __webpack_require__(495);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
@@ -58315,7 +58972,7 @@
 	exports.default = DetalleInformeStore;
 
 /***/ },
-/* 490 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58330,23 +58987,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(491);
+	var _Title = __webpack_require__(498);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(492);
+	var _Form = __webpack_require__(499);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _ActividadTitle = __webpack_require__(493);
+	var _ActividadTitle = __webpack_require__(500);
 
 	var _ActividadTitle2 = _interopRequireDefault(_ActividadTitle);
 
-	var _ActividadContent = __webpack_require__(494);
+	var _ActividadContent = __webpack_require__(501);
 
 	var _ActividadContent2 = _interopRequireDefault(_ActividadContent);
 
-	var _SubActividad = __webpack_require__(495);
+	var _SubActividad = __webpack_require__(502);
 
 	var _SubActividad2 = _interopRequireDefault(_SubActividad);
 
@@ -58421,7 +59078,7 @@
 	exports.default = DetalleInformeIndex;
 
 /***/ },
-/* 491 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58474,7 +59131,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 492 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58534,7 +59191,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 493 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58597,7 +59254,7 @@
 	exports.default = ActividadTitle;
 
 /***/ },
-/* 494 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58673,7 +59330,7 @@
 	exports.default = ActividadContent;
 
 /***/ },
-/* 495 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58820,7 +59477,7 @@
 	exports.default = SubActividad;
 
 /***/ },
-/* 496 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58836,7 +59493,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _home = __webpack_require__(497);
+	var _home = __webpack_require__(504);
 
 	var _home2 = _interopRequireDefault(_home);
 
@@ -58875,7 +59532,7 @@
 	exports.default = HomeRoutes;
 
 /***/ },
-/* 497 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58890,11 +59547,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(498);
+	var _Header = __webpack_require__(505);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Main = __webpack_require__(502);
+	var _Main = __webpack_require__(509);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -58915,7 +59572,7 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
 	    _this.state = { active: 'active', notification: null };
-	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }, { id: "3", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": false }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
+	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }, { id: "3", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": false }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
 	    return _this;
 	  }
 	  /* Agrega clase active para desplegar sub-menus */
@@ -58967,7 +59624,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 498 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58982,11 +59639,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Logo = __webpack_require__(499);
+	var _Logo = __webpack_require__(506);
 
 	var _Logo2 = _interopRequireDefault(_Logo);
 
-	var _Item = __webpack_require__(500);
+	var _Item = __webpack_require__(507);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -59029,7 +59686,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 499 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59085,7 +59742,7 @@
 	exports.default = Logo;
 
 /***/ },
-/* 500 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59102,7 +59759,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _Area = __webpack_require__(501);
+	var _Area = __webpack_require__(508);
 
 	var _Area2 = _interopRequireDefault(_Area);
 
@@ -59178,7 +59835,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 501 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59247,7 +59904,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 502 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59262,7 +59919,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(503);
+	var _Nav = __webpack_require__(510);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -59342,7 +59999,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 503 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59357,7 +60014,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Notification = __webpack_require__(504);
+	var _Notification = __webpack_require__(511);
 
 	var _Notification2 = _interopRequireDefault(_Notification);
 
@@ -59424,7 +60081,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 504 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59530,7 +60187,7 @@
 	exports.default = Notification;
 
 /***/ },
-/* 505 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59546,7 +60203,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _inicio = __webpack_require__(506);
+	var _inicio = __webpack_require__(513);
 
 	var _inicio2 = _interopRequireDefault(_inicio);
 
@@ -59580,7 +60237,7 @@
 	exports.default = InicioRoutes;
 
 /***/ },
-/* 506 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59633,7 +60290,7 @@
 	exports.default = InicioIndex;
 
 /***/ },
-/* 507 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59703,7 +60360,7 @@
 	exports.default = AuthRoutes;
 
 /***/ },
-/* 508 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59711,7 +60368,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -59719,13 +60375,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reflux = __webpack_require__(176);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _informeRocha = __webpack_require__(509);
-
-	var _informeRocha2 = _interopRequireDefault(_informeRocha);
+	var _reactRouter = __webpack_require__(198);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59735,385 +60385,57 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var InformeRoutes = function (_React$Component) {
-	  _inherits(InformeRoutes, _React$Component);
+	var ContentRocha = function (_React$Component) {
+	  _inherits(ContentRocha, _React$Component);
 
-	  function InformeRoutes() {
-	    _classCallCheck(this, InformeRoutes);
+	  function ContentRocha() {
+	    _classCallCheck(this, ContentRocha);
 
-	    return _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
+	    return _possibleConstructorReturn(this, (ContentRocha.__proto__ || Object.getPrototypeOf(ContentRocha)).call(this));
 	  }
 
-	  _createClass(InformeRoutes, [{
+	  _createClass(ContentRocha, [{
+	    key: 'validador',
+	    value: function validador(nombre, _validador, fecha) {
+	      var text = void 0;
+	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	        text = "";
+	      } else {
+	        text = _react2.default.createElement(
+	          'div',
+	          { className: 'opc' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            nombre
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            fecha ? _validador.substring(0, 10) : _validador
+	          )
+	        );
+	      }
+	      return text;
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(_informeRocha2.default, null)
+	        { className: 'content-informe' },
+	        this.validador("Ejecutivo:", this.props.rocha.EJECUTIVO),
+	        this.validador("Obra:", this.props.rocha.OBRA),
+	        this.validador("Fecha Ingreso:", this.props.rocha.FECHA_INGRESO, true),
+	        this.validador("Fecha Entrega:", this.props.rocha.FECHA_CONFIRMACION, true)
 	      );
 	    }
 	  }]);
 
-	  return InformeRoutes;
+	  return ContentRocha;
 	}(_react2.default.Component);
 
-	exports.default = InformeRoutes;
-
-/***/ },
-/* 509 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var InformeRochaIndex = function (_React$Component) {
-	  _inherits(InformeRochaIndex, _React$Component);
-
-	  function InformeRochaIndex() {
-	    _classCallCheck(this, InformeRochaIndex);
-
-	    return _possibleConstructorReturn(this, (InformeRochaIndex.__proto__ || Object.getPrototypeOf(InformeRochaIndex)).call(this));
-	  }
-
-	  _createClass(InformeRochaIndex, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(
-	          "div",
-	          { className: "title" },
-	          _react2.default.createElement(
-	            "h3",
-	            null,
-	            "Informe Rocha"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "module-filter" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item-filter" },
-	            _react2.default.createElement(
-	              "label",
-	              null,
-	              " Fecha Inicio "
-	            ),
-	            _react2.default.createElement("input", { autoComplete: "off", className: "date", id: "fechaInicio", type: "text" })
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item-filter" },
-	            _react2.default.createElement(
-	              "label",
-	              null,
-	              " Fecha Entrega "
-	            ),
-	            _react2.default.createElement("input", { autoComplete: "off", className: "date", id: "fechaEntrega", type: "text" })
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item-filter" },
-	            _react2.default.createElement(
-	              "label",
-	              null,
-	              " C\xF3digo Rocha"
-	            ),
-	            _react2.default.createElement("input", { autoComplete: "off", id: "codigo", type: "text" })
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item-filter" },
-	            _react2.default.createElement(
-	              "label",
-	              null,
-	              " Estado"
-	            ),
-	            _react2.default.createElement(
-	              "select",
-	              { id: "estado" },
-	              _react2.default.createElement(
-	                "option",
-	                { value: "En Proceso" },
-	                "En Proceso"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "ACTA" },
-	                "Acta"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "OK" },
-	                "OK"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "Nula" },
-	                "Nulo"
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item-filter" },
-	            _react2.default.createElement(
-	              "label",
-	              null,
-	              "Vendedor"
-	            ),
-	            _react2.default.createElement(
-	              "select",
-	              { id: "vendedor" },
-	              _react2.default.createElement(
-	                "option",
-	                { value: "" },
-	                "Seleccione"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "Amanda Godoy Santis" },
-	                "Amanda Godoy Santis"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "Maria de los Angeles Nu\xF1ez Duarte" },
-	                "Maria de los Angeles Nu\xF1ez Duarte"
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item-filter" },
-	            _react2.default.createElement(
-	              "label",
-	              null,
-	              "Categor\xEDa"
-	            ),
-	            _react2.default.createElement(
-	              "select",
-	              { id: "categoria" },
-	              _react2.default.createElement(
-	                "option",
-	                { value: "" },
-	                "Seleccione"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "Proyecto" },
-	                "Proyecto"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "Solicitud" },
-	                "Solicitud"
-	              ),
-	              _react2.default.createElement(
-	                "option",
-	                { value: "Proceso" },
-	                "Proceso"
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item-filter" },
-	            _react2.default.createElement(
-	              "label",
-	              null,
-	              "Cliente"
-	            ),
-	            _react2.default.createElement("input", { autoComplete: "off", onChange: this.props.filtro, id: "cliente", type: "text" })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "module-informe" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "title-informe" },
-	              _react2.default.createElement(
-	                "h3",
-	                null,
-	                "M&D 3030"
-	              ),
-	              _react2.default.createElement(
-	                "a",
-	                { className: "icon-informe" },
-	                " ",
-	                _react2.default.createElement("i", { className: "fa fa-plus", "aria-hidden": "true" }),
-	                " "
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              { className: "content-informe" },
-	              _react2.default.createElement(
-	                "div",
-	                { className: "opc" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Fecha Entrega"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "2010-12-12"
-	                )
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "opc" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Fecha Entrega"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "2010-12-12"
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "title-informe" },
-	              _react2.default.createElement(
-	                "h3",
-	                null,
-	                "M&D 3030"
-	              ),
-	              _react2.default.createElement(
-	                "a",
-	                { className: "icon-informe" },
-	                " ",
-	                _react2.default.createElement("i", { className: "fa fa-plus", "aria-hidden": "true" }),
-	                " "
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              { className: "content-informe" },
-	              _react2.default.createElement(
-	                "div",
-	                { className: "opc" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Fecha Entrega"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "2010-12-12"
-	                )
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "opc" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Fecha Entrega"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "2010-12-12"
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "item" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "title-informe" },
-	              _react2.default.createElement(
-	                "h3",
-	                null,
-	                "M&D 3030"
-	              ),
-	              _react2.default.createElement(
-	                "a",
-	                { className: "icon-informe" },
-	                " ",
-	                _react2.default.createElement("i", { className: "fa fa-plus", "aria-hidden": "true" }),
-	                " "
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              { className: "content-informe" },
-	              _react2.default.createElement(
-	                "div",
-	                { className: "opc" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Fecha Entrega"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "2010-12-12"
-	                )
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "opc" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Fecha Entrega"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "2010-12-12"
-	                )
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return InformeRochaIndex;
-	}(_react2.default.Component);
-
-	exports.default = InformeRochaIndex;
+	exports.default = ContentRocha;
 
 /***/ }
 /******/ ]);

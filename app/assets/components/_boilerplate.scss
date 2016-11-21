@@ -1330,4 +1330,20 @@ a.external-link, .external-link a {
             }
         }
     }
+    .content-view-more{
+        width: 100%;
+        .view-more{
+            @include reset-appearance;
+            width: 200px;
+            padding: 1em;
+            margin: auto;
+            color: $blanco;
+            background: $color_corporativo_dark;
+            display: block;
+            &:hover{
+              background: $color_corporativo_darker;
+              cursor: pointer;  
+            }
+        }
+    }
 }

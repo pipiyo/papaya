@@ -58,6 +58,8 @@ require('./srcApirest/controllers/subServicioSocket')(io, pool)
 
 require('./srcApirest/controllers/reclamoSocket')(io, pool)
 
+require('./srcApirest/controllers/rochaSocket')(io, pool)
+
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))

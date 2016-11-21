@@ -24,7 +24,7 @@ ReactDOM.render((
     <Route component={Auth}>
         <Route path="home" component={Home}>	
             <IndexRoute component={Inicio}/>
-        	<Route path="actividad/:tipo" component={Servicio}/>
+        	<Route path="actividad/:rocha/:tipo" component={Servicio}/>
         	<Route path="informe/:area" component={Informe}/>
             <Route path="informe-rochas" component={InformeRocha}/>
             <Route path="actualizar-actividad/:id" component={UpdateServicio}/>

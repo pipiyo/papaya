@@ -7,6 +7,7 @@ class Item extends React.Component {
   constructor() {
     super()
     this.state = {
+                  valuerocha: "",
                   reclamo:"",
                   fechaInicio:moment(),
                   fechaEntrega:moment(),
@@ -19,6 +20,11 @@ class Item extends React.Component {
     }else{
       this.state.reclamo = ""
     }
+    if(nextProps.rocha == "ingreso"){
+      this.state.valuerocha =  "";
+    }else{
+      this.state.valuerocha = this.props.rocha;
+    }
   }
 
   componentWillMount(){
@@ -26,6 +32,11 @@ class Item extends React.Component {
       this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
     }else{
       this.setState({reclamo:""})
+    }
+    if(this.props.rocha == "ingreso"){
+      this.setState({ valuerocha: ""});
+    }else{
+      this.setState({ valuerocha: this.props.rocha });
     }
   }
 
@@ -35,6 +46,10 @@ class Item extends React.Component {
 
   fechaEntregaDate(date){
     this.setState({ fechaEntrega: date });
+  }
+
+  onChange(e) {
+    this.setState({ valuerocha: document.getElementById("rocha").value})
   }
 
   render() {
@@ -49,7 +64,7 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Rocha</label>
-                <input required  id="rocha" type="text" />
+                <input required onChange={this.onChange.bind(this)} id="rocha" type="text" value={this.state.valuerocha} />
             </div>
 
             <div className="item-form">
