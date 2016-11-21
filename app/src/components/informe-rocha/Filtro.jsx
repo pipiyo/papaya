@@ -5,8 +5,8 @@ import moment  from 'moment'
 class Filtro extends React.Component {
 
   constructor(props) {
-    super(props)
-    this.state = {reclamo:"",fechaInicio:props.fechaInicio,fechaEntrega:props.fechaEntrega}
+    super()
+     this.state = {fechaInicio:props.fechaInicio,fechaEntrega:props.fechaEntrega}
   }
 
   componentWillReceiveProps(nextProps){
@@ -14,12 +14,11 @@ class Filtro extends React.Component {
   }
 
   render() {
-  
       return (
         <div class="module-filter">
           <div class="item-filter">
               <label> Fecha Inicio </label>
-              <DatePicker autoComplete="off" class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.props.fechaInicioDate} />
+               <DatePicker autoComplete="off" class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.props.fechaInicioDate} />
           </div>
           <div class="item-filter">
               <label> Fecha Entrega </label>
@@ -27,11 +26,11 @@ class Filtro extends React.Component {
           </div>
           <div class="item-filter">
               <label> Código Rocha</label>
-              <input autoComplete="off" onChange={this.props.filtro} id="codigo" type="text"/>
+              <input autoComplete="off" id="codigo" type="text" onChange={this.props.filtro} />
           </div>
           <div class="item-filter">
               <label> Estado</label>
-              <select onChange={this.props.filtro} id="estado">
+              <select id="estado" onChange={this.props.filtro}>
                   <option value="En Proceso">En Proceso</option>
                   <option value="ACTA">Acta</option>
                   <option value="OK">OK</option>
@@ -40,22 +39,10 @@ class Filtro extends React.Component {
           </div>
           <div class="item-filter">
               <label>Vendedor</label>
-              <select onChange={this.props.filtro} id="vendedor">
+              <select id="vendedor" onChange={this.props.filtro}>
                   <option value="">Seleccione</option>
-                  {
-                    this.props.ejecutivo.map( (ejecutivo) => {
-                      return <option value={`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`} key={`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`}>{`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`}</option>
-                    })
-                  }
-              </select>
-          </div>
-          <div class="item-filter">
-              <label>Categoría</label>
-              <select onChange={this.props.filtro} id="categoria">
-                  <option value="">Seleccione</option>
-                  <option value="Proyecto">Proyecto</option>
-                  <option value="Solicitud">Solicitud</option>
-                  <option value="Proceso">Proceso</option>
+                  <option value="Amanda Godoy Santis">Amanda Godoy Santis</option>
+                  <option value="Maria de los Angeles Nuñez Duarte">Maria de los Angeles Nuñez Duarte</option>
               </select>
           </div>
           <div class="item-filter">

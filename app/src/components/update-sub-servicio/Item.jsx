@@ -59,8 +59,6 @@ class Item extends React.Component {
   onChange(e) {
     this.setState({ codigo: document.getElementById("numero").value,
                     supervisor: document.getElementById("supervisor").value,
-                    fechaInicio: document.getElementById("fechaInicio").value,
-                    fechaEntrega: document.getElementById("fechaEntrega").value,
                     dias: document.getElementById("dias").value,
                     descripcion: document.getElementById("descripcion").value,
                     observaciones: document.getElementById("observacion").value,
@@ -85,12 +83,12 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Número</label>
-                <input id="numero" type="text" value={this.state.codigo} onChange={this.onChange.bind(this)} />
+                <input required readOnly id="numero" type="text" value={this.state.codigo} onChange={this.onChange.bind(this)} />
             </div>
 
             <div className="item-form">
               <label>Categoría</label>
-              <select id="categoria">
+              <select required id="categoria">
                 <option value="proyecto">Proyecto</option>
                 <option value="solicitud">Solicitud</option>
                 <option value="proceso">Proceso</option>
@@ -99,7 +97,7 @@ class Item extends React.Component {
 
             <div className="item-form">
               <label>Estado</label>
-              <select id="estado">
+              <select required id="estado">
                 <option value="OK">Ok</option>
                 <option value="EN PROCESO">En Proceso</option>
                 <option value="NULO">Nulo</option>
@@ -108,17 +106,17 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Supervisor</label>
-                <input value={this.state.supervisor} onChange={this.onChange.bind(this)} id="supervisor" type="text" />
+                <input required value={this.state.supervisor} onChange={this.onChange.bind(this)} id="supervisor" type="text" />
             </div>
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
             </div>
 
             <div className="item-form">
                 <label>Fecha Entrega</label>
-                <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
             </div>
 
             <div className="item-form">
@@ -128,7 +126,7 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Descripción</label>
-                <input value={this.state.descripcion} onChange={this.onChange.bind(this)} id="descripcion" type="text"/>
+                <input required value={this.state.descripcion} onChange={this.onChange.bind(this)} id="descripcion" type="text"/>
             </div>
 
             <div className="item-form">

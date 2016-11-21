@@ -53,16 +53,16 @@ export default class InformeRoutes extends React.Component {
       case "sillas":
           this.state.servicio = '"Sillas"'
           break;
-      case "instalacion":
+      case "instalación":
           this.state.servicio = '"Instalacion"'
           break;
-      case "produccion":
+      case "producción":
           this.state.servicio= '"Produccion"'
           break;
-      case "desarrollo":
+      case "técnica":
           this.state.servicio = '"Desarrollo"'
           break;
-      case "planificacion":
+      case "planificación":
           this.state.servicio = '"Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas"'
           break;
       case "comercial":
@@ -126,6 +126,7 @@ export default class InformeRoutes extends React.Component {
             cuenta={this.state.data.cuenta} 
             servicio={this.props.params.area} 
             datos={this.state.data.valor} 
+            ejecutivo={this.state.data.ejecutivo} 
             fechaInicio={this.state.fechaInicio} 
             fechaEntrega={this.state.fechaEntrega} 
             fechaInicioDate={this.fechaInicioDate.bind(this)} 

@@ -89,6 +89,10 @@
 
 	var _InformeRoutes2 = _interopRequireDefault(_InformeRoutes);
 
+	var _InformeRochaRoutes = __webpack_require__(484);
+
+	var _InformeRochaRoutes2 = _interopRequireDefault(_InformeRochaRoutes);
+
 	var _NotificacionRoutes = __webpack_require__(492);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
@@ -124,8 +128,9 @@
 	            _reactRouter.Route,
 	            { path: 'home', component: _HomeRoutes2.default },
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _InicioRoutes2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad/:tipo', component: _ServicioRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'actividad/:rocha/:tipo', component: _ServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'informe/:area', component: _InformeRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'informe-rochas', component: _InformeRochaRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'actualizar-actividad/:id', component: _UpdateServicioRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'reclamo', component: _ReclamoRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
@@ -37154,7 +37159,7 @@
 	      //console.log( this.state.obj.comunas )
 	      //console.log( this.state.obj.vehiculos )
 	      //console.log( this.state.obj.mensaje )
-	      return _react2.default.createElement(_servicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_servicio2.default, { rocha: this.props.params.rocha, tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
 	    }
 	  }]);
 
@@ -37352,7 +37357,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, { mensaje: this.props.mensaje }),
-	        _react2.default.createElement(_Form2.default, { tipo: this.props.tipo, addServicio: this.props.addServicio, area: this.props.area, formArea: this.props.formArea })
+	        _react2.default.createElement(_Form2.default, { rocha: this.props.rocha, tipo: this.props.tipo, addServicio: this.props.addServicio, area: this.props.area, formArea: this.props.formArea })
 	      );
 	    }
 	  }]);
@@ -37462,11 +37467,11 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.props.addServicio },
+	        { autoComplete: 'off', onSubmit: this.props.addServicio },
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
-	          _react2.default.createElement(_Item2.default, { tipo: this.props.tipo, area: this.props.area, formArea: this.props.formArea })
+	          _react2.default.createElement(_Item2.default, { rocha: this.props.rocha, tipo: this.props.tipo, area: this.props.area, formArea: this.props.formArea })
 	        )
 	      );
 	    }
@@ -37517,7 +37522,12 @@
 
 	    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 
-	    _this.state = { reclamo: "", fechaInicio: (0, _moment2.default)(), fechaEntrega: (0, _moment2.default)() };
+	    _this.state = {
+	      valuerocha: "",
+	      reclamo: "",
+	      fechaInicio: (0, _moment2.default)(),
+	      fechaEntrega: (0, _moment2.default)()
+	    };
 	    return _this;
 	  }
 
@@ -37556,6 +37566,11 @@
 	      } else {
 	        this.setState({ reclamo: "" });
 	      }
+	      if (this.props.rocha == "ingreso") {
+	        this.setState({ valuerocha: "" });
+	      } else {
+	        this.setState({ valuerocha: this.props.rocha });
+	      }
 	    }
 	  }, {
 	    key: 'fechaInicioDate',
@@ -37566,6 +37581,11 @@
 	    key: 'fechaEntregaDate',
 	    value: function fechaEntregaDate(date) {
 	      this.setState({ fechaEntrega: date });
+	    }
+	  }, {
+	    key: 'onChange',
+	    value: function onChange(e) {
+	      this.setState({ valuerocha: document.getElementById("rocha").value });
 	    }
 	  }, {
 	    key: 'render',
@@ -37594,7 +37614,7 @@
 	              null,
 	              'Rocha'
 	            ),
-	            _react2.default.createElement('input', { id: 'rocha', type: 'text' })
+	            _react2.default.createElement('input', { required: true, onChange: this.onChange.bind(this), id: 'rocha', type: 'text', value: this.state.valuerocha })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37606,7 +37626,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'area', onChange: this.props.formArea },
+	              { required: true, id: 'area', onChange: this.props.formArea },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -37615,7 +37635,7 @@
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'Adquisiciones' },
-	                'Adquisiciones'
+	                'Abastecimiento'
 	              ),
 	              _react2.default.createElement(
 	                'option',
@@ -37625,7 +37645,7 @@
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'Desarrollo' },
-	                'Desarrollo'
+	                'T\xE9cnica'
 	              ),
 	              _react2.default.createElement(
 	                'option',
@@ -37669,7 +37689,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -37700,7 +37720,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37710,7 +37730,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37720,7 +37740,7 @@
 	              null,
 	              'Fecha Entrega Cliente'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37740,7 +37760,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -51915,7 +51935,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.props.updateServicio },
+	        { autoComplete: 'off', onSubmit: this.props.updateServicio },
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
@@ -52059,7 +52079,7 @@
 	              null,
 	              'N\xFAmero'
 	            ),
-	            _react2.default.createElement('input', { id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
+	            _react2.default.createElement('input', { required: true, id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52071,7 +52091,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'proyecto' },
@@ -52125,7 +52145,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52135,7 +52155,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52145,7 +52165,7 @@
 	              null,
 	              'Fecha Entrega Cliente'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52165,7 +52185,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53502,7 +53522,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.props.addServicio },
+	        { autoComplete: 'off', onSubmit: this.props.addServicio },
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
@@ -53635,7 +53655,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'area', onChange: this.props.formArea },
+	              { required: true, id: 'area', onChange: this.props.formArea },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -53644,7 +53664,7 @@
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'Adquisiciones' },
-	                'Adquisiciones'
+	                'Abastecimiento'
 	              ),
 	              _react2.default.createElement(
 	                'option',
@@ -53654,7 +53674,7 @@
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'Desarrollo' },
-	                'Desarrollo'
+	                'T\xE9cnica'
 	              ),
 	              _react2.default.createElement(
 	                'option',
@@ -53698,7 +53718,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -53729,7 +53749,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53739,7 +53759,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53749,7 +53769,7 @@
 	              null,
 	              'Fecha Entrega'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53769,7 +53789,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -53779,7 +53799,7 @@
 	              null,
 	              'Observaci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { id: 'observacion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, id: 'observacion', type: 'text' })
 	          )
 	        ),
 	        this.props.area,
@@ -55025,8 +55045,6 @@
 	    value: function onChange(e) {
 	      this.setState({ codigo: document.getElementById("numero").value,
 	        supervisor: document.getElementById("supervisor").value,
-	        fechaInicio: document.getElementById("fechaInicio").value,
-	        fechaEntrega: document.getElementById("fechaEntrega").value,
 	        dias: document.getElementById("dias").value,
 	        descripcion: document.getElementById("descripcion").value,
 	        observaciones: document.getElementById("observacion").value
@@ -55068,7 +55086,7 @@
 	              null,
 	              'N\xFAmero'
 	            ),
-	            _react2.default.createElement('input', { id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
+	            _react2.default.createElement('input', { required: true, readOnly: true, id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55080,7 +55098,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'categoria' },
+	              { required: true, id: 'categoria' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'proyecto' },
@@ -55108,7 +55126,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { id: 'estado' },
+	              { required: true, id: 'estado' },
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'OK' },
@@ -55134,7 +55152,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55144,7 +55162,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55154,7 +55172,7 @@
 	              null,
 	              'Fecha Entrega'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -55174,7 +55192,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -56900,16 +56918,16 @@
 	        case "sillas":
 	          this.state.servicio = '"Sillas"';
 	          break;
-	        case "instalacion":
+	        case "instalación":
 	          this.state.servicio = '"Instalacion"';
 	          break;
-	        case "produccion":
+	        case "producción":
 	          this.state.servicio = '"Produccion"';
 	          break;
-	        case "desarrollo":
+	        case "técnica":
 	          this.state.servicio = '"Desarrollo"';
 	          break;
-	        case "planificacion":
+	        case "planificación":
 	          this.state.servicio = '"Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas"';
 	          break;
 	        case "comercial":
@@ -57003,6 +57021,7 @@
 	            cuenta: this.state.data.cuenta,
 	            servicio: this.props.params.area,
 	            datos: this.state.data.valor,
+	            ejecutivo: this.state.data.ejecutivo,
 	            fechaInicio: this.state.fechaInicio,
 	            fechaEntrega: this.state.fechaEntrega,
 	            fechaInicioDate: this.fechaInicioDate.bind(this),
@@ -57086,6 +57105,7 @@
 
 	    socket.emit('viewInformes', data, cant, estado, codigo, vendedor, categoria, fechai, cliente, fechae);
 	    socket.on('okViewInformes', function (okViewInformes) {
+	      console.log(okViewInformes);
 	      _this.trigger(okViewInformes);
 	    });
 	  }
@@ -57173,7 +57193,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, { servicioTitle: this.props.servicio }),
-	        _react2.default.createElement(_Filtro2.default, { fechaInicioDate: this.props.fechaInicioDate, fechaEntregaDate: this.props.fechaEntregaDate, fechaInicio: this.props.fechaInicio, fechaEntrega: this.props.fechaEntrega, filtro: this.props.filtro }),
+	        _react2.default.createElement(_Filtro2.default, { fechaInicioDate: this.props.fechaInicioDate, fechaEntregaDate: this.props.fechaEntregaDate, fechaInicio: this.props.fechaInicio, fechaEntrega: this.props.fechaEntrega, filtro: this.props.filtro, ejecutivo: this.props.ejecutivo }),
 	        _react2.default.createElement(_Servicio2.default, { cuenta: this.props.cuenta, servicioTitle: this.props.servicio, datos: this.props.datos, viewMore: this.props.viewMore, servicio: this.state.servicio, click: this.activeClass.bind(this) })
 	      );
 	    }
@@ -57248,7 +57268,7 @@
 	                        null,
 	                        ' Fecha Inicio '
 	                    ),
-	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.props.fechaInicioDate })
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.props.fechaInicioDate })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -57258,7 +57278,7 @@
 	                        null,
 	                        ' Fecha Entrega '
 	                    ),
-	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.props.fechaEntregaDate })
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.props.fechaEntregaDate })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -57268,7 +57288,7 @@
 	                        null,
 	                        ' C\xF3digo Rocha'
 	                    ),
-	                    _react2.default.createElement('input', { onChange: this.props.filtro, id: 'codigo', type: 'text' })
+	                    _react2.default.createElement('input', { autoComplete: 'off', onChange: this.props.filtro, id: 'codigo', type: 'text' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -57319,16 +57339,13 @@
 	                            { value: '' },
 	                            'Seleccione'
 	                        ),
-	                        _react2.default.createElement(
-	                            'option',
-	                            { value: 'Amanda Godoy Santis' },
-	                            'Amanda Godoy Santis'
-	                        ),
-	                        _react2.default.createElement(
-	                            'option',
-	                            { value: 'Maria de los Angeles Nu\xF1ez Duarte' },
-	                            'Maria de los Angeles Nu\xF1ez Duarte'
-	                        )
+	                        this.props.ejecutivo.map(function (ejecutivo) {
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { value: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO, key: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO },
+	                                ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO
+	                            );
+	                        })
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -57372,7 +57389,7 @@
 	                        null,
 	                        'Cliente'
 	                    ),
-	                    _react2.default.createElement('input', { onChange: this.props.filtro, id: 'cliente', type: 'text' })
+	                    _react2.default.createElement('input', { autoComplete: 'off', onChange: this.props.filtro, id: 'cliente', type: 'text' })
 	                )
 	            );
 	        }
@@ -57926,14 +57943,725 @@
 	exports.default = ContentRocha;
 
 /***/ },
-/* 484 */,
-/* 485 */,
-/* 486 */,
-/* 487 */,
-/* 488 */,
-/* 489 */,
-/* 490 */,
-/* 491 */,
+/* 484 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _dec, _class;
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactDatepicker = __webpack_require__(319);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	var _moment = __webpack_require__(320);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _InformeRochaActions = __webpack_require__(485);
+
+	var _InformeRochaActions2 = _interopRequireDefault(_InformeRochaActions);
+
+	var _InformeRochaStore = __webpack_require__(486);
+
+	var _InformeRochaStore2 = _interopRequireDefault(_InformeRochaStore);
+
+	var _informeRocha = __webpack_require__(487);
+
+	var _informeRocha2 = _interopRequireDefault(_informeRocha);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InformeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_InformeRochaStore2.default, 'obj')), _dec(_class = function (_React$Component) {
+	  _inherits(InformeRoutes, _React$Component);
+
+	  function InformeRoutes() {
+	    _classCallCheck(this, InformeRoutes);
+
+	    var _this = _possibleConstructorReturn(this, (InformeRoutes.__proto__ || Object.getPrototypeOf(InformeRoutes)).call(this));
+
+	    _this.state = { valor: 200, fechai: "", fechae: "" };
+	    return _this;
+	  }
+
+	  _createClass(InformeRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _InformeRochaActions2.default.allRocha(this.state.obj.filtro);
+	    }
+	  }, {
+	    key: 'filtro',
+	    value: function filtro() {
+	      var fechaI = document.getElementById("fechaInicio").value;
+	      var fechaE = document.getElementById("fechaEntrega").value;
+	      var codigo = document.getElementById("codigo").value;
+	      var estado = document.getElementById("estado").value;
+	      var vendedor = document.getElementById("vendedor").value;
+	      var cliente = document.getElementById("cliente").value;
+
+	      if (codigo != "") {
+	        this.state.obj.filtro.codigo = codigo;
+	      } else {
+	        this.state.obj.filtro.codigo = "";
+	      }
+	      if (vendedor != "") {
+	        this.state.obj.filtro.vendedor = vendedor;
+	      } else {
+	        this.state.obj.filtro.vendedor = "";
+	      }
+	      if (cliente != "") {
+	        this.state.obj.filtro.cliente = cliente;
+	      } else {
+	        this.state.obj.filtro.cliente = "";
+	      }
+	      if (fechaI != "") {
+	        this.state.obj.filtro.fechai = fechaI;
+	      } else {
+	        this.state.obj.filtro.fechai = "";
+	      }
+	      if (fechaE != "") {
+	        this.state.obj.filtro.fechae = fechaE;
+	      } else {
+	        this.state.obj.filtro.fechae = "";
+	      }
+	      this.state.obj.filtro.estado = estado;
+
+	      _InformeRochaActions2.default.allRocha(this.state.obj.filtro);
+	    }
+	  }, {
+	    key: 'fechaInicioDate',
+	    value: function fechaInicioDate(date) {
+	      if ((0, _moment2.default)(date).isValid()) {
+	        document.getElementById("fechaInicio").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	        this.setState({ fechaInicio: date });
+	        this.filtro();
+	      } else {
+	        document.getElementById("fechaInicio").value = "";
+	        this.setState({ fechaInicio: undefined });
+	        this.filtro();
+	      }
+	    }
+	  }, {
+	    key: 'fechaEntregaDate',
+	    value: function fechaEntregaDate(date) {
+	      if ((0, _moment2.default)(date).isValid()) {
+	        document.getElementById("fechaEntrega").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	        this.setState({ fechaEntrega: date });
+	        this.filtro();
+	      } else {
+	        document.getElementById("fechaEntrega").value = "";
+	        this.setState({ fechaEntrega: undefined });
+	        this.filtro();
+	      }
+	    }
+	  }, {
+	    key: 'viewMore',
+	    value: function viewMore() {
+	      this.setState({ valor: this.state.valor + 100 });
+	      this.state.obj.filtro.count = this.state.valor;
+	      _InformeRochaActions2.default.allRocha(this.state.obj.filtro);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.obj.rocha) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_informeRocha2.default, {
+	            rocha: this.state.obj.rocha.valor,
+	            cuenta: this.state.obj.rocha.cuenta,
+	            fechaInicio: this.state.fechaInicio,
+	            fechaEntrega: this.state.fechaEntrega,
+	            filtro: this.filtro.bind(this),
+	            viewMore: this.viewMore.bind(this),
+	            fechaInicioDate: this.fechaInicioDate.bind(this),
+	            fechaEntregaDate: this.fechaEntregaDate.bind(this)
+	          })
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Cargando'
+	          )
+	        );
+	      }
+	    }
+	  }]);
+
+	  return InformeRoutes;
+	}(_react2.default.Component)) || _class);
+	exports.default = InformeRoutes;
+
+/***/ },
+/* 485 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InformeRochaActions = _reflux2.default.createActions(['allRocha']);
+
+	exports.default = InformeRochaActions;
+
+/***/ },
+/* 486 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _InformeRochaActions = __webpack_require__(485);
+
+	var _InformeRochaActions2 = _interopRequireDefault(_InformeRochaActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var socket = _socket2.default.connect(_Config2.default.url + 'rocha');
+
+	var InformeRochaStore = _reflux2.default.createStore({
+	  listenables: [_InformeRochaActions2.default],
+	  obj: { rocha: '', filtro: { estado: "EN PROCESO", fechai: "", fechae: "", vendedor: "", cliente: "", codigo: "", count: 100 } },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  allRocha: function allRocha(data) {
+	    var _this = this;
+
+	    socket.emit('allRocha', data);
+	    socket.on('okAllRocha', function (okAllRocha) {
+	      _this.obj.rocha = okAllRocha;
+	      _this.trigger(_this.obj);
+	    });
+	  }
+	});
+
+	exports.default = InformeRochaStore;
+
+/***/ },
+/* 487 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Title = __webpack_require__(488);
+
+	var _Title2 = _interopRequireDefault(_Title);
+
+	var _Filtro = __webpack_require__(489);
+
+	var _Filtro2 = _interopRequireDefault(_Filtro);
+
+	var _Rocha = __webpack_require__(490);
+
+	var _Rocha2 = _interopRequireDefault(_Rocha);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InformeRochaIndex = function (_React$Component) {
+	  _inherits(InformeRochaIndex, _React$Component);
+
+	  function InformeRochaIndex() {
+	    _classCallCheck(this, InformeRochaIndex);
+
+	    return _possibleConstructorReturn(this, (InformeRochaIndex.__proto__ || Object.getPrototypeOf(InformeRochaIndex)).call(this));
+	  }
+
+	  _createClass(InformeRochaIndex, [{
+	    key: 'render',
+	    value: function render() {
+	      console.log();
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_Title2.default, null),
+	        _react2.default.createElement(_Filtro2.default, { fechaInicioDate: this.props.fechaInicioDate, fechaEntregaDate: this.props.fechaEntregaDate, fechaInicio: this.props.fechaInicio, fechaEntrega: this.props.fechaEntrega, filtro: this.props.filtro }),
+	        _react2.default.createElement(_Rocha2.default, { cuenta: this.props.cuenta, rocha: this.props.rocha, viewMore: this.props.viewMore })
+	      );
+	    }
+	  }]);
+
+	  return InformeRochaIndex;
+	}(_react2.default.Component);
+
+	exports.default = InformeRochaIndex;
+
+/***/ },
+/* 488 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Title = function (_React$Component) {
+	  _inherits(Title, _React$Component);
+
+	  function Title() {
+	    _classCallCheck(this, Title);
+
+	    return _possibleConstructorReturn(this, (Title.__proto__ || Object.getPrototypeOf(Title)).call(this));
+	  }
+
+	  _createClass(Title, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "title" },
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "Informe Rocha"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Title;
+	}(_react2.default.Component);
+
+	exports.default = Title;
+
+/***/ },
+/* 489 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDatepicker = __webpack_require__(319);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	var _moment = __webpack_require__(320);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Filtro = function (_React$Component) {
+	    _inherits(Filtro, _React$Component);
+
+	    function Filtro(props) {
+	        _classCallCheck(this, Filtro);
+
+	        var _this = _possibleConstructorReturn(this, (Filtro.__proto__ || Object.getPrototypeOf(Filtro)).call(this));
+
+	        _this.state = { fechaInicio: props.fechaInicio, fechaEntrega: props.fechaEntrega };
+	        return _this;
+	    }
+
+	    _createClass(Filtro, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setState({ fechaInicio: nextProps.fechaInicio, fechaEntrega: nextProps.fechaEntrega });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'module-filter' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Fecha Inicio '
+	                    ),
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.props.fechaInicioDate })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Fecha Entrega '
+	                    ),
+	                    _react2.default.createElement(_reactDatepicker2.default, { autoComplete: 'off', className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.props.fechaEntregaDate })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' C\xF3digo Rocha'
+	                    ),
+	                    _react2.default.createElement('input', { autoComplete: 'off', id: 'codigo', type: 'text', onChange: this.props.filtro })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Estado'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'estado', onChange: this.props.filtro },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'En Proceso' },
+	                            'En Proceso'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'ACTA' },
+	                            'Acta'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'OK' },
+	                            'OK'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Nula' },
+	                            'Nulo'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Vendedor'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'vendedor', onChange: this.props.filtro },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: '' },
+	                            'Seleccione'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Amanda Godoy Santis' },
+	                            'Amanda Godoy Santis'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Maria de los Angeles Nu\xF1ez Duarte' },
+	                            'Maria de los Angeles Nu\xF1ez Duarte'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Cliente'
+	                    ),
+	                    _react2.default.createElement('input', { autoComplete: 'off', onChange: this.props.filtro, id: 'cliente', type: 'text' })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Filtro;
+	}(_react2.default.Component);
+
+	exports.default = Filtro;
+
+/***/ },
+/* 490 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ContentRocha = __webpack_require__(491);
+
+	var _ContentRocha2 = _interopRequireDefault(_ContentRocha);
+
+	var _reactRouter = __webpack_require__(198);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Rocha = function (_React$Component) {
+	  _inherits(Rocha, _React$Component);
+
+	  function Rocha() {
+	    _classCallCheck(this, Rocha);
+
+	    return _possibleConstructorReturn(this, (Rocha.__proto__ || Object.getPrototypeOf(Rocha)).call(this));
+	  }
+
+	  _createClass(Rocha, [{
+	    key: 'idServicio',
+	    value: function idServicio(id) {
+	      return "/home/actividad/" + id + "/nueva/";
+	    }
+	  }, {
+	    key: 'viewRocha',
+	    value: function viewRocha() {
+	      var contenidoRocha = [];
+	      var valor = void 0;
+	      for (valor in this.props.rocha) {
+	        contenidoRocha.push(_react2.default.createElement(
+	          'div',
+	          { className: 'item', key: valor },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'title-informe' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              this.props.rocha[valor].CODIGO_PROYECTO,
+	              ' -  ',
+	              this.props.rocha[valor].NOMBRE_CLIENTE
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: this.idServicio(this.props.rocha[valor].CODIGO_PROYECTO), className: 'icon-informe' },
+	              ' ',
+	              _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' }),
+	              ' '
+	            )
+	          ),
+	          _react2.default.createElement(_ContentRocha2.default, { rocha: this.props.rocha[valor] })
+	        ));
+	      }
+	      return contenidoRocha;
+	    }
+	  }, {
+	    key: 'viewbutton',
+	    value: function viewbutton() {
+	      var button = "";
+	      if (this.props.cuenta[0].total > this.props.rocha.length) {
+	        button = _react2.default.createElement(
+	          'button',
+	          { className: 'view-more', onClick: this.props.viewMore },
+	          'Ver m\xE1s'
+	        );
+	      }
+	      return button;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'module-informe' },
+	        this.viewRocha(),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'content-view-more' },
+	          this.viewbutton()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Rocha;
+	}(_react2.default.Component);
+
+	exports.default = Rocha;
+
+/***/ },
+/* 491 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(198);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ContentRocha = function (_React$Component) {
+	  _inherits(ContentRocha, _React$Component);
+
+	  function ContentRocha() {
+	    _classCallCheck(this, ContentRocha);
+
+	    return _possibleConstructorReturn(this, (ContentRocha.__proto__ || Object.getPrototypeOf(ContentRocha)).call(this));
+	  }
+
+	  _createClass(ContentRocha, [{
+	    key: 'validador',
+	    value: function validador(nombre, _validador, fecha) {
+	      var text = void 0;
+	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	        text = "";
+	      } else {
+	        text = _react2.default.createElement(
+	          'div',
+	          { className: 'opc' },
+	          _react2.default.createElement(
+	            'h5',
+	            null,
+	            nombre
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            fecha ? _validador.substring(0, 10) : _validador
+	          )
+	        );
+	      }
+	      return text;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'content-informe' },
+	        this.validador("Ejecutivo:", this.props.rocha.EJECUTIVO),
+	        this.validador("Obra:", this.props.rocha.OBRA),
+	        this.validador("Fecha Ingreso:", this.props.rocha.FECHA_INGRESO, true),
+	        this.validador("Fecha Entrega:", this.props.rocha.FECHA_CONFIRMACION, true)
+	      );
+	    }
+	  }]);
+
+	  return ContentRocha;
+	}(_react2.default.Component);
+
+	exports.default = ContentRocha;
+
+/***/ },
 /* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -58916,7 +59644,7 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
 	    _this.state = { active: 'active', notification: null };
-	    _this.menu = [{ id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": false }, { id: "2", img: _react2.default.createElement('i', { className: 'fa fa-coffee', 'aria-hidden': 'true' }), name: "Actividades", icon: "icon actividad", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/nueva" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Desarrollo", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Desarollo", ruta: "/home/informe/desarrollo" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalacion" }] }, { id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Informe Planificación", ruta: "/home/informe/planificacion" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/produccion" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
+	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
 	    return _this;
 	  }
 	  /* Agrega clase active para desplegar sub-menus */

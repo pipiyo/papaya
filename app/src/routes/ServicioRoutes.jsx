@@ -97,7 +97,7 @@ export default class ServicioRoutes extends React.Component {
       //console.log( this.state.obj.vehiculos )
       //console.log( this.state.obj.mensaje )
       return (
-        <ServicioIndex tipo={this.props.params.tipo} mensaje={this.state.obj.mensaje} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
+        <ServicioIndex rocha={this.props.params.rocha} tipo={this.props.params.tipo} mensaje={this.state.obj.mensaje} area={this.state.area} addServicio={this.addServicio.bind(this)} formArea={this.formArea.bind(this)} />       
       )
   }
 

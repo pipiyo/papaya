@@ -6,7 +6,12 @@ class Item extends React.Component {
 
   constructor() {
     super()
-    this.state = {reclamo:"",fechaInicio:moment(),fechaEntrega:moment()}
+    this.state = {
+                  valuerocha: "",
+                  reclamo:"",
+                  fechaInicio:moment(),
+                  fechaEntrega:moment(),
+                }
   }
 
   componentWillUpdate(nextProps, nextState){
@@ -23,6 +28,11 @@ class Item extends React.Component {
     }else{
       this.setState({reclamo:""})
     }
+    if(this.props.rocha == "ingreso"){
+      this.setState({ valuerocha: ""});
+    }else{
+      this.setState({ valuerocha: this.props.rocha });
+    }
   }
 
   fechaInicioDate(date){
@@ -31,6 +41,10 @@ class Item extends React.Component {
 
   fechaEntregaDate(date){
     this.setState({ fechaEntrega: date });
+  }
+
+  onChange(e) {
+    this.setState({ valuerocha: document.getElementById("rocha").value})
   }
 
   render() {
@@ -45,16 +59,16 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Rocha</label>
-                <input id="rocha" type="text" />
+                <input required onChange={this.onChange.bind(this)} id="rocha" type="text" value={this.state.valuerocha} />
             </div>
 
             <div className="item-form">
               <label>Servicio</label>
-              <select id="area" onChange={this.props.formArea}>
+              <select required id="area" onChange={this.props.formArea}>
                 <option value="">Seleccioné</option>
-                <option value="Adquisiciones">Adquisiciones</option>
+                <option value="Adquisiciones">Abastecimiento</option>
                 <option value="Bodega">Bodega</option>
-                <option value="Desarrollo">Desarrollo</option>
+                <option value="Desarrollo">Técnica</option>
                 <option value="Despacho">Despacho</option>
                 <option value="Instalacion">Instalacion</option>
                 <option value="Prevención de Riesgos">Prevención de Riesgos</option>
@@ -66,7 +80,7 @@ class Item extends React.Component {
 
             <div className="item-form">
               <label>Categoría</label>
-              <select id="categoria">
+              <select required id="categoria">
                 <option value="">Seleccioné</option>
                 <option value="proyecto">Proyecto</option>
                 <option value="solicitud">Solicitud</option>
@@ -76,17 +90,17 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Supervisor</label>
-                <input id="supervisor" type="text" />
+                <input required id="supervisor" type="text" />
             </div>
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
             </div>
 
             <div className="item-form">
                 <label>Fecha Entrega Cliente</label>
-                <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
             </div>
 
             <div className="item-form">
@@ -96,7 +110,7 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Descripción</label>
-                <input id="descripcion" type="text"/>
+                <input required id="descripcion" type="text"/>
             </div>
 
             <div className="item-form">
