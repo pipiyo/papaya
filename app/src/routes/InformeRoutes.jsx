@@ -126,6 +126,7 @@ export default class InformeRoutes extends React.Component {
             cuenta={this.state.data.cuenta} 
             servicio={this.props.params.area} 
             datos={this.state.data.valor} 
+            ejecutivo={this.state.data.ejecutivo} 
             fechaInicio={this.state.fechaInicio} 
             fechaEntrega={this.state.fechaEntrega} 
             fechaInicioDate={this.fechaInicioDate.bind(this)} 

@@ -9,6 +9,7 @@ let InformeStore = Reflux.createStore({
   viewInformes: function(data,cant,estado,codigo,vendedor,categoria,fechai,cliente,fechae){
   	socket.emit('viewInformes', data,cant,estado,codigo,vendedor,categoria,fechai,cliente,fechae)
   	socket.on('okViewInformes', (okViewInformes) =>{
+  		console.log( okViewInformes )
   		this.trigger(okViewInformes)
   	})
   }
