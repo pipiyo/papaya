@@ -20,11 +20,6 @@ class Item extends React.Component {
     }else{
       this.state.reclamo = ""
     }
-    if(nextProps.rocha == "ingreso"){
-      this.state.valuerocha =  "";
-    }else{
-      this.state.valuerocha = this.props.rocha;
-    }
   }
 
   componentWillMount(){
