@@ -134,14 +134,14 @@ module.exports = (io, pool, Notification) => {
     if(cliente != ""){q_cliente = ' and proyecto.NOMBRE_CLIENTE like "%'+cliente +'%"'}
     if(fechai != "" && fechae != ""){q_fecha = ' and proyecto.FECHA_CONFIRMACION BETWEEN "'+ fechai +'" and "'+ fechae +'"'}
     if(data == "reclamo"){
-      let query = 'SELECT reclamos.CODIGO_RECLAMO, servicio.RECLAMOS, reclamos.RAZON, reclamos.AREA, proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.PROCESO, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto, reclamos WHERE reclamos.ROCHA = proyecto.CODIGO_PROYECTO and proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas") and proyecto.ESTADO IN ("'+estado+'") '+q_codigo+' '+q_vendedor+' '+q_categoria+' '+q_fecha+' '+q_cliente+'  order by proyecto.FECHA_CONFIRMACION asc, proyecto.CODIGO_PROYECTO  limit '+cant +';' 
+      let query = 'SELECT reclamos.CODIGO_RECLAMO, servicio.RECLAMOS, reclamos.RAZON, reclamos.AREA, proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.PROCESO, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto, reclamos WHERE reclamos.ROCHA = proyecto.CODIGO_PROYECTO and proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas") and proyecto.ESTADO IN ("'+estado+'") '+q_codigo+' '+q_vendedor+' '+q_categoria+' '+q_fecha+' '+q_cliente+'  order by proyecto.FECHA_CONFIRMACION asc, proyecto.CODIGO_PROYECTO  limit '+cant +';select `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` from `empleado` where `AREA` = "COMERCIAL";' 
       
 
       pool.getConnection( (err, connection) => {
             connection.query(query + 'select count(proyecto.CODIGO_PROYECTO) as total FROM servicio, proyecto,reclamos WHERE reclamos.ROCHA = proyecto.CODIGO_PROYECTO and proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas") and proyecto.ESTADO IN ("'+estado+'") '+q_codigo+' '+q_vendedor+' '+q_categoria+' '+q_fecha+' '+q_cliente+'', function(err, rows, fields) {
                 connection.release()
                 if (!err)
-                  socket.emit('okViewInformes', { valor:rows[0], cuenta:rows[1]})
+                  socket.emit('okViewInformes', { valor:rows[0], ejecutivo:rows[1], cuenta:rows[2]})
                 else
                   console.log('Error ' + err)
             }) 
@@ -152,13 +152,13 @@ module.exports = (io, pool, Notification) => {
     }else{
 
 
-          let query = 'SELECT proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.PROCESO, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ('+data+') and proyecto.ESTADO IN ("'+estado+'") '+q_codigo+' '+q_vendedor+' '+q_categoria+' '+q_fecha+' '+q_cliente+'  order by proyecto.FECHA_CONFIRMACION asc, proyecto.CODIGO_PROYECTO  limit '+cant +';' 
+          let query = 'SELECT proyecto.CODIGO_PROYECTO,servicio.TP, servicio.TM, servicio.OS, servicio.PROCESO, servicio.FI, servicio.DESCRIPCION, servicio.SUPERVISOR, servicio.ESTADO, servicio.DIRECCION, servicio.OBSERVACIONES, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO, servicio.CODIGO_SERVICIO,  proyecto.OBRA, proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO , proyecto.FECHA_INGRESO, proyecto.FECHA_CONFIRMACION FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ('+data+') and proyecto.ESTADO IN ("'+estado+'") '+q_codigo+' '+q_vendedor+' '+q_categoria+' '+q_fecha+' '+q_cliente+'  order by proyecto.FECHA_CONFIRMACION asc, proyecto.CODIGO_PROYECTO  limit '+cant +';select `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` from `empleado` where `AREA` = "COMERCIAL";' 
           
           pool.getConnection( (err, connection) => {
                 connection.query(query + 'select count(proyecto.CODIGO_PROYECTO) as total FROM servicio, proyecto WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and NOMBRE_SERVICIO IN ('+data+') and proyecto.ESTADO IN ("'+estado+'") '+q_codigo+' '+q_vendedor+' '+q_categoria+' '+q_fecha+' '+q_cliente+'', function(err, rows, fields) {
                     connection.release()
                     if (!err)
-                      socket.emit('okViewInformes', { valor:rows[0], cuenta:rows[1]})
+                      socket.emit('okViewInformes', { valor:rows[0], ejecutivo:rows[1], cuenta:rows[2]})
                     else
                       console.log('Error ' + err)
                 })
