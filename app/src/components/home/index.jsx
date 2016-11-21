@@ -9,8 +9,8 @@ class Home extends React.Component {
     super()
     this.state = { active : 'active', notification : null }
     this.menu = [
-      {id:"11",img: <i class="fa fa-bullhorn" aria-hidden="true"></i>, name: "Planificación", icon: "icon planificacion", "item":[{id:"1",nombre:"Nueva Actividad",ruta:"/home/actividad/ingreso/nueva"},{id:"2",nombre:"Informe Planificación",ruta:"/home/informe/planificación"},{id:"3",nombre:"Informe Rochas",ruta:"/home/informe-rochas"}]},
-      {id:"1",img: <i className="fa fa-rocket" aria-hidden="true"></i>, name: "Rochas", icon: "icon rocha", "item": false},
+      {id:"11",img: <i class="fa fa-bullhorn" aria-hidden="true"></i>, name: "Planificación", icon: "icon planificacion", "item":[{id:"1",nombre:"Nueva Actividad",ruta:"/home/actividad/ingreso/nueva"},{id:"2",nombre:"Informe Planificación",ruta:"/home/informe/planificación"}]},
+      {id:"1",img: <i className="fa fa-rocket" aria-hidden="true"></i>, name: "Rochas", icon: "icon rocha", "item": [{id:"1",nombre:"Informe Rochas",ruta:"/home/informe-rochas"}]},
       {id:"3",img: <i className="fa fa-shopping-cart" aria-hidden="true"></i>, name: "Abastecimiento", icon: "icon abastecimiento" , "item":[{id:"1",nombre:"Informe Abastecimiento",ruta:"/home/informe/abastecimiento"}]},
       {id:"4",img: <i className="fa fa-suitcase" aria-hidden="true"></i>, name: "Comercial", icon: "icon comercial", "item":[{id:"1",nombre:"Informe Comercial",ruta:"/home/informe/comercial"}]},
       {id:"5",img: <i className="fa fa-pencil" aria-hidden="true"></i>, name: "Dam" , icon: "icon dam", "item": false},
