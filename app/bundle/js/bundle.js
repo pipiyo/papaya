@@ -37655,7 +37655,12 @@
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'Instalacion' },
-	                'Instalacion'
+	                'Instalaci\xF3n'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Planificacion' },
+	                'Planificaci\xF3n'
 	              ),
 	              _react2.default.createElement(
 	                'option',
@@ -53684,7 +53689,12 @@
 	              _react2.default.createElement(
 	                'option',
 	                { value: 'Instalacion' },
-	                'Instalacion'
+	                'Instalaci\xF3n'
+	              ),
+	              _react2.default.createElement(
+	                'option',
+	                { value: 'Planificacion' },
+	                'Planificaci\xF3n'
 	              ),
 	              _react2.default.createElement(
 	                'option',
@@ -56928,7 +56938,7 @@
 	          this.state.servicio = '"Desarrollo"';
 	          break;
 	        case "planificación":
-	          this.state.servicio = '"Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas"';
+	          this.state.servicio = '"Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas","Planificacion"';
 	          break;
 	        case "comercial":
 	          this.state.servicio = '"Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas"';
@@ -57750,6 +57760,9 @@
 	          break;
 	        case "Sillas":
 	          area = "sillas";
+	          break;
+	        case "Planificacion":
+	          area = "planificacion";
 	          break;
 	      }
 	      return "item-actividades " + area;
@@ -58670,6 +58683,8 @@
 	        'div',
 	        { className: 'content-informe' },
 	        this.validador("Ejecutivo:", this.props.rocha.EJECUTIVO),
+	        this.validador("Encargado:", this.props.rocha.ENCARGADO),
+	        this.validador("Nombre Proyecto:", this.props.rocha.NOMBRE_PROYECTO),
 	        this.validador("Obra:", this.props.rocha.OBRA),
 	        this.validador("Fecha Ingreso:", this.props.rocha.FECHA_INGRESO, true),
 	        this.validador("Fecha Entrega:", this.props.rocha.FECHA_CONFIRMACION, true)

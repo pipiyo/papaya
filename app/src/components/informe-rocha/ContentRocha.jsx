@@ -22,6 +22,8 @@ class ContentRocha extends React.Component {
       return (
           <div class="content-informe">
             {this.validador("Ejecutivo:",this.props.rocha.EJECUTIVO)}
+            {this.validador("Encargado:",this.props.rocha.ENCARGADO)}
+            {this.validador("Nombre Proyecto:",this.props.rocha.NOMBRE_PROYECTO)}
             {this.validador("Obra:",this.props.rocha.OBRA)}
             {this.validador("Fecha Ingreso:",this.props.rocha.FECHA_INGRESO,true)}
             {this.validador("Fecha Entrega:",this.props.rocha.FECHA_CONFIRMACION,true)}

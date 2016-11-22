@@ -28,6 +28,9 @@ class Content extends React.Component {
     case "Sillas":
         area = "sillas";
         break;
+    case "Planificacion":
+        area = "planificacion";
+        break;
     }
     return "item-actividades " + area
   }

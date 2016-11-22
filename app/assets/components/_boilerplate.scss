@@ -969,6 +969,7 @@ a.external-link, .external-link a {
         }
 
         &.abastecimiento{border:solid 1px $color_abastecimiento; h3{background: $color_abastecimiento;&:after{content: none;}}}
+        &.planificacion{border:solid 1px $color_planificacion; h3{background: $color_planificacion;&:after{content: none;}}}
         &.produccion{border:solid 1px $color_produccion; h3{background: $color_produccion;&:after{content: none;}}}
         &.despacho{border:solid 1px $color_despacho; h3{background: $color_despacho;&:after{content: none;}}}
         &.instalaciones{border:solid 1px $color_instalaciones; h3{background: $color_instalaciones;&:after{content: none;}}}
@@ -1019,13 +1020,14 @@ a.external-link, .external-link a {
 
         .item-actividades{
             margin: 1em 1em 0 1em;
-            &.abastecimiento{order:2;.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
-            &.desarrollo{order:3;.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
-            &.produccion{order:4;.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
-            &.sillas{order:5;.title-actividad{background: $color_sillas;}.description-actividad{border: solid 1px $color_sillas;}}
-            &.despacho{order:6;.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
-            &.instalaciones{order:7;.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
-            &.integracion{order:8;.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}      
+            &.planificacion{order:2;.title-actividad{background: $color_planificacion;}.description-actividad{border: solid 1px $color_planificacion;}}
+            &.abastecimiento{order:3;.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
+            &.desarrollo{order:4;.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
+            &.produccion{order:5;.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
+            &.sillas{order:6;.title-actividad{background: $color_sillas;}.description-actividad{border: solid 1px $color_sillas;}}
+            &.despacho{order:7;.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
+            &.instalaciones{order:8;.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
+            &.integracion{order:9;.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}      
 
             &.sub{
                 width: calc(50% - 2em);

@@ -49,7 +49,8 @@ class Item extends React.Component {
                 <option value="Bodega">Bodega</option>
                 <option value="Desarrollo">Técnica</option>
                 <option value="Despacho">Despacho</option>
-                <option value="Instalacion">Instalacion</option>
+                <option value="Instalacion">Instalación</option>
+                <option value="Planificacion">Planificación</option>
                 <option value="Prevención de Riesgos">Prevención de Riesgos</option>
                 <option value="Produccion">Producción</option>
                 <option value="Sillas">Sillas</option>
