@@ -75,6 +75,7 @@ export default class InformeRoutes extends React.Component {
             <InformeRochaIndex 
             rocha={this.state.obj.rocha.valor} 
             cuenta={this.state.obj.rocha.cuenta} 
+            ejecutivo={this.state.obj.rocha.ejecutivo} 
             fechaInicio={this.state.fechaInicio} 
             fechaEntrega={this.state.fechaEntrega}  
             filtro={this.filtro.bind(this)} 

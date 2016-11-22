@@ -57105,7 +57105,6 @@
 
 	    socket.emit('viewInformes', data, cant, estado, codigo, vendedor, categoria, fechai, cliente, fechae);
 	    socket.on('okViewInformes', function (okViewInformes) {
-	      console.log(okViewInformes);
 	      _this.trigger(okViewInformes);
 	    });
 	  }
@@ -58096,6 +58095,7 @@
 	          _react2.default.createElement(_informeRocha2.default, {
 	            rocha: this.state.obj.rocha.valor,
 	            cuenta: this.state.obj.rocha.cuenta,
+	            ejecutivo: this.state.obj.rocha.ejecutivo,
 	            fechaInicio: this.state.fechaInicio,
 	            fechaEntrega: this.state.fechaEntrega,
 	            filtro: this.filtro.bind(this),
@@ -58244,7 +58244,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Filtro2.default, { fechaInicioDate: this.props.fechaInicioDate, fechaEntregaDate: this.props.fechaEntregaDate, fechaInicio: this.props.fechaInicio, fechaEntrega: this.props.fechaEntrega, filtro: this.props.filtro }),
+	        _react2.default.createElement(_Filtro2.default, { ejecutivo: this.props.ejecutivo, fechaInicioDate: this.props.fechaInicioDate, fechaEntregaDate: this.props.fechaEntregaDate, fechaInicio: this.props.fechaInicio, fechaEntrega: this.props.fechaEntrega, filtro: this.props.filtro }),
 	        _react2.default.createElement(_Rocha2.default, { cuenta: this.props.cuenta, rocha: this.props.rocha, viewMore: this.props.viewMore })
 	      );
 	    }
@@ -58442,16 +58442,13 @@
 	                            { value: '' },
 	                            'Seleccione'
 	                        ),
-	                        _react2.default.createElement(
-	                            'option',
-	                            { value: 'Amanda Godoy Santis' },
-	                            'Amanda Godoy Santis'
-	                        ),
-	                        _react2.default.createElement(
-	                            'option',
-	                            { value: 'Maria de los Angeles Nu\xF1ez Duarte' },
-	                            'Maria de los Angeles Nu\xF1ez Duarte'
-	                        )
+	                        this.props.ejecutivo.map(function (ejecutivo) {
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { value: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO, key: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO },
+	                                ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO
+	                            );
+	                        })
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -58518,6 +58515,30 @@
 	      return "/home/actividad/" + id + "/nueva/";
 	    }
 	  }, {
+	    key: 'fechaActual',
+	    value: function fechaActual() {
+	      var hoy = new Date();
+	      var dd = hoy.getDate();
+	      var mm = hoy.getMonth() + 1; //hoy es 0!
+	      var yyyy = hoy.getFullYear();
+
+	      if (dd < 10) {
+	        dd = '0' + dd;
+	      }
+
+	      if (mm < 10) {
+	        mm = '0' + mm;
+	      }
+	      return yyyy + '-' + mm + '-' + dd;
+	    }
+	  }, {
+	    key: 'atraso',
+	    value: function atraso(fecha, fechaConfirmacion) {
+	      var atraso = void 0;
+	      fecha > fechaConfirmacion ? atraso = "atrasado" : atraso = "";
+	      return atraso;
+	    }
+	  }, {
 	    key: 'viewRocha',
 	    value: function viewRocha() {
 	      var contenidoRocha = [];
@@ -58531,7 +58552,7 @@
 	            { className: 'title-informe' },
 	            _react2.default.createElement(
 	              'h3',
-	              null,
+	              { className: this.atraso(this.fechaActual(), this.props.rocha[valor].FECHA_CONFIRMACION) },
 	              this.props.rocha[valor].CODIGO_PROYECTO,
 	              ' -  ',
 	              this.props.rocha[valor].NOMBRE_CLIENTE

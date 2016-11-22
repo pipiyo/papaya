@@ -17,14 +17,14 @@ module.exports = (io, pool) => {
     if(data.fechai != "" && data.fechae != ""){q_fecha = ' and proyecto.FECHA_CONFIRMACION BETWEEN "'+ data.fechai +'" and "'+ data.fechae +'"'}
 
       let query = 'SELECT * FROM proyecto WHERE estado = "'+data.estado+'" '+q_codigo+' '+q_vendedor+' '+q_fecha+' '+q_cliente+'  limit '+data.count+';' 
-      let query1 = 'SELECT count(*) as total FROM proyecto WHERE estado = "'+data.estado+'" '+q_codigo+' '+q_vendedor+' '+q_fecha+' '+q_cliente+''
-      console.log(data)
-      console.log(query)
+      let query1 = 'SELECT count(*) as total FROM proyecto WHERE estado = "'+data.estado+'" '+q_codigo+' '+q_vendedor+' '+q_fecha+' '+q_cliente+';'
+      let query2 = 'SELECT `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` FROM `empleado` where `AREA` = "COMERCIAL" order by `NOMBRES`;'
+
       pool.getConnection( (err, connection) => {
-            connection.query(query + query1, (err, rows, fields) => {
+            connection.query(query + query1 + query2, (err, rows, fields) => {
                 connection.release()
                 if (!err)
-                  socket.emit('okAllRocha', { valor:rows[0], cuenta:rows[1]})
+                  socket.emit('okAllRocha', { valor:rows[0], cuenta:rows[1], ejecutivo:rows[2]})
                 else
                   console.log('Error ' + err)
             }) 

@@ -1293,9 +1293,23 @@ a.external-link, .external-link a {
                 font-size: 1em;
                 font-weight: normal;
                 margin: 0;
-                width: 90%;
+                width: 100%;
+                padding-right: 1em;
+                position:relative;
                 color: $blanco;
                 padding: 0;
+                &.atrasado{
+                    &:before{
+                        content: "\f06a";
+                        color:#fe2e2e;
+                        font-size: 1.2em;
+                        font-family: FontAwesome;
+                        font-weight: normal;
+                        position: absolute;
+                        right: -25px;
+                        top: -30px;
+                    }
+                }
             }
             .icon-informe{
                 position: absolute;
