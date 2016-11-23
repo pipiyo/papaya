@@ -2,15 +2,18 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
+import Autocomplete from '../../routes/AutocompleteRoutes'
+
 class Item extends React.Component {
 
   constructor() {
     super()
-    this.state = {
+    this.state = {autocomplete:"",
+                  valueAutocomplete:{},
                   valuerocha: "",
                   reclamo:"",
                   fechaInicio:moment(),
-                  fechaEntrega:moment(),
+                  fechaEntrega:moment()
                 }
   }
 
@@ -45,6 +48,19 @@ class Item extends React.Component {
 
   onChange(e) {
     this.setState({ valuerocha: document.getElementById("rocha").value})
+  }
+
+  autocomplete(e){
+    let valor
+    let filtro
+    filtro = e.currentTarget.getAttribute("data-complete")
+    valor = e.currentTarget.value
+    this.setState({ valueAutocomplete:{filtro:filtro,valor:valor} })
+    if(document.activeElement.id){
+      this.setState({ autocomplete: <Autocomplete autocomplete={this.state.valueAutocomplete} /> })
+    }else{
+      this.setState({ autocomplete: ""})
+    }
   }
 
   render() {
@@ -104,9 +120,10 @@ class Item extends React.Component {
                 <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
             </div>
 
-            <div className="item-form">
+            <div className="item-form relative">
                 <label>Días</label>
-                <input type="number" class="date" id="dias" />
+                <input data-complete="rocha" onBlur={this.autocomplete.bind(this)} onChange={this.autocomplete.bind(this)} type="text" id="dias" />
+                {this.state.autocomplete}
             </div>
 
             <div className="item-form">

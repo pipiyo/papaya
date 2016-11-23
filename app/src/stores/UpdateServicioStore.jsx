@@ -18,7 +18,6 @@ let UpdateServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.servicio = ''
     })
   },
   getInitialState: function() {
@@ -28,7 +27,6 @@ let UpdateServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.servicio = ''
       this.trigger(this.obj)
     })
   },

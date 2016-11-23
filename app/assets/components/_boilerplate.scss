@@ -255,6 +255,9 @@ a.external-link, .external-link a {
         }
     }
 }
+.relative{
+    position:relative;
+}
 
 
 /**** frame ****/
@@ -1359,6 +1362,31 @@ a.external-link, .external-link a {
             &:hover{
               background: $color_corporativo_darker;
               cursor: pointer;  
+            }
+        }
+    }
+}
+
+
+/* Auto complete */
+.module-autocomplete{
+    position: absolute;
+    background: $color_corporativo_darker;
+    padding: 0;
+    ul{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        li{
+            margin:0;
+            padding: .5em 1em;
+            color: $blanco;
+            cursor: pointer;
+            &:hover{
+                background: $color_corporativo_dark;
+            }
+            + li{
+                border-top: solid 1px $blanco; 
             }
         }
     }
