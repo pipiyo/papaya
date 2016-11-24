@@ -78,8 +78,7 @@ export default class UpdateServicioRoutes extends React.Component {
   }
  
 
-  render() {
-      
+  render() {   
       if(this.state.obj.servicio) {
         this.formArea(this.state.obj.servicio[0].NOMBRE_SERVICIO)
       return (

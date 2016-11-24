@@ -8,21 +8,12 @@ class Item extends React.Component {
 
   constructor() {
     super()
-    this.state = {autocomplete:"",
-                  valueAutocomplete:{},
+    this.state = {
                   valuerocha: "",
                   reclamo:"",
                   fechaInicio:moment(),
                   fechaEntrega:moment()
                 }
-  }
-
-  componentWillUpdate(nextProps, nextState){
-    if(nextProps.tipo == "reclamo"){
-      this.state.reclamo = <div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>
-    }else{
-      this.state.reclamo = ""
-    }
   }
 
   componentWillMount(){
@@ -38,6 +29,16 @@ class Item extends React.Component {
     }
   }
 
+  componentWillUpdate(nextProps, nextState){
+    if(this.props.tipo !== nextProps.tipo){
+      if(nextProps.tipo == "reclamo"){
+        this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
+      }else{
+        this.setState({reclamo:""})
+      }
+    }
+  }
+
   fechaInicioDate(date){
     this.setState({ fechaInicio: date });
   }
@@ -48,19 +49,6 @@ class Item extends React.Component {
 
   onChange(e) {
     this.setState({ valuerocha: document.getElementById("rocha").value})
-  }
-
-  autocomplete(e){
-    let valor
-    let filtro
-    filtro = e.currentTarget.getAttribute("data-complete")
-    valor = e.currentTarget.value
-    this.setState({ valueAutocomplete:{filtro:filtro,valor:valor} })
-    if(document.activeElement.id){
-      this.setState({ autocomplete: <Autocomplete autocomplete={this.state.valueAutocomplete} /> })
-    }else{
-      this.setState({ autocomplete: ""})
-    }
   }
 
   render() {
@@ -122,8 +110,7 @@ class Item extends React.Component {
 
             <div className="item-form relative">
                 <label>Días</label>
-                <input data-complete="rocha" onBlur={this.autocomplete.bind(this)} onChange={this.autocomplete.bind(this)} type="text" id="dias" />
-                {this.state.autocomplete}
+                <input data-complete="rocha" type="text" id="dias" />
             </div>
 
             <div className="item-form">

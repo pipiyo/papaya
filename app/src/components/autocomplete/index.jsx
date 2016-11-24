@@ -1,16 +1,26 @@
 import React from 'react'
 
 class AutocompleteIndex extends React.Component {
+
   render() {
+    
+    if(this.props.valor){
       return (         
         <div class="module-autocomplete">
-          <ul>
-            <li>Soprole</li>
-            <li>Abastible</li>
-            <li>conforte</li>
+          <ul onClick={this.props.valorInput}>
+            {
+              this.props.valor.map( (valor) => {
+                return  <li key={valor.DATOS}>{`${valor.DATOS}`}</li>
+              })
+            }
           </ul>
         </div>
       )
+    }else{
+      return (
+      <div></div>
+      )
+    }
 
   }
 

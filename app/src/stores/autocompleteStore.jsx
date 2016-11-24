@@ -1,21 +1,21 @@
 import Reflux from 'reflux'
-import autocompleteActions from '../actions/autocompleteActions'
+import AutocompleteActions from '../actions/AutocompleteActions'
 import Env from '../Config'
 import io from 'socket.io-client'
-const socket = io.connect( `${Env.url}rocha` )
+const socket = io.connect( `${Env.url}autocomplete` )
 
 let AutocompleteStore = Reflux.createStore({
-  listenables: [autocompleteActions],
-  obj: { filtro: ''},
+  listenables: [AutocompleteActions],
+  obj: { valores: ''},
   getInitialState: function() {
     return this.obj
   },
   autocomplete: function(data){
-  	socket.emit('allRocha',data)
-  	socket.on('okAllRocha', (okAllRocha) =>{
-  		this.obj.filtro = okAllRocha
-  		this.trigger(this.obj)
-  	})
+  	socket.emit('autocomplete',data)
+  	socket.on('okAutocomplete', (okAutocomplete) =>{
+  		this.obj.valores = okAutocomplete
+  	 	this.trigger(this.obj)
+  	 })
   }
 })
 

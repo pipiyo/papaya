@@ -1379,9 +1379,11 @@ a.external-link, .external-link a {
         list-style-type: none;
         li{
             margin:0;
-            padding: .5em 1em;
+            padding: .1em 1em;
             color: $blanco;
+            font-weight: normal;
             cursor: pointer;
+            font-size: $fontTiny;
             &:hover{
                 background: $color_corporativo_dark;
             }

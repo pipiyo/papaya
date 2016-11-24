@@ -1,7 +1,7 @@
 import Reflux from 'reflux'
 
-let autocompleteActions = Reflux.createActions([
+let AutocompleteActions = Reflux.createActions([
 	'autocomplete'
 ])
 
-export default autocompleteActions
+export default AutocompleteActions
