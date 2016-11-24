@@ -14,6 +14,17 @@ class ItemInstalacion extends React.Component {
                   os:this.validador(props.datos[0].OS)
                 }
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+                  direccion:this.validador(nextProps.datos[0].SUB_DIRECCION),
+                  lider:this.validador(nextProps.datos[0].LIDER),
+                  instalador1:this.validador(nextProps.datos[0].SUB_INSTALADOR_1),
+                  instalador2:this.validador(nextProps.datos[0].SUB_INSTALADOR_2),
+                  instalador3:this.validador(nextProps.datos[0].SUB_INSTALADOR_3),
+                  puestos:this.validador(nextProps.datos[0].SUB_PUESTOS),
+                  os:this.validador(nextProps.datos[0].SUB_OS)
+                });
+  }
   componentDidMount(){
     let i
 

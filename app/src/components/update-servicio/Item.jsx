@@ -19,6 +19,20 @@ class Item extends React.Component {
                 }
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+                  codigo:this.validador(nextProps.datos[0].CODIGO_SERVICIO),
+                  dias:this.validador(nextProps.datos[0].DIAS),
+                  categoria:this.validador(nextProps.datos[0].CATEGORIA),
+                  supervisor : this.validador(nextProps.datos[0].SUPERVISOR),
+                  estado : this.validador(nextProps.datos[0].ESTADO),
+                  fechaInicio : moment(nextProps.datos[0].FECHA_INICIO),
+                  fechaEntrega : moment(nextProps.datos[0].FECHA_ENTREGA),
+                  descripcion : this.validador(nextProps.datos[0].DESCRIPCION),
+                  observaciones : this.validador(nextProps.datos[0].OBSERVACIONES)
+                });
+  }
+
   componentDidMount(){
     let i
     let numero = document.getElementById("categoria")

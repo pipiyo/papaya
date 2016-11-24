@@ -16,6 +16,19 @@ class ItemDespacho extends React.Component {
                   os:this.validador(props.datos[0].OS)
                 }
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+                  guia:this.validador(nextProps.datos[0].SUB_GUIA_DESPACHO),
+                  comuna:this.validador(nextProps.datos[0].SUB_CODIGO_COMUNA),
+                  vehiculo:this.validador(nextProps.datos[0].SUB_TRANSPORTE),
+                  direccion:this.validador(nextProps.datos[0].SUB_DIRECCION),
+                  m3:this.validador(nextProps.datos[0].SUB_M3),
+                  fi:this.validador(nextProps.datos[0].SUB_I),
+                  tm:this.validador(nextProps.datos[0].SUB_TM),
+                  to:this.validador(nextProps.datos[0].SUB_TP),
+                  os:this.validador(nextProps.datos[0].SUB_OS)
+                });
+  }
   componentDidMount(){
     let i
 

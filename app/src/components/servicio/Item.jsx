@@ -2,6 +2,8 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
+import Autocomplete from '../../routes/AutocompleteRoutes'
+
 class Item extends React.Component {
 
   constructor() {
@@ -10,16 +12,8 @@ class Item extends React.Component {
                   valuerocha: "",
                   reclamo:"",
                   fechaInicio:moment(),
-                  fechaEntrega:moment(),
+                  fechaEntrega:moment()
                 }
-  }
-
-  componentWillUpdate(nextProps, nextState){
-    if(nextProps.tipo == "reclamo"){
-      this.state.reclamo = <div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>
-    }else{
-      this.state.reclamo = ""
-    }
   }
 
   componentWillMount(){
@@ -32,6 +26,16 @@ class Item extends React.Component {
       this.setState({ valuerocha: ""});
     }else{
       this.setState({ valuerocha: this.props.rocha });
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    if(this.props.tipo !== nextProps.tipo){
+      if(nextProps.tipo == "reclamo"){
+        this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
+      }else{
+        this.setState({reclamo:""})
+      }
     }
   }
 
@@ -104,9 +108,9 @@ class Item extends React.Component {
                 <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
             </div>
 
-            <div className="item-form">
+            <div className="item-form relative">
                 <label>Días</label>
-                <input type="number" class="date" id="dias" />
+                <input data-complete="rocha" type="text" id="dias" />
             </div>
 
             <div className="item-form">

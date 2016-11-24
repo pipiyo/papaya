@@ -37506,6 +37506,10 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _AutocompleteRoutes = __webpack_require__(431);
+
+	var _AutocompleteRoutes2 = _interopRequireDefault(_AutocompleteRoutes);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37532,24 +37536,6 @@
 	  }
 
 	  _createClass(Item, [{
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate(nextProps, nextState) {
-	      if (nextProps.tipo == "reclamo") {
-	        this.state.reclamo = _react2.default.createElement(
-	          'div',
-	          { className: 'item-form' },
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            'Reclamo'
-	          ),
-	          _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
-	        );
-	      } else {
-	        this.state.reclamo = "";
-	      }
-	    }
-	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      if (this.props.tipo == "reclamo") {
@@ -37570,6 +37556,26 @@
 	        this.setState({ valuerocha: "" });
 	      } else {
 	        this.setState({ valuerocha: this.props.rocha });
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(nextProps, nextState) {
+	      if (this.props.tipo !== nextProps.tipo) {
+	        if (nextProps.tipo == "reclamo") {
+	          this.setState({ reclamo: _react2.default.createElement(
+	              'div',
+	              { className: 'item-form' },
+	              _react2.default.createElement(
+	                'label',
+	                null,
+	                'Reclamo'
+	              ),
+	              _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
+	            ) });
+	        } else {
+	          this.setState({ reclamo: "" });
+	        }
 	      }
 	    }
 	  }, {
@@ -37749,13 +37755,13 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'item-form' },
+	            { className: 'item-form relative' },
 	            _react2.default.createElement(
 	              'label',
 	              null,
 	              'D\xEDas'
 	            ),
-	            _react2.default.createElement('input', { type: 'number', className: 'date', id: 'dias' })
+	            _react2.default.createElement('input', { 'data-complete': 'rocha', type: 'text', id: 'dias' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -50845,6 +50851,228 @@
 /* 435 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _dec, _class;
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _autocomplete = __webpack_require__(432);
+
+	var _autocomplete2 = _interopRequireDefault(_autocomplete);
+
+	var _AutocompleteActions = __webpack_require__(433);
+
+	var _AutocompleteActions2 = _interopRequireDefault(_AutocompleteActions);
+
+	var _AutocompleteStore = __webpack_require__(434);
+
+	var _AutocompleteStore2 = _interopRequireDefault(_AutocompleteStore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AutoCompleteRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_AutocompleteStore2.default, 'obj')), _dec(_class = function (_React$Component) {
+	  _inherits(AutoCompleteRoutes, _React$Component);
+
+	  function AutoCompleteRoutes() {
+	    _classCallCheck(this, AutoCompleteRoutes);
+
+	    return _possibleConstructorReturn(this, (AutoCompleteRoutes.__proto__ || Object.getPrototypeOf(AutoCompleteRoutes)).call(this));
+	  }
+
+	  _createClass(AutoCompleteRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _AutocompleteActions2.default.autocomplete(this.props.autocomplete);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps, nextState) {
+	      _AutocompleteActions2.default.autocomplete(nextProps.autocomplete);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.obj) {
+	        return _react2.default.createElement(_autocomplete2.default, { valor: this.state.obj.valores.datos });
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Cargando'
+	          )
+	        );
+	      }
+	    }
+	  }]);
+
+	  return AutoCompleteRoutes;
+	}(_react2.default.Component)) || _class);
+	exports.default = AutoCompleteRoutes;
+
+/***/ },
+/* 432 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AutocompleteIndex = function (_React$Component) {
+	  _inherits(AutocompleteIndex, _React$Component);
+
+	  function AutocompleteIndex() {
+	    _classCallCheck(this, AutocompleteIndex);
+
+	    return _possibleConstructorReturn(this, (AutocompleteIndex.__proto__ || Object.getPrototypeOf(AutocompleteIndex)).apply(this, arguments));
+	  }
+
+	  _createClass(AutocompleteIndex, [{
+	    key: "render",
+	    value: function render() {
+
+	      if (this.props.valor) {
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "module-autocomplete" },
+	          _react2.default.createElement(
+	            "ul",
+	            { onClick: this.props.valorInput },
+	            this.props.valor.map(function (valor) {
+	              return _react2.default.createElement(
+	                "li",
+	                { key: valor.DATOS },
+	                "" + valor.DATOS
+	              );
+	            })
+	          )
+	        );
+	      } else {
+	        return _react2.default.createElement("div", null);
+	      }
+	    }
+	  }]);
+
+	  return AutocompleteIndex;
+	}(_react2.default.Component);
+
+	exports.default = AutocompleteIndex;
+
+/***/ },
+/* 433 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AutocompleteActions = _reflux2.default.createActions(['autocomplete']);
+
+	exports.default = AutocompleteActions;
+
+/***/ },
+/* 434 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _AutocompleteActions = __webpack_require__(433);
+
+	var _AutocompleteActions2 = _interopRequireDefault(_AutocompleteActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var socket = _socket2.default.connect(_Config2.default.url + 'autocomplete');
+
+	var AutocompleteStore = _reflux2.default.createStore({
+	  listenables: [_AutocompleteActions2.default],
+	  obj: { valores: '' },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  autocomplete: function autocomplete(data) {
+	    var _this = this;
+
+	    socket.emit('autocomplete', data);
+	    socket.on('okAutocomplete', function (okAutocomplete) {
+	      _this.obj.valores = okAutocomplete;
+	      _this.trigger(_this.obj);
+	    });
+	  }
+	});
+
+	exports.default = AutocompleteStore;
+
+/***/ },
+/* 435 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -51752,7 +51980,6 @@
 	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
 	      _this.obj.comunas = comunas;
 	      _this.obj.vehiculos = vehiculos;
-	      _this.obj.servicio = '';
 	    });
 	  },
 	  getInitialState: function getInitialState() {
@@ -51764,7 +51991,6 @@
 	    socket.emit('formingresoservicio', function (comunas, vehiculos) {
 	      _this2.obj.comunas = comunas;
 	      _this2.obj.vehiculos = vehiculos;
-	      _this2.obj.servicio = '';
 	      _this2.trigger(_this2.obj);
 	    });
 	  },
@@ -52014,6 +52240,21 @@
 	  }
 
 	  _createClass(Item, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        codigo: this.validador(nextProps.datos[0].CODIGO_SERVICIO),
+	        dias: this.validador(nextProps.datos[0].DIAS),
+	        categoria: this.validador(nextProps.datos[0].CATEGORIA),
+	        supervisor: this.validador(nextProps.datos[0].SUPERVISOR),
+	        estado: this.validador(nextProps.datos[0].ESTADO),
+	        fechaInicio: (0, _moment2.default)(nextProps.datos[0].FECHA_INICIO),
+	        fechaEntrega: (0, _moment2.default)(nextProps.datos[0].FECHA_ENTREGA),
+	        descripcion: this.validador(nextProps.datos[0].DESCRIPCION),
+	        observaciones: this.validador(nextProps.datos[0].OBSERVACIONES)
+	      });
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -52267,6 +52508,15 @@
 	  }
 
 	  _createClass(ItemProduccion, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        ejecutor: this.validador(nextProps.datos[0].SUB_EJECUTOR),
+	        vale: this.validador(nextProps.datos[0].SUB_VALE),
+	        cantidad: this.validador(nextProps.datos[0].SUB_PUESTOS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -52457,6 +52707,15 @@
 	  }
 
 	  _createClass(ItemSillas, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
+	        ejecutor: this.validador(nextProps.datos[0].SUB_EJECUTOR),
+	        cantidad: this.validador(nextProps.datos[0].SUB_PUESTOS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -52680,6 +52939,19 @@
 	  }
 
 	  _createClass(ItemInstalacion, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
+	        lider: this.validador(nextProps.datos[0].LIDER),
+	        instalador1: this.validador(nextProps.datos[0].SUB_INSTALADOR_1),
+	        instalador2: this.validador(nextProps.datos[0].SUB_INSTALADOR_2),
+	        instalador3: this.validador(nextProps.datos[0].SUB_INSTALADOR_3),
+	        puestos: this.validador(nextProps.datos[0].SUB_PUESTOS),
+	        os: this.validador(nextProps.datos[0].SUB_OS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;
@@ -52920,6 +53192,21 @@
 	  }
 
 	  _createClass(ItemDespacho, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        guia: this.validador(nextProps.datos[0].SUB_GUIA_DESPACHO),
+	        comuna: this.validador(nextProps.datos[0].SUB_CODIGO_COMUNA),
+	        vehiculo: this.validador(nextProps.datos[0].SUB_TRANSPORTE),
+	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
+	        m3: this.validador(nextProps.datos[0].SUB_M3),
+	        fi: this.validador(nextProps.datos[0].SUB_I),
+	        tm: this.validador(nextProps.datos[0].SUB_TM),
+	        to: this.validador(nextProps.datos[0].SUB_TP),
+	        os: this.validador(nextProps.datos[0].SUB_OS)
+	      });
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      var i = void 0;

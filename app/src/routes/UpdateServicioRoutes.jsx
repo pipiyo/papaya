@@ -23,6 +23,7 @@ export default class UpdateServicioRoutes extends React.Component {
     UpdateServicioActions.formTrigger()
     UpdateServicioActions.searchServicio(this.props.params.id);
   }
+
   formArea(area) {
      switch(area) {
       case "Produccion":
@@ -77,7 +78,7 @@ export default class UpdateServicioRoutes extends React.Component {
   }
  
 
-  render() {
+  render() {   
       if(this.state.obj.servicio) {
         this.formArea(this.state.obj.servicio[0].NOMBRE_SERVICIO)
       return (
