@@ -3,52 +3,29 @@ import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
 import Autocomplete from '../../routes/AutocompleteRoutes'
+import ServicioActions from '../../actions/ServicioActions'
 
 class Item extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-                  valuerocha: "",
-                  reclamo:"",
-                  fechaInicio:moment(),
-                  fechaEntrega:moment()
-                }
   }
 
   componentWillMount(){
-    if(this.props.tipo == "reclamo"){
-      this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
-    }else{
-      this.setState({reclamo:""})
-    }
-    if(this.props.rocha == "ingreso"){
-      this.setState({ valuerocha: ""});
-    }else{
-      this.setState({ valuerocha: this.props.rocha });
-    }
+    ServicioActions.renderReclamo(this.props.tipo)
+    ServicioActions.renderRochaValue(this.props.rocha)
   }
 
   componentWillUpdate(nextProps, nextState){
-    if(this.props.tipo !== nextProps.tipo){
-      if(nextProps.tipo == "reclamo"){
-        this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
-      }else{
-        this.setState({reclamo:""})
-      }
-    }
+    if(this.props.tipo !== nextProps.tipo){ ServicioActions.renderReclamo(nextProps.tipo) }
   }
 
-  fechaInicioDate(date){
-    this.setState({ fechaInicio: date });
+  renderFechaInicio(date){
+    ServicioActions.renderFechaInicio(date)
   }
 
-  fechaEntregaDate(date){
-    this.setState({ fechaEntrega: date });
-  }
-
-  onChange(e) {
-    this.setState({ valuerocha: document.getElementById("rocha").value})
+  renderFechaEntrega(date){
+    ServicioActions.renderFechaEntrega(date)
   }
 
   render() {
@@ -59,16 +36,16 @@ class Item extends React.Component {
                 <h4>Nueva Actividad</h4>
             </div>
 
-             {this.state.reclamo} 
+             {this.props.reclamo} 
 
             <div className="item-form">
                 <label>Rocha</label>
-                <input required onChange={this.onChange.bind(this)} id="rocha" type="text" value={this.state.valuerocha} />
+                <input required  id="rocha" type="text" />
             </div>
 
             <div className="item-form">
               <label>Servicio</label>
-              <select required id="area" onChange={this.props.formArea}>
+              <select required id="area" onChange={this.props.renderArea}>
                 <option value="">Seleccioné</option>
                 <option value="Adquisiciones">Abastecimiento</option>
                 <option value="Bodega">Bodega</option>
@@ -100,12 +77,12 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaInicio} onChange={this.renderFechaInicio.bind(this)} />
             </div>
 
             <div className="item-form">
                 <label>Fecha Entrega Cliente</label>
-                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaEntrega} onChange={this.renderFechaEntrega.bind(this)} />
             </div>
 
             <div className="item-form relative">
@@ -124,7 +101,6 @@ class Item extends React.Component {
             </div>
           </div>
           {this.props.area}
-
           <div className="module-form button">
             <div className="item-form button">
                 <input type="submit" value="Enviar"/>

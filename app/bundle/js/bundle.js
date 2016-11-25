@@ -37023,29 +37023,9 @@
 
 	var _ServicioStore2 = _interopRequireDefault(_ServicioStore);
 
-	var _FormIngresoServicioStore = __webpack_require__(314);
-
-	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
-
 	var _servicio = __webpack_require__(315);
 
 	var _servicio2 = _interopRequireDefault(_servicio);
-
-	var _ItemProduccion = __webpack_require__(435);
-
-	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
-
-	var _ItemSillas = __webpack_require__(436);
-
-	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
-
-	var _ItemInstalacion = __webpack_require__(437);
-
-	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
-
-	var _ItemDespacho = __webpack_require__(438);
-
-	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37072,94 +37052,30 @@
 	      }
 	    }
 	  }, {
-	    key: 'formArea',
-	    value: function formArea(ev) {
-	      switch (ev.target.value) {
-	        case "Produccion":
-	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
-	          break;
-	        case "Instalacion":
-	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas }) });
-	          break;
-	        case "Sillas":
-	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas }) });
-	          break;
-	        case "Despacho":
-	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, { comunas: this.state.obj.comunas, vehiculos: this.state.obj.vehiculos }) });
-	          break;
-	        default:
-	          this.setState({ area: "" });
-	      }
+	    key: 'renderArea',
+	    value: function renderArea(ev) {
+	      _ServicioActions2.default.renderArea(ev.target.value);
 	    }
 	  }, {
 	    key: 'addServicio',
-	    value: function addServicio(ev) {
-	      ev.preventDefault();
-	      var servicio = {
-	        "reclamo": ev.target.elements['reclamo'] ? ev.target.elements['reclamo'].value : "",
-	        "area": ev.target.elements['area'].value,
-	        "categoria": ev.target.elements['categoria'].value,
-	        "supervisor": ev.target.elements['supervisor'].value,
-	        "fechaInicio": ev.target.elements['fechaInicio'].value,
-	        "fechaEntrega": ev.target.elements['fechaEntrega'].value,
-	        "dias": ev.target.elements['dias'].value,
-	        "descripcion": ev.target.elements['descripcion'].value,
-	        "observacion": ev.target.elements['observacion'].value,
-	        "rocha": ev.target.elements['rocha'].value,
-	        "direccion": ev.target.elements['direccion'] ? ev.target.elements['direccion'].value : "",
-	        "guia": ev.target.elements['guia'] ? ev.target.elements['guia'].value : "",
-	        "comuna": ev.target.elements['comuna'] ? ev.target.elements['comuna'].value : "",
-	        "m3": ev.target.elements['m3'] ? ev.target.elements['m3'].value : "",
-	        "fi": ev.target.elements['fi'] ? ev.target.elements['fi'].value : "",
-	        "tm": ev.target.elements['tm'] ? ev.target.elements['tm'].value : "",
-	        "to": ev.target.elements['to'] ? ev.target.elements['to'].value : "",
-	        "os": ev.target.elements['os'] ? ev.target.elements['os'].value : "",
-	        "lider": ev.target.elements['lider'] ? ev.target.elements['lider'].value : "",
-	        "puestos": ev.target.elements['puestos'] ? ev.target.elements['puestos'].value : "",
-	        "instalador1": ev.target.elements['instalador1'] ? ev.target.elements['instalador1'].value : "",
-	        "instalador2": ev.target.elements['instalador2'] ? ev.target.elements['instalador2'].value : "",
-	        "instalador3": ev.target.elements['instalador3'] ? ev.target.elements['instalador3'].value : "",
-	        "proceso": ev.target.elements['proceso'] ? ev.target.elements['proceso'].value : "",
-	        "vale": ev.target.elements['vale'] ? ev.target.elements['vale'].value : "",
-	        "ejecutor": ev.target.elements['ejecutor'] ? ev.target.elements['ejecutor'].value : "",
-	        "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
-	        "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
-	      };
-	      _ServicioActions2.default.addServicio(servicio);
-
-	      if (ev.target.elements['area']) {
-	        ev.target.elements['area'].options[0].selected = "selected";
-	      }
-	      if (ev.target.elements['categoria']) {
-	        ev.target.elements['categoria'].options[0].selected = "selected";
-	      }
-	      if (ev.target.elements['fechaInicio']) {
-	        ev.target.elements['fechaInicio'].value = "";
-	      }
-	      if (ev.target.elements['fechaEntrega']) {
-	        ev.target.elements['fechaEntrega'].value = "";
-	      }
-	      if (ev.target.elements['supervisor']) {
-	        ev.target.elements['supervisor'].value = "";
-	      }
-	      if (ev.target.elements['descripcion']) {
-	        ev.target.elements['descripcion'].value = "";
-	      }
-	      if (ev.target.elements['observacion']) {
-	        ev.target.elements['observacion'].value = "";
-	      }
-	      if (ev.target.elements['dias']) {
-	        ev.target.elements['dias'].value = "";
-	      }
-	      this.setState({ area: "" });
+	    value: function addServicio(event) {
+	      event.preventDefault();
+	      event.persist();
+	      _ServicioActions2.default.addServicio(event);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      //console.log( this.state.obj.comunas )
-	      //console.log( this.state.obj.vehiculos )
-	      //console.log( this.state.obj.mensaje )
-	      return _react2.default.createElement(_servicio2.default, { rocha: this.props.params.rocha, tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_servicio2.default, {
+	        rocha: this.props.params.rocha,
+	        tipo: this.props.params.tipo,
+	        area: this.state.obj.area,
+	        mensaje: this.state.obj.mensaje,
+	        fecha: this.state.obj.item.fecha,
+	        reclamo: this.state.obj.item.reclamo,
+	        addServicio: this.addServicio.bind(this),
+	        renderArea: this.renderArea.bind(this)
+	      });
 	    }
 	  }]);
 
@@ -37183,7 +37099,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ServicioActions = _reflux2.default.createActions(['addServicio', 'updateServicio', 'searchServicio', 'formTrigger']);
+	var ServicioActions = _reflux2.default.createActions(['addServicio', 'updateServicio', 'searchServicio', 'formTrigger', 'renderReclamo', 'renderRochaValue', 'renderFechaInicio', 'renderFechaEntrega', 'renderArea']);
 
 	exports.default = ServicioActions;
 
@@ -37197,11 +37113,19 @@
 	  value: true
 	});
 
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reflux = __webpack_require__(176);
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
 	var _reactRouter = __webpack_require__(198);
+
+	var _moment = __webpack_require__(320);
+
+	var _moment2 = _interopRequireDefault(_moment);
 
 	var _ServicioActions = __webpack_require__(312);
 
@@ -37210,6 +37134,22 @@
 	var _FormIngresoServicioStore = __webpack_require__(314);
 
 	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
+
+	var _ItemProduccion = __webpack_require__(435);
+
+	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
+
+	var _ItemSillas = __webpack_require__(436);
+
+	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
+
+	var _ItemInstalacion = __webpack_require__(437);
+
+	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
+
+	var _ItemDespacho = __webpack_require__(438);
+
+	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	var _Config = __webpack_require__(261);
 
@@ -37225,7 +37165,14 @@
 
 	var ServicioStore = _reflux2.default.createStore({
 	  listenables: [_ServicioActions2.default],
-	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: 'mensaje' },
+	  obj: {
+	    comunas: 'comunas',
+	    vehiculos: 'vehiculos',
+	    mensaje: 'mensaje',
+	    item: { reclamo: '', fecha: { fechaInicio: (0, _moment2.default)(), fechaEntrega: (0, _moment2.default)() } },
+	    area: null,
+	    event: null
+	  },
 	  init: function init() {
 	    this.getObj();
 	  },
@@ -37251,15 +37198,123 @@
 	      _this2.trigger(_this2.obj);
 	    });
 	  },
-	  addServicio: function addServicio(data) {
+	  addServicio: function addServicio(ev) {
 	    var _this3 = this;
 
-	    socket.emit('addServicio', data);
+	    var servicio = {
+	      "reclamo": ev.target.elements['reclamo'] ? ev.target.elements['reclamo'].value : "",
+	      "area": ev.target.elements['area'].value,
+	      "categoria": ev.target.elements['categoria'].value,
+	      "supervisor": ev.target.elements['supervisor'].value,
+	      "fechaInicio": ev.target.elements['fechaInicio'].value,
+	      "fechaEntrega": ev.target.elements['fechaEntrega'].value,
+	      "dias": ev.target.elements['dias'].value,
+	      "descripcion": ev.target.elements['descripcion'].value,
+	      "observacion": ev.target.elements['observacion'].value,
+	      "rocha": ev.target.elements['rocha'].value,
+	      "direccion": ev.target.elements['direccion'] ? ev.target.elements['direccion'].value : "",
+	      "guia": ev.target.elements['guia'] ? ev.target.elements['guia'].value : "",
+	      "comuna": ev.target.elements['comuna'] ? ev.target.elements['comuna'].value : "",
+	      "m3": ev.target.elements['m3'] ? ev.target.elements['m3'].value : "",
+	      "fi": ev.target.elements['fi'] ? ev.target.elements['fi'].value : "",
+	      "tm": ev.target.elements['tm'] ? ev.target.elements['tm'].value : "",
+	      "to": ev.target.elements['to'] ? ev.target.elements['to'].value : "",
+	      "os": ev.target.elements['os'] ? ev.target.elements['os'].value : "",
+	      "lider": ev.target.elements['lider'] ? ev.target.elements['lider'].value : "",
+	      "puestos": ev.target.elements['puestos'] ? ev.target.elements['puestos'].value : "",
+	      "instalador1": ev.target.elements['instalador1'] ? ev.target.elements['instalador1'].value : "",
+	      "instalador2": ev.target.elements['instalador2'] ? ev.target.elements['instalador2'].value : "",
+	      "instalador3": ev.target.elements['instalador3'] ? ev.target.elements['instalador3'].value : "",
+	      "proceso": ev.target.elements['proceso'] ? ev.target.elements['proceso'].value : "",
+	      "vale": ev.target.elements['vale'] ? ev.target.elements['vale'].value : "",
+	      "ejecutor": ev.target.elements['ejecutor'] ? ev.target.elements['ejecutor'].value : "",
+	      "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
+	      "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
+	    };
+	    console.log(servicio);
+	    socket.emit('addServicio', servicio);
 	    socket.on('okAddServicio', function (okAddServicio) {
+
+	      if (ev.target.elements['area']) {
+	        ev.target.elements['area'].options[0].selected = "selected";
+	      }
+	      if (ev.target.elements['categoria']) {
+	        ev.target.elements['categoria'].options[0].selected = "selected";
+	      }
+	      if (ev.target.elements['fechaInicio']) {
+	        ev.target.elements['fechaInicio'].value = "";
+	      }
+	      if (ev.target.elements['fechaEntrega']) {
+	        ev.target.elements['fechaEntrega'].value = "";
+	      }
+	      if (ev.target.elements['supervisor']) {
+	        ev.target.elements['supervisor'].value = "";
+	      }
+	      if (ev.target.elements['descripcion']) {
+	        ev.target.elements['descripcion'].value = "";
+	      }
+	      if (ev.target.elements['observacion']) {
+	        ev.target.elements['observacion'].value = "";
+	      }
+	      if (ev.target.elements['dias']) {
+	        ev.target.elements['dias'].value = "";
+	      }
+
+	      _this3.obj.area = "";
 	      _this3.obj.mensaje = okAddServicio;
 	      _this3.trigger(_this3.obj);
 	    });
+	  },
+	  renderReclamo: function renderReclamo(reclamo) {
+	    if (reclamo == "reclamo") {
+	      this.obj.item.reclamo = _react2.default.createElement(
+	        'div',
+	        { className: 'item-form' },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Reclamo'
+	        ),
+	        _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
+	      );
+	    } else {
+	      this.obj.item.reclamo = "";
+	    }
+	    this.trigger(this.obj);
+	  },
+	  renderRochaValue: function renderRochaValue(rocha) {
+	    if (rocha != "ingreso") {
+	      document.getElementById("rocha").value = rocha;
+	    }
+	  },
+	  renderFechaInicio: function renderFechaInicio(fecha) {
+	    this.obj.item.fecha.fechaInicio = fecha;
+	    this.trigger(this.obj);
+	  },
+	  renderFechaEntrega: function renderFechaEntrega(fecha) {
+	    this.obj.item.fecha.fechaEntrega = fecha;
+	    this.trigger(this.obj);
+	  },
+	  renderArea: function renderArea(area) {
+	    switch (area) {
+	      case "Produccion":
+	        this.obj.area = _react2.default.createElement(_ItemProduccion2.default, null);
+	        break;
+	      case "Instalacion":
+	        this.obj.area = _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.obj.comunas });
+	        break;
+	      case "Sillas":
+	        this.obj.area = _react2.default.createElement(_ItemSillas2.default, { comunas: this.obj.comunas });
+	        break;
+	      case "Despacho":
+	        this.obj.area = _react2.default.createElement(_ItemDespacho2.default, { comunas: this.obj.comunas, vehiculos: this.obj.vehiculos });
+	        break;
+	      default:
+	        this.obj.area = "";
+	    }
+	    this.trigger(this.obj);
 	  }
+
 	});
 
 	exports.default = ServicioStore;
@@ -37357,7 +37412,15 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, { mensaje: this.props.mensaje }),
-	        _react2.default.createElement(_Form2.default, { rocha: this.props.rocha, tipo: this.props.tipo, addServicio: this.props.addServicio, area: this.props.area, formArea: this.props.formArea })
+	        _react2.default.createElement(_Form2.default, {
+	          fecha: this.props.fecha,
+	          rocha: this.props.rocha,
+	          reclamo: this.props.reclamo,
+	          tipo: this.props.tipo,
+	          addServicio: this.props.addServicio,
+	          area: this.props.area,
+	          renderArea: this.props.renderArea
+	        })
 	      );
 	    }
 	  }]);
@@ -37471,7 +37534,14 @@
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
-	          _react2.default.createElement(_Item2.default, { rocha: this.props.rocha, tipo: this.props.tipo, area: this.props.area, formArea: this.props.formArea })
+	          _react2.default.createElement(_Item2.default, {
+	            fecha: this.props.fecha,
+	            reclamo: this.props.reclamo,
+	            rocha: this.props.rocha,
+	            tipo: this.props.tipo,
+	            area: this.props.area,
+	            renderArea: this.props.renderArea
+	          })
 	        )
 	      );
 	    }
@@ -37510,6 +37580,10 @@
 
 	var _AutocompleteRoutes2 = _interopRequireDefault(_AutocompleteRoutes);
 
+	var _ServicioActions = __webpack_require__(312);
+
+	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37524,74 +37598,31 @@
 	  function Item() {
 	    _classCallCheck(this, Item);
 
-	    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
-
-	    _this.state = {
-	      valuerocha: "",
-	      reclamo: "",
-	      fechaInicio: (0, _moment2.default)(),
-	      fechaEntrega: (0, _moment2.default)()
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 	  }
 
 	  _createClass(Item, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      if (this.props.tipo == "reclamo") {
-	        this.setState({ reclamo: _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Reclamo'
-	            ),
-	            _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
-	          ) });
-	      } else {
-	        this.setState({ reclamo: "" });
-	      }
-	      if (this.props.rocha == "ingreso") {
-	        this.setState({ valuerocha: "" });
-	      } else {
-	        this.setState({ valuerocha: this.props.rocha });
-	      }
+	      _ServicioActions2.default.renderReclamo(this.props.tipo);
+	      _ServicioActions2.default.renderRochaValue(this.props.rocha);
 	    }
 	  }, {
 	    key: 'componentWillUpdate',
 	    value: function componentWillUpdate(nextProps, nextState) {
 	      if (this.props.tipo !== nextProps.tipo) {
-	        if (nextProps.tipo == "reclamo") {
-	          this.setState({ reclamo: _react2.default.createElement(
-	              'div',
-	              { className: 'item-form' },
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                'Reclamo'
-	              ),
-	              _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
-	            ) });
-	        } else {
-	          this.setState({ reclamo: "" });
-	        }
+	        _ServicioActions2.default.renderReclamo(nextProps.tipo);
 	      }
 	    }
 	  }, {
-	    key: 'fechaInicioDate',
-	    value: function fechaInicioDate(date) {
-	      this.setState({ fechaInicio: date });
+	    key: 'renderFechaInicio',
+	    value: function renderFechaInicio(date) {
+	      _ServicioActions2.default.renderFechaInicio(date);
 	    }
 	  }, {
-	    key: 'fechaEntregaDate',
-	    value: function fechaEntregaDate(date) {
-	      this.setState({ fechaEntrega: date });
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(e) {
-	      this.setState({ valuerocha: document.getElementById("rocha").value });
+	    key: 'renderFechaEntrega',
+	    value: function renderFechaEntrega(date) {
+	      _ServicioActions2.default.renderFechaEntrega(date);
 	    }
 	  }, {
 	    key: 'render',
@@ -37611,7 +37642,7 @@
 	              'Nueva Actividad'
 	            )
 	          ),
-	          this.state.reclamo,
+	          this.props.reclamo,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'item-form' },
@@ -37620,7 +37651,7 @@
 	              null,
 	              'Rocha'
 	            ),
-	            _react2.default.createElement('input', { required: true, onChange: this.onChange.bind(this), id: 'rocha', type: 'text', value: this.state.valuerocha })
+	            _react2.default.createElement('input', { required: true, id: 'rocha', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37632,7 +37663,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { required: true, id: 'area', onChange: this.props.formArea },
+	              { required: true, id: 'area', onChange: this.props.renderArea },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -37741,7 +37772,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.props.fecha.fechaInicio, onChange: this.renderFechaInicio.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -37751,7 +37782,7 @@
 	              null,
 	              'Fecha Entrega Cliente'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.fecha.fechaEntrega, onChange: this.renderFechaEntrega.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -51791,22 +51822,6 @@
 
 	var _updateServicio2 = _interopRequireDefault(_updateServicio);
 
-	var _ItemProduccion = __webpack_require__(446);
-
-	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
-
-	var _ItemSillas = __webpack_require__(447);
-
-	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
-
-	var _ItemInstalacion = __webpack_require__(448);
-
-	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
-
-	var _ItemDespacho = __webpack_require__(449);
-
-	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51832,26 +51847,6 @@
 	    value: function componentWillMount() {
 	      _UpdateServicioActions2.default.formTrigger();
 	      _UpdateServicioActions2.default.searchServicio(this.props.params.id);
-	    }
-	  }, {
-	    key: 'formArea',
-	    value: function formArea(area) {
-	      switch (area) {
-	        case "Produccion":
-	          this.state.area = _react2.default.createElement(_ItemProduccion2.default, { datos: this.state.obj.servicio });
-	          break;
-	        case "Instalacion":
-	          this.state.area = _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas, datos: this.state.obj.servicio });
-	          break;
-	        case "Sillas":
-	          this.state.area = _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas, datos: this.state.obj.servicio });
-	          break;
-	        case "Despacho":
-	          this.state.area = _react2.default.createElement(_ItemDespacho2.default, { vehiculos: this.state.obj.vehiculos, comunas: this.state.obj.comunas, datos: this.state.obj.servicio });
-	          break;
-	        default:
-	          this.state.area = "";
-	      }
 	    }
 	  }, {
 	    key: 'updateServicio',
@@ -51892,8 +51887,13 @@
 	    key: 'render',
 	    value: function render() {
 	      if (this.state.obj.servicio) {
-	        this.formArea(this.state.obj.servicio[0].NOMBRE_SERVICIO);
-	        return _react2.default.createElement(_updateServicio2.default, { datos: this.state.obj.servicio, tipo: this.props.params.tipo, area: this.state.area, updateServicio: this.updateServicio.bind(this) });
+	        return _react2.default.createElement(_updateServicio2.default, {
+	          input: this.state.obj.input,
+	          datos: this.state.obj.servicio,
+	          area: this.state.obj.area,
+	          tipo: this.props.params.tipo,
+	          updateServicio: this.updateServicio.bind(this)
+	        });
 	      } else {
 	        return _react2.default.createElement(
 	          'div',
@@ -51928,7 +51928,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var UpdateServicioActions = _reflux2.default.createActions(['addServicio', 'updateServicio', 'searchServicio', 'formTrigger']);
+	var UpdateServicioActions = _reflux2.default.createActions(['addServicio', 'updateServicio', 'searchServicio', 'formTrigger', 'selectOption', 'renderFechaInicio', 'renderFechaEntrega', 'renderInput']);
 
 	exports.default = UpdateServicioActions;
 
@@ -51942,6 +51942,10 @@
 	  value: true
 	});
 
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reflux = __webpack_require__(176);
 
 	var _reflux2 = _interopRequireDefault(_reflux);
@@ -51951,6 +51955,26 @@
 	var _UpdateServicioActions = __webpack_require__(440);
 
 	var _UpdateServicioActions2 = _interopRequireDefault(_UpdateServicioActions);
+
+	var _moment = __webpack_require__(320);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _ItemProduccion = __webpack_require__(435);
+
+	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
+
+	var _ItemSillas = __webpack_require__(436);
+
+	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
+
+	var _ItemInstalacion = __webpack_require__(437);
+
+	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
+
+	var _ItemDespacho = __webpack_require__(438);
+
+	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	var _Config = __webpack_require__(261);
 
@@ -51966,7 +51990,12 @@
 
 	var UpdateServicioStore = _reflux2.default.createStore({
 	  listenables: [_UpdateServicioActions2.default],
-	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', servicio: '' },
+	  obj: { comunas: 'comunas',
+	    vehiculos: 'vehiculos',
+	    servicio: '',
+	    input: { codigo: null, categoria: null, supervisor: null, estado: null, dias: null, fechaInicio: null, fechaEntrega: null, descripcion: null, observaciones: null, guia: null, comuna: null, vehiculo: null, direccion: null, m3: null, fi: null, tm: null, to: null, os: null, lider: null, instalador1: null, instalador2: null, instalador3: null, puestos: null, ejecutor: null, vale: null, cantidad: null },
+	    area: null
+	  },
 	  init: function init() {
 	    this.getObj();
 	  },
@@ -51996,14 +52025,162 @@
 	      _reactRouter.browserHistory.push('/home');
 	    });
 	  },
-	  searchServicio: function searchServicio(data) {
+	  searchServicio: function searchServicio(id) {
 	    var _this3 = this;
 
-	    socket.emit('searchServicio', data);
+	    socket.emit('searchServicio', id);
 	    socket.on('okSearchServicio', function (okSearchServicio) {
 	      _this3.obj.servicio = okSearchServicio;
-	      _this3.trigger(_this3.obj);
+
+	      _this3.obj.input.codigo = _this3.validador(_this3.obj.servicio[0].CODIGO_SERVICIO);
+	      _this3.obj.input.dias = _this3.validador(_this3.obj.servicio[0].DIAS);
+	      _this3.obj.input.categoria = _this3.validador(_this3.obj.servicio[0].CATEGORIA);
+	      _this3.obj.input.supervisor = _this3.validador(_this3.obj.servicio[0].SUPERVISOR);
+	      _this3.obj.input.estado = _this3.validador(_this3.obj.servicio[0].ESTADO);
+	      _this3.obj.input.fechaInicio = (0, _moment2.default)(_this3.obj.servicio[0].FECHA_INICIO);
+	      _this3.obj.input.fechaEntrega = (0, _moment2.default)(_this3.obj.servicio[0].FECHA_ENTREGA);
+	      _this3.obj.input.descripcion = _this3.validador(_this3.obj.servicio[0].DESCRIPCION);
+	      _this3.obj.input.observaciones = _this3.validador(_this3.obj.servicio[0].OBSERVACIONES);
+	      _this3.obj.input.guia = _this3.validador(_this3.obj.servicio[0].GUIA_DESPACHO);
+	      _this3.obj.input.comuna = _this3.validador(_this3.obj.servicio[0].CODIGO_COMUNA);
+	      _this3.obj.input.vehiculo = _this3.validador(_this3.obj.servicio[0].TRANSPORTE);
+	      _this3.obj.input.direccion = _this3.validador(_this3.obj.servicio[0].DIRECCION);
+	      _this3.obj.input.m3 = _this3.validador(_this3.obj.servicio[0].M3);
+	      _this3.obj.input.fi = _this3.validador(_this3.obj.servicio[0].FI);
+	      _this3.obj.input.tm = _this3.validador(_this3.obj.servicio[0].TM);
+	      _this3.obj.input.to = _this3.validador(_this3.obj.servicio[0].TP);
+	      _this3.obj.input.os = _this3.validador(_this3.obj.servicio[0].OS);
+	      _this3.obj.input.lider = _this3.validador(_this3.obj.servicio[0].LIDER);
+	      _this3.obj.input.instalador1 = _this3.validador(_this3.obj.servicio[0].INSTALADOR_1);
+	      _this3.obj.input.instalador2 = _this3.validador(_this3.obj.servicio[0].INSTALADOR_2);
+	      _this3.obj.input.instalador3 = _this3.validador(_this3.obj.servicio[0].INSTALADOR_3);
+	      _this3.obj.input.puestos = _this3.validador(_this3.obj.servicio[0].PUESTOS);
+	      _this3.obj.input.ejecutor = _this3.validador(_this3.obj.servicio[0].EJECUTOR);
+	      _this3.obj.input.vale = _this3.validador(_this3.obj.servicio[0].VALE);
+	      _this3.obj.input.cantidad = _this3.validador(_this3.obj.servicio[0].CANTIDAD);
+
+	      _this3.renderArea(_this3.obj.servicio[0].NOMBRE_SERVICIO);
 	    });
+	  },
+	  selectOption: function selectOption(numero, seleccion, tipo) {
+	    var i = void 0;
+	    for (i = 0; numero.length > i; i++) {
+	      if (tipo) {
+	        if (numero.options[i].value.toLowerCase() == seleccion.toLowerCase()) {
+	          numero.options[i].selected = "selected";
+	        }
+	      } else {
+	        if (numero.options[i].value == seleccion) {
+	          numero.options[i].selected = "selected";
+	        }
+	      }
+	    }
+	  },
+	  validador: function validador(_validador, fecha) {
+	    var text = void 0;
+	    if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
+	      text = "";
+	    } else {
+	      text = fecha ? _validador.substring(0, 10) : _validador;
+	    }
+	    return text;
+	  },
+	  renderInput: function renderInput(id, valor) {
+	    switch (id) {
+	      case "numero":
+	        this.obj.input.codigo = this.validador(valor);
+	        break;
+	      case "dias":
+	        this.obj.input.dias = this.validador(valor);
+	        break;
+	      case "supervisor":
+	        this.obj.input.supervisor = this.validador(valor);
+	        break;
+	      case "descripcion":
+	        this.obj.input.descripcion = this.validador(valor);
+	        break;
+	      case "observacion":
+	        this.obj.input.observaciones = this.validador(valor);
+	        break;
+	      case "guia":
+	        this.obj.input.guia = this.validador(valor);
+	        break;
+	      case "direccion":
+	        this.obj.input.direccion = this.validador(valor);
+	        break;
+	      case "m3":
+	        this.obj.input.m3 = this.validador(valor);
+	        break;
+	      case "fi":
+	        this.obj.input.fi = this.validador(valor);
+	        break;
+	      case "tm":
+	        this.obj.input.tm = this.validador(valor);
+	        break;
+	      case "to":
+	        this.obj.input.to = this.validador(valor);
+	        break;
+	      case "os":
+	        this.obj.input.os = this.validador(valor);
+	        break;
+	      case "lider":
+	        this.obj.input.lider = this.validador(valor);
+	        break;
+	      case "puestos":
+	        this.obj.input.puestos = this.validador(valor);
+	        break;
+	      case "instalador1":
+	        this.obj.input.instalador1 = this.validador(valor);
+	        break;
+	      case "instalador2":
+	        this.obj.input.instalador2 = this.validador(valor);
+	        break;
+	      case "instalador3":
+	        this.obj.input.instalador3 = this.validador(valor);
+	        break;
+	      case "os":
+	        this.obj.input.puestos = this.validador(valor);
+	        break;
+	      case "ejecutor":
+	        this.obj.input.ejecutor = this.validador(valor);
+	        break;
+	      case "cantidad":
+	        this.obj.input.cantidad = this.validador(valor);
+	        break;
+	      case "vale":
+	        this.obj.input.vale = this.validador(valor);
+	        break;
+
+	    }
+	    this.trigger(this.obj);
+	  },
+	  renderFechaInicio: function renderFechaInicio(fecha) {
+	    this.obj.input.fechaInicio = fecha;
+	    this.trigger(this.obj);
+	  },
+	  renderFechaEntrega: function renderFechaEntrega(fecha) {
+	    this.obj.input.fechaEntrega = fecha;
+	    this.trigger(this.obj);
+	  },
+	  renderArea: function renderArea(area) {
+	    console.log(this.obj.input);
+	    switch (area) {
+	      case "Produccion":
+	        this.obj.area = _react2.default.createElement(_ItemProduccion2.default, null);
+	        break;
+	      case "Instalacion":
+	        this.obj.area = _react2.default.createElement(_ItemInstalacion2.default, { input: this.obj.input, comunas: this.obj.comunas });
+	        break;
+	      case "Sillas":
+	        this.obj.area = _react2.default.createElement(_ItemSillas2.default, { input: this.obj.input, comunas: this.obj.comunas });
+	        break;
+	      case "Despacho":
+	        this.obj.area = _react2.default.createElement(_ItemDespacho2.default, { input: this.obj.input, comunas: this.obj.comunas, vehiculos: this.obj.vehiculos });
+	        break;
+	      default:
+	        this.obj.area = "";
+	    }
+	    this.trigger(this.obj);
 	  }
 	});
 
@@ -52057,7 +52234,12 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Form2.default, { datos: this.props.datos, tipo: this.props.tipo, updateServicio: this.props.updateServicio, area: this.props.area })
+	        _react2.default.createElement(_Form2.default, {
+	          input: this.props.input,
+	          datos: this.props.datos,
+	          tipo: this.props.tipo,
+	          updateServicio: this.props.updateServicio,
+	          area: this.props.area })
 	      );
 	    }
 	  }]);
@@ -52170,7 +52352,11 @@
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
-	          _react2.default.createElement(_Item2.default, { datos: this.props.datos, tipo: this.props.tipo, area: this.props.area })
+	          _react2.default.createElement(_Item2.default, {
+	            input: this.props.input,
+	            datos: this.props.datos,
+	            tipo: this.props.tipo,
+	            area: this.props.area })
 	        )
 	      );
 	    }
@@ -52205,6 +52391,10 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _UpdateServicioActions = __webpack_require__(440);
+
+	var _UpdateServicioActions2 = _interopRequireDefault(_UpdateServicioActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52219,85 +52409,29 @@
 	  function Item(props) {
 	    _classCallCheck(this, Item);
 
-	    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this, props));
-
-	    _this.state = {
-	      codigo: props.datos[0].CODIGO_SERVICIO,
-	      categoria: props.datos[0].CATEGORIA,
-	      supervisor: props.datos[0].SUPERVISOR,
-	      estado: props.datos[0].ESTADO,
-	      dias: props.datos[0].DIAS,
-	      fechaInicio: (0, _moment2.default)(props.datos[0].FECHA_INICIO),
-	      fechaEntrega: (0, _moment2.default)(props.datos[0].FECHA_ENTREGA),
-	      descripcion: props.datos[0].DESCRIPCION,
-	      observaciones: props.datos[0].OBSERVACIONES
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this, props));
 	  }
 
 	  _createClass(Item, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({
-	        codigo: this.validador(nextProps.datos[0].CODIGO_SERVICIO),
-	        dias: this.validador(nextProps.datos[0].DIAS),
-	        categoria: this.validador(nextProps.datos[0].CATEGORIA),
-	        supervisor: this.validador(nextProps.datos[0].SUPERVISOR),
-	        estado: this.validador(nextProps.datos[0].ESTADO),
-	        fechaInicio: (0, _moment2.default)(nextProps.datos[0].FECHA_INICIO),
-	        fechaEntrega: (0, _moment2.default)(nextProps.datos[0].FECHA_ENTREGA),
-	        descripcion: this.validador(nextProps.datos[0].DESCRIPCION),
-	        observaciones: this.validador(nextProps.datos[0].OBSERVACIONES)
-	      });
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var i = void 0;
-	      var numero = document.getElementById("categoria");
-	      for (i = 0; numero.length > i; i++) {
-	        if (numero.options[i].value.toLowerCase() == this.props.datos[0].CATEGORIA.toLowerCase()) {
-	          numero.options[i].selected = "selected";
-	        }
-	      }
-
-	      var numero1 = document.getElementById("estado");
-	      for (i = 0; numero1.length > i; i++) {
-	        if (numero1.options[i].value.toLowerCase() == this.props.datos[0].ESTADO.toLowerCase()) {
-	          numero1.options[i].selected = "selected";
-	        }
-	      }
+	      _UpdateServicioActions2.default.selectOption(document.getElementById("categoria"), this.props.datos[0].CATEGORIA, true);
+	      _UpdateServicioActions2.default.selectOption(document.getElementById("estado"), this.props.datos[0].ESTADO, true);
 	    }
 	  }, {
-	    key: 'validador',
-	    value: function validador(_validador, fecha) {
-	      var text = void 0;
-	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
-	        text = "";
-	      } else {
-	        text = fecha ? _validador.substring(0, 10) : _validador;
-	      }
-	      return text;
+	    key: 'renderInput',
+	    value: function renderInput(event) {
+	      _UpdateServicioActions2.default.renderInput(event.target.id, event.target.value);
 	    }
 	  }, {
-	    key: 'onChange',
-	    value: function onChange(e) {
-	      this.setState({ codigo: document.getElementById("numero").value,
-	        supervisor: document.getElementById("supervisor").value,
-	        dias: document.getElementById("dias").value,
-	        descripcion: document.getElementById("descripcion").value,
-	        observaciones: document.getElementById("observacion").value
-	      });
+	    key: 'renderFechaInicio',
+	    value: function renderFechaInicio(date) {
+	      _UpdateServicioActions2.default.renderFechaInicio(date);
 	    }
 	  }, {
-	    key: 'fechaInicioDate',
-	    value: function fechaInicioDate(date) {
-	      this.setState({ fechaInicio: date });
-	    }
-	  }, {
-	    key: 'fechaEntregaDate',
-	    value: function fechaEntregaDate(date) {
-	      this.setState({ fechaEntrega: date });
+	    key: 'renderFechaEntrega',
+	    value: function renderFechaEntrega(date) {
+	      _UpdateServicioActions2.default.renderFechaEntrega(date);
 	    }
 	  }, {
 	    key: 'render',
@@ -52325,7 +52459,7 @@
 	              null,
 	              'N\xFAmero'
 	            ),
-	            _react2.default.createElement('input', { required: true, id: 'numero', type: 'text', value: this.state.codigo, onChange: this.onChange.bind(this) })
+	            _react2.default.createElement('input', { required: true, id: 'numero', type: 'text', value: this.props.input.codigo, onChange: this.renderInput.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52391,7 +52525,7 @@
 	              null,
 	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { required: true, value: this.state.supervisor, onChange: this.onChange.bind(this), id: 'supervisor', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.props.input.supervisor, onChange: this.renderInput.bind(this), id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52401,7 +52535,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.props.input.fechaInicio, onChange: this.renderFechaInicio.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52411,7 +52545,7 @@
 	              null,
 	              'Fecha Entrega Cliente'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.input.fechaEntrega, onChange: this.renderFechaEntrega.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52421,7 +52555,7 @@
 	              null,
 	              'D\xEDas'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.dias, onChange: this.onChange.bind(this), type: 'number', className: 'date', id: 'dias' })
+	            _react2.default.createElement('input', { value: this.props.input.dias, onChange: this.renderInput.bind(this), type: 'number', className: 'date', id: 'dias' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52431,7 +52565,7 @@
 	              null,
 	              'Descripci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { required: true, value: this.state.descripcion, onChange: this.onChange.bind(this), id: 'descripcion', type: 'text' })
+	            _react2.default.createElement('input', { required: true, value: this.props.input.descripcion, onChange: this.renderInput.bind(this), id: 'descripcion', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52441,7 +52575,7 @@
 	              null,
 	              'Observaci\xF3n'
 	            ),
-	            _react2.default.createElement('input', { value: this.state.observaciones, onChange: this.onChange.bind(this), id: 'observacion', type: 'text' })
+	            _react2.default.createElement('input', { value: this.props.input.observaciones, onChange: this.renderInput.bind(this), id: 'observacion', type: 'text' })
 	          )
 	        ),
 	        this.props.area,
@@ -52464,931 +52598,10 @@
 	exports.default = Item;
 
 /***/ },
-/* 446 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ItemProduccion = function (_React$Component) {
-	  _inherits(ItemProduccion, _React$Component);
-
-	  function ItemProduccion(props) {
-	    _classCallCheck(this, ItemProduccion);
-
-	    var _this = _possibleConstructorReturn(this, (ItemProduccion.__proto__ || Object.getPrototypeOf(ItemProduccion)).call(this, props));
-
-	    _this.state = {
-	      ejecutor: _this.validador(props.datos[0].EJECUTOR),
-	      vale: _this.validador(props.datos[0].VALE),
-	      cantidad: _this.validador(props.datos[0].PUESTOS)
-	    };
-	    return _this;
-	  }
-
-	  _createClass(ItemProduccion, [{
-	    key: "componentWillReceiveProps",
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({
-	        ejecutor: this.validador(nextProps.datos[0].SUB_EJECUTOR),
-	        vale: this.validador(nextProps.datos[0].SUB_VALE),
-	        cantidad: this.validador(nextProps.datos[0].SUB_PUESTOS)
-	      });
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      var i = void 0;
-
-	      var numero1 = document.getElementById("proceso");
-	      for (i = 0; numero1.length > i; i++) {
-	        if (numero1.options[i].value.toLowerCase() == this.props.datos[0].PROCESO.toLowerCase()) {
-	          numero1.options[i].selected = "selected";
-	        }
-	      }
-	    }
-	  }, {
-	    key: "validador",
-	    value: function validador(_validador, fecha) {
-	      var text = void 0;
-	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
-	        text = "";
-	      } else {
-	        text = fecha ? _validador.substring(0, 10) : _validador;
-	      }
-	      return text;
-	    }
-	  }, {
-	    key: "onChange",
-	    value: function onChange(e) {
-	      this.setState({
-	        ejecutor: document.getElementById("ejecutor").value,
-	        vale: document.getElementById("vale").value,
-	        direccion: document.getElementById("direccion").value,
-	        cantidad: document.getElementById("cantidad").value
-	      });
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "module-form" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form title" },
-	          _react2.default.createElement(
-	            "h4",
-	            null,
-	            "Producci\xF3n"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Ejecutor"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.ejecutor, onChange: this.onChange.bind(this), id: "ejecutor", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Vale"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.vale, onChange: this.onChange.bind(this), type: "text", id: "vale" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Proceso"
-	          ),
-	          _react2.default.createElement(
-	            "select",
-	            { id: "proceso" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Proceso"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "armado" },
-	              "Armado"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "barniz" },
-	              "Barniz"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "centro de mecanizado" },
-	              "Centro De Mecanizado"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Corte" },
-	              "Corte"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Enchape Curvo" },
-	              "Enchape Curvo"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Enchape Recto" },
-	              "Enchape Recto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "mueble especiales" },
-	              "Mueble Especiales"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "perforador multiple" },
-	              "Perforador Multiple"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Ruteado" },
-	              "Ruteado"
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Cantidad"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.cantidad, onChange: this.onChange.bind(this), type: "text", id: "cantidad" })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ItemProduccion;
-	}(_react2.default.Component);
-
-	exports.default = ItemProduccion;
-
-/***/ },
-/* 447 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ItemSillas = function (_React$Component) {
-	  _inherits(ItemSillas, _React$Component);
-
-	  function ItemSillas(props) {
-	    _classCallCheck(this, ItemSillas);
-
-	    var _this = _possibleConstructorReturn(this, (ItemSillas.__proto__ || Object.getPrototypeOf(ItemSillas)).call(this, props));
-
-	    _this.state = {
-	      direccion: _this.validador(props.datos[0].DIRECCION),
-	      ejecutor: _this.validador(props.datos[0].EJECUTOR),
-	      cantidad: _this.validador(props.datos[0].PUESTOS)
-	    };
-	    return _this;
-	  }
-
-	  _createClass(ItemSillas, [{
-	    key: "componentWillReceiveProps",
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({
-	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
-	        ejecutor: this.validador(nextProps.datos[0].SUB_EJECUTOR),
-	        cantidad: this.validador(nextProps.datos[0].SUB_PUESTOS)
-	      });
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      var i = void 0;
-	      var numero = document.getElementById("comuna");
-	      for (i = 0; numero.length > i; i++) {
-	        if (numero.options[i].value == this.props.datos[0].CODIGO_COMUNA) {
-	          numero.options[i].selected = "selected";
-	        }
-	      }
-	      var numero1 = document.getElementById("proceso");
-	      for (i = 0; numero1.length > i; i++) {
-	        if (numero1.options[i].value.toLowerCase() == this.props.datos[0].PROCESO.toLowerCase()) {
-	          numero1.options[i].selected = "selected";
-	        }
-	      }
-	    }
-	  }, {
-	    key: "validador",
-	    value: function validador(_validador, fecha) {
-	      var text = void 0;
-	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
-	        text = "";
-	      } else {
-	        text = fecha ? _validador.substring(0, 10) : _validador;
-	      }
-	      return text;
-	    }
-	  }, {
-	    key: "onChange",
-	    value: function onChange(e) {
-	      this.setState({
-	        ejecutor: document.getElementById("ejecutor").value,
-	        direccion: document.getElementById("direccion").value,
-	        cantidad: document.getElementById("cantidad").value
-	      });
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "module-form" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form title" },
-	          _react2.default.createElement(
-	            "h4",
-	            null,
-	            "Sillas"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Ejecutor"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.ejecutor, onChange: this.onChange.bind(this), id: "ejecutor", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Direcci\xF3n"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.direccion, onChange: this.onChange.bind(this), type: "text", id: "direccion" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Comuna"
-	          ),
-	          _react2.default.createElement(
-	            "select",
-	            { id: "comuna" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            this.props.comunas.map(function (comuna) {
-	              return _react2.default.createElement(
-	                "option",
-	                { value: comuna.codigo, key: comuna.codigo },
-	                comuna.nombre
-	              );
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Proceso"
-	          ),
-	          _react2.default.createElement(
-	            "select",
-	            { id: "proceso" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Proceso"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "armado" },
-	              "Armado"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "barniz" },
-	              "Barniz"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "centro de mecanizado" },
-	              "Centro De Mecanizado"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Corte" },
-	              "Corte"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Enchape Curvo" },
-	              "Enchape Curvo"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Enchape Recto" },
-	              "Enchape Recto"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "mueble especiales" },
-	              "Mueble Especiales"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "perforador multiple" },
-	              "Perforador Multiple"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "Ruteado" },
-	              "Ruteado"
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Cantidad"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.cantidad, onChange: this.onChange.bind(this), type: "text", id: "cantidad" })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ItemSillas;
-	}(_react2.default.Component);
-
-	exports.default = ItemSillas;
-
-/***/ },
-/* 448 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ItemInstalacion = function (_React$Component) {
-	  _inherits(ItemInstalacion, _React$Component);
-
-	  function ItemInstalacion(props) {
-	    _classCallCheck(this, ItemInstalacion);
-
-	    var _this = _possibleConstructorReturn(this, (ItemInstalacion.__proto__ || Object.getPrototypeOf(ItemInstalacion)).call(this, props));
-
-	    _this.state = {
-	      direccion: _this.validador(props.datos[0].DIRECCION),
-	      lider: _this.validador(props.datos[0].LIDER),
-	      instalador1: _this.validador(props.datos[0].INSTALADOR_1),
-	      instalador2: _this.validador(props.datos[0].INSTALADOR_2),
-	      instalador3: _this.validador(props.datos[0].INSTALADOR_3),
-	      puestos: _this.validador(props.datos[0].PUESTOS),
-	      os: _this.validador(props.datos[0].OS)
-	    };
-	    return _this;
-	  }
-
-	  _createClass(ItemInstalacion, [{
-	    key: "componentWillReceiveProps",
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({
-	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
-	        lider: this.validador(nextProps.datos[0].LIDER),
-	        instalador1: this.validador(nextProps.datos[0].SUB_INSTALADOR_1),
-	        instalador2: this.validador(nextProps.datos[0].SUB_INSTALADOR_2),
-	        instalador3: this.validador(nextProps.datos[0].SUB_INSTALADOR_3),
-	        puestos: this.validador(nextProps.datos[0].SUB_PUESTOS),
-	        os: this.validador(nextProps.datos[0].SUB_OS)
-	      });
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      var i = void 0;
-
-	      var numero = document.getElementById("comuna");
-	      for (i = 0; numero.length > i; i++) {
-	        if (numero.options[i].value == this.props.datos[0].CODIGO_COMUNA) {
-	          numero.options[i].selected = "selected";
-	        }
-	      }
-	      var numero1 = document.getElementById("proceso");
-	      for (i = 0; numero1.length > i; i++) {
-	        if (numero1.options[i].value.toLowerCase() == this.props.datos[0].PROCESO.toLowerCase()) {
-	          numero1.options[i].selected = "selected";
-	        }
-	      }
-	    }
-	  }, {
-	    key: "validador",
-	    value: function validador(_validador, fecha) {
-	      var text = void 0;
-	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
-	        text = "";
-	      } else {
-	        text = fecha ? _validador.substring(0, 10) : _validador;
-	      }
-	      return text;
-	    }
-	  }, {
-	    key: "onChange",
-	    value: function onChange(e) {
-	      this.setState({
-	        direccion: document.getElementById("direccion").value,
-	        lider: document.getElementById("lider").value,
-	        instalador1: document.getElementById("instalador1").value,
-	        instalador2: document.getElementById("instalador2").value,
-	        instalador3: document.getElementById("instalador3").value,
-	        puestos: document.getElementById("puestos").value,
-	        os: document.getElementById("os").value
-	      });
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "module-form" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form title" },
-	          _react2.default.createElement(
-	            "h4",
-	            null,
-	            "Instalacion"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Lider"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.lider, onChange: this.onChange.bind(this), id: "lider", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Puestos"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.puestos, onChange: this.onChange.bind(this), type: "number", id: "puestos" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Proceso"
-	          ),
-	          _react2.default.createElement(
-	            "select",
-	            { id: "proceso" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "armado" },
-	              "Instalaci\xF3n"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "barniz" },
-	              "Servicio T\xE9cnico"
-	            ),
-	            _react2.default.createElement(
-	              "option",
-	              { value: "barniz" },
-	              "Otros"
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Instalador"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.instalador1, onChange: this.onChange.bind(this), id: "instalador1", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Instalador"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.instalador2, onChange: this.onChange.bind(this), id: "instalador2", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Instalador"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.instalador3, onChange: this.onChange.bind(this), id: "instalador3", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Direcci\xF3n"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.direccion, onChange: this.onChange.bind(this), type: "text", id: "direccion" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Comuna"
-	          ),
-	          _react2.default.createElement(
-	            "select",
-	            { id: "comuna" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            this.props.comunas.map(function (comuna) {
-	              return _react2.default.createElement(
-	                "option",
-	                { value: comuna.codigo, key: comuna.codigo },
-	                comuna.nombre
-	              );
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "OS"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.os, onChange: this.onChange.bind(this), type: "number", id: "os" })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ItemInstalacion;
-	}(_react2.default.Component);
-
-	exports.default = ItemInstalacion;
-
-/***/ },
-/* 449 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ItemDespacho = function (_React$Component) {
-	  _inherits(ItemDespacho, _React$Component);
-
-	  function ItemDespacho(props) {
-	    _classCallCheck(this, ItemDespacho);
-
-	    var _this = _possibleConstructorReturn(this, (ItemDespacho.__proto__ || Object.getPrototypeOf(ItemDespacho)).call(this, props));
-
-	    _this.state = {
-	      guia: _this.validador(props.datos[0].GUIA_DESPACHO),
-	      comuna: _this.validador(props.datos[0].CODIGO_COMUNA),
-	      vehiculo: _this.validador(props.datos[0].TRANSPORTE),
-	      direccion: _this.validador(props.datos[0].DIRECCION),
-	      m3: _this.validador(props.datos[0].M3),
-	      fi: _this.validador(props.datos[0].FI),
-	      tm: _this.validador(props.datos[0].TM),
-	      to: _this.validador(props.datos[0].TP),
-	      os: _this.validador(props.datos[0].OS)
-	    };
-	    return _this;
-	  }
-
-	  _createClass(ItemDespacho, [{
-	    key: "componentWillReceiveProps",
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({
-	        guia: this.validador(nextProps.datos[0].SUB_GUIA_DESPACHO),
-	        comuna: this.validador(nextProps.datos[0].SUB_CODIGO_COMUNA),
-	        vehiculo: this.validador(nextProps.datos[0].SUB_TRANSPORTE),
-	        direccion: this.validador(nextProps.datos[0].SUB_DIRECCION),
-	        m3: this.validador(nextProps.datos[0].SUB_M3),
-	        fi: this.validador(nextProps.datos[0].SUB_I),
-	        tm: this.validador(nextProps.datos[0].SUB_TM),
-	        to: this.validador(nextProps.datos[0].SUB_TP),
-	        os: this.validador(nextProps.datos[0].SUB_OS)
-	      });
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      var i = void 0;
-
-	      var numero = document.getElementById("comuna");
-	      for (i = 0; numero.length > i; i++) {
-	        if (numero.options[i].value == this.props.datos[0].CODIGO_COMUNA) {
-	          numero.options[i].selected = "selected";
-	        }
-	      }
-	      var numero1 = document.getElementById("vehiculo");
-	      for (i = 0; numero1.length > i; i++) {
-	        if (numero1.options[i].value.toLowerCase() == this.props.datos[0].TRANSPORTE.toLowerCase()) {
-	          numero1.options[i].selected = "selected";
-	        }
-	      }
-	    }
-	  }, {
-	    key: "validador",
-	    value: function validador(_validador, fecha) {
-	      var text = void 0;
-	      if (_validador == "" || _validador == null || _validador == 0 || !_validador) {
-	        text = "";
-	      } else {
-	        text = fecha ? _validador.substring(0, 10) : _validador;
-	      }
-	      return text;
-	    }
-	  }, {
-	    key: "onChange",
-	    value: function onChange(e) {
-	      this.setState({ guia: document.getElementById("guia").value,
-	        direccion: document.getElementById("direccion").value,
-	        vehiculo: document.getElementById("vehiculo").value,
-	        m3: document.getElementById("m3").value,
-	        fi: document.getElementById("fi").value,
-	        tm: document.getElementById("tm").value,
-	        to: document.getElementById("to").value,
-	        os: document.getElementById("os").value
-	      });
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "module-form" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form title" },
-	          _react2.default.createElement(
-	            "h4",
-	            null,
-	            "Despacho"
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Gu\xEDa Despacho"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.guia, onChange: this.onChange.bind(this), id: "guia", type: "text" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Direcci\xF3n"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.direccion, onChange: this.onChange.bind(this), type: "text", id: "direccion" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Comuna"
-	          ),
-	          _react2.default.createElement(
-	            "select",
-	            { id: "comuna" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            this.props.comunas.map(function (comuna) {
-	              return _react2.default.createElement(
-	                "option",
-	                { value: comuna.codigo, key: comuna.codigo },
-	                comuna.nombre
-	              );
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "Vehiculo"
-	          ),
-	          _react2.default.createElement(
-	            "select",
-	            { id: "vehiculo" },
-	            _react2.default.createElement(
-	              "option",
-	              { value: "" },
-	              "Seleccion\xE9"
-	            ),
-	            this.props.vehiculos.map(function (vehiculo) {
-	              return _react2.default.createElement(
-	                "option",
-	                { value: vehiculo.patente, key: vehiculo.id },
-	                vehiculo.patente
-	              );
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "M3"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.m3, onChange: this.onChange.bind(this), type: "text", id: "m3" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "FI"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.fi, onChange: this.onChange.bind(this), type: "number", id: "fi" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "TM"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.tm, onChange: this.onChange.bind(this), type: "text", id: "tm" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "TO"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.to, onChange: this.onChange.bind(this), type: "text", id: "to" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "item-form" },
-	          _react2.default.createElement(
-	            "label",
-	            null,
-	            "OS"
-	          ),
-	          _react2.default.createElement("input", { value: this.state.os, onChange: this.onChange.bind(this), type: "text", id: "os" })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ItemDespacho;
-	}(_react2.default.Component);
-
-	exports.default = ItemDespacho;
-
-/***/ },
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
 /* 450 */
 /***/ function(module, exports, __webpack_require__) {
 

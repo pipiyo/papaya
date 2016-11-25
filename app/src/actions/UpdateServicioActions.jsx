@@ -4,7 +4,11 @@ let UpdateServicioActions = Reflux.createActions([
 	'addServicio',
 	'updateServicio',
 	'searchServicio',
-	'formTrigger'
+	'formTrigger',
+	'selectOption',
+	'renderFechaInicio',
+	'renderFechaEntrega',
+	'renderInput',
 ])
 
 export default UpdateServicioActions

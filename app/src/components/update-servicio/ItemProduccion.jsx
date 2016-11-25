@@ -1,51 +1,16 @@
 import React from 'react'
+import UpdateServicioActions from '../../actions/UpdateServicioActions'
 
 class ItemProduccion extends React.Component {
-
   constructor(props) {
     super(props)
-    this.state ={
-                  ejecutor:this.validador(props.datos[0].EJECUTOR),
-                  vale:this.validador(props.datos[0].VALE),
-                  cantidad:this.validador(props.datos[0].PUESTOS),
-                }
-  }
-  componentWillReceiveProps(nextProps){
-    this.setState({
-                  ejecutor:this.validador(nextProps.datos[0].SUB_EJECUTOR),
-                  vale:this.validador(nextProps.datos[0].SUB_VALE),
-                  cantidad:this.validador(nextProps.datos[0].SUB_PUESTOS),
-                });
   }
   componentDidMount(){
-    let i
-
-    let numero1 = document.getElementById("proceso")
-    for(i = 0; numero1.length > i; i++){
-      if(numero1.options[i].value.toLowerCase() == this.props.datos[0].PROCESO.toLowerCase()){numero1.options[i].selected = "selected"}
-    }
+    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.datos[0].PROCESO, true)
   }
-
-  validador(validador,fecha){
-    let text
-    if(validador == "" || validador == null || validador == 0 || !validador){
-      text = ""
-    }
-    else{
-      text = (fecha)?validador.substring(0,10):validador
-    }
-    return text
+  renderInput(event) {
+    UpdateServicioActions.renderInput(event.target.id,event.target.value)
   }
-
-  onChange(e) {
-    this.setState({ 
-                    ejecutor:document.getElementById("ejecutor").value,
-                    vale:document.getElementById("vale").value,
-                    direccion:document.getElementById("direccion").value,
-                    cantidad:document.getElementById("cantidad").value,
-                  })
-  }
-
   render() {
       return (
         <div className="module-form">
@@ -54,12 +19,12 @@ class ItemProduccion extends React.Component {
           </div>
           <div className="item-form">
             <label>Ejecutor</label>
-            <input value={this.state.ejecutor} onChange={this.onChange.bind(this)} id="ejecutor" type="text"/>
+            <input value={this.props.input.ejecutor} onChange={this.renderInput.bind(this)} id="ejecutor" type="text"/>
           </div>
 
           <div className="item-form">
             <label>Vale</label>
-            <input value={this.state.vale} onChange={this.onChange.bind(this)} type="text" id="vale" />
+            <input value={this.props.input.vale} onChange={this.renderInput.bind(this)} type="text" id="vale" />
           </div>
 
           <div className="item-form">
@@ -80,7 +45,7 @@ class ItemProduccion extends React.Component {
 
           <div className="item-form">
             <label>Cantidad</label>
-            <input value={this.state.cantidad} onChange={this.onChange.bind(this)} type="text" id="cantidad" />
+            <input value={this.props.input.cantidad} onChange={this.renderInput.bind(this)} type="number" id="cantidad" />
           </div> 
 
         </div>

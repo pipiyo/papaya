@@ -12,7 +12,11 @@ class Form extends React.Component {
       return (
         <form autoComplete="off" onSubmit={this.props.updateServicio}>
           <fieldset> 
-            <Item datos={this.props.datos} tipo={this.props.tipo} area={this.props.area}  />
+            <Item
+            input={this.props.input}  
+            datos={this.props.datos} 
+            tipo={this.props.tipo} 
+            area={this.props.area}  />
           </fieldset> 
         </form> 
       )
