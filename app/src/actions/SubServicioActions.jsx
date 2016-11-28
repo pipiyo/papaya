@@ -4,7 +4,10 @@ let SubServicioActions = Reflux.createActions([
 	'addSubServicio',
 	'updateSubServicio',
 	'searchSubServicio',
-	'formTrigger'
+	'formTrigger',
+	'renderFechaInicio',
+	'renderFechaEntrega',
+	'renderArea'
 ])
 
 export default SubServicioActions

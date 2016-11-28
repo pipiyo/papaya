@@ -37170,8 +37170,7 @@
 	    vehiculos: 'vehiculos',
 	    mensaje: 'mensaje',
 	    item: { reclamo: '', fecha: { fechaInicio: (0, _moment2.default)(), fechaEntrega: (0, _moment2.default)() } },
-	    area: null,
-	    event: null
+	    area: null
 	  },
 	  init: function init() {
 	    this.getObj();
@@ -53403,22 +53402,6 @@
 
 	var _subServicio2 = _interopRequireDefault(_subServicio);
 
-	var _ItemProduccion = __webpack_require__(457);
-
-	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
-
-	var _ItemSillas = __webpack_require__(458);
-
-	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
-
-	var _ItemInstalacion = __webpack_require__(459);
-
-	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
-
-	var _ItemDespacho = __webpack_require__(460);
-
-	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53433,10 +53416,7 @@
 	  function SubServicioRoutes() {
 	    _classCallCheck(this, SubServicioRoutes);
 
-	    var _this = _possibleConstructorReturn(this, (SubServicioRoutes.__proto__ || Object.getPrototypeOf(SubServicioRoutes)).call(this));
-
-	    _this.state = { data: "", area: "" };
-	    return _this;
+	    return _possibleConstructorReturn(this, (SubServicioRoutes.__proto__ || Object.getPrototypeOf(SubServicioRoutes)).call(this));
 	  }
 
 	  _createClass(SubServicioRoutes, [{
@@ -53445,91 +53425,27 @@
 	      _SubServicioActions2.default.formTrigger();
 	    }
 	  }, {
-	    key: 'formArea',
-	    value: function formArea(ev) {
-	      switch (ev.target.value) {
-	        case "Produccion":
-	          this.setState({ area: _react2.default.createElement(_ItemProduccion2.default, null) });
-	          break;
-	        case "Instalacion":
-	          this.setState({ area: _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.state.obj.comunas }) });
-	          break;
-	        case "Sillas":
-	          this.setState({ area: _react2.default.createElement(_ItemSillas2.default, { comunas: this.state.obj.comunas }) });
-	          break;
-	        case "Despacho":
-	          this.setState({ area: _react2.default.createElement(_ItemDespacho2.default, { comunas: this.state.obj.comunas, vehiculos: this.state.obj.vehiculos }) });
-	          break;
-	        default:
-	          this.setState({ area: "" });
-	      }
+	    key: 'renderArea',
+	    value: function renderArea(ev) {
+	      _SubServicioActions2.default.renderArea(ev.target.value);
 	    }
 	  }, {
 	    key: 'addServicio',
-	    value: function addServicio(ev) {
-	      ev.preventDefault();
-	      var servicio = {
-	        "codigo_servicio": this.props.params.id,
-	        "area": ev.target.elements['area'].value,
-	        "categoria": ev.target.elements['categoria'].value,
-	        "supervisor": ev.target.elements['supervisor'].value,
-	        "fechaInicio": ev.target.elements['fechaInicio'].value,
-	        "fechaEntrega": ev.target.elements['fechaEntrega'].value,
-	        "dias": ev.target.elements['dias'].value,
-	        "descripcion": ev.target.elements['descripcion'].value,
-	        "observacion": ev.target.elements['observacion'].value,
-	        "rocha": "",
-	        "direccion": ev.target.elements['direccion'] ? ev.target.elements['direccion'].value : "",
-	        "guia": ev.target.elements['guia'] ? ev.target.elements['guia'].value : "",
-	        "comuna": ev.target.elements['comuna'] ? ev.target.elements['comuna'].value : "",
-	        "m3": ev.target.elements['m3'] ? ev.target.elements['m3'].value : "",
-	        "fi": ev.target.elements['fi'] ? ev.target.elements['fi'].value : "",
-	        "tm": ev.target.elements['tm'] ? ev.target.elements['tm'].value : "",
-	        "to": ev.target.elements['to'] ? ev.target.elements['to'].value : "",
-	        "os": ev.target.elements['os'] ? ev.target.elements['os'].value : "",
-	        "lider": ev.target.elements['lider'] ? ev.target.elements['lider'].value : "",
-	        "puestos": ev.target.elements['puestos'] ? ev.target.elements['puestos'].value : "",
-	        "instalador1": ev.target.elements['instalador1'] ? ev.target.elements['instalador1'].value : "",
-	        "instalador2": ev.target.elements['instalador2'] ? ev.target.elements['instalador2'].value : "",
-	        "instalador3": ev.target.elements['instalador3'] ? ev.target.elements['instalador3'].value : "",
-	        "proceso": ev.target.elements['proceso'] ? ev.target.elements['proceso'].value : "",
-	        "vale": ev.target.elements['vale'] ? ev.target.elements['vale'].value : "",
-	        "ejecutor": ev.target.elements['ejecutor'] ? ev.target.elements['ejecutor'].value : "",
-	        "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
-	        "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
-	      };
-	      _SubServicioActions2.default.addSubServicio(servicio);
-
-	      if (ev.target.elements['area']) {
-	        ev.target.elements['area'].options[0].selected = "selected";
-	      }
-	      if (ev.target.elements['categoria']) {
-	        ev.target.elements['categoria'].options[0].selected = "selected";
-	      }
-	      if (ev.target.elements['fechaInicio']) {
-	        ev.target.elements['fechaInicio'].value = "";
-	      }
-	      if (ev.target.elements['fechaEntrega']) {
-	        ev.target.elements['fechaEntrega'].value = "";
-	      }
-	      if (ev.target.elements['supervisor']) {
-	        ev.target.elements['supervisor'].value = "";
-	      }
-	      if (ev.target.elements['descripcion']) {
-	        ev.target.elements['descripcion'].value = "";
-	      }
-	      if (ev.target.elements['observacion']) {
-	        ev.target.elements['observacion'].value = "";
-	      }
-	      if (ev.target.elements['dias']) {
-	        ev.target.elements['dias'].value = "";
-	      }
-	      this.setState({ area: "" });
+	    value: function addServicio(event) {
+	      event.preventDefault();
+	      event.persist();
+	      _SubServicioActions2.default.addSubServicio(event, this.props.params.id);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_subServicio2.default, { tipo: this.props.params.tipo, mensaje: this.state.obj.mensaje, area: this.state.area, addServicio: this.addServicio.bind(this), formArea: this.formArea.bind(this) });
+	      return _react2.default.createElement(_subServicio2.default, {
+	        fecha: this.state.obj.item.fecha,
+	        tipo: this.props.params.tipo,
+	        mensaje: this.state.obj.mensaje,
+	        area: this.state.obj.area,
+	        addServicio: this.addServicio.bind(this),
+	        renderArea: this.renderArea.bind(this) });
 	    }
 	  }]);
 
@@ -53553,7 +53469,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var SubServicioActions = _reflux2.default.createActions(['addSubServicio', 'updateSubServicio', 'searchSubServicio', 'formTrigger']);
+	var SubServicioActions = _reflux2.default.createActions(['addSubServicio', 'updateSubServicio', 'searchSubServicio', 'formTrigger', 'renderFechaInicio', 'renderFechaEntrega', 'renderArea']);
 
 	exports.default = SubServicioActions;
 
@@ -53567,15 +53483,39 @@
 	  value: true
 	});
 
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reflux = __webpack_require__(176);
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
 	var _reactRouter = __webpack_require__(198);
 
+	var _moment = __webpack_require__(314);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
 	var _SubServicioActions = __webpack_require__(451);
 
 	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
+
+	var _ItemProduccion = __webpack_require__(457);
+
+	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
+
+	var _ItemSillas = __webpack_require__(458);
+
+	var _ItemSillas2 = _interopRequireDefault(_ItemSillas);
+
+	var _ItemInstalacion = __webpack_require__(459);
+
+	var _ItemInstalacion2 = _interopRequireDefault(_ItemInstalacion);
+
+	var _ItemDespacho = __webpack_require__(460);
+
+	var _ItemDespacho2 = _interopRequireDefault(_ItemDespacho);
 
 	var _Config = __webpack_require__(261);
 
@@ -53591,7 +53531,13 @@
 
 	var SubServicioStore = _reflux2.default.createStore({
 	  listenables: [_SubServicioActions2.default],
-	  obj: { comunas: 'comunas', vehiculos: 'vehiculos', mensaje: '' },
+	  obj: {
+	    comunas: 'comunas',
+	    vehiculos: 'vehiculos',
+	    mensaje: '',
+	    item: { fecha: { fechaInicio: (0, _moment2.default)(), fechaEntrega: (0, _moment2.default)() } },
+	    area: null
+	  },
 	  init: function init() {
 	    this.getObj();
 	  },
@@ -53619,14 +53565,97 @@
 	      _this2.trigger(_this2.obj);
 	    });
 	  },
-	  addSubServicio: function addSubServicio(data) {
+	  addSubServicio: function addSubServicio(ev, id) {
 	    var _this3 = this;
 
-	    socket.emit('addSubServicio', data);
+	    var servicio = {
+	      "codigo_servicio": id,
+	      "area": ev.target.elements['area'].value,
+	      "categoria": ev.target.elements['categoria'].value,
+	      "supervisor": ev.target.elements['supervisor'].value,
+	      "fechaInicio": ev.target.elements['fechaInicio'].value,
+	      "fechaEntrega": ev.target.elements['fechaEntrega'].value,
+	      "dias": ev.target.elements['dias'].value,
+	      "descripcion": ev.target.elements['descripcion'].value,
+	      "observacion": ev.target.elements['observacion'].value,
+	      "rocha": "",
+	      "direccion": ev.target.elements['direccion'] ? ev.target.elements['direccion'].value : "",
+	      "guia": ev.target.elements['guia'] ? ev.target.elements['guia'].value : "",
+	      "comuna": ev.target.elements['comuna'] ? ev.target.elements['comuna'].value : "",
+	      "m3": ev.target.elements['m3'] ? ev.target.elements['m3'].value : "",
+	      "fi": ev.target.elements['fi'] ? ev.target.elements['fi'].value : "",
+	      "tm": ev.target.elements['tm'] ? ev.target.elements['tm'].value : "",
+	      "to": ev.target.elements['to'] ? ev.target.elements['to'].value : "",
+	      "os": ev.target.elements['os'] ? ev.target.elements['os'].value : "",
+	      "lider": ev.target.elements['lider'] ? ev.target.elements['lider'].value : "",
+	      "puestos": ev.target.elements['puestos'] ? ev.target.elements['puestos'].value : "",
+	      "instalador1": ev.target.elements['instalador1'] ? ev.target.elements['instalador1'].value : "",
+	      "instalador2": ev.target.elements['instalador2'] ? ev.target.elements['instalador2'].value : "",
+	      "instalador3": ev.target.elements['instalador3'] ? ev.target.elements['instalador3'].value : "",
+	      "proceso": ev.target.elements['proceso'] ? ev.target.elements['proceso'].value : "",
+	      "vale": ev.target.elements['vale'] ? ev.target.elements['vale'].value : "",
+	      "ejecutor": ev.target.elements['ejecutor'] ? ev.target.elements['ejecutor'].value : "",
+	      "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
+	      "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
+	    };
+	    socket.emit('addSubServicio', servicio);
 	    socket.on('okAddSubServicio', function (okAddSubServicio) {
+	      if (ev.target.elements['area']) {
+	        ev.target.elements['area'].options[0].selected = "selected";
+	      }
+	      if (ev.target.elements['categoria']) {
+	        ev.target.elements['categoria'].options[0].selected = "selected";
+	      }
+	      if (ev.target.elements['fechaInicio']) {
+	        ev.target.elements['fechaInicio'].value = "";
+	      }
+	      if (ev.target.elements['fechaEntrega']) {
+	        ev.target.elements['fechaEntrega'].value = "";
+	      }
+	      if (ev.target.elements['supervisor']) {
+	        ev.target.elements['supervisor'].value = "";
+	      }
+	      if (ev.target.elements['descripcion']) {
+	        ev.target.elements['descripcion'].value = "";
+	      }
+	      if (ev.target.elements['observacion']) {
+	        ev.target.elements['observacion'].value = "";
+	      }
+	      if (ev.target.elements['dias']) {
+	        ev.target.elements['dias'].value = "";
+	      }
+
+	      _this3.obj.area = "";
 	      _this3.obj.mensaje = okAddSubServicio;
 	      _this3.trigger(_this3.obj);
 	    });
+	  },
+	  renderFechaInicio: function renderFechaInicio(fecha) {
+	    this.obj.item.fecha.fechaInicio = fecha;
+	    this.trigger(this.obj);
+	  },
+	  renderFechaEntrega: function renderFechaEntrega(fecha) {
+	    this.obj.item.fecha.fechaEntrega = fecha;
+	    this.trigger(this.obj);
+	  },
+	  renderArea: function renderArea(area) {
+	    switch (area) {
+	      case "Produccion":
+	        this.obj.area = _react2.default.createElement(_ItemProduccion2.default, null);
+	        break;
+	      case "Instalacion":
+	        this.obj.area = _react2.default.createElement(_ItemInstalacion2.default, { comunas: this.obj.comunas });
+	        break;
+	      case "Sillas":
+	        this.obj.area = _react2.default.createElement(_ItemSillas2.default, { comunas: this.obj.comunas });
+	        break;
+	      case "Despacho":
+	        this.obj.area = _react2.default.createElement(_ItemDespacho2.default, { comunas: this.obj.comunas, vehiculos: this.obj.vehiculos });
+	        break;
+	      default:
+	        this.obj.area = "";
+	    }
+	    this.trigger(this.obj);
 	  }
 	});
 
@@ -53680,7 +53709,12 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Title2.default, { mensaje: this.props.mensaje }),
-	        _react2.default.createElement(_Form2.default, { tipo: this.props.tipo, addServicio: this.props.addServicio, area: this.props.area, formArea: this.props.formArea })
+	        _react2.default.createElement(_Form2.default, {
+	          fecha: this.props.fecha,
+	          tipo: this.props.tipo,
+	          addServicio: this.props.addServicio,
+	          area: this.props.area,
+	          renderArea: this.props.renderArea })
 	      );
 	    }
 	  }]);
@@ -53794,7 +53828,11 @@
 	        _react2.default.createElement(
 	          'fieldset',
 	          null,
-	          _react2.default.createElement(_Item2.default, { tipo: this.props.tipo, area: this.props.area, formArea: this.props.formArea })
+	          _react2.default.createElement(_Item2.default, {
+	            fecha: this.props.fecha,
+	            tipo: this.props.tipo,
+	            area: this.props.area,
+	            renderArea: this.props.renderArea })
 	        )
 	      );
 	    }
@@ -53829,6 +53867,10 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _SubServicioActions = __webpack_require__(451);
+
+	var _SubServicioActions2 = _interopRequireDefault(_SubServicioActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53845,55 +53887,19 @@
 
 	    var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 
-	    _this.state = { reclamo: "", fechaInicio: (0, _moment2.default)(), fechaEntrega: (0, _moment2.default)() };
+	    _this.state = { fechaInicio: (0, _moment2.default)(), fechaEntrega: (0, _moment2.default)() };
 	    return _this;
 	  }
 
 	  _createClass(Item, [{
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate(nextProps, nextState) {
-	      if (nextProps.tipo == "reclamo") {
-	        this.state.reclamo = _react2.default.createElement(
-	          'div',
-	          { className: 'item-form' },
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            'Reclamo'
-	          ),
-	          _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
-	        );
-	      } else {
-	        this.state.reclamo = "";
-	      }
+	    key: 'renderFechaInicio',
+	    value: function renderFechaInicio(date) {
+	      _SubServicioActions2.default.renderFechaInicio(date);
 	    }
 	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      if (this.props.tipo == "reclamo") {
-	        this.setState({ reclamo: _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Reclamo'
-	            ),
-	            _react2.default.createElement('input', { id: 'reclamo', type: 'text' })
-	          ) });
-	      } else {
-	        this.setState({ reclamo: "" });
-	      }
-	    }
-	  }, {
-	    key: 'fechaInicioDate',
-	    value: function fechaInicioDate(date) {
-	      this.setState({ fechaInicio: date });
-	    }
-	  }, {
-	    key: 'fechaEntregaDate',
-	    value: function fechaEntregaDate(date) {
-	      this.setState({ fechaEntrega: date });
+	    key: 'renderFechaEntrega',
+	    value: function renderFechaEntrega(date) {
+	      _SubServicioActions2.default.renderFechaEntrega(date);
 	    }
 	  }, {
 	    key: 'render',
@@ -53923,7 +53929,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'select',
-	              { required: true, id: 'area', onChange: this.props.formArea },
+	              { required: true, id: 'area', onChange: this.props.renderArea },
 	              _react2.default.createElement(
 	                'option',
 	                { value: '' },
@@ -54032,7 +54038,7 @@
 	              null,
 	              'Fecha Inicio'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaInicio, onChange: this.fechaInicioDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.props.fecha.fechaInicio, onChange: this.renderFechaInicio.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -54042,7 +54048,7 @@
 	              null,
 	              'Fecha Entrega'
 	            ),
-	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.state.fechaEntrega, onChange: this.fechaEntregaDate.bind(this) })
+	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.fecha.fechaEntrega, onChange: this.renderFechaEntrega.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',

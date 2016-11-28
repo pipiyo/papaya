@@ -2,37 +2,20 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
+import SubServicioActions from '../../actions/SubServicioActions'
+
 class Item extends React.Component {
 
   constructor() {
     super()
-    this.state = {reclamo:"",fechaInicio:moment(),fechaEntrega:moment()}
+    this.state = {fechaInicio:moment(),fechaEntrega:moment()}
   }
-
-  componentWillUpdate(nextProps, nextState){
-    if(nextProps.tipo == "reclamo"){
-      this.state.reclamo = <div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>
-    }else{
-      this.state.reclamo = ""
-    }
+  renderFechaInicio(date){
+    SubServicioActions.renderFechaInicio(date)
   }
-
-  componentWillMount(){
-    if(this.props.tipo == "reclamo"){
-      this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
-    }else{
-      this.setState({reclamo:""})
-    }
+  renderFechaEntrega(date){
+    SubServicioActions.renderFechaEntrega(date)
   }
-  
-  fechaInicioDate(date){
-    this.setState({ fechaInicio: date });
-  }
-
-  fechaEntregaDate(date){
-    this.setState({ fechaEntrega: date });
-  }
-
   render() {
       return (
         <div>
@@ -43,7 +26,7 @@ class Item extends React.Component {
 
             <div className="item-form">
               <label>Servicio</label>
-              <select required id="area" onChange={this.props.formArea}>
+              <select required id="area" onChange={this.props.renderArea}>
                 <option value="">Seleccioné</option>
                 <option value="Adquisiciones">Abastecimiento</option>
                 <option value="Bodega">Bodega</option>
@@ -75,12 +58,12 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.fechaInicioDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaInicio} onChange={this.renderFechaInicio.bind(this)} />
             </div>
 
             <div className="item-form">
                 <label>Fecha Entrega</label>
-                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.fechaEntregaDate.bind(this)} />
+                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaEntrega} onChange={this.renderFechaEntrega.bind(this)} />
             </div>
 
             <div className="item-form">

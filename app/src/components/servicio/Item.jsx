@@ -6,28 +6,22 @@ import Autocomplete from '../../routes/AutocompleteRoutes'
 import ServicioActions from '../../actions/ServicioActions'
 
 class Item extends React.Component {
-
   constructor() {
     super()
   }
-
   componentWillMount(){
     ServicioActions.renderReclamo(this.props.tipo)
     ServicioActions.renderRochaValue(this.props.rocha)
   }
-
   componentWillUpdate(nextProps, nextState){
     if(this.props.tipo !== nextProps.tipo){ ServicioActions.renderReclamo(nextProps.tipo) }
   }
-
   renderFechaInicio(date){
     ServicioActions.renderFechaInicio(date)
   }
-
   renderFechaEntrega(date){
     ServicioActions.renderFechaEntrega(date)
   }
-
   render() {
       return (
         <div>

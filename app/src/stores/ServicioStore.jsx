@@ -24,8 +24,7 @@ let ServicioStore = Reflux.createStore({
     vehiculos: 'vehiculos', 
     mensaje: 'mensaje',
     item: { reclamo:'', fecha : { fechaInicio:moment(), fechaEntrega:moment() } },
-    area: null,
-    event : null
+    area: null
   },
   init: function() {
     this.getObj()
