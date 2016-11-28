@@ -7,3 +7,4 @@ dump.rdb
 /bundle/index.html
 /bundle/js/bundle.js
 env.js
+/srcApirest/models/connection.js
