@@ -1,26 +1,29 @@
 import Reflux from 'reflux'
 import HomeActions from '../actions/HomeActions'
 
+import Env from '../Config'
+import io from 'socket.io-client'
+const socket = io.connect( `${Env.url}notification` )
+
 let HomeStore = Reflux.createStore({
   listenables: [HomeActions],
-  hola: 'hola',
+
+  obj: { notification: null },
+
   init: function() {
-    this.trigger( this.hola )
+
+    this.getObj()
+
   },
-  checkLogin: function() {
-
-
-   this.trigger( this.hola )
-
-/*
-    this.socket = io( getUrl )
-    this.socket.on('checklogin', (data) => {
-      if (!data) {
-        hashHistory.push('/')
-      }
+  getObj: function(){
+    socket.emit('notification', (doc) => {
+      this.obj.notification = doc 
     })
-    this.socket.emit('checklogin')
-    */
+  },
+  getInitialState: function() {
+
+    return this.obj
+
   }
 })
 

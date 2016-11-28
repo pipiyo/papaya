@@ -23,10 +23,10 @@ let notificationSchema = new Schema({
 })
 
 
-notificationSchema.pre('save', function (next) {
+notificationSchema.pre('save', (next) => {
 
-	pub.publish('notification', 'hola bld')
-
+		pub.publish('notification', 'HOLA' )
+	
 	next()
 })
 

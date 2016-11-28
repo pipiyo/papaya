@@ -9,8 +9,10 @@ class Nav extends React.Component {
   }
 
   render() {
-      let notification;
-      (this.props.notification == null) ? notification = "" : notification = <Notification />;
+ 
+      let notification
+      (this.props.notification == null) ? notification = "" : notification = <Notification notification={this.props.obj.notification} />
+
       return (
           <nav className="nav-config">
             <div className="notificacion-user" onClick={this.props.navnotification}>

@@ -45,7 +45,7 @@ io.use( (socket, next) => {
   sessionMiddleware(socket.request, socket.request.res, next)
 } )
 
-require('./srcApirest/controllers/notificationSocket')()
+require('./srcApirest/controllers/notificationSocket')(io)
 
 require('./srcApirest/controllers/loginSocket')(io, request, Store)
 

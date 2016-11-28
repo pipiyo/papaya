@@ -16,7 +16,7 @@ import Inicio from './routes/InicioRoutes'
 
 import Auth from './routes/AuthRoutes'
 
-import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 ReactDOM.render((
   <Router history={browserHistory}>

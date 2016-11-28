@@ -2,8 +2,6 @@ import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
 import ServicioActions from '../actions/ServicioActions'
 
-import FormIngresoServicioStore from '../stores/FormIngresoServicioStore'
-
 import Env from '../Config'
 import io from 'socket.io-client'
 const socket = io.connect( `${Env.url}servicio` )

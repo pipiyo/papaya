@@ -7,17 +7,7 @@ const socket = io.connect( `${Env.url}subServicio` )
 
 let DetalleInformeStore = Reflux.createStore({
   listenables: [DetalleInformeActions],
-  obj: { comunas: 'comunas', vehiculos: 'vehiculos', subServicio: ''},
-  init: function() {
-    this.getObj()
-  },
-  getObj: function() {
-    socket.emit('formingresoservicio', (comunas, vehiculos) => {
-      this.obj.comunas = comunas
-      this.obj.vehiculos = vehiculos
-      this.obj.subServicio = ''
-    })
-  },
+  obj: { subServicio: null },
   getInitialState: function() {
     return this.obj
   },
