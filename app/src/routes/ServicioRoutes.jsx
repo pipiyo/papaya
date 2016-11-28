@@ -14,21 +14,17 @@ export default class ServicioRoutes extends React.Component {
   constructor() {
     super()
   }
-
   componentWillMount(){
     if (this.state.obj.comunas == 'comunas') { ServicioActions.formTrigger() }
   }
-
   renderArea(ev) {
      ServicioActions.renderArea(ev.target.value);
   }
-
   addServicio(event) {
     event.preventDefault()
     event.persist()
     ServicioActions.addServicio(event) 
   }
- 
   render() {
       return (
         <ServicioIndex 

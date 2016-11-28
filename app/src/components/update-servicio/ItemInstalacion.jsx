@@ -7,8 +7,12 @@ class ItemInstalacion extends React.Component {
     super(props)
   }
   componentDidMount(){
-    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.datos[0].CODIGO_COMUNA, false)
-    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.datos[0].PROCESO, true)
+    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso, true)
+  }
+  componentDidUpdate(){
+    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso, true)
   }
   renderInput(event) {
     UpdateServicioActions.renderInput(event.target.id,event.target.value)
@@ -33,9 +37,9 @@ class ItemInstalacion extends React.Component {
             <label>Proceso</label>
             <select id="proceso">
                 <option value="">Seleccioné</option>
-                <option value="armado">Instalación</option>
-                <option value="barniz">Servicio Técnico</option>
-                <option value="barniz">Otros</option>
+                <option value="Instalacion">Instalación</option>
+                <option value="Servicio Tecnico">Servicio Técnico</option>
+                <option value="otros">Otros</option>
               </select>
           </div> 
 

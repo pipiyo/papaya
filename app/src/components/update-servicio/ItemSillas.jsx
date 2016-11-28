@@ -7,8 +7,12 @@ class ItemSillas extends React.Component {
     super(props)
   }
   componentDidMount(){
-    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.datos[0].CODIGO_COMUNA, false)
-    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.datos[0].TRANSPORTE,true)
+    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso,true)
+  }
+  componentDidUpdate(){
+    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso,true)
   }
   renderInput(event) {
     UpdateServicioActions.renderInput(event.target.id,event.target.value)

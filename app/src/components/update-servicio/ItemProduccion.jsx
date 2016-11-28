@@ -6,7 +6,10 @@ class ItemProduccion extends React.Component {
     super(props)
   }
   componentDidMount(){
-    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.datos[0].PROCESO, true)
+    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso, true)
+  }
+  componentDidUpdate(){
+    UpdateServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso, true)
   }
   renderInput(event) {
     UpdateServicioActions.renderInput(event.target.id,event.target.value)

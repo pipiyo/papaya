@@ -7,14 +7,17 @@ class ItemDespacho extends React.Component {
     super(props)
   }
   componentDidMount(){
-    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.datos[0].CODIGO_COMUNA, false)
-    UpdateServicioActions.selectOption(document.getElementById("vehiculo"), this.props.datos[0].TRANSPORTE,false)
+    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateServicioActions.selectOption(document.getElementById("vehiculo"), this.props.input.vehiculo,false)
+  }
+  componentDidUpdate(){
+    UpdateServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateServicioActions.selectOption(document.getElementById("vehiculo"), this.props.input.vehiculo,false)
   }
   renderInput(event) {
     UpdateServicioActions.renderInput(event.target.id,event.target.value)
   }
   render() {
-     console.log("hola")
       return (
         <div className="module-form">
           <div className="item-form title">
