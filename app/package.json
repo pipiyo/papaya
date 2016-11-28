@@ -4,7 +4,8 @@
   "description": "Rocha react ApiRest",
   "main": "index.html",
   "scripts": {
-    "build": "webpack --watch --colors"
+    "build": "webpack --watch --colors",
+    "build-production": "webpack -p --config webpack.config.production.js"
   },
   "keywords": [
     "Rocha",
