@@ -5,28 +5,26 @@ import moment  from 'moment'
 import UpdateServicioActions from '../../actions/UpdateServicioActions'
 
 class Item extends React.Component {
-
   constructor(props) {
     super(props)
   }
-
   componentDidMount(){
-    UpdateServicioActions.selectOption(document.getElementById("categoria"), this.props.datos[0].CATEGORIA,true)
-    UpdateServicioActions.selectOption(document.getElementById("estado"), this.props.datos[0].ESTADO,true)
+    UpdateServicioActions.selectOption(document.getElementById("categoria"), this.props.input.categoria,true)
+    UpdateServicioActions.selectOption(document.getElementById("estado"), this.props.input.estado,true)
   }
-
+  componentDidUpdate(){
+    UpdateServicioActions.selectOption(document.getElementById("categoria"), this.props.input.categoria,true)
+    UpdateServicioActions.selectOption(document.getElementById("estado"), this.props.input.estado,true)
+  }
   renderInput(event){
     UpdateServicioActions.renderInput(event.target.id,event.target.value)
   }
-
   renderFechaInicio(date){
     UpdateServicioActions.renderFechaInicio(date)
   }
-
   renderFechaEntrega(date){
     UpdateServicioActions.renderFechaEntrega(date)
   }
-
   render() {
       return (
         <div>

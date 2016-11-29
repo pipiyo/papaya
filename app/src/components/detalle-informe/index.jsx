@@ -8,18 +8,7 @@ class DetalleInformeIndex extends React.Component {
 
   constructor() {
     super()
-    this.state = {servicio: []}
   }
-
-  subServicio(){
-    this.state.servicio = []
-    let valor
-    for (valor in this.props.datos.sub){
-      this.state.servicio.push(<SubActividad key={valor} datos={this.props.datos.sub[valor]} />)
-    }
-    return this.state.servicio
-  }
-  
   render() {
       return (         
         <div>
@@ -33,9 +22,13 @@ class DetalleInformeIndex extends React.Component {
                 <ActividadTitle datos={this.props.datos} />
 
                 <div class="item-box">
-                  <ActividadContent datos={this.props.datos} />
+                  <ActividadContent renderServicio={this.props.renderServicio} />
                   <div class="content-actividades">
-                    {this.subServicio()}
+                    {
+                    this.props.datos.sub.map( (sub, i) => {
+                     return <SubActividad renderSubServicio={this.props.renderSubServicio[i]} key={i} datos={this.props.datos.sub[i]} />
+                    })
+                    }
                   </div>
                 </div>
               </div>

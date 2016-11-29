@@ -211,7 +211,7 @@ let UpdateServicioStore = Reflux.createStore({
   renderArea: function(area){
     switch(area) {
       case "Produccion":
-        this.obj.area= <ItemProduccion />
+        this.obj.area= <ItemProduccion input={this.obj.input} />
       break;
       case "Instalacion":
         this.obj.area = <ItemInstalacion input={this.obj.input} comunas={this.obj.comunas} />

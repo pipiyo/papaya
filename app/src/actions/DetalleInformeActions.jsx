@@ -1,7 +1,9 @@
 import Reflux from 'reflux'
 
 let DetalleInformeActions = Reflux.createActions([
-	'allSubServicio'
+	'allSubServicio',
+	'renderAreaServicio',
+	'okEstado'
 ])
 
 export default DetalleInformeActions

@@ -9,19 +9,26 @@ import DetalleInforme from '../components/detalle-informe'
 
 @ReactMixin.decorate(Reflux.connect(DetalleInformeStore, 'obj'))
 export default class DetalleInformeRoutes extends React.Component {
-
   constructor() {
     super()
   }
-
   componentWillMount(){
-  	DetalleInformeActions.allSubServicio(this.props.params.id);
+  	DetalleInformeActions.allSubServicio(this.props.params.id)
   }
-  
+  componentWillUpdate(nextProps,nextState){
+    if(this.state.obj.renderSubServicio !== nextState.obj.renderSubServicio)
+      {DetalleInformeActions.allSubServicio(nextProps.params.id)
+    }
+  }
   render() {
-    if(this.state.obj.subServicio){  
+    if(this.state.obj.subServicio){
       return (
-        <DetalleInforme datos={this.state.obj.subServicio} />       
+        <DetalleInforme 
+        renderSubServicio={this.state.obj.renderSubServicio}
+        renderServicio={this.state.obj.renderServicio}
+        sub={this.state.obj.renderSubServicio}
+        datos={this.state.obj.subServicio} 
+        />       
       )
     }else{
       return (

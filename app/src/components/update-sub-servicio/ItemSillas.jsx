@@ -1,53 +1,21 @@
 import React from 'react'
+import UpdateSubServicioActions from '../../actions/UpdateSubServicioActions'
 
 class ItemSillas extends React.Component {
-
   constructor(props) {
     super(props)
-    this.state ={
-                  direccion:this.validador(props.datos[0].SUB_DIRECCION),
-                  ejecutor:this.validador(props.datos[0].SUB_EJECUTOR),
-                  cantidad:this.validador(props.datos[0].SUB_PUESTOS),
-                }
-  }
-  componentWillReceiveProps(nextProps){
-    this.setState({
-                  direccion:this.validador(nextProps.datos[0].SUB_DIRECCION),
-                  ejecutor:this.validador(nextProps.datos[0].SUB_EJECUTOR),
-                  cantidad:this.validador(nextProps.datos[0].SUB_PUESTOS),
-                });
   }
   componentDidMount(){
-    let i
-    let numero = document.getElementById("comuna")
-    for(i = 0; numero.length > i; i++){
-      if(numero.options[i].value == this.props.datos[0].SUB_CODIGO_COMUNA){numero.options[i].selected = "selected"}
-    }
-    let numero1 = document.getElementById("proceso")
-    for(i = 0; numero1.length > i; i++){
-      if(numero1.options[i].value.toLowerCase() == this.props.datos[0].SUB_PROCESO.toLowerCase()){numero1.options[i].selected = "selected"}
-    }
+    UpdateSubServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateSubServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso,true)
   }
-
-  validador(validador,fecha){
-    let text
-    if(validador == "" || validador == null || validador == 0 || !validador){
-      text = ""
-    }
-    else{
-      text = (fecha)?validador.substring(0,10):validador
-    }
-    return text
+  componentDidUpdate(){
+    UpdateSubServicioActions.selectOption(document.getElementById("comuna"), this.props.input.comuna, false)
+    UpdateSubServicioActions.selectOption(document.getElementById("proceso"), this.props.input.proceso,true)
   }
-
-  onChange(e) {
-    this.setState({ 
-                    ejecutor:document.getElementById("ejecutor").value,
-                    direccion:document.getElementById("direccion").value,
-                    cantidad:document.getElementById("cantidad").value,
-                  })
+  renderInput(event) {
+    UpdateSubServicioActions.renderInput(event.target.id,event.target.value)
   }
-
   render() {
       return (
         <div className="module-form">
@@ -56,12 +24,12 @@ class ItemSillas extends React.Component {
           </div>
           <div className="item-form">
             <label>Ejecutor</label>
-            <input value={this.state.ejecutor} onChange={this.onChange.bind(this)} id="ejecutor" type="text"/>
+            <input value={this.props.input.ejecutor} onChange={this.renderInput.bind(this)} id="ejecutor" type="text"/>
           </div>
 
           <div className="item-form">
             <label>Dirección</label>
-            <input value={this.state.direccion} onChange={this.onChange.bind(this)} type="text" id="direccion" />
+            <input value={this.props.input.direccion} onChange={this.renderInput.bind(this)} type="text" id="direccion" />
           </div>
 
           <div className="item-form">
@@ -94,7 +62,7 @@ class ItemSillas extends React.Component {
 
           <div className="item-form">
             <label>Cantidad</label>
-            <input value={this.state.cantidad} onChange={this.onChange.bind(this)} type="text" id="cantidad" />
+            <input value={this.props.input.cantidad} onChange={this.renderInput.bind(this)} type="text" id="cantidad" />
           </div> 
 
         </div>
