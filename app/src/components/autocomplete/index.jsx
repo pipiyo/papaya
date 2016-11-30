@@ -1,9 +1,6 @@
 import React from 'react'
-
 class AutocompleteIndex extends React.Component {
-
   render() {
-    
     if(this.props.valor){
       return (         
         <div class="module-autocomplete">

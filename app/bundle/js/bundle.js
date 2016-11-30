@@ -51685,7 +51685,6 @@
 	  _createClass(AutocompleteIndex, [{
 	    key: "render",
 	    value: function render() {
-
 	      if (this.props.valor) {
 	        return _react2.default.createElement(
 	          "div",
@@ -59611,11 +59610,6 @@
 	  }
 
 	  _createClass(Form, [{
-	    key: 'rutaIngresoServicio',
-	    value: function rutaIngresoServicio() {
-	      return "/home/sub-actividad/" + this.props.datos.servicio[0].CODIGO_SERVICIO;
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -59623,7 +59617,7 @@
 	        { className: 'button' },
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: this.rutaIngresoServicio() },
+	          { to: '/home/sub-actividad/' + this.props.datos.servicio[0].CODIGO_SERVICIO },
 	          ' Nuevas Sub Actividad '
 	        )
 	      );
