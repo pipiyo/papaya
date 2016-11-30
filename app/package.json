@@ -4,7 +4,8 @@
   "description": "Rocha react ApiRest",
   "main": "index.html",
   "scripts": {
-    "build": "webpack --watch --colors"
+    "build": "webpack --watch --colors",
+    "build-production": "webpack -p --config webpack.config.production.js"
   },
   "keywords": [
     "Rocha",
@@ -18,9 +19,11 @@
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "jquery": "^3.1.1",
+    "moment": "^2.16.0",
     "mongoose": "^4.6.8",
     "mysql": "^2.11.1",
     "react": "^15.3.2",
+    "react-datepicker": "^0.34.0",
     "react-datetime": "^2.6.2",
     "react-dom": "^15.3.2",
     "react-mixin": "^3.0.5",
@@ -28,11 +31,8 @@
     "redis": "^2.6.3",
     "reflux": "^0.4.1",
     "request": "^2.76.0",
-    "moment": "^2.16.0",
-    "react-datepicker": "^0.34.0",
-    "socket.io": "^1.5.0"
-  },
-  "devDependencies": {
+    "socket.io": "^1.5.0",
+    "webpack": "^1.13.2",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
@@ -41,7 +41,9 @@
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
-    "babel-preset-stage-2": "^6.17.0",
+    "babel-preset-stage-2": "^6.17.0"
+  },
+  "devDependencies": {
     "browser-sync": "^2.11.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
@@ -59,8 +61,7 @@
     "gulp-size": "^2.0.0",
     "gulp-sourcemaps": "^1.3.0",
     "gulp-uglify": "^1.0.1",
-    "gulp-useref": "^3.0.0",
-    "webpack": "^1.13.2"
+    "gulp-useref": "^3.0.0"
   },
   "engines": {
     "node": ">=0.12"

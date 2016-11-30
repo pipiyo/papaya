@@ -1,5 +1,9 @@
 let mongoose = require("mongoose")
 
+let redis = require("redis")
+
+let pub = redis.createClient()
+
 mongoose.Promise = global.Promise
 
 mongoose.connect("mongodb://localhost/papaya")
@@ -10,11 +14,23 @@ let notificationSchema = new Schema({
 	user: String,
 	create_at: {type: Date, default: new Date() },
 	slug: String,
-	area_servicio: String,
-	codigo_servicio: String,
-	categoria_servicio: String,
+	area: String,
+	asset: {
+		codigo: String,
+		categoria: String
+	},
 	read_by: [ { user: String, read_at: {type: Date, default: new Date() } } ]
 })
+
+
+notificationSchema.pre('save', function (next) {
+
+	pub.publish('notification', 'hola bld')
+
+	next()
+})
+
+
 
 let notification = mongoose.model("notification", notificationSchema)
 

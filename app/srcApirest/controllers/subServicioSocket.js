@@ -1,4 +1,6 @@
-module.exports = (io, pool) => {
+const pool = require('../models/connection')
+
+module.exports = (io) => {
 
   io
   .of('/subServicio')

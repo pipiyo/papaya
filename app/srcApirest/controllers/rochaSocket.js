@@ -1,4 +1,6 @@
-module.exports = (io, pool) => {
+const pool = require('../models/connection')
+
+module.exports = (io) => {
 
   io
   .of('/rocha')
@@ -19,7 +21,6 @@ module.exports = (io, pool) => {
       let query = 'SELECT * FROM proyecto WHERE estado = "'+data.estado+'" '+q_codigo+' '+q_vendedor+' '+q_fecha+' '+q_cliente+'  limit '+data.count+';' 
       let query1 = 'SELECT count(*) as total FROM proyecto WHERE estado = "'+data.estado+'" '+q_codigo+' '+q_vendedor+' '+q_fecha+' '+q_cliente+';'
       let query2 = 'SELECT `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` FROM `empleado` where `AREA` = "COMERCIAL" order by `NOMBRES`;'
-
       pool.getConnection( (err, connection) => {
             connection.query(query + query1 + query2, (err, rows, fields) => {
                 connection.release()
