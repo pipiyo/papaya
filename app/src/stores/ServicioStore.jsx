@@ -78,8 +78,7 @@ let ServicioStore = Reflux.createStore({
       "vehiculo" : (ev.target.elements['vehiculo']) ? ev.target.elements['vehiculo'].value : "", 
       "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : ""          
     }
-    console.log(servicio) 
-  	socket.emit('addServicio', servicio)
+  	socket.emit('addServicio', servicio, JSON.stringify( localStorage.getItem('token') ))
   	socket.on('okAddServicio', (okAddServicio) =>{
 
       if(ev.target.elements['area']){ev.target.elements['area'].options[0].selected = "selected"}

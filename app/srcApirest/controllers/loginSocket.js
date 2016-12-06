@@ -1,4 +1,7 @@
-module.exports = (io, request, Store) => {
+const jwt = require('jwt-simple')
+const moment = require('moment')
+
+module.exports = (io, request) => {
 
   io
   .of('/login')
@@ -12,32 +15,38 @@ module.exports = (io, request, Store) => {
             pass: data.pass
           }
         }, (error, response, auht) => {
-          console.log( error )
           if (error) throw error
             auht = JSON.parse(auht)
           if(auht.on){
-            socket.request.session.name = auht.name
-            socket.request.session.type = auht.type
-            socket.request.session.save()
-            auht.on = socket.request.sessionID
-            callback(auht)
+            
+            let token = { token: jwt.encode( { name: `${auht.name}`, type: `${auht.type}`, expire: `${moment().format('h:mm:ss')}` }, 'xxx'), name: `${auht.name}`, type: `${auht.type}`}
+
+            callback(token)
           }else{
             callback(false)
           }
         })
     })
 
-    socket.on('checkUser', (data, callback) => {
-        Store.get( data, (err, session) =>{
-          if (err) throw err
-          if (session) {
-            callback( session.name, session.type, data )
-          } else {
-           callback( session, session, session ) 
-          }
-        })
-    })
+/*
+    socket.on('checkUser', (token, callback) => {
 
+        token = JSON.parse(token)
+        
+          if (token) {
+            try {
+              let decode = jwt.decode(token, 'xxx')
+
+              callback(token)
+
+            } catch (err) {
+              return callback(false)
+            }
+          } else {
+            callback(false)
+          }
+    })
+*/
 
   })
 
