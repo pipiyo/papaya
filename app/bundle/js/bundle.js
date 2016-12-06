@@ -23545,17 +23545,27 @@
 	  },
 	  checkUser: function checkUser() {
 
-	    socket.emit('checkUser', JSON.stringify(localStorage.getItem('token')), function (token) {
-	      if (!token) {
+	    if (!localStorage.getItem('token')) {
+	      localStorage.removeItem('name');
+	      localStorage.removeItem('type');
+	      localStorage.removeItem('token');
+	      _reactRouter.browserHistory.push('/');
+	    }
 
-	        localStorage.removeItem('name');
-	        localStorage.removeItem('type');
-	        localStorage.removeItem('token');
-	        _reactRouter.browserHistory.push('/');
-	      } else {
-	        console.log(token);
-	      }
-	    });
+	    /*
+	            socket.emit('checkUser', JSON.stringify( localStorage.getItem('token') ) , (token) => {
+	              if (!token) {
+	    
+	                  localStorage.removeItem('name')
+	                  localStorage.removeItem('type')
+	                  localStorage.removeItem('token')
+	                browserHistory.push('/')
+	    
+	              }else{
+	                console.log( token )
+	              }
+	            })
+	    */
 	  }
 	});
 
@@ -60695,14 +60705,13 @@
 	  _createClass(AuthRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      //LoginActions.checkUser()
+	      _LoginActions2.default.checkUser();
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps() {
 
-	      //LoginActions.checkUser()
-
+	      _LoginActions2.default.checkUser();
 	    }
 	  }, {
 	    key: 'render',
