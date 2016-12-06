@@ -16,12 +16,12 @@ export default class AuthRoutes extends React.Component {
 
 
   componentWillMount(){
-    //LoginActions.checkUser()
+    LoginActions.checkUser()
   }
 
   componentWillReceiveProps(){
 
-    //LoginActions.checkUser()
+    LoginActions.checkUser()
 
   }
 

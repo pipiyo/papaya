@@ -32,6 +32,14 @@ let LoginStore = Reflux.createStore({
   },
   checkUser: function () {
 
+  if (!localStorage.getItem('token')) {
+              localStorage.removeItem('name')
+              localStorage.removeItem('type')
+              localStorage.removeItem('token')
+            browserHistory.push('/')
+  }
+
+/*
         socket.emit('checkUser', JSON.stringify( localStorage.getItem('token') ) , (token) => {
           if (!token) {
 
@@ -44,7 +52,7 @@ let LoginStore = Reflux.createStore({
             console.log( token )
           }
         })
-
+*/
   }
 })
 

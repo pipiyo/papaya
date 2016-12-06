@@ -23540,24 +23540,32 @@
 	  storeUser: function storeUser(token) {
 	    localStorage.setItem('name', token.name);
 	    localStorage.setItem('type', token.type);
-	    localStorage.setItem('on', token.on);
+	    localStorage.setItem('token', token.token);
 	    this.trigger(token);
 	  },
 	  checkUser: function checkUser() {
 
-	    socket.emit('checkUser', localStorage.getItem('on'), function (name, type, on) {
-	      if (name) {
+	    if (!localStorage.getItem('token')) {
+	      localStorage.removeItem('name');
+	      localStorage.removeItem('type');
+	      localStorage.removeItem('token');
+	      _reactRouter.browserHistory.push('/');
+	    }
 
-	        localStorage.setItem('name', name);
-	        localStorage.setItem('type', type);
-	        localStorage.setItem('on', on);
-	      } else {
-	        localStorage.removeItem('name');
-	        localStorage.removeItem('type');
-	        localStorage.removeItem('on');
-	        _reactRouter.browserHistory.push('/');
-	      }
-	    });
+	    /*
+	            socket.emit('checkUser', JSON.stringify( localStorage.getItem('token') ) , (token) => {
+	              if (!token) {
+	    
+	                  localStorage.removeItem('name')
+	                  localStorage.removeItem('type')
+	                  localStorage.removeItem('token')
+	                browserHistory.push('/')
+	    
+	              }else{
+	                console.log( token )
+	              }
+	            })
+	    */
 	  }
 	});
 
@@ -37230,8 +37238,7 @@
 	      "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
 	      "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
 	    };
-	    console.log(servicio);
-	    socket.emit('addServicio', servicio);
+	    socket.emit('addServicio', servicio, JSON.stringify(localStorage.getItem('token')));
 	    socket.on('okAddServicio', function (okAddServicio) {
 
 	      if (ev.target.elements['area']) {
@@ -53603,7 +53610,7 @@
 	      "vehiculo": ev.target.elements['vehiculo'] ? ev.target.elements['vehiculo'].value : "",
 	      "cantidad": ev.target.elements['cantidad'] ? ev.target.elements['cantidad'].value : ""
 	    };
-	    socket.emit('addSubServicio', servicio);
+	    socket.emit('addSubServicio', servicio, JSON.stringify(localStorage.getItem('token')));
 	    socket.on('okAddSubServicio', function (okAddSubServicio) {
 	      if (ev.target.elements['area']) {
 	        ev.target.elements['area'].options[0].selected = "selected";
