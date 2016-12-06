@@ -1,5 +1,6 @@
 const pool = require('../models/connection')
-const Notification = require("../models/notification")
+const Notification = require('../models/notification')
+const decodeToken = require('./decodeToken')
 
 module.exports = (io) => {
 
@@ -22,7 +23,10 @@ module.exports = (io) => {
 
 
   /* Ingreso Servicio */
-  socket.on('addServicio', (data) => {
+  socket.on('addServicio', (data, token) => {
+
+    let user = decodeToken(token)
+
     let servicio = {  
                       NOMBRE_SERVICIO: data.area, 
                       CATEGORIA: data.categoria, 
@@ -52,7 +56,8 @@ module.exports = (io) => {
                       CANTIDAD: data.cantidad,
                       RECLAMOS: data.reclamo,
                       ESTADO: "EN PROCESO",
-                      DIAS: data.dias
+                      DIAS: data.dias,
+                      REALIZADOR: user.name
                     }
     let okAddServicio = '(Se ingreso servicio ' + data.area + ')'
 
@@ -60,7 +65,7 @@ module.exports = (io) => {
         connection.query('INSERT INTO `servicio` SET ?',servicio, (err, row) => {
           connection.release()
           if (!err) {
-            let notification = new Notification({user: socket.request.session.name, 
+            let notification = new Notification({user: user.name, 
                                                  slug: `detalle-actividad/${row.insertId}`,
                                                  area: data.area,
                                                  asset: {

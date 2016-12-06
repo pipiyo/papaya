@@ -1,4 +1,5 @@
 const pool = require('../models/connection')
+const decodeToken = require('./decodeToken')
 
 module.exports = (io) => {
 
@@ -65,7 +66,10 @@ module.exports = (io) => {
 
 
   /*Ingreso sub servicio*/
-  socket.on('addSubServicio', (data) => {
+  socket.on('addSubServicio', (data, token) => {
+
+  let user = decodeToken(token)
+
   let servicio = {  
                     SUB_CODIGO_SERVICIO: data.codigo_servicio,
                     SUB_NOMBRE_SERVICIO: data.area, 
@@ -95,7 +99,8 @@ module.exports = (io) => {
                     SUB_TRANSPORTE: data.vehiculo,    
                     SUB_CANTIDAD: data.cantidad,
                     SUB_ESTADO: "EN PROCESO",
-                    SUB_DIAS: data.dias
+                    SUB_DIAS: data.dias,
+                    SUB_REALIZADOR: user.name
                   }
     let okAddSubServicio = '(Se ingreso sub servicio ' + data.area + ')'
 

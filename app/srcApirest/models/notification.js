@@ -1,8 +1,8 @@
 let mongoose = require("mongoose")
 
-let redis = require("redis")
+//let redis = require("redis")
 
-let pub = redis.createClient()
+//let pub = redis.createClient()
 
 mongoose.Promise = global.Promise
 
@@ -25,7 +25,7 @@ let notificationSchema = new Schema({
 
 notificationSchema.pre('save', function (next) {
 
-	pub.publish('notification', 'hola bld')
+	//pub.publish('notification', 'hola bld')
 
 	next()
 })
