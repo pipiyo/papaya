@@ -27,23 +27,21 @@ let LoginStore = Reflux.createStore({
   storeUser: function (token) {
     localStorage.setItem('name', token.name)
     localStorage.setItem('type', token.type)
-    localStorage.setItem('on', token.on)
+    localStorage.setItem('token', token.token)
     this.trigger( token )
   },
   checkUser: function () {
 
-        socket.emit('checkUser', localStorage.getItem('on') , (name, type, on) => {
-          if (name) {
+        socket.emit('checkUser', JSON.stringify( localStorage.getItem('token') ) , (token) => {
+          if (!token) {
 
-              localStorage.setItem('name', name)
-              localStorage.setItem('type', type)
-              localStorage.setItem('on', on)
-
-          } else {
               localStorage.removeItem('name')
               localStorage.removeItem('type')
-              localStorage.removeItem('on')
+              localStorage.removeItem('token')
             browserHistory.push('/')
+
+          }else{
+            console.log( token )
           }
         })
 

@@ -5,13 +5,15 @@ const path = require('path')
 const port = process.env.PORT || 9097
 const http = require('http')
 const request = require('request')
-const session = require('express-session')
-const RedisStore = require('connect-redis')(session)
+const moment = require('moment')
+
+
+
+//console.log( moment('09:00:00', 'h:mm:ss').fromNow(), moment().format('h:mm:ss') )
+
 
 require('./env').config()
 
-
-const Store = new RedisStore({ ttl: 10020 })
 
 
 const app = express()
@@ -25,15 +27,7 @@ con.connect( (err) => {
     })
 */
 
-const sessionMiddleware = session({
-  store: Store,
-  secret: '$2y$10$MzQxNzNjYjM4ZjA3Zjg5ZG',
-  saveUninitialized: false,
-  resave: false
-})
 
-
-app.use(sessionMiddleware)
 
 let server = http.createServer(app).listen(port, () => {
   console.log('Estamos en el ' + port)
@@ -41,13 +35,11 @@ let server = http.createServer(app).listen(port, () => {
 
 const io = require('socket.io')(server)
 
-io.use( (socket, next) => {
-  sessionMiddleware(socket.request, socket.request.res, next)
-} )
+
 
 require('./srcApirest/controllers/notificationSocket')()
 
-require('./srcApirest/controllers/loginSocket')(io, request, Store)
+require('./srcApirest/controllers/loginSocket')(io, request)
 
 require('./srcApirest/controllers/servicioSocket')(io)
 

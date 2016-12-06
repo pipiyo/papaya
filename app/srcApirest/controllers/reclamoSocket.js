@@ -8,6 +8,7 @@ module.exports = (io) => {
 
   /* Ingreso Reclamo */
   socket.on('reclamo', (data) => {
+
     let reclamo = {  
                       AREA: data.area,
                       ROCHA : data.rocha,

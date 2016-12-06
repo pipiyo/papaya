@@ -35,7 +35,7 @@ let ServicioStore = Reflux.createStore({
     })
   },
   addServicio: function(data){ 
-  	socket.emit('addServicio', data)
+  	socket.emit('addServicio', data, JSON.stringify( localStorage.getItem('token') ))
   	socket.on('okAddServicio', (okAddServicio) =>{
       this.obj.mensaje = okAddServicio
   		this.trigger(this.obj)
