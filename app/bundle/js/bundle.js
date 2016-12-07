@@ -37205,6 +37205,23 @@
 	      _this2.trigger(_this2.obj);
 	    });
 	  },
+	  sumaFecha: function sumaFecha(dias, fecha) {
+	    var new_date = (0, _moment2.default)(fecha, "YYYY-MM-DD").add(dias, 'days');
+	    return new_date.format("YYYY-MM-DD");
+	  },
+	  fechaEntrega: function fechaEntrega(area, fechaI, fechaE) {
+	    var fechaEntrega = void 0;
+	    switch (area) {
+	      case "Adquisiciones":
+	        fechaEntrega = this.sumaFecha(2, fechaI);
+	        break;
+	      default:
+	        fechaEntrega = fechaE;
+	    }
+	    return fechaEntrega;
+	  },
+
+
 	  addServicio: function addServicio(ev) {
 	    var _this3 = this;
 
@@ -37214,8 +37231,8 @@
 	      "categoria": ev.target.elements['categoria'].value,
 	      "supervisor": ev.target.elements['supervisor'].value,
 	      "fechaInicio": ev.target.elements['fechaInicio'].value,
-	      "fechaEntrega": ev.target.elements['fechaEntrega'].value,
-	      "dias": ev.target.elements['dias'].value,
+	      "fechaEntrega": this.fechaEntrega(ev.target.elements['area'].value, ev.target.elements['fechaInicio'].value, ev.target.elements['fechaEntrega'].value),
+	      "dias": "0",
 	      "descripcion": ev.target.elements['descripcion'].value,
 	      "observacion": ev.target.elements['observacion'].value,
 	      "rocha": ev.target.elements['rocha'].value,
@@ -49311,19 +49328,9 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'Fecha Entrega Cliente'
+	              'Fecha Entrega'
 	            ),
 	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.fecha.fechaEntrega, onChange: this.renderFechaEntrega.bind(this) })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form relative' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'D\xEDas'
-	            ),
-	            _react2.default.createElement('input', { 'data-complete': 'rocha', type: 'text', id: 'dias' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52000,7 +52007,7 @@
 	      "supervisor": ev.target.elements['supervisor'].value,
 	      "fechaInicio": ev.target.elements['fechaInicio'].value,
 	      "fechaEntrega": ev.target.elements['fechaEntrega'].value,
-	      "dias": ev.target.elements['dias'].value,
+	      "dias": "0",
 	      "descripcion": ev.target.elements['descripcion'].value,
 	      "observacion": ev.target.elements['observacion'].value,
 	      "numero": ev.target.elements['numero'].value,
@@ -53301,16 +53308,6 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'Supervisor'
-	            ),
-	            _react2.default.createElement('input', { required: true, value: this.props.input.supervisor, onChange: this.renderInput.bind(this), id: 'supervisor', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
 	              'Fecha Inicio'
 	            ),
 	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.props.input.fechaInicio, onChange: this.renderFechaInicio.bind(this) })
@@ -53321,7 +53318,7 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'Fecha Entrega Cliente'
+	              'Fecha Entrega'
 	            ),
 	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.input.fechaEntrega, onChange: this.renderFechaEntrega.bind(this) })
 	          ),
@@ -53331,9 +53328,9 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'D\xEDas'
+	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { value: this.props.input.dias, onChange: this.renderInput.bind(this), type: 'number', className: 'date', id: 'dias' })
+	            _react2.default.createElement('input', { required: true, value: this.props.input.supervisor, onChange: this.renderInput.bind(this), id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -59390,7 +59387,7 @@
 	    var module = [];
 	    this.obj.renderSubServicio = [];
 	    for (valor in sub) {
-	      module = [this.validador("Descripción:", sub[valor].SUB_DESCRIPCION), this.validador("Proceso:", sub[valor].SUB_PROCESO), this.validador("Fecha Ingreso:", sub[valor].SUB_FECHA_INGRESO, true), this.validador("Fecha Entrega:", sub[valor].SUB_FECHA_ENTREGA, true), this.validador("Estado:", sub[valor].SUB_ESTADO), this.validador("Supervisor:", sub[valor].SUB_SUPERVISOR), this.validador("Dirección:", sub[valor].SUB_DIRECCION), this.validador("TP:", sub[valor].SUB_TP), this.validador("TO:", sub[valor].SUB_TO), this.validador("OS:", sub[valor].SUB_OS), this.validador("FI:", sub[valor].SUB_FI)];
+	      module = [this.validador("Descripción:", sub[valor].SUB_DESCRIPCION), this.validador("Proceso:", sub[valor].SUB_PROCESO), this.validador("Fecha Inicio:", sub[valor].SUB_FECHA_INICIO, true), this.validador("Fecha Entrega:", sub[valor].SUB_FECHA_ENTREGA, true), this.validador("Estado:", sub[valor].SUB_ESTADO), this.validador("Supervisor:", sub[valor].SUB_SUPERVISOR), this.validador("Dirección:", sub[valor].SUB_DIRECCION), this.validador("TP:", sub[valor].SUB_TP), this.validador("TO:", sub[valor].SUB_TO), this.validador("OS:", sub[valor].SUB_OS), this.validador("FI:", sub[valor].SUB_FI)];
 	      this.obj.renderSubServicio.push(module);
 	    }
 	    this.trigger(this.obj);

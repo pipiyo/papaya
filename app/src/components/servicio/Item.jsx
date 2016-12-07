@@ -75,13 +75,8 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
-                <label>Fecha Entrega Cliente</label>
+                <label>Fecha Entrega</label>
                 <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaEntrega} onChange={this.renderFechaEntrega.bind(this)} />
-            </div>
-
-            <div className="item-form relative">
-                <label>Días</label>
-                <input data-complete="rocha" type="text" id="dias" />
             </div>
 
             <div className="item-form">
