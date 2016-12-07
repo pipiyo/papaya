@@ -11,7 +11,7 @@ class Form extends React.Component {
       return (
         <form onSubmit={this.props.addReclamo}>
           <fieldset> 
-            <Item />
+            <Item fecha={this.props.fecha} />
           </fieldset> 
         </form> 
       )

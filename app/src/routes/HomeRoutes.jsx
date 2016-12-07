@@ -1,15 +1,11 @@
 import React from 'react'
-import ReactMixin from 'react-mixin'
-import Reflux from 'reflux'
 
 import Home from '../components/home'
 
-import HomeActions from '../actions/HomeActions'
-
-import HomeStore from '../stores/HomeStore'
-
-@ReactMixin.decorate(Reflux.connect(HomeStore, 'var'))
+//@ReactMixin.decorate(Reflux.connect(AuthStore, 'user'))
 export default class HomeRoutes extends React.Component {
+
+
 
   constructor() {
     super()
@@ -19,14 +15,12 @@ export default class HomeRoutes extends React.Component {
   }
 
 
-  componentWillMount(){
-     HomeActions.checkLogin()
-  }
-
   render() {
-  	  return (
+
+      return (
             <Home content={this.props.children}/>
       )
+
   }
 
 }

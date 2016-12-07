@@ -1,7 +1,9 @@
 import Reflux from 'reflux'
 
 let ReclamoActions = Reflux.createActions([
-	'addReclamo'
+	'addReclamo',
+	'renderFechaInicio',
+	'renderFechaEntrega'
 ])
 
 export default ReclamoActions

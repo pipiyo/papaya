@@ -255,6 +255,9 @@ a.external-link, .external-link a {
         }
     }
 }
+.relative{
+    position:relative;
+}
 
 
 /**** frame ****/
@@ -647,6 +650,14 @@ a.external-link, .external-link a {
         @include active-state{
             border: solid 1px $color_valido;
         }
+        &:required{
+            border:solid 1px $gris; 
+            box-shadow:none;
+        }
+        &:invalid{
+            border:solid 1px $gris;
+            box-shadow:none; 
+        }    
     }
     input[type="checkbox"]:checked{
         + .checkbox{
@@ -948,21 +959,33 @@ a.external-link, .external-link a {
                 top: 1em;
             }
         }
+        .item-box{
+            padding-bottom: 1em;
+            display: block;
+            &.orden{
+                display: flex;
+                flex-wrap: wrap;
+                .item-actividades{
+                    width: 100%;
+                }
+            }
+        }
+
         &.abastecimiento{border:solid 1px $color_abastecimiento; h3{background: $color_abastecimiento;&:after{content: none;}}}
+        &.planificacion{border:solid 1px $color_planificacion; h3{background: $color_planificacion;&:after{content: none;}}}
         &.produccion{border:solid 1px $color_produccion; h3{background: $color_produccion;&:after{content: none;}}}
         &.despacho{border:solid 1px $color_despacho; h3{background: $color_despacho;&:after{content: none;}}}
         &.instalaciones{border:solid 1px $color_instalaciones; h3{background: $color_instalaciones;&:after{content: none;}}}
         &.integracion{border:solid 1px $color_integracion; h3{background: $color_integracion;&:after{content: none;}}}
         &.desarrollo{border:solid 1px $color_desarrollo; h3{background: $color_desarrollo;&:after{content: none;}}}
+        &.sillas{border:solid 1px $color_sillas; h3{background: $color_sillas;&:after{content: none;}}}
+        &.father{border:solid 1px $color_rochas; h3{background: $color_rochas;&:after{content: none;}}}
 
-        .item-box{
-            padding-bottom: 1em;
-            display: block;
-        }
         .item-rocha-info{
             padding: 1em 1em 0 1em;
             display: flex;
             flex-wrap: wrap;
+            order: 1;
             h5{
                 margin: 0;
                 padding: 0;
@@ -978,14 +1001,7 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
-                }
-                &.sub{
-                    width: 50%;
-                    margin-top: .5em;
-                    @include vertical-tablet-down {
-                        width: 100%;
-                    }
-                }           
+                }          
             }
         }
     } 
@@ -999,15 +1015,31 @@ a.external-link, .external-link a {
         &.sub{
             width: calc(100% - 2em);
         }
+        
+        .content-actividades{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .item-actividades{
             margin: 1em 1em 0 1em;
-            &.abastecimiento{.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
-            &.produccion{.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
-            &.despacho{.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
-            &.instalaciones{.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
-            &.integracion{.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}
-            &.desarrollo{.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
+            &.planificacion{order:2;.title-actividad{background: $color_planificacion;}.description-actividad{border: solid 1px $color_planificacion;}}
+            &.abastecimiento{order:3;.title-actividad{background: $color_abastecimiento;}.description-actividad{border: solid 1px $color_abastecimiento;}}
+            &.desarrollo{order:4;.title-actividad{background: $color_desarrollo;}.description-actividad{border: solid 1px $color_desarrollo;}}
+            &.produccion{order:5;.title-actividad{background: $color_produccion;}.description-actividad{border: solid 1px $color_produccion;}}
+            &.sillas{order:6;.title-actividad{background: $color_sillas;}.description-actividad{border: solid 1px $color_sillas;}}
+            &.despacho{order:7;.title-actividad{background: $color_despacho;}.description-actividad{border: solid 1px $color_despacho;}}
+            &.instalaciones{order:8;.title-actividad{background: $color_instalaciones;}.description-actividad{border: solid 1px $color_instalaciones;}}
+            &.integracion{order:9;.title-actividad{background: $color_integracion;}.description-actividad{border: solid 1px $color_integracion;}}      
+
+            &.sub{
+                width: calc(50% - 2em);
+                @include vertical-tablet-down {
+                    width: 100%;
+                }
+            }
         }
+       
         .title-actividad{
             padding: .5em;
             overflow: hidden;
@@ -1044,14 +1076,10 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
-                }
-                &.sub{
-                    margin-top: .5em;
-                    width: 50%;
-                    @include vertical-tablet-down {
-                        width: 100%;
-                    }
-                }    
+                }   
+            }
+            &.ok{
+                background: #E3F6CE;
             }
             h5{
                 margin: 0;
@@ -1061,6 +1089,22 @@ a.external-link, .external-link a {
                 color: $color_corporativo_dark;
                 font-size: $fontTiny;
                 margin: 0;
+            }
+        }
+    }
+    .content-view-more{
+        width: 100%;
+        .view-more{
+            @include reset-appearance;
+            width: 200px;
+            padding: 1em;
+            margin: auto;
+            color: $blanco;
+            background: $color_corporativo_dark;
+            display: block;
+            &:hover{
+              background: $color_corporativo_darker;
+              cursor: pointer;  
             }
         }
     }
@@ -1225,6 +1269,126 @@ a.external-link, .external-link a {
             + p{
                 font-size: $fontSmall;
                 font-weight: normal;
+            }
+        }
+    }
+}
+
+
+/**** modulo informe ****/
+/**** modulo informe ****/
+/**** modulo informe ****/
+/**** modulo informe ****/
+
+.module-informe{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .item{
+        width: 50%;
+        padding: 1em;
+        @include vertical-tablet-down {
+            width: 100%;
+        }
+        .title-informe{
+            position: relative;
+            padding: 1em;
+            background: #0B3861;
+            h3{
+                font-size: 1em;
+                font-weight: normal;
+                margin: 0;
+                width: 100%;
+                padding-right: 1em;
+                position:relative;
+                color: $blanco;
+                padding: 0;
+                &.atrasado{
+                    &:before{
+                        content: "\f06a";
+                        color:#fe2e2e;
+                        font-size: 1.2em;
+                        font-family: FontAwesome;
+                        font-weight: normal;
+                        position: absolute;
+                        right: -25px;
+                        top: -30px;
+                    }
+                }
+            }
+            .icon-informe{
+                position: absolute;
+                top: 13px;
+                color: $blanco;
+                right: 10px;
+                &:hover{
+                    color: $color_rochas;
+                    cursor: pointer;
+                }
+            }
+        }
+        .content-informe{
+            border: solid #0B3861 1px;
+            padding: 1em;
+            h5{
+                margin: 0;
+                padding: 0;
+            }
+            p{
+                margin: 0;
+                font-weight: normal;
+                padding: 0;
+                display: inline;
+                font-size: $fontTiny;
+            }
+            .opc{
+                width: 100%;
+                + .opc{
+                    margin-top: .5em;
+                }          
+            }
+        }
+    }
+    .content-view-more{
+        width: 100%;
+        .view-more{
+            @include reset-appearance;
+            width: 200px;
+            padding: 1em;
+            margin: auto;
+            color: $blanco;
+            background: $color_corporativo_dark;
+            display: block;
+            &:hover{
+              background: $color_corporativo_darker;
+              cursor: pointer;  
+            }
+        }
+    }
+}
+
+
+/* Auto complete */
+.module-autocomplete{
+    position: absolute;
+    background: $color_corporativo_darker;
+    padding: 0;
+    ul{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        li{
+            margin:0;
+            padding: .1em 1em;
+            color: $blanco;
+            font-weight: normal;
+            cursor: pointer;
+            font-size: $fontTiny;
+            &:hover{
+                background: $color_corporativo_dark;
+            }
+            + li{
+                border-top: solid 1px $blanco; 
             }
         }
     }

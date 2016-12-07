@@ -1,28 +1,27 @@
 import React from 'react'
+import DatePicker from 'react-datepicker'
+import moment  from 'moment'
+
+import Autocomplete from '../../routes/AutocompleteRoutes'
+import ServicioActions from '../../actions/ServicioActions'
 
 class Item extends React.Component {
-
   constructor() {
     super()
-    this.state = {reclamo:""}
   }
-
-  componentWillUpdate(nextProps, nextState){
-    if(nextProps.tipo == "reclamo"){
-      this.state.reclamo = <div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>
-    }else{
-      this.state.reclamo = ""
-    }
-  }
-
   componentWillMount(){
-    if(this.props.tipo == "reclamo"){
-      this.setState({reclamo:<div className="item-form"><label>Reclamo</label><input id="reclamo" type="text" /></div>})
-    }else{
-      this.setState({reclamo:""})
-    }
+    ServicioActions.renderReclamo(this.props.tipo)
+    ServicioActions.renderRochaValue(this.props.rocha)
   }
-
+  componentWillUpdate(nextProps, nextState){
+    if(this.props.tipo !== nextProps.tipo){ ServicioActions.renderReclamo(nextProps.tipo) }
+  }
+  renderFechaInicio(date){
+    ServicioActions.renderFechaInicio(date)
+  }
+  renderFechaEntrega(date){
+    ServicioActions.renderFechaEntrega(date)
+  }
   render() {
       return (
         <div>
@@ -31,22 +30,23 @@ class Item extends React.Component {
                 <h4>Nueva Actividad</h4>
             </div>
 
-             {this.state.reclamo} 
+             {this.props.reclamo} 
 
             <div className="item-form">
                 <label>Rocha</label>
-                <input id="rocha" type="text" />
+                <input required  id="rocha" type="text" />
             </div>
 
             <div className="item-form">
               <label>Servicio</label>
-              <select id="area" onChange={this.props.formArea}>
+              <select required id="area" onChange={this.props.renderArea}>
                 <option value="">Seleccioné</option>
-                <option value="Adquisiciones">Adquisiciones</option>
+                <option value="Adquisiciones">Abastecimiento</option>
                 <option value="Bodega">Bodega</option>
-                <option value="Desarrollo">Desarrollo</option>
+                <option value="Desarrollo">Técnica</option>
                 <option value="Despacho">Despacho</option>
-                <option value="Instalacion">Instalacion</option>
+                <option value="Instalacion">Instalación</option>
+                <option value="Planificacion">Planificación</option>
                 <option value="Prevención de Riesgos">Prevención de Riesgos</option>
                 <option value="Produccion">Producción</option>
                 <option value="Sillas">Sillas</option>
@@ -56,7 +56,7 @@ class Item extends React.Component {
 
             <div className="item-form">
               <label>Categoría</label>
-              <select id="categoria">
+              <select required id="categoria">
                 <option value="">Seleccioné</option>
                 <option value="proyecto">Proyecto</option>
                 <option value="solicitud">Solicitud</option>
@@ -66,27 +66,27 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Supervisor</label>
-                <input id="supervisor" type="text" />
+                <input required id="supervisor" type="text" />
             </div>
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <input class="date" id="fechaInicio" type="text"/>
+                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaInicio} onChange={this.renderFechaInicio.bind(this)} />
             </div>
 
             <div className="item-form">
-                <label>Fecha Entrega</label>
-                <input class="date" id="fechaEntrega" type="text"/>
+                <label>Fecha Entrega Cliente</label>
+                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaEntrega} onChange={this.renderFechaEntrega.bind(this)} />
             </div>
 
-            <div className="item-form">
+            <div className="item-form relative">
                 <label>Días</label>
-                <input type="number" class="date" id="dias" />
+                <input data-complete="rocha" type="text" id="dias" />
             </div>
 
             <div className="item-form">
                 <label>Descripción</label>
-                <input id="descripcion" type="text"/>
+                <input required id="descripcion" type="text"/>
             </div>
 
             <div className="item-form">
@@ -95,7 +95,6 @@ class Item extends React.Component {
             </div>
           </div>
           {this.props.area}
-
           <div className="module-form button">
             <div className="item-form button">
                 <input type="submit" value="Enviar"/>

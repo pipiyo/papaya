@@ -1,7 +1,10 @@
 /node_modules/
 /.tmp/
 /.sass-cache/
-/srcApirest/connection.js
-dump.rbd
-env.js
+dump.rdb
 /src/Config/index.jsx
+../dump.rdb
+/bundle/index.html
+/bundle/js/bundle.js
+env.js
+/srcApirest/models/connection.js

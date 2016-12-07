@@ -6,11 +6,10 @@ class Form extends React.Component {
   constructor() {
     super()
   }
-
   render() {
       return (
         <div class="button">
-          <Link to="/home/detalle-actividad/sub-actividad"> Nueva Sub Actividad </Link>
+          <Link to={`/home/sub-actividad/${this.props.datos.servicio[0].CODIGO_SERVICIO}`}> Nuevas Sub Actividad </Link>
         </div>
       )
 

@@ -1,41 +1,34 @@
 import React from 'react'
+import { Link } from 'react-router'
+import DetalleInformeActions from '../../actions/DetalleInformeActions'
 
 class SubActividad extends React.Component {
-
   constructor() {
     super()
   }
-
+  componentWillMount(){
+    DetalleInformeActions.renderAreaServicio(this.props.datos)
+  }
+  componentDidMount(){
+    DetalleInformeActions.okEstado(this.props.datos)
+  }
+  componentDidUpdate(nextProps){
+    DetalleInformeActions.okEstado(nextProps.datos)
+  }
   render() {
       return (
-        <div class="item-actividades abastecimiento">
-          <div class="title-actividad">
-            <h4>10001 -  LC-2015</h4> 
-            <p><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-          </div>
-          <div class="description-actividad">
-            <div class="opc sub">
-              <h5>Descripción: </h5>
-              <p>Cajoneras Linea Bozz (2 Puestos).</p>
+          <div data-area={this.props.datos.CODIGO_SUBSERVICIO} class="item-actividades sub">
+            <div class="title-actividad">
+              <h4>{this.props.datos.CODIGO_PROYECTO} -  {this.props.datos.CODIGO_SUBSERVICIO}</h4> 
+              <p><Link to={`/home/actualizar-subactividad/${this.props.datos.CODIGO_SUBSERVICIO}`}><i class="fa fa-pencil" aria-hidden="true"></i></Link></p>
             </div>
-            <div class="opc sub">
-              <h5>Cliente: </h5>
-              <p>AFP Planvital S.A.</p>
-            </div>
-            <div class="opc sub">
-              <h5>Observación: </h5>
-              <p>Pocas cosas</p>
-            </div>
-            <div class="opc sub">
-              <h5>Fecha </h5>
-              <p>Desde 2016-05-19 / Hasta 2016-05-19 / Días 4</p>
+            <div data-estado={this.props.datos.CODIGO_SUBSERVICIO} class="description-actividad sub">
+              {this.props.renderSubServicio}
             </div>
           </div>
-        </div>
       )
 
   }
 
 }
-
 export default SubActividad

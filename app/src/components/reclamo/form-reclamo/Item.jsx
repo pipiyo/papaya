@@ -1,11 +1,19 @@
 import React from 'react'
+import DatePicker from 'react-datepicker'
+import moment  from 'moment'
+
+import ReclamoActions from '../../../actions/ReclamoActions'
 
 class Item extends React.Component {
-
   constructor() {
     super()
   }
-
+  renderFechaInicio(date){
+    ReclamoActions.renderFechaInicio(date)
+  }
+  renderFechaEntrega(date){
+    ReclamoActions.renderFechaEntrega(date)
+  }
   render() {
       return (
         <div>
@@ -53,12 +61,12 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <input class="date" id="fechaInicio" type="text"/>
+                <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaInicio} onChange={this.renderFechaInicio.bind(this)} />
             </div>
 
             <div className="item-form">
                 <label>Fecha Entrega</label>
-                <input class="date" id="fechaEntrega" type="text"/>
+                <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaEntrega} onChange={this.renderFechaEntrega.bind(this)} />
             </div>
 
             <div className="item-form">

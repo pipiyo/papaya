@@ -26,8 +26,23 @@ class ItemDespacho extends React.Component {
             <label>Comuna</label>
              <select id="comuna">
                 <option value="">Seleccioné</option>
-                <option value="puente alto">Puente Alto</option>
-                <option value="la florida">La Florida</option>
+                 {
+                  this.props.comunas.map( (comuna) => {
+                    return <option value={comuna.codigo} key={comuna.codigo}>{comuna.nombre}</option>
+                  })
+                } 
+              </select>
+          </div>
+
+          <div className="item-form">
+            <label>Vehiculo</label>
+             <select id="vehiculo">
+               <option value="">Seleccioné</option>
+                {
+                  this.props.vehiculos.map( (vehiculo) => {
+                    return <option value={vehiculo.patente} key={vehiculo.id}>{vehiculo.patente}</option>
+                  })
+                }
               </select>
           </div>
 
@@ -36,9 +51,21 @@ class ItemDespacho extends React.Component {
             <input type="text" id="m3" />
           </div>
           <div className="item-form">
-            <label>TP</label>
-            <input type="text" id="tp" />
-          </div>    
+              <label>FI</label>
+              <input type="number" id="fi" />
+          </div>
+          <div className="item-form">
+            <label>TM</label>
+            <input type="text" id="tm" />
+          </div>  
+          <div className="item-form">
+            <label>TO</label>
+            <input type="text" id="to" />
+          </div>   
+          <div className="item-form">
+            <label>OS</label>
+            <input type="text" id="os" />
+          </div> 
         </div>
       )
 

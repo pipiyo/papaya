@@ -12,7 +12,10 @@ class ReclamoIndex extends React.Component {
       return (
         <div>
             <Title mensaje={this.props.mensaje} />
-            <Form addReclamo={this.props.addReclamo} />
+            <Form 
+            fecha={this.props.fecha}  
+            addReclamo={this.props.addReclamo} 
+            />
         </div>   
       )
 

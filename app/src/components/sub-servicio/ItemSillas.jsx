@@ -18,8 +18,20 @@ class ItemSillas extends React.Component {
           </div>
 
           <div className="item-form">
-            <label>OC</label>
-            <input type="text" id="oc" />
+            <label>Dirección</label>
+            <input type="text" id="direccion" />
+          </div>
+
+          <div className="item-form">
+            <label>Comuna</label>
+             <select id="comuna">
+             <option value="">Seleccioné</option>
+                {
+                  this.props.comunas.map( (comuna) => {
+                    return <option value={comuna.codigo} key={comuna.codigo}>{comuna.nombre}</option>
+                  })
+                }
+              </select>
           </div>
 
           <div className="item-form">

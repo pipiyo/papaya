@@ -1,5 +1,6 @@
 import React from 'react'
 import Notification from './Notification'
+import Env from '../../Config'
 
 class Nav extends React.Component {
 
@@ -22,7 +23,7 @@ class Nav extends React.Component {
               <h2>{this.props.nombre}</h2>
             </div>
             <div className="img-user">
-              <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
+              <img src={`${Env.url}css/images/fondos/cristobal.jpg`} alt="usuario"/>
             </div>
           </nav>
       )
