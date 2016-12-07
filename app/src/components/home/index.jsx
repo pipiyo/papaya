@@ -52,7 +52,7 @@ class Home extends React.Component {
       return (
         <div className="frame">
           <Header menu={ this.menu } submenu={this.subMenus.bind(this)} navmovil={this.navMovil.bind(this)} />
-          <Main notification={this.state.notification} navnotification={this.navNotification.bind(this)} content={this.props.content}/>
+          <Main user={this.props.user} notification={this.state.notification} navnotification={this.navNotification.bind(this)} content={this.props.content}/>
         </div>
       )
 

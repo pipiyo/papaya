@@ -23541,6 +23541,8 @@
 	    localStorage.setItem('name', token.name);
 	    localStorage.setItem('type', token.type);
 	    localStorage.setItem('token', token.token);
+	    localStorage.setItem('full_name', token.full_name);
+	    localStorage.setItem('profile_picture', token.profile_picture);
 	    this.trigger(token);
 	  },
 	  checkUser: function checkUser() {
@@ -23549,6 +23551,8 @@
 	      localStorage.removeItem('name');
 	      localStorage.removeItem('type');
 	      localStorage.removeItem('token');
+	      localStorage.removeItem('full_name');
+	      localStorage.removeItem('profile_picture');
 	      _reactRouter.browserHistory.push('/');
 	    }
 
@@ -59855,13 +59859,27 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _dec, _class;
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
 	var _home = __webpack_require__(509);
 
 	var _home2 = _interopRequireDefault(_home);
+
+	var _HomeStore = __webpack_require__(520);
+
+	var _HomeStore2 = _interopRequireDefault(_HomeStore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59871,8 +59889,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	//@ReactMixin.decorate(Reflux.connect(AuthStore, 'user'))
-	var HomeRoutes = function (_React$Component) {
+	var HomeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_HomeStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(HomeRoutes, _React$Component);
 
 	  function HomeRoutes() {
@@ -59888,13 +59905,12 @@
 	    key: 'render',
 	    value: function render() {
 
-	      return _react2.default.createElement(_home2.default, { content: this.props.children });
+	      return _react2.default.createElement(_home2.default, { content: this.props.children, user: this.state.obj });
 	    }
 	  }]);
 
 	  return HomeRoutes;
-	}(_react2.default.Component);
-
+	}(_react2.default.Component)) || _class);
 	exports.default = HomeRoutes;
 
 /***/ },
@@ -59979,7 +59995,7 @@
 	        'div',
 	        { className: 'frame' },
 	        _react2.default.createElement(_Header2.default, { menu: this.menu, submenu: this.subMenus.bind(this), navmovil: this.navMovil.bind(this) }),
-	        _react2.default.createElement(_Main2.default, { notification: this.state.notification, navnotification: this.navNotification.bind(this), content: this.props.content })
+	        _react2.default.createElement(_Main2.default, { user: this.props.user, notification: this.state.notification, navnotification: this.navNotification.bind(this), content: this.props.content })
 	      );
 	    }
 	  }]);
@@ -60308,50 +60324,28 @@
 	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 	  }
 
+	  /*
+	                <ul>
+	                  <li><a href="#">Pagina 1</a></li>
+	                  <li><a href="#">Pagina 2</a></li>
+	                  <li><a href="#">Pagina 3</a></li>
+	                </ul>
+	  */
+
 	  _createClass(Main, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'main', id: 'main' },
-	        _react2.default.createElement(_Nav2.default, { notification: this.props.notification, navnotification: this.props.navnotification, nombre: 'Crist\xF3bal Maturana' }),
+	        _react2.default.createElement(_Nav2.default, { user: this.props.user, notification: this.props.notification, navnotification: this.props.navnotification }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'breadcrumb' },
-	            _react2.default.createElement(
-	              'ul',
-	              null,
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Pagina 1'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Pagina 2'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Pagina 3'
-	                )
-	              )
-	            )
+	            _react2.default.createElement('ul', null)
 	          ),
 	          /*React.cloneElement(this.props.content, {siteArea: "test"}) */this.props.content
 	        )
@@ -60405,6 +60399,15 @@
 	    return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this));
 	  }
 
+	  /*
+	              <div className="notificacion-user hidden" onClick={this.props.navnotification}>
+	                <p class="notificacion-num">
+	                  21
+	                </p>
+	                { notification }
+	              </div>
+	  */
+
 	  _createClass(Nav, [{
 	    key: 'render',
 	    value: function render() {
@@ -60415,27 +60418,17 @@
 	        { className: 'nav-config' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'notificacion-user', onClick: this.props.navnotification },
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'notificacion-num' },
-	            '21'
-	          ),
-	          notification
-	        ),
-	        _react2.default.createElement(
-	          'div',
 	          { className: 'name-user' },
 	          _react2.default.createElement(
 	            'h2',
 	            null,
-	            this.props.nombre
+	            this.props.user.full_name
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'img-user' },
-	          _react2.default.createElement('img', { src: _Config2.default.url + 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
+	          _react2.default.createElement('img', { src: this.props.user.profile_picture, alt: 'usuario' })
 	        )
 	      );
 	    }
@@ -60724,6 +60717,56 @@
 	}(_react2.default.Component);
 
 	exports.default = AuthRoutes;
+
+/***/ },
+/* 520 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _HomeActions = __webpack_require__(521);
+
+	var _HomeActions2 = _interopRequireDefault(_HomeActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HomeStore = _reflux2.default.createStore({
+	  listenables: [_HomeActions2.default],
+	  getInitialState: function getInitialState() {
+	    return this.x = { full_name: localStorage.getItem('full_name'),
+	      profile_picture: localStorage.getItem('profile_picture') };
+	  }
+	});
+
+	exports.default = HomeStore;
+
+/***/ },
+/* 521 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HomeActions = _reflux2.default.createActions(['checkLogin']);
+
+	exports.default = HomeActions;
 
 /***/ }
 /******/ ]);

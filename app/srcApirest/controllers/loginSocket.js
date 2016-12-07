@@ -1,7 +1,7 @@
 const jwt = require('jwt-simple')
 const moment = require('moment')
 const User = require('../models/user')
-const Userr = require('../models/user')
+const pokemonGif = require('pokemon-gif')
 
 module.exports = (io, request) => {
 
@@ -23,7 +23,7 @@ User.
 
         callback({ 
                     token: jwt.encode( { name: `${user.name}`, type: `${user.type}`, expire: `${moment().format('h:mm:ss')}` }, 'xxx'),
-                    name: `${user.name}`, type: `${user.type}`, nombre_completo: `${user.employee.name} ${user.employee.last_name} ${user.employee.second_name}`
+                    name: `${user.name}`, type: `${user.type}`, full_name: `${user.employee.name} ${user.employee.last_name} ${user.employee.second_name}`, profile_picture: `${user.profile_picture}`
                   })
       
 
@@ -49,7 +49,7 @@ User.
                                   name: auht.name,
                                   password: data.pass,
                                   type: auht.type,
-                                  profile_picture: `http://pokeapi.co/media/img/${Math.floor(Math.random() * 718) + 1}.png`,
+                                  profile_picture: `${pokemonGif(Math.floor(Math.random() * 150) + 1)}`,
                                   employee: {
                                     rut: auht.employee.rut,
                                     name: auht.employee.name,
@@ -70,7 +70,7 @@ User.
 
                     callback({ 
                                 token: jwt.encode( { name: `${doc.name}`, type: `${doc.type}`, expire: `${moment().format('h:mm:ss')}` }, 'xxx'),
-                                name: `${doc.name}`, type: `${doc.type}`, nombre_completo: `${doc.employee.name} ${doc.employee.last_name} ${doc.employee.second_name}`
+                                name: `${doc.name}`, type: `${doc.type}`, full_name: `${doc.employee.name} ${doc.employee.last_name} ${doc.employee.second_name}`, profile_picture: `${doc.profile_picture}` 
                               })
 
 
