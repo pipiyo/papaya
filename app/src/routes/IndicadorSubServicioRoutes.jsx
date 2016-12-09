@@ -18,9 +18,17 @@ export default class IndicadorSubServicioRoutes extends React.Component {
   }
 
   render() {
-      return (
-        <IndicadorSubServicio />       
-      )
+  	if(this.state.obj.subServicio){
+    	return (
+        	<IndicadorSubServicio 
+        	datos={this.state.obj.subServicio}
+        	/>       
+      	)
+    }else{
+    	return (
+    		<div><h1>Cargando</h1></div>
+    	)
+    }
   }
 
 }

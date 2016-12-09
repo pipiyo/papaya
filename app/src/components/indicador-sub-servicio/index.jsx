@@ -13,7 +13,7 @@ class IndicadorSubServicioIndex extends React.Component {
         <div>
           <Title />
           <Filtro />
-          <SubServicio />
+          <SubServicio datos={this.props.datos} />
         </div>   
       )
 

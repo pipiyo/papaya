@@ -43,7 +43,7 @@ module.exports = (io) => {
 
   /* Proyecto, Servicio, Sub-servicio */
   socket.on('allProyectoSubServicio', (data) => {
-      let query = 'SELECT CODIGO_SUBSERVICIO FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO;' 
+      let query = 'SELECT sub_servicio.CODIGO_SUBSERVICIO, proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.DESCRIPCION as SD , sub_servicio.SUB_DESCRIPCION as SSD,sub_servicio.SUB_FECHA_INICIO, sub_servicio.SUB_FECHA_ENTREGA, sub_servicio.SUB_OBSERVACIONES, sub_servicio.SUB_ESTADO FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO;' 
       let query1 = 'SELECT count(CODIGO_SUBSERVICIO) as total FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO' 
       
       pool.getConnection( (err, connection) => {

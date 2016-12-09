@@ -1399,26 +1399,49 @@ a.external-link, .external-link a {
 /* Table */
 
 .module-table{
-    margin: auto;
+    max-width: 100%;
     width: calc(100% - 1em);
+    margin: auto;
+    
+    margin-bottom: 1em;
     max-height: 500px;
-    overflow: scroll;
-    padding: .5em;
-    border:solid 1px #ccc;
+    @include small-desktop-down{
+        border:none;
+    }
     &.abastecimiento{table{th{background: $color_abastecimiento; color: $blanco}}}
-    table{
-        min-width: 800px;
-        border-collapse: collapse;
-        td{
-            border: solid 1px #ccc;
-            font-size: $fontTiny;
-            padding: .3em;
+    .module-table-content{
+        width: 100%;
+        overflow: scroll;
+        margin: auto;
+        max-height: 500px;
+        @include small-desktop-down{
+            max-width: 750px;
         }
-        th{
-            padding: .3em;
-            border: solid 1px #ccc;
+        @include tablet-down{
+            max-width: 580px;
         }
+        @include vertical-tablet-down {
+            max-width: 100%;
+        }
+        table{
+            width: 700%;
+            max-width: 1700px;
+            border-collapse: collapse;
+            touch-action: pan-x;
+            @include vertical-tablet-down {
+                width: 700%;
+            }
+            td{
+                border: solid 1px #ccc;
+                font-size: $fontTiny;
+                padding: .3em;
+            }
+            th{
+                padding: .3em;
+                border: solid 1px #ccc;
+            }
 
+        }
     }
 
 }

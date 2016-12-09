@@ -12,7 +12,7 @@ const socket = io.connect( `${Env.url}subServicio` )
 let IndicadorSubServicioStore = Reflux.createStore({
   listenables: [IndicadorSubServicioActions],
   obj: { 
-
+    subServicio : ""
   },
   init: function() {
 
@@ -23,7 +23,8 @@ let IndicadorSubServicioStore = Reflux.createStore({
   renderSubServicio: function(){
     socket.emit('allProyectoSubServicio')
     socket.on('okAllProyectoSubServicio', (okSearchServicio) =>{
-      console.log(okSearchServicio)
+      this.obj.subServicio = okSearchServicio.sub
+      this.trigger(this.obj)
     })
   }
 })
