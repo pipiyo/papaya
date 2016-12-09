@@ -786,7 +786,6 @@ a.external-link, .external-link a {
     flex-wrap: wrap;
     margin: 0 .5em 1em .5em;
     border: solid 1px $gris_lighter;
-    width: calc(100% - 2em); 
     .item-filter{
         padding: 1em;
         width: 25%;
@@ -1392,4 +1391,34 @@ a.external-link, .external-link a {
             }
         }
     }
+}
+
+/* Table */
+/* Table */
+/* Table */
+/* Table */
+
+.module-table{
+    margin: auto;
+    width: calc(100% - 1em);
+    max-height: 500px;
+    overflow: scroll;
+    padding: .5em;
+    border:solid 1px #ccc;
+    &.abastecimiento{table{th{background: $color_abastecimiento; color: $blanco}}}
+    table{
+        min-width: 800px;
+        border-collapse: collapse;
+        td{
+            border: solid 1px #ccc;
+            font-size: $fontTiny;
+            padding: .3em;
+        }
+        th{
+            padding: .3em;
+            border: solid 1px #ccc;
+        }
+
+    }
+
 }

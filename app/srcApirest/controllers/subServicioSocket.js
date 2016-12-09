@@ -39,9 +39,22 @@ module.exports = (io) => {
                 console.log('Error ' + err)
           }) 
       })
+  })
 
-
-
+  /* Proyecto, Servicio, Sub-servicio */
+  socket.on('allProyectoSubServicio', (data) => {
+      let query = 'SELECT CODIGO_SUBSERVICIO FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO;' 
+      let query1 = 'SELECT count(CODIGO_SUBSERVICIO) as total FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO' 
+      
+      pool.getConnection( (err, connection) => {
+          connection.query(query+query1, (err, rows, fields) => {
+              connection.release()
+              if (!err)
+                socket.emit('okAllProyectoSubServicio', { sub:rows[0], total:rows[1]})
+              else
+                console.log('Error ' + err)
+          }) 
+      })
   })
 
   /* Search Sub Servicio */

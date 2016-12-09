@@ -11,7 +11,7 @@ class Home extends React.Component {
     this.menu = [
       {id:"11",img: <i class="fa fa-bullhorn" aria-hidden="true"></i>, name: "Planificación", icon: "icon planificacion", "item":[{id:"1",nombre:"Nueva Actividad",ruta:"/home/actividad/ingreso/nueva"},{id:"2",nombre:"Informe Planificación",ruta:"/home/informe/planificación"}]},
       {id:"1",img: <i className="fa fa-rocket" aria-hidden="true"></i>, name: "Rochas", icon: "icon rocha", "item": [{id:"1",nombre:"Informe Rochas",ruta:"/home/informe-rochas"}]},
-      {id:"3",img: <i className="fa fa-shopping-cart" aria-hidden="true"></i>, name: "Abastecimiento", icon: "icon abastecimiento" , "item":[{id:"1",nombre:"Informe Abastecimiento",ruta:"/home/informe/abastecimiento"}]},
+      {id:"3",img: <i className="fa fa-shopping-cart" aria-hidden="true"></i>, name: "Abastecimiento", icon: "icon abastecimiento" , "item":[{id:"1",nombre:"Informe Abastecimiento",ruta:"/home/informe/abastecimiento"},{id:"2",nombre:"Sub Actividades",ruta:"/home/indicadores/abastecimiento"}]},
       {id:"4",img: <i className="fa fa-suitcase" aria-hidden="true"></i>, name: "Comercial", icon: "icon comercial", "item":[{id:"1",nombre:"Informe Comercial",ruta:"/home/informe/comercial"}]},
       {id:"5",img: <i className="fa fa-pencil" aria-hidden="true"></i>, name: "Dam" , icon: "icon dam", "item": false},
       {id:"6",img: <i className="fa fa-lightbulb-o" aria-hidden="true"></i>, name: "Técnica", icon: "icon desarrollo", "item":[{id:"1",nombre:"Informe Técnica",ruta:"/home/informe/técnica"}]},
