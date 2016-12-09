@@ -22,7 +22,7 @@ export default class HomeRoutes extends React.Component {
   render() {
 
       return (
-            <Home content={this.props.children} user={this.state.obj} />
+            <Home content={this.props.children} obj={this.state.obj} />
       )
 
   }

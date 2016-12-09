@@ -24,9 +24,11 @@ class Nav extends React.Component {
       (this.props.notification == null) ? notification = "" : notification = <Notification />
       return (
           <nav className="nav-config">
+
             <div className="name-user">
               <h2>{this.props.user.full_name}</h2>
             </div>
+
             <div className="img-user">
               <img src={this.props.user.profile_picture} alt="usuario"/>
             </div>

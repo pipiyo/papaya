@@ -12,7 +12,7 @@ class Area extends React.Component {
             <li data-active={this.props.num}>
               <a href="#" data-click={this.props.num} onClick={this.props.submenu} >
                 <div className={this.props.icon}>
-                 {this.props.img}
+                  <i className={this.props.img} aria-hidden="true"></i>    
                 </div>
                 <p>{this.props.name}</p>
                </a>
