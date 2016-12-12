@@ -258,6 +258,12 @@ a.external-link, .external-link a {
 .relative{
     position:relative;
 }
+.a-center{
+    text-align: center;
+}
+.a-right{
+    text-align: right;
+}
 
 
 /**** frame ****/
@@ -286,6 +292,7 @@ a.external-link, .external-link a {
         display: table-cell;
         height: 100%;
         vertical-align: top;
+        width: calc(100% - 250px);
         @include vertical-tablet-down {
             width: 100%;
             display: block;
@@ -1400,48 +1407,55 @@ a.external-link, .external-link a {
 
 
 .module-table{
-    max-width: 100%;
-    width: calc(100% - 1em);
+    border:solid 1px $gris;
+    overflow:scroll;
     margin: auto;
-    margin-bottom: 1em;
-    max-height: 500px;
+    max-width: 1000px;
     @include small-desktop-down{
-        border:none;
+        max-width: 550px;
+        max-height: 300px;
     }
-    &.abastecimiento{table{th{background: $color_abastecimiento; color: $blanco}}}
-    .module-table-content{
-        width: 100%;
-        overflow: scroll;
-        margin: auto;
+    @include vertical-tablet-down {
+        max-width: calc(100% - 1em);
+        max-height: 300px;
+    }
+    @include desktop-only{
+        max-width: 900px;
+        max-height: 300px;
+    }
+    @include desktop-max{
+        max-width: 1200px;
         max-height: 500px;
-        @include small-desktop-down{
-            max-width: 750px;
-        }
-        @include tablet-down{
-            max-width: 580px;
-        }
-        @include vertical-tablet-down {
-            max-width: 100%;
-        }
-        table{
-            width: 700%;
-            max-width: 1700px;
-            border-collapse: collapse;
-            touch-action: pan-x;
-            @include vertical-tablet-down {
-                width: 700%;
-            }
-            td{
-                border: solid 1px #ccc;
-                font-size: $fontTiny;
-                padding: .3em;
-            }
-            th{
-                padding: .3em;
-                border: solid 1px #ccc;
-            }
+    }
+    &.abastecimiento{.module-table-container{.module-table-item{background:$color_abastecimiento;padding: .5em;}}}
+    &.sillas{.module-table-container{.module-table-item{background:$color_sillas;padding: .5em;}}}
 
+    &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
+    .module-table-container{
+        display: flex;
+        flex-wrap: wrap;
+        .module-table-item{
+            width: 200px;
+            text-align: center;
+            + .module-table-item{
+                border-left: solid 1px $gris;
+            }
         }
     }
-
+    &[data-col="once"]{.module-table-content{width:calc(11 * 200px);}}
+    .module-table-content{
+        display: flex;
+        flex-wrap: wrap;
+        + .module-table-content{
+            border-top: solid 1px $gris;
+        }
+        .module-table-content-item{
+            width: 200px;
+            font-size: $fontTiny;
+            padding: .5em;
+            + .module-table-content-item{
+                border-left: solid 1px $gris;
+            }
+        }
+    }
 }

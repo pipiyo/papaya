@@ -22,7 +22,7 @@ class Home extends React.Component {
       {id:"12",img: <i className="fa fa-fire-extinguisher" aria-hidden="true"></i>, name: "Prevención", icon: "icon prevencion", "item": false},
       {id:"13",img: <i className="fa fa-cog" aria-hidden="true"></i>, name: "Producción", icon: "icon produccion", "item":[{id:"1",nombre:"Informe Producción",ruta:"/home/informe/producción"}]},
       {id:"14",img: <i className="fa fa-book" aria-hidden="true"></i>, name: "Reclamos", icon: "icon reclamos", "item":[{id:"1",nombre:"Nuevo Reclamo",ruta:"/home/reclamo"},{id:"2",nombre:"Nueva Actividad Reclamo",ruta:"/home/actividad/ingreso/reclamo"},{id:"3",nombre:"Informe Reclamo",ruta:"/home/informe/reclamo"}]},
-      {id:"15",img: <i className="fa fa-cog" aria-hidden="true"></i>, name: "Sillas" , icon: "icon sillas", "item":[{id:"1",nombre:"Informe Sillas",ruta:"/home/informe/sillas"}]},
+      {id:"15",img: <i className="fa fa-cog" aria-hidden="true"></i>, name: "Sillas" , icon: "icon sillas", "item":[{id:"1",nombre:"Informe Sillas",ruta:"/home/informe/sillas"},{id:"2",nombre:"Sub Actividades",ruta:"/home/indicadores/sillas"}]},
       {id:"16",img: <i className="fa fa-bolt" aria-hidden="true"></i>, name: "Sistema" , icon: "icon sistema", "item": false},
     ]
   }

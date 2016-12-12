@@ -1,54 +1,53 @@
 import React from 'react'
+import IndicadorSubServicioActions from '../../actions/IndicadorSubServicioActions'
 
 class Title extends React.Component {
 
   constructor() {
     super()
   }
+  componentDidMount(){
+    IndicadorSubServicioActions.renderAreaServicio(this.props.area)
+  }
+  componentDidUpdate(nextProps){
+    IndicadorSubServicioActions.renderAreaServicio(nextProps.area, this.props.area)
+  }
   render() {
       return (
-        <div class="module-table abastecimiento">
-          <div class="module-table-content">
-            <table>
-              <thead>
-              <tr>
-                <th>Rocha</th>
-                <th>Cliente</th>
-                <th>Ejecutivo</th>
-                <th>Actividad</th>
-                <th>Descripción</th>
-                <th>Sub Actividad</th>
-                <th>Descripción</th>
-                <th>Fecha I</th>
-                <th>Fecha E</th>
-                <th>Observación</th>
-                <th>Estado</th>
-              </tr>
-              </thead>
-              <tbody>
-               {
-                this.props.datos.map( (datos) => {
+        <div class="module-table" data-col="once" data-area="ok">
+          <div class="module-table-container">
+              <div class="module-table-item">Rocha</div>
+              <div class="module-table-item">Cliente</div>
+              <div class="module-table-item">Ejecutivo</div>
+              <div class="module-table-item">Actividad</div>
+              <div class="module-table-item">Descripción</div>
+              <div class="module-table-item">Sub Actividad</div>
+              <div class="module-table-item">Descripción</div>
+              <div class="module-table-item">Fecha I</div>
+              <div class="module-table-item">Fecha E</div>
+              <div class="module-table-item">Observación</div>
+              <div class="module-table-item">Estado</div>
+    
+              {
+                this.props.datos.map( (datos,i) => {
                   return( 
-                    <tr key={datos.CODIGO_SUBSERVICIO}>
-                        <td>{datos.CODIGO_PROYECTO}</td>
-                        <td>{datos.NOMBRE_CLIENTE}</td>
-                        <td>{datos.EJECUTIVO}</td>
-                        <td>{datos.CODIGO_SERVICIO}</td>
-                        <td>{datos.SD}</td>
-                        <td>{datos.CODIGO_SUBSERVICIO}</td>
-                        <td>{datos.SSD}</td>
-                        <td>{datos.SUB_FECHA_INICIO.substring(0,10)}</td>
-                        <td>{datos.SUB_FECHA_ENTREGA.substring(0,10)}</td>
-                        <td>{datos.SUB_OBSERVACIONES}</td>
-                        <td>{datos.SUB_ESTADO}</td>
-                    </tr>
+                    <div class="module-table-content" key={i}>
+                        <div class="module-table-content-item a-center">{datos.CODIGO_PROYECTO}</div>
+                        <div class="module-table-content-item">{datos.NOMBRE_CLIENTE}</div>
+                        <div class="module-table-content-item">{datos.EJECUTIVO}</div>
+                        <div class="module-table-content-item a-right">{datos.CODIGO_SERVICIO}</div>
+                        <div class="module-table-content-item">{datos.SD}</div>
+                        <div class="module-table-content-item a-right">{datos.CODIGO_SUBSERVICIO}</div>
+                        <div class="module-table-content-item">{datos.SSD}</div>
+                        <div class="module-table-content-item a-center">{datos.SUB_FECHA_INICIO.substring(0,10)}</div>
+                        <div class="module-table-content-item a-center">{datos.SUB_FECHA_ENTREGA.substring(0,10)}</div>
+                        <div class="module-table-content-item">{datos.SUB_OBSERVACIONES}</div>
+                        <div class="module-table-content-item">{datos.SUB_ESTADO}</div>
+                    </div>
                   )
                 })
-                }
-                
-              </tbody>
-            </table>
-          </div>
+              }
+          </div>   
         </div>
       )
 

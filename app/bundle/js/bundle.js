@@ -56458,14 +56458,40 @@
 	  _createClass(IndicadorSubServicioRoutes, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _IndicadorSubServicioActions2.default.renderSubServicio();
+	      _IndicadorSubServicioActions2.default.renderSubServicio(this.props.params.area);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps, nextState) {
+	      _IndicadorSubServicioActions2.default.renderSubServicio(nextProps.params.area);
+	    }
+	  }, {
+	    key: 'renderFiltro',
+	    value: function renderFiltro() {
+	      _IndicadorSubServicioActions2.default.renderFiltro();
+	    }
+	  }, {
+	    key: 'renderFiltroFi',
+	    value: function renderFiltroFi(date) {
+	      _IndicadorSubServicioActions2.default.renderFiltroFi(date);
+	    }
+	  }, {
+	    key: 'renderFiltroFe',
+	    value: function renderFiltroFe(date) {
+	      _IndicadorSubServicioActions2.default.renderFiltroFe(date);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (this.state.obj.subServicio) {
 	        return _react2.default.createElement(_indicadorSubServicio2.default, {
-	          datos: this.state.obj.subServicio
+	          area: this.props.params.area,
+	          ejecutivo: this.state.obj.ejecutivo,
+	          datos: this.state.obj.subServicio,
+	          filtro: this.state.obj.filtro,
+	          renderFiltro: this.renderFiltro.bind(this),
+	          renderFiltroFi: this.renderFiltroFi.bind(this),
+	          renderFiltroFe: this.renderFiltroFe.bind(this)
 	        });
 	      } else {
 	        return _react2.default.createElement(
@@ -56501,7 +56527,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var IndicadorSubServicioActions = _reflux2.default.createActions(['renderSubServicio']);
+	var IndicadorSubServicioActions = _reflux2.default.createActions(['renderSubServicio', 'renderFiltro', 'renderFiltroFi', 'renderFiltroFe', 'renderAreaServicio']);
 
 	exports.default = IndicadorSubServicioActions;
 
@@ -56548,20 +56574,146 @@
 	var IndicadorSubServicioStore = _reflux2.default.createStore({
 	  listenables: [_IndicadorSubServicioActions2.default],
 	  obj: {
-	    subServicio: ""
+	    subServicio: "",
+	    ejecutivo: "",
+	    area: "",
+	    filtro: { fechaInicio: null, fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null }
 	  },
 	  init: function init() {},
 	  getInitialState: function getInitialState() {
 	    return this.obj;
 	  },
-	  renderSubServicio: function renderSubServicio() {
+	  renderSubServicio: function renderSubServicio(area) {
 	    var _this = this;
 
-	    socket.emit('allProyectoSubServicio');
+	    this.obj.area = area;
+	    socket.emit('allProyectoSubServicio', this.obj.filtro, this.obj.area);
 	    socket.on('okAllProyectoSubServicio', function (okSearchServicio) {
 	      _this.obj.subServicio = okSearchServicio.sub;
+	      _this.obj.ejecutivo = okSearchServicio.ejecutivo;
 	      _this.trigger(_this.obj);
 	    });
+	  },
+	  renderFiltro: function renderFiltro() {
+	    var _this2 = this;
+
+	    var fechaI = document.getElementById("fechaInicio").value;
+	    var fechaE = document.getElementById("fechaEntrega").value;
+	    var codigo = document.getElementById("codigo").value;
+	    var estado = document.getElementById("estado").value;
+	    var vendedor = document.getElementById("vendedor").value;
+	    var categoria = document.getElementById("categoria").value;
+	    var cliente = document.getElementById("cliente").value;
+
+	    if (codigo != "") {
+	      this.obj.filtro.codigo = codigo;
+	    } else {
+	      this.obj.filtro.codigo = null;
+	    }
+	    if (vendedor != "") {
+	      this.obj.filtro.vendedor = vendedor;
+	    } else {
+	      this.obj.filtro.vendedor = null;
+	    }
+	    if (categoria != "") {
+	      this.obj.filtro.categoria = categoria;
+	    } else {
+	      this.obj.filtro.categoria = null;
+	    }
+	    if (cliente != "") {
+	      this.obj.filtro.cliente = cliente;
+	    } else {
+	      this.obj.filtro.cliente = null;
+	    }
+	    if (fechaI != "") {
+	      this.obj.filtro.fechai = fechaI;
+	    } else {
+	      this.obj.filtro.fechai = undefined;
+	    }
+	    if (fechaE != "") {
+	      this.obj.filtro.fechae = fechaE;
+	    } else {
+	      this.obj.filtro.fechae = undefined;
+	    }
+	    this.obj.filtro.estado = estado;
+
+	    socket.emit('allProyectoSubServicio', this.obj.filtro, this.obj.area);
+	    socket.on('okAllProyectoSubServicio', function (okSearchServicio) {
+	      _this2.obj.subServicio = okSearchServicio.sub;
+	      _this2.obj.ejecutivo = okSearchServicio.ejecutivo;
+	      _this2.trigger(_this2.obj);
+	    });
+	  },
+	  renderFiltroFi: function renderFiltroFi(date) {
+	    if ((0, _moment2.default)(date).isValid()) {
+	      document.getElementById("fechaInicio").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	      this.obj.filtro.fechaInicio = date;
+	      this.renderFiltro();
+	    } else {
+	      document.getElementById("fechaInicio").value = "";
+	      this.obj.filtro.fechaInicio = undefined;
+	      this.renderFiltro();
+	    }
+	  },
+	  renderFiltroFe: function renderFiltroFe(date) {
+	    if ((0, _moment2.default)(date).isValid()) {
+	      document.getElementById("fechaEntrega").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	      this.obj.filtro.fechaEntrega = date;
+	      this.renderFiltro();
+	    } else {
+	      document.getElementById("fechaEntrega").value = "";
+	      this.obj.filtro.fechaEntrega = undefined;
+	      this.renderFiltro();
+	    }
+	  },
+	  renderAreaServicio: function renderAreaServicio(actual, antigua) {
+	    var area = "";
+	    var area1 = null;
+	    switch (actual) {
+	      case "abastecimiento":
+	        area = "abastecimiento";
+	        break;
+	      case "Despacho":
+	        area = "despacho";
+	        break;
+	      case "Instalacion":
+	        area = "instalaciones";
+	        break;
+	      case "Produccion":
+	        area = "produccion";
+	        break;
+	      case "Desarrollo":
+	        area = "desarrollo";
+	        break;
+	      case "sillas":
+	        area = "sillas";
+	        break;
+	    }
+	    document.querySelector('[data-area="ok"]').classList.add(area);
+	    if (antigua) {
+	      switch (antigua) {
+	        case "abastecimiento":
+	          area1 = "abastecimiento";
+	          break;
+	        case "Despacho":
+	          area1 = "despacho";
+	          break;
+	        case "Instalacion":
+	          area1 = "instalaciones";
+	          break;
+	        case "Produccion":
+	          area1 = "produccion";
+	          break;
+	        case "Desarrollo":
+	          area1 = "desarrollo";
+	          break;
+	        case "sillas":
+	          area1 = "sillas";
+	          break;
+	      }
+	      document.querySelector('[data-area="ok"]').classList.remove(area);
+	      document.querySelector('[data-area="ok"]').classList.add(area1);
+	    }
 	  }
 	});
 
@@ -56618,9 +56770,18 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Title2.default, null),
-	        _react2.default.createElement(_Filtro2.default, null),
-	        _react2.default.createElement(_SubServicio2.default, { datos: this.props.datos })
+	        _react2.default.createElement(_Title2.default, { area: this.props.area }),
+	        _react2.default.createElement(_Filtro2.default, {
+	          ejecutivo: this.props.ejecutivo,
+	          filtro: this.props.filtro,
+	          renderFiltro: this.props.renderFiltro,
+	          renderFiltroFi: this.props.renderFiltroFi,
+	          renderFiltroFe: this.props.renderFiltroFe
+	        }),
+	        _react2.default.createElement(_SubServicio2.default, {
+	          area: this.props.area,
+	          datos: this.props.datos
+	        })
 	      );
 	    }
 	  }]);
@@ -56686,7 +56847,7 @@
 	                        null,
 	                        ' Fecha Inicio '
 	                    ),
-	                    _react2.default.createElement('input', { type: 'text', autoComplete: 'off', className: 'date', id: 'fechaInicio' })
+	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.props.filtro.fechaInicio, onChange: this.props.renderFiltroFi })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -56696,7 +56857,7 @@
 	                        null,
 	                        ' Fecha Entrega '
 	                    ),
-	                    _react2.default.createElement('input', { type: 'text', autoComplete: 'off', className: 'date', id: 'fechaEntrega' })
+	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.filtro.fechaEntrega, onChange: this.props.renderFiltroFe })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -56706,7 +56867,7 @@
 	                        null,
 	                        ' C\xF3digo Rocha'
 	                    ),
-	                    _react2.default.createElement('input', { autoComplete: 'off', id: 'codigo', type: 'text' })
+	                    _react2.default.createElement('input', { autoComplete: 'off', id: 'codigo', type: 'text', onChange: this.props.renderFiltro })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -56718,7 +56879,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'select',
-	                        { id: 'estado' },
+	                        { id: 'estado', onChange: this.props.renderFiltro },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: 'En Proceso' },
@@ -56728,6 +56889,11 @@
 	                            'option',
 	                            { value: 'ACTA' },
 	                            'Acta'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Emitido' },
+	                            'Emitido'
 	                        ),
 	                        _react2.default.createElement(
 	                            'option',
@@ -56751,12 +56917,19 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'select',
-	                        { id: 'vendedor' },
+	                        { id: 'vendedor', onChange: this.props.renderFiltro },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: '' },
 	                            'Seleccione'
-	                        )
+	                        ),
+	                        this.props.ejecutivo.map(function (ejecutivo) {
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { value: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO, key: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO },
+	                                ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO
+	                            );
+	                        })
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -56769,7 +56942,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'select',
-	                        { id: 'categoria' },
+	                        { id: 'categoria', onChange: this.props.renderFiltro },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: '' },
@@ -56800,7 +56973,7 @@
 	                        null,
 	                        'Cliente'
 	                    ),
-	                    _react2.default.createElement('input', { autoComplete: 'off', id: 'cliente', type: 'text' })
+	                    _react2.default.createElement('input', { onChange: this.props.renderFiltro, autoComplete: 'off', id: 'cliente', type: 'text' })
 	                )
 	            );
 	        }
@@ -56868,7 +57041,7 @@
 /* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -56879,6 +57052,10 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _IndicadorSubServicioActions = __webpack_require__(473);
+
+	var _IndicadorSubServicioActions2 = _interopRequireDefault(_IndicadorSubServicioActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56898,146 +57075,140 @@
 	  }
 
 	  _createClass(Title, [{
-	    key: "render",
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      _IndicadorSubServicioActions2.default.renderAreaServicio(this.props.area);
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(nextProps) {
+	      _IndicadorSubServicioActions2.default.renderAreaServicio(nextProps.area, this.props.area);
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "module-table abastecimiento" },
+	        'div',
+	        { className: 'module-table', 'data-col': 'once', 'data-area': 'ok' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "module-table-content" },
+	          'div',
+	          { className: 'module-table-container' },
 	          _react2.default.createElement(
-	            "table",
-	            null,
-	            _react2.default.createElement(
-	              "thead",
-	              null,
+	            'div',
+	            { className: 'module-table-item' },
+	            'Rocha'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Cliente'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Ejecutivo'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Actividad'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Descripci\xF3n'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Sub Actividad'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Descripci\xF3n'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Fecha I'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Fecha E'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Observaci\xF3n'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Estado'
+	          ),
+	          this.props.datos.map(function (datos, i) {
+	            return _react2.default.createElement(
+	              'div',
+	              { className: 'module-table-content', key: i },
 	              _react2.default.createElement(
-	                "tr",
-	                null,
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Rocha"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Cliente"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Ejecutivo"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Actividad"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Descripci\xF3n"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Sub Actividad"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Descripci\xF3n"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Fecha I"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Fecha E"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Observaci\xF3n"
-	                ),
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  "Estado"
-	                )
+	                'div',
+	                { className: 'module-table-content-item a-center' },
+	                datos.CODIGO_PROYECTO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.NOMBRE_CLIENTE
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.EJECUTIVO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-right' },
+	                datos.CODIGO_SERVICIO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SD
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-right' },
+	                datos.CODIGO_SUBSERVICIO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SSD
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-center' },
+	                datos.SUB_FECHA_INICIO.substring(0, 10)
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-center' },
+	                datos.SUB_FECHA_ENTREGA.substring(0, 10)
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SUB_OBSERVACIONES
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SUB_ESTADO
 	              )
-	            ),
-	            _react2.default.createElement(
-	              "tbody",
-	              null,
-	              this.props.datos.map(function (datos) {
-	                return _react2.default.createElement(
-	                  "tr",
-	                  { key: datos.CODIGO_SUBSERVICIO },
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.CODIGO_PROYECTO
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.NOMBRE_CLIENTE
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.EJECUTIVO
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.CODIGO_SERVICIO
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.SD
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.CODIGO_SUBSERVICIO
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.SSD
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.SUB_FECHA_INICIO.substring(0, 10)
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.SUB_FECHA_ENTREGA.substring(0, 10)
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.SUB_OBSERVACIONES
-	                  ),
-	                  _react2.default.createElement(
-	                    "td",
-	                    null,
-	                    datos.SUB_ESTADO
-	                  )
-	                );
-	              })
-	            )
-	          )
+	            );
+	          })
 	        )
 	      );
 	    }
@@ -60589,7 +60760,7 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
 	    _this.state = { active: 'active', notification: null };
-	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
+	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
 	    return _this;
 	  }
 	  /* Agrega clase active para desplegar sub-menus */
