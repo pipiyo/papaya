@@ -3,8 +3,23 @@ import HomeActions from '../actions/HomeActions'
 
 let HomeStore = Reflux.createStore({
   listenables: [HomeActions],
-  getInitialState: function() {
-    return this.obj = { 
+  obj: { 
+                      	user: {
+                      			null,
+                      			null
+                      	},
+                        menu: null,
+						active : null,
+						notification : null,
+						navMovil: null,
+						subMenus: null,
+						navNotification: null
+  },
+  init: function() {
+    this.getObj()
+  },
+  getObj: function() {
+    this.obj = { 
                       	user: {
                       			full_name: localStorage.getItem('full_name'),
                       			profile_picture: localStorage.getItem('profile_picture')
@@ -33,7 +48,9 @@ let HomeStore = Reflux.createStore({
 						navNotification: this.navNotification
                        }
   },
-
+  getInitialState: function() {
+    return this.obj
+  },
 
   /* Agrega clase active para desplegar sub-menus */
   navMovil: function(ev){

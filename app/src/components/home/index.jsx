@@ -12,8 +12,15 @@ class Home extends React.Component {
   render() {
       return (
         <div className="frame">
-          <Header menu={this.props.obj.menu} submenu={this.props.obj.subMenus} navmovil={this.props.obj.navMovil} />
-          <Main user={this.props.obj.user} notification={this.props.obj.notification} navnotification={this.props.obj.navNotification} content={this.props.content}/>
+          <Header 
+            menu={this.props.obj.menu} 
+            submenu={this.props.obj.subMenus} 
+            navmovil={this.props.obj.navMovil} />
+          <Main 
+            user={this.props.obj.user} 
+            notification={this.props.obj.notification} 
+            navnotification={this.props.obj.navNotification} 
+            content={this.props.content}/>
         </div>
       )
 
