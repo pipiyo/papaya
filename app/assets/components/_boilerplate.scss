@@ -1398,11 +1398,11 @@ a.external-link, .external-link a {
 /* Table */
 /* Table */
 
+
 .module-table{
     max-width: 100%;
     width: calc(100% - 1em);
     margin: auto;
-    
     margin-bottom: 1em;
     max-height: 500px;
     @include small-desktop-down{
