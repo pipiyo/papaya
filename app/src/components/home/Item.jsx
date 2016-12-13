@@ -20,7 +20,7 @@ class Item extends React.Component {
         for(i=0;i<valor.length;i++){
           sub.push(<li key={valor[i]['id']}><Link to={valor[i]['ruta']}>{valor[i]['nombre']}</Link></li>)
         }
-        rows.push(<Area submenu={this.props.submenu} img={menu.img} icon={menu.icon} name={menu.name} key={menu.id} sub={sub} num={e} />)
+        rows.push(<Area submenu={this.props.submenu} img={menu.img} icon={menu.icon} name={menu.name} key={menu.id} sub={sub} num={e} />)    
         e++
       })
 

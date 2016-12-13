@@ -73,8 +73,6 @@ module.exports = (io) => {
                                                    categoria: data.categoria
                                                  } })
 
-
-
             notification.save().then( (doc) => {
               console.log( doc )
             }, (error) => {
