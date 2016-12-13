@@ -8,9 +8,11 @@ class Title extends React.Component {
   }
   componentDidMount(){
     IndicadorSubServicioActions.renderAreaServicio(this.props.area)
+    IndicadorSubServicioActions.renderButton(this.props.total[0].total,this.props.datos.length)
   }
   componentDidUpdate(nextProps){
     IndicadorSubServicioActions.renderAreaServicio(nextProps.area, this.props.area)
+    IndicadorSubServicioActions.renderButton(nextProps.total[0].total,nextProps.datos.length)
   }
   render() {
       return (
@@ -47,6 +49,9 @@ class Title extends React.Component {
                   )
                 })
               }
+          </div>
+          <div class="module-table-button">
+            <button id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
           </div>   
         </div>
       )

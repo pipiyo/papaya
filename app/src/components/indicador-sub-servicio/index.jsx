@@ -19,7 +19,9 @@ class IndicadorSubServicioIndex extends React.Component {
           renderFiltroFi={this.props.renderFiltroFi}
           renderFiltroFe={this.props.renderFiltroFe}
           />
-          <SubServicio 
+          <SubServicio
+          total={this.props.total} 
+          renderViewMore={this.props.renderViewMore}
           area={this.props.area}
           datos={this.props.datos} 
           />

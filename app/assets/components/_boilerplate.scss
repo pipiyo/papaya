@@ -1446,15 +1446,31 @@ a.external-link, .external-link a {
     .module-table-content{
         display: flex;
         flex-wrap: wrap;
-        + .module-table-content{
-            border-top: solid 1px $gris;
-        }
+        border-bottom: solid 1px $gris;
         .module-table-content-item{
             width: 200px;
             font-size: $fontTiny;
             padding: .5em;
             + .module-table-content-item{
                 border-left: solid 1px $gris;
+            }
+        }
+    }
+    .module-table-button{
+        button{
+            @include reset-appearance;
+            width: 200px;
+            padding: 1em;
+            margin: 1em;
+            color: $blanco;
+            background: $color_corporativo_dark;
+            display: block;
+            &:hover{
+              background: $color_corporativo_darker;
+              cursor: pointer;  
+            }
+            &.hidden{
+                display: none;
             }
         }
     }

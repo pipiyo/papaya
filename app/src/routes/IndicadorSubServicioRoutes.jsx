@@ -17,6 +17,7 @@ export default class IndicadorSubServicioRoutes extends React.Component {
   	IndicadorSubServicioActions.renderSubServicio(this.props.params.area)
   }
   componentWillReceiveProps(nextProps, nextState){
+    IndicadorSubServicioActions.renderReset()
     IndicadorSubServicioActions.renderSubServicio(nextProps.params.area)
   }
   renderFiltro(){
@@ -28,17 +29,22 @@ export default class IndicadorSubServicioRoutes extends React.Component {
   renderFiltroFe(date){
     IndicadorSubServicioActions.renderFiltroFe(date)
   }
+  renderViewMore(){
+    IndicadorSubServicioActions.renderViewMore()
+  }
   render() {
   	if(this.state.obj.subServicio){
     	return (
         	<IndicadorSubServicio
           area={this.props.params.area} 
+          total={this.state.obj.total}
           ejecutivo={this.state.obj.ejecutivo}
         	datos={this.state.obj.subServicio}
           filtro={this.state.obj.filtro}
           renderFiltro={this.renderFiltro.bind(this)}
           renderFiltroFi={this.renderFiltroFi.bind(this)}
           renderFiltroFe={this.renderFiltroFe.bind(this)}
+          renderViewMore={this.renderViewMore.bind(this)}
         	/>       
       	)
     }else{

@@ -14,14 +14,19 @@ let IndicadorSubServicioStore = Reflux.createStore({
   obj: { 
     subServicio : "",
     ejecutivo: "",
+    total: 0,
     area: "",
-    filtro:{fechaInicio:null,fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null}
+    button: "",
+    filtro:{fechaInicio:null,fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100}
   },
   init: function() {
-
+   
   },
   getInitialState: function() {
     return this.obj
+  },
+  renderReset: function(){
+     this.obj.filtro.limit = 5
   },
   renderSubServicio: function(area){
     this.obj.area = area
@@ -29,6 +34,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
     socket.on('okAllProyectoSubServicio', (okSearchServicio) =>{
       this.obj.subServicio = okSearchServicio.sub
       this.obj.ejecutivo = okSearchServicio.ejecutivo
+      this.obj.total = okSearchServicio.total
       this.trigger(this.obj)
     })
   },
@@ -53,6 +59,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
       socket.on('okAllProyectoSubServicio', (okSearchServicio) =>{
         this.obj.subServicio = okSearchServicio.sub
         this.obj.ejecutivo = okSearchServicio.ejecutivo
+        this.obj.total = okSearchServicio.total
         this.trigger(this.obj)
       })
   },
@@ -77,6 +84,18 @@ let IndicadorSubServicioStore = Reflux.createStore({
       this.obj.filtro.fechaEntrega = undefined
       this.renderFiltro();
     }
+  },
+  renderViewMore: function(){
+    this.obj.filtro.limit = this.obj.filtro.limit + 100;
+    this.renderFiltro();
+  },
+  renderButton: function(rows,sub){
+    if(rows > sub){
+      document.getElementById("btn-view").classList.remove("hidden")
+    }else{
+      document.getElementById("btn-view").classList.add("hidden")
+    }
+   
   },
   renderAreaServicio: function(actual,antigua){
     let area = ""

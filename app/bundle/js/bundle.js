@@ -56463,6 +56463,7 @@
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps, nextState) {
+	      _IndicadorSubServicioActions2.default.renderReset();
 	      _IndicadorSubServicioActions2.default.renderSubServicio(nextProps.params.area);
 	    }
 	  }, {
@@ -56481,17 +56482,24 @@
 	      _IndicadorSubServicioActions2.default.renderFiltroFe(date);
 	    }
 	  }, {
+	    key: 'renderViewMore',
+	    value: function renderViewMore() {
+	      _IndicadorSubServicioActions2.default.renderViewMore();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      if (this.state.obj.subServicio) {
 	        return _react2.default.createElement(_indicadorSubServicio2.default, {
 	          area: this.props.params.area,
+	          total: this.state.obj.total,
 	          ejecutivo: this.state.obj.ejecutivo,
 	          datos: this.state.obj.subServicio,
 	          filtro: this.state.obj.filtro,
 	          renderFiltro: this.renderFiltro.bind(this),
 	          renderFiltroFi: this.renderFiltroFi.bind(this),
-	          renderFiltroFe: this.renderFiltroFe.bind(this)
+	          renderFiltroFe: this.renderFiltroFe.bind(this),
+	          renderViewMore: this.renderViewMore.bind(this)
 	        });
 	      } else {
 	        return _react2.default.createElement(
@@ -56527,7 +56535,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var IndicadorSubServicioActions = _reflux2.default.createActions(['renderSubServicio', 'renderFiltro', 'renderFiltroFi', 'renderFiltroFe', 'renderAreaServicio']);
+	var IndicadorSubServicioActions = _reflux2.default.createActions(['renderSubServicio', 'renderFiltro', 'renderFiltroFi', 'renderFiltroFe', 'renderAreaServicio', 'renderViewMore', 'renderReset', 'renderButton']);
 
 	exports.default = IndicadorSubServicioActions;
 
@@ -56576,12 +56584,17 @@
 	  obj: {
 	    subServicio: "",
 	    ejecutivo: "",
+	    total: 0,
 	    area: "",
-	    filtro: { fechaInicio: null, fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null }
+	    button: "",
+	    filtro: { fechaInicio: null, fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100 }
 	  },
 	  init: function init() {},
 	  getInitialState: function getInitialState() {
 	    return this.obj;
+	  },
+	  renderReset: function renderReset() {
+	    this.obj.filtro.limit = 5;
 	  },
 	  renderSubServicio: function renderSubServicio(area) {
 	    var _this = this;
@@ -56591,6 +56604,7 @@
 	    socket.on('okAllProyectoSubServicio', function (okSearchServicio) {
 	      _this.obj.subServicio = okSearchServicio.sub;
 	      _this.obj.ejecutivo = okSearchServicio.ejecutivo;
+	      _this.obj.total = okSearchServicio.total;
 	      _this.trigger(_this.obj);
 	    });
 	  },
@@ -56641,6 +56655,7 @@
 	    socket.on('okAllProyectoSubServicio', function (okSearchServicio) {
 	      _this2.obj.subServicio = okSearchServicio.sub;
 	      _this2.obj.ejecutivo = okSearchServicio.ejecutivo;
+	      _this2.obj.total = okSearchServicio.total;
 	      _this2.trigger(_this2.obj);
 	    });
 	  },
@@ -56664,6 +56679,17 @@
 	      document.getElementById("fechaEntrega").value = "";
 	      this.obj.filtro.fechaEntrega = undefined;
 	      this.renderFiltro();
+	    }
+	  },
+	  renderViewMore: function renderViewMore() {
+	    this.obj.filtro.limit = this.obj.filtro.limit + 100;
+	    this.renderFiltro();
+	  },
+	  renderButton: function renderButton(rows, sub) {
+	    if (rows > sub) {
+	      document.getElementById("btn-view").classList.remove("hidden");
+	    } else {
+	      document.getElementById("btn-view").classList.add("hidden");
 	    }
 	  },
 	  renderAreaServicio: function renderAreaServicio(actual, antigua) {
@@ -56779,6 +56805,8 @@
 	          renderFiltroFe: this.props.renderFiltroFe
 	        }),
 	        _react2.default.createElement(_SubServicio2.default, {
+	          total: this.props.total,
+	          renderViewMore: this.props.renderViewMore,
 	          area: this.props.area,
 	          datos: this.props.datos
 	        })
@@ -57079,11 +57107,13 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      _IndicadorSubServicioActions2.default.renderAreaServicio(this.props.area);
+	      _IndicadorSubServicioActions2.default.renderButton(this.props.total[0].total, this.props.datos.length);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(nextProps) {
 	      _IndicadorSubServicioActions2.default.renderAreaServicio(nextProps.area, this.props.area);
+	      _IndicadorSubServicioActions2.default.renderButton(nextProps.total[0].total, nextProps.datos.length);
 	    }
 	  }, {
 	    key: 'render',
@@ -57210,6 +57240,15 @@
 	              )
 	            );
 	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module-table-button' },
+	          _react2.default.createElement(
+	            'button',
+	            { id: 'btn-view', onClick: this.props.renderViewMore },
+	            'Ver m\xE1s'
+	          )
 	        )
 	      );
 	    }
