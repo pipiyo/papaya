@@ -81,35 +81,35 @@
 
 	var _UpdateSubServicioRoutes2 = _interopRequireDefault(_UpdateSubServicioRoutes);
 
-	var _ReclamoRoutes = __webpack_require__(472);
+	var _ReclamoRoutes = __webpack_require__(479);
 
 	var _ReclamoRoutes2 = _interopRequireDefault(_ReclamoRoutes);
 
-	var _InformeRoutes = __webpack_require__(479);
+	var _InformeRoutes = __webpack_require__(486);
 
 	var _InformeRoutes2 = _interopRequireDefault(_InformeRoutes);
 
-	var _InformeRochaRoutes = __webpack_require__(488);
+	var _InformeRochaRoutes = __webpack_require__(495);
 
 	var _InformeRochaRoutes2 = _interopRequireDefault(_InformeRochaRoutes);
 
-	var _NotificacionRoutes = __webpack_require__(496);
+	var _NotificacionRoutes = __webpack_require__(503);
 
 	var _NotificacionRoutes2 = _interopRequireDefault(_NotificacionRoutes);
 
-	var _DetalleInformeRoutes = __webpack_require__(499);
+	var _DetalleInformeRoutes = __webpack_require__(506);
 
 	var _DetalleInformeRoutes2 = _interopRequireDefault(_DetalleInformeRoutes);
 
-	var _HomeRoutes = __webpack_require__(508);
+	var _HomeRoutes = __webpack_require__(515);
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
-	var _InicioRoutes = __webpack_require__(517);
+	var _InicioRoutes = __webpack_require__(524);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
 
-	var _AuthRoutes = __webpack_require__(519);
+	var _AuthRoutes = __webpack_require__(526);
 
 	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
 
@@ -56398,7 +56398,14 @@
 	exports.default = Item;
 
 /***/ },
-/* 472 */
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56424,15 +56431,15 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _ReclamoActions = __webpack_require__(473);
+	var _ReclamoActions = __webpack_require__(480);
 
 	var _ReclamoActions2 = _interopRequireDefault(_ReclamoActions);
 
-	var _ReclamoStore = __webpack_require__(474);
+	var _ReclamoStore = __webpack_require__(481);
 
 	var _ReclamoStore2 = _interopRequireDefault(_ReclamoStore);
 
-	var _formReclamo = __webpack_require__(475);
+	var _formReclamo = __webpack_require__(482);
 
 	var _formReclamo2 = _interopRequireDefault(_formReclamo);
 
@@ -56476,7 +56483,7 @@
 	exports.default = ReclamoRoutes;
 
 /***/ },
-/* 473 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56496,7 +56503,7 @@
 	exports.default = ReclamoActions;
 
 /***/ },
-/* 474 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56513,7 +56520,7 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _ReclamoActions = __webpack_require__(473);
+	var _ReclamoActions = __webpack_require__(480);
 
 	var _ReclamoActions2 = _interopRequireDefault(_ReclamoActions);
 
@@ -56599,7 +56606,7 @@
 	exports.default = ReclamoStore;
 
 /***/ },
-/* 475 */
+/* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56614,11 +56621,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(476);
+	var _Title = __webpack_require__(483);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(477);
+	var _Form = __webpack_require__(484);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -56660,7 +56667,7 @@
 	exports.default = ReclamoIndex;
 
 /***/ },
-/* 476 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56718,7 +56725,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 477 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56733,7 +56740,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Item = __webpack_require__(478);
+	var _Item = __webpack_require__(485);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -56775,7 +56782,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 478 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56798,7 +56805,7 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _ReclamoActions = __webpack_require__(473);
+	var _ReclamoActions = __webpack_require__(480);
 
 	var _ReclamoActions2 = _interopRequireDefault(_ReclamoActions);
 
@@ -57081,7 +57088,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 479 */
+/* 486 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57115,15 +57122,15 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _InformeActions = __webpack_require__(480);
+	var _InformeActions = __webpack_require__(487);
 
 	var _InformeActions2 = _interopRequireDefault(_InformeActions);
 
-	var _InformeStore = __webpack_require__(481);
+	var _InformeStore = __webpack_require__(488);
 
 	var _InformeStore2 = _interopRequireDefault(_InformeStore);
 
-	var _informe = __webpack_require__(482);
+	var _informe = __webpack_require__(489);
 
 	var _informe2 = _interopRequireDefault(_informe);
 
@@ -57322,7 +57329,7 @@
 	exports.default = InformeRoutes;
 
 /***/ },
-/* 480 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57342,7 +57349,7 @@
 	exports.default = InformeActions;
 
 /***/ },
-/* 481 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57355,7 +57362,7 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _InformeActions = __webpack_require__(480);
+	var _InformeActions = __webpack_require__(487);
 
 	var _InformeActions2 = _interopRequireDefault(_InformeActions);
 
@@ -57386,7 +57393,7 @@
 	exports.default = InformeStore;
 
 /***/ },
-/* 482 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57401,15 +57408,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Filtro = __webpack_require__(483);
+	var _Filtro = __webpack_require__(490);
 
 	var _Filtro2 = _interopRequireDefault(_Filtro);
 
-	var _Title = __webpack_require__(484);
+	var _Title = __webpack_require__(491);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Servicio = __webpack_require__(485);
+	var _Servicio = __webpack_require__(492);
 
 	var _Servicio2 = _interopRequireDefault(_Servicio);
 
@@ -57477,7 +57484,7 @@
 	exports.default = InformeIndex;
 
 /***/ },
-/* 483 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57673,7 +57680,7 @@
 	exports.default = Filtro;
 
 /***/ },
-/* 484 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57727,7 +57734,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 485 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57742,11 +57749,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Content = __webpack_require__(486);
+	var _Content = __webpack_require__(493);
 
 	var _Content2 = _interopRequireDefault(_Content);
 
-	var _ContentRocha = __webpack_require__(487);
+	var _ContentRocha = __webpack_require__(494);
 
 	var _ContentRocha2 = _interopRequireDefault(_ContentRocha);
 
@@ -57967,7 +57974,7 @@
 	exports.default = Servicio;
 
 /***/ },
-/* 486 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58140,7 +58147,7 @@
 	exports.default = Content;
 
 /***/ },
-/* 487 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58218,7 +58225,7 @@
 	exports.default = ContentRocha;
 
 /***/ },
-/* 488 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58252,15 +58259,15 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _InformeRochaActions = __webpack_require__(489);
+	var _InformeRochaActions = __webpack_require__(496);
 
 	var _InformeRochaActions2 = _interopRequireDefault(_InformeRochaActions);
 
-	var _InformeRochaStore = __webpack_require__(490);
+	var _InformeRochaStore = __webpack_require__(497);
 
 	var _InformeRochaStore2 = _interopRequireDefault(_InformeRochaStore);
 
-	var _informeRocha = __webpack_require__(491);
+	var _informeRocha = __webpack_require__(498);
 
 	var _informeRocha2 = _interopRequireDefault(_informeRocha);
 
@@ -58399,7 +58406,7 @@
 	exports.default = InformeRoutes;
 
 /***/ },
-/* 489 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58419,7 +58426,7 @@
 	exports.default = InformeRochaActions;
 
 /***/ },
-/* 490 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58432,7 +58439,7 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _InformeRochaActions = __webpack_require__(489);
+	var _InformeRochaActions = __webpack_require__(496);
 
 	var _InformeRochaActions2 = _interopRequireDefault(_InformeRochaActions);
 
@@ -58468,7 +58475,7 @@
 	exports.default = InformeRochaStore;
 
 /***/ },
-/* 491 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58483,15 +58490,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(492);
+	var _Title = __webpack_require__(499);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Filtro = __webpack_require__(493);
+	var _Filtro = __webpack_require__(500);
 
 	var _Filtro2 = _interopRequireDefault(_Filtro);
 
-	var _Rocha = __webpack_require__(494);
+	var _Rocha = __webpack_require__(501);
 
 	var _Rocha2 = _interopRequireDefault(_Rocha);
 
@@ -58532,7 +58539,7 @@
 	exports.default = InformeRochaIndex;
 
 /***/ },
-/* 492 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58585,7 +58592,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 493 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58747,7 +58754,7 @@
 	exports.default = Filtro;
 
 /***/ },
-/* 494 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58762,7 +58769,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ContentRocha = __webpack_require__(495);
+	var _ContentRocha = __webpack_require__(502);
 
 	var _ContentRocha2 = _interopRequireDefault(_ContentRocha);
 
@@ -58881,7 +58888,7 @@
 	exports.default = Rocha;
 
 /***/ },
-/* 495 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58961,7 +58968,7 @@
 	exports.default = ContentRocha;
 
 /***/ },
-/* 496 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58977,7 +58984,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _notificacion = __webpack_require__(497);
+	var _notificacion = __webpack_require__(504);
 
 	var _notificacion2 = _interopRequireDefault(_notificacion);
 
@@ -59011,7 +59018,7 @@
 	exports.default = AbastecimientoRoutes;
 
 /***/ },
-/* 497 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59026,7 +59033,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(498);
+	var _Title = __webpack_require__(505);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
@@ -59122,7 +59129,7 @@
 	exports.default = NotificacionIndex;
 
 /***/ },
-/* 498 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59175,7 +59182,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 499 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59201,15 +59208,15 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _DetalleInformeActions = __webpack_require__(500);
+	var _DetalleInformeActions = __webpack_require__(507);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
-	var _DetalleInformeStore = __webpack_require__(501);
+	var _DetalleInformeStore = __webpack_require__(508);
 
 	var _DetalleInformeStore2 = _interopRequireDefault(_DetalleInformeStore);
 
-	var _detalleInforme = __webpack_require__(502);
+	var _detalleInforme = __webpack_require__(509);
 
 	var _detalleInforme2 = _interopRequireDefault(_detalleInforme);
 
@@ -59271,7 +59278,7 @@
 	exports.default = DetalleInformeRoutes;
 
 /***/ },
-/* 500 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59291,7 +59298,7 @@
 	exports.default = DetalleInformeActions;
 
 /***/ },
-/* 501 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59310,7 +59317,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _DetalleInformeActions = __webpack_require__(500);
+	var _DetalleInformeActions = __webpack_require__(507);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
@@ -59432,7 +59439,7 @@
 	exports.default = DetalleInformeStore;
 
 /***/ },
-/* 502 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59447,23 +59454,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Title = __webpack_require__(503);
+	var _Title = __webpack_require__(510);
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _Form = __webpack_require__(504);
+	var _Form = __webpack_require__(511);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
-	var _ActividadTitle = __webpack_require__(505);
+	var _ActividadTitle = __webpack_require__(512);
 
 	var _ActividadTitle2 = _interopRequireDefault(_ActividadTitle);
 
-	var _ActividadContent = __webpack_require__(506);
+	var _ActividadContent = __webpack_require__(513);
 
 	var _ActividadContent2 = _interopRequireDefault(_ActividadContent);
 
-	var _SubActividad = __webpack_require__(507);
+	var _SubActividad = __webpack_require__(514);
 
 	var _SubActividad2 = _interopRequireDefault(_SubActividad);
 
@@ -59529,7 +59536,7 @@
 	exports.default = DetalleInformeIndex;
 
 /***/ },
-/* 503 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59582,7 +59589,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 504 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59637,7 +59644,7 @@
 	exports.default = Form;
 
 /***/ },
-/* 505 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59700,7 +59707,7 @@
 	exports.default = ActividadTitle;
 
 /***/ },
-/* 506 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59749,7 +59756,7 @@
 	exports.default = ActividadContent;
 
 /***/ },
-/* 507 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59766,7 +59773,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _DetalleInformeActions = __webpack_require__(500);
+	var _DetalleInformeActions = __webpack_require__(507);
 
 	var _DetalleInformeActions2 = _interopRequireDefault(_DetalleInformeActions);
 
@@ -59843,7 +59850,7 @@
 	exports.default = SubActividad;
 
 /***/ },
-/* 508 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59859,7 +59866,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _home = __webpack_require__(509);
+	var _home = __webpack_require__(516);
 
 	var _home2 = _interopRequireDefault(_home);
 
@@ -59898,7 +59905,7 @@
 	exports.default = HomeRoutes;
 
 /***/ },
-/* 509 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59913,11 +59920,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Header = __webpack_require__(510);
+	var _Header = __webpack_require__(517);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Main = __webpack_require__(514);
+	var _Main = __webpack_require__(521);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
@@ -59990,7 +59997,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 510 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60005,11 +60012,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Logo = __webpack_require__(511);
+	var _Logo = __webpack_require__(518);
 
 	var _Logo2 = _interopRequireDefault(_Logo);
 
-	var _Item = __webpack_require__(512);
+	var _Item = __webpack_require__(519);
 
 	var _Item2 = _interopRequireDefault(_Item);
 
@@ -60052,7 +60059,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 511 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60108,7 +60115,7 @@
 	exports.default = Logo;
 
 /***/ },
-/* 512 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60125,7 +60132,7 @@
 
 	var _reactRouter = __webpack_require__(198);
 
-	var _Area = __webpack_require__(513);
+	var _Area = __webpack_require__(520);
 
 	var _Area2 = _interopRequireDefault(_Area);
 
@@ -60201,7 +60208,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 513 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60270,7 +60277,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 514 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60285,7 +60292,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(515);
+	var _Nav = __webpack_require__(522);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -60365,7 +60372,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 515 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60380,7 +60387,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Notification = __webpack_require__(516);
+	var _Notification = __webpack_require__(523);
 
 	var _Notification2 = _interopRequireDefault(_Notification);
 
@@ -60447,7 +60454,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 516 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60553,7 +60560,7 @@
 	exports.default = Notification;
 
 /***/ },
-/* 517 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60569,7 +60576,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _inicio = __webpack_require__(518);
+	var _inicio = __webpack_require__(525);
 
 	var _inicio2 = _interopRequireDefault(_inicio);
 
@@ -60603,7 +60610,7 @@
 	exports.default = InicioRoutes;
 
 /***/ },
-/* 518 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60656,7 +60663,7 @@
 	exports.default = InicioIndex;
 
 /***/ },
-/* 519 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
