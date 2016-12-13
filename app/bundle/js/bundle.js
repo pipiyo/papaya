@@ -57026,7 +57026,8 @@
 	        _react2.default.createElement(
 	          "h3",
 	          null,
-	          "Sub Actividad Abastecimiento"
+	          "Sub Actividad ",
+	          this.props.area
 	        )
 	      );
 	    }
