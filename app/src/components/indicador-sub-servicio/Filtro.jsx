@@ -30,6 +30,7 @@ class Filtro extends React.Component {
                   <option value="En Proceso">En Proceso</option>
                   <option value="ACTA">Acta</option>
                   <option value="Emitido">Emitido</option>
+                  <option value="Parcial">Parcial</option>
                   <option value="OK">OK</option>
                   <option value="Nula">Nulo</option>
               </select>
