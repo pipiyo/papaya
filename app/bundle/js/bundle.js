@@ -81,6 +81,10 @@
 
 	var _UpdateSubServicioRoutes2 = _interopRequireDefault(_UpdateSubServicioRoutes);
 
+	var _IndicadorSubServicioRoutes = __webpack_require__(472);
+
+	var _IndicadorSubServicioRoutes2 = _interopRequireDefault(_IndicadorSubServicioRoutes);
+
 	var _ReclamoRoutes = __webpack_require__(479);
 
 	var _ReclamoRoutes2 = _interopRequireDefault(_ReclamoRoutes);
@@ -136,7 +140,8 @@
 	            _react2.default.createElement(_reactRouter.Route, { path: 'notificacion', component: _NotificacionRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'detalle-actividad/:id', component: _DetalleInformeRoutes2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'sub-actividad/:id', component: _SubServicioRoutes2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'actualizar-subactividad/:id', component: _UpdateSubServicioRoutes2.default })
+	            _react2.default.createElement(_reactRouter.Route, { path: 'actualizar-subactividad/:id', component: _UpdateSubServicioRoutes2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'indicadores/:area', component: _IndicadorSubServicioRoutes2.default })
 	        )
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _ServicioRoutes2.default })
@@ -37205,6 +37210,23 @@
 	      _this2.trigger(_this2.obj);
 	    });
 	  },
+	  sumaFecha: function sumaFecha(dias, fecha) {
+	    var new_date = (0, _moment2.default)(fecha, "YYYY-MM-DD").add(dias, 'days');
+	    return new_date.format("YYYY-MM-DD");
+	  },
+	  fechaEntrega: function fechaEntrega(area, fechaI, fechaE) {
+	    var fechaEntrega = void 0;
+	    switch (area) {
+	      case "Adquisiciones":
+	        fechaEntrega = this.sumaFecha(2, fechaI);
+	        break;
+	      default:
+	        fechaEntrega = fechaE;
+	    }
+	    return fechaEntrega;
+	  },
+
+
 	  addServicio: function addServicio(ev) {
 	    var _this3 = this;
 
@@ -37214,8 +37236,8 @@
 	      "categoria": ev.target.elements['categoria'].value,
 	      "supervisor": ev.target.elements['supervisor'].value,
 	      "fechaInicio": ev.target.elements['fechaInicio'].value,
-	      "fechaEntrega": ev.target.elements['fechaEntrega'].value,
-	      "dias": ev.target.elements['dias'].value,
+	      "fechaEntrega": this.fechaEntrega(ev.target.elements['area'].value, ev.target.elements['fechaInicio'].value, ev.target.elements['fechaEntrega'].value),
+	      "dias": "0",
 	      "descripcion": ev.target.elements['descripcion'].value,
 	      "observacion": ev.target.elements['observacion'].value,
 	      "rocha": ev.target.elements['rocha'].value,
@@ -49311,19 +49333,9 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'Fecha Entrega Cliente'
+	              'Fecha Entrega'
 	            ),
 	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.fecha.fechaEntrega, onChange: this.renderFechaEntrega.bind(this) })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form relative' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'D\xEDas'
-	            ),
-	            _react2.default.createElement('input', { 'data-complete': 'rocha', type: 'text', id: 'dias' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -52000,7 +52012,7 @@
 	      "supervisor": ev.target.elements['supervisor'].value,
 	      "fechaInicio": ev.target.elements['fechaInicio'].value,
 	      "fechaEntrega": ev.target.elements['fechaEntrega'].value,
-	      "dias": ev.target.elements['dias'].value,
+	      "dias": "0",
 	      "descripcion": ev.target.elements['descripcion'].value,
 	      "observacion": ev.target.elements['observacion'].value,
 	      "numero": ev.target.elements['numero'].value,
@@ -53301,16 +53313,6 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'Supervisor'
-	            ),
-	            _react2.default.createElement('input', { required: true, value: this.props.input.supervisor, onChange: this.renderInput.bind(this), id: 'supervisor', type: 'text' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'item-form' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
 	              'Fecha Inicio'
 	            ),
 	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.props.input.fechaInicio, onChange: this.renderFechaInicio.bind(this) })
@@ -53321,7 +53323,7 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'Fecha Entrega Cliente'
+	              'Fecha Entrega'
 	            ),
 	            _react2.default.createElement(_reactDatepicker2.default, { readOnly: true, className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.input.fechaEntrega, onChange: this.renderFechaEntrega.bind(this) })
 	          ),
@@ -53331,9 +53333,9 @@
 	            _react2.default.createElement(
 	              'label',
 	              null,
-	              'D\xEDas'
+	              'Supervisor'
 	            ),
-	            _react2.default.createElement('input', { value: this.props.input.dias, onChange: this.renderInput.bind(this), type: 'number', className: 'date', id: 'dias' })
+	            _react2.default.createElement('input', { required: true, value: this.props.input.supervisor, onChange: this.renderInput.bind(this), id: 'supervisor', type: 'text' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -56398,13 +56400,866 @@
 	exports.default = Item;
 
 /***/ },
-/* 472 */,
-/* 473 */,
-/* 474 */,
-/* 475 */,
-/* 476 */,
-/* 477 */,
-/* 478 */,
+/* 472 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _dec, _class;
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _IndicadorSubServicioActions = __webpack_require__(473);
+
+	var _IndicadorSubServicioActions2 = _interopRequireDefault(_IndicadorSubServicioActions);
+
+	var _IndicadorSubServicioStore = __webpack_require__(474);
+
+	var _IndicadorSubServicioStore2 = _interopRequireDefault(_IndicadorSubServicioStore);
+
+	var _indicadorSubServicio = __webpack_require__(475);
+
+	var _indicadorSubServicio2 = _interopRequireDefault(_indicadorSubServicio);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IndicadorSubServicioRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_IndicadorSubServicioStore2.default, 'obj')), _dec(_class = function (_React$Component) {
+	  _inherits(IndicadorSubServicioRoutes, _React$Component);
+
+	  function IndicadorSubServicioRoutes() {
+	    _classCallCheck(this, IndicadorSubServicioRoutes);
+
+	    return _possibleConstructorReturn(this, (IndicadorSubServicioRoutes.__proto__ || Object.getPrototypeOf(IndicadorSubServicioRoutes)).call(this));
+	  }
+
+	  _createClass(IndicadorSubServicioRoutes, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      _IndicadorSubServicioActions2.default.renderSubServicio(this.props.params.area);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps, nextState) {
+	      _IndicadorSubServicioActions2.default.renderReset();
+	      _IndicadorSubServicioActions2.default.renderSubServicio(nextProps.params.area);
+	    }
+	  }, {
+	    key: 'renderFiltro',
+	    value: function renderFiltro() {
+	      _IndicadorSubServicioActions2.default.renderFiltro();
+	    }
+	  }, {
+	    key: 'renderFiltroFi',
+	    value: function renderFiltroFi(date) {
+	      _IndicadorSubServicioActions2.default.renderFiltroFi(date);
+	    }
+	  }, {
+	    key: 'renderFiltroFe',
+	    value: function renderFiltroFe(date) {
+	      _IndicadorSubServicioActions2.default.renderFiltroFe(date);
+	    }
+	  }, {
+	    key: 'renderViewMore',
+	    value: function renderViewMore() {
+	      _IndicadorSubServicioActions2.default.renderViewMore();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.obj.subServicio) {
+	        return _react2.default.createElement(_indicadorSubServicio2.default, {
+	          area: this.props.params.area,
+	          total: this.state.obj.total,
+	          ejecutivo: this.state.obj.ejecutivo,
+	          datos: this.state.obj.subServicio,
+	          filtro: this.state.obj.filtro,
+	          renderFiltro: this.renderFiltro.bind(this),
+	          renderFiltroFi: this.renderFiltroFi.bind(this),
+	          renderFiltroFe: this.renderFiltroFe.bind(this),
+	          renderViewMore: this.renderViewMore.bind(this)
+	        });
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Cargando'
+	          )
+	        );
+	      }
+	    }
+	  }]);
+
+	  return IndicadorSubServicioRoutes;
+	}(_react2.default.Component)) || _class);
+	exports.default = IndicadorSubServicioRoutes;
+
+/***/ },
+/* 473 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var IndicadorSubServicioActions = _reflux2.default.createActions(['renderSubServicio', 'renderFiltro', 'renderFiltroFi', 'renderFiltroFe', 'renderAreaServicio', 'renderViewMore', 'renderReset', 'renderButton']);
+
+	exports.default = IndicadorSubServicioActions;
+
+/***/ },
+/* 474 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactRouter = __webpack_require__(198);
+
+	var _moment = __webpack_require__(314);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _IndicadorSubServicioActions = __webpack_require__(473);
+
+	var _IndicadorSubServicioActions2 = _interopRequireDefault(_IndicadorSubServicioActions);
+
+	var _Config = __webpack_require__(261);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	var _socket = __webpack_require__(262);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var socket = _socket2.default.connect(_Config2.default.url + 'subServicio');
+
+	var IndicadorSubServicioStore = _reflux2.default.createStore({
+	  listenables: [_IndicadorSubServicioActions2.default],
+	  obj: {
+	    subServicio: "",
+	    ejecutivo: "",
+	    total: 0,
+	    area: "",
+	    button: "",
+	    filtro: { fechaInicio: null, fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100 }
+	  },
+	  init: function init() {},
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+	  renderReset: function renderReset() {
+	    this.obj.filtro.limit = 5;
+	  },
+	  renderSubServicio: function renderSubServicio(area) {
+	    var _this = this;
+
+	    this.obj.area = area;
+	    socket.emit('allProyectoSubServicio', this.obj.filtro, this.obj.area);
+	    socket.on('okAllProyectoSubServicio', function (okSearchServicio) {
+	      _this.obj.subServicio = okSearchServicio.sub;
+	      _this.obj.ejecutivo = okSearchServicio.ejecutivo;
+	      _this.obj.total = okSearchServicio.total;
+	      _this.trigger(_this.obj);
+	    });
+	  },
+	  renderFiltro: function renderFiltro() {
+	    var _this2 = this;
+
+	    var fechaI = document.getElementById("fechaInicio").value;
+	    var fechaE = document.getElementById("fechaEntrega").value;
+	    var codigo = document.getElementById("codigo").value;
+	    var estado = document.getElementById("estado").value;
+	    var vendedor = document.getElementById("vendedor").value;
+	    var categoria = document.getElementById("categoria").value;
+	    var cliente = document.getElementById("cliente").value;
+
+	    if (codigo != "") {
+	      this.obj.filtro.codigo = codigo;
+	    } else {
+	      this.obj.filtro.codigo = null;
+	    }
+	    if (vendedor != "") {
+	      this.obj.filtro.vendedor = vendedor;
+	    } else {
+	      this.obj.filtro.vendedor = null;
+	    }
+	    if (categoria != "") {
+	      this.obj.filtro.categoria = categoria;
+	    } else {
+	      this.obj.filtro.categoria = null;
+	    }
+	    if (cliente != "") {
+	      this.obj.filtro.cliente = cliente;
+	    } else {
+	      this.obj.filtro.cliente = null;
+	    }
+	    if (fechaI != "") {
+	      this.obj.filtro.fechai = fechaI;
+	    } else {
+	      this.obj.filtro.fechai = undefined;
+	    }
+	    if (fechaE != "") {
+	      this.obj.filtro.fechae = fechaE;
+	    } else {
+	      this.obj.filtro.fechae = undefined;
+	    }
+	    this.obj.filtro.estado = estado;
+
+	    socket.emit('allProyectoSubServicio', this.obj.filtro, this.obj.area);
+	    socket.on('okAllProyectoSubServicio', function (okSearchServicio) {
+	      _this2.obj.subServicio = okSearchServicio.sub;
+	      _this2.obj.ejecutivo = okSearchServicio.ejecutivo;
+	      _this2.obj.total = okSearchServicio.total;
+	      _this2.trigger(_this2.obj);
+	    });
+	  },
+	  renderFiltroFi: function renderFiltroFi(date) {
+	    if ((0, _moment2.default)(date).isValid()) {
+	      document.getElementById("fechaInicio").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	      this.obj.filtro.fechaInicio = date;
+	      this.renderFiltro();
+	    } else {
+	      document.getElementById("fechaInicio").value = "";
+	      this.obj.filtro.fechaInicio = undefined;
+	      this.renderFiltro();
+	    }
+	  },
+	  renderFiltroFe: function renderFiltroFe(date) {
+	    if ((0, _moment2.default)(date).isValid()) {
+	      document.getElementById("fechaEntrega").value = (0, _moment2.default)(date).format("YYYY-MM-DD");
+	      this.obj.filtro.fechaEntrega = date;
+	      this.renderFiltro();
+	    } else {
+	      document.getElementById("fechaEntrega").value = "";
+	      this.obj.filtro.fechaEntrega = undefined;
+	      this.renderFiltro();
+	    }
+	  },
+	  renderViewMore: function renderViewMore() {
+	    this.obj.filtro.limit = this.obj.filtro.limit + 100;
+	    this.renderFiltro();
+	  },
+	  renderButton: function renderButton(rows, sub) {
+	    if (rows > sub) {
+	      document.getElementById("btn-view").classList.remove("hidden");
+	    } else {
+	      document.getElementById("btn-view").classList.add("hidden");
+	    }
+	  },
+	  renderAreaServicio: function renderAreaServicio(actual, antigua) {
+	    var area = "";
+	    var area1 = null;
+	    switch (actual) {
+	      case "abastecimiento":
+	        area = "abastecimiento";
+	        break;
+	      case "Despacho":
+	        area = "despacho";
+	        break;
+	      case "Instalacion":
+	        area = "instalaciones";
+	        break;
+	      case "Produccion":
+	        area = "produccion";
+	        break;
+	      case "Desarrollo":
+	        area = "desarrollo";
+	        break;
+	      case "sillas":
+	        area = "sillas";
+	        break;
+	    }
+	    document.querySelector('[data-area="ok"]').classList.add(area);
+	    if (antigua) {
+	      switch (antigua) {
+	        case "abastecimiento":
+	          area1 = "abastecimiento";
+	          break;
+	        case "Despacho":
+	          area1 = "despacho";
+	          break;
+	        case "Instalacion":
+	          area1 = "instalaciones";
+	          break;
+	        case "Produccion":
+	          area1 = "produccion";
+	          break;
+	        case "Desarrollo":
+	          area1 = "desarrollo";
+	          break;
+	        case "sillas":
+	          area1 = "sillas";
+	          break;
+	      }
+	      document.querySelector('[data-area="ok"]').classList.remove(area);
+	      document.querySelector('[data-area="ok"]').classList.add(area1);
+	    }
+	  }
+	});
+
+	exports.default = IndicadorSubServicioStore;
+
+/***/ },
+/* 475 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Filtro = __webpack_require__(476);
+
+	var _Filtro2 = _interopRequireDefault(_Filtro);
+
+	var _Title = __webpack_require__(477);
+
+	var _Title2 = _interopRequireDefault(_Title);
+
+	var _SubServicio = __webpack_require__(478);
+
+	var _SubServicio2 = _interopRequireDefault(_SubServicio);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var IndicadorSubServicioIndex = function (_React$Component) {
+	  _inherits(IndicadorSubServicioIndex, _React$Component);
+
+	  function IndicadorSubServicioIndex() {
+	    _classCallCheck(this, IndicadorSubServicioIndex);
+
+	    return _possibleConstructorReturn(this, (IndicadorSubServicioIndex.__proto__ || Object.getPrototypeOf(IndicadorSubServicioIndex)).call(this));
+	  }
+
+	  _createClass(IndicadorSubServicioIndex, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_Title2.default, { area: this.props.area }),
+	        _react2.default.createElement(_Filtro2.default, {
+	          ejecutivo: this.props.ejecutivo,
+	          filtro: this.props.filtro,
+	          renderFiltro: this.props.renderFiltro,
+	          renderFiltroFi: this.props.renderFiltroFi,
+	          renderFiltroFe: this.props.renderFiltroFe
+	        }),
+	        _react2.default.createElement(_SubServicio2.default, {
+	          total: this.props.total,
+	          renderViewMore: this.props.renderViewMore,
+	          area: this.props.area,
+	          datos: this.props.datos
+	        })
+	      );
+	    }
+	  }]);
+
+	  return IndicadorSubServicioIndex;
+	}(_react2.default.Component);
+
+	exports.default = IndicadorSubServicioIndex;
+
+/***/ },
+/* 476 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDatepicker = __webpack_require__(433);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	var _moment = __webpack_require__(314);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Filtro = function (_React$Component) {
+	    _inherits(Filtro, _React$Component);
+
+	    function Filtro(props) {
+	        _classCallCheck(this, Filtro);
+
+	        return _possibleConstructorReturn(this, (Filtro.__proto__ || Object.getPrototypeOf(Filtro)).call(this, props));
+	    }
+
+	    _createClass(Filtro, [{
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'module-filter' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Fecha Inicio '
+	                    ),
+	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaInicio', dateFormat: 'YYYY-MM-DD', selected: this.props.filtro.fechaInicio, onChange: this.props.renderFiltroFi })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Fecha Entrega '
+	                    ),
+	                    _react2.default.createElement(_reactDatepicker2.default, { className: 'date', id: 'fechaEntrega', dateFormat: 'YYYY-MM-DD', selected: this.props.filtro.fechaEntrega, onChange: this.props.renderFiltroFe })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' C\xF3digo Rocha'
+	                    ),
+	                    _react2.default.createElement('input', { autoComplete: 'off', id: 'codigo', type: 'text', onChange: this.props.renderFiltro })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Estado'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'estado', onChange: this.props.renderFiltro },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'En Proceso' },
+	                            'En Proceso'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'ACTA' },
+	                            'Acta'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Emitido' },
+	                            'Emitido'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'OK' },
+	                            'OK'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Nula' },
+	                            'Nulo'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Vendedor'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'vendedor', onChange: this.props.renderFiltro },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: '' },
+	                            'Seleccione'
+	                        ),
+	                        this.props.ejecutivo.map(function (ejecutivo) {
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { value: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO, key: ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO },
+	                                ejecutivo.NOMBRES + ' ' + ejecutivo.APELLIDO_PATERNO + ' ' + ejecutivo.APELLIDO_MATERNO
+	                            );
+	                        })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Categor\xEDa'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { id: 'categoria', onChange: this.props.renderFiltro },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: '' },
+	                            'Seleccione'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Proyecto' },
+	                            'Proyecto'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Solicitud' },
+	                            'Solicitud'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Proceso' },
+	                            'Proceso'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'item-filter' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Cliente'
+	                    ),
+	                    _react2.default.createElement('input', { onChange: this.props.renderFiltro, autoComplete: 'off', id: 'cliente', type: 'text' })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Filtro;
+	}(_react2.default.Component);
+
+	exports.default = Filtro;
+
+/***/ },
+/* 477 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Title = function (_React$Component) {
+	  _inherits(Title, _React$Component);
+
+	  function Title() {
+	    _classCallCheck(this, Title);
+
+	    return _possibleConstructorReturn(this, (Title.__proto__ || Object.getPrototypeOf(Title)).call(this));
+	  }
+
+	  _createClass(Title, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "title" },
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "Sub Actividad ",
+	          this.props.area
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Title;
+	}(_react2.default.Component);
+
+	exports.default = Title;
+
+/***/ },
+/* 478 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _IndicadorSubServicioActions = __webpack_require__(473);
+
+	var _IndicadorSubServicioActions2 = _interopRequireDefault(_IndicadorSubServicioActions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Title = function (_React$Component) {
+	  _inherits(Title, _React$Component);
+
+	  function Title() {
+	    _classCallCheck(this, Title);
+
+	    return _possibleConstructorReturn(this, (Title.__proto__ || Object.getPrototypeOf(Title)).call(this));
+	  }
+
+	  _createClass(Title, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      _IndicadorSubServicioActions2.default.renderAreaServicio(this.props.area);
+	      _IndicadorSubServicioActions2.default.renderButton(this.props.total[0].total, this.props.datos.length);
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(nextProps) {
+	      _IndicadorSubServicioActions2.default.renderAreaServicio(nextProps.area, this.props.area);
+	      _IndicadorSubServicioActions2.default.renderButton(nextProps.total[0].total, nextProps.datos.length);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'module-table', 'data-col': 'once', 'data-area': 'ok' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module-table-container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Rocha'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Cliente'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Ejecutivo'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Actividad'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Descripci\xF3n'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Sub Actividad'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Descripci\xF3n'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Fecha I'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Fecha E'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Observaci\xF3n'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'module-table-item' },
+	            'Estado'
+	          ),
+	          this.props.datos.map(function (datos, i) {
+	            return _react2.default.createElement(
+	              'div',
+	              { className: 'module-table-content', key: i },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-center' },
+	                datos.CODIGO_PROYECTO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.NOMBRE_CLIENTE
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.EJECUTIVO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-right' },
+	                datos.CODIGO_SERVICIO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SD
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-right' },
+	                datos.CODIGO_SUBSERVICIO
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SSD
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-center' },
+	                datos.SUB_FECHA_INICIO.substring(0, 10)
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item a-center' },
+	                datos.SUB_FECHA_ENTREGA.substring(0, 10)
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SUB_OBSERVACIONES
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'module-table-content-item' },
+	                datos.SUB_ESTADO
+	              )
+	            );
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'module-table-button' },
+	          _react2.default.createElement(
+	            'button',
+	            { id: 'btn-view', onClick: this.props.renderViewMore },
+	            'Ver m\xE1s'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Title;
+	}(_react2.default.Component);
+
+	exports.default = Title;
+
+/***/ },
 /* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -59397,7 +60252,7 @@
 	    var module = [];
 	    this.obj.renderSubServicio = [];
 	    for (valor in sub) {
-	      module = [this.validador("Descripción:", sub[valor].SUB_DESCRIPCION), this.validador("Proceso:", sub[valor].SUB_PROCESO), this.validador("Fecha Ingreso:", sub[valor].SUB_FECHA_INGRESO, true), this.validador("Fecha Entrega:", sub[valor].SUB_FECHA_ENTREGA, true), this.validador("Estado:", sub[valor].SUB_ESTADO), this.validador("Supervisor:", sub[valor].SUB_SUPERVISOR), this.validador("Dirección:", sub[valor].SUB_DIRECCION), this.validador("TP:", sub[valor].SUB_TP), this.validador("TO:", sub[valor].SUB_TO), this.validador("OS:", sub[valor].SUB_OS), this.validador("FI:", sub[valor].SUB_FI)];
+	      module = [this.validador("Descripción:", sub[valor].SUB_DESCRIPCION), this.validador("Proceso:", sub[valor].SUB_PROCESO), this.validador("Fecha Inicio:", sub[valor].SUB_FECHA_INICIO, true), this.validador("Fecha Entrega:", sub[valor].SUB_FECHA_ENTREGA, true), this.validador("Estado:", sub[valor].SUB_ESTADO), this.validador("Supervisor:", sub[valor].SUB_SUPERVISOR), this.validador("Dirección:", sub[valor].SUB_DIRECCION), this.validador("TP:", sub[valor].SUB_TP), this.validador("TO:", sub[valor].SUB_TO), this.validador("OS:", sub[valor].SUB_OS), this.validador("FI:", sub[valor].SUB_FI)];
 	      this.obj.renderSubServicio.push(module);
 	    }
 	    this.trigger(this.obj);
@@ -59945,7 +60800,7 @@
 	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
 	    _this.state = { active: 'active', notification: null };
-	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
+	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
 	    return _this;
 	  }
 	  /* Agrega clase active para desplegar sub-menus */

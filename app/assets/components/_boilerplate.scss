@@ -258,6 +258,12 @@ a.external-link, .external-link a {
 .relative{
     position:relative;
 }
+.a-center{
+    text-align: center;
+}
+.a-right{
+    text-align: right;
+}
 
 
 /**** frame ****/
@@ -286,6 +292,7 @@ a.external-link, .external-link a {
         display: table-cell;
         height: 100%;
         vertical-align: top;
+        width: calc(100% - 250px);
         @include vertical-tablet-down {
             width: 100%;
             display: block;
@@ -786,7 +793,6 @@ a.external-link, .external-link a {
     flex-wrap: wrap;
     margin: 0 .5em 1em .5em;
     border: solid 1px $gris_lighter;
-    width: calc(100% - 2em); 
     .item-filter{
         padding: 1em;
         width: 25%;
@@ -1389,6 +1395,82 @@ a.external-link, .external-link a {
             }
             + li{
                 border-top: solid 1px $blanco; 
+            }
+        }
+    }
+}
+
+/* Table */
+/* Table */
+/* Table */
+/* Table */
+
+
+.module-table{
+    border:solid 1px $gris;
+    overflow:scroll;
+    margin: auto;
+    max-width: 1000px;
+    @include small-desktop-down{
+        max-width: 550px;
+        max-height: 300px;
+    }
+    @include vertical-tablet-down {
+        max-width: calc(100% - 1em);
+        max-height: 300px;
+    }
+    @include desktop-only{
+        max-width: 900px;
+        max-height: 300px;
+    }
+    @include desktop-max{
+        max-width: 1200px;
+        max-height: 500px;
+    }
+    &.abastecimiento{.module-table-container{.module-table-item{background:$color_abastecimiento;padding: .5em;}}}
+    &.sillas{.module-table-container{.module-table-item{background:$color_sillas;padding: .5em;}}}
+
+    &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
+    .module-table-container{
+        display: flex;
+        flex-wrap: wrap;
+        .module-table-item{
+            width: 200px;
+            text-align: center;
+            + .module-table-item{
+                border-left: solid 1px $gris;
+            }
+        }
+    }
+    &[data-col="once"]{.module-table-content{width:calc(11 * 200px);}}
+    .module-table-content{
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: solid 1px $gris;
+        .module-table-content-item{
+            width: 200px;
+            font-size: $fontTiny;
+            padding: .5em;
+            + .module-table-content-item{
+                border-left: solid 1px $gris;
+            }
+        }
+    }
+    .module-table-button{
+        button{
+            @include reset-appearance;
+            width: 200px;
+            padding: 1em;
+            margin: 1em;
+            color: $blanco;
+            background: $color_corporativo_dark;
+            display: block;
+            &:hover{
+              background: $color_corporativo_darker;
+              cursor: pointer;  
+            }
+            &.hidden{
+                display: none;
             }
         }
     }

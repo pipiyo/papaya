@@ -62,7 +62,7 @@ let DetalleInformeStore = Reflux.createStore({
       module = [
         this.validador("Descripción:",sub[valor].SUB_DESCRIPCION),
         this.validador("Proceso:",sub[valor].SUB_PROCESO),
-        this.validador("Fecha Ingreso:",sub[valor].SUB_FECHA_INGRESO,true),
+        this.validador("Fecha Inicio:",sub[valor].SUB_FECHA_INICIO,true),
         this.validador("Fecha Entrega:",sub[valor].SUB_FECHA_ENTREGA,true),
         this.validador("Estado:",sub[valor].SUB_ESTADO),
         this.validador("Supervisor:",sub[valor].SUB_SUPERVISOR),
