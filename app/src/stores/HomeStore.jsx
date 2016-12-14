@@ -1,10 +1,27 @@
+import React from 'react'
 import Reflux from 'reflux'
 import HomeActions from '../actions/HomeActions'
+import Notification from '../components/home/Notification'
 
 let HomeStore = Reflux.createStore({
   listenables: [HomeActions],
-  getInitialState: function() {
-    return this.obj = { 
+  obj: { 
+                      	user: {
+                      			null,
+                      			null
+                      	},
+                        menu: null,
+						active : null,
+						notification : null,
+						navMovil: null,
+						subMenus: null,
+						showNotification: null
+  },
+  init: function() {
+    this.getObj()
+  },
+  getObj: function() {
+    this.obj = { 
                       	user: {
                       			full_name: localStorage.getItem('full_name'),
                       			profile_picture: localStorage.getItem('profile_picture')
@@ -27,13 +44,15 @@ let HomeStore = Reflux.createStore({
 							      {id:"16",img: "fa fa-bolt", name: "Sistema" , icon: "icon sistema", "item": false}
 							    ],
 						active : 'active',
-						notification : null,
 						navMovil: this.navMovil,
 						subMenus: this.subMenus,
-						navNotification: this.navNotification
+						showNotification: this.showNotification
+										
                        }
   },
-
+  getInitialState: function() {
+    return this.obj
+  },
 
   /* Agrega clase active para desplegar sub-menus */
   navMovil: function(ev){
@@ -42,11 +61,13 @@ let HomeStore = Reflux.createStore({
     x[0].classList.toggle('active')
   },
 
-  /* Agrega clase notificación active */
+  /* Agrega clase notificación active 
   navNotification: function(ev){
-    ev.preventDefault();
+    ev.preventDefault()
     (this.obj.notification == null ) ? this.obj.notification = 'active' : this.obj.notification = null
+    this.trigger(this.obj)
   },
+  */
 
   /* Agrega clase active para desplegar sub-menus */
   subMenus: function(ev){
@@ -55,9 +76,32 @@ let HomeStore = Reflux.createStore({
     let z = document.querySelectorAll("[data-active]")
     let valor = ev.currentTarget.getAttribute("data-click")
     z[valor].classList.toggle('active')
-  }
+  },
 
+  showNotification: function(){
+	HomeActions._showNotification()
+  },
+  _showNotification: function(){
+  	this.obj.notification = <Notification hideNotification={HomeActions.hideNotification} />
+  	this.trigger( this.obj )
+  },
+  hideNotification: function(click){
+
+      let container
+      try {
+          container = ReactDOM.findDOMNode(this.refs.notification).contains(click.target)
+      }
+      catch(err) {
+          container = false
+      }
+
+  	if (!container) {
+  		if ( !(click.target == document.getElementsByClassName('notificacion-user')[0] || click.target == document.getElementsByClassName('notificacion-num')[0]) ) {
+			this.obj.notification = null
+  		  	this.trigger( this.obj )
+  		}
+  	}
+  }
 })
 
 export default HomeStore
-

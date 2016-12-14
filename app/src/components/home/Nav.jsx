@@ -1,6 +1,4 @@
 import React from 'react'
-import Notification from './Notification'
-import Env from '../../Config'
 
 class Nav extends React.Component {
 
@@ -9,21 +7,23 @@ class Nav extends React.Component {
   }
 
 
-
 /*
-            <div className="notificacion-user hidden" onClick={this.props.navnotification}>
+      let notification;
+      (this.props.notification == null) ? notification = "" : notification = <Notification />
+*/
+
+
+
+  render() {
+      return (
+          <nav className="nav-config">
+
+            <div className="notificacion-user hidden" onClick={this.props.showNotification}>
               <p class="notificacion-num">
                 21
               </p>
-              { notification }
+              {this.props.notification}
             </div>
-*/
-
-  render() {
-      let notification;
-      (this.props.notification == null) ? notification = "" : notification = <Notification />
-      return (
-          <nav className="nav-config">
 
             <div className="name-user">
               <h2>{this.props.user.full_name}</h2>
