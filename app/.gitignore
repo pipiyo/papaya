@@ -2,7 +2,6 @@
 /.tmp/
 /.sass-cache/
 dump.rdb
-/src/Config/index.jsx
 ../dump.rdb
 /bundle/index.html
 /bundle/js/bundle.js
