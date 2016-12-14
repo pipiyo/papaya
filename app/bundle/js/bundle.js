@@ -109,11 +109,11 @@
 
 	var _HomeRoutes2 = _interopRequireDefault(_HomeRoutes);
 
-	var _InicioRoutes = __webpack_require__(524);
+	var _InicioRoutes = __webpack_require__(526);
 
 	var _InicioRoutes2 = _interopRequireDefault(_InicioRoutes);
 
-	var _AuthRoutes = __webpack_require__(526);
+	var _AuthRoutes = __webpack_require__(528);
 
 	var _AuthRoutes2 = _interopRequireDefault(_AuthRoutes);
 
@@ -61415,7 +61415,9 @@
 	exports.default = Notification;
 
 /***/ },
-/* 524 */
+/* 524 */,
+/* 525 */,
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61431,7 +61433,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _inicio = __webpack_require__(525);
+	var _inicio = __webpack_require__(527);
 
 	var _inicio2 = _interopRequireDefault(_inicio);
 
@@ -61465,7 +61467,7 @@
 	exports.default = InicioRoutes;
 
 /***/ },
-/* 525 */
+/* 527 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61518,7 +61520,7 @@
 	exports.default = InicioIndex;
 
 /***/ },
-/* 526 */
+/* 528 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
