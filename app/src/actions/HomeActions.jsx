@@ -1,7 +1,8 @@
 import Reflux from 'reflux'
 
 let HomeActions = Reflux.createActions([
-  'checkLogin'
+  '_showNotification',
+  'hideNotification'
 ])
 
 export default HomeActions

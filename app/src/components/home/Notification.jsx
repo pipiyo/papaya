@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom' 
 import { Link } from 'react-router'
 
 class Notification extends React.Component {
@@ -7,9 +8,22 @@ class Notification extends React.Component {
     super()
   }
 
+  getEvent(e) {
+    this.props.hideNotification(e)
+  }
+
+
+    componentWillUnmount() {
+        window.__myapp_container.removeEventListener('click', this.getEvent.bind(this) )
+    }
+
+    componentDidMount() {
+        window.__myapp_container.addEventListener('click', this.getEvent.bind(this) )
+    }
+
   render() {
       return (
-        <div class="module-notification">
+        <div class="module-notification" ref="notification">
           <h6>Notificaciones</h6>
           <a class="item-notification">
               <div class="img-notification">
@@ -29,7 +43,7 @@ class Notification extends React.Component {
                 <p> Se ingreso rocha 2055</p>
               </div>
           </a>
-          <Link to="home/notificacion" class="view-all-notification" href="#"> ver todas</Link>
+          <Link to="/home/notificacion" class="view-all-notification" href="#"> ver todas</Link>
         </div>
       )
 

@@ -18,9 +18,9 @@ class Home extends React.Component {
             navmovil={this.props.obj.navMovil} />
           <Main 
             user={this.props.obj.user} 
-            notification={this.props.obj.notification} 
-            navnotification={this.props.obj.navNotification} 
-            content={this.props.content}/>
+            content={this.props.content}
+            showNotification={this.props.obj.showNotification}
+            notification={this.props.obj.notification}/>
         </div>
       )
 

@@ -18,6 +18,8 @@ import Auth from './routes/AuthRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
+window.__myapp_container = document.getElementById('app')
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={Login}/>
@@ -37,4 +39,4 @@ ReactDOM.render((
     </Route>
     <Route path="*" component={Servicio} />
   </Router>
-), document.getElementById('app'))
+), window.__myapp_container)
