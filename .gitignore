@@ -9,4 +9,3 @@ dump.rdb
 /app/dump.rdb
 /app/src/Config/index.jsx
 /appenv.js
-/app/srcApirest/models/connection.js
