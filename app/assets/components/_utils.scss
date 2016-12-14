@@ -200,6 +200,7 @@ $colores : (
 $transition : all 200ms ease;
 
 /* -> Definiendo mediaqueries <- */
+$max_desktop : 1500px;
 $desktop : 1200px;
 $tablet_horizontal : 1024px;
 $tablet_vertical : 850px;
@@ -208,6 +209,9 @@ $phone : 320px;
 
 
 @mixin media-query( $type ){
+    @if $type == desktop-max {
+        @media only screen and (min-width: $max_desktop) { @content; }
+    }
     @if $type == desktop-only {
         @media only screen and (min-width: $desktop) { @content; }
     }
@@ -239,7 +243,7 @@ $phone : 320px;
         @media only screen and (max-width: $phone) { @content; }
     }
 }
-
+@mixin desktop-max { @include media-query(desktop-max) { @content }; }
 @mixin desktop-only { @include media-query(desktop-only) { @content }; }
 @mixin desktop-tablet { @include media-query(desktop-tablet) { @content }; }
 @mixin small-desktop-down { @include media-query(small-desktop-down) { @content }; }

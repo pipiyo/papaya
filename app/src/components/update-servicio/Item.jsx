@@ -57,23 +57,18 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
-                <label>Supervisor</label>
-                <input required value={this.props.input.supervisor} onChange={this.renderInput.bind(this)} id="supervisor" type="text" />
-            </div>
-
-            <div className="item-form">
                 <label>Fecha Inicio</label>
                 <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.input.fechaInicio} onChange={this.renderFechaInicio.bind(this)} />
             </div>
 
             <div className="item-form">
-                <label>Fecha Entrega Cliente</label>
+                <label>Fecha Entrega</label>
                 <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.input.fechaEntrega} onChange={this.renderFechaEntrega.bind(this)} />
             </div>
 
             <div className="item-form">
-                <label>Días</label>
-                <input value={this.props.input.dias} onChange={this.renderInput.bind(this)} type="number" class="date" id="dias" />
+                <label>Supervisor</label>
+                <input required value={this.props.input.supervisor} onChange={this.renderInput.bind(this)} id="supervisor" type="text" />
             </div>
 
             <div className="item-form">

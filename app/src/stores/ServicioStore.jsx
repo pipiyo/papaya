@@ -47,6 +47,22 @@ let ServicioStore = Reflux.createStore({
       this.trigger(this.obj)
     })
   },
+  sumaFecha : function(dias, fecha){
+    let new_date = moment(fecha, "YYYY-MM-DD").add(dias, 'days');
+    return new_date.format("YYYY-MM-DD");
+  },
+  fechaEntrega(area,fechaI,fechaE){
+    let fechaEntrega
+    switch(area) {
+      case "Adquisiciones":
+        fechaEntrega = this.sumaFecha(2,fechaI)
+      break;
+      default:
+        fechaEntrega = fechaE
+      }
+      return fechaEntrega
+  },
+
   addServicio: function(ev){
     let servicio = {
       "reclamo": (ev.target.elements['reclamo']) ? ev.target.elements['reclamo'].value : "",
@@ -54,8 +70,8 @@ let ServicioStore = Reflux.createStore({
       "categoria": ev.target.elements['categoria'].value,
       "supervisor": ev.target.elements['supervisor'].value,
       "fechaInicio": ev.target.elements['fechaInicio'].value,
-      "fechaEntrega": ev.target.elements['fechaEntrega'].value,  
-      "dias": ev.target.elements['dias'].value,
+      "fechaEntrega": this.fechaEntrega(ev.target.elements['area'].value,ev.target.elements['fechaInicio'].value,ev.target.elements['fechaEntrega'].value),  
+      "dias": "0",
       "descripcion": ev.target.elements['descripcion'].value ,
       "observacion": ev.target.elements['observacion'].value,
       "rocha": ev.target.elements['rocha'].value,

@@ -47,7 +47,7 @@ let UpdateServicioStore = Reflux.createStore({
       "supervisor": ev.target.elements['supervisor'].value,
       "fechaInicio": ev.target.elements['fechaInicio'].value,
       "fechaEntrega": ev.target.elements['fechaEntrega'].value,  
-      "dias": ev.target.elements['dias'].value,
+      "dias": "0",
       "descripcion": ev.target.elements['descripcion'].value ,
       "observacion": ev.target.elements['observacion'].value,
       "numero": ev.target.elements['numero'].value,
