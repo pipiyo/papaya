@@ -28,6 +28,8 @@ let LoginStore = Reflux.createStore({
     localStorage.setItem('name', token.name)
     localStorage.setItem('type', token.type)
     localStorage.setItem('token', token.token)
+    localStorage.setItem('full_name', token.full_name)
+    localStorage.setItem('profile_picture', token.profile_picture)
     this.trigger( token )
   },
   checkUser: function () {
@@ -36,6 +38,8 @@ let LoginStore = Reflux.createStore({
               localStorage.removeItem('name')
               localStorage.removeItem('type')
               localStorage.removeItem('token')
+              localStorage.removeItem('full_name')
+              localStorage.removeItem('profile_picture')
             browserHistory.push('/')
   }
 

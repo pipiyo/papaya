@@ -3,3 +3,8 @@ dump.rdb
 /app/bundle/index.html
 /app/.gitignore.swp
 /app/dump.rdb
+/app/node_modules/
+/app/.tmp/
+/app/.sass-cache/
+/app/dump.rdb
+/appenv.js

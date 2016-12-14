@@ -6,7 +6,7 @@ let mongoose = require("mongoose")
 
 mongoose.Promise = global.Promise
 
-mongoose.connect("mongodb://localhost/papaya")
+mongoose.createConnection("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
@@ -32,6 +32,6 @@ notificationSchema.pre('save', function (next) {
 
 
 
-let notification = mongoose.model("notification", notificationSchema)
+let notification = mongoose.model('notification', notificationSchema)
 
 module.exports = notification

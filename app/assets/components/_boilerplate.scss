@@ -1428,7 +1428,14 @@ a.external-link, .external-link a {
         max-height: 500px;
     }
     &.abastecimiento{.module-table-container{.module-table-item{background:$color_abastecimiento;padding: .5em;}}}
-    &.sillas{.module-table-container{.module-table-item{background:$color_sillas;padding: .5em;}}}
+    &.sillas{.module-table-container{.module-table-item{background:$color_sillas;color:$blanco;padding: .5em;}}}
+    &.produccion{.module-table-container{.module-table-item{background:$color_produccion;color:$blanco;padding: .5em;}}}
+    &.planificacion{.module-table-container{.module-table-item{background:$color_planificacion;color:$blanco;padding: .5em;}}}
+    &.desarrollo{.module-table-container{.module-table-item{background:$color_desarrollo;color:$blanco;padding: .5em;}}}
+    &.comercial{.module-table-container{.module-table-item{background:$color_comercial;padding: .5em;}}}
+    &.instalaciones{.module-table-container{.module-table-item{background:$color_instalaciones;color:$blanco;padding: .5em;}}}
+    &.despacho{.module-table-container{.module-table-item{background:$color_despacho;color:$blanco;padding: .5em;}}}
+
 
     &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
     .module-table-container{

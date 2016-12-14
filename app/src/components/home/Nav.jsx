@@ -1,6 +1,4 @@
 import React from 'react'
-import Notification from './Notification'
-import Env from '../../Config'
 
 class Nav extends React.Component {
 
@@ -8,22 +6,31 @@ class Nav extends React.Component {
     super()
   }
 
-  render() {
+
+/*
       let notification;
-      (this.props.notification == null) ? notification = "" : notification = <Notification />;
+      (this.props.notification == null) ? notification = "" : notification = <Notification />
+*/
+
+
+
+  render() {
       return (
           <nav className="nav-config">
-            <div className="notificacion-user" onClick={this.props.navnotification}>
+
+            <div className="notificacion-user hidden" onClick={this.props.showNotification}>
               <p class="notificacion-num">
                 21
               </p>
-              { notification }
+              {this.props.notification}
             </div>
+
             <div className="name-user">
-              <h2>{this.props.nombre}</h2>
+              <h2>{this.props.user.full_name}</h2>
             </div>
+
             <div className="img-user">
-              <img src={`${Env.url}css/images/fondos/cristobal.jpg`} alt="usuario"/>
+              <img src={this.props.user.profile_picture} alt="usuario"/>
             </div>
           </nav>
       )

@@ -121,6 +121,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	window.__myapp_container = document.getElementById('app');
+
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.browserHistory },
@@ -145,7 +147,7 @@
 	        )
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _ServicioRoutes2.default })
-	), document.getElementById('app'));
+	), window.__myapp_container);
 
 /***/ },
 /* 2 */
@@ -23546,6 +23548,8 @@
 	    localStorage.setItem('name', token.name);
 	    localStorage.setItem('type', token.type);
 	    localStorage.setItem('token', token.token);
+	    localStorage.setItem('full_name', token.full_name);
+	    localStorage.setItem('profile_picture', token.profile_picture);
 	    this.trigger(token);
 	  },
 	  checkUser: function checkUser() {
@@ -23554,6 +23558,8 @@
 	      localStorage.removeItem('name');
 	      localStorage.removeItem('type');
 	      localStorage.removeItem('token');
+	      localStorage.removeItem('full_name');
+	      localStorage.removeItem('profile_picture');
 	      _reactRouter.browserHistory.push('/');
 	    }
 
@@ -37144,10 +37150,6 @@
 
 	var _ServicioActions2 = _interopRequireDefault(_ServicioActions);
 
-	var _FormIngresoServicioStore = __webpack_require__(424);
-
-	var _FormIngresoServicioStore2 = _interopRequireDefault(_FormIngresoServicioStore);
-
 	var _ItemProduccion = __webpack_require__(425);
 
 	var _ItemProduccion2 = _interopRequireDefault(_ItemProduccion);
@@ -48186,51 +48188,7 @@
 	});
 
 /***/ },
-/* 424 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var FormIngresoServicioStore = function () {
-	  function FormIngresoServicioStore() {
-	    _classCallCheck(this, FormIngresoServicioStore);
-
-	    this._comunas = null;
-	    this._vehiculos = null;
-	  }
-
-	  _createClass(FormIngresoServicioStore, [{
-	    key: "comunas",
-	    get: function get() {
-	      return this._comunas;
-	    },
-	    set: function set(value) {
-	      this._comunas = value;
-	    }
-	  }, {
-	    key: "vehiculos",
-	    get: function get() {
-	      return this._vehiculos;
-	    },
-	    set: function set(value) {
-	      this._vehiculos = value;
-	    }
-	  }]);
-
-	  return FormIngresoServicioStore;
-	}();
-
-	exports.default = new FormIngresoServicioStore();
-
-/***/ },
+/* 424 */,
 /* 425 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -56587,14 +56545,28 @@
 	    total: 0,
 	    area: "",
 	    button: "",
-	    filtro: { fechaInicio: null, fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100 }
+	    filtro: { fechaInicio: undefined, fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100 }
 	  },
 	  init: function init() {},
 	  getInitialState: function getInitialState() {
 	    return this.obj;
 	  },
 	  renderReset: function renderReset() {
-	    this.obj.filtro.limit = 5;
+	    document.getElementById("cliente").value = "";
+	    document.getElementById("fechaInicio").value = "";
+	    document.getElementById("fechaEntrega").value = "";
+	    document.getElementById("codigo").value = "";
+	    document.getElementById("estado").options[0].selected = "selected";
+	    document.getElementById("vendedor").options[0].selected = "selected";
+	    document.getElementById("categoria").options[0].selected = "selected";
+	    this.obj.filtro.limit = 100;
+	    this.obj.filtro.fechaInicio = undefined;
+	    this.obj.filtro.fechaEntrega = undefined;
+	    this.obj.filtro.codigo = null;
+	    this.obj.filtro.estado = "EN PROCESO";
+	    this.obj.filtro.vendedor = null;
+	    this.obj.filtro.categoria = null;
+	    this.obj.filtro.cliente = null;
 	  },
 	  renderSubServicio: function renderSubServicio(area) {
 	    var _this = this;
@@ -56639,16 +56611,7 @@
 	    } else {
 	      this.obj.filtro.cliente = null;
 	    }
-	    if (fechaI != "") {
-	      this.obj.filtro.fechai = fechaI;
-	    } else {
-	      this.obj.filtro.fechai = undefined;
-	    }
-	    if (fechaE != "") {
-	      this.obj.filtro.fechae = fechaE;
-	    } else {
-	      this.obj.filtro.fechae = undefined;
-	    }
+
 	    this.obj.filtro.estado = estado;
 
 	    socket.emit('allProyectoSubServicio', this.obj.filtro, this.obj.area);
@@ -56699,20 +56662,26 @@
 	      case "abastecimiento":
 	        area = "abastecimiento";
 	        break;
-	      case "Despacho":
+	      case "despacho":
 	        area = "despacho";
 	        break;
-	      case "Instalacion":
+	      case "instalación":
 	        area = "instalaciones";
 	        break;
-	      case "Produccion":
+	      case "producción":
 	        area = "produccion";
 	        break;
-	      case "Desarrollo":
-	        area = "desarrollo";
+	      case "planificación":
+	        area = "planificacion";
 	        break;
 	      case "sillas":
 	        area = "sillas";
+	        break;
+	      case "técnica":
+	        area = "desarrollo";
+	        break;
+	      case "comercial":
+	        area = "comercial";
 	        break;
 	    }
 	    document.querySelector('[data-area="ok"]').classList.add(area);
@@ -56721,20 +56690,26 @@
 	        case "abastecimiento":
 	          area1 = "abastecimiento";
 	          break;
-	        case "Despacho":
+	        case "despacho":
 	          area1 = "despacho";
 	          break;
-	        case "Instalacion":
+	        case "instalación":
 	          area1 = "instalaciones";
 	          break;
-	        case "Produccion":
+	        case "producción":
 	          area1 = "produccion";
 	          break;
-	        case "Desarrollo":
-	          area1 = "desarrollo";
+	        case "planificación":
+	          area1 = "planificacion";
 	          break;
 	        case "sillas":
 	          area1 = "sillas";
+	          break;
+	        case "técnica":
+	          area1 = "desarrollo";
+	          break;
+	        case "comercial":
+	          area1 = "comercial";
 	          break;
 	      }
 	      document.querySelector('[data-area="ok"]').classList.remove(area);
@@ -56922,6 +56897,11 @@
 	                            'option',
 	                            { value: 'Emitido' },
 	                            'Emitido'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'Parcial' },
+	                            'Parcial'
 	                        ),
 	                        _react2.default.createElement(
 	                            'option',
@@ -60717,13 +60697,31 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _dec, _class;
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactMixin = __webpack_require__(174);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _reactDom = __webpack_require__(35);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	var _home = __webpack_require__(516);
 
 	var _home2 = _interopRequireDefault(_home);
+
+	var _HomeStore = __webpack_require__(524);
+
+	var _HomeStore2 = _interopRequireDefault(_HomeStore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60733,8 +60731,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	//@ReactMixin.decorate(Reflux.connect(AuthStore, 'user'))
-	var HomeRoutes = function (_React$Component) {
+	var HomeRoutes = (_dec = _reactMixin2.default.decorate(_reflux2.default.connect(_HomeStore2.default, 'obj')), _dec(_class = function (_React$Component) {
 	  _inherits(HomeRoutes, _React$Component);
 
 	  function HomeRoutes() {
@@ -60750,13 +60747,12 @@
 	    key: 'render',
 	    value: function render() {
 
-	      return _react2.default.createElement(_home2.default, { content: this.props.children });
+	      return _react2.default.createElement(_home2.default, { content: this.props.children, obj: this.state.obj });
 	    }
 	  }]);
 
 	  return HomeRoutes;
-	}(_react2.default.Component);
-
+	}(_react2.default.Component)) || _class);
 	exports.default = HomeRoutes;
 
 /***/ },
@@ -60797,51 +60793,24 @@
 	  function Home() {
 	    _classCallCheck(this, Home);
 
-	    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
-
-	    _this.state = { active: 'active', notification: null };
-	    _this.menu = [{ id: "11", img: _react2.default.createElement('i', { className: 'fa fa-bullhorn', 'aria-hidden': 'true' }), name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: _react2.default.createElement('i', { className: 'fa fa-rocket', 'aria-hidden': 'true' }), name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: _react2.default.createElement('i', { className: 'fa fa-shopping-cart', 'aria-hidden': 'true' }), name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/abastecimiento" }] }, { id: "4", img: _react2.default.createElement('i', { className: 'fa fa-suitcase', 'aria-hidden': 'true' }), name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: _react2.default.createElement('i', { className: 'fa fa-pencil', 'aria-hidden': 'true' }), name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: _react2.default.createElement('i', { className: 'fa fa-lightbulb-o', 'aria-hidden': 'true' }), name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: _react2.default.createElement('i', { className: 'fa fa-truck', 'aria-hidden': 'true' }), name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: _react2.default.createElement('i', { className: 'fa fa-user', 'aria-hidden': 'true' }), name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: _react2.default.createElement('i', { className: 'fa fa-wrench', 'aria-hidden': 'true' }), name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: _react2.default.createElement('i', { className: 'fa fa-fire-extinguisher', 'aria-hidden': 'true' }), name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: _react2.default.createElement('i', { className: 'fa fa-book', 'aria-hidden': 'true' }), name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: _react2.default.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' }), name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/sillas" }] }, { id: "16", img: _react2.default.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }), name: "Sistema", icon: "icon sistema", "item": false }];
-	    return _this;
+	    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 	  }
-	  /* Agrega clase active para desplegar sub-menus */
-
 
 	  _createClass(Home, [{
-	    key: 'navMovil',
-	    value: function navMovil(ev) {
-	      ev.preventDefault();
-	      var x = document.querySelectorAll(".nav-item");
-	      x[0].classList.toggle('active');
-	    }
-
-	    /* Agrega clase notificación active */
-
-	  }, {
-	    key: 'navNotification',
-	    value: function navNotification(ev) {
-	      ev.preventDefault();
-	      this.state.notification == null ? this.setState({ notification: 'active' }) : this.setState({ notification: null });
-	    }
-
-	    /* Agrega clase active para desplegar sub-menus */
-
-	  }, {
-	    key: 'subMenus',
-	    value: function subMenus(ev) {
-	      ev.preventDefault();
-	      var x = document.querySelectorAll("[data-click]");
-	      var z = document.querySelectorAll("[data-active]");
-	      var valor = ev.currentTarget.getAttribute("data-click");
-	      z[valor].classList.toggle('active');
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'frame' },
-	        _react2.default.createElement(_Header2.default, { menu: this.menu, submenu: this.subMenus.bind(this), navmovil: this.navMovil.bind(this) }),
-	        _react2.default.createElement(_Main2.default, { notification: this.state.notification, navnotification: this.navNotification.bind(this), content: this.props.content })
+	        _react2.default.createElement(_Header2.default, {
+	          menu: this.props.obj.menu,
+	          submenu: this.props.obj.subMenus,
+	          navmovil: this.props.obj.navMovil }),
+	        _react2.default.createElement(_Main2.default, {
+	          user: this.props.obj.user,
+	          content: this.props.content,
+	          showNotification: this.props.obj.showNotification,
+	          notification: this.props.obj.notification })
 	      );
 	    }
 	  }]);
@@ -61109,7 +61078,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: this.props.icon },
-	            this.props.img
+	            _react2.default.createElement('i', { className: this.props.img, 'aria-hidden': 'true' })
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -61170,50 +61139,31 @@
 	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 	  }
 
+	  /*
+	                <ul>
+	                  <li><a href="#">Pagina 1</a></li>
+	                  <li><a href="#">Pagina 2</a></li>
+	                  <li><a href="#">Pagina 3</a></li>
+	                </ul>
+	  */
+
 	  _createClass(Main, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'main', id: 'main' },
-	        _react2.default.createElement(_Nav2.default, { notification: this.props.notification, navnotification: this.props.navnotification, nombre: 'Crist\xF3bal Maturana' }),
+	        _react2.default.createElement(_Nav2.default, {
+	          showNotification: this.props.showNotification,
+	          user: this.props.user,
+	          notification: this.props.notification }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'breadcrumb' },
-	            _react2.default.createElement(
-	              'ul',
-	              null,
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Pagina 1'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Pagina 2'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'Pagina 3'
-	                )
-	              )
-	            )
+	            _react2.default.createElement('ul', null)
 	          ),
 	          /*React.cloneElement(this.props.content, {siteArea: "test"}) */this.props.content
 	        )
@@ -61230,7 +61180,7 @@
 /* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -61241,14 +61191,6 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _Notification = __webpack_require__(523);
-
-	var _Notification2 = _interopRequireDefault(_Notification);
-
-	var _Config = __webpack_require__(261);
-
-	var _Config2 = _interopRequireDefault(_Config);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61267,37 +61209,40 @@
 	    return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this));
 	  }
 
+	  /*
+	        let notification;
+	        (this.props.notification == null) ? notification = "" : notification = <Notification />
+	  */
+
 	  _createClass(Nav, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      var notification = void 0;
-	      this.props.notification == null ? notification = "" : notification = _react2.default.createElement(_Notification2.default, null);
 	      return _react2.default.createElement(
-	        'nav',
-	        { className: 'nav-config' },
+	        "nav",
+	        { className: "nav-config" },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'notificacion-user', onClick: this.props.navnotification },
+	          "div",
+	          { className: "notificacion-user hidden", onClick: this.props.showNotification },
 	          _react2.default.createElement(
-	            'p',
-	            { className: 'notificacion-num' },
-	            '21'
+	            "p",
+	            { className: "notificacion-num" },
+	            "21"
 	          ),
-	          notification
+	          this.props.notification
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'name-user' },
+	          "div",
+	          { className: "name-user" },
 	          _react2.default.createElement(
-	            'h2',
+	            "h2",
 	            null,
-	            this.props.nombre
+	            this.props.user.full_name
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'img-user' },
-	          _react2.default.createElement('img', { src: _Config2.default.url + 'css/images/fondos/cristobal.jpg', alt: 'usuario' })
+	          "div",
+	          { className: "img-user" },
+	          _react2.default.createElement("img", { src: this.props.user.profile_picture, alt: "usuario" })
 	        )
 	      );
 	    }
@@ -61324,6 +61269,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(35);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	var _reactRouter = __webpack_require__(198);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -61344,11 +61293,26 @@
 	  }
 
 	  _createClass(Notification, [{
+	    key: 'getEvent',
+	    value: function getEvent(e) {
+	      this.props.hideNotification(e);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      window.__myapp_container.removeEventListener('click', this.getEvent.bind(this));
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.__myapp_container.addEventListener('click', this.getEvent.bind(this));
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'module-notification' },
+	        { className: 'module-notification', ref: 'notification' },
 	        _react2.default.createElement(
 	          'h6',
 	          null,
@@ -61402,7 +61366,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: 'home/notificacion', className: 'view-all-notification', href: '#' },
+	          { to: '/home/notificacion', className: 'view-all-notification', href: '#' },
 	          ' ver todas'
 	        )
 	      );
@@ -61415,8 +61379,141 @@
 	exports.default = Notification;
 
 /***/ },
-/* 524 */,
-/* 525 */,
+/* 524 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _HomeActions = __webpack_require__(525);
+
+	var _HomeActions2 = _interopRequireDefault(_HomeActions);
+
+	var _Notification = __webpack_require__(523);
+
+	var _Notification2 = _interopRequireDefault(_Notification);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var HomeStore = _reflux2.default.createStore({
+	  listenables: [_HomeActions2.default],
+	  obj: {
+	    user: _defineProperty({
+	      null: null
+	    }, 'null', null),
+	    menu: null,
+	    active: null,
+	    notification: null,
+	    navMovil: null,
+	    subMenus: null,
+	    showNotification: null
+	  },
+	  init: function init() {
+	    this.getObj();
+	  },
+	  getObj: function getObj() {
+	    this.obj = {
+	      user: {
+	        full_name: localStorage.getItem('full_name'),
+	        profile_picture: localStorage.getItem('profile_picture')
+	      },
+	      menu: [{ id: "11", img: "fa fa-bullhorn", name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }, { id: "3", nombre: "Sub Actividades", ruta: "/home/indicadores/planificación" }] }, { id: "1", img: "fa fa-rocket", name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: "fa fa-shopping-cart", name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/abastecimiento" }] }, { id: "4", img: "fa fa-suitcase", name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/comercial" }] }, { id: "5", img: "fa fa-pencil", name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: "fa fa-lightbulb-o", name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/técnica" }] }, { id: "7", img: "fa fa-truck", name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/despacho" }] }, { id: "8", img: "fa fa-user", name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: "fa fa-wrench", name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: "fa fa-wrench", name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/instalación" }] }, { id: "12", img: "fa fa-fire-extinguisher", name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: "fa fa-cog", name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/producción" }] }, { id: "14", img: "fa fa-book", name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: "fa fa-cog", name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/sillas" }] }, { id: "16", img: "fa fa-bolt", name: "Sistema", icon: "icon sistema", "item": false }],
+	      active: 'active',
+	      navMovil: this.navMovil,
+	      subMenus: this.subMenus,
+	      showNotification: this.showNotification
+
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return this.obj;
+	  },
+
+	  /* Agrega clase active para desplegar sub-menus */
+	  navMovil: function navMovil(ev) {
+	    ev.preventDefault();
+	    var x = document.querySelectorAll(".nav-item");
+	    x[0].classList.toggle('active');
+	  },
+
+	  /* Agrega clase notificación active 
+	  navNotification: function(ev){
+	    ev.preventDefault()
+	    (this.obj.notification == null ) ? this.obj.notification = 'active' : this.obj.notification = null
+	    this.trigger(this.obj)
+	  },
+	  */
+
+	  /* Agrega clase active para desplegar sub-menus */
+	  subMenus: function subMenus(ev) {
+	    ev.preventDefault();
+	    var x = document.querySelectorAll("[data-click]");
+	    var z = document.querySelectorAll("[data-active]");
+	    var valor = ev.currentTarget.getAttribute("data-click");
+	    z[valor].classList.toggle('active');
+	  },
+
+	  showNotification: function showNotification() {
+	    _HomeActions2.default._showNotification();
+	  },
+	  _showNotification: function _showNotification() {
+	    this.obj.notification = _react2.default.createElement(_Notification2.default, { hideNotification: _HomeActions2.default.hideNotification });
+	    this.trigger(this.obj);
+	  },
+	  hideNotification: function hideNotification(click) {
+
+	    var container = void 0;
+	    try {
+	      container = ReactDOM.findDOMNode(this.refs.notification).contains(click.target);
+	    } catch (err) {
+	      container = false;
+	    }
+
+	    if (!container) {
+	      if (!(click.target == document.getElementsByClassName('notificacion-user')[0] || click.target == document.getElementsByClassName('notificacion-num')[0])) {
+	        this.obj.notification = null;
+	        this.trigger(this.obj);
+	      }
+	    }
+	  }
+	});
+
+	exports.default = HomeStore;
+
+/***/ },
+/* 525 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _reflux = __webpack_require__(176);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HomeActions = _reflux2.default.createActions(['_showNotification', 'hideNotification']);
+
+	exports.default = HomeActions;
+
+/***/ },
 /* 526 */
 /***/ function(module, exports, __webpack_require__) {
 

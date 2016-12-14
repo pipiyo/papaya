@@ -77,11 +77,12 @@ module.exports = (io) => {
             q_area = 'and SUB_NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas")'
             break;
       }
+
       if(data.codigo){q_codigo = ' and proyecto.CODIGO_PROYECTO like "%'+data.codigo +'%"'}
       if(data.vendedor){q_vendedor = ' and proyecto.EJECUTIVO like "%'+data.vendedor +'%"'}
       if(data.categoria){q_categoria = ' and sub_servicio.SUB_CATEGORIA like "%'+data.categoria +'%"'}
       if(data.cliente){q_cliente = ' and proyecto.NOMBRE_CLIENTE like "%'+data.cliente +'%"'}
-      if(data.fechai != null && data.fechae != null){q_fecha = ' and sub_servicio.SUB_FECHA_ENTREGA BETWEEN "'+ data.fechai +'" and "'+ data.fechae +'"'}
+      if(data.fechaInicio != null && data.fechaEntrega != null){q_fecha = ' and sub_servicio.SUB_FECHA_ENTREGA BETWEEN "'+ data.fechaInicio +'" and "'+ data.fechaEntrega +'"'}
       q_estado = ' and sub_servicio.SUB_ESTADO = "'+data.estado+'"'
 
       let query = 'SELECT sub_servicio.CODIGO_SUBSERVICIO, proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.DESCRIPCION as SD , sub_servicio.SUB_DESCRIPCION as SSD,sub_servicio.SUB_FECHA_INICIO, sub_servicio.SUB_FECHA_ENTREGA, sub_servicio.SUB_OBSERVACIONES, sub_servicio.SUB_ESTADO FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+' limit '+data.limit +';' 
