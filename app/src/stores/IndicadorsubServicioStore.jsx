@@ -17,7 +17,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
     total: 0,
     area: "",
     button: "",
-    filtro:{fechaInicio:null,fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100}
+    filtro:{fechaInicio:undefined,fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100}
   },
   init: function() {
    
@@ -26,7 +26,21 @@ let IndicadorSubServicioStore = Reflux.createStore({
     return this.obj
   },
   renderReset: function(){
-     this.obj.filtro.limit = 5
+    document.getElementById("cliente").value = ""
+    document.getElementById("fechaInicio").value = ""
+    document.getElementById("fechaEntrega").value = ""
+    document.getElementById("codigo").value = ""
+    document.getElementById("estado").options[0].selected = "selected"
+    document.getElementById("vendedor").options[0].selected = "selected"
+    document.getElementById("categoria").options[0].selected = "selected"
+    this.obj.filtro.limit = 100
+    this.obj.filtro.fechaInicio = undefined
+    this.obj.filtro.fechaEntrega = undefined
+    this.obj.filtro.codigo = null
+    this.obj.filtro.estado = "EN PROCESO" 
+    this.obj.filtro.vendedor = null
+    this.obj.filtro.categoria = null
+    this.obj.filtro.cliente = null 
   },
   renderSubServicio: function(area){
     this.obj.area = area
@@ -51,8 +65,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
       if(vendedor != ""){this.obj.filtro.vendedor=vendedor}else{this.obj.filtro.vendedor= null}   
       if(categoria != ""){this.obj.filtro.categoria = categoria}else{this.obj.filtro.categoria = null}
       if(cliente != ""){this.obj.filtro.cliente =  cliente }else{this.obj.filtro.cliente = null}
-      if(fechaI != ""){this.obj.filtro.fechai =  fechaI }else{this.obj.filtro.fechai = undefined}
-      if(fechaE != ""){this.obj.filtro.fechae =  fechaE }else{this.obj.filtro.fechae = undefined}
+      
       this.obj.filtro.estado = estado
 
       socket.emit('allProyectoSubServicio',this.obj.filtro,this.obj.area)
@@ -103,21 +116,27 @@ let IndicadorSubServicioStore = Reflux.createStore({
     case "abastecimiento":
         area = "abastecimiento"
         break
-    case "Despacho":
+    case "despacho":
         area = "despacho"
         break
-    case "Instalacion":
+    case "instalación":
         area = "instalaciones"
         break
-    case "Produccion":
+    case "producción":
         area = "produccion"
         break
-    case "Desarrollo":
-        area = "desarrollo"
+    case "planificación":
+        area = "planificacion"
         break
     case "sillas":
         area = "sillas"
         break
+    case "técnica":
+        area = "desarrollo"
+        break
+    case "comercial":
+        area = "comercial"
+        break       
     }
     document.querySelector(`[data-area="ok"]`).classList.add(area)
     if(antigua){
@@ -125,21 +144,27 @@ let IndicadorSubServicioStore = Reflux.createStore({
       case "abastecimiento":
           area1 = "abastecimiento"
           break
-      case "Despacho":
+      case "despacho":
           area1 = "despacho"
           break
-      case "Instalacion":
+      case "instalación":
           area1 = "instalaciones"
           break
-      case "Produccion":
+      case "producción":
           area1 = "produccion"
           break
-      case "Desarrollo":
-          area1 = "desarrollo"
+      case "planificación":
+          area1 = "planificacion"
           break
       case "sillas":
           area1 = "sillas"
           break
+      case "técnica":
+          area1 = "desarrollo"
+          break 
+      case "comercial":
+          area1 = "comercial"
+          break    
       }
       document.querySelector(`[data-area="ok"]`).classList.remove(area)
       document.querySelector(`[data-area="ok"]`).classList.add(area1)

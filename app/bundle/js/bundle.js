@@ -56591,14 +56591,28 @@
 	    total: 0,
 	    area: "",
 	    button: "",
-	    filtro: { fechaInicio: null, fechaEntrega: undefined, codigo: undefined, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100 }
+	    filtro: { fechaInicio: undefined, fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100 }
 	  },
 	  init: function init() {},
 	  getInitialState: function getInitialState() {
 	    return this.obj;
 	  },
 	  renderReset: function renderReset() {
-	    this.obj.filtro.limit = 5;
+	    document.getElementById("cliente").value = "";
+	    document.getElementById("fechaInicio").value = "";
+	    document.getElementById("fechaEntrega").value = "";
+	    document.getElementById("codigo").value = "";
+	    document.getElementById("estado").options[0].selected = "selected";
+	    document.getElementById("vendedor").options[0].selected = "selected";
+	    document.getElementById("categoria").options[0].selected = "selected";
+	    this.obj.filtro.limit = 100;
+	    this.obj.filtro.fechaInicio = undefined;
+	    this.obj.filtro.fechaEntrega = undefined;
+	    this.obj.filtro.codigo = null;
+	    this.obj.filtro.estado = "EN PROCESO";
+	    this.obj.filtro.vendedor = null;
+	    this.obj.filtro.categoria = null;
+	    this.obj.filtro.cliente = null;
 	  },
 	  renderSubServicio: function renderSubServicio(area) {
 	    var _this = this;
@@ -56643,16 +56657,7 @@
 	    } else {
 	      this.obj.filtro.cliente = null;
 	    }
-	    if (fechaI != "") {
-	      this.obj.filtro.fechai = fechaI;
-	    } else {
-	      this.obj.filtro.fechai = undefined;
-	    }
-	    if (fechaE != "") {
-	      this.obj.filtro.fechae = fechaE;
-	    } else {
-	      this.obj.filtro.fechae = undefined;
-	    }
+
 	    this.obj.filtro.estado = estado;
 
 	    socket.emit('allProyectoSubServicio', this.obj.filtro, this.obj.area);
@@ -56703,20 +56708,26 @@
 	      case "abastecimiento":
 	        area = "abastecimiento";
 	        break;
-	      case "Despacho":
+	      case "despacho":
 	        area = "despacho";
 	        break;
-	      case "Instalacion":
+	      case "instalación":
 	        area = "instalaciones";
 	        break;
-	      case "Produccion":
+	      case "producción":
 	        area = "produccion";
 	        break;
-	      case "Desarrollo":
-	        area = "desarrollo";
+	      case "planificación":
+	        area = "planificacion";
 	        break;
 	      case "sillas":
 	        area = "sillas";
+	        break;
+	      case "técnica":
+	        area = "desarrollo";
+	        break;
+	      case "comercial":
+	        area = "comercial";
 	        break;
 	    }
 	    document.querySelector('[data-area="ok"]').classList.add(area);
@@ -56725,20 +56736,26 @@
 	        case "abastecimiento":
 	          area1 = "abastecimiento";
 	          break;
-	        case "Despacho":
+	        case "despacho":
 	          area1 = "despacho";
 	          break;
-	        case "Instalacion":
+	        case "instalación":
 	          area1 = "instalaciones";
 	          break;
-	        case "Produccion":
+	        case "producción":
 	          area1 = "produccion";
 	          break;
-	        case "Desarrollo":
-	          area1 = "desarrollo";
+	        case "planificación":
+	          area1 = "planificacion";
 	          break;
 	        case "sillas":
 	          area1 = "sillas";
+	          break;
+	        case "técnica":
+	          area1 = "desarrollo";
+	          break;
+	        case "comercial":
+	          area1 = "comercial";
 	          break;
 	      }
 	      document.querySelector('[data-area="ok"]').classList.remove(area);
@@ -61406,7 +61423,7 @@
 	        full_name: localStorage.getItem('full_name'),
 	        profile_picture: localStorage.getItem('profile_picture')
 	      },
-	      menu: [{ id: "11", img: "fa fa-bullhorn", name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }] }, { id: "1", img: "fa fa-rocket", name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: "fa fa-shopping-cart", name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/abastecimiento" }] }, { id: "4", img: "fa fa-suitcase", name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }] }, { id: "5", img: "fa fa-pencil", name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: "fa fa-lightbulb-o", name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }] }, { id: "7", img: "fa fa-truck", name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }] }, { id: "8", img: "fa fa-user", name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: "fa fa-wrench", name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: "fa fa-wrench", name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }] }, { id: "12", img: "fa fa-fire-extinguisher", name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: "fa fa-cog", name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }] }, { id: "14", img: "fa fa-book", name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: "fa fa-cog", name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/sillas" }] }, { id: "16", img: "fa fa-bolt", name: "Sistema", icon: "icon sistema", "item": false }],
+	      menu: [{ id: "11", img: "fa fa-bullhorn", name: "Planificación", icon: "icon planificacion", "item": [{ id: "1", nombre: "Nueva Actividad", ruta: "/home/actividad/ingreso/nueva" }, { id: "2", nombre: "Informe Planificación", ruta: "/home/informe/planificación" }, { id: "3", nombre: "Sub Actividades", ruta: "/home/indicadores/planificación" }] }, { id: "1", img: "fa fa-rocket", name: "Rochas", icon: "icon rocha", "item": [{ id: "1", nombre: "Informe Rochas", ruta: "/home/informe-rochas" }] }, { id: "3", img: "fa fa-shopping-cart", name: "Abastecimiento", icon: "icon abastecimiento", "item": [{ id: "1", nombre: "Informe Abastecimiento", ruta: "/home/informe/abastecimiento" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/abastecimiento" }] }, { id: "4", img: "fa fa-suitcase", name: "Comercial", icon: "icon comercial", "item": [{ id: "1", nombre: "Informe Comercial", ruta: "/home/informe/comercial" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/comercial" }] }, { id: "5", img: "fa fa-pencil", name: "Dam", icon: "icon dam", "item": false }, { id: "6", img: "fa fa-lightbulb-o", name: "Técnica", icon: "icon desarrollo", "item": [{ id: "1", nombre: "Informe Técnica", ruta: "/home/informe/técnica" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/técnica" }] }, { id: "7", img: "fa fa-truck", name: "Despacho", icon: "icon despacho", "item": [{ id: "1", nombre: "Informe Despacho", ruta: "/home/informe/despacho" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/despacho" }] }, { id: "8", img: "fa fa-user", name: "Gerencia", icon: "icon gerencia", "item": false }, { id: "9", img: "fa fa-wrench", name: "Integración", icon: "icon integracion", "item": false }, { id: "10", img: "fa fa-wrench", name: "Instalaciones", icon: "icon instalaciones", "item": [{ id: "1", nombre: "Informe Instalación", ruta: "/home/informe/instalación" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/instalación" }] }, { id: "12", img: "fa fa-fire-extinguisher", name: "Prevención", icon: "icon prevencion", "item": false }, { id: "13", img: "fa fa-cog", name: "Producción", icon: "icon produccion", "item": [{ id: "1", nombre: "Informe Producción", ruta: "/home/informe/producción" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/producción" }] }, { id: "14", img: "fa fa-book", name: "Reclamos", icon: "icon reclamos", "item": [{ id: "1", nombre: "Nuevo Reclamo", ruta: "/home/reclamo" }, { id: "2", nombre: "Nueva Actividad Reclamo", ruta: "/home/actividad/ingreso/reclamo" }, { id: "3", nombre: "Informe Reclamo", ruta: "/home/informe/reclamo" }] }, { id: "15", img: "fa fa-cog", name: "Sillas", icon: "icon sillas", "item": [{ id: "1", nombre: "Informe Sillas", ruta: "/home/informe/sillas" }, { id: "2", nombre: "Sub Actividades", ruta: "/home/indicadores/sillas" }] }, { id: "16", img: "fa fa-bolt", name: "Sistema", icon: "icon sistema", "item": false }],
 	      active: 'active',
 	      notification: null,
 	      navMovil: this.navMovil,
