@@ -7,5 +7,4 @@ dump.rdb
 /app/.tmp/
 /app/.sass-cache/
 /app/dump.rdb
-/app/src/Config/index.jsx
 /appenv.js
