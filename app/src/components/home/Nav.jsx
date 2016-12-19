@@ -30,6 +30,7 @@ class Nav extends React.Component {
             </div>
 
             <div className="img-user">
+              <div className="user-item"><a>Cerrar sesion</a></div>
               <img src={this.props.user.profile_picture} alt="usuario"/>
             </div>
           </nav>

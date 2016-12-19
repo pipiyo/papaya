@@ -529,6 +529,11 @@ a.external-link, .external-link a {
        
     }
     .img-user{
+        position: relative;
+        .user-item{
+            position: absolute;
+            display: none;
+        }
         img{
             vertical-align: middle;
             border-radius: 10px;
@@ -759,7 +764,6 @@ a.external-link, .external-link a {
         }
 
         &.opc{
-            width: 100%;
             .cr-title{
                 margin-top: .3em;
                 margin-bottom: .1em;
