@@ -15,11 +15,13 @@ export default class InformeRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = {valor:200, fechai: "",fechae: ""}
+    this.state = {valor:200}
   }
   componentWillMount(){
+    InformeRochaActions.renderReset()
     InformeRochaActions.allRocha(this.state.obj.filtro)
   }
+
   filtro(){
     let fechaI = document.getElementById("fechaInicio").value;
     let fechaE = document.getElementById("fechaEntrega").value;

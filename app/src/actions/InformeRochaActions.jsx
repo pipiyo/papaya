@@ -1,7 +1,7 @@
 import Reflux from 'reflux'
 
 let InformeRochaActions = Reflux.createActions([
-  'allRocha'
+  'allRocha','renderReset'
 ])
 
 export default InformeRochaActions

@@ -10,6 +10,14 @@ let InformeRochaStore = Reflux.createStore({
   getInitialState: function() {
     return this.obj
   },
+  renderReset: function(){
+    this.obj.filtro.fechai = ""
+    this.obj.filtro.fechae = ""
+    this.obj.filtro.codigo = ""
+    this.obj.filtro.estado = "EN PROCESO" 
+    this.obj.filtro.vendedor = ""
+    this.obj.filtro.cliente = "" 
+  },
   allRocha: function(data){
   	socket.emit('allRocha',data)
   	socket.on('okAllRocha', (okAllRocha) =>{
