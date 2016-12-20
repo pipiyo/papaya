@@ -15,7 +15,8 @@ let HomeStore = Reflux.createStore({
 						notification : null,
 						navMovil: null,
 						subMenus: null,
-						showNotification: null
+						showNotification: null,
+            activeMenu: null
   },
   init: function() {
     this.getObj()
@@ -46,7 +47,9 @@ let HomeStore = Reflux.createStore({
 						active : 'active',
 						navMovil: this.navMovil,
 						subMenus: this.subMenus,
-						showNotification: this.showNotification
+						showNotification: this.showNotification,
+            activeMenu : this.activeMenu
+
 										
                        }
   },
@@ -70,6 +73,14 @@ let HomeStore = Reflux.createStore({
   */
 
   /* Agrega clase active para desplegar sub-menus */
+  activeMenu : function(click){
+    let i
+    let x = document.querySelectorAll(`[data-subclick]`)
+    for(i = 0; i < x.length; i++){
+      x[i].classList.remove("ok")
+    }
+    document.getElementById(click.currentTarget.id).classList.add("ok")
+  },
   subMenus: function(ev){
     ev.preventDefault()
     let x = document.querySelectorAll("[data-click]")

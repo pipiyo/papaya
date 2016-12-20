@@ -352,6 +352,9 @@ a.external-link, .external-link a {
             transition-property: background;
             transition-duration: .3s;
             transition-timing-function: linear;
+            a{
+                color: $color_corporativo_lighter;
+            }
             &.active{
                 background: $color_corporativo_light;
                 cursor: pointer;
@@ -376,12 +379,18 @@ a.external-link, .external-link a {
                     a{
                         font-size: $fontTiny;
                         line-height: 110%;
+                        color: $color_corporativo_lighter;
                         &:hover{
                             color: $gris_lightest ;
                             cursor: pointer;
                         }
                     }
-                }
+                    &.ok{
+                        a{
+                            color: $color_secundario_regular;
+                        }
+                    }
+                }    
             }
             p{
                 display: inline-block;
@@ -394,7 +403,7 @@ a.external-link, .external-link a {
                 position:relative;
                 vertical-align: middle;
                 text-decoration: none;
-                color: $color_corporativo_lighter;
+                
             }
             .icon{
                 display: inline-block;

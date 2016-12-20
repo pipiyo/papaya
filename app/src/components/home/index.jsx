@@ -14,6 +14,7 @@ class Home extends React.Component {
           <Header 
             menu={this.props.obj.menu} 
             submenu={this.props.obj.subMenus} 
+            activeMenu={this.props.obj.activeMenu}
             navmovil={this.props.obj.navMovil} />
           <Main 
             user={this.props.obj.user} 
