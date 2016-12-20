@@ -78,6 +78,83 @@ module.exports = (io) => {
                 })
               })
             }
+            if(data.checkMuebles != ""){
+              let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaEntrega, SUB_DESCRIPCION:"Comprar Muebles", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"EN PROCESO", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
+              pool.getConnection( (err, connection) => {
+              connection.query('INSERT INTO `sub_servicio` SET ?',subServicio, (errs) => {
+                    connection.release()
+                    if (errs){
+                      console.log('Error no se pudo ingresar sub-servicio '+ errs)
+                    } 
+                })
+              })
+            }
+            if(data.checkEspeciales != ""){
+              let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaEntrega, SUB_DESCRIPCION:"Comprar Especiales", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"EN PROCESO", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
+              pool.getConnection( (err, connection) => {
+              connection.query('INSERT INTO `sub_servicio` SET ?',subServicio, (errs) => {
+                    connection.release()
+                    if (errs){
+                      console.log('Error no se pudo ingresar sub-servicio '+ errs)
+                    } 
+                })
+              })
+            }
+            if(data.checkSillas != ""){
+              let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaEntrega, SUB_DESCRIPCION:"Comprar Sillas", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"EN PROCESO", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
+              pool.getConnection( (err, connection) => {
+              connection.query('INSERT INTO `sub_servicio` SET ?',subServicio, (errs) => {
+                    connection.release()
+                    if (errs){
+                      console.log('Error no se pudo ingresar sub-servicio '+ errs)
+                    } 
+                })
+              })
+            }
+            if(data.checkTela != ""){
+              let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaEntrega, SUB_DESCRIPCION:"Comprar Tela", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"EN PROCESO", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
+              pool.getConnection( (err, connection) => {
+              connection.query('INSERT INTO `sub_servicio` SET ?',subServicio, (errs) => {
+                    connection.release()
+                    if (errs){
+                      console.log('Error no se pudo ingresar sub-servicio '+ errs)
+                    } 
+                })
+              })
+            }
+            if(data.checkVidrio != ""){
+              let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaEntrega, SUB_DESCRIPCION:"Comprar Vidrio", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"EN PROCESO", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
+              pool.getConnection( (err, connection) => {
+              connection.query('INSERT INTO `sub_servicio` SET ?',subServicio, (errs) => {
+                    connection.release()
+                    if (errs){
+                      console.log('Error no se pudo ingresar sub-servicio '+ errs)
+                    } 
+                })
+              })
+            }
+            if(data.checkInsumo != ""){
+              let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaEntrega, SUB_DESCRIPCION:"Comprar Insumo", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"EN PROCESO", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
+              pool.getConnection( (err, connection) => {
+              connection.query('INSERT INTO `sub_servicio` SET ?',subServicio, (errs) => {
+                    connection.release()
+                    if (errs){
+                      console.log('Error no se pudo ingresar sub-servicio '+ errs)
+                    } 
+                })
+              })
+            }
+            if(data.checkImportado != ""){
+              let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaEntrega, SUB_DESCRIPCION:"Comprar Importado", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"EN PROCESO", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
+              pool.getConnection( (err, connection) => {
+              connection.query('INSERT INTO `sub_servicio` SET ?',subServicio, (errs) => {
+                    connection.release()
+                    if (errs){
+                      console.log('Error no se pudo ingresar sub-servicio '+ errs)
+                    } 
+                })
+              })
+            }
 
             let notification = new Notification({user: user.name, 
                                                  slug: `detalle-actividad/${row.insertId}`,
