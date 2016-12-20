@@ -541,7 +541,34 @@ a.external-link, .external-link a {
         position: relative;
         .user-item{
             position: absolute;
-            display: none;
+            width: 200px;
+            left: -185px;
+            top: 50px;
+            a{
+                padding: .1em .5em;
+                display: block;
+                width: 100%;
+                color: $blanco;
+                background: $color_corporativo_darker;
+                font-size: $fontTiny;
+                &:hover{
+                    color: $color_secundario_regular;
+                }
+            }
+            &:before{
+                content: "\f0d8";
+                color:$color_corporativo_darker;
+                font-size: 1.6em;
+                font-family: FontAwesome;
+                font-weight: normal;
+                position: absolute;
+                right: 0;
+                top: -15px;
+            }
+            @include phablet-down {
+                width: 70px;
+                left: -40px;
+            }
         }
         img{
             vertical-align: middle;

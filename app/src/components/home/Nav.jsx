@@ -1,4 +1,5 @@
 import React from 'react'
+import User from './User'
 
 class Nav extends React.Component {
 
@@ -30,7 +31,7 @@ class Nav extends React.Component {
             </div>
 
             <div className="img-user">
-              <div className="user-item"><a>Cerrar sesion</a></div>
+              <User />
               <img src={this.props.user.profile_picture} alt="usuario"/>
             </div>
           </nav>
