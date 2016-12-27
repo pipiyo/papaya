@@ -1,5 +1,4 @@
 import React from 'react'
-import User from './User'
 
 class Nav extends React.Component {
 
@@ -30,8 +29,8 @@ class Nav extends React.Component {
               <h2>{this.props.user.full_name}</h2>
             </div>
 
-            <div className="img-user">
-              <User />
+            <div className="img-user" onClick={this.props.user.showUserNav}>
+              {this.props.user.user_nav}
               <img src={this.props.user.profile_picture} alt="usuario"/>
             </div>
           </nav>

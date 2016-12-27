@@ -17,7 +17,6 @@ let LoginStore = Reflux.createStore({
 
     if (token) {
       this.storeUser( token )
-      browserHistory.push('home')
     } else {
       this.trigger( this.check )
     }
@@ -30,7 +29,7 @@ let LoginStore = Reflux.createStore({
     localStorage.setItem('token', token.token)
     localStorage.setItem('full_name', token.full_name)
     localStorage.setItem('profile_picture', token.profile_picture)
-    this.trigger( token )
+    browserHistory.push('home')
   },
   checkUser: function () {
 
@@ -57,6 +56,15 @@ let LoginStore = Reflux.createStore({
           }
         })
 */
+  },
+  checkToken: function(){
+
+    if (localStorage.getItem('token')) {
+
+      browserHistory.push('/home')
+
+    }
+
   }
 })
 
