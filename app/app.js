@@ -37,7 +37,7 @@ const io = require('socket.io')(server)
 
 
 
-require('./srcApirest/controllers/notificationSocket')()
+require('./srcApirest/controllers/notificationSocket')(io)
 
 require('./srcApirest/controllers/loginSocket')(io, request)
 

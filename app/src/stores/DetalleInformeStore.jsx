@@ -106,6 +106,15 @@ let DetalleInformeStore = Reflux.createStore({
     }else{
       document.querySelector(`[data-estado="${sub.CODIGO_SUBSERVICIO}"]`).classList.remove("ok")
     }
+  },
+
+  refresh: function(data){
+    socket.emit('allSubServicio', data)
+    socket.on('okAllSubServicio', (okAllSubServicio) =>{
+      this.obj.subServicio = okAllSubServicio
+      this.renderServicio(this.obj.subServicio.servicio)
+      this.renderSubServicio(this.obj.subServicio.sub)
+    })
   }
 
   

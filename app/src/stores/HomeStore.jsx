@@ -8,6 +8,10 @@ import HomeActions from '../actions/HomeActions'
 import Notification from '../components/home/Notification'
 import User from '../components/home/User'
 
+import Env from '../Config'
+import io from 'socket.io-client'
+const socket = io.connect( `${Env.url}home` )
+
 let HomeStore = Reflux.createStore({
   listenables: [HomeActions],
   obj: { 
@@ -133,6 +137,7 @@ let HomeStore = Reflux.createStore({
   HomeActions._showUserNav()
   },
   _showUserNav: function(){
+
     this.obj.user.user_nav = <User 
                                   hideUserNav={HomeActions.hideUserNav}
                                   logout={HomeActions.logout} />
@@ -166,8 +171,17 @@ let HomeStore = Reflux.createStore({
 	HomeActions._showNotification()
   },
   _showNotification: function(){
-  	this.obj.notification = <Notification hideNotification={HomeActions.hideNotification} />
-  	this.trigger( this.obj )
+
+    socket.emit('getNotification', (notifications) => {
+
+      this.obj.notification = <Notification 
+                                            notifications={notifications}
+                                            hideNotification={HomeActions.hideNotification} />
+      this.trigger( this.obj )
+
+    })
+
+
   },
   hideNotification: function(click){
       let container

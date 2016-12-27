@@ -26,7 +26,9 @@ class DetalleInformeIndex extends React.Component {
                   <div class="content-actividades">
                     {
                     this.props.datos.sub.map( (sub, i) => {
-                     return <SubActividad renderSubServicio={this.props.renderSubServicio[i]} key={i} datos={this.props.datos.sub[i]} />
+                     return <SubActividad renderSubServicio={this.props.renderSubServicio[i]} 
+                                          key={i} 
+                                          datos={this.props.datos.sub[i]} />
                     })
                     }
                   </div>

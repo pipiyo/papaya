@@ -1,16 +1,26 @@
-//const redis = require("redis")
+const Notification = require('../models/notification')
 
-//const sub = redis.createClient()
+module.exports = (io) => {
 
-//sub.subscribe('notification')
+  io
+  .of('/home')
+  .on('connection', (socket) => {
 
-module.exports = () => {
+	  socket.on('getNotification', (callback) => {
 
-/* 
-  sub.on('message', (channel, message) => {
-    console.log( `POR EL CANAL: ${channel}  Y EL MENSAJE: ${message}`  )
+		Notification.
+		  find({}).
+		  limit(5).
+		  exec( (err, notification) => {
+		  	if (err) return handleError(err)
+
+		  	callback(notification)
+
+		  })
+
+	  })
+
   })
-*/
 
 
 }
