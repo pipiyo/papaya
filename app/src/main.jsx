@@ -1,6 +1,7 @@
 import React from 'react' 
 import ReactDOM from 'react-dom' 
 
+import Profile from './routes/ProfileRoutes'
 import Login from './routes/LoginRoutes'
 import Servicio from './routes/ServicioRoutes'
 import UpdateServicio from './routes/UpdateServicioRoutes'
@@ -27,6 +28,7 @@ ReactDOM.render((
     <Route component={Auth}>
         <Route path="home" component={Home}>	
             <IndexRoute component={Inicio}/>
+            <Route path="profile" component={Profile}/>
         	<Route path="actividad/:rocha/:tipo" component={Servicio}/>
         	<Route path="informe/:area" component={Informe}/>
             <Route path="informe-rochas" component={InformeRocha}/>

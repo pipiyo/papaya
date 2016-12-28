@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom' 
 import { Link } from 'react-router'
 
 class Notification extends React.Component {
@@ -43,7 +42,7 @@ class Notification extends React.Component {
                 <p> Se ingreso rocha 2055</p>
               </div>
           </a>
-          <Link to="/home/notificacion" class="view-all-notification" href="#"> ver todas</Link>
+          <Link to="/home/notificacion" class="view-all-notification" > ver todas</Link>
         </div>
       )
 

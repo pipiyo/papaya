@@ -27,6 +27,13 @@ export default class LoginRoutes extends React.Component {
   }
 */
 //this.setState({user: false})
+
+
+  componentWillMount(){
+    LoginActions.checkToken()
+  }
+
+
   userFormSubmit(ev) {
     ev.preventDefault()
     let user = {
