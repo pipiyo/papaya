@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Title from './Title'
+import { Link } from 'react-router'
 
-class NotificacionIndex extends React.Component {
+class NotificacionIndex extends Component {
 
   constructor() {
     super()
@@ -12,24 +13,23 @@ class NotificacionIndex extends React.Component {
         <div>
           <Title />
           <div class="module-notification-all">
-              <div class="item-notification">
-                <div class="img-notification">
-                  <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
-                </div>
-                <div class="content-notification">
-                  <p><a href="#"> Nuevo Rocha</a></p>
-                  <p> Se ingreso rocha 2055 -> Cristóbal Maturana</p>
-                </div>
-              </div>
-              <div class="item-notification">
-                <div class="img-notification">
-                  <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
-                </div>
-                <div class="content-notification">
-                  <p><a href="#"> Nuevo Rocha</a></p>
-                  <p> Se ingreso rocha 2055 -> Cristóbal Maturana</p>
-                </div>
-              </div>
+    
+            {
+              this.props.obj.map( (notification) => {
+                return (
+                        <div key={notification.asset.codigo} class="item-notification">
+                          <div class="img-notification">
+                            <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
+                          </div>
+                          <div class="content-notification">
+                            <p><Link to={`/home/${notification.slug}`} >Nuevo {notification.asset.tipo} {notification.asset.codigo}</Link></p>
+                            <p>Para el rocha  {notification.asset.rocha}</p>
+                          </div>
+                        </div>
+                      )
+              })
+            }
+
           </div>
         </div>
       )

@@ -36,8 +36,9 @@ let server = http.createServer(app).listen(port, () => {
 const io = require('socket.io')(server)
 
 
+require('./srcApirest/controllers/homeSocket')(io)
 
-require('./srcApirest/controllers/notificationSocket')()
+require('./srcApirest/controllers/notificationSocket')(io)
 
 require('./srcApirest/controllers/loginSocket')(io, request)
 

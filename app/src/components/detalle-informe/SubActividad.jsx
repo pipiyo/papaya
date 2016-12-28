@@ -8,13 +8,23 @@ class SubActividad extends React.Component {
   }
   componentWillMount(){
     DetalleInformeActions.renderAreaServicio(this.props.datos)
+    
   }
+
+
   componentDidMount(){
     DetalleInformeActions.okEstado(this.props.datos)
   }
+/*
   componentDidUpdate(nextProps){
     DetalleInformeActions.okEstado(nextProps.datos)
   }
+*/
+
+  componentWillReceiveProps(nextProps){
+    DetalleInformeActions.okEstado(nextProps.datos)
+  }
+
   render() {
       return (
           <div data-area={this.props.datos.CODIGO_SUBSERVICIO} class="item-actividades sub">
