@@ -8,16 +8,19 @@ const socket = io.connect( `${Env.url}notification` )
 let HomeStore = Reflux.createStore({
   obj: { notifications: null },
 
-  getInitialState: function() {
+  init: function() {
+    this.getObj()
+  },
+  getObj: function() {
 
     socket.emit('getNotification', (notifications) => {
-
-      this.obj.notifications = notifications 
-
+       this.obj.notifications = notifications
     })
 
+  },
 
-    return this.obj
+  getInitialState: function() {
+    return this.obj.notifications
   }
 
 

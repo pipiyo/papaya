@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Title from './Title'
+import { Link } from 'react-router'
 
 class NotificacionIndex extends Component {
 
@@ -8,12 +9,11 @@ class NotificacionIndex extends Component {
   }
 
   render() {
-      console.log( this.props.obj )
       return (         
         <div>
           <Title />
           <div class="module-notification-all">
-      
+    
             {
               this.props.obj.map( (notification) => {
                 return (
