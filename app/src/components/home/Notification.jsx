@@ -35,13 +35,12 @@ class Notification extends React.Component {
                                       <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
                                     </div>
                                     <div class="content-notification">
-                                      <p>Nuevo Servicio</p>
-                                      <p> Codigo {notification.asset.codigo} </p>
+                                      <p>Nuevo {notification.asset.tipo} {notification.asset.codigo}</p>
+                                      <p> Para el rocha  {notification.asset.rocha} </p>
                                     </div>
                                 </Link>
                             )
                     })
-
                   }
 
           <Link to="/home/notificacion" class="view-all-notification" > ver todas</Link>

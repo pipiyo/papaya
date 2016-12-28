@@ -12,24 +12,26 @@ let Schema = mongoose.Schema
 
 let notificationSchema = new Schema({
 	user: String,
-	create_at: {type: Date, default: new Date() },
+	create_at: { type : Date, default: Date.now },
 	slug: String,
 	area: String,
 	asset: {
+		tipo: String,
+		rocha: String,
 		codigo: String,
 		categoria: String
 	},
 	read_by: [ { user: String, read_at: {type: Date, default: new Date() } } ]
 })
 
-
+/*
 notificationSchema.pre('save', function (next) {
 
 	//pub.publish('notification', 'hola bld')
 
 	next()
 })
-
+*/
 
 
 let notification = mongoose.model('notification', notificationSchema)

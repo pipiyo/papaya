@@ -160,6 +160,8 @@ module.exports = (io) => {
                                                  slug: `detalle-actividad/${row.insertId}`,
                                                  area: data.area,
                                                  asset: {
+                                                   tipo: 'servicio',
+                                                   rocha: data.rocha,
                                                    codigo: row.insertId,
                                                    categoria: data.categoria
                                                  } })

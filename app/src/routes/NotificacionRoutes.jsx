@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
+import ReactMixin from 'react-mixin'
+import Reflux from 'reflux'
 
 import NotificacionIndex from '../components/notificacion'
 
-export default class AbastecimientoRoutes extends React.Component {
+import NotificationStore from '../stores/NotificationStore'
+
+@ReactMixin.decorate(Reflux.connect(NotificationStore, 'obj'))
+export default class NotificacionRoutes extends Component {
 
   constructor() {
     super()
@@ -10,7 +15,7 @@ export default class AbastecimientoRoutes extends React.Component {
 
   render() {
       return (
-        <NotificacionIndex />       
+        <NotificacionIndex obj={this.state.obj} />       
       )
   }
 
