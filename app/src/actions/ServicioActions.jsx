@@ -9,7 +9,15 @@ let ServicioActions = Reflux.createActions([
 	'renderRochaValue',
 	'renderFechaInicio',
 	'renderFechaEntrega',
-	'renderArea'
+	'renderArea',
+	'renderFechaMetales',
+	"renderFechaMuebles", 
+    "renderFechaEspeciales",
+    "renderFechaSillas",
+    "renderFechaTela",
+    "renderFechaVidrio",
+    "renderFechaInsumo",
+    "renderFechaImportado"
 ])
 
 export default ServicioActions
