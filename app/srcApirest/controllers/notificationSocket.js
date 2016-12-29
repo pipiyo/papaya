@@ -11,6 +11,7 @@ module.exports = (io) => {
 		Notification.
 		  find({}).
 		  sort('-create_at').
+		  limit(30).
 		  exec( (err, notification) => {
 		  	if (err) return handleError(err)
 

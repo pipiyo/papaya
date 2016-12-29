@@ -25,10 +25,6 @@ export default class AuthRoutes extends React.Component {
 
   }
 
-  shouldComponentUpdate(){
-    return true
-  }
-
 
   render() {
       return this.props.children

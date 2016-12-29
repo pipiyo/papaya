@@ -20,7 +20,7 @@ let HomeStore = Reflux.createStore({
   },
 
   getInitialState: function() {
-    return this.obj.notifications
+    return this.obj
   }
 
 
