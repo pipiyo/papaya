@@ -82,7 +82,7 @@ let HomeStore = Reflux.createStore({
                     {id:"12",img: "fa fa-fire-extinguisher", name: "Prevención", icon: "icon prevencion", "item": false},
                     {id:"13",img: "fa fa-cog", name: "Producción", icon: "icon produccion", "item":[{id:"1",nombre:"Informe Producción",ruta:"/home/informe/producción"},{id:"2",nombre:"Sub Actividades",ruta:"/home/indicadores/producción"}]},
                     {id:"14",img: "fa fa-book", name: "Reclamos", icon: "icon reclamos", "item":[{id:"1",nombre:"Nuevo Reclamo",ruta:"/home/reclamo"},{id:"2",nombre:"Nueva Actividad Reclamo",ruta:"/home/actividad/ingreso/reclamo"},{id:"3",nombre:"Informe Reclamo",ruta:"/home/informe/reclamo"}]},
-                    {id:"15",img: "fa fa-cog", name: "Sillas" , icon: "icon sillas", "item":[{id:"1",nombre:"Informe Sillas",ruta:"/home/informe/sillas"},{id:"2",nombre:"Sub Actividades",ruta:"/home/indicadores/sillas"}]},
+                    {id:"15",img: "fa fa-cog", name: "Sillas" , icon: "icon sillas", "item":[{id:"1",nombre:"Informe Sillas",ruta:"/home/informe/sillas"},{id:"2",nombre:"Sub Actividades",ruta:"/home/indicadores/sillas"},{id:"3",nombre:"Bodega Silla",ruta:"/home/bodega"}]},
                     {id:"16",img: "fa fa-bolt", name: "Sistema" , icon: "icon sistema", "item": false}
                   ],
             active : 'active',

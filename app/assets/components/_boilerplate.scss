@@ -846,6 +846,22 @@ a.external-link, .external-link a {
             padding: 0;
             width: 100%;
         }
+        &.opc{
+            .cr-title{
+                margin-top: 1.3em;
+                margin-bottom: .1em;
+            }
+            .name-check,.name-radio{
+                margin-top: 1.6em;
+                float: left;
+                margin-right: 10px;
+            }
+            .checkbox,.radio{
+                margin-top: 1.3em;
+                float: left;
+                margin-right: 20px;
+            }
+        }
     }
     input,label,select{
         display: block;
@@ -932,6 +948,7 @@ a.external-link, .external-link a {
             border: solid 1px $gris;
         }
     }
+
     h4{
         margin: 0;
         font-size: $fontRegular;
@@ -1518,6 +1535,88 @@ a.external-link, .external-link a {
             }
             &.hidden{
                 display: none;
+            }
+        }
+    }
+}
+
+/* Module Bodega */
+/* Module Bodega */
+/* Module Bodega */
+/* Module Bodega */
+
+.module_bodega{
+    .module_bodega_generico{
+        display: table;
+        width: calc(100% - 1em);
+        margin: auto;
+        border: solid 1px $gris;
+        margin-bottom: 1em;
+        .module_bodega_generico_img{
+            padding: 1em;
+            display: table-cell;
+            width: 200px;
+            vertical-align: middle;
+            img{
+                width: 100%;
+            }
+        }
+        .module_bodega_generico_des{
+            display: table-cell;
+            width: calc(100% - 200px);
+            h2{
+                font-size: $fontRegular;
+                margin: 1em 0 0 0;
+                padding: 0;
+                p{
+                    margin: 0;
+                    padding: 0;
+                    display: inline;
+                    font-weight: normal;
+                }
+            }
+            .module_bodega_generico_stock{
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 1em;
+                div{
+                    background: $color_rochas;
+                    padding: .5em 1em;
+                    border: solid $color_corporativo_dark 1px;
+                    margin-right: .5em;
+                    @include vertical-tablet-down {
+                        width: 100%;
+                        + div{
+                            margin-top: 5px;
+                        }
+                    }
+                    &.mm{
+                        background: $color_desarrollo;
+                    }
+                    p{
+                        color: $blanco;
+                    }
+                }
+            }
+            .module_bodega_generico_icon{
+                display: flex;
+                margin: 1em 0;
+                div{
+                    border: solid $color_corporativo_dark 1px;
+                    margin-right: .5em;
+                    a{
+                        color: $blanco;
+                        background: $color_sistema;
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        padding: 2px 5px; 
+                        &:hover{
+                             background: $color_despacho;
+                             cursor: pointer;
+                        }
+                    }
+                }
             }
         }
     }

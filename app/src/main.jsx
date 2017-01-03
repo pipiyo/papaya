@@ -13,8 +13,10 @@ import Informe from './routes/InformeRoutes'
 import InformeRocha from './routes/InformeRochaRoutes'
 import Notificacion from './routes/NotificacionRoutes'
 import DetalleInforme from './routes/DetalleInformeRoutes'
+import Bodega from './routes/BodegaRoutes'
 import Home from './routes/HomeRoutes'
 import Inicio from './routes/InicioRoutes'
+
 
 import Auth from './routes/AuthRoutes'
 
@@ -39,6 +41,7 @@ ReactDOM.render((
             <Route path="sub-actividad/:id" component={SubServicio}/>
             <Route path="actualizar-subactividad/:id" component={UpdateSubServicio}/>
             <Route path="indicadores/:area" component={IndicadorSubServicio}/>
+            <Route path="bodega" component={Bodega}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />
