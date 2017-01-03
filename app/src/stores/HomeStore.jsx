@@ -22,14 +22,34 @@ let HomeStore = Reflux.createStore({
 						navMovil: null,
 						subMenus: null,
 						showNotification: null,
-            activeMenu: null
+            activeMenu: null,
+            numberNotification: null
   },
 
+
+
+  init: function() {
+    
+    socket.on('popupNotification', (n) => {
+      this.obj.numberNotification = n
+      this.trigger( this.obj )
+    })
+
+
+    socket.emit('getNumberNotification', localStorage.getItem('name'), (n) => {
+
+      this.obj.numberNotification = n
+      this.trigger( this.obj )
+
+    })
+
+
+
+
+
+  },
 
 /*
-  init: function() {
-    this.getObj()
-  },
   getObj: function() {
     this.obj = { 
                   user: {
@@ -93,7 +113,8 @@ let HomeStore = Reflux.createStore({
             navMovil: this.navMovil,
             subMenus: this.subMenus,
             showNotification: this.showNotification,
-            activeMenu : this.activeMenu
+            activeMenu : this.activeMenu,
+            numberNotification: 0
 
                     
                        }
@@ -172,11 +193,14 @@ let HomeStore = Reflux.createStore({
   },
   _showNotification: function(){
 
-    socket.emit('getNotification', (notifications) => {
+    socket.emit('getNotification', localStorage.getItem('name'), (notifications) => {
 
       this.obj.notification = <Notification 
                                             notifications={notifications}
                                             hideNotification={HomeActions.hideNotification} />
+
+      this.obj.numberNotification = 0
+
       this.trigger( this.obj )
 
     })

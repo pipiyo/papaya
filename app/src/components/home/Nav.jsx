@@ -20,7 +20,7 @@ class Nav extends React.Component {
 
             <div className="notificacion-user hidden" onClick={this.props.showNotification}>
               <p class="notificacion-num">
-                21
+                {this.props.numberNotification}
               </p>
               {this.props.notification}
             </div>

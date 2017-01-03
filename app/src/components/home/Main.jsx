@@ -21,7 +21,8 @@ class Main extends React.Component {
           <Nav 
             showNotification={this.props.showNotification} 
             user={this.props.user} 
-            notification={this.props.notification}/>
+            notification={this.props.notification}
+            numberNotification={this.props.numberNotification}/>
 
           <div className="content">
             <div className="breadcrumb">

@@ -20,7 +20,8 @@ class Home extends React.Component {
             user={this.props.obj.user} 
             content={this.props.content}
             showNotification={this.props.obj.showNotification}
-            notification={this.props.obj.notification}/>
+            notification={this.props.obj.notification}
+            numberNotification={this.props.obj.numberNotification}/>
         </div>
       )
 
