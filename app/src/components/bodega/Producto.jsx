@@ -7,7 +7,6 @@ class Producto extends React.Component {
   }
 
   render() {
-    console.log(this.props.bodega)
       return (
         <div class="module_bodega">
           {

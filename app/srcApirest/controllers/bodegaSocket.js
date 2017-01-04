@@ -81,7 +81,6 @@ module.exports = (io) => {
                }
               }
             }
-            console.log(producto)
             if (!err){
               socket.emit('okAllVale', {productos:producto})
             }
