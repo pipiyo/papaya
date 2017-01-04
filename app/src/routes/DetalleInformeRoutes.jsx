@@ -20,6 +20,11 @@ export default class DetalleInformeRoutes extends React.Component {
       {DetalleInformeActions.allSubServicio(nextProps.params.id)
     }
   }
+
+  componentWillReceiveProps(nextProps,nextState){
+    DetalleInformeActions.allSubServicio(nextProps.params.id)
+  }
+
   render() {
     if(this.state.obj.subServicio){
       return (

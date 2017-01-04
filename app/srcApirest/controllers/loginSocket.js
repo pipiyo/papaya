@@ -3,7 +3,7 @@ const moment = require('moment')
 const User = require('../models/user')
 const pokemonGif = require('pokemon-gif')
 
-module.exports = (io, request) => {
+module.exports = (io, request, UserSession) => {
 
   io
   .of('/login')
@@ -20,6 +20,8 @@ User.
 
       if (user.password == data.pass) {
 
+
+        UserSession.name = user.name
 
         callback({ 
                     token: jwt.encode( { name: `${user.name}`, type: `${user.type}`, expire: `${moment().format('h:mm:ss')}` }, 'xxx'),
@@ -67,6 +69,11 @@ User.
                                   })
 
                   user.save().then( (doc) => {
+
+
+                  UserSession.name = doc.name
+
+
 
                     callback({ 
                                 token: jwt.encode( { name: `${doc.name}`, type: `${doc.type}`, expire: `${moment().format('h:mm:ss')}` }, 'xxx'),

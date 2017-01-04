@@ -8,6 +8,10 @@ import HomeActions from '../actions/HomeActions'
 import Notification from '../components/home/Notification'
 import User from '../components/home/User'
 
+import Env from '../Config'
+import io from 'socket.io-client'
+const socket = io.connect( `${Env.url}home` )
+
 let HomeStore = Reflux.createStore({
   listenables: [HomeActions],
   obj: { 
@@ -18,14 +22,34 @@ let HomeStore = Reflux.createStore({
 						navMovil: null,
 						subMenus: null,
 						showNotification: null,
-            activeMenu: null
+            activeMenu: null,
+            numberNotification: null
   },
 
+
+
+  init: function() {
+    
+    socket.on('popupNotification', (n) => {
+      this.obj.numberNotification = n
+      this.trigger( this.obj )
+    })
+
+
+    socket.emit('getNumberNotification', localStorage.getItem('name'), (n) => {
+
+      this.obj.numberNotification = n
+      this.trigger( this.obj )
+
+    })
+
+
+
+
+
+  },
 
 /*
-  init: function() {
-    this.getObj()
-  },
   getObj: function() {
     this.obj = { 
                   user: {
@@ -89,7 +113,8 @@ let HomeStore = Reflux.createStore({
             navMovil: this.navMovil,
             subMenus: this.subMenus,
             showNotification: this.showNotification,
-            activeMenu : this.activeMenu
+            activeMenu : this.activeMenu,
+            numberNotification: 0
 
                     
                        }
@@ -133,6 +158,7 @@ let HomeStore = Reflux.createStore({
   HomeActions._showUserNav()
   },
   _showUserNav: function(){
+
     this.obj.user.user_nav = <User 
                                   hideUserNav={HomeActions.hideUserNav}
                                   logout={HomeActions.logout} />
@@ -166,8 +192,20 @@ let HomeStore = Reflux.createStore({
 	HomeActions._showNotification()
   },
   _showNotification: function(){
-  	this.obj.notification = <Notification hideNotification={HomeActions.hideNotification} />
-  	this.trigger( this.obj )
+
+    socket.emit('getNotification', localStorage.getItem('name'), (notifications) => {
+
+      this.obj.notification = <Notification 
+                                            notifications={notifications}
+                                            hideNotification={HomeActions.hideNotification} />
+
+      this.obj.numberNotification = 0
+
+      this.trigger( this.obj )
+
+    })
+
+
   },
   hideNotification: function(click){
       let container

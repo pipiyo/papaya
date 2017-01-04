@@ -1,4 +1,5 @@
-let mongoose = require("mongoose")
+let mongoose = require('mongoose')
+const PubSub = require('pubsub-js')
 
 //let redis = require("redis")
 
@@ -12,20 +13,22 @@ let Schema = mongoose.Schema
 
 let notificationSchema = new Schema({
 	user: String,
-	create_at: {type: Date, default: new Date() },
+	create_at: { type : Date, default: Date.now },
 	slug: String,
 	area: String,
 	asset: {
+		tipo: String,
+		rocha: String,
 		codigo: String,
 		categoria: String
 	},
-	read_by: [ { user: String, read_at: {type: Date, default: new Date() } } ]
+	read_by: []
 })
 
 
 notificationSchema.pre('save', function (next) {
 
-	//pub.publish('notification', 'hola bld')
+	PubSub.publish( 'notification', this._id )
 
 	next()
 })
