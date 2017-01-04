@@ -2,17 +2,32 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
+import BodegaActions from '../actions/BodegaActions'
+import BodegaStore from '../stores/BodegaStore'
+
 import Bodega from '../components/bodega'
 
+@ReactMixin.decorate(Reflux.connect(BodegaStore, 'obj'))
 export default class BodegaRoutes extends React.Component {
 
   constructor() {
     super()
   }
+  componentWillMount(){
+  	 BodegaActions.renderBodega();
+  }
   render() {
-  	return (
-        <Bodega />
-  	)
+    if(this.state.obj.renderBodega){
+    	return (
+          <Bodega 
+            bodega={this.state.obj.renderBodega} 
+          />
+    	)
+    }else{
+      return (
+          <div><h1>Cargando</h1></div>
+      )
+    }
   }
 
 }

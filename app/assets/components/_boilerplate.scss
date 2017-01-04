@@ -1593,6 +1593,9 @@ a.external-link, .external-link a {
                     &.mm{
                         background: $color_desarrollo;
                     }
+                    &.cm{
+                        background: $color_abastecimiento;
+                    }
                     p{
                         color: $blanco;
                     }

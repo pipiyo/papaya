@@ -48,6 +48,8 @@ require('./srcApirest/controllers/subServicioSocket')(io)
 require('./srcApirest/controllers/reclamoSocket')(io)
 
 require('./srcApirest/controllers/rochaSocket')(io)
+
+require('./srcApirest/controllers/bodegaSocket')(io)
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))

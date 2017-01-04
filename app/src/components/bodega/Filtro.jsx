@@ -18,8 +18,8 @@ class Filtro extends React.Component {
           </div>
           <div class="item-filter">
               <label>Categoría</label>
-              <select id="estado">
-                  <option value="En Proceso">En Proceso</option>
+              <select id="categoria">
+                  <option value="">Seleccioné</option>
                   <option value="ACTA">Acta</option>
                   <option value="Emitido">Emitido</option>
                   <option value="Parcial">Parcial</option>

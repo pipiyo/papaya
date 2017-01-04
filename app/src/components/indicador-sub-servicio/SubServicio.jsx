@@ -15,6 +15,7 @@ class Title extends React.Component {
     IndicadorSubServicioActions.renderButton(nextProps.total[0].total,nextProps.datos.length)
   }
   render() {
+    console.log(this.props.datos)
       return (
         <div class="module-table" data-col="once" data-area="ok">
           <div class="module-table-container">
