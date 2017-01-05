@@ -48,10 +48,12 @@ class Item extends React.Component {
 
             <div className="item-form">
               <label>Estado</label>
-              <select required id="estado">
-                <option value="OK">Ok</option>
-                <option value="EN PROCESO">En Proceso</option>
-                <option value="NULO">Nulo</option>
+              <select id="estado">
+                  <option value="En Proceso">En Proceso</option>
+                  <option value="Emitido">Emitido</option>
+                  <option value="Parcial">Parcial</option>
+                  <option value="OK">OK</option>
+                  <option value="Nula">Nulo</option>
               </select>
             </div>
 

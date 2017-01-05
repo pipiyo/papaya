@@ -28,7 +28,6 @@ class Filtro extends React.Component {
               <label> Estado</label>
               <select id="estado" onChange={this.props.renderFiltro}>
                   <option value="En Proceso">En Proceso</option>
-                  <option value="ACTA">Acta</option>
                   <option value="Emitido">Emitido</option>
                   <option value="Parcial">Parcial</option>
                   <option value="OK">OK</option>
