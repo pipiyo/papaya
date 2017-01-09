@@ -16,11 +16,17 @@ export default class BodegaRoutes extends React.Component {
   componentWillMount(){
   	 BodegaActions.renderBodega();
   }
+  renderViewMore(){
+    BodegaActions.renderViewMore();
+  }
+
   render() {
-    if(this.state.obj.renderBodega){
+    if(this.state.obj){
+      console.log(this.state.obj.renderBodega)
     	return (
           <Bodega 
             bodega={this.state.obj.renderBodega} 
+            renderViewMore={this.renderViewMore.bind(this)}
           />
     	)
     }else{

@@ -1623,4 +1623,17 @@ a.external-link, .external-link a {
             }
         }
     }
+    .view-more{
+        @include reset-appearance;
+        width: 200px;
+        padding: 1em;
+        margin: 0 auto 1em auto;
+        color: $blanco;
+        background: $color_corporativo_dark;
+        display: block;
+        &:hover{
+          background: $color_corporativo_darker;
+          cursor: pointer;  
+        }
+    }
 }

@@ -5,7 +5,6 @@ class Producto extends React.Component {
   constructor() {
     super()
   }
-
   render() {
       return (
         <div class="module_bodega">
@@ -27,8 +26,8 @@ class Producto extends React.Component {
                     <div class="module_bodega_generico_stock">
                       <div class="cm"><p>OC Transito {bodega.TRANSITO}</p></div>
                       <div class="cm"><p>Vale {bodega.VALE}</p></div>
-                      <div class="cm"><p>Contable {parseInt(bodega.STOCK_ACTUAL) + parseInt(bodega.TRANSITO)}</p></div>
-                      <div class="cm"><p>Disponible {parseInt(bodega.STOCK_ACTUAL) + parseInt(bodega.TRANSITO) - parseInt(bodega.VALE)}</p></div>
+                      <div class="cm"><p>Contable {bodega.CONTABLE}</p></div>
+                      <div class="cm"><p>Disponible {bodega.DISPONIBLE}</p></div>
                     </div>
                     <div class="module_bodega_generico_icon">
                       <div><a><i class="fa fa-eye" aria-hidden="true"></i></a></div>
@@ -40,6 +39,7 @@ class Producto extends React.Component {
               )
             })
           }
+          <button class="view-more" onClick={this.props.renderViewMore}> Ver Más </button>
         </div>
       )
 
