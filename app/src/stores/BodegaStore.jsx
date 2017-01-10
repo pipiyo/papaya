@@ -14,7 +14,7 @@ let BodegaStore = Reflux.createStore({
   obj: { 
     renderBodega: '',
     renderItem: [],
-    filtro:{limitA:1, limitB:5}
+    filtro:{limitA:0, limitB:5}
   },
 
   renderBodega: function(data){

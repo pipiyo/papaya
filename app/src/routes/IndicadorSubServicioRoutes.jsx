@@ -33,13 +33,13 @@ export default class IndicadorSubServicioRoutes extends React.Component {
     IndicadorSubServicioActions.renderViewMore()
   }
   render() {
-  	if(this.state.obj.subServicio){
+  	if(this.state.obj){
     	return (
         	<IndicadorSubServicio
           area={this.props.params.area} 
           total={this.state.obj.total}
           ejecutivo={this.state.obj.ejecutivo}
-        	datos={this.state.obj.subServicio}
+        	datos={this.state.obj.renderItem}
           filtro={this.state.obj.filtro}
           renderFiltro={this.renderFiltro.bind(this)}
           renderFiltroFi={this.renderFiltroFi.bind(this)}

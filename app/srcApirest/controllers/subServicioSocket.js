@@ -42,7 +42,7 @@ module.exports = (io) => {
   })
 
   /* Proyecto, Servicio, Sub-servicio */
-  socket.on('allProyectoSubServicio', (data,area) => {
+  socket.on('allProyectoSubServicio', (data,area,callback) => {
       let q_codigo = ""
       let q_vendedor = ""
       let q_categoria = ""
@@ -85,14 +85,14 @@ module.exports = (io) => {
       if(data.fechaInicio != null && data.fechaEntrega != null){q_fecha = ' and sub_servicio.SUB_FECHA_ENTREGA BETWEEN "'+ data.fechaInicio +'" and "'+ data.fechaEntrega +'"'}
       q_estado = ' and sub_servicio.SUB_ESTADO = "'+data.estado+'"'
 
-      let query = 'SELECT sub_servicio.CODIGO_SUBSERVICIO, proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.DESCRIPCION as SD , sub_servicio.SUB_DESCRIPCION as SSD,sub_servicio.SUB_FECHA_INICIO, sub_servicio.SUB_FECHA_ENTREGA, sub_servicio.SUB_OBSERVACIONES, sub_servicio.SUB_ESTADO FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+' limit '+data.limit +';' 
+      let query = 'SELECT sub_servicio.CODIGO_SUBSERVICIO, proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.DESCRIPCION as SD , sub_servicio.SUB_DESCRIPCION as SSD,sub_servicio.SUB_FECHA_INICIO, sub_servicio.SUB_FECHA_ENTREGA, sub_servicio.SUB_OBSERVACIONES, sub_servicio.SUB_ESTADO FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+' limit '+data.limit +', '+data.limitB+' ;' 
       let query1 = 'SELECT count(CODIGO_SUBSERVICIO) as total FROM proyecto,servicio, sub_servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO and servicio.CODIGO_SERVICIO = sub_servicio.SUB_CODIGO_SERVICIO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+';' 
       let query2 = 'SELECT `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` FROM `empleado` where `AREA` = "COMERCIAL" order by NOMBRES;'
       pool.getConnection( (err, connection) => {
           connection.query(query+query1+query2, (err, rows, fields) => {
               connection.release()
               if (!err)
-                socket.emit('okAllProyectoSubServicio', { sub:rows[0], total:rows[1], ejecutivo:rows[2]})
+                callback({ sub:rows[0], total:rows[1], ejecutivo:rows[2]})
               else
                 console.log('Error ' + err)
           }) 

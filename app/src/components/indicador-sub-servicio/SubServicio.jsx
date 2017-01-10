@@ -1,4 +1,5 @@
 import React from 'react'
+import Item from './Item'
 import IndicadorSubServicioActions from '../../actions/IndicadorSubServicioActions'
 
 class Title extends React.Component {
@@ -29,25 +30,8 @@ class Title extends React.Component {
               <div class="module-table-item">Fecha E</div>
               <div class="module-table-item">Observación</div>
               <div class="module-table-item">Estado</div>
-    
               {
-                this.props.datos.map( (datos,i) => {
-                  return( 
-                    <div class="module-table-content" key={i}>
-                        <div class="module-table-content-item a-center">{datos.CODIGO_PROYECTO}</div>
-                        <div class="module-table-content-item">{datos.NOMBRE_CLIENTE}</div>
-                        <div class="module-table-content-item">{datos.EJECUTIVO}</div>
-                        <div class="module-table-content-item a-right">{datos.CODIGO_SERVICIO}</div>
-                        <div class="module-table-content-item">{datos.SD}</div>
-                        <div class="module-table-content-item a-right">{datos.CODIGO_SUBSERVICIO}</div>
-                        <div class="module-table-content-item">{datos.SSD}</div>
-                        <div class="module-table-content-item a-center">{datos.SUB_FECHA_INICIO.substring(0,10)}</div>
-                        <div class="module-table-content-item a-center">{datos.SUB_FECHA_ENTREGA.substring(0,10)}</div>
-                        <div class="module-table-content-item">{datos.SUB_OBSERVACIONES}</div>
-                        <div class="module-table-content-item">{datos.SUB_ESTADO}</div>
-                    </div>
-                  )
-                })
+                this.props.datos
               }
           </div>
           <div class="module-table-button">
