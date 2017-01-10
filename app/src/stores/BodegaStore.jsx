@@ -4,17 +4,20 @@ import { browserHistory } from 'react-router'
 import BodegaActions from '../actions/BodegaActions'
 import Env from '../Config'
 import io from 'socket.io-client'
+
+import Item from '../components/bodega/Item.jsx'
+
 const socket = io.connect( `${Env.url}bodega` )
 
 let BodegaStore = Reflux.createStore({
   listenables: [BodegaActions],
   obj: { 
     renderBodega: '',
-    filtro:{limitA:1, limitB:20}
+    renderItem: [],
+    filtro:{limitA:1, limitB:5}
   },
 
   renderBodega: function(data){
-    this.obj.renderBodega = ""
   	socket.emit('allBodega', data, this.obj.filtro, (n) => {
       this.obj.renderBodega = n.productos
       this.renderTransito(n.productos)
@@ -29,13 +32,19 @@ let BodegaStore = Reflux.createStore({
   renderVale: function(productos){
   	socket.emit('allVale', productos, (n) => {
       this.obj.renderBodega = n.productos
+      this.renderItem()
       this.trigger(this.obj)
     })
   },
   renderViewMore: function(){
-    this.obj.filtro.limitA = this.obj.filtro.limitA + 20
-    this.obj.filtro.limitB = this.obj.filtro.limitB + 20
+    this.obj.filtro.limitA = this.obj.filtro.limitA + 5
     this.renderBodega()
+  },
+  renderItem: function(){
+    let i
+    for(i=0;this.obj.renderBodega.length > i ;i++){
+      this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} bodega={this.obj.renderBodega[i]} />)
+    } 
   }
   
 })
