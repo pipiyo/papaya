@@ -7,7 +7,7 @@ module.exports = (io) => {
   .on('connection', (socket) => {
 
   /* Listar Rocha */
-  socket.on('allRocha', (data) => {
+  socket.on('allRocha', (data,callback) => {
     let q_codigo = ""
     let q_vendedor = ""
     let q_cliente = ""
@@ -25,7 +25,7 @@ module.exports = (io) => {
             connection.query(query + query1 + query2, (err, rows, fields) => {
                 connection.release()
                 if (!err)
-                  socket.emit('okAllRocha', { valor:rows[0], cuenta:rows[1], ejecutivo:rows[2]})
+                  callback({valor:rows[0], cuenta:rows[1], ejecutivo:rows[2]})
                 else
                   console.log('Error ' + err)
             }) 

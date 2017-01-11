@@ -12,12 +12,11 @@ class InformeRochaIndex extends React.Component {
   }
 
   render() {
-      console.log()
       return (         
         <div>
           <Title />
-          <Filtro ejecutivo={this.props.ejecutivo}  fechaInicioDate={this.props.fechaInicioDate} fechaEntregaDate={this.props.fechaEntregaDate} fechaInicio={this.props.fechaInicio} fechaEntrega={this.props.fechaEntrega}  filtro={this.props.filtro} />
-          <Rocha cuenta={this.props.cuenta} rocha={this.props.rocha} viewMore={this.props.viewMore}  />
+          <Filtro />
+          <Rocha obj={this.props.obj} />
         </div>
       )
 

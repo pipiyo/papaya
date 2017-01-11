@@ -9,28 +9,23 @@ class Filtro extends React.Component {
      this.state = {fechaInicio:props.fechaInicio,fechaEntrega:props.fechaEntrega}
   }
 
-  componentWillReceiveProps(nextProps){
-     this.setState({fechaInicio:nextProps.fechaInicio,fechaEntrega:nextProps.fechaEntrega})
-  }
-
   render() {
       return (
         <div class="module-filter">
           <div class="item-filter">
               <label> Fecha Inicio </label>
-               <DatePicker autoComplete="off" class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.state.fechaInicio} onChange={this.props.fechaInicioDate} />
+              
           </div>
           <div class="item-filter">
               <label> Fecha Entrega </label>
-              <DatePicker autoComplete="off" class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.state.fechaEntrega} onChange={this.props.fechaEntregaDate} />
           </div>
           <div class="item-filter">
               <label> Código Rocha</label>
-              <input autoComplete="off" id="codigo" type="text" onChange={this.props.filtro} />
+              <input autoComplete="off" id="codigo" type="text"  />
           </div>
           <div class="item-filter">
               <label> Estado</label>
-              <select id="estado" onChange={this.props.filtro}>
+              <select id="estado">
                   <option value="En Proceso">En Proceso</option>
                   <option value="ACTA">Acta</option>
                   <option value="OK">OK</option>
@@ -39,18 +34,13 @@ class Filtro extends React.Component {
           </div>
           <div class="item-filter">
               <label>Vendedor</label>
-              <select id="vendedor" onChange={this.props.filtro}>
+              <select id="vendedor">
                   <option value="">Seleccione</option>
-                  {
-                    this.props.ejecutivo.map( (ejecutivo) => {
-                      return <option value={`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`} key={`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`}>{`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`}</option>
-                    })
-                  }
               </select>
           </div>
           <div class="item-filter">
               <label>Cliente</label>
-              <input autoComplete="off" onChange={this.props.filtro} id="cliente" type="text"/>
+              <input autoComplete="off"  id="cliente" type="text"/>
           </div>
         </div>
       )

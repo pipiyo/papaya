@@ -2,34 +2,24 @@ import React from 'react'
 import { Link } from 'react-router'
 
 class ContentRocha extends React.Component {
-
   constructor() {
     super()
   }
-
-  validador(nombre,validador,fecha){
-    let text
-    if(validador == "" || validador == null || validador == 0 || !validador){
-      text = ""
-    }
-    else{
-      text = <div class="opc"><h5>{nombre}</h5><p>{ (fecha)?validador.substring(0,10):validador}</p></div>
-    }
-    return text
-  }
-
   render() {
       return (
+        <div class="item">
+          <div class="title-informe">
+            <h3 class="">{this.props.rocha.CODIGO_PROYECTO} - {this.props.rocha.NOMBRE_CLIENTE} </h3>
+            <a href="" class="icon-informe"> <i class="fa fa-plus" aria-hidden="true"></i> </a>
+          </div>
           <div class="content-informe">
-            {this.validador("Ejecutivo:",this.props.rocha.EJECUTIVO)}
-            {this.validador("Encargado:",this.props.rocha.ENCARGADO)}
-            {this.validador("Nombre Proyecto:",this.props.rocha.NOMBRE_PROYECTO)}
-            {this.validador("Obra:",this.props.rocha.OBRA)}
-            {this.validador("Fecha Ingreso:",this.props.rocha.FECHA_INGRESO,true)}
-            {this.validador("Fecha Entrega:",this.props.rocha.FECHA_CONFIRMACION,true)}
-          </div>  
+            <div class="opc"><h5>Obra</h5><p>{this.props.rocha.OBRA}</p></div>
+            <div class="opc"><h5>Ejecutivo</h5><p>{this.props.rocha.EJECUTIVO}</p></div>
+            <div class="opc"><h5>Fecha Ingreso</h5><p>{this.props.rocha.FECHA_INGRESO}</p></div>
+            <div class="opc"><h5>Fecha Confirmación</h5><p>{this.props.rocha.FECHA_CONFIRMACION}</p></div>
+          </div>
+        </div>  
       )
-
   }
 
 }
