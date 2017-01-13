@@ -32,7 +32,7 @@ let LoginStore = Reflux.createStore({
     browserHistory.push('home')
   },
   checkUser: function () {
-
+/*
   if (!localStorage.getItem('token')) {
               localStorage.removeItem('name')
               localStorage.removeItem('type')
@@ -41,29 +41,39 @@ let LoginStore = Reflux.createStore({
               localStorage.removeItem('profile_picture')
             browserHistory.push('/')
   }
+*/
 
-/*
-        socket.emit('checkUser', JSON.stringify( localStorage.getItem('token') ) , (token) => {
-          if (!token) {
+        socket.emit('checkUser', localStorage.getItem('token') , (request) => {
 
+          if (!request) {
               localStorage.removeItem('name')
               localStorage.removeItem('type')
               localStorage.removeItem('token')
-            browserHistory.push('/')
-
-          }else{
-            console.log( token )
+              localStorage.removeItem('full_name')
+              localStorage.removeItem('profile_picture')
+              browserHistory.push('/')
           }
+          
         })
-*/
+
   },
   checkToken: function(){
 
-    if (localStorage.getItem('token')) {
 
-      browserHistory.push('/home')
 
-    }
+        socket.emit('checkToken', localStorage.getItem('token') , (request) => {
+
+          if (request) {
+
+              browserHistory.push('/home')
+          }
+          
+        })
+
+
+
+
+
 
   }
 })

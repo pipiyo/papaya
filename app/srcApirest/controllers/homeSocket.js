@@ -1,17 +1,17 @@
 const Notification = require('../models/notification')
 const PubSub = require('pubsub-js')
 
-module.exports = (io, UserSession) => {
+module.exports = (io) => {
 
   io
   .of('/home')
   .on('connection', (socket) => {
 
 
-	  socket.on('getNumberNotification', (user, callback) => {
+	  socket.on('getNumberNotification', (callback) => {
 
 		Notification.
-		  find({ 'read_by': { $ne: user } }).
+		  find({ 'read_by': { $ne: global.userName } }).
 		  count().
 		  exec( (err, n) => {
 		  	if (err) console.log(err)
@@ -20,12 +20,12 @@ module.exports = (io, UserSession) => {
 
 	  })
 
-	  socket.on('getNotification', (user, callback) => {
+	  socket.on('getNotification', (callback) => {
 
 		Notification.
 			update( { }, 
 						 { $addToSet: 
-						 	{ read_by: user 
+						 	{ read_by: global.userName 
 						 	}  
 					 }, 
 					 {multi: true},
@@ -36,6 +36,7 @@ module.exports = (io, UserSession) => {
 		Notification.
 		  find({}).
 		  limit(5).
+		  populate('user').
 		  sort('-create_at').
 		  exec( (err, notification) => {
 		  	if (err) console.log( err )
@@ -46,7 +47,8 @@ module.exports = (io, UserSession) => {
 	 	PubSub.subscribe('notification', function( msg, data ){
 
 			Notification.
-			  find({ 'read_by': { $ne: UserSession.name } }).
+			  find({ 'read_by': { $ne: global.userName } }).
+			  populate('user').
 			  count().
 			  exec( (err, notification) => {
 			  	if (err) console.log(err)

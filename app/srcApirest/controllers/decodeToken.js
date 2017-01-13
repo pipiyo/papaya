@@ -6,7 +6,7 @@ module.exports = (token) => {
 
               token = JSON.parse(token)
 
-              let decode = jwt.decode(token, 'xxx')
+              let decode = jwt.decode(token, global.secret)
 
               return decode
 

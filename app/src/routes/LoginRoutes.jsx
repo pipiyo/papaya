@@ -13,8 +13,6 @@ export default class LoginRoutes extends React.Component {
 
   constructor() {
     super()
-    this.state = { msj: 'paso' } 
-    this.state = { msj2: 'No paso' } 
   }
 /*
   handleSubmit(event) {
@@ -45,19 +43,12 @@ export default class LoginRoutes extends React.Component {
   }
 
   render() {
-
-    if (this.state.check) {
-      return (
-              <LoginFrom onSubmit={ this.userFormSubmit.bind(this) } />
-      )
-    } else {
       return (
             <div>
-              <h1>{this.state.msj2}</h1>
+              <h1>Login</h1>
               <LoginFrom onSubmit={ this.userFormSubmit.bind(this) } />
             </div>
       )
-    }
   }
 
 }

@@ -1,6 +1,7 @@
 const pool = require('../models/connection')
 const Notification = require('../models/notification')
 const decodeToken = require('./decodeToken')
+const notificationInsert = require('../inserts/notificationInsert')
 
 module.exports = (io) => {
 
@@ -142,7 +143,7 @@ module.exports = (io) => {
                       console.log('Error no se pudo ingresar sub-servicio '+ errs)
                     } 
                 })
-              })
+              }) 
             }
             if(data.checkImportado != ""){
               let subServicio = { SUB_CODIGO_SERVICIO:row.insertId, SUB_NOMBRE_SERVICIO:data.area, SUB_CATEGORIA:data.categoria, SUB_SUPERVISOR:data.supervisor, SUB_FECHA_INICIO:data.fechaInicio, SUB_FECHA_ENTREGA:data.fechaImportado, SUB_DESCRIPCION:"Comprar Importado", SUB_OBSERVACIONES:data.observacion, SUB_CODIGO_PROYECTO:data.rocha, SUB_DIRECCION:data.direccion, SUB_GUIA_DESPACHO:data.guia, SUB_CODIGO_COMUNA:data.comuna, SUB_M3:data.m3, SUB_FI:data.fi, SUB_TM:data.tm, SUB_TP:data.to, SUB_OS:data.os, SUB_LIDER:data.lider, SUB_PUESTOS:data.puestos, SUB_PROCESO:data.proceso, SUB_INSTALADOR_1:data.instalador1, SUB_INSTALADOR_2:data.instalador2, SUB_INSTALADOR_3:data.instalador3, SUB_EJECUTOR:data.ejecutor, SUB_VALE:data.vale, SUB_TRANSPORTE:data.vehiculo, SUB_CANTIDAD:data.cantidad, SUB_ESTADO:"En Proceso", SUB_DIAS:data.dias, SUB_REALIZADOR:user.name}
@@ -156,7 +157,9 @@ module.exports = (io) => {
               })
             }
 
-            let notification = new Notification({user: user.name, 
+
+
+            let notification = new Notification({
                                                  slug: `detalle-actividad/${row.insertId}`,
                                                  area: data.area,
                                                  asset: {
@@ -164,14 +167,10 @@ module.exports = (io) => {
                                                    rocha: data.rocha,
                                                    codigo: row.insertId,
                                                    categoria: data.categoria
-                                                 } })
+                                                 } 
+                                               })
 
-            notification.save().then( (doc) => {
-            }, (error) => {
-              console.log( error )
-            })
-
-
+            notificationInsert(notification)
 
           } else {
             console.log('Error no se pudo ingresar servicio '+ err)

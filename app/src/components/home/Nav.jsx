@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class Nav extends React.Component {
+class Nav extends Component {
 
   constructor() {
     super()
@@ -19,9 +19,7 @@ class Nav extends React.Component {
           <nav className="nav-config">
 
             <div className="notificacion-user hidden" onClick={this.props.showNotification}>
-              <p class="notificacion-num">
-                {this.props.numberNotification}
-              </p>
+              {this.props.numberNotification}
               {this.props.notification}
             </div>
 

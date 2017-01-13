@@ -3,13 +3,39 @@ const moment = require('moment')
 const User = require('../models/user')
 const pokemonGif = require('pokemon-gif')
 
-module.exports = (io, request, UserSession) => {
+module.exports = (io, request) => {
 
   io
   .of('/login')
   .on('connection', (socket) => {
 
-    socket.on('login', ( data, callback) => {
+    socket.on('checkUser', (token, callback) => {
+      if (global.token == token) {
+        callback(true)
+      } else{
+        global.token = null
+        global.userName = null
+        callback(false)
+      }
+    })
+
+
+
+
+    socket.on('checkToken', (token, callback) => {
+      if (global.token == token && !token == null) {
+        callback(true)
+      } else{
+        global.token = null
+        global.userName = null
+        callback(false)
+      }
+    })
+
+
+
+
+    socket.on('login', ( data, callback, token = null) => {
 
 User.
   findOne({ name: data.userName }).
@@ -20,11 +46,13 @@ User.
 
       if (user.password == data.pass) {
 
+        token = jwt.encode( { name: `${user.name}`, type: `${user.type}`, expire: `${moment().format('h:mm:ss')}` }, global.secret)
 
-        UserSession.name = user.name
+        global.token = token
+        global.userName = user.name
 
         callback({ 
-                    token: jwt.encode( { name: `${user.name}`, type: `${user.type}`, expire: `${moment().format('h:mm:ss')}` }, 'xxx'),
+                    token: token,
                     name: `${user.name}`, type: `${user.type}`, full_name: `${user.employee.name} ${user.employee.last_name} ${user.employee.second_name}`, profile_picture: `${user.profile_picture}`
                   })
       
@@ -70,13 +98,13 @@ User.
 
                   user.save().then( (doc) => {
 
+                  token = jwt.encode( { name: `${doc.name}`, type: `${doc.type}`, expire: `${moment().format('h:mm:ss')}` }, global.secret )
 
-                  UserSession.name = doc.name
-
-
+                  global.token = token
+                  global.userName = doc.name
 
                     callback({ 
-                                token: jwt.encode( { name: `${doc.name}`, type: `${doc.type}`, expire: `${moment().format('h:mm:ss')}` }, 'xxx'),
+                                token: token,
                                 name: `${doc.name}`, type: `${doc.type}`, full_name: `${doc.employee.name} ${doc.employee.last_name} ${doc.employee.second_name}`, profile_picture: `${doc.profile_picture}` 
                               })
 
