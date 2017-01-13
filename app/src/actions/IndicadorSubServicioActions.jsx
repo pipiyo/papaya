@@ -8,7 +8,8 @@ let IndicadorSubServicioActions = Reflux.createActions([
   'renderAreaServicio',
   'renderViewMore',
   'renderReset',
-  'renderButton'
+  'renderButton',
+  'renderResetMount',
 ])
 
 export default IndicadorSubServicioActions

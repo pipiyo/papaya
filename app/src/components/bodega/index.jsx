@@ -13,7 +13,10 @@ class BodegaIndex extends React.Component {
         <div>
           <Title />
           <Filtro />
-          <Producto bodega={this.props.bodega} />
+          <Producto 
+          bodega={this.props.bodega} 
+          renderViewMore={this.props.renderViewMore}
+          />
 
         </div>
       )

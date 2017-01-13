@@ -7,7 +7,6 @@ class IndicadorSubServicioIndex extends React.Component {
   constructor() {
     super()
   }
-
   render() {
       return (
         <div>

@@ -2,6 +2,7 @@ import React from 'react'
 import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
 import moment  from 'moment'
+import Item from '../components/indicador-sub-servicio/Item.jsx'
 
 import IndicadorSubServicioActions from '../actions/IndicadorSubServicioActions'
 
@@ -17,13 +18,8 @@ let IndicadorSubServicioStore = Reflux.createStore({
     total: 0,
     area: "",
     button: "",
-    filtro:{fechaInicio:undefined,fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 100}
-  },
-  init: function() {
-   
-  },
-  getInitialState: function() {
-    return this.obj
+    renderItem: [],
+    filtro:{fechaInicio:undefined,fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 0, limitB:100}
   },
   renderReset: function(){
     document.getElementById("cliente").value = ""
@@ -33,7 +29,19 @@ let IndicadorSubServicioStore = Reflux.createStore({
     document.getElementById("estado").options[0].selected = "selected"
     document.getElementById("vendedor").options[0].selected = "selected"
     document.getElementById("categoria").options[0].selected = "selected"
-    this.obj.filtro.limit = 100
+    this.obj.filtro.limit = 0
+    this.obj.renderItem = []
+    this.obj.filtro.fechaInicio = undefined
+    this.obj.filtro.fechaEntrega = undefined
+    this.obj.filtro.codigo = null
+    this.obj.filtro.estado = "EN PROCESO" 
+    this.obj.filtro.vendedor = null
+    this.obj.filtro.categoria = null
+    this.obj.filtro.cliente = null 
+  },
+  renderResetMount: function(){
+    this.obj.filtro.limit = 0
+    this.obj.renderItem = []
     this.obj.filtro.fechaInicio = undefined
     this.obj.filtro.fechaEntrega = undefined
     this.obj.filtro.codigo = null
@@ -44,11 +52,11 @@ let IndicadorSubServicioStore = Reflux.createStore({
   },
   renderSubServicio: function(area){
     this.obj.area = area
-    socket.emit('allProyectoSubServicio',this.obj.filtro,this.obj.area)
-    socket.on('okAllProyectoSubServicio', (okSearchServicio) =>{
-      this.obj.subServicio = okSearchServicio.sub
-      this.obj.ejecutivo = okSearchServicio.ejecutivo
-      this.obj.total = okSearchServicio.total
+    socket.emit('allProyectoSubServicio',this.obj.filtro,this.obj.area, (n) => {
+      this.obj.subServicio = n.sub
+      this.obj.ejecutivo = n.ejecutivo
+      this.obj.total = n.total
+      this.renderItem()
       this.trigger(this.obj)
     })
   },
@@ -67,12 +75,14 @@ let IndicadorSubServicioStore = Reflux.createStore({
       if(cliente != ""){this.obj.filtro.cliente =  cliente }else{this.obj.filtro.cliente = null}
       
       this.obj.filtro.estado = estado
+      this.obj.renderItem = []
+      this.obj.filtro.limit = 0
 
-      socket.emit('allProyectoSubServicio',this.obj.filtro,this.obj.area)
-      socket.on('okAllProyectoSubServicio', (okSearchServicio) =>{
-        this.obj.subServicio = okSearchServicio.sub
-        this.obj.ejecutivo = okSearchServicio.ejecutivo
-        this.obj.total = okSearchServicio.total
+      socket.emit('allProyectoSubServicio',this.obj.filtro,this.obj.area, (n) => {
+        this.obj.subServicio = n.sub
+        this.obj.ejecutivo = n.ejecutivo
+        this.obj.total = n.total
+        this.renderItem()
         this.trigger(this.obj)
       })
   },
@@ -99,8 +109,8 @@ let IndicadorSubServicioStore = Reflux.createStore({
     }
   },
   renderViewMore: function(){
-    this.obj.filtro.limit = this.obj.filtro.limit + 100;
-    this.renderFiltro();
+    this.obj.filtro.limit = this.obj.filtro.limit + 100
+    this.renderSubServicio(this.obj.area)
   },
   renderButton: function(rows,sub){
     if(rows > sub){
@@ -169,6 +179,12 @@ let IndicadorSubServicioStore = Reflux.createStore({
       document.querySelector(`[data-area="ok"]`).classList.remove(area)
       document.querySelector(`[data-area="ok"]`).classList.add(area1)
     }
+  },
+  renderItem: function(){
+    let i
+    for(i=0;this.obj.subServicio.length > i ;i++){
+      this.obj.renderItem.push(<Item key={this.obj.subServicio[i].CODIGO_SUBSERVICIO} datos={this.obj.subServicio[i]} />)
+    } 
   }
 })
 
