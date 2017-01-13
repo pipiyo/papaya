@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router'
 import HomeActions from '../actions/HomeActions'
 import Notification from '../components/home/Notification'
 import User from '../components/home/User'
+import NumberNotification from '../components/home/NumberNotification'
 
 import Env from '../Config'
 import io from 'socket.io-client'
@@ -26,27 +27,24 @@ let HomeStore = Reflux.createStore({
             numberNotification: null
   },
 
-
-
   init: function() {
-    
     socket.on('popupNotification', (n) => {
-      this.obj.numberNotification = n
+      console.log(n)
+      if (n == 0) {
+        this.obj.numberNotification = null
+      }else{
+        this.obj.numberNotification = <NumberNotification number={n} />
+      }
       this.trigger( this.obj )
     })
-
-
-    socket.emit('getNumberNotification', localStorage.getItem('name'), (n) => {
-
-      this.obj.numberNotification = n
+    socket.emit('getNumberNotification', (n) => {
+      if (n == 0) {
+        this.obj.numberNotification = null
+      }else{
+        this.obj.numberNotification = <NumberNotification number={n} />
+      }
       this.trigger( this.obj )
-
     })
-
-
-
-
-
   },
 
 /*
@@ -114,7 +112,7 @@ let HomeStore = Reflux.createStore({
             subMenus: this.subMenus,
             showNotification: this.showNotification,
             activeMenu : this.activeMenu,
-            numberNotification: 0
+            numberNotification: null
 
                     
                        }
@@ -193,13 +191,15 @@ let HomeStore = Reflux.createStore({
   },
   _showNotification: function(){
 
-    socket.emit('getNotification', localStorage.getItem('name'), (notifications) => {
+    socket.emit('getNotification', (notifications) => {
+
+      console.log(notifications)
 
       this.obj.notification = <Notification 
                                             notifications={notifications}
                                             hideNotification={HomeActions.hideNotification} />
 
-      this.obj.numberNotification = 0
+      this.obj.numberNotification = null
 
       this.trigger( this.obj )
 

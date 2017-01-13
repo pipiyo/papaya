@@ -8,14 +8,11 @@ const request = require('request')
 const moment = require('moment')
 const UserSession =  require('./srcApirest/models/userSession')
 
-let u = new UserSession()
-
 //console.log( moment('09:00:00', 'h:mm:ss').fromNow(), moment().format('h:mm:ss') )
-
 
 require('./env').config()
 
-
+require('./globals').globals()
 
 const app = express()
 
@@ -37,11 +34,11 @@ let server = http.createServer(app).listen(port, () => {
 const io = require('socket.io')(server)
 
 
-require('./srcApirest/controllers/homeSocket')(io, u)
+require('./srcApirest/controllers/homeSocket')(io)
 
 require('./srcApirest/controllers/notificationSocket')(io)
 
-require('./srcApirest/controllers/loginSocket')(io, request, u)
+require('./srcApirest/controllers/loginSocket')(io, request)
 
 require('./srcApirest/controllers/servicioSocket')(io)
 
