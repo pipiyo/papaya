@@ -28,7 +28,8 @@ let userSchema = new Schema({
 		nationality: String,
 		position: String,
 		address: String
-	}
+	},
+	notifications: [{ type: Schema.Types.ObjectId, ref: 'notification' }]
 })
 
 let user = mongoose.model('user', userSchema)

@@ -1,5 +1,6 @@
 let mongoose = require('mongoose')
 const PubSub = require('pubsub-js')
+const User = require('../models/user')
 
 //let redis = require("redis")
 
@@ -12,7 +13,7 @@ mongoose.createConnection("mongodb://localhost/papaya")
 let Schema = mongoose.Schema
 
 let notificationSchema = new Schema({
-	user: String,
+	user: { type: Schema.Types.ObjectId, ref: 'user' },
 	create_at: { type : Date, default: Date.now },
 	slug: String,
 	area: String,
