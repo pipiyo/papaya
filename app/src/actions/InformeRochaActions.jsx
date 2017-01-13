@@ -6,7 +6,9 @@ let InformeRochaActions = Reflux.createActions([
   'renderFiltroFi',
   'renderFiltroFe',
   'renderFiltro',
-  'renderViewMore'
+  'renderViewMore',
+  'renderButton',
+  'renderAtraso'
 ])
 
 export default InformeRochaActions

@@ -1426,6 +1426,9 @@ a.external-link, .external-link a {
               background: $color_corporativo_darker;
               cursor: pointer;  
             }
+            &.hidden{
+                display: none;
+            }
         }
     }
 }
@@ -1634,6 +1637,9 @@ a.external-link, .external-link a {
         &:hover{
           background: $color_corporativo_darker;
           cursor: pointer;  
+        }
+        &.hidden{
+            display: none;
         }
     }
 }

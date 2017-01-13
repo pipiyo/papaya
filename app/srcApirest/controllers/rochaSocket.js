@@ -23,8 +23,6 @@ module.exports = (io) => {
       let query2 = 'SELECT `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` FROM `empleado` where `AREA` = "COMERCIAL" order by `NOMBRES`;'
       pool.getConnection( (err, connection) => {
             connection.query(query + query1 + query2, (err, rows, fields) => {
-              console.log(rows[0].length)
-              console.log(query)
                 connection.release()
                 if (!err)
                   callback({valor:rows[0], cuenta:rows[1], ejecutivo:rows[2]})

@@ -14,6 +14,7 @@ export default class IndicadorSubServicioRoutes extends React.Component {
     super()
   }
   componentWillMount(){
+    IndicadorSubServicioActions.renderResetMount()
   	IndicadorSubServicioActions.renderSubServicio(this.props.params.area)
   }
   componentWillReceiveProps(nextProps, nextState){

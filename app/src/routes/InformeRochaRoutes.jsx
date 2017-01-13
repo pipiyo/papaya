@@ -17,6 +17,7 @@ export default class InformeRoutes extends React.Component {
     super()
   }
   componentWillMount(){
+    InformeRochaActions.renderReset()
     InformeRochaActions.allRocha()
   }
   renderFiltro(){

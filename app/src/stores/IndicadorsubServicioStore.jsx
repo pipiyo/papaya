@@ -39,6 +39,17 @@ let IndicadorSubServicioStore = Reflux.createStore({
     this.obj.filtro.categoria = null
     this.obj.filtro.cliente = null 
   },
+  renderResetMount: function(){
+    this.obj.filtro.limit = 0
+    this.obj.renderItem = []
+    this.obj.filtro.fechaInicio = undefined
+    this.obj.filtro.fechaEntrega = undefined
+    this.obj.filtro.codigo = null
+    this.obj.filtro.estado = "EN PROCESO" 
+    this.obj.filtro.vendedor = null
+    this.obj.filtro.categoria = null
+    this.obj.filtro.cliente = null 
+  },
   renderSubServicio: function(area){
     this.obj.area = area
     socket.emit('allProyectoSubServicio',this.obj.filtro,this.obj.area, (n) => {

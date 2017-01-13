@@ -13,20 +13,26 @@ let InformeRochaStore = Reflux.createStore({
   listenables: [InformeRochaActions],
   obj: { 
     rocha: '',
+    total: 0,
+    ejecutivo: '',
     renderRochas: [], 
-    filtro:{estado: "EN PROCESO", fechaInicio:undefined,fechaEntrega: undefined, vendedor : null, cliente : null,codigo:null,limitA:0, limitB: 5} 
+    filtro:{estado: "EN PROCESO", fechaInicio:undefined,fechaEntrega: undefined, vendedor : null, cliente : null,codigo:null,limitA:0, limitB: 100} 
   },
   renderReset: function(){
-    this.obj.filtro.fechai = ""
-    this.obj.filtro.fechae = ""
-    this.obj.filtro.codigo = ""
+    this.obj.filtro.limitA = 0
+    this.obj.renderRochas = []
+    this.obj.filtro.fechaInicio = undefined
+    this.obj.filtro.fechaEntrega = undefined
+    this.obj.filtro.codigo = null
     this.obj.filtro.estado = "EN PROCESO" 
-    this.obj.filtro.vendedor = ""
-    this.obj.filtro.cliente = "" 
+    this.obj.filtro.vendedor = null
+    this.obj.filtro.cliente = null 
   },
   allRocha: function(data){
   	socket.emit('allRocha',this.obj.filtro, (n) => {
       this.obj.rocha = n.valor
+      this.obj.total = n.cuenta
+      this.obj.ejecutivo = n.ejecutivo
       this.rederRochas()
       this.trigger(this.obj)
     })
@@ -49,6 +55,8 @@ let InformeRochaStore = Reflux.createStore({
 
       socket.emit('allRocha',this.obj.filtro, (n) => {
         this.obj.rocha = n.valor
+        this.obj.total = n.cuenta
+        this.obj.ejecutivo = n.ejecutivo
         this.rederRochas()
         this.trigger(this.obj)
       })
@@ -67,27 +75,56 @@ let InformeRochaStore = Reflux.createStore({
     if(moment(date).isValid()){
       document.getElementById("fechaInicio").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaInicio = date
-      this.renderFiltro();
+      this.renderFiltro()
     }else{
       document.getElementById("fechaInicio").value = ""
       this.obj.filtro.fechaInicio = undefined
-      this.renderFiltro();
+      this.renderFiltro()
     }
   },
   renderFiltroFe : function(date){
     if(moment(date).isValid()){
       document.getElementById("fechaEntrega").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaEntrega = date
-      this.renderFiltro();
+      this.renderFiltro()
     }else{
       document.getElementById("fechaEntrega").value = ""
       this.obj.filtro.fechaEntrega = undefined
-      this.renderFiltro();
+      this.renderFiltro()
     }
   },
   renderViewMore: function(){
-    this.obj.filtro.limitA = this.obj.filtro.limitA + 5
+    this.obj.filtro.limitA = this.obj.filtro.limitA + 100
     this.allRocha()
+  },
+  renderButton: function(rows,sub){
+    if(rows > sub){
+      document.getElementById("view-more").classList.remove("hidden")
+    }else{
+      document.getElementById("view-more").classList.add("hidden")
+    }
+  },
+  renderAtraso: function(fechaConfirmacion,codigo){
+    if(this.fechaActual() > fechaConfirmacion){
+      document.querySelector(`[data-proyecto="${codigo}"]`).classList.add("atrasado")
+    }else{
+      document.querySelector(`[data-proyecto="${codigo}"]`).classList.remove("ok")
+    }
+  },
+  fechaActual: function(){
+    let hoy = new Date()
+    let dd = hoy.getDate();
+    let mm = hoy.getMonth()+1;
+    let yyyy = hoy.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+    } 
+
+    if(mm<10) {
+      mm='0'+mm
+    } 
+    return yyyy+'-'+mm+'-'+dd
   }
 })
 

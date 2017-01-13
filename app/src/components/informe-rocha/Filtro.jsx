@@ -36,6 +36,11 @@ class Filtro extends React.Component {
               <label>Vendedor</label>
               <select id="vendedor" onChange={this.props.renderFiltro} >
                   <option value="">Seleccione</option>
+                  {
+                    this.props.obj.ejecutivo.map( (ejecutivo) => {
+                      return <option value={`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`} key={`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`}>{`${ejecutivo.NOMBRES} ${ejecutivo.APELLIDO_PATERNO} ${ejecutivo.APELLIDO_MATERNO}`}</option>
+                    })
+                  }
               </select>
           </div>
           <div class="item-filter">
