@@ -14,11 +14,11 @@ class Filtro extends React.Component {
         <div class="module-filter">
           <div class="item-filter">
               <label> Fecha Inicio </label>
-              <DatePicker class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.filtro.fechaInicio} onChange={this.props.renderFiltroFi} />
+              <DatePicker autoComplete="off" class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.filtro.fechaInicio} onChange={this.props.renderFiltroFi} />
           </div>
           <div class="item-filter">
               <label> Fecha Entrega </label>
-              <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.filtro.fechaEntrega} onChange={this.props.renderFiltroFe} />
+              <DatePicker autoComplete="off" class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.filtro.fechaEntrega} onChange={this.props.renderFiltroFe} />
           </div>
           <div class="item-filter">
               <label> Código Rocha</label>

@@ -14,7 +14,7 @@ class Rocha extends React.Component {
           {this.props.obj.renderRochas}
 
           <div class="content-view-more">
-            <button class="view-more">Ver más</button>
+            <button class="view-more" onClick={this.props.renderViewMore}>Ver más</button>
           </div>
         </div>
 

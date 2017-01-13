@@ -15,8 +15,16 @@ class InformeRochaIndex extends React.Component {
       return (         
         <div>
           <Title />
-          <Filtro />
-          <Rocha obj={this.props.obj} />
+          <Filtro 
+          obj={this.props.obj}
+          renderFiltro={this.props.renderFiltro} 
+          renderFiltroFi={this.props.renderFiltroFi}
+          renderFiltroFe={this.props.renderFiltroFe}
+          />
+          <Rocha 
+          obj={this.props.obj}
+          renderViewMore={this.props.renderViewMore} 
+          />
         </div>
       )
 

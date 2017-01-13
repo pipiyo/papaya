@@ -30,6 +30,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
     document.getElementById("vendedor").options[0].selected = "selected"
     document.getElementById("categoria").options[0].selected = "selected"
     this.obj.filtro.limit = 0
+    this.obj.renderItem = []
     this.obj.filtro.fechaInicio = undefined
     this.obj.filtro.fechaEntrega = undefined
     this.obj.filtro.codigo = null
@@ -63,6 +64,8 @@ let IndicadorSubServicioStore = Reflux.createStore({
       if(cliente != ""){this.obj.filtro.cliente =  cliente }else{this.obj.filtro.cliente = null}
       
       this.obj.filtro.estado = estado
+      this.obj.renderItem = []
+      this.obj.filtro.limit = 0
 
       socket.emit('allProyectoSubServicio',this.obj.filtro,this.obj.area, (n) => {
         this.obj.subServicio = n.sub
@@ -95,8 +98,8 @@ let IndicadorSubServicioStore = Reflux.createStore({
     }
   },
   renderViewMore: function(){
-    this.obj.filtro.limit = this.obj.filtro.limit + 100;
-    this.renderFiltro();
+    this.obj.filtro.limit = this.obj.filtro.limit + 100
+    this.renderSubServicio(this.obj.area)
   },
   renderButton: function(rows,sub){
     if(rows > sub){

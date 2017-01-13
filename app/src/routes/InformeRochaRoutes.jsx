@@ -19,11 +19,29 @@ export default class InformeRoutes extends React.Component {
   componentWillMount(){
     InformeRochaActions.allRocha()
   }
+  renderFiltro(){
+    InformeRochaActions.renderFiltro()
+  }
+  renderFiltroFi(date){
+    InformeRochaActions.renderFiltroFi(date)
+  }
+  renderFiltroFe(date){
+    InformeRochaActions.renderFiltroFe(date)
+  }
+  renderViewMore(){
+    InformeRochaActions.renderViewMore()
+  }
   render() {  
       if(this.state.obj){
         return (
           <div>
-            <InformeRochaIndex obj={this.state.obj} />  
+            <InformeRochaIndex
+            renderFiltro={this.renderFiltro.bind(this)}
+            renderFiltroFi={this.renderFiltroFi.bind(this)}
+            renderFiltroFe={this.renderFiltroFe.bind(this)}
+            renderViewMore={this.renderViewMore.bind(this)} 
+            obj={this.state.obj} 
+            />  
           </div>  
         )
       }else{
