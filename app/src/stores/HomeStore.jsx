@@ -29,7 +29,6 @@ let HomeStore = Reflux.createStore({
 
   init: function() {
     socket.on('popupNotification', (n) => {
-      console.log(n)
       if (n == 0) {
         this.obj.numberNotification = null
       }else{
@@ -192,8 +191,6 @@ let HomeStore = Reflux.createStore({
   _showNotification: function(){
 
     socket.emit('getNotification', (notifications) => {
-
-      console.log(notifications)
 
       this.obj.notification = <Notification 
                                             notifications={notifications}
