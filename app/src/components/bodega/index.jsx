@@ -12,9 +12,11 @@ class BodegaIndex extends React.Component {
       return (         
         <div>
           <Title />
-          <Filtro />
+          <Filtro 
+          renderFiltro={this.props.renderFiltro}
+          />
           <Producto 
-          bodega={this.props.bodega} 
+          obj={this.props.obj} 
           renderViewMore={this.props.renderViewMore}
           />
 
