@@ -14,6 +14,7 @@ class BodegaIndex extends React.Component {
           <Title />
           <Filtro 
           renderFiltro={this.props.renderFiltro}
+          obj={this.props.obj} 
           />
           <Producto 
           obj={this.props.obj} 

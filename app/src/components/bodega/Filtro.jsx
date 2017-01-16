@@ -19,12 +19,11 @@ class Filtro extends React.Component {
           <div class="item-filter">
               <label>Categoría</label>
               <select id="categoria" onChange={this.props.renderFiltro}>
-                  <option value="">Seleccioné</option>
-                  <option value="ACTA">Acta</option>
-                  <option value="Emitido">Emitido</option>
-                  <option value="Parcial">Parcial</option>
-                  <option value="OK">OK</option>
-                  <option value="Nula">Nulo</option>
+                  {
+                    this.props.obj.categoria.map( (i) => {
+                      return <option value={`${i}`} key={`${i}`}>{`${i}`}</option>
+                    })
+                  }
               </select>
           </div>
           <div className="item-filter opc" >

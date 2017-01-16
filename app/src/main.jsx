@@ -46,7 +46,7 @@ ReactDOM.render((
             <Route path="sub-actividad/:id" component={SubServicio}/>
             <Route path="actualizar-subactividad/:id" component={UpdateSubServicio}/>
             <Route path="indicadores/:area" component={IndicadorSubServicio}/>
-            <Route path="bodega" component={Bodega}/>
+            <Route path="bodega/:area" component={Bodega}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />
