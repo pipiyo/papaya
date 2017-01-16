@@ -1,10 +1,5 @@
 let mongoose = require('mongoose')
 const PubSub = require('pubsub-js')
-const User = require('../models/user')
-
-//let redis = require("redis")
-
-//let pub = redis.createClient()
 
 mongoose.Promise = global.Promise
 
