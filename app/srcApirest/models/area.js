@@ -5,16 +5,17 @@ mongoose.createConnection("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
-let servicioSchema = new Schema({
+let areaSchema = new Schema({
 
      img: String, 
      name: String, 
      icon: String, 
-     item: []
-
+     item: [{
+     		nombre: String,
+     		ruta: String }]
 
 })
 
-let servicio = mongoose.model('servicio', servicioSchema)
+let area = mongoose.model('area', areaSchema)
 
-module.exports = servicio
+module.exports = area

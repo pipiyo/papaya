@@ -1,37 +1,87 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router'
-import Area from './Area'
+import _ from 'lodash'
 
-class Item extends React.Component {
+
+class ItemArea extends Component {  
+  constructor() {
+    super()
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState)
+  }
+
+  render() {
+      return (
+              <ul>
+                 {
+                   _.map(this.props.items, (item, i) => {
+                     return (
+                              <li 
+                                data-subclick="ok" 
+                                id={`subMenu${i}`} 
+                                onClick={this.props.activeMenuOnClick} 
+                                key={i}>
+                                  <Link 
+                                  to={item.ruta}>
+                                    {item.nombre}
+                                  </Link>
+                              </li>                       
+                             )    
+                   })
+                 }
+              </ul>
+      )
+  }
+}
+
+
+class Area extends Component {  
+  constructor() {
+    super()
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState)
+  }
+
+  render() {
+      return (
+              <ul class="nav-item">
+                 {
+                   _.map(this.props.menus, (menu, i) => {
+                     return (
+                             <li key={i} data-active={i}>
+                               <a href="#" data-click={i} onClick={this.props.submenuOnClick} >
+                                 <div className={menu.icon}>
+                                   <i className={menu.img} aria-hidden="true"></i>    
+                                 </div>
+                                 <p>{menu.name}</p>
+                                </a>
+                                <ItemArea items={menu.item} activeMenuOnClick={this.props.activeMenuOnClick} />
+                              </li>
+                             )    
+                   })
+                 }
+              </ul>
+      )
+  }
+}
+
+
+class Item extends Component {
 
   constructor() {
     super()
   }
 
   render() {
-      let rows = [];
-      let sub = [];
-      let e = 0;
-      let f = 0;
-      let valor, data, i;
-
-      this.props.menu.forEach((menu) => {
-        valor = menu.item
-        sub = []
-        for(i=0;i<valor.length;i++){
-          sub.push(<li data-subclick="ok" id={`subMenu${f}`} onClick={this.props.activeMenu} key={valor[i]['id']}><Link to={valor[i]['ruta']}>{valor[i]['nombre']}</Link></li>)
-          f++
-        }
-        rows.push(<Area submenu={this.props.submenu} img={menu.img} icon={menu.icon} name={menu.name} key={menu.id} sub={sub} num={e} />)    
-        e++
-      })
 
       return (
         <nav className="nav">
           <a onClick={this.props.navmovil} class="btn-burger" href=""> <i class="fa fa-bars" aria-hidden="true"></i> </a>
-          <ul class="nav-item">
-            { rows }
-          </ul>
+            <Area submenuOnClick={this.props.submenu} activeMenuOnClick={this.props.activeMenu}  menus={this.props.menu} />
         </nav> 
       )
 
