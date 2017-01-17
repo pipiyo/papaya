@@ -24,7 +24,8 @@ export default class BodegaRoutes extends React.Component {
   renderViewMore(){
     BodegaActions.renderViewMore(this.props.params.area)
   }
-  renderFiltro(){
+  renderFiltro(event){
+    event.preventDefault()
     BodegaActions.renderFiltro(this.props.params.area)
   }
 

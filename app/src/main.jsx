@@ -21,6 +21,8 @@ import Home from './routes/HomeRoutes'
 import Inicio from './routes/InicioRoutes'
 import AddProducto from './routes/AddProductoRoutes'
 import UpdateProducto from './routes/UpdateProductoRoutes'
+import Producto from './routes/ProductoRoutes'
+import StockProducto from './routes/StockPruductoRoutes'
 
 import Auth from './routes/AuthRoutes'
 
@@ -50,6 +52,8 @@ ReactDOM.render((
             <Route path="bodega/:area" component={Bodega}/>
             <Route path="ingreso-producto" component={AddProducto}/>
             <Route path="actualizar-producto/:id" component={UpdateProducto}/>
+            <Route path="producto/:id" component={Producto}/>
+            <Route path="stock-producto/:id" component={StockProducto}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

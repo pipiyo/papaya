@@ -37,6 +37,11 @@ let BodegaStore = Reflux.createStore({
     })
   },
   renderFiltro : function(area){
+      document.getElementById('btn-buscar').disabled = true
+      setTimeout(function(){ 
+        document.getElementById('btn-buscar').disabled = false
+      }, 3000)
+
       let codigo = document.getElementById('codigo').value
       let descripcion = document.getElementById('descripcion').value
       let categoria = document.getElementById('categoria').value
@@ -52,8 +57,7 @@ let BodegaStore = Reflux.createStore({
 
       this.obj.renderItem = []
       this.obj.filtro.limitA = 0
-      this.obj.renderBodega = ''
-
+      
       socket.emit('allBodega',area, this.obj.filtro, (n) => {
         this.obj.renderBodega = n.productos
         this.obj.total = n.cuenta
@@ -80,11 +84,10 @@ let BodegaStore = Reflux.createStore({
   },
   renderItem: function(){
     let i
-    this.obj.renderItem = []
     for(i=0;this.obj.renderBodega.length > i ;i++){
       this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} bodega={this.obj.renderBodega[i]} />)
-    } 
-    this.trigger(this.obj)
+    }
+    this.trigger(this.obj) 
   },
   renderButton: function(rows,sub){
     if(document.getElementById("view-more")){

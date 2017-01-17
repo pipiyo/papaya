@@ -2,7 +2,7 @@ import React from 'react'
 import Title from './Title'
 import Form from './Form'
 
-class UpdateProductoIndex extends React.Component {
+class StockProductoIndex extends React.Component {
 
   constructor() {
     super()
@@ -19,4 +19,4 @@ class UpdateProductoIndex extends React.Component {
 
 }
 
-export default UpdateProductoIndex
+export default StockProductoIndex

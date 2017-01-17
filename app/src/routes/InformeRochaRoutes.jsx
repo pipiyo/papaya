@@ -20,7 +20,8 @@ export default class InformeRoutes extends React.Component {
     InformeRochaActions.renderReset()
     InformeRochaActions.allRocha()
   }
-  renderFiltro(){
+  renderFiltro(event){
+    event.preventDefault()
     InformeRochaActions.renderFiltro()
   }
   renderFiltroFi(date){

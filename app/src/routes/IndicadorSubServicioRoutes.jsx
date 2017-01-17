@@ -21,7 +21,8 @@ export default class IndicadorSubServicioRoutes extends React.Component {
     IndicadorSubServicioActions.renderReset()
     IndicadorSubServicioActions.renderSubServicio(nextProps.params.area)
   }
-  renderFiltro(){
+  renderFiltro(event){
+    event.preventDefault()
     IndicadorSubServicioActions.renderFiltro()
   }
   renderFiltroFi(date){

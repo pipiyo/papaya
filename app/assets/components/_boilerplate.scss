@@ -830,6 +830,7 @@ a.external-link, .external-link a {
 
 .module-filter{
     display: flex;
+    justify-content: flex-end;
     flex-wrap: wrap;
     margin: 0 .5em 1em .5em;
     border: solid 1px $gris_lighter;
@@ -946,6 +947,19 @@ a.external-link, .external-link a {
             border-radius: 50%;
             height: 28px;
             border: solid 1px $gris;
+        }
+    }
+    input[type="button"],input[type="submit"]{
+        @include reset-appearance;
+        padding: .5em .3em;
+        width: 100%;
+        margin: 20px auto 0 auto;
+        color: $blanco;
+        background: $color_corporativo_dark;
+        display: block;
+        &:hover{
+          background: $color_corporativo_darker;
+          cursor: pointer;  
         }
     }
 

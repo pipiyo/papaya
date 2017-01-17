@@ -38,6 +38,11 @@ let InformeRochaStore = Reflux.createStore({
     })
   },
   renderFiltro : function(){
+      document.getElementById('btn-buscar').disabled = true
+      setTimeout(function(){ 
+        document.getElementById('btn-buscar').disabled = false
+      }, 3000)
+      
       let fechaI = document.getElementById("fechaInicio").value
       let fechaE = document.getElementById("fechaEntrega").value
       let codigo = document.getElementById("codigo").value
@@ -63,7 +68,6 @@ let InformeRochaStore = Reflux.createStore({
   },
   rederRochas: function(){
     let i
-    this.obj.renderRochas = []
     for(i=0; i < this.obj.rocha.length; i++){
       (this.obj.rocha[i].FECHA_INGRESO != null)? this.obj.rocha[i].FECHA_INGRESO = this.obj.rocha[i].FECHA_INGRESO.substring(0,10) : this.obj.rocha[i].FECHA_INGRESO = "" ;
       (this.obj.rocha[i].FECHA_CONFIRMACION != null)? this.obj.rocha[i].FECHA_CONFIRMACION = this.obj.rocha[i].FECHA_CONFIRMACION.substring(0,10) : this.obj.rocha[i].FECHA_CONFIRMACION = "En Espera" ;
@@ -75,23 +79,25 @@ let InformeRochaStore = Reflux.createStore({
     if(moment(date).isValid()){
       document.getElementById("fechaInicio").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaInicio = date
-      this.renderFiltro()
+     // this.renderFiltro()
     }else{
       document.getElementById("fechaInicio").value = ""
       this.obj.filtro.fechaInicio = undefined
-      this.renderFiltro()
+     // this.renderFiltro()
     }
+    this.trigger(this.obj)
   },
   renderFiltroFe : function(date){
     if(moment(date).isValid()){
       document.getElementById("fechaEntrega").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaEntrega = date
-      this.renderFiltro()
+     // this.renderFiltro()
     }else{
       document.getElementById("fechaEntrega").value = ""
       this.obj.filtro.fechaEntrega = undefined
-      this.renderFiltro()
+    // this.renderFiltro()
     }
+    this.trigger(this.obj)
   },
   renderViewMore: function(){
     this.obj.filtro.limitA = this.obj.filtro.limitA + 100

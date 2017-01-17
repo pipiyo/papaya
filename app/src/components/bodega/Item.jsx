@@ -27,9 +27,9 @@ class Item extends React.Component {
               <div class="cm"><p>Disponible {this.props.bodega.DISPONIBLE}</p></div>
             </div>
             <div class="module_bodega_generico_icon">
-              <div><a><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+              <div><Link class="icon-informe" to={`/home/producto/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-eye" aria-hidden="true"></i></Link></div>
               <div><Link class="icon-informe" to={`/home/actualizar-producto/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-pencil" aria-hidden="true"></i></Link></div>
-              <div><a><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+              <div><Link class="icon-informe" to={`/home/stock-producto/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-plus" aria-hidden="true"></i></Link></div>
             </div>   
           </div>
         </div> 

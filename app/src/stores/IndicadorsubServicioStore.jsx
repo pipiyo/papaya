@@ -61,6 +61,11 @@ let IndicadorSubServicioStore = Reflux.createStore({
     })
   },
   renderFiltro : function(){
+      document.getElementById('btn-buscar').disabled = true
+      setTimeout(function(){ 
+        document.getElementById('btn-buscar').disabled = false
+      }, 3000)
+      
       let fechaI = document.getElementById("fechaInicio").value
       let fechaE = document.getElementById("fechaEntrega").value
       let codigo = document.getElementById("codigo").value
@@ -90,23 +95,25 @@ let IndicadorSubServicioStore = Reflux.createStore({
     if(moment(date).isValid()){
       document.getElementById("fechaInicio").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaInicio = date
-      this.renderFiltro();
+      //this.renderFiltro();
     }else{
       document.getElementById("fechaInicio").value = ""
       this.obj.filtro.fechaInicio = undefined
-      this.renderFiltro();
+      //this.renderFiltro();
     }
+    this.trigger(this.obj)
   },
   renderFiltroFe : function(date){
     if(moment(date).isValid()){
       document.getElementById("fechaEntrega").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaEntrega = date
-      this.renderFiltro();
+      //this.renderFiltro();
     }else{
       document.getElementById("fechaEntrega").value = ""
       this.obj.filtro.fechaEntrega = undefined
-      this.renderFiltro();
+      //this.renderFiltro();
     }
+    this.trigger(this.obj)
   },
   renderViewMore: function(){
     this.obj.filtro.limit = this.obj.filtro.limit + 100
@@ -186,7 +193,6 @@ let IndicadorSubServicioStore = Reflux.createStore({
   },
   renderItem: function(){
     let i
-    this.obj.renderItem = []
     for(i=0;this.obj.subServicio.length > i ;i++){
       this.obj.renderItem.push(<Item key={this.obj.subServicio[i].CODIGO_SUBSERVICIO} datos={this.obj.subServicio[i]} />)
     } 

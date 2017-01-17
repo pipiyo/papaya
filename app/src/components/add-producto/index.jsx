@@ -1,4 +1,6 @@
 import React from 'react'
+import Title from './Title'
+import Form from './Form'
 
 class AddProductoIndex extends React.Component {
 
@@ -8,7 +10,8 @@ class AddProductoIndex extends React.Component {
   render() {
       return (         
         <div>
-          <h1>Add Producto</h1>
+          <Title />
+          <Form />
         </div>
       )
 
