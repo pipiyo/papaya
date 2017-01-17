@@ -52,6 +52,7 @@ let BodegaStore = Reflux.createStore({
 
       this.obj.renderItem = []
       this.obj.filtro.limitA = 0
+      this.obj.renderBodega = ''
 
       socket.emit('allBodega',area, this.obj.filtro, (n) => {
         this.obj.renderBodega = n.productos
@@ -71,7 +72,6 @@ let BodegaStore = Reflux.createStore({
   	socket.emit('allVale', productos, (n) => {
       this.obj.renderBodega = n.productos
       this.renderItem()
-      this.trigger(this.obj)
     })
   },
   renderViewMore: function(area){
@@ -80,15 +80,19 @@ let BodegaStore = Reflux.createStore({
   },
   renderItem: function(){
     let i
+    this.obj.renderItem = []
     for(i=0;this.obj.renderBodega.length > i ;i++){
       this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} bodega={this.obj.renderBodega[i]} />)
     } 
+    this.trigger(this.obj)
   },
   renderButton: function(rows,sub){
-    if(rows > sub){
-      document.getElementById("view-more").classList.remove("hidden")
-    }else{
-      document.getElementById("view-more").classList.add("hidden")
+    if(document.getElementById("view-more")){
+      if(rows > sub){
+        document.getElementById("view-more").classList.remove("hidden")
+      }else{
+        document.getElementById("view-more").classList.add("hidden")
+      }
     }
   }
 

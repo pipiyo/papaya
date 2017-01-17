@@ -83,7 +83,7 @@ module.exports = (io) => {
               callback({productos:rows[0],cuenta:rows[1],categoria:filtro_categoria})
             }
             else{
-              console.log('Error ' + err)
+              console.log('Error-1 ' + err)
             }
         }) 
     })
@@ -93,6 +93,7 @@ module.exports = (io) => {
   socket.on('allTransito', (producto,callback) => {
     let i, e
     let consulta = ""
+
     for(i=0;i<producto.length;i++){
       if(i == 0){
         consulta += '"'+producto[i].CODIGO_PRODUCTO+'"'
@@ -100,6 +101,9 @@ module.exports = (io) => {
         consulta += ',"'+producto[i].CODIGO_PRODUCTO+'"'
       }
     }
+
+    if(consulta == ""){consulta = '"No producto"'}
+
     
     let query = 'SELECT sum(oc_producto.CANTIDAD - oc_producto.CANTIDAD_RECIBIDA) as TOTAL,producto.CODIGO_PRODUCTO  FROM oc_producto, producto, orden_de_compra WHERE orden_de_compra.CODIGO_OC = oc_producto.CODIGO_OC and oc_producto.CODIGO_PRODUCTO = producto.CODIGO_PRODUCTO and producto.CODIGO_PRODUCTO IN ('+consulta+') and orden_de_compra.ESTADO = "EN PROCESO" group by producto.CODIGO_PRODUCTO' 
     pool.getConnection( (err, connection) => {
@@ -125,7 +129,7 @@ module.exports = (io) => {
               callback({productos:producto})
             }
             else{
-              console.log('Error ' + err)
+              console.log('Error-2 ' + err)
             }
         }) 
     })
@@ -143,6 +147,9 @@ module.exports = (io) => {
         consulta += ',"'+producto[i].CODIGO_PRODUCTO+'"'
       }
     }
+
+    if(consulta == ""){consulta = '"No producto"'}
+
     let query = 'select sum(producto_vale_emision.CANTIDAD_SOLICITADA -  IFNULL(producto_vale_emision.CANTIDAD_ENTREGADA,0)) as TOTAL,producto_vale_emision.CODIGO_PRODUCTO  from vale_emision, producto_vale_emision, producto where vale_emision.COD_VALE = producto_vale_emision.CODIGO_VALE and producto_vale_emision.CODIGO_PRODUCTO = producto.CODIGO_PRODUCTO and producto.CODIGO_PRODUCTO in ('+consulta+')  and vale_emision.ESTADO = "PENDIENTE" group by producto_vale_emision.CODIGO_PRODUCTO' 
     pool.getConnection( (err, connection) => {
         connection.query(query, (err, rows, fields) => {
@@ -167,7 +174,7 @@ module.exports = (io) => {
               callback({productos:producto})
             }
             else{
-              console.log('Error ' + err)
+              console.log('Error-3 ' + err)
             }
         }) 
     })

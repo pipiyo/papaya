@@ -113,75 +113,80 @@ let IndicadorSubServicioStore = Reflux.createStore({
     this.renderSubServicio(this.obj.area)
   },
   renderButton: function(rows,sub){
-    if(rows > sub){
-      document.getElementById("btn-view").classList.remove("hidden")
-    }else{
-      document.getElementById("btn-view").classList.add("hidden")
+    if(document.getElementById("btn-view")){
+      if(rows > sub){
+        document.getElementById("btn-view").classList.remove("hidden")
+      }else{
+        document.getElementById("btn-view").classList.add("hidden")
+      }
     }
   },
   renderAreaServicio: function(actual,antigua){
     let area = ""
     let area1 = null
-    switch (actual) {
-    case "abastecimiento":
-        area = "abastecimiento"
-        break
-    case "despacho":
-        area = "despacho"
-        break
-    case "instalación":
-        area = "instalaciones"
-        break
-    case "producción":
-        area = "produccion"
-        break
-    case "planificación":
-        area = "planificacion"
-        break
-    case "sillas":
-        area = "sillas"
-        break
-    case "técnica":
-        area = "desarrollo"
-        break
-    case "comercial":
-        area = "comercial"
-        break       
-    }
-    document.querySelector(`[data-area="ok"]`).classList.add(area)
-    if(antigua){
-      switch (antigua) {
+    if(document.querySelector(`[data-area="ok"]`)){
+      switch (actual) {
       case "abastecimiento":
-          area1 = "abastecimiento"
+          area = "abastecimiento"
           break
       case "despacho":
-          area1 = "despacho"
+          area = "despacho"
           break
       case "instalación":
-          area1 = "instalaciones"
+          area = "instalaciones"
           break
       case "producción":
-          area1 = "produccion"
+          area = "produccion"
           break
       case "planificación":
-          area1 = "planificacion"
+          area = "planificacion"
           break
       case "sillas":
-          area1 = "sillas"
+          area = "sillas"
           break
       case "técnica":
-          area1 = "desarrollo"
-          break 
+          area = "desarrollo"
+          break
       case "comercial":
-          area1 = "comercial"
-          break    
+          area = "comercial"
+          break       
       }
-      document.querySelector(`[data-area="ok"]`).classList.remove(area)
-      document.querySelector(`[data-area="ok"]`).classList.add(area1)
+      document.querySelector(`[data-area="ok"]`).classList.add(area)
+      if(antigua){
+        switch (antigua) {
+        case "abastecimiento":
+            area1 = "abastecimiento"
+            break
+        case "despacho":
+            area1 = "despacho"
+            break
+        case "instalación":
+            area1 = "instalaciones"
+            break
+        case "producción":
+            area1 = "produccion"
+            break
+        case "planificación":
+            area1 = "planificacion"
+            break
+        case "sillas":
+            area1 = "sillas"
+            break
+        case "técnica":
+            area1 = "desarrollo"
+            break 
+        case "comercial":
+            area1 = "comercial"
+            break    
+        }
+        document.querySelector(`[data-area="ok"]`).classList.remove(area)
+        document.querySelector(`[data-area="ok"]`).classList.add(area1)
+      }
     }
   },
   renderItem: function(){
     let i
+    this.obj.renderItem = []
     for(i=0;this.obj.subServicio.length > i ;i++){
       this.obj.renderItem.push(<Item key={this.obj.subServicio[i].CODIGO_SUBSERVICIO} datos={this.obj.subServicio[i]} />)
     } 

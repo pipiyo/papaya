@@ -63,6 +63,7 @@ let InformeRochaStore = Reflux.createStore({
   },
   rederRochas: function(){
     let i
+    this.obj.renderRochas = []
     for(i=0; i < this.obj.rocha.length; i++){
       (this.obj.rocha[i].FECHA_INGRESO != null)? this.obj.rocha[i].FECHA_INGRESO = this.obj.rocha[i].FECHA_INGRESO.substring(0,10) : this.obj.rocha[i].FECHA_INGRESO = "" ;
       (this.obj.rocha[i].FECHA_CONFIRMACION != null)? this.obj.rocha[i].FECHA_CONFIRMACION = this.obj.rocha[i].FECHA_CONFIRMACION.substring(0,10) : this.obj.rocha[i].FECHA_CONFIRMACION = "En Espera" ;
@@ -71,7 +72,6 @@ let InformeRochaStore = Reflux.createStore({
     }
   },
   renderFiltroFi : function(date){
-    console.log("hola")
     if(moment(date).isValid()){
       document.getElementById("fechaInicio").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaInicio = date
@@ -98,17 +98,21 @@ let InformeRochaStore = Reflux.createStore({
     this.allRocha()
   },
   renderButton: function(rows,sub){
-    if(rows > sub){
-      document.getElementById("view-more").classList.remove("hidden")
-    }else{
-      document.getElementById("view-more").classList.add("hidden")
+    if(document.getElementById("view-more")){
+      if(rows > sub){
+        document.getElementById("view-more").classList.remove("hidden")
+      }else{
+        document.getElementById("view-more").classList.add("hidden")
+      }
     }
   },
   renderAtraso: function(fechaConfirmacion,codigo){
-    if(this.fechaActual() > fechaConfirmacion){
-      document.querySelector(`[data-proyecto="${codigo}"]`).classList.add("atrasado")
-    }else{
-      document.querySelector(`[data-proyecto="${codigo}"]`).classList.remove("ok")
+    if( document.querySelector(`[data-proyecto="${codigo}"]`)){
+      if(this.fechaActual() > fechaConfirmacion){
+        document.querySelector(`[data-proyecto="${codigo}"]`).classList.add("atrasado")
+      }else{
+        document.querySelector(`[data-proyecto="${codigo}"]`).classList.remove("ok")
+      }
     }
   },
   fechaActual: function(){

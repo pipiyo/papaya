@@ -19,7 +19,8 @@ import DetalleInforme from './routes/DetalleInformeRoutes'
 import Bodega from './routes/BodegaRoutes'
 import Home from './routes/HomeRoutes'
 import Inicio from './routes/InicioRoutes'
-
+import AddProducto from './routes/AddProductoRoutes'
+import UpdateProducto from './routes/UpdateProductoRoutes'
 
 import Auth from './routes/AuthRoutes'
 
@@ -47,6 +48,8 @@ ReactDOM.render((
             <Route path="actualizar-subactividad/:id" component={UpdateSubServicio}/>
             <Route path="indicadores/:area" component={IndicadorSubServicio}/>
             <Route path="bodega/:area" component={Bodega}/>
+            <Route path="ingreso-producto" component={AddProducto}/>
+            <Route path="actualizar-producto/:id" component={UpdateProducto}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

@@ -1,16 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 class Item extends React.Component {
 
   constructor() {
     super()
-  }
-  shouldComponentUpdate(nextProps, nextState){
-    if(nextProps.bodega){
-      return false
-    }else{
-      return true
-    }
   }
   render() {
       return (
@@ -34,8 +28,8 @@ class Item extends React.Component {
             </div>
             <div class="module_bodega_generico_icon">
               <div><a><i class="fa fa-eye" aria-hidden="true"></i></a></div>
-              <div><a><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
-              <div><a><i class="fa fa-minus-square" aria-hidden="true"></i></a></div>
+              <div><Link class="icon-informe" to={`/home/actualizar-producto/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-pencil" aria-hidden="true"></i></Link></div>
+              <div><a><i class="fa fa-plus" aria-hidden="true"></i></a></div>
             </div>   
           </div>
         </div> 
