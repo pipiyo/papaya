@@ -14,54 +14,28 @@ class Item extends React.Component {
         <div>
           <div className="module-form">
             <div className="item-form title">
-                <h4>Nueva Sub Actividad</h4>
+                <h4>Control Stock Actividad</h4>
+            </div>
+            <div class="item-form opc">
+              <label class="cr-title">Opciones a escoger</label>
+
+              <label class="name-radio">Ingreso</label>
+              <input type="radio" name="stock" id="radio-ingreso" />
+              <label class="radio" for="radio-ingreso"></label>
+
+              <label class="name-radio">Egreso</label>
+              <input type="radio" name="stock" id="radio-egreso" />
+              <label class="radio" for="radio-egreso"></label>
             </div>
 
             <div className="item-form">
-              <label>Servicio</label>
-              <select required id="area" onChange={this.props.renderArea}>
-                <option value="">Seleccioné</option>
-                <option value="Adquisiciones">Abastecimiento</option>
-                <option value="Bodega">Bodega</option>
-                <option value="Desarrollo">Técnica</option>
-                <option value="Despacho">Despacho</option>
-                <option value="Instalacion">Instalación</option>
-                <option value="Planificacion">Planificación</option>
-                <option value="Prevención de Riesgos">Prevención de Riesgos</option>
-                <option value="Produccion">Producción</option>
-                <option value="Sillas">Sillas</option>
-                <option value="Sistema">Sistema</option>
-              </select>
+                <label>Stock</label>
+                <input id="stock" type="text" />
             </div>
 
             <div className="item-form">
-              <label>Categoría</label>
-              <select required id="categoria">
-                <option value="">Seleccioné</option>
-                <option value="proyecto">Proyecto</option>
-                <option value="solicitud">Solicitud</option>
-                <option value="solicitud">Proceso</option>
-              </select>
-            </div>
-
-            <div className="item-form">
-                <label>Supervisor</label>
-                <input required id="supervisor" type="text" />
-            </div>
-
-            <div className="item-form">
-                <label>Días</label>
-                <input type="number" class="date" id="dias" />
-            </div>
-
-            <div className="item-form">
-                <label>Descripción</label>
-                <input required id="descripcion" type="text"/>
-            </div>
-
-            <div className="item-form">
-                <label>Observación</label>
-                <input required id="observacion" type="text"/>
+                <label>Rocha</label>
+                <input id="rocha" type="text"/>
             </div>
           </div>
 

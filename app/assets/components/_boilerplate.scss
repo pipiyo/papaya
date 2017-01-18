@@ -755,6 +755,7 @@ a.external-link, .external-link a {
     input[type="radio"]{
         display: none;
         + .radio{
+            background: $blanco;
             position: relative;
             width: 28px;
             border-radius: 50%;
