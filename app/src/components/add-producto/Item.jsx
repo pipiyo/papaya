@@ -55,7 +55,7 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
-                <label>Supervisor</label>
+                <label>Categoría</label>
                 <select required id="categoria">
                   <option value="">Seleccioné</option>
                   <option value="ACTIU"> ACTIU </option>

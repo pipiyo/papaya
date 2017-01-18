@@ -11,7 +11,11 @@ class UpdateProductoIndex extends React.Component {
       return (         
         <div>
           <Title />
-          <Form />
+          <Form
+          updateProducto={this.props.updateProducto} 
+          renderInput={this.props.renderInput}
+          obj={this.props.obj}
+          />
         </div>
       )
 

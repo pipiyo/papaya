@@ -2,7 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
-import SubServicioActions from '../../actions/SubServicioActions'
+import UpdateProductoActions from '../../actions/UpdateProductoActions'
 
 class Item extends React.Component {
 
@@ -18,8 +18,13 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
+                <label>Código</label>
+                <input readOnly  value={this.props.obj.input.codigo} onChange={this.props.renderInput} required id="codigo" type="text" />
+            </div>
+
+            <div className="item-form">
                 <label>Descripción</label>
-                <input required id="descripcion" type="text" />
+                <input value={this.props.obj.input.descripcion} onChange={this.props.renderInput} required id="descripcion" type="text" />
             </div>
 
             <div className="item-form">
@@ -50,7 +55,7 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
-                <label>Supervisor</label>
+                <label>Categoría</label>
                 <select required id="categoria">
                   <option value="">Seleccioné</option>
                   <option value="ACTIU"> ACTIU </option>
@@ -96,17 +101,17 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Precio compra</label>
-                <input id="precio" type="text" />
+                <input onChange={this.props.renderInput} value={this.props.obj.input.precio} id="precio" type="text" />
             </div>
 
             <div className="item-form">
                 <label>Stock Mínimo</label>
-                <input id="stock-min" type="text"/>
+                <input onChange={this.props.renderInput} value={this.props.obj.input.stockMin} id="stock-min" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Stock Máximo</label>
-                <input id="stock-max" type="text"/>
+                <input onChange={this.props.renderInput} value={this.props.obj.input.stockMax} id="stock-max" type="text"/>
             </div>
 
           </div>

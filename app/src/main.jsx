@@ -51,7 +51,7 @@ ReactDOM.render((
             <Route path="indicadores/:area" component={IndicadorSubServicio}/>
             <Route path="bodega/:area" component={Bodega}/>
             <Route path="ingreso-producto" component={AddProducto}/>
-            <Route path="actualizar-producto/:id" component={UpdateProducto}/>
+            <Route path="actualizar-producto/:bodega/:id" component={UpdateProducto}/>
             <Route path="producto/:id" component={Producto}/>
             <Route path="stock-producto/:id" component={StockProducto}/>
         </Route>

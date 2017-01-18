@@ -10,9 +10,12 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={this.props.updateProducto}>
           <fieldset> 
-            <Item />
+            <Item 
+            renderInput={this.props.renderInput}
+            obj={this.props.obj} 
+            />
           </fieldset> 
         </form> 
       )

@@ -16,6 +16,7 @@ let BodegaStore = Reflux.createStore({
     renderItem: [],
     categoria: '',
     total: 0,
+    tipoBodega: '',
     filtro:{limitA:0, limitB:5, codigo:null, descripcion:null, categoria: null, quiebre: false, desactivado: false}
   },
   renderReset: function(){
@@ -28,7 +29,9 @@ let BodegaStore = Reflux.createStore({
     this.obj.filtro.quiebre = false
     this.obj.filtro.desactivado = false  
   },
-  renderBodega: function(area){
+  renderBodega: function(area, bodega){
+    this.obj.tipoBodega = bodega
+
   	socket.emit('allBodega',area, this.obj.filtro, (n) => {
       this.obj.renderBodega = n.productos
       this.obj.total = n.cuenta
@@ -36,18 +39,19 @@ let BodegaStore = Reflux.createStore({
       this.renderTransito(n.productos)
     })
   },
-  renderFiltro : function(area){
+  renderFiltro : function(area , bodega){
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
         document.getElementById('btn-buscar').disabled = false
       }, 3000)
+
+      this.obj.tipoBodega = bodega
 
       let codigo = document.getElementById('codigo').value
       let descripcion = document.getElementById('descripcion').value
       let categoria = document.getElementById('categoria').value
       let quiebre = document.getElementById('check-quiebre').checked
       let desactivado = document.getElementById('check-desactivado').checked
-
 
       if(codigo != ""){this.obj.filtro.codigo=codigo}else{this.obj.filtro.codigo = null}
       if(descripcion != ""){this.obj.filtro.descripcion=descripcion}else{this.obj.filtro.descripcion= null}   
@@ -61,6 +65,7 @@ let BodegaStore = Reflux.createStore({
       socket.emit('allBodega',area, this.obj.filtro, (n) => {
         this.obj.renderBodega = n.productos
         this.obj.total = n.cuenta
+        
         this.obj.categoria = n.categoria
         this.renderTransito(n.productos)
       })
@@ -78,14 +83,14 @@ let BodegaStore = Reflux.createStore({
       this.renderItem()
     })
   },
-  renderViewMore: function(area){
+  renderViewMore: function(area, bodega){
     this.obj.filtro.limitA = this.obj.filtro.limitA + 5
-    this.renderBodega(area)
+    this.renderBodega(area, bodega)
   },
   renderItem: function(){
     let i
     for(i=0;this.obj.renderBodega.length > i ;i++){
-      this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} bodega={this.obj.renderBodega[i]} />)
+      this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} tipoBodega={this.obj.tipoBodega} bodega={this.obj.renderBodega[i]}  />)
     }
     this.trigger(this.obj) 
   },

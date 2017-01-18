@@ -10,8 +10,12 @@ class AddProductoIndex extends React.Component {
   render() {
       return (         
         <div>
-          <Title />
-          <Form />
+          <Title 
+          obj={this.props.obj}
+          />
+          <Form 
+          addProducto={this.props.addProducto} 
+          />
         </div>
       )
 
