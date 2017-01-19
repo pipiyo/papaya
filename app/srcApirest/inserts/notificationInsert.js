@@ -12,19 +12,16 @@ module.exports = (notification, areaForm) => {
                                 exec( (err, area) => {
                                   if (err) console.log( err )
 
-
-
                                       notification.user = user._id
                                       notification.area = area._id
+                                      notification.read_by[0] = global.userName
                                       notification.save().then( (doc) => {
                                       }, (error) => {
                                         console.log( error )
                                       })
 
-
                                     return true
                                 })
-
 
               })
 }
