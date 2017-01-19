@@ -1,5 +1,6 @@
 import React from 'react'
 import Reflux from 'reflux'
+import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
 import BodegaActions from '../actions/BodegaActions'
 import Env from '../Config'
@@ -97,9 +98,26 @@ let BodegaStore = Reflux.createStore({
     this.renderBodega(area, bodega)
   },
   renderItem: function(){
-    let i
+    let i, link
+    
+
     for(i=0;this.obj.renderBodega.length > i ;i++){
-      this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} tipoBodega={this.obj.tipoBodega} bodega={this.obj.renderBodega[i]}  />)
+
+      /* Filtro Enlaces Bodega */
+
+      link = []
+      if(this.obj.filtro.bodega){
+        link.push(
+          <div key={`a${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><Link class="icon-informe" to={`/home/producto/${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><i class="fa fa-eye" aria-hidden="true"></i></Link></div>
+          )
+      }else{
+        link.push(
+          <div key={`a${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><Link class="icon-informe" to={`/home/actualizar-producto/${this.obj.tipoBodega}/${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><i class="fa fa-pencil" aria-hidden="true"></i></Link></div>,
+          <div key={`b${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><Link class="icon-informe" to={`/home/stock-producto/${this.obj.tipoBodega}/${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><i class="fa fa-plus" aria-hidden="true"></i></Link></div>
+          )
+      }
+
+      this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} link={link} bodega={this.obj.renderBodega[i]}  />)
     }
     this.trigger(this.obj) 
   },
