@@ -11,7 +11,9 @@ class StockProductoIndex extends React.Component {
       return (         
         <div>
           <Title />
-          <Form />
+          <Form 
+          stockProducto={this.props.stockProducto} 
+          />
         </div>
       )
 

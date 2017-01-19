@@ -29,7 +29,7 @@ class Item extends React.Component {
             <div class="module_bodega_generico_icon">
               <div><Link class="icon-informe" to={`/home/producto/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-eye" aria-hidden="true"></i></Link></div>
               <div><Link class="icon-informe" to={`/home/actualizar-producto/${this.props.tipoBodega}/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-pencil" aria-hidden="true"></i></Link></div>
-              <div><Link class="icon-informe" to={`/home/stock-producto/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-plus" aria-hidden="true"></i></Link></div>
+              <div><Link class="icon-informe" to={`/home/stock-producto/${this.props.tipoBodega}/${this.props.bodega.CODIGO_PRODUCTO}`}><i class="fa fa-plus" aria-hidden="true"></i></Link></div>
             </div>   
           </div>
         </div> 

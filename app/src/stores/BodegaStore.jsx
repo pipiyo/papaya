@@ -17,7 +17,7 @@ let BodegaStore = Reflux.createStore({
     categoria: '',
     total: 0,
     tipoBodega: '',
-    filtro:{limitA:0, limitB:5, codigo:null, descripcion:null, categoria: null, quiebre: false, desactivado: false}
+    filtro:{limitA:0, limitB:5, codigo:null, descripcion:null, categoria: null, quiebre: false, desactivado: false, bodega: false}
   },
   renderReset: function(){
     this.obj.filtro.limitA = 0
@@ -27,7 +27,8 @@ let BodegaStore = Reflux.createStore({
     this.obj.filtro.descripcion = null 
     this.obj.filtro.categoria = null
     this.obj.filtro.quiebre = false
-    this.obj.filtro.desactivado = false  
+    this.obj.filtro.desactivado = false 
+    this.obj.filtro.bodega = false 
   },
   renderBodega: function(area, bodega){
     this.obj.tipoBodega = bodega
@@ -53,16 +54,24 @@ let BodegaStore = Reflux.createStore({
       let quiebre = document.getElementById('check-quiebre').checked
       let desactivado = document.getElementById('check-desactivado').checked
 
+      /* Filtro para la divición de bodega */
+
+      let checkBodega = document.getElementById('check-bodega').checked
+      let selectBodega
+
+      if(checkBodega){selectBodega = 'allBodegaNew'}else{selectBodega='allBodega'}
+
       if(codigo != ""){this.obj.filtro.codigo=codigo}else{this.obj.filtro.codigo = null}
       if(descripcion != ""){this.obj.filtro.descripcion=descripcion}else{this.obj.filtro.descripcion= null}   
       if(categoria != ""){this.obj.filtro.categoria =  categoria }else{this.obj.filtro.categoria = null}
       if(quiebre){this.obj.filtro.quiebre =  true }else{this.obj.filtro.quiebre = false}
       if(desactivado){this.obj.filtro.desactivado =  true }else{this.obj.filtro.desactivado = false}
+      if(checkBodega){this.obj.filtro.bodega =  true }else{this.obj.filtro.bodega = false}
 
       this.obj.renderItem = []
       this.obj.filtro.limitA = 0
       
-      socket.emit('allBodega',area, this.obj.filtro, (n) => {
+      socket.emit(selectBodega,area, this.obj.filtro, (n) => {
         this.obj.renderBodega = n.productos
         this.obj.total = n.cuenta
         

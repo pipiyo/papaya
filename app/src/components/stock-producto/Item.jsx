@@ -17,25 +17,23 @@ class Item extends React.Component {
                 <h4>Control Stock Actividad</h4>
             </div>
             <div class="item-form opc">
-              <label class="cr-title">Opciones a escoger</label>
+              <label class="cr-title">Ingreso o Egreso</label>
 
-              <label class="name-radio">Ingreso</label>
-              <input type="radio" name="stock" id="radio-ingreso" />
-              <label class="radio" for="radio-ingreso"></label>
-
-              <label class="name-radio">Egreso</label>
-              <input type="radio" name="stock" id="radio-egreso" />
-              <label class="radio" for="radio-egreso"></label>
+              <select required id="stock">
+                <option value="">Seleccioné</option>
+                <option value="1">Ingreso</option>
+                <option value="0">Egreso</option>
+              </select>
             </div>
 
             <div className="item-form">
                 <label>Stock</label>
-                <input id="stock" type="text" />
+                <input required id="numero" type="number" />
             </div>
 
             <div className="item-form">
                 <label>Rocha</label>
-                <input id="rocha" type="text"/>
+                <input required id="rocha" type="text"/>
             </div>
           </div>
 

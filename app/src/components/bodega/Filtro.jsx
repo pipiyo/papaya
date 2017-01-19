@@ -23,10 +23,15 @@ class Filtro extends React.Component {
                   <option value="">Seleccioné</option>
                     {
                       this.props.obj.categoria.map( (i) => {
-                        return <option value={`${i}`} key={`${i}`}>{`${i}`}</option>
+                        return <option value={`${i.id}`} key={`${i.id}`}>{`${i.name}`}</option>
                       })
                     }
                 </select>
+            </div>
+            <div className="item-filter opc" >
+              <input type="checkbox" id="check-bodega" name="check-bodega" value="bodega"/>
+              <label class="checkbox" for="check-bodega"></label>
+              <label class="name-check">Bodega 2</label>
             </div>
             <div className="item-filter opc" >
               <input type="checkbox" id="check-quiebre" name="check-quiebre" value="quiebre"/>

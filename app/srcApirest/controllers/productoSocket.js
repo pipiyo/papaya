@@ -52,6 +52,27 @@ module.exports = (io) => {
       }) 
   })
 
+  /* Stock Producto */
+  socket.on('stockProducto', (data,callback) => {
+    let query
+      if(data.stock == 1){
+        query = `UPDATE producto SET STOCK_ACTUAL = STOCK_ACTUAL + ${data.numero} WHERE CODIGO_PRODUCTO = "${data.codigo}"`
+      }else{
+        query = `UPDATE producto SET STOCK_ACTUAL = STOCK_ACTUAL - ${data.numero} WHERE CODIGO_PRODUCTO = "${data.codigo}"`
+      }
+      pool.getConnection( (err, connection) => {
+            connection.query(query , (err, results) => {
+                connection.release()
+                if (!err){
+                  callback({mensaje:`Se ingreso ${data.codigo}`})
+                }
+                else{
+                  console.log('Error ' + err)
+                }
+            }) 
+      }) 
+  })
+
   /* Listar Producto */
   socket.on('searchProducto', (id,callback) => {
    

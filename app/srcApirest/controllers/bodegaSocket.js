@@ -28,53 +28,114 @@ module.exports = (io) => {
     case 'insumo':
         q_bodega = ' and CATEGORIA IN("Cubiertas","Baldosas Tapizadas","Baldosas Vidrio","Baldosas Metalica","Baldosas Melamina","Articulo Electrico","Maquinas y Herramientas","Embalaje","sillas","Tornillos","Baldosas Laminadas","Tela","Laminados","Maderas","Tapacantos")'
         filtro_categoria = [
-          'Cubiertas',
-          'Baldosas Tapizadas',
-          'Baldosas Vidrio',
-          'Baldosas Metalica',
-          'Baldosas Melamina',
-          'Articulo Electrico',
-          'Maquinas y Herramientas',
-          'Embalaje',
-          'sillas',
-          'Tornillos',
-          'Tela',
-          'Laminados',
-          'Maderas',
-          'Tapacantos'
+          {id:'Cubiertas',name:'Cubiertas'},
+          {id:'Baldosas Tapizadas',name:'Baldosas Tapizadas'},
+          {id:'Baldosas Vidrio',name:'Baldosas Vidrio'},
+          {id:'Baldosas Metalica',name:'Baldosas Metalica'},
+          {id:'Baldosas Melamina',name:'Baldosas Melamina'},
+          {id:'Articulo Electrico',name:'Articulo Electrico'},
+          {id:'Maquinas y Herramientas',name:'Maquinas y Herramientas'},
+          {id:'Embalaje',name:'Embalaje'},
+          {id:'sillas',name:'Sillas'},
+          {id:'Tornillos',name:'Tornillos'}
         ]
         break;
     case 'terminado':
         q_bodega = ' and CATEGORIA IN("Muebles De Linea","Full Space","Cajoneras")'
         filtro_categoria = [
-          'Muebles De Linea',
-          'Full Space',
-          'Cajoneras'
+          {id:'Muebles De Linea',name:'Muebles De Linea'},
+          {id:'Full Space',name:'Full Space'},
+          {id:'Cajoneras',name:'Cajoneras'}
         ]
         break;
     case 'importado':
         q_bodega = ' and CATEGORIA IN("ACTIU")'
         filtro_categoria = [
-          'ACTIU'
+          {id:'ACTIU',name:'ACTIU'}
         ]
         break;
     case 'sillas':
         q_bodega = ' and CATEGORIA IN("Embalaje","sillas","Tornillos","Baldosas Tapizadas","Baldosas Laminadas","Tela","Laminados","Maderas","Tapacantos")'
         filtro_categoria = [
-          'Embalaje',
-          'sillas',
-          'Tornillos',
-          'Baldosas Tapizadas',
-          'Baldosas Laminadas',
-          'Tela',
-          'Laminados',
-          'Maderas',
-          'Tapacantos'
+          {id:'Embalaje',name:'Baldosas Tapizadas'},
+          {id:'sillas',name:'Baldosas Laminadas'},
+          {id:'Tornillos',name:'Tela'},
+          {id:'Laminados',name:'Laminados'},
+          {id:'Maderas',name:'Maderas'},
+          {id:'Tapacantos',name:'Tapacantos'}
         ]
         break;
     }  
     let query = 'SELECT * FROM producto WHERE '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+' ORDER BY CODIGO_PRODUCTO limit '+filtro.limitA+','+filtro.limitB+';' 
     let query1 = 'SELECT count(*) as total FROM producto WHERE '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+';' 
+
+    pool.getConnection( (err, connection) => {
+        connection.query(query+query1 , (err, rows, fields) => {
+            connection.release()
+            if (!err){
+              callback({productos:rows[0],cuenta:rows[1],categoria:filtro_categoria})
+            }
+            else{
+              console.log('Error-1 ' + err)
+            }
+        }) 
+    })
+  })
+
+  /* Producto New */
+  socket.on('allBodegaNew', (area,filtro,callback) => {
+    
+
+    let q_codigo = ''
+    let q_descripcion = ''
+    let q_categoria = ''
+    let q_quiebre = ''
+    let q_desactivado = ''
+    let q_temporada = ' and TEMPORADA = "2"'
+    let q_bodega = ''
+
+    if(filtro.desactivado){q_desactivado = ' AND DESHABILITAR = "1"'}else{q_desactivado = ' and DESHABILITAR = "0"'}
+    if(filtro.quiebre){q_quiebre = ' and STOCK_ACTUAL < STOCK_MINIMO'}
+    if(filtro.codigo){q_codigo = ' and CODIGO_PRODUCTO like "%'+filtro.codigo +'%"'}
+    if(filtro.descripcion){q_descripcion = ' and DESCRIPCION like "%'+filtro.descripcion +'%"'}
+    if(filtro.categoria){q_categoria = ' and CATEGORIA like "%'+filtro.categoria +'%"'}
+
+    switch(area) {
+    case 'insumo':
+        q_bodega = ' and CATEGORIA IN("1","2","3")'
+        filtro_categoria = [
+          {id:'1',name:'Superficies curvas'},
+          {id:'2',name:'Superficies Rectas'},
+          {id:'3',name:'Almacenamientos'}
+        ]
+        break;
+    case 'terminado':
+        q_bodega = ' and CATEGORIA IN("4","5","6")'
+        filtro_categoria = [
+          {id:'4',name:'Cajoneras'},
+          {id:'5',name:'Muebles de linea'},
+          {id:'6',name:'Parte y piezas'}
+        ]
+        break;
+    case 'importado':
+        q_bodega = ' and CATEGORIA IN("7","8","9")'
+        filtro_categoria = [
+          {id:'7',name:'Pantalla'},
+          {id:'8',name:'Soportes'},
+          {id:'9',name:'Faldon'}
+        ]
+        break;
+    case 'sillas':
+        q_bodega = ' and CATEGORIA IN("10","11","12")'
+        filtro_categoria = [
+          {id:'10',name:'Insumo'},
+          {id:'11',name:'Herraje'},
+          {id:'12',name:'Recurso'}
+        ]
+        break;
+    }  
+    let query = 'SELECT producto.CODIGO_PRODUCTO, producto.DESCRIPCION, producto.STOCK_ACTUAL, producto.STOCK_MAXIMO, producto.STOCK_MINIMO, categoria_producto.nombre as CATEGORIA FROM producto, categoria_producto WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+' ORDER BY CODIGO_PRODUCTO limit '+filtro.limitA+','+filtro.limitB+';' 
+    let query1 = 'SELECT count(*) as total FROM producto , categoria_producto WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+';' 
 
     pool.getConnection( (err, connection) => {
         connection.query(query+query1 , (err, rows, fields) => {
