@@ -958,6 +958,7 @@ a.external-link, .external-link a {
         color: $blanco;
         background: $color_corporativo_dark;
         display: block;
+        
         &:hover{
           background: $color_corporativo_darker;
           cursor: pointer;  
