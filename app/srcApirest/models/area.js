@@ -7,12 +7,12 @@ let Schema = mongoose.Schema
 
 let areaSchema = new Schema({
 
-     img: String, 
-     name: String, 
-     icon: String, 
-     item: [{
-     		nombre: String,
-     		ruta: String }]
+     id_name: String,
+     name: String,
+     icon: {
+     		color: String,
+     		img: String
+     }
 
 })
 

@@ -11,7 +11,7 @@ let notificationSchema = new Schema({
 	user: { type: Schema.Types.ObjectId, ref: 'user' },
 	create_at: { type : Date, default: Date.now },
 	slug: String,
-	area: String,
+	area: { type: Schema.Types.ObjectId, ref: 'area' },
 	asset: {
 		tipo: String,
 		rocha: String,

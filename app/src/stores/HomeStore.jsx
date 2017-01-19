@@ -47,7 +47,6 @@ let HomeStore = Reflux.createStore({
     })
 
     socket.emit('getAreas', (n) => {
-
       this.obj.menu = n
       this.trigger( this.obj )
     })
@@ -151,7 +150,7 @@ let HomeStore = Reflux.createStore({
   _showNotification: function(){
 
     socket.emit('getNotification', (notifications) => {
-
+      
       this.obj.notification = <Notification 
                                             notifications={notifications}
                                             hideNotification={HomeActions.hideNotification} />

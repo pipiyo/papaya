@@ -8,9 +8,7 @@ class ItemArea extends Component {
     super()
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState)
-  }
+
 
   render() {
       return (
@@ -24,8 +22,8 @@ class ItemArea extends Component {
                                 onClick={this.props.activeMenuOnClick} 
                                 key={i}>
                                   <Link 
-                                  to={item.ruta}>
-                                    {item.nombre}
+                                  to={item.path}>
+                                    {item.name}
                                   </Link>
                               </li>                       
                              )    
@@ -42,9 +40,7 @@ class Area extends Component {
     super()
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState)
-  }
+
 
   render() {
       return (
@@ -54,12 +50,12 @@ class Area extends Component {
                      return (
                              <li key={i} data-active={i}>
                                <a href="#" data-click={i} onClick={this.props.submenuOnClick} >
-                                 <div className={menu.icon}>
-                                   <i className={menu.img} aria-hidden="true"></i>    
+                                 <div className={menu.icon.color}>
+                                   <i className={menu.icon.img} aria-hidden="true"></i>    
                                  </div>
                                  <p>{menu.name}</p>
                                 </a>
-                                <ItemArea items={menu.item} activeMenuOnClick={this.props.activeMenuOnClick} />
+                                <ItemArea items={menu.items} activeMenuOnClick={this.props.activeMenuOnClick} />
                               </li>
                              )    
                    })
@@ -77,11 +73,13 @@ class Item extends Component {
   }
 
   render() {
-
       return (
         <nav className="nav">
           <a onClick={this.props.navmovil} class="btn-burger" href=""> <i class="fa fa-bars" aria-hidden="true"></i> </a>
-            <Area submenuOnClick={this.props.submenu} activeMenuOnClick={this.props.activeMenu}  menus={this.props.menu} />
+            <Area 
+              submenuOnClick={this.props.submenu} 
+              activeMenuOnClick={this.props.activeMenu} 
+              menus={this.props.menu} />
         </nav> 
       )
 

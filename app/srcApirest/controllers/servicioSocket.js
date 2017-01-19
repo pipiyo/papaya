@@ -161,7 +161,6 @@ module.exports = (io) => {
 
             let notification = new Notification({
                                                  slug: `detalle-actividad/${row.insertId}`,
-                                                 area: data.area,
                                                  asset: {
                                                    tipo: 'servicio',
                                                    rocha: data.rocha,
@@ -170,7 +169,7 @@ module.exports = (io) => {
                                                  } 
                                                })
 
-            notificationInsert(notification)
+            notificationInsert(notification, data.area)
 
           } else {
             console.log('Error no se pudo ingresar servicio '+ err)

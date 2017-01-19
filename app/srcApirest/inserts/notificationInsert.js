@@ -1,19 +1,30 @@
 const User = require('../models/user')
+const Area = require('../models/area')
 
-module.exports = (notification) => {
-
+module.exports = (notification, areaForm) => {
            User.
               findOne({ name: global.userName }).
               exec( (err, user) => {
                 if (err) console.log( err )
-               
-                  notification.user = user._id
+ 
+                            Area.
+                                findOne({ id_name: areaForm }).
+                                exec( (err, area) => {
+                                  if (err) console.log( err )
 
-                  notification.save().then( (doc) => {
-                  }, (error) => {
-                    console.log( error )
-                  })
+
+
+                                      notification.user = user._id
+                                      notification.area = area._id
+                                      notification.save().then( (doc) => {
+                                      }, (error) => {
+                                        console.log( error )
+                                      })
+
+
+                                    return true
+                                })
+
 
               })
-
 }

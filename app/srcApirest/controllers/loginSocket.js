@@ -10,7 +10,7 @@ module.exports = (io, request) => {
   .on('connection', (socket) => {
 
     socket.on('checkUser', (token, callback) => {
-      if (global.token == token) {
+      if (global.token == token && !(token == null) ) {
         callback(true)
       } else{
         global.token = null
@@ -18,12 +18,9 @@ module.exports = (io, request) => {
         callback(false)
       }
     })
-
-
-
 
     socket.on('checkToken', (token, callback) => {
-      if (global.token == token && !token == null) {
+      if (global.token == token && !(token == null) ) {
         callback(true)
       } else{
         global.token = null
@@ -31,9 +28,6 @@ module.exports = (io, request) => {
         callback(false)
       }
     })
-
-
-
 
     socket.on('login', ( data, callback, token = null) => {
 

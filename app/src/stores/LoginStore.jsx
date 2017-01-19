@@ -42,9 +42,7 @@ let LoginStore = Reflux.createStore({
             browserHistory.push('/')
   }
 */
-
         socket.emit('checkUser', localStorage.getItem('token') , (request) => {
-
           if (!request) {
               localStorage.removeItem('name')
               localStorage.removeItem('type')
@@ -53,28 +51,14 @@ let LoginStore = Reflux.createStore({
               localStorage.removeItem('profile_picture')
               browserHistory.push('/')
           }
-          
         })
-
   },
   checkToken: function(){
-
-
-
         socket.emit('checkToken', localStorage.getItem('token') , (request) => {
-
           if (request) {
-
               browserHistory.push('/home')
           }
-          
         })
-
-
-
-
-
-
   }
 })
 
