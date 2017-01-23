@@ -29,7 +29,7 @@ let LoginStore = Reflux.createStore({
     localStorage.setItem('token', token.token)
     localStorage.setItem('full_name', token.full_name)
     localStorage.setItem('profile_picture', token.profile_picture)
-    browserHistory.push('home')
+    browserHistory.push('/home')
   },
   checkUser: function () {
 /*
