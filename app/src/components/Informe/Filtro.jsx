@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
-class Filtro extends React.Component {
+class Filtro extends Component {
 
   constructor(props) {
     super(props)
