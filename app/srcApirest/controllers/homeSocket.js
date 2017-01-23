@@ -1,4 +1,5 @@
 const Notification = require('../models/notification')
+const Content = require('../models/content')
 const PubSub = require('pubsub-js')
 
 module.exports = (io) => {
@@ -7,9 +8,16 @@ module.exports = (io) => {
   .of('/home')
   .on('connection', (socket) => {
 
+	  socket.on('getAreas', (callback) => {
+		Content.
+		  find({}).
+		  exec( (err, n) => {
+		  	if (err) console.log(err)
+		  	callback(n)
+		  })
+	  })
 
 	  socket.on('getNumberNotification', (callback) => {
-
 		Notification.
 		  find({ 'read_by': { $ne: global.userName } }).
 		  count().
@@ -17,7 +25,6 @@ module.exports = (io) => {
 		  	if (err) console.log(err)
 		  	callback(n)
 		  })
-
 	  })
 
 	  socket.on('getNotification', (callback) => {
@@ -36,7 +43,7 @@ module.exports = (io) => {
 		Notification.
 		  find({}).
 		  limit(5).
-		  populate('user').
+		  populate('user area').
 		  sort('-create_at').
 		  exec( (err, notification) => {
 		  	if (err) console.log( err )
@@ -48,7 +55,7 @@ module.exports = (io) => {
 
 			Notification.
 			  find({ 'read_by': { $ne: global.userName } }).
-			  populate('user').
+			  populate('user area').
 			  count().
 			  exec( (err, notification) => {
 			  	if (err) console.log(err)

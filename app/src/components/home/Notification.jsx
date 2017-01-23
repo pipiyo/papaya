@@ -32,7 +32,10 @@ class Notification extends React.Component {
                       return (
                                 <Link key={notification.asset.codigo} to={`/home/${notification.slug}`} class="item-notification">
                                     <div class="img-notification">
-                                      <img src="css/images/fondos/cristobal.jpg" alt="usuario"/>
+                                      <div class={notification.area.icon.color}>
+                                        <i class={notification.area.icon.img} aria-hidden="true">
+                                        </i>
+                                      </div>
                                     </div>
                                     <div class="content-notification">
                                       <p>Nuevo {notification.asset.tipo} {notification.asset.codigo}</p>
