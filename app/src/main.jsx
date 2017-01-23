@@ -17,6 +17,7 @@ import InformeRocha from './routes/InformeRochaRoutes'
 import Notificacion from './routes/NotificacionRoutes'
 import DetalleInforme from './routes/DetalleInformeRoutes'
 import Bodega from './routes/BodegaRoutes'
+import BodegaSon from './routes/BodegaSonRoutes'
 import Home from './routes/HomeRoutes'
 import Inicio from './routes/InicioRoutes'
 import AddProducto from './routes/AddProductoRoutes'
@@ -54,6 +55,7 @@ ReactDOM.render((
             <Route path="actualizar-producto/:bodega/:id" component={UpdateProducto}/>
             <Route path="producto/:id" component={Producto}/>
             <Route path="stock-producto/:bodega/:id" component={StockProducto}/>
+            <Route path="bodega-seleccion/:id" component={BodegaSon}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

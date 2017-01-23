@@ -150,6 +150,40 @@ module.exports = (io) => {
     })
   })
 
+  /* Producto Son */
+  socket.on('allBodegaNewSon', (id,filtro,callback) => {
+    
+
+    let q_codigo = ' and CODIGO_PRODUCTO like "%'+id+'%"'
+    let q_descripcion = ''
+    let q_categoria = ''
+    let q_quiebre = ''
+    let q_desactivado = ''
+    let q_temporada = ' and TEMPORADA = "2"'
+    let q_bodega = ''
+
+    if(filtro.desactivado){q_desactivado = ' AND DESHABILITAR = "1"'}else{q_desactivado = ' and DESHABILITAR = "0"'}
+    if(filtro.quiebre){q_quiebre = ' and STOCK_ACTUAL < STOCK_MINIMO'}
+    if(filtro.descripcion){q_descripcion = ' and DESCRIPCION like "%'+filtro.descripcion +'%"'}
+    if(filtro.categoria){q_categoria = ' and CATEGORIA like "%'+filtro.categoria +'%"'}
+
+
+    let query = 'SELECT producto.CODIGO_PRODUCTO, producto.DESCRIPCION, producto.STOCK_ACTUAL, producto.STOCK_MAXIMO, producto.STOCK_MINIMO, categoria_producto.nombre as CATEGORIA FROM producto, categoria_producto WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+' ORDER BY CODIGO_PRODUCTO limit '+filtro.limitA+','+filtro.limitB+';' 
+    let query1 = 'SELECT count(*) as total FROM producto , categoria_producto WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+';' 
+
+    pool.getConnection( (err, connection) => {
+        connection.query(query+query1 , (err, rows, fields) => {
+            connection.release()
+            if (!err){
+              callback({productos:rows[0],cuenta:rows[1]})
+            }
+            else{
+              console.log('Error-1 ' + err)
+            }
+        }) 
+    })
+  })
+
   /* Transito */
   socket.on('allTransito', (producto,callback) => {
     let i, e

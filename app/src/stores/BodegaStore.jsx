@@ -31,8 +31,8 @@ let BodegaStore = Reflux.createStore({
     this.obj.filtro.desactivado = false 
     this.obj.filtro.bodega = false 
   },
-  renderBodega: function(area, bodega){
-    this.obj.tipoBodega = bodega
+  renderBodega: function(area){
+    this.obj.tipoBodega = area
 
   	socket.emit('allBodega',area, this.obj.filtro, (n) => {
       this.obj.renderBodega = n.productos
@@ -41,13 +41,13 @@ let BodegaStore = Reflux.createStore({
       this.renderTransito(n.productos)
     })
   },
-  renderFiltro : function(area , bodega){
+  renderFiltro : function(area){
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
         document.getElementById('btn-buscar').disabled = false
       }, 3000)
 
-      this.obj.tipoBodega = bodega
+      this.obj.tipoBodega = area
 
       let codigo = document.getElementById('codigo').value
       let descripcion = document.getElementById('descripcion').value
@@ -93,9 +93,9 @@ let BodegaStore = Reflux.createStore({
       this.renderItem()
     })
   },
-  renderViewMore: function(area, bodega){
+  renderViewMore: function(area){
     this.obj.filtro.limitA = this.obj.filtro.limitA + 5
-    this.renderBodega(area, bodega)
+    this.renderBodega(area)
   },
   renderItem: function(){
     let i, link
@@ -108,7 +108,7 @@ let BodegaStore = Reflux.createStore({
       link = []
       if(this.obj.filtro.bodega){
         link.push(
-          <div key={`a${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><Link class="icon-informe" to={`/home/producto/${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><i class="fa fa-eye" aria-hidden="true"></i></Link></div>
+          <div key={`a${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><Link class="icon-informe" to={`/home/bodega-seleccion/${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><i class="fa fa-eye" aria-hidden="true"></i></Link></div>
           )
       }else{
         link.push(
