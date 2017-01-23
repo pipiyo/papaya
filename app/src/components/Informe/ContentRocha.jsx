@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-class ContentRocha extends React.Component {
+class ContentRocha extends Component {
 
   constructor() {
     super()

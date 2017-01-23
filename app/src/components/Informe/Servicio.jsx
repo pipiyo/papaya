@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Content from './Content'
 import ContentRocha from './ContentRocha'
 
-class Servicio extends React.Component {
+class Servicio extends Component {
 
   constructor() {
     super()
@@ -19,11 +19,11 @@ class Servicio extends React.Component {
 
     for (valor in this.props.datos){
         if(reclamo.indexOf(this.props.datos[valor].CODIGO_RECLAMO) <= -1){
-          reclamo.push(this.props.datos[valor].CODIGO_RECLAMO);
-          rocha.push(this.props.datos[valor].CODIGO_PROYECTO);
-          cliente.push(this.props.datos[valor].NOMBRE_CLIENTE);
-          razon.push(this.props.datos[valor].RAZON);
-          fechaConfirmacion.push(this.props.datos[valor].FECHA_CONFIRMACION);
+          reclamo.push(this.props.datos[valor].CODIGO_RECLAMO)
+          rocha.push(this.props.datos[valor].CODIGO_PROYECTO)
+          cliente.push(this.props.datos[valor].NOMBRE_CLIENTE)
+          razon.push(this.props.datos[valor].RAZON)
+          fechaConfirmacion.push(this.props.datos[valor].FECHA_CONFIRMACION)
         }
     }
     
@@ -34,7 +34,7 @@ class Servicio extends React.Component {
         if(this.props.datos[valor].CODIGO_RECLAMO == reclamo[i] && this.props.datos[valor].RECLAMOS == reclamo[i] ){
           contentRocha = <ContentRocha datos={this.props.datos[valor]}/>
           for(e=0; e < this.props.servicio.length; e++) { 
-              (this.props.servicio[e] == this.props.datos[valor].CODIGO_RECLAMO) ? contenido.push (<Content key={valor} datos={this.props.datos[valor]} /> ) : ""; 
+              (this.props.servicio[e] == this.props.datos[valor].CODIGO_RECLAMO) ? contenido.push (<Content key={valor} datos={this.props.datos[valor]} /> ) : ""
           }
         }
       }
@@ -96,16 +96,16 @@ class Servicio extends React.Component {
   }
 
   tipoInforme(){
-    let informe;
-    (this.props.servicioTitle == "reclamo")? informe = this.viewReclamo() : informe = this.viewRocha();
+    let informe
+    (this.props.servicioTitle == "reclamo")? informe = this.viewReclamo() : informe = this.viewRocha()
     return informe
   }
 
   fechaActual(){
     let hoy = new Date()
-    let dd = hoy.getDate();
-    let mm = hoy.getMonth()+1; //hoy es 0!
-    let yyyy = hoy.getFullYear();
+    let dd = hoy.getDate()
+    let mm = hoy.getMonth()+1 //hoy es 0!
+    let yyyy = hoy.getFullYear()
 
     if(dd<10) {
       dd='0'+dd
@@ -114,12 +114,12 @@ class Servicio extends React.Component {
     if(mm<10) {
       mm='0'+mm
     } 
-    return yyyy+'-'+mm+'-'+dd;
+    return yyyy+'-'+mm+'-'+dd
   }
 
   atraso(fecha, fechaConfirmacion){
     let atraso
-    (fecha > fechaConfirmacion)? atraso = "atrasado" : atraso = "";
+    (fecha > fechaConfirmacion)? atraso = "atrasado" : atraso = ""
     return atraso
   }
 

@@ -1,36 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-class Content extends React.Component {
+class Content extends Component {
 
   constructor() {
     super()
   }
 
   viewServicio(){
-    let area;
+    let area
     switch (this.props.datos.NOMBRE_SERVICIO) {
     case "Adquisiciones":
-        area = "abastecimiento";
-        break;
+        area = "abastecimiento"
+        break
     case "Despacho":
-        area = "despacho";
-        break;
+        area = "despacho"
+        break
     case "Instalacion":
-        area = "instalaciones";
-        break;
+        area = "instalaciones"
+        break
     case "Produccion":
-        area = "produccion";
-        break;
+        area = "produccion"
+        break
     case "Desarrollo":
-        area = "desarrollo";
-        break;
+        area = "desarrollo"
+        break
     case "Sillas":
-        area = "sillas";
-        break;
+        area = "sillas"
+        break
     case "Planificacion":
-        area = "planificacion";
-        break;
+        area = "planificacion"
+        break
     }
     return "item-actividades " + area
   }
