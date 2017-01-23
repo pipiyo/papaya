@@ -40,14 +40,22 @@ User.
 
       if (user.password == data.pass) {
 
-        token = jwt.encode( { name: `${user.name}`, type: `${user.type}`, expire: `${moment().format('h:mm:ss')}` }, global.secret)
+        token = jwt.encode( { 
+                              name: `${user.name}`, 
+                              type: `${user.type}`, 
+                              expire: `${moment().format('h:mm:ss')}`,
+                              profile_picture: `${user.profile_picture}` }, 
+                              global.secret)
 
         global.token = token
         global.userName = user.name
 
         callback({ 
                     token: token,
-                    name: `${user.name}`, type: `${user.type}`, full_name: `${user.employee.name} ${user.employee.last_name} ${user.employee.second_name}`, profile_picture: `${user.profile_picture}`
+                    name: `${user.name}`, 
+                    type: `${user.type}`, 
+                    full_name: `${user.employee.name} ${user.employee.last_name} ${user.employee.second_name}`, 
+                    profile_picture: `${user.profile_picture}`
                   })
       
 
@@ -92,14 +100,22 @@ User.
 
                   user.save().then( (doc) => {
 
-                  token = jwt.encode( { name: `${doc.name}`, type: `${doc.type}`, expire: `${moment().format('h:mm:ss')}` }, global.secret )
+                  token = jwt.encode( { 
+                                        name: `${doc.name}`, 
+                                        type: `${doc.type}`, 
+                                        expire: `${moment().format('h:mm:ss')}`,
+                                        profile_picture: `${doc.profile_picture}` }, 
+                                        global.secret )
 
                   global.token = token
                   global.userName = doc.name
 
                     callback({ 
                                 token: token,
-                                name: `${doc.name}`, type: `${doc.type}`, full_name: `${doc.employee.name} ${doc.employee.last_name} ${doc.employee.second_name}`, profile_picture: `${doc.profile_picture}` 
+                                name: `${doc.name}`, 
+                                type: `${doc.type}`, 
+                                full_name: `${doc.employee.name} ${doc.employee.last_name} ${doc.employee.second_name}`, 
+                                profile_picture: `${doc.profile_picture}` 
                               })
 
 

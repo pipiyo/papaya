@@ -6,14 +6,6 @@ class Nav extends Component {
     super()
   }
 
-
-/*
-      let notification;
-      (this.props.notification == null) ? notification = "" : notification = <Notification />
-*/
-
-
-
   render() {
       return (
           <nav className="nav-config">
