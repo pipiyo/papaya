@@ -14,6 +14,7 @@ import IndicadorSubServicio from './routes/IndicadorSubServicioRoutes'
 import Reclamo from './routes/ReclamoRoutes'
 import Informe from './routes/InformeRoutes'
 import InformeRocha from './routes/InformeRochaRoutes'
+import AddRocha from './routes/AddRochaRoutes'
 import Notificacion from './routes/NotificacionRoutes'
 import DetalleInforme from './routes/DetalleInformeRoutes'
 import Bodega from './routes/BodegaRoutes'
@@ -43,6 +44,7 @@ ReactDOM.render((
         	<Route path="actividad/:rocha/:tipo" component={Servicio}/>
         	<Route path="informe/:area" component={Informe}/>
             <Route path="informe-rochas" component={InformeRocha}/>
+            <Route path="ingreso-proyecto" component={AddRocha}/>
             <Route path="actualizar-actividad/:id" component={UpdateServicio}/>
             <Route path="reclamo" component={Reclamo}/>
             <Route path="notificacion" component={Notificacion}/>
