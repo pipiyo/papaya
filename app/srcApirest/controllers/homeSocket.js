@@ -42,7 +42,6 @@ module.exports = (io) => {
 		  	if (err) console.log(err)
 			return n
 		  }).then( (n) => {
-		  	
 		  		Notification.
 				  find({ 'read_by': { $ne: global.userName } }).
 				  count().
@@ -51,7 +50,6 @@ module.exports = (io) => {
 				  		let user = (global.token) ? decodeToken( JSON.stringify( global.token ) ) : { name: null, profile_picture: null }
 				  		callback(n, user, number)
 				  })
-
 		  })
 	  })
 

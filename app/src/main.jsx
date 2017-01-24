@@ -2,7 +2,7 @@ import React from 'react'
 
 import ReactDOM from 'react-dom' 
 
-import Perf from 'react-addons-perf'
+//import Perf from 'react-addons-perf'
 
 import Profile from './routes/ProfileRoutes'
 import Login from './routes/LoginRoutes'
@@ -31,7 +31,7 @@ import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-route
 
 window.__myapp_container = document.getElementById('app')
 
-window.Perf = Perf
+//window.Perf = Perf
 
 ReactDOM.render((
   <Router history={browserHistory}>
