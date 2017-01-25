@@ -51,6 +51,8 @@ require('./srcApirest/controllers/rochaSocket')(io)
 require('./srcApirest/controllers/bodegaSocket')(io)
 
 require('./srcApirest/controllers/productoSocket')(io)
+
+require('./srcApirest/controllers/proyectoSocket')(io)
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))

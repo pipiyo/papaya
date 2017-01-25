@@ -816,6 +816,18 @@ a.external-link, .external-link a {
                 margin-right: 20px;
             }
         }
+        &.sem-ext{
+            width: 66.66%;
+            @include vertical-tablet-down {
+                width: 50%;
+            }
+            @include phablet-down {
+                width: 100%;
+            }
+        }
+        &.ext{
+            width: 100%;
+        }
         @include vertical-tablet-down {
             width: 50%;
         }

@@ -1,6 +1,6 @@
 import React from 'react'
-// import Title from './Title'
-// import Form from './Form'
+import Title from './Title'
+import Form from './Form'
 
 class AddRochaIndex extends React.Component {
 
@@ -10,7 +10,17 @@ class AddRochaIndex extends React.Component {
   render() {
       return (         
         <div>
-          <h1>Add Rocha</h1>
+          <Title 
+          obj={this.props.obj}
+          />
+          <Form
+          obj={this.props.obj}
+          renderRut={this.props.renderRut}
+          renderTotal={this.props.renderTotal}
+          addRocha={this.props.addRocha}  
+          renderFechaInicio={this.props.renderFechaInicio} 
+          renderFechaEntrega={this.props.renderFechaEntrega}
+          />
         </div>
       )
 
