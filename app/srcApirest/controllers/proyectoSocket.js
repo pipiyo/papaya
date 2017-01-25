@@ -1,4 +1,5 @@
 const pool = require('../models/connection')
+const decodeToken = require('./decodeToken')
 
 module.exports = (io) => {
 
@@ -25,16 +26,19 @@ module.exports = (io) => {
   })
    
   /* Ingresar producto */
-  socket.on('addRocha', (proyecto,callback) => {
+  socket.on('addRocha', (proyecto, token, callback) => {
+
+    let user = decodeToken(token)
+
     let producto = {  
                     CODIGO_PROYECTO: proyecto.codigo,
                     RUT_CLIENTE: proyecto.rut, 
                     NOMBRE_CLIENTE: proyecto.cliente, 
                     OBRA: proyecto.obra,
-                    MONTO: proyecto.Monto,
-                    EJECUTIVO: proyecto.Ejecutivo,
-                    FECHA_INGRESO: proyecto.FechaInicio,
-                    FECHA_ENTREGA: proyecto.FechaEntrega,    
+                    MONTO: proyecto.monto,
+                    EJECUTIVO: proyecto.ejecutivo,
+                    FECHA_INGRESO: proyecto.fechaInicio,
+                    FECHA_ENTREGA: proyecto.fechaEntrega,    
                     CONTACTO : proyecto.contacto,
                     TELEFONO: proyecto.telefono,
                     MAIL:proyecto.mail,
@@ -51,6 +55,7 @@ module.exports = (io) => {
                     DESCUENTO2: proyecto.descuento2,
                     DEPARTAMENTO_CREDITO: proyecto.linea,
                     DEPARTAMENTO: proyecto.departamento,
+                    CODIGO_USUARIO: user.name,
                     DIRECCION_FACTURACION:proyecto.direccionObra
                   }
 

@@ -30,10 +30,11 @@ let AddRochaStore = Reflux.createStore({
     })
   },
   addRocha: function(ev){
-    console.log("Hola")
+    let numero =  document.getElementById('cliente').options.selectedIndex
+
     let proyecto = {
       codigo: ev.target.elements['codigo'].value,
-      cliente: ev.target.elements['cliente'].text,
+      cliente: ev.target.elements['cliente'].options[numero].text,
       rut: ev.target.elements['rut'].value,
       obra: ev.target.elements['obra'].value,
       direccionObra: ev.target.elements['direccion-obra'].value,
@@ -58,7 +59,7 @@ let AddRochaStore = Reflux.createStore({
       iva: ev.target.elements['iva'].value,
       departamento: ev.target.elements['departamento'].value  
     }
-    socket.emit('addRocha', proyecto, (n) => {
+    socket.emit('addRocha', proyecto, JSON.stringify( localStorage.getItem('token')), (n) => {
       ev.target.elements['codigo'].value = ""
       ev.target.elements['rut'].value = ""
       ev.target.elements['obra'].value = ""
