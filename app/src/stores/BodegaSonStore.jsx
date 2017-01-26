@@ -1,14 +1,16 @@
 import React from 'react'
 import Reflux from 'reflux'
-import { Link } from 'react-router'
-import { browserHistory } from 'react-router'
+
+import { Link, browserHistory } from 'react-router'
+import _ from 'lodash'
+
 import BodegaSonActions from '../actions/BodegaSonActions'
 import Env from '../Config'
 import io from 'socket.io-client'
 
 import Item from '../components/bodega/Item.jsx'
 
-const socket = io.connect( `${Env.url}bodega` )
+const socket = io.connect( `${Env.url}bodega-hijos` )
 
 let BodegaSonStore = Reflux.createStore({
   listenables: [BodegaSonActions],
@@ -18,7 +20,29 @@ let BodegaSonStore = Reflux.createStore({
     total: 0,
     filtro:{limitA:0, limitB:5, codigo:null, descripcion:null, categoria: null, quiebre: false, desactivado: false, bodega: false}
   },
-  renderReset: function(){
+
+  init: function() {
+
+  },
+
+  getContent: function() {
+
+  },
+
+  getInitialState: function() {
+
+    //return this.obj
+  },
+
+
+  renderBodegaHijos: function(){
+
+  },
+
+
+  renderReset: function(id){
+
+
     this.obj.filtro.limitA = 0
     this.obj.renderItem = []
     this.obj.renderBodega = ''
@@ -27,6 +51,19 @@ let BodegaSonStore = Reflux.createStore({
     this.obj.filtro.quiebre = false
     this.obj.filtro.desactivado = false 
     this.obj.filtro.bodega = false 
+
+
+
+    socket.emit('getBodegaHijos',id, this.obj.filtro, ( productos, cuenta ) => {
+      this.obj.total = cuenta[0].total
+      _.map( productos, (producto) => {
+        _.map( producto, (p) => {
+              this.obj.renderItem.push(<Item key={p.CODIGO_PRODUCTO} bodega={p}  />)
+        })
+      })  
+      this.trigger(this.obj) 
+    })
+
   },
   renderBodega: function(id){
 

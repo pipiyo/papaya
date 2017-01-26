@@ -1,7 +1,7 @@
 import React from 'react'
 import Reflux from 'reflux'
-import { Link } from 'react-router'
-import { browserHistory } from 'react-router'
+import { Link, browserHistory } from 'react-router'
+
 import BodegaActions from '../actions/BodegaActions'
 import Env from '../Config'
 import io from 'socket.io-client'

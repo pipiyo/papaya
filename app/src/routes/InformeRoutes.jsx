@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
-import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
 import InformeActions from '../actions/InformeActions'
@@ -138,7 +137,7 @@ export default class InformeRoutes extends Component {
       )
     }else{
       return (
-      <div><h1>Cargando ...</h1></div>
+      <div><h1>Cargan3 ...</h1></div>
       )
     }
   }

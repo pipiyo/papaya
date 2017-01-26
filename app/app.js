@@ -50,6 +50,8 @@ require('./srcApirest/controllers/rochaSocket')(io)
 
 require('./srcApirest/controllers/bodegaSocket')(io)
 
+require('./srcApirest/controllers/bodegaHijosSocket')(io)
+
 require('./srcApirest/controllers/productoSocket')(io)
   
 app.all('*', (request, response, next) => {
