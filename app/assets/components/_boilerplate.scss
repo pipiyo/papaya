@@ -1841,3 +1841,100 @@ a.external-link, .external-link a {
         }
     }
 }
+
+/* Module login */
+
+.module-login{
+   
+    height: 100vh;
+    width: 100%;
+    display: table;
+    position: relative;
+    h1{
+        margin: 0;
+        padding: 0;
+    }
+    .fondo{
+        background: url(images/fondos/login.jpg);
+        filter: blur(3px) grayscale(80%);
+        position: absolute;
+        background-size: cover;
+        border: solid;
+        height: 100%;
+        width: 100%;
+    }
+    .item-login{
+        filter: blur(0px);
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        .box-login{
+            width: 800px;
+            margin: auto;
+            display: table;
+            @include phablet-down {
+                width: 300px;
+            }
+            background: $blanco;
+            div{
+                display: table-cell;
+                &.box{
+                    width: 400px;
+                    vertical-align: top;
+                    @include phablet-down {
+                        width: 300px;
+                    }
+                    h1{
+                        padding: 1em;
+                        color: rgb(85, 85, 85);
+                    }
+                     input{
+                        display: block;
+                        @include reset-appearance;
+                    }
+                    input[type="text"],select, input[type="number"]{
+                        border:solid 1px $gris;
+                        padding: .5em .3em;
+                        width: 200px;
+                        border-radius: 3px;
+                        margin: 0 auto 1em auto;
+                        background-color: rgb(240, 240, 240);
+                        @include active-state{
+                            border: solid 1px $color_valido;
+                        }
+                        &:required{
+                            border:solid 1px $gris; 
+                            box-shadow:none;
+                        }
+                        &:invalid{
+                            border:solid 1px $gris;
+                            box-shadow:none; 
+                        }    
+                    }
+                    button{
+                        width: 200px;
+                        color: $blanco;
+                        padding: .5em;
+                        margin-bottom: 1em;
+                        border:solid 1px $gris;
+                        border-radius: 3px;
+                        background: rgb(213, 12, 34);
+                        @include active-state{
+                            cursor: pointer;
+                            background: $color_secundario_light;
+                        }
+                        &:disabled{
+                            background: $gris_dark;
+                        }
+                    }
+                }
+                &.img{
+                    width: 400px;
+                    @include phablet-down {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

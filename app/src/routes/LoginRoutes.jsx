@@ -44,9 +44,19 @@ export default class LoginRoutes extends React.Component {
 
   render() {
       return (
-            <div>
-              <h1>Login</h1>
-              <LoginFrom onSubmit={ this.userFormSubmit.bind(this) } />
+            <div class="module-login">
+              <div class="fondo"></div>
+              <div class="item-login">
+                <div class="box-login">
+                  <div class="img">
+                    <img src="http://lorempixel.com/400/500/" alt="img" />
+                  </div>
+                  <div class="box">
+                    <h1>Te damos la bienvenida a Papaya, el sistema de gestión.</h1>
+                    <LoginFrom onSubmit={ this.userFormSubmit.bind(this) } />
+                  </div>
+                </div>
+              </div>
             </div>
       )
   }
