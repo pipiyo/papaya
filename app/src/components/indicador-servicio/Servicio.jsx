@@ -1,30 +1,28 @@
 import React from 'react'
 import Item from './Item'
-import IndicadorSubServicioActions from '../../actions/IndicadorSubServicioActions'
+import IndicadorServicioActions from '../../actions/IndicadorServicioActions'
 
-class SubServicio extends React.Component {
+class Servicio extends React.Component {
 
   constructor() {
     super()
   }
   componentDidMount(){
-    IndicadorSubServicioActions.renderAreaServicio(this.props.area)
-    IndicadorSubServicioActions.renderButton(this.props.total[0].total,this.props.datos.length)
+    IndicadorServicioActions.renderAreaServicio(this.props.area)
+    IndicadorServicioActions.renderButton(this.props.total[0].total,this.props.datos.length)
   }
   componentDidUpdate(nextProps){
-    IndicadorSubServicioActions.renderAreaServicio(nextProps.area, this.props.area)
-    IndicadorSubServicioActions.renderButton(nextProps.total[0].total,nextProps.datos.length)
+    IndicadorServicioActions.renderAreaServicio(nextProps.area, this.props.area)
+    IndicadorServicioActions.renderButton(nextProps.total[0].total,nextProps.datos.length)
   }
   render() {
       return (
-        <div class="module-table" data-col="once" data-area="ok">
+        <div class="module-table" data-col="nueve" data-area="ok">
           <div class="module-table-container">
               <div class="module-table-item">Rocha</div>
               <div class="module-table-item">Cliente</div>
               <div class="module-table-item">Ejecutivo</div>
               <div class="module-table-item">Actividad</div>
-              <div class="module-table-item">Descripción</div>
-              <div class="module-table-item">Sub Actividad</div>
               <div class="module-table-item">Descripción</div>
               <div class="module-table-item">Fecha I</div>
               <div class="module-table-item">Fecha E</div>
@@ -44,4 +42,4 @@ class SubServicio extends React.Component {
 
 }
 
-export default SubServicio
+export default Servicio

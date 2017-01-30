@@ -1535,6 +1535,7 @@ a.external-link, .external-link a {
 
 
     &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
+    &[data-col="nueve"]{.module-table-container{width:calc(9 * 200px);}}
     .module-table-container{
         display: flex;
         flex-wrap: wrap;
