@@ -270,17 +270,39 @@ a.external-link, .external-link a {
 /**** frame ****/
 /**** frame ****/
 
-.frame{
-    display: table;
-    width: 100%;
-    height: 100%;
+#app{
+    min-height: 100%;
+    position: relative;
+    .index{
+        overflow: hidden;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+        background: $blanco;
+        &:before{
+            content: "";
+            width: 250px;
+            height: 100%;
+            background: $color_corporativo_dark;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
     @include vertical-tablet-down {
         display: block;
+        .index{
+            min-height: 100%;
+            &:before{
+                display: none;
+            }
+        }
     }
     .header{
-        display: table-cell;
+        float: left;
         vertical-align: top;
         width: 250px;
+        min-width: 250px;
         height: 100%;
         @include vertical-tablet-down {
             width: 100%;
@@ -289,9 +311,9 @@ a.external-link, .external-link a {
         }
     }
     .main{
-        display: table-cell;
+        float: left;
         height: 100%;
-        vertical-align: top;
+        background: $blanco;
         width: calc(100% - 250px);
         @include vertical-tablet-down {
             width: 100%;
@@ -1390,10 +1412,9 @@ a.external-link, .external-link a {
                 font-weight: normal;
                 margin: 0;
                 width: 100%;
-                padding-right: 1em;
+                padding-right: 2.5em;
                 position:relative;
                 color: $blanco;
-                padding: 0;
                 &.atrasado{
                     &:before{
                         content: "\f06a";
@@ -1412,6 +1433,9 @@ a.external-link, .external-link a {
                 top: 13px;
                 color: $blanco;
                 right: 10px;
+                &.a{
+                    right: 30px; 
+                }
                 &:hover{
                     color: $color_rochas;
                     cursor: pointer;
@@ -1496,25 +1520,10 @@ a.external-link, .external-link a {
 
 .module-table{
     border:solid 1px $gris;
-    overflow:scroll;
+    overflow-x:scroll;
     margin: auto;
-    max-width: 1000px;
-    @include small-desktop-down{
-        max-width: 550px;
-        max-height: 300px;
-    }
-    @include vertical-tablet-down {
-        max-width: calc(100% - 1em);
-        max-height: 300px;
-    }
-    @include desktop-only{
-        max-width: 900px;
-        max-height: 300px;
-    }
-    @include desktop-max{
-        max-width: 1200px;
-        max-height: 500px;
-    }
+    width: calc(100% - 1em);
+    max-width: 100%;
     &.abastecimiento{.module-table-container{.module-table-item{background:$color_abastecimiento;padding: .5em;}}}
     &.sillas{.module-table-container{.module-table-item{background:$color_sillas;color:$blanco;padding: .5em;}}}
     &.produccion{.module-table-container{.module-table-item{background:$color_produccion;color:$blanco;padding: .5em;}}}
@@ -1537,7 +1546,6 @@ a.external-link, .external-link a {
             }
         }
     }
-    &[data-col="once"]{.module-table-content{width:calc(11 * 200px);}}
     .module-table-content{
         display: flex;
         flex-wrap: wrap;
@@ -1668,6 +1676,167 @@ a.external-link, .external-link a {
         }
         &.hidden{
             display: none;
+        }
+    }
+}
+
+/* Module Cuadro Rocha */
+/* Module Cuadro Rocha */
+/* Module Cuadro Rocha */
+/* Module Cuadro Rocha */
+
+.module-cuadro-rocha{
+    border:solid 1px $gris;
+    overflow-x:scroll;
+    width: calc(100% - 1em);
+    margin: auto;
+    .info{
+        display: flex;
+        &.title-proyecto{
+            .name{
+                background: $color_planificacion;
+                color: $blanco;
+                padding: 3px 2px 3px 2px;
+                p{
+                    font-size: $fontRegularBig;
+                }
+            }
+            .date, .percentage, .day{
+                background: $color_planificacion;
+                color: $blanco;  
+            }
+        }
+        &.proyecto{
+            width: 100%;
+            .name{
+                padding: 3px 2px 3px 2px;
+                p{
+                    font-size: $fontRegularBig;
+                }
+            }
+        }
+        &.rocha{
+            width: 100%;
+            .name{
+                padding: 3px 2px 3px 12px;
+                p{
+                    font-size: $fontRegular;
+                }
+            }
+        }
+        &.actividad{
+            width: 100%;;
+            .name{
+                padding: 3px 2px 3px 22px;
+                p{
+                    font-size: $fontSmall;
+                }
+            }
+        }
+        &.subactividad{
+            width: 100%;
+            .name{
+                padding: 3px 2px 3px 32px;
+                p{
+                    font-size: $fontTiny;
+                }
+            }
+        }
+        .name{
+            width: 300px;
+            min-width: 300px;
+            position: relative;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            &:after{
+                content: "\f106";
+                font-family: FontAwesome;
+                font-weight: normal;
+                position: absolute;
+                font-size: 18px;
+                right: .5em;
+                top: 4px;
+            }
+            &.active{
+                &:after{
+                    content: "\f107";
+                }
+            }
+            &.none{
+                &:after{
+                    content: "";
+                }
+            }
+        }
+        .date{
+            padding: 3px 2px 3px 2px;
+            width: 100px;
+            min-width: 100px;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            p{
+                text-align: center;
+                font-size: $fontSmall;
+            }
+        }
+        .percentage{
+            padding: 3px 2px 3px 2px;
+            width: 50px;
+            min-width: 50px;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            p{
+                text-align: center;
+                font-size: $fontSmall;
+            }
+        }
+        .day{
+            padding: 3px 2px 3px 2px;
+            width: 20px;
+            min-width: 20px;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            p{
+                text-align: center;
+                font-size: $fontSmall;
+            }
+            &.ok{
+                background: $negro;
+                border-right: solid 1px $negro;
+                &.proyecto{
+                    background: $color_rochas;
+                    border-right: solid 1px $color_rochas;  
+                }
+                &.abastecimiento{
+                    background: $color_abastecimiento;
+                    border-right: solid 1px $color_abastecimiento;  
+                }
+                &.produccion{
+                    background: $color_produccion;
+                    border-right: solid 1px $color_produccion;  
+                }
+                &.despacho{
+                    background: $color_despacho;
+                    border-right: solid 1px $color_despacho;  
+                }
+                &.desarrollo{
+                    background: $color_dam;
+                    border-right: solid 1px $color_dam;  
+                }
+                &.instalaciones{
+                    background: $color_instalaciones;
+                    border-right: solid 1px $color_instalaciones;  
+                }
+                &.sillas{
+                    background: $color_sillas;
+                    border-right: solid 1px $color_sillas;  
+                }
+                &.planificacion{
+                    background: $color_planificacion;
+                    border-right: solid 1px $color_planificacion;  
+                }
+
+            }
         }
     }
 }

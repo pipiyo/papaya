@@ -11,7 +11,7 @@ class Home extends React.Component {
 
   render() {
       return (
-        <div className="frame">
+        <div className="frame index">
           <Header 
             menu={this.props.obj.menu} 
             submenu={this.props.obj.subMenus} 

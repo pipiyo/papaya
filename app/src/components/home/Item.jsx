@@ -18,7 +18,7 @@ class ItemArea extends Component {
                      return (
                               <li 
                                 data-subclick="ok" 
-                                id={`subMenu${i}`} 
+                                id={`subMenu${item.name.replace(" ", "")}${i}`} 
                                 onClick={this.props.activeMenuOnClick} 
                                 key={i}>
                                   <Link 
