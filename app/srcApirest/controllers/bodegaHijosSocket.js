@@ -12,6 +12,7 @@ module.exports = (io) => {
     
     let promesa = new Promise( (resolve, reject) => {  
 //////////////////
+
         let q_codigo = ' and CODIGO_PRODUCTO like "%'+id+'%"'
         let q_descripcion = ''
         let q_categoria = ''

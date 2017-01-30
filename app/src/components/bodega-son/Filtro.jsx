@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class Filtro extends React.Component {
+class Filtro extends Component {
   constructor() {
     super()
   }

@@ -34,27 +34,26 @@ let BodegaSonStore = Reflux.createStore({
     //return this.obj
   },
 
-
-  renderBodegaHijos: function(){
-
+  renderBodegaHijos: function (idProducto) {
+    this.cleanState()
+    this.getBodegaHijos(idProducto)
   },
-
-
-  renderReset: function(id){
-
-
-    this.obj.filtro.limitA = 0
+  renderViewMore: function(idProducto){
+    this.obj.filtro.limitA += 5
+    this.getBodegaHijos(idProducto)
+  },
+  cleanState: function(){
     this.obj.renderItem = []
     this.obj.renderBodega = ''
+    this.obj.filtro.limitA = 0
     this.obj.filtro.codigo = null
     this.obj.filtro.descripcion = null 
     this.obj.filtro.quiebre = false
     this.obj.filtro.desactivado = false 
     this.obj.filtro.bodega = false 
-
-
-
-    socket.emit('getBodegaHijos',id, this.obj.filtro, ( productos, cuenta ) => {
+  },
+  getBodegaHijos: function(idProducto){
+    socket.emit('getBodegaHijos',idProducto, this.obj.filtro, ( productos, cuenta ) => {
       this.obj.total = cuenta[0].total
       _.map( productos, (producto) => {
         _.map( producto, (p) => {
@@ -63,10 +62,28 @@ let BodegaSonStore = Reflux.createStore({
       })  
       this.trigger(this.obj) 
     })
-
+  },
+  renderButton: function(rows,sub){
+    if(document.getElementById("view-more")){
+      if(rows > sub){
+        document.getElementById("view-more").classList.remove("hidden")
+      }else{
+        document.getElementById("view-more").classList.add("hidden")
+      }
+    }
+  }
+/*
+  renderReset: function(id){
+    this.obj.filtro.limitA = 0
+    this.obj.renderItem = []
+    this.obj.renderBodega = ''
+    this.obj.filtro.codigo = null
+    this.obj.filtro.descripcion = null 
+    this.obj.filtro.quiebre = false
+    this.obj.filtro.desactivado = false 
+    this.obj.filtro.bodega = false 
   },
   renderBodega: function(id){
-
   	socket.emit('allBodegaNewSon',id, this.obj.filtro, (n) => {
       this.obj.renderBodega = n.productos
       this.obj.total = n.cuenta
@@ -85,36 +102,18 @@ let BodegaSonStore = Reflux.createStore({
       this.renderItem()
     })
   },
-  renderViewMore: function(id){
-    this.obj.filtro.limitA = this.obj.filtro.limitA + 5
-    this.renderBodega(id)
-  },
   renderItem: function(){
     let i, link
-    
-
     for(i=0;this.obj.renderBodega.length > i ;i++){
-
       let link = []
-     
       // link.push(
       //   <div key={`a${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><Link class="icon-informe" to={`/home/producto/${this.obj.renderBodega[i].CODIGO_PRODUCTO}`}><i class="fa fa-eye" aria-hidden="true"></i></Link></div>
       // )
-
       this.obj.renderItem.push(<Item key={this.obj.renderBodega[i].CODIGO_PRODUCTO} link={link} bodega={this.obj.renderBodega[i]}  />)
     }
     this.trigger(this.obj) 
   },
-  renderButton: function(rows,sub){
-    if(document.getElementById("view-more")){
-      if(rows > sub){
-        document.getElementById("view-more").classList.remove("hidden")
-      }else{
-        document.getElementById("view-more").classList.add("hidden")
-      }
-    }
-  }
-
+*/
 })
 
 export default BodegaSonStore
