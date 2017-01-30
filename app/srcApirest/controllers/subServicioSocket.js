@@ -43,6 +43,9 @@ module.exports = (io) => {
 
   /* Proyecto, Servicio, Sub-servicio */
   socket.on('allProyectoSubServicio', (data,area,callback) => {
+    
+    let promesa = new Promise( (resolve, reject) => {  
+
       let q_codigo = ""
       let q_vendedor = ""
       let q_categoria = ""
@@ -91,11 +94,12 @@ module.exports = (io) => {
           connection.query(query+query1+query2, (err, rows, fields) => {
               connection.release()
               if (!err)
-                callback({ sub:rows[0], total:rows[1], ejecutivo:rows[2]})
+                resolve( callback({ sub:rows[0], total:rows[1], ejecutivo:rows[2]}) )
               else
-                console.log('Error ' + err)
+                reject( console.log('Error ' + err) )
           }) 
       })
+    }).catch( rason => console.log(rason) )
   })
 
   /* Search Sub Servicio */
