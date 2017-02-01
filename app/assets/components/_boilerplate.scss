@@ -1400,6 +1400,9 @@ a.external-link, .external-link a {
     .item{
         width: 50%;
         padding: 1em;
+        &.ext{
+            width: 100%;
+        }
         @include vertical-tablet-down {
             width: 100%;
         }
@@ -1445,9 +1448,20 @@ a.external-link, .external-link a {
         .content-informe{
             border: solid #0B3861 1px;
             padding: 1em;
+            &.ext{
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0 1em 1em 1em;
+            }
             h5{
                 margin: 0;
                 padding: 0;
+            }
+            h4{
+                margin: .5em 0 0 0;
+                font-size: $fontBig;
+                width: 100%;
+                text-decoration: underline;
             }
             p{
                 margin: 0;
@@ -1460,6 +1474,13 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
+                }
+                &.ext{
+                    width: 25%;
+                    margin-top: .5em;
+                    @include vertical-tablet-down {
+                        width: 100%;
+                    }
                 }          
             }
         }
@@ -1524,6 +1545,7 @@ a.external-link, .external-link a {
     margin: auto;
     width: calc(100% - 1em);
     max-width: 100%;
+    .module-table-container{.module-table-item{background:#7384AB;padding: .5em;}}
     &.abastecimiento{.module-table-container{.module-table-item{background:$color_abastecimiento;padding: .5em;}}}
     &.sillas{.module-table-container{.module-table-item{background:$color_sillas;color:$blanco;padding: .5em;}}}
     &.produccion{.module-table-container{.module-table-item{background:$color_produccion;color:$blanco;padding: .5em;}}}
@@ -1536,6 +1558,9 @@ a.external-link, .external-link a {
 
     &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
     &[data-col="nueve"]{.module-table-container{width:calc(9 * 200px);}}
+    &[data-col="ocho"]{.module-table-container{width:calc(8 * 200px);}}
+    &[data-col="siete"]{.module-table-container{width:calc(7 * 200px);}}
+    &[data-col="seis"]{.module-table-container{width:calc(6 * 200px);}}
     .module-table-container{
         display: flex;
         flex-wrap: wrap;
@@ -1551,6 +1576,16 @@ a.external-link, .external-link a {
         display: flex;
         flex-wrap: wrap;
         border-bottom: solid 1px $gris;
+        &.adquisiciones{background:$color_abastecimiento;order:1;}
+        &.produccion{background:$color_produccion;order:2;color:$blanco;}
+        &.desarrollo{background:$color_desarrollo;order:3;}
+        &.sillas{background:$color_sillas;order:4;}
+        &.despacho{background:$color_despacho;order:5;}
+        &.instalacion{background:$color_instalaciones;order:6;}
+        &.oc{background:$color_rochas;order:7;}
+        &.fi{background:$color_comercial;order:8;}
+        &.sistema{background:$color_sistema;order:9;}
+        &.bodega{background:#79A9B5;order:9;}
         .module-table-content-item{
             width: 200px;
             font-size: $fontTiny;

@@ -117,7 +117,7 @@ let IndicadorServicioStore = Reflux.createStore({
   },
   renderViewMore: function(){
     this.obj.filtro.limit = this.obj.filtro.limit + 100
-    this.renderSubServicio(this.obj.area)
+    this.renderServicio(this.obj.area)
   },
   renderButton: function(rows,sub){
     if(document.getElementById("btn-view")){
