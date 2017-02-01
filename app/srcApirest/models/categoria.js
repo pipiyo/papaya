@@ -9,16 +9,15 @@ let Schema = mongoose.Schema
 let categoriaSchema = new Schema({
 	_id: Number,
 	name: String,
-	posicion: {
-		frente: Boolean,
-		cuerpo: Boolean
-	},
+	frente: Boolean,
 	proovedor: Boolean
 })
 
 let categoria = mongoose.model('categoria', categoriaSchema)
 
 module.exports = categoria
+
+
 
 
 {

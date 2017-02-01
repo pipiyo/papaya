@@ -6,338 +6,323 @@ mongoose.connect("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
-let colorSchema = new Schema({
+let cantoSchema = new Schema({
 	_id: Number,
 	name: String,
 	code: Number
 })
 
-let color = mongoose.model('color', colorSchema)
+let canto = mongoose.model('canto', cantoSchema)
 
-module.exports = color
+module.exports = canto
 
 {
 	_id: 1,
 	name: 'Blanco',
-	code: 1
+	code: a
 },
 {
 	_id: 2,
-	name: 'Gris Humo',
-	code: 2
+	name: 'Granadillo',
+	code: b
 },
 {
 	_id: 3,
-	name: 'Grafito',
-	code: 3
+	name: 'Coigue Chocolate',
+	code: c
 },
 {
 	_id: 4,
 	name: 'Peral',
-	code: 4
+	code: d
 },
 {
 	_id: 5,
-	name: 'Aluminio',
-	code: 5
+	name: 'Almendra',
+	code: e
 },
 {
 	_id: 6,
-	name: 'Vison',
-	code: 6
+	name: 'Gris Humo',
+	code: f
 },
 {
 	_id: 7,
-	name: 'Coigue Chocolate',
-	code: 7
+	name: 'Grafito',
+	code: g
+},
+{
+	_id: 8,
+	name: 'Aluminio',
+	code: h
 },
 {
 	_id: 9,
-	name: 'Cerezo basic',
-	code: 8
+	name: 'Wengue',
+	code: i
 },
 {
 	_id: 10,
-	name: 'Vainilla',
-	code: 1
+	name: 'Nogal Clásico',
+	code: j
 },
 {
 	_id: 11,
-	name: 'White Oak',
-	code: 2
+	name: 'Cypress Camel',
+	code: k
 },
 {
 	_id: 12,
-	name: 'Cypress Camel',
-	code: 3
+	name: 'White Oak',
+	code: l
 },
 {
 	_id: 13,
-	name: 'Roble Lineal',
-	code: 4
+	name: 'Maple',
+	code: m
 },
 {
 	_id: 14,
-	name: 'Noce Caffe Latte',
-	code: 5
-},
-{
-	_id: 15,
-	name: 'Wengue',
-	code: 6
+	name: 'Peral',
+	code: n
 },
 {
 	_id: 16,
-	name: 'Perillo',
-	code: 7
+	name: 'Vison',
+	code: o
 },
 {
 	_id: 17,
-	name: 'Maple Fusion',
-	code: 8
+	name: 'Maple claro',
+	code: p
 },
 {
 	_id: 18,
-	name: 'Haya 1750',
-	code: 9
+	name: 'Caravalo',
+	code: q
 },
 {
 	_id: 19,
-	name: 'Wengue, Frente Wengue 1',
-	code: 1
+	name: 'Acacia',
+	code: r
 },
 {
 	_id: 20,
-	name: 'Wengue, Frente Wengue 2',
-	code: 2
+	name: 'Teñido',
+	code: s
 },
 {
 	_id: 21,
-	name: 'Cedro, Frente Miel 1',
-	code: 3
+	name: 'hilat glock rojo',
+	code: T
 },
 {
 	_id: 22,
-	name: 'Cedro, Frente Miel 2',
-	code: 4
+	name: 'hilat glock azul lago',
+	code: U
 },
 {
 	_id: 23,
-	name: 'Haya Rosada, Frente Tinta Natural',
-	code: 5
+	name: 'hilat glock caribe',
+	code: V
 },
 {
 	_id: 24,
-	name: 'hilat glock rojo',
-	code: 1
+	name: 'hilat glock azul',
+	code: W
 },
 {
 	_id: 25,
-	name: 'hilat glock azul lago',
-	code: 2
+	name: 'hilat glock mango',
+	code: X
 },
 {
 	_id: 26,
-	name: 'hilat glock caribe',
-	code: 3
+	name: 'hilat glock verde pino',
+	code: Y
 },
 {
 	_id: 27,
-	name: 'hilat glock azul',
-	code: 4
+	name: 'hilat glock esmeralda',
+	code: Z
 },
 {
 	_id: 28,
-	name: 'hilat glock mango',
-	code: 5
+	name: 'hilat glock manzana',
+	code: A1
 },
 {
 	_id: 29,
-	name: 'hilat glock verde pino',
-	code: 6
+	name: 'hilat glock caoba',
+	code: B1
 },
 {
 	_id: 30,
-	name: 'hilat glock esmeralda',
-	code: 7
+	name: 'hilat glock gris perla',
+	code: C1
 },
 {
 	_id: 31,
-	name: 'hilat glock manzana',
-	code: 8
+	name: 'hilat glock plomo',
+	code: D1
 },
 {
 	_id: 32,
-	name: 'hilat glock caoba',
-	code: 9
+	name: 'hilat glock negro',
+	code: E1
 },
 {
 	_id: 33,
-	name: 'hilat glock gris perla',
-	code: 10
+	name: 'hilat escorial plus navy',
+	code: F1
 },
 {
 	_id: 34,
-	name: 'hilat glock plomo',
-	code: 11
+	name: 'hilat escorial plus arrecife',
+	code: G1
 },
 {
 	_id: 35,
-	name: 'hilat glock negro',
-	code: 12
+	name: 'hilat escorial plus azul re',
+	code: H1
 },
 {
 	_id: 36,
-	name: 'hilat escorial plus navy',
-	code: 13
+	name: 'hilat escorial plus azul caribe',
+	code: I1
 },
 {
 	_id: 37,
-	name: 'hilat escorial plus arrecife',
-	code: 14
+	name: 'hilat escorial plus azul lago',
+	code: J1
 },
 {
 	_id: 38,
-	name: 'hilat escorial plus azul re',
-	code: 15
+	name: 'hilat escorial plus blue',
+	code: K1
 },
 {
 	_id: 39,
-	name: 'hilat escorial plus azul caribe',
-	code: 16
+	name: 'hilat escorial plus mango',
+	code: L1
 },
 {
 	_id: 40,
-	name: 'hilat escorial plus azul lago',
-	code: 17
+	name: 'hilat escorial plus azafran',
+	code: M1
 },
 {
 	_id: 41,
-	name: 'hilat escorial plus blue',
-	code: 18
+	name: 'hilat escorial plus naranja',
+	code: N1
 },
 {
 	_id: 42,
-	name: 'hilat escorial plus mango',
-	code: 19
+	name: 'hilat escorial plus scarlati',
+	code: O1
 },
 {
 	_id: 43,
-	name: 'hilat escorial plus azafran',
-	code: 20
+	name: 'hilat escorial plus tomate',
+	code: P1
 },
 {
 	_id: 44,
-	name: 'hilat escorial plus naranja',
-	code: 21
+	name: 'hilat escorial plus burdeos',
+	code: Q1
 },
 {
 	_id: 45,
-	name: 'hilat escorial plus scarlati',
-	code: 22
+	name: 'hilat escorial plus vino',
+	code: R1
 },
 {
 	_id: 46,
-	name: 'hilat escorial plus tomate',
-	code: 23
+	name: 'hilat escorial plus almendra',
+	code: S1
 },
 {
 	_id: 47,
-	name: 'hilat escorial plus burdeos',
-	code: 24
+	name: 'hilat escorial plus tabaco',
+	code: T1
 },
 {
 	_id: 48,
-	name: 'hilat escorial plus vino',
-	code: 25
+	name: 'hilat escorial plus caoba',
+	code: U1
 },
 {
 	_id: 49,
-	name: 'hilat escorial plus almendra',
-	code: 26
+	name: 'hilat escorial plus gris mouse',
+	code: V1
 },
 {
 	_id: 50,
-	name: 'hilat escorial plus tabaco',
-	code: 27
+	name: 'hilat escorial plus gris perla',
+	code: W1
 },
 {
 	_id: 51,
-	name: 'hilat escorial plus caoba',
-	code: 28
+	name: 'hilat escorial plus gris raton',
+	code: X1
 },
 {
 	_id: 52,
-	name: 'hilat escorial plus gris mouse',
-	code: 29
+	name: 'hilat escorial plus gris acero',
+	code: Y1
 },
 {
 	_id: 53,
-	name: 'hilat escorial plus gris perla',
-	code: 30
+	name: 'hilat escorial plus gris nevado',
+	code: Z1
 },
 {
 	_id: 54,
-	name: 'hilat escorial plus gris raton',
-	code: 31
+	name: 'hilat escorial plus negro',
+	code: A2
 },
 {
 	_id: 55,
-	name: 'hilat escorial plus gris acero',
-	code: 32
+	name: 'hilat escorial plus pera',
+	code: B2
 },
 {
 	_id: 56,
-	name: 'hilat escorial plus gris nevado',
-	code: 33
+	name: 'hilat escorial plus verde tilo',
+	code: C2
 },
 {
 	_id: 57,
-	name: 'hilat escorial plus negro',
-	code: 34
+	name: 'hilat escorial plus green',
+	code: D2
 },
 {
 	_id: 58,
-	name: 'hilat escorial plus pera',
-	code: 35
+	name: 'hilat escorial plus esmeralda',
+	code: E2
 },
 {
 	_id: 59,
-	name: 'hilat escorial plus verde tilo',
-	code: 36
+	name: 'hilat escorial plus verde',
+	code: F2
 },
 {
 	_id: 60,
-	name: 'hilat escorial plus green',
-	code: 37
+	name: 'film saten',
+	code: G3
 },
 {
 	_id: 61,
-	name: 'hilat escorial plus esmeralda',
-	code: 38
+	name: 'blanco',
+	code: H3
 },
 {
 	_id: 62,
-	name: 'hilat escorial plus verde',
-	code: 39
+	name: 'rojo',
+	code: I3
 },
 {
 	_id: 63,
-	name: 'film saten',
-	code: 1
-},
-{
-	_id: 64,
-	name: 'blanco',
-	code: 2
-},
-{
-	_id: 65,
-	name: 'rojo',
-	code: 3
-},
-{
-	_id: 66,
 	name: 'negro',
-	code: 4
-}
+	code: J3
+},
