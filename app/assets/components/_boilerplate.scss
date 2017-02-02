@@ -1415,7 +1415,7 @@ a.external-link, .external-link a {
                 font-weight: normal;
                 margin: 0;
                 width: 100%;
-                padding-right: 2.5em;
+                padding-right: 3em;
                 position:relative;
                 color: $blanco;
                 &.atrasado{
@@ -1438,6 +1438,9 @@ a.external-link, .external-link a {
                 right: 10px;
                 &.a{
                     right: 30px; 
+                }
+                &.b{
+                    right: 55px; 
                 }
                 &:hover{
                     color: $color_rochas;

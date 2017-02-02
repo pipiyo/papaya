@@ -44,7 +44,7 @@ let BodegaStore = Reflux.createStore({
   renderFiltro : function(area){
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
-        document.getElementById('btn-buscar').disabled = false
+        if(document.getElementById('btn-buscar')){document.getElementById('btn-buscar').disabled = false}
       }, 3000)
 
       this.obj.tipoBodega = area
