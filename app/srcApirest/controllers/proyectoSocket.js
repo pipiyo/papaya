@@ -50,7 +50,6 @@ module.exports = (io) => {
                     SUB_TOTAL: proyecto.subtotal,
                     PUESTOS:proyecto.puestos,
                     TOTAL: proyecto.total,
-                    MONTO: proyecto.neto,
                     MONTO2: proyecto.neto2,
                     DESCUENTO: proyecto.descuento,
                     DESCUENTO2: proyecto.descuento2,
@@ -69,6 +68,21 @@ module.exports = (io) => {
                 }
                 else{
                   callback({mensaje:`Código ya ingresado ${proyecto.codigo}`})
+                }
+            }) 
+      }) 
+  })
+
+  /* Editar Proyecto */
+  socket.on('updateRocha', (proyecto,callback) => {
+      pool.getConnection( (err, connection) => {
+            connection.query('UPDATE proyecto SET RUT_CLIENTE = ?, NOMBRE_CLIENTE = ?, OBRA = ?, MONTO = ?, EJECUTIVO = ?, FECHA_INGRESO = ?, FECHA_ENTREGA = ?, CONTACTO = ?, TELEFONO = ?, MAIL = ?, NOMBRE_PROYECTO = ?, ENCARGADO = ? , DISENADOR = ? , IVA = ? , TIPO_IVA = ? , SUB_TOTAL = ? , PUESTOS = ? , TOTAL = ? , MONTO2 = ? , DESCUENTO = ? , DESCUENTO2 = ? , DEPARTAMENTO_CREDITO = ? , DEPARTAMENTO = ? , DIRECCION_FACTURACION = ? , ESTADO = ? , FECHA_ACTA = ?, FECHA_CONFIRMACION = ? WHERE CODIGO_PROYECTO = ?', [proyecto.rut, proyecto.cliente, proyecto.obra, proyecto.monto, proyecto.ejecutivo, proyecto.fechaInicio, proyecto.fechaEntrega, proyecto.contacto, proyecto.telefono, proyecto.mail, proyecto.nombreProyecto, proyecto.encargado, proyecto.disenador, proyecto.valoriva, proyecto.iva, proyecto.subtotal, proyecto.puestos, proyecto.total, proyecto.neto2, proyecto.descuento, proyecto.descuento2, proyecto.linea, proyecto.departamento, proyecto.direccionObra, proyecto.estado, proyecto.fechaActa, proyecto.fechaConfirmacion , proyecto.codigo], (err, results) => {
+                connection.release()
+                if (!err){
+                  callback({mensaje:`Se actualizo ${proyecto.codigo}`})
+                }
+                else{
+                  console.log('Error ' + err)
                 }
             }) 
       }) 

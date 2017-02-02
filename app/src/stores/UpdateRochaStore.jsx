@@ -125,10 +125,9 @@ let UpdateRochaStore = Reflux.createStore({
       fechaConfirmacion: ev.target.elements['fechaConfirmacion'].value,
       fechaActa: ev.target.elements['fechaActa'].value    
     }
-    socket.emit('updateRocha', proyecto, JSON.stringify( localStorage.getItem('token')), (n) => {
-
+    socket.emit('updateRocha', proyecto, (n) => {
       this.obj.mensaje = n.mensaje
-      this.trigger(this.obj)
+      browserHistory.push(`/home/informe-rochas`)
     })
   },
   renderRut: function(){
@@ -224,7 +223,6 @@ let UpdateRochaStore = Reflux.createStore({
     return text
   },
   renderInput: function(id,valor){
-    console.log("as")
     switch(id) {
       case "codigo":
        this.obj.input.codigo = this.validador(valor)
