@@ -82,7 +82,6 @@ let UpdateRochaStore = Reflux.createStore({
       this.obj.input.total= this.validador(this.obj.search[0].TOTAL)
       this.obj.input.departamento= this.validador(this.obj.search[0].DEPARTAMENTO)
       this.obj.input.estado= this.validador(this.obj.search[0].ESTADO)
-      console.log(n.rocha)
     })
     socket.emit('completSelect', (n) => {
       this.obj.vendedor = n.vendedor
