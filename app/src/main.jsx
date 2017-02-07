@@ -29,6 +29,7 @@ import Producto from './routes/ProductoRoutes'
 import StockProducto from './routes/StockPruductoRoutes'
 import CuadroRocha from './routes/CuadroRochaRoutes'
 import DescriptionRocha from './routes/DescriptionRochaRoutes'
+import ListadoOc from './routes/ListadoOcRoutes'
 
 import Auth from './routes/AuthRoutes'
 
@@ -65,7 +66,7 @@ ReactDOM.render((
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
-            <Route path="actualizar-rocha/:id" component={UpdateRocha}/>
+            <Route path="listado-oc" component={ListadoOc}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

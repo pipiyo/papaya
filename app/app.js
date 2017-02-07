@@ -55,6 +55,8 @@ require('./srcApirest/controllers/productoSocket')(io)
 require('./srcApirest/controllers/proyectoSocket')(io)
 
 require('./srcApirest/controllers/descriptionRochaSocket')(io)
+
+require('./srcApirest/controllers/listadoOcSocket')(io)
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
