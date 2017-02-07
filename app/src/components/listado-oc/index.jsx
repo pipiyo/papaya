@@ -16,6 +16,7 @@ class ListadoOCIndex extends React.Component {
           <Title />
           <Filtro
           obj={this.props.obj} 
+          renderFiltro={this.props.renderFiltro}
           renderFiltroFi={this.props.renderFiltroFi}
           renderFiltroFe={this.props.renderFiltroFe}
 

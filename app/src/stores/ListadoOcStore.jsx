@@ -27,10 +27,9 @@ let ListadoOcStore = Reflux.createStore({
     this.obj.filtro.fechaInicio = undefined
     this.obj.filtro.fechaEntrega = undefined
     this.obj.filtro.codigo = null
-    this.obj.filtro.estado = "EN PROCESO" 
-    this.obj.filtro.vendedor = null
-    this.obj.filtro.categoria = null
-    this.obj.filtro.cliente = null 
+    this.obj.filtro.estado = "Pendiente" 
+    this.obj.filtro.rocha = null
+    this.obj.filtro.proveedor = null 
   },
   renderOc: function(){
     socket.emit('allOc',this.obj.filtro, (n) => {
@@ -44,7 +43,7 @@ let ListadoOcStore = Reflux.createStore({
   renderFiltro : function(){
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
-        document.getElementById('btn-buscar').disabled = false
+        if(document.getElementById('btn-buscar')){document.getElementById('btn-buscar').disabled = false}
       }, 3000)
       
       let fechaI = document.getElementById("fechaInicio").value

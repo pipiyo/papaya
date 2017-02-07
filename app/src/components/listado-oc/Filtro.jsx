@@ -8,7 +8,7 @@ class Filtro extends React.Component {
   }
   render() {
       return (
-      <form onSubmit="">
+      <form onSubmit={this.props.renderFiltro}>
         <div class="module-filter">
           
             <div class="item-filter">
@@ -33,7 +33,6 @@ class Filtro extends React.Component {
             <div className="item-filter opc" >
               <label>Estado</label>
               <select id="estado" >
-                <option value="">Seleccioné</option>
                 <option value="Pendiente">Pendiente</option>
                 <option value="En Proceso">En Proceso</option>
                 <option value="Nulo">Nulo</option>

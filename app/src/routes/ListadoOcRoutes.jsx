@@ -19,6 +19,10 @@ export default class ListadoOcRoutes extends React.Component {
   renderFiltroFi(date){
     ListadoOcActions.renderFiltroFi(date)
   }
+  renderFiltro(event){
+    event.preventDefault()
+    ListadoOcActions.renderFiltro()
+  }
   renderFiltroFe(date){
     ListadoOcActions.renderFiltroFe(date)
   }
@@ -32,7 +36,8 @@ export default class ListadoOcRoutes extends React.Component {
         obj={this.state.obj}
         renderFiltroFi={this.renderFiltroFi.bind(this)}
         renderFiltroFe={this.renderFiltroFe.bind(this)}
-        renderViewMore={this.renderViewMore.bind(this)} 
+        renderViewMore={this.renderViewMore.bind(this)}
+        renderFiltro={this.renderFiltro.bind(this)}  
         />       
       )
   	}else{
