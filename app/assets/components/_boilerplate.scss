@@ -1555,7 +1555,8 @@ a.external-link, .external-link a {
     &.instalaciones{.module-table-container{.module-table-item{background:$color_instalaciones;color:$blanco;padding: .5em;}}}
     &.despacho{.module-table-container{.module-table-item{background:$color_despacho;color:$blanco;padding: .5em;}}}
 
-
+    &[data-col="trece"]{.module-table-container{width:calc(13 * 200px);}}
+    &[data-col="doce"]{.module-table-container{width:calc(12 * 200px);}}
     &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
     &[data-col="nueve"]{.module-table-container{width:calc(9 * 200px);}}
     &[data-col="ocho"]{.module-table-container{width:calc(8 * 200px);}}
