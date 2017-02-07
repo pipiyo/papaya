@@ -1557,7 +1557,10 @@ a.external-link, .external-link a {
     &.comercial{.module-table-container{.module-table-item{background:$color_comercial;padding: .5em;}}}
     &.instalaciones{.module-table-container{.module-table-item{background:$color_instalaciones;color:$blanco;padding: .5em;}}}
     &.despacho{.module-table-container{.module-table-item{background:$color_despacho;color:$blanco;padding: .5em;}}}
+    &.comercial{.module-table-container{.module-table-item{background:$color_comercial;padding: .5em;}}}
+    &.oc{.module-table-container{.module-table-item{background:#41AC8A;color:$blanco;padding: .5em;}}}
 
+    &[data-col="catorce"]{.module-table-container{width:calc(14 * 200px);}}
     &[data-col="trece"]{.module-table-container{width:calc(13 * 200px);}}
     &[data-col="doce"]{.module-table-container{width:calc(12 * 200px);}}
     &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}

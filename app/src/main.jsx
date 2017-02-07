@@ -30,7 +30,7 @@ import StockProducto from './routes/StockPruductoRoutes'
 import CuadroRocha from './routes/CuadroRochaRoutes'
 import DescriptionRocha from './routes/DescriptionRochaRoutes'
 import ListadoOc from './routes/ListadoOcRoutes'
-
+import UpdateOcFecha from './routes/UpdateOcFechaRoutes'
 import Auth from './routes/AuthRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
@@ -67,6 +67,7 @@ ReactDOM.render((
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
             <Route path="listado-oc" component={ListadoOc}/>
+            <Route path="actualizar-oc-fecha/:id" component={UpdateOcFecha}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />
