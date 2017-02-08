@@ -10,6 +10,7 @@ module.exports = (io) => {
   .of('/home')
   .on('connection', (socket) => {
 
+
 /*
 	  socket.on('getContentUser', (callback) => {
 	  	let user = decodeToken( JSON.stringify( global.token ) )

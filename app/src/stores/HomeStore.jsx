@@ -88,7 +88,6 @@ let HomeStore = Reflux.createStore({
 
   getContent: function() {
 
-
     socket.emit('getContent', (content, user, number) => {
 
       if (number == 0) {
