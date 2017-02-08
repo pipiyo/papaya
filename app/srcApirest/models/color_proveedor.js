@@ -2,7 +2,7 @@ let mongoose = require("mongoose")
 
 mongoose.Promise = global.Promise
 
-mongoose.connect("mongodb://localhost/papaya")
+mongoose.createConnection("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
@@ -13,11 +13,11 @@ let color_proveedorSchema = new Schema({
 	codigo_proveedor: Number
 })
 
-let color_proveedor = mongoose.model('color_proveedor', color_proveedorSchema)
+let color_proveedor = mongoose.model('color_proveedore', color_proveedorSchema)
 
 module.exports = color_proveedor
 
-
+/*
 {
 	_id: 1,
 	name: 'Gris MT',
@@ -107,4 +107,5 @@ module.exports = color_proveedor
 	name: 'Grafito',
 	code: 7,
 	codigo_proveedor: 30
-},
+}
+*/

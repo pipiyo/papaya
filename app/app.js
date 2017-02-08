@@ -8,6 +8,8 @@ const request = require('request')
 const moment = require('moment')
 const UserSession =  require('./srcApirest/models/userSession')
 
+
+
 //console.log( moment('09:00:00', 'h:mm:ss').fromNow(), moment().format('h:mm:ss') )
 
 require('./env').config()
@@ -24,6 +26,10 @@ con.connect( (err) => {
   console.log('conexta3')
     })
 */
+
+
+
+
 
 
 

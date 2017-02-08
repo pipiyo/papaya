@@ -2,7 +2,7 @@ let mongoose = require("mongoose")
 
 mongoose.Promise = global.Promise
 
-mongoose.connect("mongodb://localhost/papaya")
+mongoose.createConnection("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
@@ -12,10 +12,11 @@ let espesorSchema = new Schema({
 	code: Number
 })
 
-let espesor = mongoose.model('espesor', espesorSchema)
+let espesor = mongoose.model('espesore', espesorSchema)
 
 module.exports = espesor
 
+/*
 {
 	_id: 1,
 	name: 'A 24',
@@ -31,3 +32,4 @@ module.exports = espesor
 	name: 'MDF 30',
 	code: 30
 }
+*/

@@ -2,7 +2,7 @@ let mongoose = require("mongoose")
 
 mongoose.Promise = global.Promise
 
-mongoose.connect("mongodb://localhost/papaya")
+mongoose.createConnection("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
@@ -12,10 +12,12 @@ let colorSchema = new Schema({
 	code: Number
 })
 
-let color = mongoose.model('color', colorSchema)
+let color = mongoose.model('colore', colorSchema)
 
 module.exports = color
 
+
+/*
 {
 	_id: 1,
 	name: 'Blanco',
@@ -341,3 +343,4 @@ module.exports = color
 	name: 'negro',
 	code: 4
 }
+*/

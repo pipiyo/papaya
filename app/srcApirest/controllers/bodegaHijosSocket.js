@@ -1,6 +1,8 @@
 const pool = require('../models/connection')
 const Promise = require('promise')
 
+const Superficie = require('../models/superficie')
+
 module.exports = (io) => {
 
   io
@@ -9,7 +11,7 @@ module.exports = (io) => {
 
   /* Producto Son */
   socket.on('getBodegaHijos', (id,filtro,callback) => {
-    
+
     let promesa = new Promise( (resolve, reject) => {  
 //////////////////
 
@@ -27,7 +29,7 @@ module.exports = (io) => {
         if(filtro.categoria){q_categoria = ' and CATEGORIA like "%'+filtro.categoria +'%"'}
 
 
-        let query = 'SELECT producto.CODIGO_PRODUCTO, producto.DESCRIPCION, producto.STOCK_ACTUAL, producto.STOCK_MAXIMO, producto.STOCK_MINIMO, categoria_producto.nombre as CATEGORIA FROM producto, categoria_producto WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+' ORDER BY CODIGO_PRODUCTO limit '+filtro.limitA+','+filtro.limitB+';' 
+        let query = 'SELECT producto.CODIGO_PRODUCTO, producto.DESCRIPCION, producto.STOCK_ACTUAL, producto.STOCK_MAXIMO, producto.STOCK_MINIMO, categoria_producto.nombre as CATEGORIA, producto.CATEGORIA as CODIGO_CATEGORIA FROM producto, categoria_producto WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+' ORDER BY CODIGO_PRODUCTO limit '+filtro.limitA+','+filtro.limitB+';' 
         let query1 = 'SELECT count(*) as total FROM producto , categoria_producto WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto '+q_desactivado+q_temporada+q_codigo+q_descripcion+q_categoria+q_quiebre+q_bodega+';' 
 
         pool.getConnection( (err, connection) => {
@@ -35,7 +37,7 @@ module.exports = (io) => {
                 connection.release()
                 if (!err){
                   //callback({productos:rows[0],cuenta:rows[1]})
-                  resolve( [ rows[0], rows[1] ] )
+                  resolve( [ rows[0], rows[1], rows[0][0].CODIGO_CATEGORIA ] )
                 }
                 else{
                   //console.log('Error-1 ' + err)
@@ -46,7 +48,7 @@ module.exports = (io) => {
 /////////////////
     })
 
-    promesa.then( ([producto, cuenta]) => {
+    promesa.then( ([producto, cuenta, codigo_categoria]) => {
 /////////////////
           let i, e
           let consulta = ""
@@ -89,7 +91,7 @@ module.exports = (io) => {
                   }
               }) 
           })
-          return [{productos:producto}, cuenta]
+          return [{productos:producto}, cuenta, codigo_categoria]
 /////////////////
     }).then( producto => {
 /////////////////////
@@ -128,7 +130,22 @@ module.exports = (io) => {
               }
             }
             if (!err){
-              callback( producto[0], producto[1])
+
+                  Superficie.
+                    find({ 'asset.categoria': producto[2] } ).
+                    populate('colores').
+                    populate('asset.categoria').
+                    populate('asset.espesor').
+                    populate('asset.trascara').
+                    populate('asset.colores_proveedor').
+                    exec( (err, superficies) => {
+                      if (err) console.log(err)
+
+                        callback( producto[0], producto[1], superficies)
+                   
+                    })
+
+
             }
             else{
               reject(`Error-3: ${err}`)
@@ -141,7 +158,11 @@ module.exports = (io) => {
 
 
 
-  /* Producto Son */
+
+
+
+/*
+
   socket.on('allBodegaNewSon', (id,filtro,callback) => {
     
 
@@ -175,7 +196,7 @@ module.exports = (io) => {
     })
   })
 
-  /* Transito */
+
   socket.on('allTransito', (producto,callback) => {
     let i, e
     let consulta = ""
@@ -222,7 +243,7 @@ module.exports = (io) => {
   })
 
 
-  /* Vale */
+
   socket.on('allVale', (producto,callback) => {
     let i, e
     let consulta = ""
@@ -265,7 +286,10 @@ module.exports = (io) => {
         }) 
     })
   })
+*/
+
 
 })
+
 
 }

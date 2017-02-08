@@ -2,7 +2,7 @@ let mongoose = require("mongoose")
 
 mongoose.Promise = global.Promise
 
-mongoose.connect("mongodb://localhost/papaya")
+mongoose.createConnection("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
@@ -16,6 +16,7 @@ let trascara = mongoose.model('trascara', trascaraSchema)
 
 module.exports = trascara
 
+/*
 {
 	_id: 1,
 	name: 'Pintura',
@@ -26,3 +27,4 @@ module.exports = trascara
 	name: 'Balance',
 	code: 'B'
 }
+*/

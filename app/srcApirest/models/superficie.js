@@ -1,8 +1,14 @@
 let mongoose = require("mongoose")
 
+const Colore = require('./color')
+const Categoria = require('./categoria')
+const Espesore = require('./espesor')
+const Trascara = require('./trascara')
+const Color_proveedore = require('./color_proveedor')
+
 mongoose.Promise = global.Promise
 
-mongoose.connect("mongodb://localhost/papaya")
+mongoose.createConnection("mongodb://localhost/papaya")
 
 let Schema = mongoose.Schema
 
@@ -10,18 +16,18 @@ let superficieSchema = new Schema({
 	_id: Number,
 	name: String,
 	alias: String,
-	asset: [ { categoria: { type: Schema.Types.ObjectId, ref: 'categoria' },
-			   espesor: [ { type: Schema.Types.ObjectId, ref: 'espesor' } ],
-			   trascara: [ { type: Schema.Types.ObjectId, ref: 'trascara' } ] } ],
-	colores: [ { type: Schema.Types.ObjectId, ref: 'color' } ],
-	colores_proveedor: [ { type: Schema.Types.ObjectId, ref: 'color_proveedor' } ]
+	asset: [ { categoria: { type: Number, ref: 'categoria' },
+			   espesor: [ { type: Schema.Types.ObjectId, ref: 'espesore' } ],
+			   trascara: [ { type: Schema.Types.ObjectId, ref: 'trascara' } ],
+			   colores_proveedor: [ { type: Schema.Types.ObjectId, ref: 'color_proveedore' } ] } ],
+	colores: [ { type: Schema.Types.ObjectId, ref: 'colore' } ]
 })
 
 let superficie = mongoose.model('superficie', superficieSchema)
 
 module.exports = superficie
 
-
+/*
 {
 	_id: 1,
 	name: 'Melamina',
@@ -147,21 +153,60 @@ module.exports = superficie
 	_id: 6,
 	name: 'metalico',
 	alias: 'metalico',
-	asset: [ { categoria: 15 },
-			 { categoria: 16 },
-			 { categoria: 17 } ],
-	colores: [ ],
-	colores_proveedor: [ ]
+	asset: [ { categoria: 15,
+			   colores_proveedor: [ 1,
+			   						2,
+			   						3,
+			   						4,
+			   						5,
+			   						6,
+			   						7,
+			   						8 ] },
+			 { categoria: 16,
+			   colores_proveedor: [ 1,
+			   						2,
+			   						3,
+			   						4,
+			   						5,
+			   						6,
+			   						7,
+			   						8,
+			   						9,
+			   						10,
+			   						11,
+			   						12,
+			   						13,
+			   						14,
+			   						15 ] },
+			 { categoria: 17,
+			   colores_proveedor: [ 1,
+			   						2,
+			   						3,
+			   						4,
+			   						5,
+			   						6,
+			   						7,
+			   						8 ] } ],
+	colores: [ ]
 },
 {
 	_id: 7,
 	name: 'panaleria',
 	alias: 'panaleria',
-	asset: [ { categoria: 19 } ],
-	colores: [ ],
-	colores_proveedor: [ ]
+	asset: [ { categoria: 19,
+			   colores_proveedor: [ 1,
+			   						2,
+			   						3,
+			   						4,
+			   						5,
+			   						6,
+			   						7,
+			   						8 ] } ],
+	colores: [ ]
 }
 
 SELECT DISTINCT FAMILIA FROM `producto` WHERE not FAMILIA = ''
 
 SELECT DISTINCT FAMILIA FROM `producto` WHERE `categoria` = '7'
+
+*/

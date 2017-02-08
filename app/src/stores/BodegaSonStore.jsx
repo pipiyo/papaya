@@ -9,6 +9,7 @@ import Env from '../Config'
 import io from 'socket.io-client'
 
 import Item from '../components/bodega/Item.jsx'
+import { FiltroColores } from '../components/bodega-son/Filtro.jsx'
 
 const socket = io.connect( `${Env.url}bodega-hijos` )
 
@@ -17,6 +18,9 @@ let BodegaSonStore = Reflux.createStore({
   obj: { 
     renderBodega: '',
     renderItem: [],
+    superficies: null,
+    colores: null,
+    filtrarColores: null,
     total: 0,
     filtro:{limitA:0, limitB:5, codigo:null, descripcion:null, categoria: null, quiebre: false, desactivado: false, bodega: false}
   },
@@ -52,8 +56,30 @@ let BodegaSonStore = Reflux.createStore({
     this.obj.filtro.desactivado = false 
     this.obj.filtro.bodega = false 
   },
+
+  filtrarColores: function(e){
+
+    if (e.target.value == 'x') {
+
+      this.obj.colores = null
+
+    }else{
+
+      let xxx = _.find(this.obj.superficies, (o) => { return o._id == e.target.value })
+
+      this.obj.colores = <FiltroColores colores={xxx.colores} />
+
+    }
+
+    this.trigger(this.obj)
+
+  },
+
   getBodegaHijos: function(idProducto){
-    socket.emit('getBodegaHijos',idProducto, this.obj.filtro, ( productos, cuenta ) => {
+    this.obj.filtrarColores = this.filtrarColores
+    this.obj.filtro.codigo = idProducto
+    socket.emit('getBodegaHijos',idProducto, this.obj.filtro, ( productos, cuenta, superficies ) => {
+      this.obj.superficies = superficies
       this.obj.total = cuenta[0].total
       _.map( productos, (producto) => {
         _.map( producto, (p) => {
