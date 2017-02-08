@@ -24,7 +24,7 @@ export default class UpdateProductoRoutes extends React.Component {
     UpdateProductoActions.selectOption(document.getElementById("formato"), this.state.obj.input.formato,true)
     UpdateProductoActions.selectOption(document.getElementById("um"), this.state.obj.input.um,true)
   }
-  componentDidUpdate(){
+  componentDidUpdate(prevProps, prevState){
     UpdateProductoActions.selectOption(document.getElementById("categoria"), this.state.obj.input.categoria,true)
     UpdateProductoActions.selectOption(document.getElementById("formato"), this.state.obj.input.formato,true)
     UpdateProductoActions.selectOption(document.getElementById("um"), this.state.obj.input.um,true)

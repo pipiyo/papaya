@@ -40,7 +40,7 @@ let InformeRochaStore = Reflux.createStore({
   renderFiltro : function(){
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
-        document.getElementById('btn-buscar').disabled = false
+        if(document.getElementById('btn-buscar')){document.getElementById('btn-buscar').disabled = false}
       }, 3000)
       
       let fechaI = document.getElementById("fechaInicio").value

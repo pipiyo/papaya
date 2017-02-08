@@ -270,17 +270,39 @@ a.external-link, .external-link a {
 /**** frame ****/
 /**** frame ****/
 
-.frame{
-    display: table;
-    width: 100%;
-    height: 100%;
+#app{
+    min-height: 100%;
+    position: relative;
+    .index{
+        overflow: hidden;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+        background: $blanco;
+        &:before{
+            content: "";
+            width: 250px;
+            height: 100%;
+            background: $color_corporativo_dark;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
     @include vertical-tablet-down {
         display: block;
+        .index{
+            min-height: 100%;
+            &:before{
+                display: none;
+            }
+        }
     }
     .header{
-        display: table-cell;
+        float: left;
         vertical-align: top;
         width: 250px;
+        min-width: 250px;
         height: 100%;
         @include vertical-tablet-down {
             width: 100%;
@@ -289,9 +311,9 @@ a.external-link, .external-link a {
         }
     }
     .main{
-        display: table-cell;
+        float: left;
         height: 100%;
-        vertical-align: top;
+        background: $blanco;
         width: calc(100% - 250px);
         @include vertical-tablet-down {
             width: 100%;
@@ -815,6 +837,18 @@ a.external-link, .external-link a {
                 float: left;
                 margin-right: 20px;
             }
+        }
+        &.sem-ext{
+            width: 66.66%;
+            @include vertical-tablet-down {
+                width: 50%;
+            }
+            @include phablet-down {
+                width: 100%;
+            }
+        }
+        &.ext{
+            width: 100%;
         }
         @include vertical-tablet-down {
             width: 50%;
@@ -1366,6 +1400,9 @@ a.external-link, .external-link a {
     .item{
         width: 50%;
         padding: 1em;
+        &.ext{
+            width: 100%;
+        }
         @include vertical-tablet-down {
             width: 100%;
         }
@@ -1378,10 +1415,9 @@ a.external-link, .external-link a {
                 font-weight: normal;
                 margin: 0;
                 width: 100%;
-                padding-right: 1em;
+                padding-right: 3em;
                 position:relative;
                 color: $blanco;
-                padding: 0;
                 &.atrasado{
                     &:before{
                         content: "\f06a";
@@ -1400,6 +1436,12 @@ a.external-link, .external-link a {
                 top: 13px;
                 color: $blanco;
                 right: 10px;
+                &.a{
+                    right: 30px; 
+                }
+                &.b{
+                    right: 55px; 
+                }
                 &:hover{
                     color: $color_rochas;
                     cursor: pointer;
@@ -1409,9 +1451,20 @@ a.external-link, .external-link a {
         .content-informe{
             border: solid #0B3861 1px;
             padding: 1em;
+            &.ext{
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0 1em 1em 1em;
+            }
             h5{
                 margin: 0;
                 padding: 0;
+            }
+            h4{
+                margin: .5em 0 0 0;
+                font-size: $fontBig;
+                width: 100%;
+                text-decoration: underline;
             }
             p{
                 margin: 0;
@@ -1424,6 +1477,13 @@ a.external-link, .external-link a {
                 width: 100%;
                 + .opc{
                     margin-top: .5em;
+                }
+                &.ext{
+                    width: 50%;
+                    margin-top: .5em;
+                    @include vertical-tablet-down {
+                        width: 100%;
+                    }
                 }          
             }
         }
@@ -1484,25 +1544,11 @@ a.external-link, .external-link a {
 
 .module-table{
     border:solid 1px $gris;
-    overflow:scroll;
+    overflow-x:scroll;
     margin: auto;
-    max-width: 1000px;
-    @include small-desktop-down{
-        max-width: 550px;
-        max-height: 300px;
-    }
-    @include vertical-tablet-down {
-        max-width: calc(100% - 1em);
-        max-height: 300px;
-    }
-    @include desktop-only{
-        max-width: 900px;
-        max-height: 300px;
-    }
-    @include desktop-max{
-        max-width: 1200px;
-        max-height: 500px;
-    }
+    width: calc(100% - 1em);
+    max-width: 100%;
+    .module-table-container{.module-table-item{background:#7384AB;padding: .5em;}}
     &.abastecimiento{.module-table-container{.module-table-item{background:$color_abastecimiento;padding: .5em;}}}
     &.sillas{.module-table-container{.module-table-item{background:$color_sillas;color:$blanco;padding: .5em;}}}
     &.produccion{.module-table-container{.module-table-item{background:$color_produccion;color:$blanco;padding: .5em;}}}
@@ -1514,6 +1560,10 @@ a.external-link, .external-link a {
 
 
     &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
+    &[data-col="nueve"]{.module-table-container{width:calc(9 * 200px);}}
+    &[data-col="ocho"]{.module-table-container{width:calc(8 * 200px);}}
+    &[data-col="siete"]{.module-table-container{width:calc(7 * 200px);}}
+    &[data-col="seis"]{.module-table-container{width:calc(6 * 200px);}}
     .module-table-container{
         display: flex;
         flex-wrap: wrap;
@@ -1525,11 +1575,20 @@ a.external-link, .external-link a {
             }
         }
     }
-    &[data-col="once"]{.module-table-content{width:calc(11 * 200px);}}
     .module-table-content{
         display: flex;
         flex-wrap: wrap;
         border-bottom: solid 1px $gris;
+        &.adquisiciones{background:$color_abastecimiento;order:1;}
+        &.produccion{background:$color_produccion;order:2;color:$blanco;}
+        &.desarrollo{background:$color_desarrollo;order:3;}
+        &.sillas{background:$color_sillas;order:4;}
+        &.despacho{background:$color_despacho;order:5;}
+        &.instalacion{background:$color_instalaciones;order:6;}
+        &.oc{background:$color_rochas;order:7;}
+        &.fi{background:$color_comercial;order:8;}
+        &.sistema{background:$color_sistema;order:9;}
+        &.bodega{background:#79A9B5;order:9;}
         .module-table-content-item{
             width: 200px;
             font-size: $fontTiny;
@@ -1656,6 +1715,264 @@ a.external-link, .external-link a {
         }
         &.hidden{
             display: none;
+        }
+    }
+}
+
+/* Module Cuadro Rocha */
+/* Module Cuadro Rocha */
+/* Module Cuadro Rocha */
+/* Module Cuadro Rocha */
+
+.module-cuadro-rocha{
+    border:solid 1px $gris;
+    overflow-x:scroll;
+    width: calc(100% - 1em);
+    margin: auto;
+    .info{
+        display: flex;
+        &.title-proyecto{
+            .name{
+                background: $color_planificacion;
+                color: $blanco;
+                padding: 3px 2px 3px 2px;
+                p{
+                    font-size: $fontRegularBig;
+                }
+            }
+            .date, .percentage, .day{
+                background: $color_planificacion;
+                color: $blanco;  
+            }
+        }
+        &.proyecto{
+            width: 100%;
+            .name{
+                padding: 3px 2px 3px 2px;
+                p{
+                    font-size: $fontRegularBig;
+                }
+            }
+        }
+        &.rocha{
+            width: 100%;
+            .name{
+                padding: 3px 2px 3px 12px;
+                p{
+                    font-size: $fontRegular;
+                }
+            }
+        }
+        &.actividad{
+            width: 100%;;
+            .name{
+                padding: 3px 2px 3px 22px;
+                p{
+                    font-size: $fontSmall;
+                }
+            }
+        }
+        &.subactividad{
+            width: 100%;
+            .name{
+                padding: 3px 2px 3px 32px;
+                p{
+                    font-size: $fontTiny;
+                }
+            }
+        }
+        .name{
+            width: 300px;
+            min-width: 300px;
+            position: relative;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            &:after{
+                content: "\f106";
+                font-family: FontAwesome;
+                font-weight: normal;
+                position: absolute;
+                font-size: 18px;
+                right: .5em;
+                top: 4px;
+            }
+            &.active{
+                &:after{
+                    content: "\f107";
+                }
+            }
+            &.none{
+                &:after{
+                    content: "";
+                }
+            }
+        }
+        .date{
+            padding: 3px 2px 3px 2px;
+            width: 100px;
+            min-width: 100px;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            p{
+                text-align: center;
+                font-size: $fontSmall;
+            }
+        }
+        .percentage{
+            padding: 3px 2px 3px 2px;
+            width: 50px;
+            min-width: 50px;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            p{
+                text-align: center;
+                font-size: $fontSmall;
+            }
+        }
+        .day{
+            padding: 3px 2px 3px 2px;
+            width: 20px;
+            min-width: 20px;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            p{
+                text-align: center;
+                font-size: $fontSmall;
+            }
+            &.ok{
+                background: $negro;
+                border-right: solid 1px $negro;
+                &.proyecto{
+                    background: $color_rochas;
+                    border-right: solid 1px $color_rochas;  
+                }
+                &.abastecimiento{
+                    background: $color_abastecimiento;
+                    border-right: solid 1px $color_abastecimiento;  
+                }
+                &.produccion{
+                    background: $color_produccion;
+                    border-right: solid 1px $color_produccion;  
+                }
+                &.despacho{
+                    background: $color_despacho;
+                    border-right: solid 1px $color_despacho;  
+                }
+                &.desarrollo{
+                    background: $color_dam;
+                    border-right: solid 1px $color_dam;  
+                }
+                &.instalaciones{
+                    background: $color_instalaciones;
+                    border-right: solid 1px $color_instalaciones;  
+                }
+                &.sillas{
+                    background: $color_sillas;
+                    border-right: solid 1px $color_sillas;  
+                }
+                &.planificacion{
+                    background: $color_planificacion;
+                    border-right: solid 1px $color_planificacion;  
+                }
+
+            }
+        }
+    }
+}
+
+/* Module login */
+
+.module-login{
+   
+    height: 100vh;
+    width: 100%;
+    display: table;
+    position: relative;
+    h1{
+        margin: 0;
+        padding: 0;
+    }
+    .fondo{
+        background: url(images/fondos/login.jpg);
+        filter: blur(3px) grayscale(80%);
+        position: absolute;
+        background-size: cover;
+        border: solid;
+        height: 100%;
+        width: 100%;
+    }
+    .item-login{
+        filter: blur(0px);
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        .box-login{
+            width: 800px;
+            margin: auto;
+            display: table;
+            @include phablet-down {
+                width: 300px;
+            }
+            background: $blanco;
+            div{
+                display: table-cell;
+                &.box{
+                    width: 400px;
+                    vertical-align: top;
+                    @include phablet-down {
+                        width: 300px;
+                    }
+                    h1{
+                        padding: 1em;
+                        color: rgb(85, 85, 85);
+                    }
+                     input{
+                        display: block;
+                        @include reset-appearance;
+                    }
+                    input[type="text"],select, input[type="number"]{
+                        border:solid 1px $gris;
+                        padding: .5em .3em;
+                        width: 200px;
+                        border-radius: 3px;
+                        margin: 0 auto 1em auto;
+                        background-color: rgb(240, 240, 240);
+                        @include active-state{
+                            border: solid 1px $color_valido;
+                        }
+                        &:required{
+                            border:solid 1px $gris; 
+                            box-shadow:none;
+                        }
+                        &:invalid{
+                            border:solid 1px $gris;
+                            box-shadow:none; 
+                        }    
+                    }
+                    button{
+                        width: 200px;
+                        color: $blanco;
+                        padding: .5em;
+                        margin-bottom: 1em;
+                        border:solid 1px $gris;
+                        border-radius: 3px;
+                        background: rgb(213, 12, 34);
+                        @include active-state{
+                            cursor: pointer;
+                            background: $color_secundario_light;
+                        }
+                        &:disabled{
+                            background: $gris_dark;
+                        }
+                    }
+                }
+                &.img{
+                    width: 400px;
+                    @include phablet-down {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }

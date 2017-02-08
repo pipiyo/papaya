@@ -11,9 +11,12 @@ import UpdateServicio from './routes/UpdateServicioRoutes'
 import SubServicio from './routes/SubServicioRoutes'
 import UpdateSubServicio from './routes/UpdateSubServicioRoutes'
 import IndicadorSubServicio from './routes/IndicadorSubServicioRoutes'
+import IndicadorServicio from './routes/IndicadorServicioRoutes'
 import Reclamo from './routes/ReclamoRoutes'
 import Informe from './routes/InformeRoutes'
 import InformeRocha from './routes/InformeRochaRoutes'
+import AddRocha from './routes/AddRochaRoutes'
+import UpdateRocha from './routes/UpdateRochaRoutes'
 import Notificacion from './routes/NotificacionRoutes'
 import DetalleInforme from './routes/DetalleInformeRoutes'
 import Bodega from './routes/BodegaRoutes'
@@ -24,6 +27,8 @@ import AddProducto from './routes/AddProductoRoutes'
 import UpdateProducto from './routes/UpdateProductoRoutes'
 import Producto from './routes/ProductoRoutes'
 import StockProducto from './routes/StockPruductoRoutes'
+import CuadroRocha from './routes/CuadroRochaRoutes'
+import DescriptionRocha from './routes/DescriptionRochaRoutes'
 
 import Auth from './routes/AuthRoutes'
 
@@ -43,6 +48,7 @@ ReactDOM.render((
         	<Route path="actividad/:rocha/:tipo" component={Servicio}/>
         	<Route path="informe/:area" component={Informe}/>
             <Route path="informe-rochas" component={InformeRocha}/>
+            <Route path="ingreso-proyecto" component={AddRocha}/>
             <Route path="actualizar-actividad/:id" component={UpdateServicio}/>
             <Route path="reclamo" component={Reclamo}/>
             <Route path="notificacion" component={Notificacion}/>
@@ -50,12 +56,16 @@ ReactDOM.render((
             <Route path="sub-actividad/:id" component={SubServicio}/>
             <Route path="actualizar-subactividad/:id" component={UpdateSubServicio}/>
             <Route path="indicadores/:area" component={IndicadorSubServicio}/>
+            <Route path="indicadores-actividad/:area" component={IndicadorServicio}/>
             <Route path="bodega/:area" component={Bodega}/>
             <Route path="ingreso-producto" component={AddProducto}/>
             <Route path="actualizar-producto/:bodega/:id" component={UpdateProducto}/>
             <Route path="producto/:id" component={Producto}/>
             <Route path="stock-producto/:bodega/:id" component={StockProducto}/>
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>
+            <Route path="cuadro-proyecto" component={CuadroRocha}/>
+            <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
+            <Route path="actualizar-rocha/:id" component={UpdateRocha}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

@@ -2,7 +2,7 @@ import React from 'react'
 import Item from './Item'
 import IndicadorSubServicioActions from '../../actions/IndicadorSubServicioActions'
 
-class Title extends React.Component {
+class SubServicio extends React.Component {
 
   constructor() {
     super()
@@ -44,4 +44,4 @@ class Title extends React.Component {
 
 }
 
-export default Title
+export default SubServicio

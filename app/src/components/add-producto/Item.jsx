@@ -2,8 +2,6 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
-import SubServicioActions from '../../actions/SubServicioActions'
-
 class Item extends React.Component {
 
   constructor() {
