@@ -1410,6 +1410,9 @@ a.external-link, .external-link a {
             position: relative;
             padding: 1em;
             background: #0B3861;
+            &.oc{
+                background: #41AC8A;
+            }
             h3{
                 font-size: 1em;
                 font-weight: normal;
@@ -1451,6 +1454,9 @@ a.external-link, .external-link a {
         .content-informe{
             border: solid #0B3861 1px;
             padding: 1em;
+            &.oc{
+                border: solid #41AC8A 1px;
+            }
             &.ext{
                 display: flex;
                 flex-wrap: wrap;
@@ -1583,6 +1589,19 @@ a.external-link, .external-link a {
         display: flex;
         flex-wrap: wrap;
         border-bottom: solid 1px $gris;
+        &.right{
+            display: block; 
+            width:100%;
+            .module-table-content-item-rows{
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+            .module-table-content-item{
+                background: #E3F6CE;
+                border-bottom: solid 1px $gris;
+            }
+        }
         &.adquisiciones{background:$color_abastecimiento;order:1;}
         &.produccion{background:$color_produccion;order:2;color:$blanco;}
         &.desarrollo{background:$color_desarrollo;order:3;}
@@ -1597,6 +1616,9 @@ a.external-link, .external-link a {
             width: 200px;
             font-size: $fontTiny;
             padding: .5em;
+            a{
+                padding: 0 .5em;
+            }
             + .module-table-content-item{
                 border-left: solid 1px $gris;
             }

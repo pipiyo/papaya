@@ -9,7 +9,9 @@ class Item extends React.Component {
   render() {
       return (       
         <div class="module-table-content">
-            <div class="module-table-content-item a-center"><Link to={`/home/actualizar-oc-fecha/${this.props.datos.CODIGO_OC}`}> <i class="fa fa-pencil" aria-hidden="true"></i></Link></div>
+            <div class="module-table-content-item a-center"><Link to={`/home/descripcion-oc/${this.props.datos.CODIGO_OC}`}> <i class="fa fa-eye" aria-hidden="true"></i></Link> - 
+                                                            <Link to={`/home/actualizar-oc-fecha/${this.props.datos.CODIGO_OC}`}> <i class="fa fa-pencil" aria-hidden="true"></i></Link>
+            </div>
             <div class="module-table-content-item a-center">{this.props.datos.CODIGO_OC}</div>
             <div class="module-table-content-item a-center">{this.props.datos.ROCHA_PROYECTO}</div>
             <div class="module-table-content-item a-center">{this.props.datos.VERSION}</div>
