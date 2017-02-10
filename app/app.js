@@ -8,6 +8,8 @@ const request = require('request')
 const moment = require('moment')
 const UserSession =  require('./srcApirest/models/userSession')
 
+
+
 //console.log( moment('09:00:00', 'h:mm:ss').fromNow(), moment().format('h:mm:ss') )
 
 require('./env').config()
@@ -24,6 +26,10 @@ con.connect( (err) => {
   console.log('conexta3')
     })
 */
+
+
+
+
 
 
 
@@ -49,6 +55,8 @@ require('./srcApirest/controllers/reclamoSocket')(io)
 require('./srcApirest/controllers/rochaSocket')(io)
 
 require('./srcApirest/controllers/bodegaSocket')(io)
+
+require('./srcApirest/controllers/bodegaHijosSocket')(io)
 
 require('./srcApirest/controllers/productoSocket')(io)
 

@@ -47,15 +47,7 @@ this.socket = io(getUrl)
 
   */
 })
-
 export default AuthStore
-
-
-
-
-
-
-
 /*
 class AuthStore {
 
@@ -92,6 +84,21 @@ class AuthStore {
 }
 
 export default new AuthStore()
+*/
 
 
+/*
+let promesa = new Promise( (resolve, reject) => {  
+   if (1 == 1) {
+      resolve('hola')
+   } else {
+      reject('chau')
+   }
+})
+
+promesa.
+    then( respuesta => console.log( respuesta ) ).
+    catch( error => {
+        console.error({ err: error }, 'Unexpected Error')
+    })
 */

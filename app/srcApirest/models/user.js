@@ -1,9 +1,5 @@
 let mongoose = require("mongoose")
 
-//let redis = require("redis")
-
-//let pub = redis.createClient()
-
 mongoose.Promise = global.Promise
 
 mongoose.connect("mongodb://localhost/papaya")

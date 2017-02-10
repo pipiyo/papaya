@@ -5,7 +5,8 @@ let BodegaSonActions = Reflux.createActions([
   'renderViewMore',
   'renderFiltro',
   'renderReset',
-  'renderButton'
+  'renderButton',
+  'getBodegaHijos'
 ])
 
 export default BodegaSonActions

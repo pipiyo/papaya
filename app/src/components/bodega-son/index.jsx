@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Filtro from './Filtro'
 import Title from './Title'
 import Producto from './Producto'
 
-class BodegaSonIndex extends React.Component {
+class BodegaSonIndex extends Component {
 
   constructor() {
     super()

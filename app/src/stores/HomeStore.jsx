@@ -28,7 +28,9 @@ let HomeStore = Reflux.createStore({
   },
 
   init: function() {
+    
     this.getObj()
+
     socket.on('popupNotification', (n) => {
       if (n == 0) {
         this.obj.numberNotification = null
@@ -37,6 +39,9 @@ let HomeStore = Reflux.createStore({
       }
       this.trigger( this.obj )
     })
+
+
+/*
     socket.emit('getNumberNotification', (n) => {
       if (n == 0) {
         this.obj.numberNotification = null
@@ -46,19 +51,22 @@ let HomeStore = Reflux.createStore({
       this.trigger( this.obj )
     })
 
-    socket.emit('getAreas', (n) => {
+    socket.emit('getContent', (n) => {
       this.obj.menu = n
       this.trigger( this.obj )
     })
+*/
+
+
 
   },
 
 
   getObj: function() {
-    return this.obj = { 
-                  user: {
-                          full_name: localStorage.getItem('full_name'),
-                          profile_picture: localStorage.getItem('profile_picture'),
+    return this.obj = {
+            user: {
+                          full_name: null,
+                          profile_picture: null,
                           user_nav: null,
                           showUserNav: this.showUserNav
                         },
@@ -73,8 +81,42 @@ let HomeStore = Reflux.createStore({
 
 
   getInitialState: function() {
+
     return this.obj
   },
+
+
+  getContent: function() {
+
+    socket.emit('getContent', (content, user, number) => {
+
+      if (number == 0) {
+        this.obj.numberNotification = null
+      }else{
+        this.obj.numberNotification = <NumberNotification number={number} />
+      }
+      this.obj.menu = content
+
+      this.obj.user = {
+                          full_name: user.name,
+                          profile_picture: user.profile_picture,
+                          user_nav: null,
+                          showUserNav: this.showUserNav
+                        }
+
+      this.trigger( this.obj )
+    })
+
+  },
+
+
+
+
+
+
+
+
+
 
 
   /* Agrega clase active para desplegar sub-menus */

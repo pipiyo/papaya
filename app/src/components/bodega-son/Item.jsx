@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-class Item extends React.Component {
+class Item extends Component {
 
   constructor() {
     super()
