@@ -26,43 +26,72 @@ module.exports = (io) => {
 
     switch(area) {
     case 'insumo':
-        q_bodega = ' and CATEGORIA IN("Cubiertas","Baldosas Tapizadas","Baldosas Vidrio","Baldosas Metalica","Baldosas Melamina","Articulo Electrico","Maquinas y Herramientas","Embalaje","sillas","Tornillos","Baldosas Laminadas","Tela","Laminados","Maderas","Tapacantos")'
+        q_bodega = ' and CATEGORIA IN("Accesorios","Cerradura","Correderas","Embalaje","Laminados","Maderas","Mantencion","Maquinas y Herramientas","Partes y piezas","Quimicos","Quincalleria","Seguridad","Tapacantos","Tela","Tiradores","Tornillos")'
         filtro_categoria = [
-          {id:'Cubiertas',name:'Cubiertas'},
-          {id:'Baldosas Tapizadas',name:'Baldosas Tapizadas'},
-          {id:'Baldosas Vidrio',name:'Baldosas Vidrio'},
-          {id:'Baldosas Metalica',name:'Baldosas Metalica'},
-          {id:'Baldosas Melamina',name:'Baldosas Melamina'},
-          {id:'Articulo Electrico',name:'Articulo Electrico'},
-          {id:'Maquinas y Herramientas',name:'Maquinas y Herramientas'},
+          {id:'Accesorios',name:'Accesorios'},
+          {id:'Cerradura',name:'Cerradura'},
+          {id:'Correderas',name:'Correderaxxs'},
           {id:'Embalaje',name:'Embalaje'},
-          {id:'sillas',name:'Sillas'},
+          {id:'Laminados',name:'Laminados'},
+          {id:'Maderas',name:'Maderas'},
+          {id:'Mantencion',name:'Mantención'},
+          {id:'Maquinas y Herramientas',name:'Maquinas y Herramientas'},
+          {id:'Partes y piezas',name:'Partes y piezas'},
+          {id:'Quimicos',name:'Quimicos'},
+          {id:'Quincalleria',name:'Quincalleria'},
+          {id:'Seguridad',name:'Seguridad'},
+          {id:'Tapacantos',name:'Tapacantos'},
+          {id:'Tela',name:'Tela'},
+          {id:'Tiradores',name:'Tiradores'},
           {id:'Tornillos',name:'Tornillos'}
         ]
         break;
-    case 'terminado':
-        q_bodega = ' and CATEGORIA IN("Muebles De Linea","Full Space","Cajoneras")'
+    case 'sillas':
+        q_bodega = ' and CATEGORIA IN("Adhesivos","Espuma","Sillas","Tela")'
         filtro_categoria = [
-          {id:'Muebles De Linea',name:'Muebles De Linea'},
-          {id:'Full Space',name:'Full Space'},
-          {id:'Cajoneras',name:'Cajoneras'}
+          {id:'Adhesivos',name:'Adhesivos'},
+          {id:'Espuma',name:'Espuma'},
+          {id:'Sillas',name:'Sillas'},
+          {id:'Tela',name:'Tela'}
         ]
         break;
     case 'importado':
-        q_bodega = ' and CATEGORIA IN("ACTIU")'
+        q_bodega = ' and CATEGORIA IN("ACTIU","MEPAL")'
         filtro_categoria = [
-          {id:'ACTIU',name:'ACTIU'}
+          {id:'ACTIU',name:'ACTIU'},
+          {id:'MEPAL',name:'MEPAL'}
         ]
         break;
-    case 'sillas':
-        q_bodega = ' and CATEGORIA IN("Embalaje","sillas","Tornillos","Baldosas Tapizadas","Baldosas Laminadas","Tela","Laminados","Maderas","Tapacantos")'
+    case 'terminado':
+        q_bodega = ' and CATEGORIA IN("Accesorios","Accesorios metalicos","Almacenamiento metalico","Articulo Electrico","Baldosas Laminadas","Baldosas melamina","Baldosas metalica","Baldosas Tapizadas","Cajoneras","Cubiertas","Cristales","Faldon","Full space","Herraje","Insumo","Laminados","Maderas","Mueble de linea","Mueble Especial","Pantalla","Paneleria","Partes y piezas","recurso","Superficies curvas","superficies rectas","soportes","soportes metalicos")'
         filtro_categoria = [
-          {id:'Embalaje',name:'Baldosas Tapizadas'},
-          {id:'sillas',name:'Baldosas Laminadas'},
-          {id:'Tornillos',name:'Tela'},
+          {id:'Accesorios',name:'Accesorios'},
+          {id:'Accesorios metalicos',name:'Accesorios Metalicos'},
+          {id:'Almacenamiento metalico',name:'Almacenamiento Metalico'},
+          {id:'Articulo Electrico',name:'Articulo Electrico'},
+          {id:'Baldosas Laminadas',name:'Baldosas Laminadas'},
+          {id:'Baldosas melamina',name:'Baldosas Melamina'},
+          {id:'Baldosas metalica',name:'Baldosas Metalica'},
+          {id:'Baldosas Tapizadas',name:'Baldosas Tapizadas'},
+          {id:'Cajoneras',name:'Cajoneras'},
+          {id:'Cubiertas',name:'Cubiertas'},
+          {id:'Cristales',name:'Cristales'},
+          {id:'Faldon',name:'Faldon'},
+          {id:'Full space',name:'Full Space'},
+          {id:'Herraje',name:'Herraje'},  
+          {id:'Insumo',name:'Insumo'},
           {id:'Laminados',name:'Laminados'},
-          {id:'Maderas',name:'Maderas'},
-          {id:'Tapacantos',name:'Tapacantos'}
+          {id:'Maderas',name:'Maderas'},    
+          {id:'Mueble de linea',name:'Mueble de linea'},
+          {id:'Mueble Especial',name:'Mueble Especial'},
+          {id:'Pantalla',name:'Pantalla'},
+          {id:'Paneleria',name:'Paneleria'},
+          {id:'Partes y piezas',name:'Partes y piezas'},
+          {id:'recurso',name:'Recurso'},  
+          {id:'Superficies curvas',name:'Superficies Curvas'},
+          {id:'superficies rectas',name:'Superficies Rectas'},
+          {id:'soportes',name:'Soportes'},  
+          {id:'soportes metalicos',name:'Soportes Metalicos'},  
         ]
         break;
     }  

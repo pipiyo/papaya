@@ -33,6 +33,7 @@ import ListadoOc from './routes/ListadoOcRoutes'
 import UpdateOcFecha from './routes/UpdateOcFechaRoutes'
 import DescriptionOc from './routes/DescriptionOcRoutes'
 import Auth from './routes/AuthRoutes'
+import OrdenCompra from './routes/OrdenCompraRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
@@ -70,6 +71,7 @@ ReactDOM.render((
             <Route path="listado-oc" component={ListadoOc}/>
             <Route path="actualizar-oc-fecha/:id" component={UpdateOcFecha}/>
             <Route path="descripcion-oc/:id" component={DescriptionOc}/>
+            <Route path="orden-de-compra" component={OrdenCompra}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

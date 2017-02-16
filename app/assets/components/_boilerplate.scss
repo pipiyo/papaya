@@ -690,6 +690,9 @@ a.external-link, .external-link a {
     }
     &.button{
         margin-top: 0;
+        &.top{
+            margin-top: 1em;
+        }
     }
     input,label,select{
         display: block;
@@ -805,7 +808,7 @@ a.external-link, .external-link a {
         &.button{
             width: 100%;
             padding: 1em 1em;
-            input[type="submit"]{
+            input[type="submit"],input[type="button"]{
                 width: 200px;
                 color: $blanco;
                 float: right;
@@ -1554,6 +1557,7 @@ a.external-link, .external-link a {
     margin: auto;
     width: calc(100% - 1em);
     max-width: 100%;
+    max-height: 400px;
     .module-table-container{.module-table-item{background:#7384AB;padding: .5em;}}
     &.abastecimiento{.module-table-container{.module-table-item{background:$color_abastecimiento;padding: .5em;}}}
     &.sillas{.module-table-container{.module-table-item{background:$color_sillas;color:$blanco;padding: .5em;}}}
@@ -1616,6 +1620,25 @@ a.external-link, .external-link a {
             width: 200px;
             font-size: $fontTiny;
             padding: .5em;
+            input{
+                width: 100%;
+                border: solid 1px $gris;
+                @include reset-appearance;
+                border: solid 1px $gris;
+                @include active-state{
+                    border: solid 1px $color_valido;
+                }
+            }
+            select{
+                @include reset-appearance;
+                position:relative;
+                border: solid 1px $gris;
+                width: 100%;
+                background-image: url(images/app-icons/down-arrow.svg);
+                background-repeat: no-repeat;
+                background-size: 10px 10px;
+                background-position: 98% center;
+            }
             a{
                 padding: 0 .5em;
             }
@@ -1907,6 +1930,9 @@ a.external-link, .external-link a {
 }
 
 /* Module login */
+/* Module login */
+/* Module login */
+/* Module login */
 
 .module-login{
    
@@ -2002,3 +2028,6 @@ a.external-link, .external-link a {
         }
     }
 }
+
+/* Module orden de compra */
+

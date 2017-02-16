@@ -5,7 +5,7 @@ import Producto from './Producto'
 
 class BodegaIndex extends React.Component {
 
-  constructor() {
+  constructor(){
     super()
   }
   render() {
