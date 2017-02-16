@@ -72,6 +72,7 @@ ReactDOM.render((
             <Route path="actualizar-oc-fecha/:id" component={UpdateOcFecha}/>
             <Route path="descripcion-oc/:id" component={DescriptionOc}/>
             <Route path="orden-de-compra" component={OrdenCompra}/>
+            <Route path="actualizar-rocha/:id" component={UpdateRocha}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />
