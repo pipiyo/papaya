@@ -26,7 +26,7 @@ module.exports = (io) => {
   /* Listar Producto */
   socket.on('searchOc', (id,callback) => {
     let query = `select * from orden_de_compra where CODIGO_OC = '${id}' ;` 
-    let query1 = `select producto.DESCRIPCION, producto.STOCK_ACTUAL, oc_producto.CODIGO_PRODUCTO,oc_producto.ROCHA, oc_producto.OBSERVACION, oc_producto.CANTIDAD, oc_producto.PRECIO_BODEGA, oc_producto.PRECIO_UNITARIO, oc_producto.PRECIO_LISTA, oc_producto.DESCUENTO, oc_producto.TOTAL from orden_de_compra, oc_producto, producto where producto.CODIGO_PRODUCTO = oc_producto.CODIGO_PRODUCTO and oc_producto.CODIGO_OC = orden_de_compra.CODIGO_OC AND orden_de_compra.CODIGO_OC = '${id}' ` 
+    let query1 = `select producto.DESCRIPCION, producto.STOCK_ACTUAL, oc_producto.CANTIDAD_RECIBIDA, oc_producto.DIFERENCIA , oc_producto.GUIA_DESPACHO, oc_producto.CODIGO_PRODUCTO,oc_producto.ROCHA, oc_producto.OBSERVACION, oc_producto.CANTIDAD, oc_producto.PRECIO_BODEGA, oc_producto.PRECIO_UNITARIO, oc_producto.PRECIO_LISTA, oc_producto.DESCUENTO, oc_producto.TOTAL from orden_de_compra, oc_producto, producto where producto.CODIGO_PRODUCTO = oc_producto.CODIGO_PRODUCTO and oc_producto.CODIGO_OC = orden_de_compra.CODIGO_OC AND orden_de_compra.CODIGO_OC = '${id}' ` 
     pool.getConnection( (err, connection) => {
         connection.query(query+query1, (err, rows, fields) => {
             connection.release()

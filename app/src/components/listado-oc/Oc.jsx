@@ -18,7 +18,7 @@ class OC extends React.Component {
       return (
         <div class="module-table oc" data-col="catorce" data-area="ok">
           <div class="module-table-container ">
-              <div class="module-table-item">Herramienta</div>
+              <div class="module-table-item">Herramientas</div>
               <div class="module-table-item">OC</div>
               <div class="module-table-item">Rocha</div>
               <div class="module-table-item">Versión</div>

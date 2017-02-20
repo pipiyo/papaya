@@ -1574,6 +1574,7 @@ a.external-link, .external-link a {
     &[data-col="trece"]{.module-table-container{width:calc(13 * 200px);}}
     &[data-col="doce"]{.module-table-container{width:calc(12 * 200px);}}
     &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
+    &[data-col="diez"]{.module-table-container{width:calc(10 * 200px);}}
     &[data-col="nueve"]{.module-table-container{width:calc(9 * 200px);}}
     &[data-col="ocho"]{.module-table-container{width:calc(8 * 200px);}}
     &[data-col="siete"]{.module-table-container{width:calc(7 * 200px);}}
@@ -1593,6 +1594,9 @@ a.external-link, .external-link a {
         display: flex;
         flex-wrap: wrap;
         border-bottom: solid 1px $gris;
+        a{
+            text-decoration: none;
+        }
         &.right{
             display: block; 
             width:100%;
@@ -1627,6 +1631,9 @@ a.external-link, .external-link a {
                 border: solid 1px $gris;
                 @include active-state{
                     border: solid 1px $color_valido;
+                }
+                &.bordernone{
+                    border: 0;
                 }
             }
             select{
