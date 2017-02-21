@@ -26,7 +26,11 @@ export default class RecibirOCRoutes extends React.Component {
   renderInputOcTotal(event){
     RecibirOcActions.renderInputOcTotal(event.target.id,event.target.value)
   }
-
+  updateOc(event) {
+    event.preventDefault()
+    event.persist()
+    RecibirOcActions.updateOc(event);
+  }
   render() {
   	if(this.state.obj){
 	    return(
@@ -35,6 +39,7 @@ export default class RecibirOCRoutes extends React.Component {
 	      renderInput={this.renderInput.bind(this)}
 	      renderInputOc={this.renderInputOc.bind(this)}
 	      renderInputOcTotal={this.renderInputOcTotal.bind(this)}
+        updateOc={this.updateOc.bind(this)}
 	      />       
 	    )
 	}else{

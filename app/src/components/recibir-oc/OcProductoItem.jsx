@@ -8,7 +8,7 @@ class OcProductoItem extends React.Component {
   render() {
       return (         
         <div class="module-table-content">
-          <div class="module-table-content-item"><p><input readOnly class="bordernone" id={`codigo-${this.props.number}`} value={this.props.codigo} /></p></div>
+          <div class="module-table-content-item"><p><input readOnly data-countoc="ok" class="bordernone" id={`codigo-${this.props.number}`} value={this.props.codigo} /></p></div>
           <div class="module-table-content-item"><p>{this.props.producto.ROCHA}</p></div>
           <div class="module-table-content-item"><p>{this.props.producto.DESCRIPCION}</p></div>
           <div class="module-table-content-item"><p>{this.props.producto.OBSERVACION}</p></div>

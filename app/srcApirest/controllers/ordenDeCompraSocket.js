@@ -6,10 +6,43 @@ module.exports = (io) => {
   .of('/ordenDeCompra')
   .on('connection', (socket) => {
 
-  /* Editar Producto */
+  /* Editar Oc */
   socket.on('updateFechaOc', (data,callback) => {
       pool.getConnection( (err, connection) => {
             connection.query('UPDATE orden_de_compra SET FECHA_CONFIRMACION = ?, FECHA_ENVIO_VALIJA = ?, ESTADO = ? WHERE CODIGO_OC = ?', [data.fechaConfirmacion, data.fechaActa, data.estado, data.codigo], (err, results) => {
+                connection.release()
+                if (!err){
+                  callback({mensaje:`Se ingreso ${data.codigo}`})
+                }
+                else{
+                  console.log('Error ' + err)
+                }
+            }) 
+      }) 
+  })
+
+  /* Editar Recibir OC */
+  socket.on('updateOcRecibir', (data,callback) => {
+      let query = ""
+      let total
+      let totalOC = 0
+      let recibido
+      data.producto.map( (producto,i) => {
+        if(data.recibido[i] == ""){
+          recibido = 0
+        }else{
+          recibido = parseInt(data.recibido[i])
+        }
+        totalOC += parseInt(data.diferencia[i])
+        total = parseInt(data.entregado[i]) + recibido
+
+        query += `UPDATE oc_producto SET oc_producto.CANTIDAD_RECIBIDA = "${total}", oc_producto.DIFERENCIA = "${data.diferencia[i]}", oc_producto.GUIA_DESPACHO = "${data.guia[i]}" where CODIGO_OC = "${data.codigo}" and oc_producto.CODIGO_PRODUCTO = "${producto}"; `
+      })
+      if(totalOC <= 0){
+        query += `UPDATE orden_de_compra SET ESTADO = "OK", DIFERENCIA_TOTAL = "0" where CODIGO_OC = "${data.codigo}";`
+      }
+      pool.getConnection( (err, connection) => {
+            connection.query(query, (err, results) => {
                 connection.release()
                 if (!err){
                   callback({mensaje:`Se ingreso ${data.codigo}`})

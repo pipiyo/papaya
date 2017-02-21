@@ -48,7 +48,7 @@ class Item extends React.Component {
             </div>
             <div className="item-form">
                 <label>Razón</label>
-                <select id="codigo">
+                <select id="razon">
                   <option value="">Seleccioné</option>
                   <option value="calidad">calidad</option>
                   <option value="Diferencia solicitado oc">Diferencia solicitado oc</option>

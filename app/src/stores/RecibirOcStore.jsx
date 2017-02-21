@@ -22,6 +22,32 @@ let RecibirOcStore = Reflux.createStore({
     diferencia : [],
     guia : []
   },
+  updateOc: function(ev){
+    let count = document.querySelectorAll("[data-countoc]").length
+    console.log(count)
+
+    let oc = {
+      codigo: ev.target.elements['codigo'].value,
+      producto: [],
+      recibido: [],  
+      entregado: [],
+      diferencia : [],
+      guia: []
+    }
+    let i = 0
+    for(i; i < count; i++){
+      oc.producto.push(ev.target.elements[`codigo-${i}`].value)
+      oc.recibido.push(ev.target.elements[`recibido-${i}`].value)
+      oc.entregado.push(ev.target.elements[`entregado-${i}`].value)
+      oc.diferencia.push(ev.target.elements[`diferencia-${i}`].value)
+      oc.guia.push(ev.target.elements[`guia-${i}`].value)
+    }
+
+    socket.emit('updateOcRecibir', oc, (n) => {
+      this.obj.mensaje = n.mensaje
+      browserHistory.push(`/home/listado-oc`)
+    })
+  },
   searchOc: function(id){
   	socket.emit('searchOc', id, (n) => {
       this.obj.renderOc = n.oc
@@ -72,12 +98,12 @@ let RecibirOcStore = Reflux.createStore({
     let recibido = this.formatNumber(document.getElementById(`recibido-${item[1]}`).value)
     let entregado = this.formatNumber(document.getElementById(`entregado-${item[1]}`).value)
     let diferencia = this.formatNumber(document.getElementById(`diferencia-${item[1]}`).value)
-    let total = parseInt(recibido) + parseInt(entregado)
-    if(recibido == "" || total > cantidad){
+    let total = parseInt(cantidad) - (parseInt(recibido) + parseInt(entregado))
+    if(recibido == "" || total < 0){
       recibido = 0;
-      document.getElementById(`recibido-${item[1]}`).value = 0
+      document.getElementById(`recibido-${item[1]}`).value = ""
     }
-    this.obj.diferencia[item[1]] = parseInt(recibido) + parseInt(entregado)
+    this.obj.diferencia[item[1]] = parseInt(cantidad) - (parseInt(recibido) + parseInt(entregado)) 
     this.trigger(this.obj)    
   },
   validador: function(validador){

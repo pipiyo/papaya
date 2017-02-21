@@ -17,6 +17,7 @@ class RecibirOcIndex extends Component {
           renderInputOcTotal={this.props.renderInputOcTotal} 
           renderInputOc={this.props.renderInputOc} 
           renderInput={this.props.renderInput} 
+          updateOc={this.props.updateOc}
           />
         </div>
       )

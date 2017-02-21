@@ -4,7 +4,8 @@ let RecibirOcActions = Reflux.createActions([
   'searchOc',
   'renderInput',
   'renderInputOc',
-  'renderInputOcTotal'
+  'renderInputOcTotal',
+  'updateOc'
 ])
 
 export default RecibirOcActions
