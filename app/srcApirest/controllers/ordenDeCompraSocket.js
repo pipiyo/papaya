@@ -37,6 +37,7 @@ module.exports = (io) => {
         total = parseInt(data.entregado[i]) + recibido
 
         query += `UPDATE oc_producto SET oc_producto.CANTIDAD_RECIBIDA = "${total}", oc_producto.DIFERENCIA = "${data.diferencia[i]}", oc_producto.GUIA_DESPACHO = "${data.guia[i]}" where CODIGO_OC = "${data.codigo}" and oc_producto.CODIGO_PRODUCTO = "${producto}"; `
+        query += `UPDATE producto SET STOCK_ACTUAL = STOCK_ACTUAL + ${recibido}  WHERE CODIGO_PRODUCTO = '${producto}'; `
       })
       if(totalOC <= 0){
         query += `UPDATE orden_de_compra SET ESTADO = "OK", DIFERENCIA_TOTAL = "0" where CODIGO_OC = "${data.codigo}";`
