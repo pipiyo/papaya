@@ -14,6 +14,7 @@ let RecibirOcStore = Reflux.createStore({
   obj: { 
     renderOc: '',
     renderProductos: '',
+    mensaje: '',
     input : {codigo:"", proveedor:""},
     codigos : [],
     cantidad : [],
@@ -24,7 +25,6 @@ let RecibirOcStore = Reflux.createStore({
   },
   updateOc: function(ev){
     let count = document.querySelectorAll("[data-countoc]").length
-    console.log(count)
 
     let oc = {
       codigo: ev.target.elements['codigo'].value,
@@ -48,6 +48,22 @@ let RecibirOcStore = Reflux.createStore({
       browserHistory.push(`/home/listado-oc`)
     })
   },
+  addOc: function(ev){
+    let count = document.querySelectorAll("[data-countoc]").length
+
+    let oc = {
+      codigo: document.getElementById('codigo').value,
+      ocProducto: document.getElementById('ocProducto').value,
+      razon: document.getElementById('razon').value,
+      cantidad: document.getElementById('cantidad').value,
+      fecha : this.fechaActual()
+    }
+
+    socket.emit('addOcRecibir', oc, (n) => {
+      this.obj.mensaje = n.mensaje
+      this.trigger(this.obj)
+    })
+  },
   searchOc: function(id){
   	socket.emit('searchOc', id, (n) => {
       this.obj.renderOc = n.oc
@@ -67,6 +83,7 @@ let RecibirOcStore = Reflux.createStore({
       this.trigger(this.obj)
     })
   },
+
   renderInput: function(id,valor){
     switch(id) {
       case "codigo":
@@ -105,6 +122,21 @@ let RecibirOcStore = Reflux.createStore({
     }
     this.obj.diferencia[item[1]] = parseInt(cantidad) - (parseInt(recibido) + parseInt(entregado)) 
     this.trigger(this.obj)    
+  },
+  fechaActual: function(){
+    let hoy = new Date()
+    let dd = hoy.getDate();
+    let mm = hoy.getMonth()+1;
+    let yyyy = hoy.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+    } 
+
+    if(mm<10) {
+      mm='0'+mm
+    } 
+    return yyyy+'-'+mm+'-'+dd
   },
   validador: function(validador){
     let text

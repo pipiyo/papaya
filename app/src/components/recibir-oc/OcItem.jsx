@@ -28,7 +28,7 @@ class Item extends React.Component {
 
           <div className="module-form">
             <div className="item-form title">
-                <h4>Devolución OC</h4>
+                <h4>Devolución OC {this.props.obj.mensaje}</h4>
             </div>
 
             <div className="item-form">
@@ -44,7 +44,7 @@ class Item extends React.Component {
             </div>
             <div className="item-form">
                 <label>Cantidad</label>
-                <input id="cantidad" type="text" />
+                <input id="cantidad" type="number" />
             </div>
             <div className="item-form">
                 <label>Razón</label>
@@ -58,7 +58,7 @@ class Item extends React.Component {
 
           <div className="module-form button">
             <div className="item-form button">
-                <input type="button" value="Ingresar devolución"/>
+                <input onClick={this.props.addOc} type="button" value="Ingresar devolución"/>
             </div>
           </div> 
         </div>  

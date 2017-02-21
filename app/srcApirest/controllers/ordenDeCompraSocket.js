@@ -56,6 +56,31 @@ module.exports = (io) => {
   })
 
 
+   /* Devolución OC */
+  socket.on('addOcRecibir', (data,callback) => {
+      let producto = {  
+                    codigo_oc: data.codigo,
+                    cantidad: data.cantidad, 
+                    motivo: data.razon, 
+                    fecha: data.fecha,
+                    codigo_producto: data.ocProducto
+                  }
+
+      pool.getConnection( (err, connection) => {
+            connection.query('INSERT INTO `oc_devolucion` SET ?',producto, (err) => {
+                connection.release()
+                if (!err){
+                  callback({mensaje:`Se ingreso devolución ${data.ocProducto}`})
+                }
+                else{
+                  console.log('Error ' + err)
+                }
+            }) 
+      }) 
+  })
+
+
+
 
   /* Listar Producto */
   socket.on('searchOc', (id,callback) => {

@@ -15,6 +15,7 @@ class Form extends React.Component {
             <OcItem 
             renderInput={this.props.renderInput} 
             obj={this.props.obj} 
+            addOc={this.props.addOc}
             />
           </fieldset> 
 

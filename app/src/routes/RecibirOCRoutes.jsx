@@ -31,6 +31,12 @@ export default class RecibirOCRoutes extends React.Component {
     event.persist()
     RecibirOcActions.updateOc(event);
   }
+  addOc(event) {
+    event.preventDefault()
+    event.persist()
+    RecibirOcActions.addOc(event);
+  }
+
   render() {
   	if(this.state.obj){
 	    return(
@@ -40,6 +46,7 @@ export default class RecibirOCRoutes extends React.Component {
 	      renderInputOc={this.renderInputOc.bind(this)}
 	      renderInputOcTotal={this.renderInputOcTotal.bind(this)}
         updateOc={this.updateOc.bind(this)}
+        addOc={this.addOc.bind(this)}
 	      />       
 	    )
 	}else{
