@@ -1569,6 +1569,7 @@ a.external-link, .external-link a {
     &.despacho{.module-table-container{.module-table-item{background:$color_despacho;color:$blanco;padding: .5em;}}}
     &.comercial{.module-table-container{.module-table-item{background:$color_comercial;padding: .5em;}}}
     &.oc{.module-table-container{.module-table-item{background:#41AC8A;color:$blanco;padding: .5em;}}}
+    &.vale{.module-table-container{.module-table-item{background:#0489B1;color:$blanco;padding: .5em;}}}
 
     &[data-col="catorce"]{.module-table-container{width:calc(14 * 200px);}}
     &[data-col="trece"]{.module-table-container{width:calc(13 * 200px);}}

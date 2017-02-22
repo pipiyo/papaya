@@ -26,11 +26,12 @@ class OC extends React.Component {
               <div class="module-table-item">Fecha Realización</div>
               <div class="module-table-item">Fecha Entrega</div>
               <div class="module-table-item">Fecha Confirmación</div>
+              <div class="module-table-item">Fecha Recibo</div>
               <div class="module-table-item">User</div>
               <div class="module-table-item">Neto</div>
               <div class="module-table-item">Factura</div>
               <div class="module-table-item">Fecha Envio Por Valija</div>
-              <div class="module-table-item">Recibir</div>
+              
               <div class="module-table-item">Estado</div>
               {this.props.obj.renderItem}
           </div>

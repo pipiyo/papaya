@@ -32,7 +32,8 @@ let RecibirOcStore = Reflux.createStore({
       recibido: [],  
       entregado: [],
       diferencia : [],
-      guia: []
+      guia: [],
+      fecha : this.fechaActual()
     }
     let i = 0
     for(i; i < count; i++){
@@ -43,7 +44,7 @@ let RecibirOcStore = Reflux.createStore({
       oc.guia.push(ev.target.elements[`guia-${i}`].value)
     }
 
-    socket.emit('updateOcRecibir', oc, (n) => {
+    socket.emit('updateOcRecibir', oc, JSON.stringify( localStorage.getItem('token')), (n) => {
       this.obj.mensaje = n.mensaje
       browserHistory.push(`/home/listado-oc`)
     })
@@ -59,7 +60,7 @@ let RecibirOcStore = Reflux.createStore({
       fecha : this.fechaActual()
     }
 
-    socket.emit('addOcRecibir', oc, (n) => {
+    socket.emit('addOcRecibir', oc,JSON.stringify( localStorage.getItem('token')), (n) => {
       this.obj.mensaje = n.mensaje
       this.trigger(this.obj)
     })

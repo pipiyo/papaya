@@ -1,4 +1,5 @@
 const pool = require('../models/connection')
+const decodeToken = require('./decodeToken')
 
 module.exports = (io) => {
 
@@ -22,11 +23,14 @@ module.exports = (io) => {
   })
 
   /* Editar Recibir OC */
-  socket.on('updateOcRecibir', (data,callback) => {
+  socket.on('updateOcRecibir', (data,token,callback) => {
+      let user = decodeToken(token)
+
       let query = ""
       let total
       let totalOC = 0
       let recibido
+      let totalDevolucion
       data.producto.map( (producto,i) => {
         if(data.recibido[i] == ""){
           recibido = 0
@@ -35,6 +39,11 @@ module.exports = (io) => {
         }
         totalOC += parseInt(data.diferencia[i])
         total = parseInt(data.entregado[i]) + recibido
+
+        if(recibido > 0){
+          totalDevolucion = parseInt(data.diferencia[i]) + parseInt(data.entregado[i])
+          query += `INSERT INTO oc_recibo (codigo_oc, total, recibido,fecha_recibido,codigo_producto,user) values ("${data.codigo}","${totalDevolucion}","${recibido}","${data.fecha}","${producto}",".${user.name}");`;
+        }
 
         query += `UPDATE oc_producto SET oc_producto.CANTIDAD_RECIBIDA = "${total}", oc_producto.DIFERENCIA = "${data.diferencia[i]}", oc_producto.GUIA_DESPACHO = "${data.guia[i]}" where CODIGO_OC = "${data.codigo}" and oc_producto.CODIGO_PRODUCTO = "${producto}"; `
         query += `UPDATE producto SET STOCK_ACTUAL = STOCK_ACTUAL + ${recibido}  WHERE CODIGO_PRODUCTO = '${producto}'; `
@@ -57,11 +66,13 @@ module.exports = (io) => {
 
 
    /* Devolución OC */
-  socket.on('addOcRecibir', (data,callback) => {
+  socket.on('addOcRecibir', (data,token,callback) => {
+      let user = decodeToken(token)
       let producto = {  
                     codigo_oc: data.codigo,
                     cantidad: data.cantidad, 
                     motivo: data.razon, 
+                    user: user.name,
                     fecha: data.fecha,
                     codigo_producto: data.ocProducto
                   }

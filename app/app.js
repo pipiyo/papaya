@@ -66,6 +66,8 @@ require('./srcApirest/controllers/descriptionRochaSocket')(io)
 
 require('./srcApirest/controllers/listadoOcSocket')(io)
 
+require('./srcApirest/controllers/listadoValeSocket')(io)
+
 require('./srcApirest/controllers/ordenDeCompraSocket')(io)
   
 app.all('*', (request, response, next) => {
