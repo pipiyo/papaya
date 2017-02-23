@@ -127,7 +127,8 @@ $instagramColor_darker : darken( $instagramColor, 15%);
 $instagramColor_light : lighten( $instagramColor, 10%);
 $instagramColor_lighter : lighten( $instagramColor, 15%);
 
-
+$ok : #D8F6CE;
+$error : #F6CECE;
 /* -> genero un mapa de tamanos <- */
 $color_corporativo_darker : #2F3740;
 $color_corporativo_dark : #34404e; 

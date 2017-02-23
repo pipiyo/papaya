@@ -2040,5 +2040,91 @@ a.external-link, .external-link a {
     }
 }
 
-/* Module orden de compra */
+/* Module dialog */
+.module_dialog{
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    right: 1em;
+    bottom: 0;
+    border-top-left-radius: 10px;
+    .content-dialog{
+        position: relative;
+        display: table;
+        height: 100px;
+        width: 100%;
+        .close{
+            position: absolute;
+            top: -2px;
+            display: block;
+            left: -1px;
+            font-size: 2em;
+            cursor: pointer;
 
+            color: $color_corporativo_darker;
+            &:hover{
+                color: $color_corporativo_dark;
+            }
+        }
+    }
+
+    .icon{
+        display: table-cell;
+        width: 30%;
+        vertical-align: middle;
+        text-align: center;
+        i{
+            font-size: 2em;
+        }
+
+    }
+    .text{
+        display: table-cell;
+        width: 70%;
+        vertical-align: middle;
+        h5{
+            font-size: $fontBig;
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            font-size: $fontSmall;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &.ok{
+        background: $ok;
+    }
+    &.error{
+        background: $error;
+    }
+
+}
+
+/* Css transition*/
+/* Css transition*/
+/* Css transition*/
+
+.dialog-leave {
+   position: absolute;
+   right: 1em;
+   bottom: 0;
+}
+.dialog-enter {
+   position: absolute;
+   right: calc(-400px + -1em);
+   bottom: 0;
+}
+
+.dialog-leave.dialog-leave-active {
+   transition: all 500ms linear;
+   right: calc(-400px + -1em);
+   bottom: 0;
+}
+.dialog-enter.dialog-enter-active {
+   transition: all 1500ms linear;
+   right: 1em;
+   bottom: 0;
+}

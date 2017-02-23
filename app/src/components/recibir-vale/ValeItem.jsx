@@ -12,7 +12,7 @@ class ValeItem extends React.Component {
         <div>
           <div className="module-form">
             <div className="item-form title">
-                <h4>Recibir orden de compra</h4>
+                <h4>Recibir vale</h4>
             </div>
 
             <div className="item-form">

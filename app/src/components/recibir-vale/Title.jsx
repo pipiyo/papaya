@@ -7,7 +7,7 @@ class Title extends React.Component {
 	render(){
 		return(
 			<div class="title">
-          		<h3>Recibir orden de compra</h3>
+          		<h3>Recibir vale de emisión</h3>
         	</div>
 		)
 	}

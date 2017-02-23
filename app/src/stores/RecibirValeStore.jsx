@@ -62,7 +62,7 @@ let RecibirValeStore = Reflux.createStore({
         this.obj.cantidad[i] = this.validador(this.obj.renderProductos[i].CANTIDAD_SOLICITADA)
         this.obj.stock[i] = (this.obj.renderProductos[i].STOCK_ACTUAL)?this.obj.renderProductos[i].STOCK_ACTUAL:0;
         this.obj.recibido[i] = (this.obj.renderProductos[i].CANTIDAD_ENTREGADA)?this.obj.renderProductos[i].CANTIDAD_ENTREGADA:0;
-        this.obj.diferencia[i] = (this.obj.renderProductos[i].DIFERENCIA)?this.obj.renderProductos[i].DIFERENCIA:this.obj.renderProductos[i].CANTIDAD_SOLICITADA
+        this.obj.diferencia[i] = (this.obj.renderProductos[i].DIFERENCIA || this.obj.renderProductos[i].CANTIDAD_ENTREGADA)?this.obj.renderProductos[i].DIFERENCIA:this.obj.renderProductos[i].CANTIDAD_SOLICITADA
       }
       this.trigger(this.obj)
     })
