@@ -1,8 +1,8 @@
 import React from 'react'
-import OcItem from './OcItem'
-import OcProducto from './OcProducto'
+import ValeItem from './ValeItem'
+import ValeProducto from './ValeProducto'
 
-class Oc extends React.Component {
+class Vale extends React.Component {
 
   constructor() {
     super()
@@ -10,18 +10,16 @@ class Oc extends React.Component {
 
   render() {
       return (
-        <form autoComplete="off" onSubmit={this.props.updateOc}>
+        <form autoComplete="off" onSubmit={this.props.updateVale}>
           <fieldset> 
-            <OcItem 
+            <ValeItem 
             renderInput={this.props.renderInput} 
             obj={this.props.obj} 
-            addOc={this.props.addOc}
             />
           </fieldset> 
 
-          <OcProducto 
+          <ValeProducto 
             obj={this.props.obj}
-            renderInputOc={this.props.renderInputOc}
             renderInputOcTotal={this.props.renderInputOcTotal}   
           />
           <div className="module-form button top">
@@ -36,4 +34,4 @@ class Oc extends React.Component {
 
 }
 
-export default Oc
+export default Vale

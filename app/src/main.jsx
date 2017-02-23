@@ -35,6 +35,7 @@ import DescriptionOc from './routes/DescriptionOcRoutes'
 import Auth from './routes/AuthRoutes'
 import OrdenCompra from './routes/OrdenCompraRoutes'
 import RecibirOc from './routes/RecibirOCRoutes'
+import RecibirVale from './routes/RecibirValeRoutes'
 import ListadoVale from './routes/ListadoValeRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
@@ -77,6 +78,7 @@ ReactDOM.render((
             <Route path="orden-de-compra" component={OrdenCompra}/>
             <Route path="actualizar-rocha/:id" component={UpdateRocha}/>
             <Route path="recibir-oc/:id" component={RecibirOc}/>
+            <Route path="recibir-vale/:id" component={RecibirVale}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

@@ -2,7 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
-class Item extends React.Component {
+class OcItem extends React.Component {
 
   constructor() {
     super()
@@ -68,4 +68,4 @@ class Item extends React.Component {
 
 }
 
-export default Item
+export default OcItem

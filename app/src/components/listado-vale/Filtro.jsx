@@ -35,9 +35,8 @@ class Filtro extends React.Component {
               <label>Estado</label>
               <select id="estado" >
                 <option value="Pendiente">Pendiente</option>
-                <option value="En Proceso">En Proceso</option>
                 <option value="Nulo">Nulo</option>
-                <option value="Ok">Ok</option>
+                <option value="ENTREGADO">Entregado</option>
               </select>
             </div>
             <div class="item-filter">

@@ -69,6 +69,8 @@ require('./srcApirest/controllers/listadoOcSocket')(io)
 require('./srcApirest/controllers/listadoValeSocket')(io)
 
 require('./srcApirest/controllers/ordenDeCompraSocket')(io)
+
+require('./srcApirest/controllers/valeDeEmisionSocket')(io)
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
