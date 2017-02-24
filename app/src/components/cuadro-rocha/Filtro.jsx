@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class Filtro extends React.Component {
+class Filtro extends Component {
   constructor() {
     super()
   }
   render() {
+
       return (
-      <form>
+      <form onSubmit={this.props.buscar} >
         <div class="module-filter">
           
             <div class="item-filter">
@@ -27,15 +28,20 @@ class Filtro extends React.Component {
             </div>
             <div class="item-filter">
                 <label>Ejecutivo</label>
+
                 <select id="ejecutivo" >
                   <option value="">Seleccioné</option>
+                    {
+                      this.props.obj.ejecutivo.map( (v, k) => {
+                        return( <option key={k} value={v.ejecutivo}>{v.ejecutivo}</option> )
+                      })
+                    }
                 </select>
+
             </div>
             <div class="item-filter">
                 <label>Cliente</label>
-                <select id="cliente" >
-                  <option value="">Seleccioné</option>
-                </select>
+                <input autoComplete="off" id="cliente" type="text" />
             </div>
             <div className="item-filter ">
               <input id="btn-buscar" value="Buscar"  type="submit" />

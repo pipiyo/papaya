@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Filtro from './Filtro'
 import Title from './Title'
 import Proyecto from './Proyecto'
 import Day from './Day'
 
-class CuadroRochaIndex extends React.Component {
+class CuadroRochaIndex extends Component {
 
   constructor() {
     super()
@@ -13,12 +13,16 @@ class CuadroRochaIndex extends React.Component {
       return (         
         <div>
           <Title />
-          <Filtro />
+          <Filtro 
+                obj={this.props.obj.form}
+                buscar={this.props.obj.buscar} />
            
           <div class="module-cuadro-rocha">
             <Day />
             <div class="item">
-               <Proyecto />
+
+            <Proyecto obj={this.props.obj} /> 
+
             </div>
 
           </div>

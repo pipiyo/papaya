@@ -1,18 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Rocha from './Rocha'
 
-class Proyecto extends React.Component {
+
+
+import _ from 'lodash'
+
+
+class ProyectoItem extends Component {
 
   constructor() {
     super()
   }
   render() {
+
       return (         
         <div>
-          <div class="info proyecto">
-            <div class="datos name"><p>Nombre Proyecto</p></div>
-            <div class="datos date"><p>2016-01-02</p></div>
-            <div class="datos date"><p>2016-01-02</p></div>
+
+
+
+        <div class="info proyecto">
+            <div class="datos name" onClick={this.props.showProyecto} ><p>{this.props.obj.np}</p></div>
+            <div class="datos date"><p>{this.props.obj.ingreso}</p></div>
+            <div class="datos date"><p>{this.props.obj.entrega}</p></div>
             <div class="datos percentage"><p>10%</p></div>
             <div class="day"><p></p></div>
             <div class="day ok"><p></p></div>
@@ -49,8 +58,49 @@ class Proyecto extends React.Component {
             <div class="day"><p></p></div>
             <div class="day"><p></p></div>
             <div class="day"><p></p></div>
-          </div>
-          <Rocha />
+          </div> 
+
+          { this.props.obj.show ? <Rocha
+                                        keyProyecto={this.props.index}  
+                                        showRocha={this.props.showRocha} 
+                                        showServicio={this.props.showServicio}
+                                        showSubServicio={this.props.showSubServicio}
+                                        obj={this.props.obj.cp} /> : null }
+          
+
+        </div>
+      )
+
+  }
+
+}
+
+
+
+
+
+
+class Proyecto extends Component {
+
+  constructor() {
+    super()
+  }
+  render() {
+
+      return (         
+        <div>
+            {
+              this.props.obj.proyectos.map( (v, k) => {
+                return( <ProyectoItem 
+                                    key={k} 
+                                    index={k} 
+                                    showProyecto={this.props.obj.showProyecto}
+                                    showRocha={this.props.obj.showRocha}
+                                    showServicio={this.props.obj.showServicio}
+                                    showSubServicio={this.props.obj.showSubServicio}
+                                    obj={v} /> )
+              })
+            }
         </div>
       )
 
