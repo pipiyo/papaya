@@ -45,7 +45,9 @@ export default class LoginRoutes extends React.Component {
   render() {
       return (
             <div class="module-login">
-              <div class="fondo"></div>
+              <div class="fondo1"></div>
+              <div class="fondo2"></div>
+              <div class="fondo-gris"></div>
               <div class="item-login">
                 <div class="box-login">
                   <div class="img">

@@ -1955,9 +1955,21 @@ a.external-link, .external-link a {
         margin: 0;
         padding: 0;
     }
-    .fondo{
-        background: url(images/fondos/login.jpg);
-        filter: blur(3px) grayscale(80%);
+    .fondo1{
+        background: url(images/fondos/fondo.jpg);
+        //filter: blur(3px);
+        position: absolute;
+        top: 0;
+        background-size: cover;
+        background-position: 0 100%;
+        height: 100%;
+        width: 100%;
+        -webkit-animation: subir 180s linear 1;
+        -moz-animation: subir 180s linear 1;
+        -ms-animation: subir 180s linear 1; 
+    }
+    .fondo-gris{
+        background: rgba(0, 0, 0, .5);
         position: absolute;
         background-size: cover;
         border: solid;
@@ -2038,6 +2050,19 @@ a.external-link, .external-link a {
             }
         }
     }
+}
+
+@-webkit-keyframes subir{
+    0%   { background-position: 0 0;}
+    100% { background-position: 0 100%;}
+}
+@-moz-keyframes subir{
+    0%   { background-position: 0 0;}
+    100% { background-position: 0 100%;}
+}
+@-ms-keyframes subir{
+    0%   { background-position: 0 0;}
+    100% { background-position: 0 100%;}
 }
 
 /* Module dialog */
