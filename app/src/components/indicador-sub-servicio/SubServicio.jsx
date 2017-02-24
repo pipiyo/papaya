@@ -17,8 +17,9 @@ class SubServicio extends React.Component {
   }
   render() {
       return (
-        <div class="module-table" data-col="once" data-area="ok">
+        <div class="module-table" data-area="ok">
           <div class="module-table-container">
+            <div class="module-table-content">
               <div class="module-table-item">Rocha</div>
               <div class="module-table-item">Cliente</div>
               <div class="module-table-item">Ejecutivo</div>
@@ -30,6 +31,7 @@ class SubServicio extends React.Component {
               <div class="module-table-item">Fecha E</div>
               <div class="module-table-item">Observación</div>
               <div class="module-table-item">Estado</div>
+            </div>
               {
                 this.props.datos
               }

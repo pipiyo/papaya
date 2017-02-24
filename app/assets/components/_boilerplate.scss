@@ -1574,15 +1574,7 @@ a.external-link, .external-link a {
     &.oc{.module-table-container{.module-table-item{background:#41AC8A;color:$blanco;padding: .5em;}}}
     &.vale{.module-table-container{.module-table-item{background:#0489B1;color:$blanco;padding: .5em;}}}
 
-    &[data-col="catorce"]{.module-table-container{width:calc(14 * 200px);}}
-    &[data-col="trece"]{.module-table-container{width:calc(13 * 200px);}}
-    &[data-col="doce"]{.module-table-container{width:calc(12 * 200px);}}
-    &[data-col="once"]{.module-table-container{width:calc(11 * 200px);}}
-    &[data-col="diez"]{.module-table-container{width:calc(10 * 200px);}}
-    &[data-col="nueve"]{.module-table-container{width:calc(9 * 200px);}}
-    &[data-col="ocho"]{.module-table-container{width:calc(8 * 200px);}}
-    &[data-col="siete"]{.module-table-container{width:calc(7 * 200px);}}
-    &[data-col="seis"]{.module-table-container{width:calc(6 * 200px);}}
+
     .module-table-container{
         display: flex;
         flex-wrap: wrap;
@@ -1596,23 +1588,9 @@ a.external-link, .external-link a {
     }
     .module-table-content{
         display: flex;
-        flex-wrap: wrap;
         border-bottom: solid 1px $gris;
         a{
             text-decoration: none;
-        }
-        &.right{
-            display: block; 
-            width:100%;
-            .module-table-content-item-rows{
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-            }
-            .module-table-content-item{
-                background: #E3F6CE;
-                border-bottom: solid 1px $gris;
-            }
         }
         &.adquisiciones{background:$color_abastecimiento;order:1;}
         &.produccion{background:$color_produccion;order:2;color:$blanco;}

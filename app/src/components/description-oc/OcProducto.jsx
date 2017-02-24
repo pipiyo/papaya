@@ -11,6 +11,7 @@ class OcProducto extends React.Component {
       return (         
         <div class="module-table oc" data-col="once" data-area="ok">
           <div class="module-table-container">
+            <div class="module-table-content">
               <div class="module-table-item">Código</div>
               <div class="module-table-item">Rocha</div>
               <div class="module-table-item">Descripción</div>
@@ -22,7 +23,7 @@ class OcProducto extends React.Component {
               <div class="module-table-item">Precio Lista</div>
               <div class="module-table-item">Descuento</div>
               <div class="module-table-item">Total</div>
-              
+            </div>  
               {
                 this.props.obj.renderProductos.map( (producto,i) => {
                   return <OcProductoItem key={i}  producto={producto}/>

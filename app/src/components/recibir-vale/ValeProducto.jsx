@@ -10,6 +10,7 @@ class ValeProducto extends React.Component {
       return (         
         <div class="module-table vale top" data-col="ocho" data-area="ok">
           <div class="module-table-container">
+            <div class="module-table-content">
               <div class="module-table-item">Código</div>
               <div class="module-table-item">Descripción</div>
               <div class="module-table-item">Observaciones</div>
@@ -18,6 +19,7 @@ class ValeProducto extends React.Component {
               <div class="module-table-item">Recibido</div>
               <div class="module-table-item">Entregado</div>
               <div class="module-table-item">Diferencia</div>
+            </div>
               {
                 this.props.obj.renderProductos.map( (producto,i) => {
                   return <ValeProductoItem 

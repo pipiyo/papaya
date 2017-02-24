@@ -18,6 +18,7 @@ class OC extends React.Component {
       return (
         <div class="module-table oc" data-col="catorce" data-area="ok">
           <div class="module-table-container ">
+            <div class="module-table-content">
               <div class="module-table-item">Herramientas</div>
               <div class="module-table-item">OC</div>
               <div class="module-table-item">Rocha</div>
@@ -30,9 +31,9 @@ class OC extends React.Component {
               <div class="module-table-item">User</div>
               <div class="module-table-item">Neto</div>
               <div class="module-table-item">Factura</div>
-              <div class="module-table-item">Fecha Envio Por Valija</div>
-              
+              <div class="module-table-item">Fecha Envio Por Valija</div>         
               <div class="module-table-item">Estado</div>
+            </div>
               {this.props.obj.renderItem}
           </div>
           <div class="module-table-button">
