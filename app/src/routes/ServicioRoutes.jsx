@@ -25,12 +25,7 @@ export default class ServicioRoutes extends React.Component {
     event.persist()
     ServicioActions.addServicio(event) 
   }
-  closeDialog(event) {
-    event.preventDefault()
-    ServicioActions.closeDialog() 
-  }
   render() {
-    console.log(this.props)
       return (
         <ServicioIndex 
         rocha={this.props.params.rocha} 
@@ -41,7 +36,6 @@ export default class ServicioRoutes extends React.Component {
         reclamo={this.state.obj.item.reclamo}  
         addServicio={this.addServicio.bind(this)} 
         renderArea={this.renderArea.bind(this)} 
-        closeDialog={this.closeDialog.bind(this)} 
         />       
       )
   }

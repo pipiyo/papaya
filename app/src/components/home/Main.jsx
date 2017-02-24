@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from './Nav'
+import Dialog from '../../routes/DialogRoutes'
 
 class Main extends React.Component {
 
@@ -31,6 +32,7 @@ class Main extends React.Component {
             </div>
             {/*React.cloneElement(this.props.content, {siteArea: "test"}))*/  this.props.content}
           </div>
+            <Dialog closeDialog={this.props.closeDialog} mensaje={this.props.mensaje} /> 
         </div>
       )
   }

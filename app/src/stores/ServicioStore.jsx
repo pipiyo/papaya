@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import moment  from 'moment'
 
 import ServicioActions from '../actions/ServicioActions'
+import DialogActions from '../actions/DialogActions'
 
 import ItemProduccion from '../components/servicio/ItemProduccion.jsx'
 import ItemSillas from '../components/servicio/ItemSillas.jsx'
@@ -136,9 +137,8 @@ let ServicioStore = Reflux.createStore({
       this.obj.mensaje.title = 'Felicitaciones'
       this.obj.mensaje.estado = true
       setTimeout(this.closeDialog, 8000)
-   
+      DialogActions.dialog(this.obj.mensaje)
       /* End Dialog */
-
   		this.trigger(this.obj)
   	})
   },
@@ -208,6 +208,7 @@ let ServicioStore = Reflux.createStore({
     this.obj.mensaje.title = ''
     this.obj.mensaje.estado = false
     this.trigger(this.obj)
+    DialogActions.dialog(this.obj.mensaje)
   },
   renderArea: function(area){
     this.obj.areaName = area
