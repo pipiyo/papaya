@@ -103,7 +103,7 @@ if (form.ejecutivo) {
 							  					entrega: value.FECHA_ENTREGA }
 							})
 
-						    connection.query(`SELECT servicio.CODIGO_SERVICIO,  servicio.CODIGO_PROYECTO, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA
+						    connection.query(`SELECT servicio.CODIGO_SERVICIO,  servicio.CODIGO_PROYECTO, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.NOMBRE_SERVICIO
 	FROM servicio 
 	WHERE servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
 						      if (errorCodigoServicio) {
@@ -117,7 +117,9 @@ if (form.ejecutivo) {
 								    cs[0] = []
 									_.forEach(resultsCodigoServicio, (value, key) => {
 									  cs[0][key] = value.CODIGO_SERVICIO
-									  lista.cs[key] = { cs: value.CODIGO_SERVICIO, cp: value.CODIGO_PROYECTO,
+									  lista.cs[key] = { cs: value.CODIGO_SERVICIO, 
+														csnombre: value.NOMBRE_SERVICIO,
+									  					cp: value.CODIGO_PROYECTO,
 									  					inicio: value.FECHA_INICIO,
 									  					entrega: value.FECHA_ENTREGA }
 									})
@@ -266,7 +268,7 @@ if (form.ejecutivo) {
 							  					 }
 							})
 
-						    connection.query(`SELECT servicio.CODIGO_SERVICIO, servicio.CODIGO_PROYECTO, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA
+						    connection.query(`SELECT servicio.CODIGO_SERVICIO, servicio.CODIGO_PROYECTO, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.DESCRIPCION
 	FROM servicio 
 	WHERE servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
 						      if (errorCodigoServicio) {
@@ -281,6 +283,7 @@ if (form.ejecutivo) {
 									  cs[0][key] = value.CODIGO_SERVICIO
 									  lista.cs[key] = { 
 									  					cs: value.CODIGO_SERVICIO, 
+									  					csnombre: value.DESCRIPCION,
 									  					cp: value.CODIGO_PROYECTO,
 									  					inicio: value.FECHA_INICIO,
 									  					entrega: value.FECHA_ENTREGA
