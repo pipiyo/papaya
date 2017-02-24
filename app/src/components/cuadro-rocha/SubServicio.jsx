@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class SubServicio extends React.Component {
+
+
+
+class SubServicioItem extends Component {
 
   constructor() {
     super()
@@ -9,9 +12,9 @@ class SubServicio extends React.Component {
       return (         
         <div>
           <div class="info subactividad">
-            <div class="datos name"><p>Nombre Sub Servicio</p></div>
-            <div class="datos date"><p>2016-01-02</p></div>
-            <div class="datos date"><p>2016-01-02</p></div>
+            <div class="datos name"><p>{this.props.obj.css}</p></div>
+            <div class="datos date"><p>{this.props.obj.inicio}</p></div>
+            <div class="datos date"><p>{this.props.obj.entrega}</p></div>
             <div class="datos percentage"><p>10%</p></div>
             <div class="day"><p></p></div>
             <div class="day ok abastecimiento"><p></p></div>
@@ -54,6 +57,38 @@ class SubServicio extends React.Component {
 
   }
 
+}
+
+
+
+
+
+
+
+
+class SubServicio extends Component {
+
+  constructor() {
+    super()
+  }
+  render() {
+      return (         
+        <div>
+            {
+              this.props.obj.map( (v, k) => {
+                return( <SubServicioItem 
+                                   key={k} 
+                                   index={k} 
+                                   keyProyecto={this.props.keyProyecto} 
+                                   keyRocha={this.props.keyRocha} 
+                                   keyServicio={this.props.keyServicio}
+                                   showSubServicio={this.props.showSubServicio} 
+                                   obj={v} /> )
+              })
+            }
+        </div>
+      )
+  }
 }
 
 export default SubServicio

@@ -6,9 +6,6 @@ const port = process.env.PORT || 9097
 const http = require('http')
 const request = require('request')
 const moment = require('moment')
-const UserSession =  require('./srcApirest/models/userSession')
-
-
 
 //console.log( moment('09:00:00', 'h:mm:ss').fromNow(), moment().format('h:mm:ss') )
 
@@ -63,6 +60,8 @@ require('./srcApirest/controllers/productoSocket')(io)
 require('./srcApirest/controllers/proyectoSocket')(io)
 
 require('./srcApirest/controllers/descriptionRochaSocket')(io)
+
+require('./srcApirest/controllers/cuadroRochaSocket')(io)
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
