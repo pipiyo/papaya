@@ -61,12 +61,16 @@ require('./srcApirest/controllers/proyectoSocket')(io)
 
 require('./srcApirest/controllers/descriptionRochaSocket')(io)
 
-
 require('./srcApirest/controllers/listadoOcSocket')(io)
+
+require('./srcApirest/controllers/listadoValeSocket')(io)
 
 require('./srcApirest/controllers/ordenDeCompraSocket')(io)
 
+require('./srcApirest/controllers/valeDeEmisionSocket')(io)
+
 require('./srcApirest/controllers/cuadroRochaSocket')(io)
+
 
   
 app.all('*', (request, response, next) => {

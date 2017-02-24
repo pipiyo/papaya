@@ -32,7 +32,7 @@ export default class UpdateOcFechaRoutes extends React.Component {
       return (
         <UpdateOcFechaIndex 
        	obj={this.state.obj}
-		renderFechaConfirmacion={this.renderFechaConfirmacion.bind(this)} 
+		    renderFechaConfirmacion={this.renderFechaConfirmacion.bind(this)} 
         renderFechaActa={this.renderFechaActa.bind(this)}
         updateFechaOc={this.updateFechaOc.bind(this)}    
         />       

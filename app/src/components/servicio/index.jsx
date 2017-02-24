@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Title from './Title'
 import Form from './Form'
 
@@ -8,7 +7,6 @@ class ServicioIndex extends React.Component {
   constructor() {
     super()
   }
-
   render() {
       return (
         <div>
@@ -22,6 +20,7 @@ class ServicioIndex extends React.Component {
             area={this.props.area} 
             renderArea={this.props.renderArea} 
             />
+            
         </div>   
       )
 

@@ -34,6 +34,9 @@ import UpdateOcFecha from './routes/UpdateOcFechaRoutes'
 import DescriptionOc from './routes/DescriptionOcRoutes'
 import Auth from './routes/AuthRoutes'
 import OrdenCompra from './routes/OrdenCompraRoutes'
+import RecibirOc from './routes/RecibirOCRoutes'
+import RecibirVale from './routes/RecibirValeRoutes'
+import ListadoVale from './routes/ListadoValeRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
@@ -69,9 +72,13 @@ ReactDOM.render((
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
             <Route path="listado-oc" component={ListadoOc}/>
+            <Route path="listado-vale" component={ListadoVale}/>
             <Route path="actualizar-oc-fecha/:id" component={UpdateOcFecha}/>
             <Route path="descripcion-oc/:id" component={DescriptionOc}/>
             <Route path="orden-de-compra" component={OrdenCompra}/>
+            <Route path="actualizar-rocha/:id" component={UpdateRocha}/>
+            <Route path="recibir-oc/:id" component={RecibirOc}/>
+            <Route path="recibir-vale/:id" component={RecibirVale}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

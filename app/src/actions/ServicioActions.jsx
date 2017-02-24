@@ -17,7 +17,8 @@ let ServicioActions = Reflux.createActions([
     "renderFechaTela",
     "renderFechaVidrio",
     "renderFechaInsumo",
-    "renderFechaImportado"
+    "renderFechaImportado",
+    'closeDialog'
 ])
 
 export default ServicioActions

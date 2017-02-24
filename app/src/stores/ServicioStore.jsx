@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import moment  from 'moment'
 
 import ServicioActions from '../actions/ServicioActions'
+import DialogActions from '../actions/DialogActions'
 
 import ItemProduccion from '../components/servicio/ItemProduccion.jsx'
 import ItemSillas from '../components/servicio/ItemSillas.jsx'
@@ -22,7 +23,7 @@ let ServicioStore = Reflux.createStore({
   obj: { 
     comunas: 'comunas', 
     vehiculos: 'vehiculos', 
-    mensaje: 'mensaje',
+    mensaje: {title:"",texto:"",estado:false},
     item: { reclamo:'', fecha : { fechaInicio:moment(), fechaEntrega:moment(),fechaMetales:moment(),fechaMuebles:moment(), fechaEspeciales:moment(), fechaSillas:moment(), fechaTela:moment(), fechaVidrio:moment(), fechaInsumo:moment(), fechaImportado:moment()  } },
     area: null,
     areaName: null
@@ -34,7 +35,9 @@ let ServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.mensaje = ''
+      this.obj.mensaje.texto = ''
+      this.obj.mensaje.title = ''
+      this.obj.mensaje.estado = false
     })
   },
   getInitialState: function() {
@@ -44,7 +47,9 @@ let ServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.mensaje = ''
+      this.obj.mensaje.texto = ''
+      this.obj.mensaje.title = ''
+      this.obj.mensaje.estado = false
       this.trigger(this.obj)
     })
   },
@@ -126,7 +131,14 @@ let ServicioStore = Reflux.createStore({
       if(ev.target.elements['dias']){ev.target.elements['dias'].value = ""}
         
       this.obj.area = ""
-      this.obj.mensaje = okAddServicio
+
+      /* Dialog */
+      this.obj.mensaje.texto = okAddServicio
+      this.obj.mensaje.title = 'Felicitaciones'
+      this.obj.mensaje.estado = true
+      setTimeout(this.closeDialog, 8000)
+      DialogActions.dialog(this.obj.mensaje)
+      /* End Dialog */
   		this.trigger(this.obj)
   	})
   },
@@ -190,6 +202,13 @@ let ServicioStore = Reflux.createStore({
     this.obj.item.fecha.fechaImportado = fecha
     this.trigger(this.obj)
     this.renderArea(this.obj.areaName )
+  },
+  closeDialog : function(){
+    this.obj.mensaje.texto = ''
+    this.obj.mensaje.title = ''
+    this.obj.mensaje.estado = false
+    this.trigger(this.obj)
+    DialogActions.dialog(this.obj.mensaje)
   },
   renderArea: function(area){
     this.obj.areaName = area
