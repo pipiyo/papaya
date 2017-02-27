@@ -18,8 +18,8 @@ export default class IndicadorSubServicioRoutes extends React.Component {
   	IndicadorServicioActions.renderServicio(this.props.params.area)
   }
   componentWillReceiveProps(nextProps, nextState){
-    IndicadorServicioActions.renderReset()
-    IndicadorServicioActions.renderServicio(nextProps.params.area)
+    IndicadorServicioActions.renderReset(nextProps.params.area)
+    IndicadorServicioActions.renderServicio()
   }
   renderFiltro(event){
     event.preventDefault()
