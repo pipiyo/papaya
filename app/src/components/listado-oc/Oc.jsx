@@ -16,27 +16,33 @@ class OC extends React.Component {
   }
   render() {
       return (
-        <div class="module-table oc" data-col="catorce" data-area="ok">
-          <div class="module-table-container ">
-            <div class="module-table-content">
-              <div class="module-table-item">Herramientas</div>
-              <div class="module-table-item">OC</div>
-              <div class="module-table-item">Rocha</div>
-              <div class="module-table-item">Versión</div>
-              <div class="module-table-item">Proveedor</div>
-              <div class="module-table-item">Fecha Realización</div>
-              <div class="module-table-item">Fecha Entrega</div>
-              <div class="module-table-item">Fecha Confirmación</div>
-              <div class="module-table-item">Fecha Recibo</div>
-              <div class="module-table-item">User</div>
-              <div class="module-table-item">Neto</div>
-              <div class="module-table-item">Factura</div>
-              <div class="module-table-item">Fecha Envio Por Valija</div>         
-              <div class="module-table-item">Estado</div>
-            </div>
-              {this.props.obj.renderItem}
+        <div>
+          <div class="module-table-new">
+            <table class="oc">
+              <thead>
+                <tr>
+                  <th>Herramientas</th>
+                  <th>OC</th>
+                  <th>Rocha</th>
+                  <th>Versión</th>
+                  <th>Proveedor</th>
+                  <th>Fecha Realización</th>
+                  <th>Fecha Entrega</th>
+                  <th>Fecha Confirmación</th>
+                  <th>Fecha Recibo</th>
+                  <th>User</th>
+                  <th>Neto</th>
+                  <th>Factura</th>
+                  <th>Fecha Envio Por Valija</th>         
+                  <th>Estado</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {this.props.obj.renderItem}
+              </tbody>
+            </table>
           </div>
-          <div class="module-table-button">
+          <div class="button">
             <button class="hidden" id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
           </div>   
         </div>

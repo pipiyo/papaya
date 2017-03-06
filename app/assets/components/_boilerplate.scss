@@ -620,7 +620,7 @@ a.external-link, .external-link a {
     .button{
         overflow: hidden;
         margin-bottom: 1em;
-        a{
+        a, button{
             margin: 0 1em;
             background: $color_corporativo_darker;
             padding: .5em;
@@ -629,9 +629,13 @@ a.external-link, .external-link a {
             float: right;
             text-align: center;
             max-width: 200px;
+            border: 0;
             display: block;
             &:hover{
                 background: $color_corporativo_dark;
+            }
+            &.hidden{
+                display: none;
             }
         }
     }
@@ -2161,6 +2165,92 @@ a.external-link, .external-link a {
         background: $error;
     }
 
+}
+/* Module table new */
+
+.module-table-new{
+    margin: 1em auto 1em auto;
+    overflow-y: hidden; 
+    overflow-x: scroll; 
+    border-radius: 10px;
+    width: calc(100% - 1em);
+    table{
+        border-radius: 10px;
+        border-collapse: separate;
+        width: 100%;
+        border-spacing:0;
+        border:1px solid rgba(34,36,38,.15);
+        font-size: $fontTiny;
+        &.oc{thead{th{background:#41AC8A;color:$blanco;}}}
+        thead{
+            border-radius: 10px 10px 0 0;
+            th{
+                background-color: rgb(249, 250, 251);
+                &:first-child{
+                   border-radius: 10px 0 0 0;
+                }
+                &:last-child{
+                    border-radius: 0 10px 0 0;
+                }
+            }
+        }
+        tbody{
+            tr{
+                &:nth-child(odd){
+                    background: rgb(244, 246, 247);
+                }
+                &:nth-child(event){
+                    background: rgb(255, 255, 255);
+                }
+                &.error{
+                    background: #fff6f6;
+                    color : #9f3a38;
+                }
+                &.ok{
+                    background: #fcfff5;
+                    color : #2c662d;
+                }
+                &:last-child{
+                    td{
+                        &:first-child{
+                           border-radius: 0 0 0 10px;
+                        }
+                        &:last-child{
+                            border-radius: 0 0 10px 0;
+                        }
+                    }
+                }
+            }
+        }
+        td, th{
+            padding: 10px 7px;
+            &.nr{
+                white-space: nowrap;
+            }
+            &.right{
+                text-align: right;
+            }
+            &.center{
+                text-align: center;
+            }
+            a{
+                text-decoration: none;
+                padding: 0 3px;
+            }
+        }
+        td{
+            border-top:1px solid rgba(34,36,38,.15);
+            + td{  
+                border-left:1px solid rgba(34,36,38,.15);
+            }
+        }
+        th{
+            + th{
+                border-left:1px solid rgba(34,36,38,.15);
+    
+            }
+        }
+    }
 }
 
 /* Css transition*/
