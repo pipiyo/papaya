@@ -7,23 +7,27 @@ class Vale extends React.Component {
     super()
   }
   render() {
-      return (         
-        <div class="module-table" data-col="seis" data-area="ok">
-          <div class="module-table-container">
-            <div class="module-table-content">
-              <div class="module-table-item">Vale</div>
-              <div class="module-table-item">Departamento</div>
-              <div class="module-table-item">Fecha Ingreso</div>
-              <div class="module-table-item">Fecha Entrega</div>
-              <div class="module-table-item">Empleado</div>
-              <div class="module-table-item">Estado</div>
-            </div>
+      return (
+        <div class="module-table-new">
+          <table class="vale">
+              <thead>
+                <tr>
+                  <th>Vale</th>
+                  <th>Departamento</th>
+                  <th>Fecha Ingreso</th>
+                  <th>Fecha Entrega</th>
+                  <th>Empleado</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
               {
                 this.props.obj.renderVale.map( (vale,i) => {
                   return <ValeItem key={i} vale={vale} />
                 })
               } 
-          </div>  
+              </tbody>
+            </table>
         </div>
       )
 

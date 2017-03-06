@@ -7,15 +7,15 @@ class ServicioItem extends React.Component {
   }
   render() {
       return (         
-        <div class={`module-table-content ${this.props.servicio.NOMBRE_SERVICIO.toLowerCase()}`}>
-          <div class="module-table-content-item">{this.props.servicio.NOMBRE_SERVICIO}</div>
-          <div class="module-table-content-item a-center" >{this.props.servicio.CODIGO_SERVICIO}</div>
-          <div class="module-table-content-item">{this.props.servicio.SD}</div>
-          <div class="module-table-content-item a-center">{this.props.servicio.FECHA_INICIO.substring(0,10)}</div>
-          <div class="module-table-content-item a-center">{this.props.servicio.FECHA_ENTREGA.substring(0,10)}</div>
-          <div class="module-table-content-item">{this.props.servicio.OBSERVACIONES}</div>
-          <div class="module-table-content-item">{this.props.servicio.ESTADO}</div>
-        </div> 
+        <tr class={`${this.props.servicio.NOMBRE_SERVICIO.toLowerCase()}`}>
+          <td>{this.props.servicio.NOMBRE_SERVICIO}</td>
+          <td>{this.props.servicio.CODIGO_SERVICIO}</td>
+          <td>{this.props.servicio.SD}</td>
+          <td>{this.props.servicio.FECHA_INICIO.substring(0,10)}</td>
+          <td>{this.props.servicio.FECHA_ENTREGA.substring(0,10)}</td>
+          <td>{this.props.servicio.OBSERVACIONES}</td>
+          <td>{this.props.servicio.ESTADO}</td>
+        </tr> 
       )
 
   }

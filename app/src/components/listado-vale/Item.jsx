@@ -8,19 +8,19 @@ class Item extends React.Component {
   }
   render() {
       return (       
-        <div class="module-table-content">
-            <div class="module-table-content-item a-center">
+        <tr>
+            <td class="center">
               <Link to={`/home/recibir-vale/${this.props.datos.COD_VALE}`}> <i class="fa fa-check-square" aria-hidden="true"></i></Link>
-            </div>
-            <div class="module-table-content-item a-center">{this.props.datos.COD_VALE}</div>
-            <div class="module-table-content-item a-center">{this.props.datos.CODIGO_PROYECTO}</div>
-            <div class="module-table-content-item a-center">{this.props.datos.DEPARTAMENTO}</div>
-            <div class="module-table-content-item a-center">{this.props.datos.CODIGO_PROYECTO}</div>
-            <div class="module-table-content-item a-center">{(this.props.datos.FECHA)?this.props.datos.FECHA.substring(0,10):this.props.datos.FECHA}</div>
-            <div class="module-table-content-item a-center">{(this.props.datos.FECHA_TERMINO)?this.props.datos.FECHA_TERMINO.substring(0,10):this.props.datos.FECHA_TERMINO}</div>
-            <div class="module-table-content-item a-center">{this.props.datos.NOMBRE_USUARIO}</div>
-            <div class="module-table-content-item a-center">{this.props.datos.ESTADO}</div>
-        </div>     
+            </td>
+            <td>{this.props.datos.COD_VALE}</td>
+            <td>{this.props.datos.CODIGO_PROYECTO}</td>
+            <td>{this.props.datos.DEPARTAMENTO}</td>
+            <td>{this.props.datos.CODIGO_PROYECTO}</td>
+            <td class="nr">{(this.props.datos.FECHA)?this.props.datos.FECHA.substring(0,10):this.props.datos.FECHA}</td>
+            <td class="nr">{(this.props.datos.FECHA_TERMINO)?this.props.datos.FECHA_TERMINO.substring(0,10):this.props.datos.FECHA_TERMINO}</td>
+            <td>{this.props.datos.NOMBRE_USUARIO}</td>
+            <td>{this.props.datos.ESTADO}</td>
+        </tr>     
       )
   }
 

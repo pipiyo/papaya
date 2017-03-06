@@ -18,8 +18,10 @@ export default class BodegaRoutes extends React.Component {
   	BodegaActions.renderBodega(this.props.params.area)
   }
   componentWillReceiveProps(nextProps){
-    BodegaActions.renderReset()
-    BodegaActions.renderBodega(nextProps.params.area)
+    if(nextProps.params.area !== this.props.params.area){
+      BodegaActions.renderReset()
+      BodegaActions.renderBodega(nextProps.params.area)
+    }
   }
   renderViewMore(){
     BodegaActions.renderViewMore(this.props.params.area)

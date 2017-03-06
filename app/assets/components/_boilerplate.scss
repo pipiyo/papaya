@@ -1660,6 +1660,26 @@ a.external-link, .external-link a {
     }
 }
 
+.content-view-more{
+    width: 100%;
+    .view-more{
+        @include reset-appearance;
+        width: 200px;
+        padding: 1em;
+        margin: auto;
+        color: $blanco;
+        background: $color_corporativo_dark;
+        display: block;
+        &:hover{
+          background: $color_corporativo_darker;
+          cursor: pointer;  
+        }
+        &.hidden{
+            display: none;
+        }
+    }
+}
+
 /* Module Bodega */
 /* Module Bodega */
 /* Module Bodega */
@@ -2182,6 +2202,15 @@ a.external-link, .external-link a {
         border:1px solid rgba(34,36,38,.15);
         font-size: $fontTiny;
         &.oc{thead{th{background:#41AC8A;color:$blanco;}}}
+        &.abastecimiento{thead{th{background:$color_abastecimiento;color:$blanco;}}}
+        &.sillas{thead{th{background:$color_sillas;color:$blanco;}}}
+        &.produccion{thead{th{background:$color_produccion;color:$blanco;}}}
+        &.planificacion{thead{th{background:$color_planificacion;color:$blanco;}}}
+        &.desarrollo{thead{th{background:$color_desarrollo;color:$blanco;}}}
+        &.comercial{thead{th{background:$color_comercial;}}}
+        &.instalaciones{thead{th{background:$color_instalaciones;color:$blanco;}}}
+        &.despacho{thead{th{background:$color_despacho;color:$blanco;}}}
+        &.vale{thead{th{background:#0489B1;color:$blanco;}}}
         thead{
             border-radius: 10px 10px 0 0;
             th{
@@ -2236,6 +2265,12 @@ a.external-link, .external-link a {
             a{
                 text-decoration: none;
                 padding: 0 3px;
+            }
+            input{
+                @include reset-appearance;
+                &.active{
+                    border:solid 1px $gris;
+                }
             }
         }
         td{

@@ -7,19 +7,19 @@ class OcProductoItem extends React.Component {
   }
   render() {
       return (         
-        <div class="module-table-content">
-          <div class="module-table-content-item"><p>{this.props.producto.CODIGO_PRODUCTO}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.ROCHA}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.DESCRIPCION}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.OBSERVACION}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.STOCK_ACTUAL}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.CANTIDAD}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.PRECIO_BODEGA}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.PRECIO_UNITARIO}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.PRECIO_LISTA}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.DESCUENTO}</p></div>
-          <div class="module-table-content-item"><p>{this.props.producto.TOTAL}</p></div>
-        </div> 
+        <tr>
+          <td><p>{this.props.producto.CODIGO_PRODUCTO}</p></td>
+          <td><p>{this.props.producto.ROCHA}</p></td>
+          <td><p>{this.props.producto.DESCRIPCION}</p></td>
+          <td><p>{this.props.producto.OBSERVACION}</p></td>
+          <td><p>{this.props.producto.STOCK_ACTUAL}</p></td>
+          <td><p>{this.props.producto.CANTIDAD}</p></td>
+          <td><p>{this.props.producto.PRECIO_BODEGA}</p></td>
+          <td><p>{this.props.producto.PRECIO_UNITARIO}</p></td>
+          <td><p>{this.props.producto.PRECIO_LISTA}</p></td>
+          <td><p>{this.props.producto.DESCUENTO}</p></td>
+          <td><p>{this.props.producto.TOTAL}</p></td>
+        </tr> 
       )
 
   }

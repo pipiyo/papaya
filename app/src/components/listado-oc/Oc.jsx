@@ -42,9 +42,9 @@ class OC extends React.Component {
               </tbody>
             </table>
           </div>
-          <div class="button">
-            <button class="hidden" id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
-          </div>   
+          <div class="content-view-more">
+            <button class="hidden view-more" id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
+          </div>
         </div>
       )
 

@@ -17,29 +17,33 @@ class SubServicio extends React.Component {
   }
   render() {
       return (
-        <div class="module-table" data-area="ok">
-          <div class="module-table-container">
-            <div class="module-table-content">
-              <div class="module-table-item">Rocha</div>
-              <div class="module-table-item">Cliente</div>
-              <div class="module-table-item">Ejecutivo</div>
-              <div class="module-table-item">Actividad</div>
-              <div class="module-table-item">Descripción</div>
-              <div class="module-table-item">Sub Actividad</div>
-              <div class="module-table-item">Descripción</div>
-              <div class="module-table-item">Fecha I</div>
-              <div class="module-table-item">Fecha E</div>
-              <div class="module-table-item">Observación</div>
-              <div class="module-table-item">Estado</div>
-            </div>
-              {
-                this.props.datos
-              }
+        <div>
+          <div class="module-table-new">
+            <table data-area="ok">
+                <thead>
+                  <tr>
+                    <th>Rocha</th>
+                    <th>Cliente</th>
+                    <th>Ejecutivo</th>
+                    <th>Actividad</th>
+                    <th>Descripción</th>
+                    <th>Sub Actividad</th>
+                    <th>Descripción</th>
+                    <th>Fecha I</th>
+                    <th>Fecha E</th>
+                    <th>Observación</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.datos}
+                </tbody>
+              </table>
           </div>
-          <div class="module-table-button">
-            <button id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
-          </div>   
-        </div>
+          <div class="content-view-more">
+            <button class="hidden view-more" id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
+          </div>
+        </div>  
       )
 
   }

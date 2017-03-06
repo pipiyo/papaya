@@ -14,8 +14,8 @@ let IndicadorServicioStore = Reflux.createStore({
   listenables: [IndicadorServicioActions],
   obj: { 
     servicio : "",
-    ejecutivo: "",
-    total: 0,
+    ejecutivo: [],
+    total: [],
     area: "",
     button: "",
     renderItem: [],
@@ -61,6 +61,7 @@ let IndicadorServicioStore = Reflux.createStore({
       this.renderItem()
       this.trigger(this.obj)
     })
+    
   },
   renderFiltro : function(){
       document.getElementById('btn-buscar').disabled = true
@@ -97,11 +98,9 @@ let IndicadorServicioStore = Reflux.createStore({
     if(moment(date).isValid()){
       document.getElementById("fechaInicio").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaInicio = date
-      //this.renderFiltro();
     }else{
       document.getElementById("fechaInicio").value = ""
       this.obj.filtro.fechaInicio = undefined
-      //this.renderFiltro();
     }
     this.trigger(this.obj)
   },
@@ -109,11 +108,9 @@ let IndicadorServicioStore = Reflux.createStore({
     if(moment(date).isValid()){
       document.getElementById("fechaEntrega").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaEntrega = date
-      //this.renderFiltro();
     }else{
       document.getElementById("fechaEntrega").value = ""
       this.obj.filtro.fechaEntrega = undefined
-      //this.renderFiltro();
     }
     this.trigger(this.obj)
   },
@@ -195,11 +192,9 @@ let IndicadorServicioStore = Reflux.createStore({
   },
   renderItem: function(){
     let i
-    if(this.obj.renderItem.length <= 0){
       for(i=0;this.obj.servicio.length > i ;i++){
         this.obj.renderItem.push(<Item key={this.obj.servicio[i].CODIGO_SERVICIO} datos={this.obj.servicio[i]} />)
       } 
-    }
   }
 })
 

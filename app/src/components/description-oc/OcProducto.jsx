@@ -1,6 +1,5 @@
 import React from 'react'
 import OcProductoItem from './OcProductoItem'
-import OcProductoFootItem from './OcProductoFootItem'
 
 class OcProducto extends React.Component {
 
@@ -8,30 +7,60 @@ class OcProducto extends React.Component {
     super()
   }
   render() {
-      return (         
-        <div class="module-table oc" data-col="once" data-area="ok">
-          <div class="module-table-container">
-            <div class="module-table-content">
-              <div class="module-table-item">Código</div>
-              <div class="module-table-item">Rocha</div>
-              <div class="module-table-item">Descripción</div>
-              <div class="module-table-item">Observaciones</div>
-              <div class="module-table-item">Stock</div>
-              <div class="module-table-item">Cantidad</div>
-              <div class="module-table-item">Precio Bodega</div>
-              <div class="module-table-item">Precio Unitario</div>
-              <div class="module-table-item">Precio Lista</div>
-              <div class="module-table-item">Descuento</div>
-              <div class="module-table-item">Total</div>
-            </div>  
-              {
-                this.props.obj.renderProductos.map( (producto,i) => {
-                  return <OcProductoItem key={i}  producto={producto}/>
-                })
-              }
-              <OcProductoFootItem obj={this.props.obj} />
+      return (
+        <div>
+          <div class="module-table-new">
+            <table class="oc">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Rocha</th>
+                    <th>Descripción</th>
+                    <th>Observaciones</th>
+                    <th>Stock</th>
+                    <th>Cantidad</th>
+                    <th>Precio Bodega</th>
+                    <th>Precio Unitario</th>
+                    <th>Precio Lista</th>
+                    <th>Descuento</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {
+                  this.props.obj.renderProductos.map( (producto,i) => {
+                    return <OcProductoItem key={i}  producto={producto}/>
+                  })
+                }
+                <tr>
+                    <td class="right" colSpan="10"><p>Sub Total</p></td>
+                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].SUB_TOTAL}</p></td>
+                </tr>
+                <tr>
+                    <td class="right" colSpan="10"><p>Descuento %</p></td>
+                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].DESCUENTO_OC}</p></td>
+                </tr>
+                <tr>
+                    <td class="right" colSpan="10"><p>Descuento $</p></td>
+                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].DESCUENTO_2}</p></td>
+                </tr>
+
+                <tr>
+                    <td class="right" colSpan="10"><p>Iva</p></td>
+                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].IVA}</p></td>
+                </tr>
+                <tr>
+                    <td class="right" colSpan="10"><p>Total</p></td>
+                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].TOTAL}</p></td>
+                </tr>
+                <tr>
+                    <td class="right"><p>Observaciones</p></td>
+                    <td colSpan="10" class="module-table-content-item"><p>{this.props.obj.renderOc[0].OBSERVACION}</p></td>
+                </tr>
+                </tbody>
+              </table>
           </div>
-        </div>
+        </div>    
       )
 
   }
