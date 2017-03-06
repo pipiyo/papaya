@@ -7,6 +7,11 @@ const http = require('http')
 const request = require('request')
 const moment = require('moment')
 
+
+const graphqlHTTP = require('express-graphql')
+const { buildSchema } = require('graphql')
+
+
 //console.log( moment('09:00:00', 'h:mm:ss').fromNow(), moment().format('h:mm:ss') )
 
 require('./env').config()
@@ -24,8 +29,23 @@ con.connect( (err) => {
     })
 */
 
+let schema = buildSchema(`
+  type Query {
+    hello: String,
+    rocha: Int
+  }
+`)
 
 
+
+let rollo = { hello: 'Hello world!',
+			  rocha: 420 }
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: rollo,
+  graphiql: true
+}))
 
 
 

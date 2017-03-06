@@ -1867,6 +1867,17 @@ a.external-link, .external-link a {
                 font-size: $fontSmall;
             }
         }
+        .mes{
+            padding: 3px 2px 3px 2px;
+            width: 800px;
+            min-width: 20px;
+            border-bottom:solid 1px $gris;
+            border-right: solid 1px $gris;
+            p{
+                text-align: center;
+                font-size: $fontSmall;
+            }
+        }
         .day{
             padding: 3px 2px 3px 2px;
             width: 20px;

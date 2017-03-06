@@ -15,8 +15,8 @@ class SubServicioItem extends Component {
             <div class="datos name"><p>{this.props.obj.css}</p></div>
             <div class="datos date"><p>{this.props.obj.inicio}</p></div>
             <div class="datos date"><p>{this.props.obj.entrega}</p></div>
-            <div class="datos percentage"><p>10%</p></div>
-            <div class="day"><p></p></div>
+            <div class="datos percentage"><p>{this.props.obj.estado}</p></div>
+            {/*<div class="day"><p></p></div>
             <div class="day ok abastecimiento"><p></p></div>
             <div class="day"><p></p></div>
             <div class="day"><p></p></div>
@@ -50,7 +50,7 @@ class SubServicioItem extends Component {
             <div class="day"><p></p></div>
             <div class="day"><p></p></div>
             <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
+            <div class="day"><p></p></div>*/}
           </div>
         </div>
       )

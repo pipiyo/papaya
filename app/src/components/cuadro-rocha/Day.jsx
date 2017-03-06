@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class Day extends React.Component {
+class Day extends Component {
 
   constructor() {
     super()
@@ -8,11 +8,31 @@ class Day extends React.Component {
   render() {
       return (         
         <div>
+
+          <div class="info title-proyecto">
+            <div class="datos name none"><p></p></div>
+            <div class="datos date"><p></p></div>
+            <div class="datos date"><p></p></div>
+            <div class="datos percentage"><p></p></div>
+
+            {
+                this.props.obj.map( (calendario, i) => {
+                    return( <div key={i} class="mes">
+                                <p>{calendario}</p>
+                            </div>  )
+                })
+            }
+
+
+
+         </div>
+
           <div class="info title-proyecto">
             <div class="datos name none"><p>Información</p></div>
             <div class="datos date"><p>Fecha I</p></div>
             <div class="datos date"><p>Fecha E</p></div>
             <div class="datos percentage"><p>%</p></div>
+
             <div class="day"><p>1</p></div>
             <div class="day"><p>2</p></div>
             <div class="day"><p>3</p></div>
@@ -48,6 +68,8 @@ class Day extends React.Component {
             <div class="day"><p>2</p></div>
             <div class="day"><p>3</p></div>
             <div class="day"><p>4</p></div>
+
+
           </div>
         </div>
       )

@@ -22,8 +22,8 @@ class ProyectoItem extends Component {
             <div class="datos name" onClick={this.props.showProyecto} ><p>{this.props.obj.np}</p></div>
             <div class="datos date"><p>{this.props.obj.ingreso}</p></div>
             <div class="datos date"><p>{this.props.obj.entrega}</p></div>
-            <div class="datos percentage"><p>10%</p></div>
-            <div class="day"><p></p></div>
+            <div class="datos percentage"><p>{`${this.props.obj.estado}%`}</p></div>
+            {/*<div class="day"><p></p></div>
             <div class="day ok"><p></p></div>
             <div class="day ok"><p></p></div>
             <div class="day ok"><p></p></div>
@@ -57,7 +57,7 @@ class ProyectoItem extends Component {
             <div class="day"><p></p></div>
             <div class="day"><p></p></div>
             <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
+            <div class="day"><p></p></div>*/}
           </div> 
 
           { this.props.obj.show ? <Rocha

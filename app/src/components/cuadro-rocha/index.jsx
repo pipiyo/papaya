@@ -1,8 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+
 import Filtro from './Filtro'
 import Title from './Title'
 import Proyecto from './Proyecto'
 import Day from './Day'
+
+
+const MyQuery = gql`query { hello rocha }`
+
+@graphql(MyQuery)
 
 class CuadroRochaIndex extends Component {
 
@@ -11,7 +20,7 @@ class CuadroRochaIndex extends Component {
   }
   render() {
 
-    console.log( this.props.obj  )
+    console.log( this.props.data )
 
       return (         
         <div>
@@ -21,7 +30,7 @@ class CuadroRochaIndex extends Component {
                 buscar={this.props.obj.buscar} />
            
           <div class="module-cuadro-rocha">
-            <Day />
+            <Day obj={this.props.obj.calendario} />
             <div class="item">
 
             <Proyecto obj={this.props.obj} /> 
@@ -36,5 +45,6 @@ class CuadroRochaIndex extends Component {
   }
 
 }
+
 
 export default CuadroRochaIndex

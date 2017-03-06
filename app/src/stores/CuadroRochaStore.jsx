@@ -3,6 +3,8 @@ import React from 'react'
 import Reflux from 'reflux'
 
 import _ from 'lodash'
+import moment from 'moment'
+moment.locale('es')
 
 import CuadroRochaActions from '../actions/CuadroRochaActions'
 
@@ -23,7 +25,8 @@ let CuadroRochaStore = Reflux.createStore({
           ejecutivo: [],
           cliente: [] 
     },
-    buscar: null
+    buscar: null,
+    calendario: []
   },
 
   listaCss: {},
@@ -72,80 +75,7 @@ socket.emit('getRochas', ( x, y ) => {
 
   getObj: function() {
 
-
-    this.obj.showProyecto = this.showProyecto
-    this.obj.showRocha = this.showRocha
-    this.obj.showServicio = this.showServicio
-    this.obj.showSubServicio = this.showSubServicio
-    this.obj.buscar = this.buscar
-
-
-
-    socket.emit('getRochas', ( y ) => {
-
-          _.forEach(y.form, (value, key) => {
-            this.obj.form.ejecutivo[key] = { ejecutivo: `${value.NOMBRES} ${value.APELLIDO_PATERNO} ${value.APELLIDO_MATERNO}`  }
-          })
-
-          _.forEach(y.cs, (vcs, kcs) => {
-            this.listaCss[kcs] = { csnombre: vcs.csnombre,cs: vcs.cs, cp: vcs.cp, inicio: vcs.inicio.substring(0,10), entrega: vcs.entrega.substring(0,10), css: [], show: false }
-            _.forEach(y.css, (vcss, kcss) => {
-              if (vcss.SUB_CODIGO_SERVICIO == vcs.cs) {
-                this.listaCss[kcs].css.push( { css: vcss.CODIGO_SUBSERVICIO, cs: vcss.SUB_CODIGO_SERVICIO, inicio: vcss.SUB_FECHA_INICIO.substring(0,10), entrega: vcss.SUB_FECHA_ENTREGA.substring(0,10)  } )
-              }
-            })
-          })
-
-
-let min,max = null
-
-          _.forEach(y.np, (vnp, knp) => {
-            this.obj.proyectos[knp] = { np: vnp, cp: [], show: false, ingreso: null, entrega: null } 
-                     
-            min,max = null
-            _.forEach(y.cp, (vcp, kcp) => {
-              if (vcp.np == vnp) {
-                this.obj.proyectos[knp].cp.push({
-                                                    np: vcp.np, 
-                                                    cp: vcp.cp, 
-                                                    cs: [], 
-                                                    show: false,
-                                                    ingreso: vcp.ingreso.substring(0,10),
-                                                    entrega: vcp.entrega.substring(0,10)
-                                                })
-
-if (min == null) {
-  min =  vcp.ingreso.substring(0,10)
-}
-
-if (max == null) {
-  max =  vcp.entrega.substring(0,10)
-}
-
-
-                min = ( min > vcp.ingreso.substring(0,10) ) ? min : vcp.ingreso.substring(0,10)
-                max = ( max < vcp.entrega.substring(0,10) ) ? max : vcp.entrega.substring(0,10)
-
-              }
-            })// cp
-
-
-            this.obj.proyectos[knp].ingreso = min
-            this.obj.proyectos[knp].entrega = max
-
-
-          })// np 
-          _.forEach(this.obj.proyectos, (vnp, knp) => {
-            _.forEach(this.obj.proyectos[knp].cp, (vcp, kcp) => {
-              _.forEach(this.listaCss, (vcs, kcs) => {
-                if (vcp.cp == vcs.cp) {
-                  this.obj.proyectos[knp].cp[kcp].cs.push( vcs )
-                }
-              })// cs
-            })// cp
-          })// np 
-                this.trigger( this.obj )
-        })
+    this.getProyectos('getRochas', null)
 
 
   },
@@ -178,6 +108,8 @@ if (max == null) {
                   proyecto: e.getAttribute('data-indexproyecto'),
                   rocha: e.getAttribute('data-indexrocha')
                 }
+
+
     this.obj.proyectos[index.proyecto].cp[index.rocha].show = this.obj.proyectos[index.proyecto].cp[index.rocha].show ? false : true 
     this.trigger( this.obj )
   },
@@ -195,6 +127,7 @@ if (max == null) {
                   servicio: e.getAttribute('data-indexservicio'),
                   rocha: e.getAttribute('data-indexrocha')
                 }
+
     this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show = this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show ? false : true 
     this.trigger( this.obj )
   },
@@ -227,6 +160,22 @@ if (max == null) {
   _buscar: function(e) {
 
 
+    this.getProyectos('getRochaFiltro', e)
+
+
+  },  
+
+
+  getProyectos: function(method, event) {
+
+//console.log( moment.months() )
+
+    _.forEach(moment.months(), (value, key) => {
+      this.obj.calendario[key] = value
+    })
+
+
+
     this.obj.showProyecto = this.showProyecto
     this.obj.showRocha = this.showRocha
     this.obj.showServicio = this.showServicio
@@ -234,99 +183,137 @@ if (max == null) {
     this.obj.buscar = this.buscar
 
 
+let form = null
 
-    let form = {
-                  rocha: e.elements[0].value,
-                  proyecto: e.elements[1].value,
-                  mas: e.elements[2].value,
-                  menos: e.elements[3].value,
-                  ejecutivo: e.elements[4].value,
-                  cliente: e.elements[5].value,
+if (event) {
+
+    form = {
+                  rocha: event.elements[0].value,
+                  proyecto: event.elements[1].value,
+                  mas: event.elements[2].value,
+                  menos: event.elements[3].value,
+                  ejecutivo: event.elements[4].value,
+                  cliente: event.elements[5].value,
                 }
 
+}
 
-    socket.emit('getRochaFiltro', form, ( y ) => {
+  this.obj.proyectos= []
 
+    socket.emit(method, form, ( y ) => {
 
-      this.obj.proyectos = []
-
+          let i = 0
+          let ok = 0
 
           _.forEach(y.form, (value, key) => {
             this.obj.form.ejecutivo[key] = { ejecutivo: `${value.NOMBRES} ${value.APELLIDO_PATERNO} ${value.APELLIDO_MATERNO}`  }
           })
 
-
-
-
           _.forEach(y.cs, (vcs, kcs) => {
-            this.listaCss[kcs] = { csnombre: vcs.csnombre, cs: vcs.cs, cp: vcs.cp, css: [], inicio: vcs.inicio.substring(0,10), entrega: vcs.entrega.substring(0,10), css: [], show: false }
+            this.listaCss[kcs] = {  estado: null, csnombre: vcs.csnombre, cs: vcs.cs, cp: vcs.cp, inicio: vcs.inicio.substring(0,10), entrega: vcs.entrega.substring(0,10), css: [], show: false }
+            
+
+            i = 0
+            ok = 0
             _.forEach(y.css, (vcss, kcss) => {
               if (vcss.SUB_CODIGO_SERVICIO == vcs.cs) {
-                this.listaCss[kcs].css.push( { css: vcss.CODIGO_SUBSERVICIO, cs: vcss.SUB_CODIGO_SERVICIO, inicio: vcss.SUB_FECHA_INICIO.substring(0,10), entrega: vcss.SUB_FECHA_ENTREGA.substring(0,10)   } )
+                this.listaCss[kcs].css.push( {  estado: vcss.SUB_ESTADO, css: vcss.CODIGO_SUBSERVICIO, cs: vcss.SUB_CODIGO_SERVICIO, inicio: vcss.SUB_FECHA_INICIO.substring(0,10), entrega: vcss.SUB_FECHA_ENTREGA.substring(0,10)  } )
+
+
+                  if (vcss.SUB_ESTADO == 'OK') {
+                    ok++
+                  }
+
+                  i++              
+
+
               }
             })
+
+            this.listaCss[kcs].estado = ~~( ( ok * 100 ) / i )
+
+
           })
 
-let min,max = null
-
+          let min = []
+          let max = []
+          let mintime = null
+          let maxtime = null
 
           _.forEach(y.np, (vnp, knp) => {
-            this.obj.proyectos[knp] = { np: vnp, cp: [], show: false, ingreso: null, entrega: null } 
-            
-              min,max = null
+            this.obj.proyectos[knp] = { np: vnp, cp: [], show: false, ingreso: null, entrega: null, estado: null } 
+                     
+            min[0] = []
+            max[0] = []
+            i = 0
+            ok = 0
+            mintime = null
+            maxtime = null
+
             _.forEach(y.cp, (vcp, kcp) => {
               if (vcp.np == vnp) {
-                this.obj.proyectos[knp].cp.push( {
+                this.obj.proyectos[knp].cp.push({
                                                     np: vcp.np, 
                                                     cp: vcp.cp, 
                                                     cs: [], 
                                                     show: false,
                                                     ingreso: vcp.ingreso.substring(0,10),
-                                                    entrega: vcp.entrega.substring(0,10)
-                                                } )
-             
+                                                    entrega: vcp.entrega.substring(0,10),
+                                                    estado: null
+                                                })
 
+                if (vcp.estado == 'OK') {
+                  ok++
+                }
 
-if (min == null) {
-  min =  vcp.ingreso.substring(0,10)
-}
+                min[0][i] =  moment(vcp.ingreso.substring(0,10), 'YYYY-MM-DD')
+                max[0][i] =  moment(vcp.entrega.substring(0,10), 'YYYY-MM-DD')
 
-if (max == null) {
-  max =  vcp.entrega.substring(0,10)
-}
-
-
-                min = ( min > vcp.ingreso.substring(0,10) ) ? min : vcp.ingreso.substring(0,10)
-                max = ( max < vcp.entrega.substring(0,10) ) ? max : vcp.entrega.substring(0,10)
-
-
-
-
+                i++
               }
             })// cp
 
-            this.obj.proyectos[knp].ingreso = min
-            this.obj.proyectos[knp].entrega = max
+                //console.log( ok, i )
+                //console.log( ~~( ( ok * 100 ) / i ) )
+
+                mintime = moment.min(min[0])
+                maxtime = moment.max(max[0])
 
 
+            this.obj.proyectos[knp].estado = ~~( ( ok * 100 ) / i )
+            this.obj.proyectos[knp].ingreso = mintime.format('YYYY-MM-DD')
+            this.obj.proyectos[knp].entrega = maxtime.format('YYYY-MM-DD')
 
           })// np 
           _.forEach(this.obj.proyectos, (vnp, knp) => {
             _.forEach(this.obj.proyectos[knp].cp, (vcp, kcp) => {
+
+
+
+              ok = 0
+              i = 0
               _.forEach(this.listaCss, (vcs, kcs) => {
                 if (vcp.cp == vcs.cp) {
                   this.obj.proyectos[knp].cp[kcp].cs.push( vcs )
+
+                  if (vcs.estado == 'OK') {
+                    ok++
+                  }
+
+                  i++
                 }
               })// cs
+
+              
+              this.obj.proyectos[knp].cp[kcp].estado = ~~( ( ok * 100 ) / i )
+
+
             })// cp
           })// np 
                 this.trigger( this.obj )
-
-    })
-
+        })
 
   }
-
 
 })
 
