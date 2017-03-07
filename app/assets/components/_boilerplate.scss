@@ -288,36 +288,54 @@ a.external-link, .external-link a {
             left: 0;
             bottom: 0;
         }
-    }
-    @include vertical-tablet-down {
-        display: block;
-        .index{
+
+        @include vertical-tablet-down {
             min-height: 100%;
             &:before{
                 display: none;
             }
         }
-    }
-    .header{
-        float: left;
-        vertical-align: top;
-        width: 250px;
-        min-width: 250px;
-        height: 100%;
-        @include vertical-tablet-down {
-            width: 100%;
-            display: block;
-            height: auto;
+        &.active{
+            @include vertical-tablet-up {
+                &:before{
+                    content: none;
+                }
+                .header{
+                    width: 100%;
+                    display: block;
+                    height: auto;
+                }
+                .main{
+                    width: 100%;
+                    display: block;
+                    height: auto;
+                }
+                .nav{
+                    display: none;
+                }
+            }
         }
-    }
-    .main{
-        float: left;
-        height: 100%;
-        background: $blanco;
-        width: calc(100% - 250px);
-        @include vertical-tablet-down {
-            width: 100%;
-            display: block;
+        .header{
+            float: left;
+            vertical-align: top;
+            width: 250px;
+            min-width: 250px;
+            height: 100%;
+            @include vertical-tablet-down {
+                width: 100%;
+                display: block;
+                height: auto;
+            }
+        }
+        .main{
+            float: left;
+            height: 100%;
+            background: $blanco;
+            width: calc(100% - 250px);
+            @include vertical-tablet-down {
+                width: 100%;
+                display: block;
+            }
         }
     }
 }
@@ -331,6 +349,7 @@ a.external-link, .external-link a {
     position:relative;
     overflow: hidden;
     .logo{
+        position: relative;
         background: $color_corporativo_darker;
         margin: 0 auto;
         padding: .3em 0;
@@ -348,6 +367,20 @@ a.external-link, .external-link a {
             color: $blanco;
             font-size: $fontBig;
             padding: 0;
+        }
+        .burger{
+            position: absolute;
+            left: 16px;
+            top: 20px;
+            font-size: 2em;
+            color: $blanco;
+            @include vertical-tablet-down {
+                display: none;
+            }
+            &:hover{
+                color: $gris;
+                cursor: pointer;
+            }
         }
     }  
 }

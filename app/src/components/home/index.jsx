@@ -11,11 +11,12 @@ class Home extends React.Component {
 
   render() {
       return (
-        <div className="frame index">
+        <div className="frame index active">
           <Header 
             menu={this.props.obj.menu} 
             submenu={this.props.obj.subMenus} 
             activeMenu={this.props.obj.activeMenu}
+            navMenu={this.props.obj.navMenu}
             navmovil={this.props.obj.navMovil} />
           <Main 
             user={this.props.obj.user} 

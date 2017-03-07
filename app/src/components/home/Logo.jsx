@@ -10,6 +10,7 @@ class Logo extends React.Component {
   render() {
       return (
             <div className="logo">
+              <a onClick={this.props.navMenu} href="" className="burger"> <i class="fa fa-bars" aria-hidden="true"></i> </a>
               <h1>
                 <img src={this.props.logo} alt="logo-empresa"/>
                 Papaya

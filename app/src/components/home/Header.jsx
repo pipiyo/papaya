@@ -12,7 +12,10 @@ class Header extends React.Component {
   render() {
       return (
         <header className="header" id="header">
-            <Logo logo={`${Env.url}css/images/logos/logo.png`} />
+            <Logo
+            navMenu={this.props.navMenu} 
+            logo={`${Env.url}css/images/logos/logo.png`} 
+            />
             <Item 
             activeMenu={this.props.activeMenu}
             navmovil={this.props.navmovil} 
