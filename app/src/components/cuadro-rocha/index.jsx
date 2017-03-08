@@ -24,6 +24,7 @@ class CuadroRochaIndex extends Component {
 
       return (         
         <div>
+          <input type="button" onClick={this.props.obj.sillas} />
           <Title />
           <Filtro 
                 obj={this.props.obj.form}

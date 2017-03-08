@@ -21,6 +21,7 @@ let CuadroRochaStore = Reflux.createStore({
     showRocha: null,
     showServicio: null,
     showSubServicio: null,
+    sillas: null,
     form: {
           ejecutivo: [],
           cliente: [] 
@@ -166,6 +167,17 @@ socket.emit('getRochas', ( x, y ) => {
   },  
 
 
+
+
+
+
+  sillas: function() {
+    socket.emit('sillas', 'cafe')
+  },
+
+
+
+
   getProyectos: function(method, event) {
 
 //console.log( moment.months() )
@@ -181,6 +193,8 @@ socket.emit('getRochas', ( x, y ) => {
     this.obj.showServicio = this.showServicio
     this.obj.showSubServicio = this.showSubServicio
     this.obj.buscar = this.buscar
+
+    this.obj.sillas = this.sillas
 
 
 let form = null
