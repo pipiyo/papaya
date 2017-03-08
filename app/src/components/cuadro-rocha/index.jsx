@@ -1,17 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import React, { Component } from 'react'
 
 import Filtro from './Filtro'
 import Title from './Title'
 import Proyecto from './Proyecto'
 import Day from './Day'
-
-
-const MyQuery = gql`query { hello rocha }`
-
-@graphql(MyQuery)
 
 class CuadroRochaIndex extends Component {
 
@@ -19,8 +11,6 @@ class CuadroRochaIndex extends Component {
     super()
   }
   render() {
-
-    console.log( this.props.data )
 
       return (         
         <div>
