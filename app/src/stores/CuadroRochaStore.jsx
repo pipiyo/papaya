@@ -168,7 +168,7 @@ socket.emit('getRochas', ( x, y ) => {
 
   getProyectos: function(method, event) {
 
-//console.log( moment.months() )
+//console.log( moment().month() )
 
     _.forEach(moment.months(), (value, key) => {
       this.obj.calendario[key] = value
