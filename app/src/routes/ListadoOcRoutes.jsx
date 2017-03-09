@@ -34,6 +34,7 @@ export default class ListadoOcRoutes extends React.Component {
       return (
         <LitsadoOcIndex 
         obj={this.state.obj}
+        scrollWin={this.props.scrollWin}
         renderFiltroFi={this.renderFiltroFi.bind(this)}
         renderFiltroFe={this.renderFiltroFe.bind(this)}
         renderViewMore={this.renderViewMore.bind(this)}

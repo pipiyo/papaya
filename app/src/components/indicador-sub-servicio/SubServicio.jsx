@@ -18,7 +18,12 @@ class SubServicio extends React.Component {
   render() {
       return (
         <div>
-          <div class="module-table-new">
+          <div class="module-arrow">
+            <div class="arrow-a"><a href="#" data-left="-100" data-tabla="tabla-subservicio" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a></div>
+            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla</h3></div>
+            <div class="arrow-a"><a href="#" data-left="100" data-tabla="tabla-subservicio" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a></div>
+          </div>
+          <div class="module-table-new" id="tabla-subservicio">
             <table data-area="ok">
                 <thead>
                   <tr>

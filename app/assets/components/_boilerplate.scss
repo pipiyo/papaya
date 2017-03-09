@@ -264,6 +264,9 @@ a.external-link, .external-link a {
 .a-right{
     text-align: right;
 }
+.top{
+    margin-top: 1em;
+}
 
 
 /**** frame ****/
@@ -829,6 +832,7 @@ a.external-link, .external-link a {
     .item-form{
         padding: .5em 1em;
         width: 33.33%;
+        position: relative;
         &.title{
             width: 100%;
             padding: 1em 1em;
@@ -912,6 +916,7 @@ a.external-link, .external-link a {
     .item-filter{
         padding: 1em;
         width: 25%;
+        position: relative;
         @include vertical-tablet-down {
             width: 50%;
         }
@@ -1561,17 +1566,25 @@ a.external-link, .external-link a {
     position: absolute;
     background: $color_corporativo_darker;
     padding: 0;
+    z-index: 99;
+    width: calc(100% - 2em);
+    left: 1em;
     ul{
         margin: 0;
         padding: 0;
         list-style-type: none;
         li{
             margin:0;
-            padding: .1em 1em;
             color: $blanco;
             font-weight: normal;
             cursor: pointer;
             font-size: $fontTiny;
+            a{
+                padding: .1em 1em;
+                text-decoration: none;
+                color: $blanco;
+                display: block;
+            }
             &:hover{
                 background: $color_corporativo_dark;
             }
@@ -2304,6 +2317,9 @@ a.external-link, .external-link a {
                 &.active{
                     border:solid 1px $gris;
                 }
+                &.small{
+                    width: 50px;
+                }
             }
         }
         td{
@@ -2320,7 +2336,28 @@ a.external-link, .external-link a {
         }
     }
 }
-
+.module-arrow{
+    display: flex;
+    flex-wrap: wrap;
+    .arrow-a{
+        width: 100px;
+        text-align: center;
+        a{
+            font-size: 2.5em;
+        }
+    }
+    .arrow-b{
+        width: calc(100% - 200px);
+        h3{
+            text-align: center;
+            margin: 1em 0 0 0;
+            padding: 0;
+            font-weight: normal;
+            text-transform: uppercase;
+            font-size: $fontSmall;
+        }
+    }
+}
 /* Css transition*/
 /* Css transition*/
 /* Css transition*/

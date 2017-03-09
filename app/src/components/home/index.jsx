@@ -11,7 +11,7 @@ class Home extends React.Component {
 
   render() {
       return (
-        <div className="frame index active">
+        <div className="frame index">
           <Header 
             menu={this.props.obj.menu} 
             submenu={this.props.obj.subMenus} 
@@ -23,6 +23,7 @@ class Home extends React.Component {
             content={this.props.content}
             showNotification={this.props.obj.showNotification}
             notification={this.props.obj.notification}
+            scrollWin={this.props.obj.scrollWin}
             numberNotification={this.props.obj.numberNotification}/>
         </div>
       )

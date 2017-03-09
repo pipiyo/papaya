@@ -30,7 +30,7 @@ class Main extends React.Component {
               <ul>
               </ul>
             </div>
-            {/*React.cloneElement(this.props.content, {siteArea: "test"}))*/  this.props.content}
+            {React.cloneElement(this.props.content, {scrollWin: this.props.scrollWin})}
           </div>
             <Dialog closeDialog={this.props.closeDialog} mensaje={this.props.mensaje} /> 
         </div>

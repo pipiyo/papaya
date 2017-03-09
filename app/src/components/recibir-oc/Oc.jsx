@@ -19,7 +19,8 @@ class Oc extends React.Component {
             />
           </fieldset> 
 
-          <OcProducto 
+          <OcProducto
+            scrollWin={this.props.scrollWin} 
             obj={this.props.obj}
             renderInputOc={this.props.renderInputOc}
             renderInputOcTotal={this.props.renderInputOcTotal}   

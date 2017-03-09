@@ -40,6 +40,7 @@ export default class IndicadorSubServicioRoutes extends React.Component {
   	if(this.state.obj){
     	return (
         	<IndicadorServicio
+          scrollWin={this.props.scrollWin}
           area={this.props.params.area} 
           total={this.state.obj.total}
           ejecutivo={this.state.obj.ejecutivo}

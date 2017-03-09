@@ -45,6 +45,7 @@ export default class IndicadorSubServicioRoutes extends React.Component {
           ejecutivo={this.state.obj.ejecutivo}
         	datos={this.state.obj.renderItem}
           filtro={this.state.obj.filtro}
+          scrollWin={this.props.scrollWin}
           renderFiltro={this.renderFiltro.bind(this)}
           renderFiltroFi={this.renderFiltroFi.bind(this)}
           renderFiltroFe={this.renderFiltroFe.bind(this)}

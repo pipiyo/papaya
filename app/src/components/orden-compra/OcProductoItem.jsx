@@ -7,19 +7,19 @@ class OcProductoItem extends React.Component {
   }
   render() {
       return (         
-        <div class="module-table-content">
-          <div class="module-table-content-item"><p><input id="a1" /></p></div>
-          <div class="module-table-content-item"><p><input id="b1" /></p></div>
-          <div class="module-table-content-item"><p><input id="c1" /></p></div>
-          <div class="module-table-content-item"><p><input id="d1" /></p></div>
-          <div class="module-table-content-item"><p><input id="e1" /></p></div>
-          <div class="module-table-content-item"><p><input id="f1" /></p></div>
-          <div class="module-table-content-item"><p><input id="g1" /></p></div>
-          <div class="module-table-content-item"><p><input id="h1" /></p></div>
-          <div class="module-table-content-item"><p><input id="i1" /></p></div>
-          <div class="module-table-content-item"><p><input id="j1" /></p></div>
-          <div class="module-table-content-item"><p><input id="k1" /></p></div>
-        </div> 
+        <tr>
+          <td><input class="active" id="a1" /></td>
+          <td><input class="active small center" id="b1" /></td>
+          <td><input class="active" id="c1" /></td>
+          <td><input class="active" id="d1" /></td>
+          <td><input class="active small center" id="e1" /></td>
+          <td><input class="active small center" id="f1" /></td>
+          <td><input class="active small center" id="g1" /></td>
+          <td><input class="active small center" id="h1" /></td>
+          <td><input class="active small center" id="i1" /></td>
+          <td><input class="active small center" id="j1" /></td>
+          <td><input class="active small center" id="k1" /></td>
+        </tr> 
       )
 
   }

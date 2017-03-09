@@ -1,9 +1,10 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
-
-import Autocomplete from '../../routes/AutocompleteRoutes'
 import ServicioActions from '../../actions/ServicioActions'
+
+import AutoComplet  from '../../routes/AutoComRoutes'
+import AutocompleteActions from '../../actions/AutocompleteActions'
 
 class Item extends React.Component {
   constructor() {
@@ -22,19 +23,28 @@ class Item extends React.Component {
   renderFechaEntrega(date){
     ServicioActions.renderFechaEntrega(date)
   }
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
+  }
   render() {
       return (
         <div>
           <div className="module-form">
             <div className="item-form title">
-                <h4>Nueva Actividad</h4>
+                <h4>Nueva Actividads</h4>
             </div>
 
              {this.props.reclamo} 
 
             <div className="item-form">
                 <label>Rocha</label>
-                <input required  id="rocha" type="text" />
+                <input required data-complete="rocha" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)}  id="rocha" type="text" />
+                <AutoComplet name="rocha" />
             </div>
 
             <div className="item-form">

@@ -2,10 +2,22 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
+import AutoComplet  from '../../routes/AutoComRoutes'
+import AutocompleteActions from '../../actions/AutocompleteActions'
+ 
 class Filtro extends React.Component {
 
   constructor(props) {
     super()
+  }
+
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
   }
 
   render() {
@@ -22,7 +34,8 @@ class Filtro extends React.Component {
             </div>
             <div class="item-filter">
                 <label> Código Rocha</label>
-                <input autoComplete="off" id="codigo" type="text" />
+                <input autoComplete="off" data-complete="rocha" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} id="codigo" type="text" />
+                <AutoComplet name="codigo" />
             </div>
             <div class="item-filter">
                 <label> Estado</label>
@@ -46,7 +59,8 @@ class Filtro extends React.Component {
             </div>
             <div class="item-filter">
                 <label>Cliente</label>
-                <input autoComplete="off" id="cliente" type="text"/>
+                <input autoComplete="off" data-complete="cliente" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} id="cliente" type="text"/>
+                <AutoComplet name="cliente" />
             </div>
             <div className="item-filter ">
               <input id="btn-buscar" value="Buscar" type="submit" />

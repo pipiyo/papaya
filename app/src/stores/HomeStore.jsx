@@ -23,6 +23,7 @@ let HomeStore = Reflux.createStore({
 						navMovil: null,
             navMenu: null,
 						subMenus: null,
+            scrollWin: null,
 						showNotification: null,
             activeMenu: null,
             numberNotification: null
@@ -75,6 +76,7 @@ let HomeStore = Reflux.createStore({
 						navMovil: this.navMovil,
             navMenu: this.navMenu,
 						subMenus: this.subMenus,
+            scrollWin: this.scrollWin,
 						showNotification: this.showNotification,
             activeMenu : this.activeMenu
                        }
@@ -110,7 +112,10 @@ let HomeStore = Reflux.createStore({
     })
 
   },
-
+  scrollWin:function(ev) {
+    ev.preventDefault()
+    document.getElementById(ev.currentTarget.dataset.tabla).scrollLeft += ev.currentTarget.dataset.left
+  },
 
 
 
