@@ -16,6 +16,12 @@ module.exports = (io) => {
       case "cliente":
             query = `SELECT NOMBRE_CLIENTE as DATOS FROM cliente WHERE  NOMBRE_CLIENTE like "%${data.valor}%"  limit 10`;
           break;
+      case "producto":
+            query = `SELECT CODIGO_PRODUCTO as DATOS, DESCRIPCION as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5 FROM producto WHERE  CODIGO_PRODUCTO like "%${data.valor}%"  limit 10`;
+          break;
+      case "producto1":
+            query = `SELECT DESCRIPCION as DATOS, CODIGO_PRODUCTO as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5 FROM producto WHERE  DESCRIPCION like "%${data.valor}%"  limit 10`;
+          break;
     }
 
       pool.getConnection( (err, connection) => {

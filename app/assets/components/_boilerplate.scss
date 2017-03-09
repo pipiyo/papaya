@@ -2236,7 +2236,7 @@ a.external-link, .external-link a {
 
 .module-table-new{
     margin: 1em auto 1em auto;
-    overflow-y: hidden; 
+    overflow-y: auto; 
     overflow-x: scroll; 
     border-radius: 10px;
     width: calc(100% - 1em);
@@ -2299,6 +2299,7 @@ a.external-link, .external-link a {
         }
         td, th{
             padding: 10px 7px;
+            position: relative;
             &.nr{
                 white-space: nowrap;
             }
@@ -2307,6 +2308,7 @@ a.external-link, .external-link a {
             }
             &.center{
                 text-align: center;
+
             }
             a{
                 text-decoration: none;
@@ -2314,11 +2316,15 @@ a.external-link, .external-link a {
             }
             input{
                 @include reset-appearance;
+                width: 100%;
                 &.active{
                     border:solid 1px $gris;
                 }
                 &.small{
                     width: 50px;
+                }
+                &.medium{
+                    width: 90px;
                 }
             }
         }

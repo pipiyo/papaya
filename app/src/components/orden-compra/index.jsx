@@ -12,7 +12,7 @@ class OrdenCompraIndex extends Component {
       return (         
         <div>
           <Title />
-          <Oc />
+          <Oc scrollWin={this.props.scrollWin} />
         </div>
       )
 
