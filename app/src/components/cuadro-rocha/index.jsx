@@ -10,6 +10,9 @@ class CuadroRochaIndex extends Component {
     super()
   }
   render() {
+
+    console.log( this.props.obj  )
+
       return (         
         <div>
           <Title />

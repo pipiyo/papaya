@@ -14,7 +14,7 @@ class ServicioItem extends Component {
       return (         
         <div>
           <div class="info actividad">
-            <div class="datos name" onClick={this.props.showServicio}><p data-indexproyecto={this.props.keyProyecto} data-indexrocha={this.props.keyRocha} data-indexservicio={this.props.index}>{this.props.obj.cs}</p></div>
+            <div class="datos name" onClick={this.props.showServicio}><p data-indexproyecto={this.props.keyProyecto} data-indexrocha={this.props.keyRocha} data-indexservicio={this.props.index}>{this.props.obj.csnombre}</p></div>
             <div class="datos date"><p>{this.props.obj.inicio}</p></div>
             <div class="datos date"><p>{this.props.obj.entrega}</p></div>
             <div class="datos percentage"><p>10%</p></div>

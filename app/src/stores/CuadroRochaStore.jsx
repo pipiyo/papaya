@@ -88,7 +88,7 @@ socket.emit('getRochas', ( x, y ) => {
           })
 
           _.forEach(y.cs, (vcs, kcs) => {
-            this.listaCss[kcs] = { cs: vcs.cs, cp: vcs.cp, inicio: vcs.inicio.substring(0,10), entrega: vcs.entrega.substring(0,10), css: [], show: false }
+            this.listaCss[kcs] = { csnombre: vcs.csnombre,cs: vcs.cs, cp: vcs.cp, inicio: vcs.inicio.substring(0,10), entrega: vcs.entrega.substring(0,10), css: [], show: false }
             _.forEach(y.css, (vcss, kcss) => {
               if (vcss.SUB_CODIGO_SERVICIO == vcs.cs) {
                 this.listaCss[kcs].css.push( { css: vcss.CODIGO_SUBSERVICIO, cs: vcss.SUB_CODIGO_SERVICIO, inicio: vcss.SUB_FECHA_INICIO.substring(0,10), entrega: vcss.SUB_FECHA_ENTREGA.substring(0,10)  } )
@@ -259,7 +259,7 @@ if (max == null) {
 
 
           _.forEach(y.cs, (vcs, kcs) => {
-            this.listaCss[kcs] = { cs: vcs.cs, cp: vcs.cp, css: [], inicio: vcs.inicio.substring(0,10), entrega: vcs.entrega.substring(0,10), css: [], show: false }
+            this.listaCss[kcs] = { csnombre: vcs.csnombre, cs: vcs.cs, cp: vcs.cp, css: [], inicio: vcs.inicio.substring(0,10), entrega: vcs.entrega.substring(0,10), css: [], show: false }
             _.forEach(y.css, (vcss, kcss) => {
               if (vcss.SUB_CODIGO_SERVICIO == vcs.cs) {
                 this.listaCss[kcs].css.push( { css: vcss.CODIGO_SUBSERVICIO, cs: vcss.SUB_CODIGO_SERVICIO, inicio: vcss.SUB_FECHA_INICIO.substring(0,10), entrega: vcss.SUB_FECHA_ENTREGA.substring(0,10)   } )
