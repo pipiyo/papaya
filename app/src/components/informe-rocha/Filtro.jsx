@@ -11,15 +11,6 @@ class Filtro extends React.Component {
     super()
   }
 
-  autocomplete(ev){
-    ev.persist()
-    AutocompleteActions.autocomplete(ev)
-  }
-  autocompleteOff(ev,input){
-    ev.persist()
-    AutocompleteActions.autocompleteOff(ev)
-  }
-
   render() {
       return (
         <form onSubmit={this.props.renderFiltro}>
