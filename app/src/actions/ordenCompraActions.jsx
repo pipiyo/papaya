@@ -5,7 +5,8 @@ let ordenCompraActions = Reflux.createActions([
 	'renderFechaInicio',
 	'renderFechaEntrega',
 	'addSubActividad',
-	'addRowOc'
+	'addRowOc',
+	'totalProducto'
 ])
 
 export default ordenCompraActions

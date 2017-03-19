@@ -23,7 +23,16 @@ let ordenCompraStore = Reflux.createStore({
     numOc:30,
     item: { fecha : { fechaInicio:moment(), fechaEntrega:moment()} }
   },
+  resetSelect: function(){
+    this.obj.numeroOC = ''
+    this.obj.sub = ''
+    this.obj.compSub = []
+    this.obj.numSub = 1
+    this.obj.compOc = []
+    this.obj.numOc = 30
+  },
   completSelect: function() {
+    this.resetSelect()
     socket.emit('completSelect', (n) => {
       this.obj.numeroOC = n.numeroOc[0].NUMEROOC
       this.obj.sub = n.sub
@@ -36,6 +45,10 @@ let ordenCompraStore = Reflux.createStore({
       this.trigger(this.obj)
       
     })
+  },
+  totalProducto : function(){
+    // console.log("--><--")
+    // console.log(document.getElementById('codigo-1').value)
   },
   addSubActividad: function(){
     this.obj.numSub = this.obj.numSub + 1

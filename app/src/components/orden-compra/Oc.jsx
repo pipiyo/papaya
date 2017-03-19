@@ -27,7 +27,7 @@ class Form extends React.Component {
           </div>
 
           <OcProducto
-            obj={this.props.obj} 
+            obj={this.props.obj}
             scrollWin={this.props.scrollWin} 
           />
           <div className="module-form button top">

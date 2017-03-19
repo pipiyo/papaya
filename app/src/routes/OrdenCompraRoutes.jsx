@@ -40,6 +40,7 @@ export default class OrdenCompraRoutes extends React.Component {
     AutocompleteActions.autocompleteOff(ev)
   }
   render() {
+
       if(this.state.obj){
       return (
         <OrdenCompraIndex
@@ -50,7 +51,7 @@ export default class OrdenCompraRoutes extends React.Component {
           renderFechaInicio={this.renderFechaInicio.bind(this)} 
           renderFechaEntrega={this.renderFechaEntrega.bind(this)} 
           addSubActividad={this.addSubActividad.bind(this)}
-          addRowOc={this.addRowOc.bind(this)}    
+          addRowOc={this.addRowOc.bind(this)}
         />       
         )
       }else{

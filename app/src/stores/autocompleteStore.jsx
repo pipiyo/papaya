@@ -32,13 +32,15 @@ let AutocompleteStore = Reflux.createStore({
     }
 
   },
-  autocompleteOK: function(ev,id,datos1,datos2,datos3,datos4,datos5){
+  autocompleteOK: function(ev,id,datos1,datos2,datos3,datos4,datos5,datos6,datosCantidad){
     document.getElementById(id).value = ev.target.text
     if(datos1){document.getElementById(datos1).value = ev.target.dataset.datos1}
     if(datos2){document.getElementById(datos2).value = ev.target.dataset.datos2}
     if(datos3){document.getElementById(datos3).value = ev.target.dataset.datos3} 
     if(datos4){document.getElementById(datos4).value = ev.target.dataset.datos4}
-    if(datos5){document.getElementById(datos5).value = ev.target.dataset.datos5}  
+    if(datos5){document.getElementById(datos5).value = ev.target.dataset.datos5}
+    if(datos6){document.getElementById(datos6).value = ev.target.dataset.datos6}
+    if(datosCantidad){document.getElementById(datosCantidad).value = ev.target.dataset.cantidad}      
     this.obj.valores = []
     this.obj.input = null
     this.trigger(this.obj)
