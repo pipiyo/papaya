@@ -16,6 +16,9 @@ module.exports = (io) => {
       case "cliente":
             query = `SELECT NOMBRE_CLIENTE as DATOS FROM cliente WHERE  NOMBRE_CLIENTE like "%${data.valor}%"  limit 10`;
           break;
+      case "proveedor":
+            query = `SELECT NOMBRE_FANTASIA as DATOS, RUT_PROVEEDOR as DATOS1, FORMA_PAGO AS DATOS2  FROM proveedor WHERE  NOMBRE_FANTASIA like "%${data.valor}%"  limit 10`;
+          break;
       case "producto":
             query = `SELECT CODIGO_PRODUCTO as DATOS, DESCRIPCION as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5 FROM producto WHERE  CODIGO_PRODUCTO like "%${data.valor}%"  limit 10`;
           break;

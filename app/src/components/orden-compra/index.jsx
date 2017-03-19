@@ -12,7 +12,16 @@ class OrdenCompraIndex extends Component {
       return (         
         <div>
           <Title />
-          <Oc scrollWin={this.props.scrollWin} />
+          <Oc
+          obj={this.props.obj} 
+          scrollWin={this.props.scrollWin}
+          autocompleteOff={this.props.autocompleteOff} 
+          autocomplete={this.props.autocomplete}  
+          renderFechaInicio={this.props.renderFechaInicio} 
+          renderFechaEntrega={this.props.renderFechaEntrega}
+          addSubActividad={this.props.addSubActividad}
+          addRowOc={this.props.addRowOc}
+          />
         </div>
       )
 

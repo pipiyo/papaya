@@ -1,19 +1,12 @@
 import React from 'react'
 import OcProductoItem from './OcProductoItem'
-import AutocompleteActions from '../../actions/AutocompleteActions'
+
 class OcProducto extends React.Component {
 
   constructor() {
     super()
   }
-  autocomplete(ev){
-    ev.persist()
-    AutocompleteActions.autocomplete(ev)
-  }
-  autocompleteOff(ev,input){
-    ev.persist()
-    AutocompleteActions.autocompleteOff(ev)
-  }
+  
   render() {
       return (         
         <div>
@@ -40,10 +33,7 @@ class OcProducto extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                <OcProductoItem 
-                autocompleteOff={this.autocompleteOff.bind(this)} 
-                autocomplete={this.autocomplete.bind(this)} 
-                />
+                {this.props.obj.compOc}
                 <tr>
                     <td class="right" colSpan="10"><p>Sub Total</p></td>
                     <td class="module-table-content-item"><input class="active small center" type="text" /></td>
