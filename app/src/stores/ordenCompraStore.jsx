@@ -46,10 +46,6 @@ let ordenCompraStore = Reflux.createStore({
       
     })
   },
-  totalProducto : function(){
-    // console.log("--><--")
-    // console.log(document.getElementById('codigo-1').value)
-  },
   addSubActividad: function(){
     this.obj.numSub = this.obj.numSub + 1
     this.obj.compSub.push(<SubActividad sub={this.obj.sub} num={this.obj.numSub} key={this.obj.numSub} />)

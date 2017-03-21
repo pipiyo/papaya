@@ -3,7 +3,8 @@ import Reflux from 'reflux'
 let AutocompleteActions = Reflux.createActions([
 	'autocomplete',
 	'autocompleteOff',
-	'autocompleteOK'
+	'autocompleteOK',
+	'autocompleteTotalOC'
 
 ])
 
