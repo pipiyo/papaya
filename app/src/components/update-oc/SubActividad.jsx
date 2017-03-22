@@ -8,7 +8,7 @@ class subActividad extends React.Component {
 		return(
 			<div className="item-form">
                 <label>Sub Actividad</label>
-                <select data-counteditarsubavtividad="ok" id={`editarsubactividad-${this.props.num}`}>
+                <select data-counteditarsubavtividad="ok" data-txteditaroc={`editarsubactividad-${this.props.num}`} id={`editarsubactividad-${this.props.num}`}>
                   <option value="">Seleccioné</option>
                    	{
 	                  this.props.sub.map( (sub) => {

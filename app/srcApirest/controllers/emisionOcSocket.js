@@ -10,7 +10,7 @@ module.exports = (io) => {
   /* Complete Oc */
   socket.on('completSelect', (callback) => {
     let query = `select max(CODIGO_OC + 1) as NUMEROOC from orden_de_compra ;` 
-    let query1 = `select servicio.CODIGO_PROYECTO, sub_servicio.CODIGO_SUBSERVICIO, sub_servicio.SUB_DESCRIPCION from sub_servicio, servicio where sub_servicio.SUB_CODIGO_SERVICIO =  servicio.CODIGO_SERVICIO and sub_servicio.SUB_ESTADO = 'En Proceso' and sub_servicio.SUB_NOMBRE_SERVICIO  = 'Adquisiciones';`   
+    let query1 = `select servicio.CODIGO_PROYECTO, sub_servicio.CODIGO_SUBSERVICIO, sub_servicio.SUB_DESCRIPCION from sub_servicio, servicio where sub_servicio.SUB_CODIGO_SERVICIO =  servicio.CODIGO_SERVICIO and sub_servicio.SUB_ESTADO = 'En Proceso' and sub_servicio.SUB_NOMBRE_SERVICIO  = 'Adquisiciones';`
     pool.getConnection( (err, connection) => {
         connection.query(query+query1, (err, rows, fields) => {
             connection.release()
@@ -27,13 +27,15 @@ module.exports = (io) => {
   /* Complete Oc */
   socket.on('completSelectUpdate', (id,callback) => {
     let query = `select * from orden_de_compra where CODIGO_OC = '${id}';` 
-    let query1 = `select servicio.CODIGO_PROYECTO, sub_servicio.CODIGO_SUBSERVICIO, sub_servicio.SUB_DESCRIPCION from sub_servicio, servicio where sub_servicio.SUB_CODIGO_SERVICIO =  servicio.CODIGO_SERVICIO and sub_servicio.SUB_ESTADO = 'En Proceso' and sub_servicio.SUB_NOMBRE_SERVICIO  = 'Adquisiciones';`   
-    let query2 = `SELECT * FROM oc_proveedor WHERE CODIGO_OC = '${id}'`;
+    let query1 = `select  sub_servicio.CODIGO_SUBSERVICIO, servicio.CODIGO_PROYECTO, sub_servicio.SUB_DESCRIPCION from sub_servicio, servicio where sub_servicio.SUB_CODIGO_SERVICIO =  servicio.CODIGO_SERVICIO and (sub_servicio.SUB_ESTADO NOT IN('Emitido','OK','Nulo')  or SUB_OC = '${id}') and  sub_servicio.SUB_NOMBRE_SERVICIO  = 'Adquisiciones';` 
+    let query2 = `SELECT * FROM oc_proveedor WHERE CODIGO_OC = '${id}';`
+    let query3 = `select servicio.CODIGO_PROYECTO, sub_servicio.CODIGO_SUBSERVICIO, sub_servicio.SUB_DESCRIPCION from sub_servicio, servicio  where sub_servicio.SUB_CODIGO_SERVICIO =  servicio.CODIGO_SERVICIO and SUB_OC = '${id}' ;`
+    let query4 = `select producto.UNIDAD_DE_MEDIDA,oc_producto.DIFERENCIA,oc_producto.CANTIDAD_RECIBIDA,oc_producto.PRECIO_UNITARIO,oc_producto.ID, oc_producto.PRECIO_LISTA,producto.STOCK_ACTUAL, oc_producto.OBSERVACION, producto.DESCRIPCION,oc_producto.ROCHA,producto.CODIGO_PRODUCTO, oc_producto.TOTAL, oc_producto.DESCUENTO, oc_producto.CANTIDAD, oc_producto.PRECIO_BODEGA from orden_de_compra, oc_producto, producto where producto.CODIGO_PRODUCTO = oc_producto.CODIGO_PRODUCTO AND oc_producto.CODIGO_OC = orden_de_compra.CODIGO_OC AND orden_de_compra.CODIGO_OC  = '${id}';`
     pool.getConnection( (err, connection) => {
-        connection.query(query+query1+query2, (err, rows, fields) => {
+        connection.query(query+query1+query2+query3+query4, (err, rows, fields) => {
             connection.release()
             if (!err){
-              callback({oc:rows[0],sub:rows[1],pro:rows[2]})
+              callback({oc:rows[0],sub:rows[1],pro:rows[2],suboc:rows[3],ocp:rows[4]})
             }
             else{
               console.log('Error ' + err)

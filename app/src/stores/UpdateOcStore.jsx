@@ -17,6 +17,8 @@ let UpdateOcStore = Reflux.createStore({
   listenables: [UpdateOcActions],
   obj: { 
     oc : '',
+    ocp : '',
+    suboc : '',
     proveedor : '',
     numeroOC: '',
     sub:'',
@@ -29,6 +31,7 @@ let UpdateOcStore = Reflux.createStore({
   },
   resetSelect: function(){
     this.obj.oc = ''
+    this.obj.ocp = ''
     this.obj.numeroOC = ''
     this.obj.sub = ''
     this.obj.compSub = []
@@ -42,16 +45,23 @@ let UpdateOcStore = Reflux.createStore({
   completSelect: function(id) {
     this.resetSelect()
     socket.emit('completSelectUpdate',id, (n) => {
+      
+      this.obj.suboc = n.suboc
+      this.obj.ocp = n.ocp
       this.obj.oc = n.oc[0]
       this.obj.proveedor = n.pro[0]
       this.obj.item.fecha.fechaInicio = moment(n.oc[0].FECHA_REALIZACION)
       this.obj.item.fecha.fechaEntrega = moment(n.oc[0].FECHA_ENTREGA)
       this.obj.numeroOC = n.oc[0].CODIGO_OC
       this.obj.sub = n.sub
-
-      this.obj.compSub.push(<SubActividad sub={this.obj.sub} num={this.obj.numSub} key={this.obj.numSub} />)
-
+      this.obj.numSub = n.suboc.length
+      this.obj.numOc = n.ocp.length
+   
       let i
+      for(i = 1; i <= this.obj.numSub; i++){
+        this.obj.compSub.push(<SubActividad sub={this.obj.sub} num={i} key={i} />)
+      }
+      
       for(i = 1; i <= this.obj.numOc; i++){
         this.obj.compOc.push(<OcProductoItem num={i} key={i} />)
       }
@@ -60,6 +70,28 @@ let UpdateOcStore = Reflux.createStore({
     })
   },
   completInput: function(){
+    let i,e
+    console.log(this.obj.ocp)
+    for(i = 1; i <= this.obj.numOc; i++){
+      e = i - 1
+      document.getElementById(`editaroccantidad-${i}`).value = this.obj.ocp[e].CANTIDAD
+      document.getElementById(`editarocpreciol-${i}`).value = this.obj.ocp[e].PRECIO_LISTA
+      document.getElementById(`editarocpreciou-${i}`).value = this.obj.ocp[e].PRECIO_UNITARIO
+      document.getElementById(`editarocpreciob-${i}`).value = this.obj.ocp[e].PRECIO_BODEGA
+      document.getElementById(`editaroctotal-${i}`).value = this.obj.ocp[e].TOTAL
+      document.getElementById(`editarocdescuento-${i}`).value = this.obj.ocp[e].DESCUENTO
+      document.getElementById(`editarocstock-${i}`).value = this.obj.ocp[e].STOCK_ACTUAL
+      document.getElementById(`editarocobservaciones-${i}`).value = this.obj.ocp[e].OBSERVACION
+      document.getElementById(`editarocrocha-${i}`).value = this.obj.ocp[e].ROCHA
+      document.getElementById(`editarocdescripcion-${i}`).value = this.obj.ocp[e].DESCRIPCION
+      document.getElementById(`editaroccodigo-${i}`).value = this.obj.ocp[e].CODIGO_PRODUCTO
+    }
+
+    for(i = 1; i <= this.obj.numSub; i++){
+      e = i - 1
+      this.selectOption(document.querySelector(`[data-txteditaroc="editarsubactividad-${i}"]`),this.obj.suboc[e].CODIGO_SUBSERVICIO, false)
+    }
+
     document.querySelector(`[data-txteditaroc="rocha"]`).value = this.obj.oc.ROCHA_PROYECTO
     document.querySelector(`[data-txteditaroc="proveedor"]`).value = this.obj.oc.NOMBRE_PROVEEDOR
     document.querySelector(`[data-txteditaroc="pago"]`).value = this.obj.oc.CONDICION_PAGO
@@ -90,10 +122,12 @@ let UpdateOcStore = Reflux.createStore({
   selectOption: function(numero, seleccion, tipo){
     let i
     for(i = 0; numero.length > i; i++){
-      if(tipo){
-        if(numero.options[i].value.toLowerCase() == seleccion.toLowerCase()){numero.options[i].selected = "selected"}
-      }else{
-        if(numero.options[i].value == seleccion){numero.options[i].selected = "selected"}
+      if(seleccion){
+        if(tipo){
+          if(numero.options[i].value.toLowerCase() == seleccion.toLowerCase()){numero.options[i].selected = "selected"}
+        }else{
+          if(numero.options[i].value == seleccion){numero.options[i].selected = "selected"}
+        }
       }
     }
   },

@@ -33,7 +33,6 @@ let AutocompleteStore = Reflux.createStore({
 
   },
   autocompleteOK: function(ev,id,datos1,datos2,datos3,datos4,datos5,datos6,datosCantidad,datosTotalOC){
-    console.log(datosTotalOC)
     document.getElementById(id).value = ev.target.text
     if(datos1){document.getElementById(datos1).value = ev.target.dataset.datos1}
     if(datos2){document.getElementById(datos2).value = ev.target.dataset.datos2}
