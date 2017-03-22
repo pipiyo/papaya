@@ -27,12 +27,12 @@ class Item extends React.Component {
                   <option value="Fabrica">Fábrica</option>
                   <option value="Los Conquistadores">Los Conquistadores</option>
                   <option value="La Dehesa">La Dehesa</option>
-                  <option value="Otro">Otro</option>
                 </select>
             </div>
             <div className="item-form">
                 <label>Empresa</label>
                 <select required id="empresa">
+                  <option value="">Seleccioné</option>
                   <option value="MULTIOFICINA">Multioficina</option>
                   <option value="MUEBLES Y DISEÑO">Muebles y diseño</option>
                   <option value="SILLAS Y SILLAS">Sillas y sillas</option>
@@ -55,12 +55,9 @@ class Item extends React.Component {
             </div>
              <div className="item-form">
                 <label>Proveedor</label>
-                <input type="text" data-complete="proveedor" onBlur={this.props.autocompleteOff} onChange={this.props.autocomplete} class="active" id="proveedor" />
+                <input required type="text" data-complete="proveedor" onBlur={this.props.autocompleteOff} onChange={this.props.autocomplete} class="active" id="proveedor" />
                 <AutoComplet name="proveedor" datos1="rut-proveedor" datos2="forma-pago"  />
-            </div>
-            <div className="item-form">
-                <label>Rut Proveedor</label>
-                <input readOnly required id="rut-proveedor" type="text" />
+                <input readOnly required id="rut-proveedor" type="hidden" />
             </div>
 
             <div className="item-form">
@@ -70,7 +67,7 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Reclamo</label>
-                <input required id="reclamo" type="text" />
+                <input id="reclamo" type="text" />
             </div>
           </div>
 

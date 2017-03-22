@@ -21,6 +21,11 @@ export default class OrdenCompraRoutes extends React.Component {
   renderFechaInicio(date){
     ordenCompraActions.renderFechaInicio(date)
   }
+  addOc(ev){
+    ev.preventDefault()
+    ev.persist()
+    ordenCompraActions.addOc(ev)
+  }
   renderFechaEntrega(date){
     ordenCompraActions.renderFechaEntrega(date)
   }
@@ -52,6 +57,7 @@ export default class OrdenCompraRoutes extends React.Component {
           renderFechaEntrega={this.renderFechaEntrega.bind(this)} 
           addSubActividad={this.addSubActividad.bind(this)}
           addRowOc={this.addRowOc.bind(this)}
+          addOc={this.addOc.bind(this)}
         />       
         )
       }else{

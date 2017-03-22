@@ -64,7 +64,7 @@ class OcProducto extends React.Component {
                 </tr>
                 <tr>
                     <td class="right"><p>Observaciones</p></td>
-                    <td colSpan="10" class="module-table-content-item"><input readOnly class="small center"  type="text" /></td>
+                    <td colSpan="10" class="module-table-content-item"><input id="emisionocobservaciones" class="active big center" type="text" /></td>
                 </tr>
                 </tbody>
               </table>

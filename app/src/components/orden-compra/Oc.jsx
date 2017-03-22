@@ -10,7 +10,7 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form autoComplete="off" onSubmit="">
+        <form autoComplete="off" onSubmit={this.props.addOc}>
           <fieldset> 
             <OcItem 
               obj={this.props.obj}

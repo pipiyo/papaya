@@ -50,6 +50,9 @@ module.exports = (io) => {
       })
       if(totalOC <= 0){
         query += `UPDATE orden_de_compra SET ESTADO = "OK", DIFERENCIA_TOTAL = "0" where CODIGO_OC = "${data.codigo}";`
+        query += `UPDATE sub_servicio SET SUB_ESTADO = 'OK' WHERE SUB_OC = '${data.codigo}';`
+      }else{
+        query += `UPDATE sub_servicio SET SUB_ESTADO = 'Parcial' WHERE SUB_OC = '${data.codigo}';`
       }
       pool.getConnection( (err, connection) => {
             connection.query(query, (err, results) => {
