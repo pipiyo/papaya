@@ -24,6 +24,24 @@ module.exports = (io) => {
     })
   })
 
+  /* Complete Oc */
+  socket.on('completSelectUpdate', (id,callback) => {
+    let query = `select * from orden_de_compra where CODIGO_OC = '${id}';` 
+    let query1 = `select servicio.CODIGO_PROYECTO, sub_servicio.CODIGO_SUBSERVICIO, sub_servicio.SUB_DESCRIPCION from sub_servicio, servicio where sub_servicio.SUB_CODIGO_SERVICIO =  servicio.CODIGO_SERVICIO and sub_servicio.SUB_ESTADO = 'En Proceso' and sub_servicio.SUB_NOMBRE_SERVICIO  = 'Adquisiciones';`   
+    let query2 = `SELECT * FROM oc_proveedor WHERE CODIGO_OC = '${id}'`;
+    pool.getConnection( (err, connection) => {
+        connection.query(query+query1+query2, (err, rows, fields) => {
+            connection.release()
+            if (!err){
+              callback({oc:rows[0],sub:rows[1],pro:rows[2]})
+            }
+            else{
+              console.log('Error ' + err)
+            }
+        }) 
+    })
+  })
+
   /* Agregar OC */
   socket.on('addOc', (data,token,callback) => {
     let user = decodeToken(token)

@@ -37,6 +37,7 @@ import OrdenCompra from './routes/OrdenCompraRoutes'
 import RecibirOc from './routes/RecibirOCRoutes'
 import RecibirVale from './routes/RecibirValeRoutes'
 import ListadoVale from './routes/ListadoValeRoutes'
+import UpdateOc from './routes/UpdateOcRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
@@ -79,6 +80,7 @@ ReactDOM.render((
             <Route path="actualizar-rocha/:id" component={UpdateRocha}/>
             <Route path="recibir-oc/:id" component={RecibirOc}/>
             <Route path="recibir-vale/:id" component={RecibirVale}/>
+            <Route path="actualizar-oc/:id" component={UpdateOc}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

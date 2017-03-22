@@ -17,10 +17,6 @@ class OcProductoItem extends React.Component {
     ev.persist()
     AutocompleteActions.autocompleteOff(ev)
   }
-  autocompleteTotalOC(ev,input){
-    ev.persist()
-    AutocompleteActions.autocompleteOff(ev)
-  }
   autocompleteTotalOC(ev){
     ev.persist()
     AutocompleteActions.autocompleteTotalOC()
@@ -39,7 +35,7 @@ class OcProductoItem extends React.Component {
           </td>
           <td>
             <input type="text" data-complete="producto1" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} class="active" id={`emisionocdescripcion-${this.props.num}`} />
-            <AutoComplet name={`emisionocdescripcion-${this.props.num}`} datos1={`emisionoccodigo-${this.props.num}`} datos2={`emisionocstock-${this.props.num}`} datos3={`emisionocpreciob-${this.props.num}`} datos4={`emisionocpreciol-${this.props.num}`} datos5={`emisionocpreciou-${this.props.num}`} datos6={`emisionoctotal-${this.props.num}`} datosCantidad={`emisionoccantidad-${this.props.num}`} />
+            <AutoComplet name={`emisionocdescripcion-${this.props.num}`} datos1={`emisionoccodigo-${this.props.num}`} datos2={`emisionocstock-${this.props.num}`} datos3={`emisionocpreciob-${this.props.num}`} datos4={`emisionocpreciol-${this.props.num}`} datos5={`emisionocpreciou-${this.props.num}`} datos6={`emisionoctotal-${this.props.num}`} datosCantidad={`emisionoccantidad-${this.props.num}`} datosTotalOC='ok' />
           </td>
           <td><input class="active" id={`emisionocobservaciones-${this.props.num}`} /></td>
           <td class="center"><input type="text" readOnly class="small center" id={`emisionocstock-${this.props.num}`} /></td>

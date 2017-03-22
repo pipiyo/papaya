@@ -33,6 +33,7 @@ let AutocompleteStore = Reflux.createStore({
 
   },
   autocompleteOK: function(ev,id,datos1,datos2,datos3,datos4,datos5,datos6,datosCantidad,datosTotalOC){
+    console.log(datosTotalOC)
     document.getElementById(id).value = ev.target.text
     if(datos1){document.getElementById(datos1).value = ev.target.dataset.datos1}
     if(datos2){document.getElementById(datos2).value = ev.target.dataset.datos2}
@@ -41,7 +42,8 @@ let AutocompleteStore = Reflux.createStore({
     if(datos5){document.getElementById(datos5).value = ev.target.dataset.datos5}
     if(datos6){document.getElementById(datos6).value = ev.target.dataset.datos6}
     if(datosCantidad){document.getElementById(datosCantidad).value = ev.target.dataset.cantidad}  
-    if(datosTotalOC){this.autocompleteTotalOC()}    
+    if(datosTotalOC == "ok"){this.autocompleteTotalOC()} 
+    if(datosTotalOC == "okupdate"){this.autocompleteTotalUpdateOC()}     
     this.obj.valores = []
     this.obj.input = null
     this.trigger(this.obj)
@@ -111,6 +113,71 @@ let AutocompleteStore = Reflux.createStore({
       ocho = parseInt(neto) * 19 / 100
       document.getElementById(`emisionociva`).value = ocho  
       document.getElementById(`emisionoctotalfinal`).value = parseInt(ocho) + parseInt(neto)
+    }
+  
+  },
+  autocompleteTotalUpdateOC(){
+    let count = document.querySelectorAll("[data-editaroc]").length
+    let i, precio, cantidad , uno, descuento, dos, tres, cuatro, preciou, cinco
+    let subtotal, descuentopor, descuentopes, iva, seis, siete, neto, ocho
+    let totalfinal = 0
+    for(i = 1; i <= count; i++){
+      if(document.getElementById(`editaroccantidad-${i}`) && document.getElementById(`editarocpreciol-${i}`)){
+        if(document.getElementById(`editaroccodigo-${i}`).value.length > 0){
+          cantidad = this.formatNumber(document.getElementById(`editaroccantidad-${i}`).value)
+          precio = this.formatNumber(document.getElementById(`editarocpreciol-${i}`).value)
+          descuento = this.formatNumber(document.getElementById(`editarocdescuento-${i}`).value)
+          preciou = this.formatNumber(document.getElementById(`editarocpreciou-${i}`).value)
+
+          uno  = parseInt(cantidad) * parseInt(precio)
+          dos = (parseInt(uno) * parseInt(descuento)) / 100
+          tres = parseInt(uno) - parseInt(dos)
+
+          cuatro = (parseInt(precio) * parseInt(descuento)) / 100
+          cinco = parseInt(precio) - parseInt(cuatro)
+
+          document.getElementById(`editaroccantidad-${i}`).value = cantidad
+          document.getElementById(`editarocpreciol-${i}`).value = precio
+          document.getElementById(`editarocpreciou-${i}`).value = (cinco)?cinco:precio
+
+        
+          if(descuento){
+            document.getElementById(`editaroctotal-${i}`).value = (tres)?tres:0
+          }else{
+            document.getElementById(`editaroctotal-${i}`).value = (uno)?uno:0
+          }
+          totalfinal +=parseInt(document.getElementById(`editaroctotal-${i}`).value)
+        }
+      }
+    }
+    document.getElementById(`editarocsubtotal`).value = totalfinal
+
+    subtotal = this.formatNumber(document.getElementById(`editarocsubtotal`).value)
+    descuentopor = this.formatNumber(document.getElementById(`editarocdescuentopor`).value)
+    descuentopes = this.formatNumber(document.getElementById(`editarocdescuentopes`).value)
+
+    if(descuentopor){
+      seis = (parseInt(subtotal) * parseInt(descuentopor)) / 100
+      seis = parseInt(subtotal) - parseInt(seis)
+    }else{
+      seis = subtotal
+    }
+
+    if(descuentopes){
+      siete = (parseInt(seis) - parseInt(descuentopes))
+    }else{
+      siete = seis
+    }
+
+    document.getElementById(`editarocneto`).value = siete
+
+    iva = this.formatNumber(document.getElementById(`editarociva`).value)
+    neto = this.formatNumber(document.getElementById(`editarocneto`).value)
+
+    if(neto){
+      ocho = parseInt(neto) * 19 / 100
+      document.getElementById(`editarociva`).value = ocho  
+      document.getElementById(`editaroctotalfinal`).value = parseInt(ocho) + parseInt(neto)
     }
   
   },

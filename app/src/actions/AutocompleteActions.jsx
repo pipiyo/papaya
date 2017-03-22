@@ -4,7 +4,8 @@ let AutocompleteActions = Reflux.createActions([
 	'autocomplete',
 	'autocompleteOff',
 	'autocompleteOK',
-	'autocompleteTotalOC'
+	'autocompleteTotalOC',
+	'autocompleteTotalUpdateOC'
 
 ])
 
