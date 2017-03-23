@@ -131,7 +131,7 @@ let UpdateOcStore = Reflux.createStore({
       }
     }
   },
-  addOc: function(ev){
+  updateOc: function(ev,id){
     let despachar = ev.target.elements['despachar'].value
     let despacharNombre, despacharDireccion, despacharComuna, despacharRut, despacharTelefono
     switch(despachar) {
@@ -212,7 +212,8 @@ let UpdateOcStore = Reflux.createStore({
         oc.ocpTotal.push(ev.target.elements[`editaroctotal-${i}`].value)
       }
     }
-    socket.emit('addOc', oc, JSON.stringify( localStorage.getItem('token')), (n) => {
+
+    socket.emit('updateOc', oc, id, JSON.stringify( localStorage.getItem('token')), (n) => {
 
       /* Dialog */
       this.obj.mensaje.texto = n.mensaje

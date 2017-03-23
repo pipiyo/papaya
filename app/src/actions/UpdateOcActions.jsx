@@ -6,7 +6,7 @@ let UpdateOcActions = Reflux.createActions([
 	'renderFechaEntrega',
 	'addSubActividad',
 	'addRowOc',
-	'addOc',
+	'updateOc',
 	'totalProducto',
 	'completInput'
 ])

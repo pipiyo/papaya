@@ -14,7 +14,7 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form autoComplete="off" onSubmit={this.props.addOc}>
+        <form autoComplete="off" onSubmit={this.props.updateOc}>
           <fieldset> 
             <OcItem 
               obj={this.props.obj}

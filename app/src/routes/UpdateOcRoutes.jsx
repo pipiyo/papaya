@@ -21,10 +21,10 @@ export default class UpdateOcRoutes extends React.Component {
   renderFechaInicio(date){
     UpdateOcActions.renderFechaInicio(date)
   }
-  addOc(ev){
+  updateOc(ev){
     ev.preventDefault()
     ev.persist()
-    UpdateOcActions.addOc(ev)
+    UpdateOcActions.updateOc(ev,this.props.params.id)
   }
   renderFechaEntrega(date){
     UpdateOcActions.renderFechaEntrega(date)
@@ -57,7 +57,7 @@ export default class UpdateOcRoutes extends React.Component {
           renderFechaEntrega={this.renderFechaEntrega.bind(this)} 
           addSubActividad={this.addSubActividad.bind(this)}
           addRowOc={this.addRowOc.bind(this)}
-          addOc={this.addOc.bind(this)}
+          updateOc={this.updateOc.bind(this)}
         />       
         )
       }else{

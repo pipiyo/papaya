@@ -21,7 +21,7 @@ class UpdateOcIndex extends Component {
           renderFechaEntrega={this.props.renderFechaEntrega}
           addSubActividad={this.props.addSubActividad}
           addRowOc={this.props.addRowOc}
-          addOc={this.props.addOc}
+          updateOc={this.props.updateOc}
           />
         </div>
       )
