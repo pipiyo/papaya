@@ -1,6 +1,6 @@
 import React from 'react'
 import OcProductoItem from './OcProductoItem'
-
+import AutocompleteActions from '../../actions/AutocompleteActions'
 class OcProducto extends React.Component {
 
   constructor() {
