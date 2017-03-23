@@ -34,6 +34,7 @@ import UpdateOcFecha from './routes/UpdateOcFechaRoutes'
 import DescriptionOc from './routes/DescriptionOcRoutes'
 import Auth from './routes/AuthRoutes'
 import OrdenCompra from './routes/OrdenCompraRoutes'
+import ValeEmision from './routes/ValeEmisionRoutes'
 import RecibirOc from './routes/RecibirOCRoutes'
 import RecibirVale from './routes/RecibirValeRoutes'
 import ListadoVale from './routes/ListadoValeRoutes'
@@ -81,6 +82,7 @@ ReactDOM.render((
             <Route path="recibir-oc/:id" component={RecibirOc}/>
             <Route path="recibir-vale/:id" component={RecibirVale}/>
             <Route path="actualizar-oc/:id" component={UpdateOc}/>
+            <Route path="vale-emision" component={ValeEmision}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

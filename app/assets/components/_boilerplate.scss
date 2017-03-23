@@ -2244,6 +2244,7 @@ a.external-link, .external-link a {
         border-radius: 10px;
         border-collapse: separate;
         width: 100%;
+        min-width: 100%;
         border-spacing:0;
         border:1px solid rgba(34,36,38,.15);
         font-size: $fontTiny;
