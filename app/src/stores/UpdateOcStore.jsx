@@ -45,7 +45,6 @@ let UpdateOcStore = Reflux.createStore({
   completSelect: function(id) {
     this.resetSelect()
     socket.emit('completSelectUpdate',id, (n) => {
-      
       this.obj.suboc = n.suboc
       this.obj.ocp = n.ocp
       this.obj.oc = n.oc[0]
