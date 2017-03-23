@@ -71,7 +71,6 @@ let UpdateOcStore = Reflux.createStore({
   },
   completInput: function(){
     let i,e
-    console.log(this.obj.ocp)
     for(i = 1; i <= this.obj.numOc; i++){
       e = i - 1
       document.getElementById(`editaroccantidad-${i}`).value = this.obj.ocp[e].CANTIDAD
