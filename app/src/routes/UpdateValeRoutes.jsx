@@ -2,36 +2,36 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
-import ValeEmisionIndex from '../components/vale-emision'
+import UpdateValeIndex from '../components/update-vale'
 
-import ValeEmisionActions from '../actions/ValeEmisionActions'
-import ValeEmisionStore from '../stores/ValeEmisionStore'
+import UpdateValeActions from '../actions/UpdateValeActions'
+import UpdateValeStore from '../stores/UpdateValeStore'
 
 import AutocompleteActions from '../actions/AutocompleteActions'
 
-@ReactMixin.decorate(Reflux.connect(ValeEmisionStore, 'obj'))
-export default class ValeEmisionRoutes extends React.Component {
+@ReactMixin.decorate(Reflux.connect(UpdateValeStore, 'obj'))
+export default class UpdateValeRoutes extends React.Component {
 
   constructor() {
     super()
   }
   componentWillMount(){
-    ValeEmisionActions.completSelect()
+    UpdateValeActions.completSelect(this.props.params.id)
   }
   renderFechaInicio(date){
-    ValeEmisionActions.renderFechaInicio(date)
+    UpdateValeActions.renderFechaInicio(date)
   }
-  addVale(ev){
+  updateVale(ev){
     ev.preventDefault()
     ev.persist()
-    ValeEmisionActions.addVale(ev)
+    UpdateValeActions.updateVale(ev,this.props.params.id)
   }
   renderFechaEntrega(date){
-    ValeEmisionActions.renderFechaEntrega(date)
+    UpdateValeActions.renderFechaEntrega(date)
   }
   addRowVale(ev){
     ev.preventDefault()
-    ValeEmisionActions.addRowVale()
+    UpdateValeActions.addRowVale()
   }
   autocomplete(ev){
     ev.persist()
@@ -45,15 +45,15 @@ export default class ValeEmisionRoutes extends React.Component {
 
       if(this.state.obj){
       return (
-        <ValeEmisionIndex
+        <UpdateValeIndex
           obj={this.state.obj}
-        	scrollWin={this.props.scrollWin}
+          scrollWin={this.props.scrollWin}
           autocompleteOff={this.autocompleteOff.bind(this)} 
           autocomplete={this.autocomplete.bind(this)} 
           renderFechaInicio={this.renderFechaInicio.bind(this)} 
           renderFechaEntrega={this.renderFechaEntrega.bind(this)} 
           addRowVale={this.addRowVale.bind(this)}
-          addVale={this.addVale.bind(this)}
+          updateVale={this.updateVale.bind(this)}
         />       
         )
       }else{

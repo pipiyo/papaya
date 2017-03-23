@@ -23,7 +23,7 @@ let ValeEmisionStore = Reflux.createStore({
     item: { fecha : { fechaInicio:moment(), fechaEntrega:moment()} }
   },
   resetSelect: function(){
-    this.obj.numeroOC = ''
+    this.obj.numeroVale = ''
     this.obj.compVale = []
     this.obj.numVale = 30
     this.obj.mensaje.texto = ''
@@ -60,7 +60,7 @@ let ValeEmisionStore = Reflux.createStore({
       valePreciol : []
     }
 
-    let count = document.querySelectorAll("[data-countemisionoc]").length
+    let count = document.querySelectorAll("[data-countemisionvale]").length
     for(let i = 1; i <= count; i++){
       if(ev.target.elements[`emisionvalecodigo-${i}`].value.length > 0){
         vale.valeCodigo.push(ev.target.elements[`emisionvalecodigo-${i}`].value)

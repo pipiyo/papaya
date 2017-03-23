@@ -11,6 +11,7 @@ class Item extends React.Component {
         <tr>
             <td class="center">
               <Link to={`/home/recibir-vale/${this.props.datos.COD_VALE}`}> <i class="fa fa-check-square" aria-hidden="true"></i></Link>
+              {(this.props.datos.ESTADO == "PENDIENTE")?<Link to={`/home/actualizar-vale/${this.props.datos.COD_VALE}`}> - <i class="fa fa-pencil-square-o" aria-hidden="true"></i></Link>:""}
             </td>
             <td>{this.props.datos.COD_VALE}</td>
             <td>{this.props.datos.CODIGO_PROYECTO}</td>

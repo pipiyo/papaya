@@ -22,9 +22,9 @@ class Item extends React.Component {
             </div>
             <div className="item-form">
                 <label>Departamento</label>
-                <select required id="departamento">
+                <select data-txteditarvale="departamento" required id="departamento">
                   <option value="">Seleccioné</option>
-                  <option value="PRODUCCIÓN">Producción</option>
+                  <option value="PRODUCCION">Producción</option>
                   <option value="DESARROLLO">Desarrollo</option>
                   <option value="Abastecimiento">Abastecimiento</option>
                   <option value="SILLAS">Sillas</option>
@@ -34,7 +34,7 @@ class Item extends React.Component {
             </div>
             <div className="item-form">
                 <label>Rocha</label>
-                <input type="text" data-complete="rocha" onBlur={this.props.autocompleteOff} onChange={this.props.autocomplete} class="active" id="rocha" />
+                <input data-txteditarvale="rocha" type="text" data-complete="rocha" onBlur={this.props.autocompleteOff} onChange={this.props.autocomplete} class="active" id="rocha" />
                 <AutoComplet name="rocha" />
             </div>
             <div className="item-form">
@@ -49,7 +49,7 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Empleado</label>
-                <input id="empleado" type="text" />
+                <input data-txteditarvale="empleado" id="empleado" type="text" />
             </div>
           </div>
 

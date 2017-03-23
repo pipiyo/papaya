@@ -21,7 +21,7 @@ class ValeProductoItem extends React.Component {
       return (         
         <tr>
           <td>
-            <input data-countemisionoc="ok" type="text" data-complete="producto" onBlur={this.autocompleteOff.bind(this)}  onChange={this.autocomplete.bind(this)} class="active" id={`emisionvalecodigo-${this.props.num}`} />
+            <input data-countemisionvale="ok" type="text" data-complete="producto" onBlur={this.autocompleteOff.bind(this)}  onChange={this.autocomplete.bind(this)} class="active" id={`emisionvalecodigo-${this.props.num}`} />
             <AutoComplet name={`emisionvalecodigo-${this.props.num}`} datos1={`emisionvaledescripcion-${this.props.num}`} datos2={`emisionvalestock-${this.props.num}`}  datos3={`emisionvalepreciol-${this.props.num}`} datosCantidad={`emisionvalecantidad-${this.props.num}`}  />
           </td>
           <td>
