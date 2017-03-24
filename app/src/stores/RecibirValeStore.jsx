@@ -76,14 +76,14 @@ let RecibirValeStore = Reflux.createStore({
     let recibido = this.formatNumber(document.getElementById(`recibido-${item[1]}`).value)
     let entregado = this.formatNumber(document.getElementById(`entregado-${item[1]}`).value)
     let diferencia = this.formatNumber(document.getElementById(`diferencia-${item[1]}`).value)
-    let stock = document.getElementById(`stock-${item[1]}`).value
+    let stock = parseInt(document.getElementById(`stock-${item[1]}`).value)
     let total = parseInt(cantidad) - (parseInt(recibido) + parseInt(entregado))
 
     if(recibido == "" || total < 0 || recibido > stock){
       recibido = 0;
       document.getElementById(`recibido-${item[1]}`).value = ""
     }
-    this.obj.diferencia[item[1]] = parseInt(cantidad) - (parseInt(recibido) + parseInt(entregado)) 
+    this.obj.diferencia[item[1]] = parseInt(cantidad) - (parseInt(recibido) + parseInt(entregado))
     this.trigger(this.obj)    
   },
   fechaActual: function(){

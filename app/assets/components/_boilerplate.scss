@@ -2309,7 +2309,10 @@ a.external-link, .external-link a {
             }
             &.center{
                 text-align: center;
-
+            }
+            &.error{
+                background: #FA5858;
+                color : #fff;
             }
             a{
                 text-decoration: none;
