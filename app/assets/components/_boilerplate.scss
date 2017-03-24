@@ -264,6 +264,9 @@ a.external-link, .external-link a {
 .a-right{
     text-align: right;
 }
+.top{
+    margin-top: 1em;
+}
 
 
 /**** frame ****/
@@ -288,36 +291,54 @@ a.external-link, .external-link a {
             left: 0;
             bottom: 0;
         }
-    }
-    @include vertical-tablet-down {
-        display: block;
-        .index{
+
+        @include vertical-tablet-down {
             min-height: 100%;
             &:before{
                 display: none;
             }
         }
-    }
-    .header{
-        float: left;
-        vertical-align: top;
-        width: 250px;
-        min-width: 250px;
-        height: 100%;
-        @include vertical-tablet-down {
-            width: 100%;
-            display: block;
-            height: auto;
+        &.active{
+            @include vertical-tablet-up {
+                &:before{
+                    content: none;
+                }
+                .header{
+                    width: 100%;
+                    display: block;
+                    height: auto;
+                }
+                .main{
+                    width: 100%;
+                    display: block;
+                    height: auto;
+                }
+                .nav{
+                    display: none;
+                }
+            }
         }
-    }
-    .main{
-        float: left;
-        height: 100%;
-        background: $blanco;
-        width: calc(100% - 250px);
-        @include vertical-tablet-down {
-            width: 100%;
-            display: block;
+        .header{
+            float: left;
+            vertical-align: top;
+            width: 250px;
+            min-width: 250px;
+            height: 100%;
+            @include vertical-tablet-down {
+                width: 100%;
+                display: block;
+                height: auto;
+            }
+        }
+        .main{
+            float: left;
+            height: 100%;
+            background: $blanco;
+            width: calc(100% - 250px);
+            @include vertical-tablet-down {
+                width: 100%;
+                display: block;
+            }
         }
     }
 }
@@ -331,6 +352,7 @@ a.external-link, .external-link a {
     position:relative;
     overflow: hidden;
     .logo{
+        position: relative;
         background: $color_corporativo_darker;
         margin: 0 auto;
         padding: .3em 0;
@@ -348,6 +370,20 @@ a.external-link, .external-link a {
             color: $blanco;
             font-size: $fontBig;
             padding: 0;
+        }
+        .burger{
+            position: absolute;
+            left: 16px;
+            top: 20px;
+            font-size: 2em;
+            color: $blanco;
+            @include vertical-tablet-down {
+                display: none;
+            }
+            &:hover{
+                color: $gris;
+                cursor: pointer;
+            }
         }
     }  
 }
@@ -620,7 +656,7 @@ a.external-link, .external-link a {
     .button{
         overflow: hidden;
         margin-bottom: 1em;
-        a{
+        a, button{
             margin: 0 1em;
             background: $color_corporativo_darker;
             padding: .5em;
@@ -629,9 +665,13 @@ a.external-link, .external-link a {
             float: right;
             text-align: center;
             max-width: 200px;
+            border: 0;
             display: block;
             &:hover{
                 background: $color_corporativo_dark;
+            }
+            &.hidden{
+                display: none;
             }
         }
     }
@@ -792,6 +832,7 @@ a.external-link, .external-link a {
     .item-form{
         padding: .5em 1em;
         width: 33.33%;
+        position: relative;
         &.title{
             width: 100%;
             padding: 1em 1em;
@@ -875,6 +916,7 @@ a.external-link, .external-link a {
     .item-filter{
         padding: 1em;
         width: 25%;
+        position: relative;
         @include vertical-tablet-down {
             width: 50%;
         }
@@ -1524,17 +1566,25 @@ a.external-link, .external-link a {
     position: absolute;
     background: $color_corporativo_darker;
     padding: 0;
+    z-index: 99;
+    width: calc(100% - 2em);
+    left: 1em;
     ul{
         margin: 0;
         padding: 0;
         list-style-type: none;
         li{
             margin:0;
-            padding: .1em 1em;
             color: $blanco;
             font-weight: normal;
             cursor: pointer;
             font-size: $fontTiny;
+            a{
+                padding: .1em 1em;
+                text-decoration: none;
+                color: $blanco;
+                display: block;
+            }
             &:hover{
                 background: $color_corporativo_dark;
             }
@@ -1652,6 +1702,26 @@ a.external-link, .external-link a {
             &.hidden{
                 display: none;
             }
+        }
+    }
+}
+
+.content-view-more{
+    width: 100%;
+    .view-more{
+        @include reset-appearance;
+        width: 200px;
+        padding: 1em;
+        margin: auto;
+        color: $blanco;
+        background: $color_corporativo_dark;
+        display: block;
+        &:hover{
+          background: $color_corporativo_darker;
+          cursor: pointer;  
+        }
+        &.hidden{
+            display: none;
         }
     }
 }
@@ -2173,7 +2243,138 @@ a.external-link, .external-link a {
     }
 
 }
+/* Module table new */
 
+.module-table-new{
+    margin: 1em auto 1em auto;
+    overflow-y: auto; 
+    overflow-x: scroll; 
+    border-radius: 10px;
+    width: calc(100% - 1em);
+    table{
+        border-radius: 10px;
+        border-collapse: separate;
+        width: 100%;
+        border-spacing:0;
+        border:1px solid rgba(34,36,38,.15);
+        font-size: $fontTiny;
+        &.oc{thead{th{background:#41AC8A;color:$blanco;}}}
+        &.abastecimiento{thead{th{background:$color_abastecimiento;color:$blanco;}}}
+        &.sillas{thead{th{background:$color_sillas;color:$blanco;}}}
+        &.produccion{thead{th{background:$color_produccion;color:$blanco;}}}
+        &.planificacion{thead{th{background:$color_planificacion;color:$blanco;}}}
+        &.desarrollo{thead{th{background:$color_desarrollo;color:$blanco;}}}
+        &.comercial{thead{th{background:$color_comercial;}}}
+        &.instalaciones{thead{th{background:$color_instalaciones;color:$blanco;}}}
+        &.despacho{thead{th{background:$color_despacho;color:$blanco;}}}
+        &.vale{thead{th{background:#0489B1;color:$blanco;}}}
+        thead{
+            border-radius: 10px 10px 0 0;
+            th{
+                background-color: rgb(249, 250, 251);
+                &:first-child{
+                   border-radius: 10px 0 0 0;
+                }
+                &:last-child{
+                    border-radius: 0 10px 0 0;
+                }
+            }
+        }
+        tbody{
+            tr{
+                &:nth-child(odd){
+                    background: rgb(244, 246, 247);
+                }
+                &:nth-child(event){
+                    background: rgb(255, 255, 255);
+                }
+                &.error{
+                    background: #fff6f6;
+                    color : #9f3a38;
+                }
+                &.ok{
+                    background: #fcfff5;
+                    color : #2c662d;
+                }
+                &:last-child{
+                    td{
+                        &:first-child{
+                           border-radius: 0 0 0 10px;
+                        }
+                        &:last-child{
+                            border-radius: 0 0 10px 0;
+                        }
+                    }
+                }
+            }
+        }
+        td, th{
+            padding: 10px 7px;
+            position: relative;
+            &.nr{
+                white-space: nowrap;
+            }
+            &.right{
+                text-align: right;
+            }
+            &.center{
+                text-align: center;
+
+            }
+            a{
+                text-decoration: none;
+                padding: 0 3px;
+            }
+            input{
+                @include reset-appearance;
+                width: 100%;
+                &.active{
+                    border:solid 1px $gris;
+                }
+                &.small{
+                    width: 50px;
+                }
+                &.medium{
+                    width: 90px;
+                }
+            }
+        }
+        td{
+            border-top:1px solid rgba(34,36,38,.15);
+            + td{  
+                border-left:1px solid rgba(34,36,38,.15);
+            }
+        }
+        th{
+            + th{
+                border-left:1px solid rgba(34,36,38,.15);
+    
+            }
+        }
+    }
+}
+.module-arrow{
+    display: flex;
+    flex-wrap: wrap;
+    .arrow-a{
+        width: 100px;
+        text-align: center;
+        a{
+            font-size: 2.5em;
+        }
+    }
+    .arrow-b{
+        width: calc(100% - 200px);
+        h3{
+            text-align: center;
+            margin: 1em 0 0 0;
+            padding: 0;
+            font-weight: normal;
+            text-transform: uppercase;
+            font-size: $fontSmall;
+        }
+    }
+}
 /* Css transition*/
 /* Css transition*/
 /* Css transition*/

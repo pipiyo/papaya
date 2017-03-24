@@ -21,7 +21,9 @@ let HomeStore = Reflux.createStore({
 						active : null,
 						notification : null,
 						navMovil: null,
+            navMenu: null,
 						subMenus: null,
+            scrollWin: null,
 						showNotification: null,
             activeMenu: null,
             numberNotification: null
@@ -72,7 +74,9 @@ let HomeStore = Reflux.createStore({
                         },
 						active : 'active',
 						navMovil: this.navMovil,
+            navMenu: this.navMenu,
 						subMenus: this.subMenus,
+            scrollWin: this.scrollWin,
 						showNotification: this.showNotification,
             activeMenu : this.activeMenu
                        }
@@ -108,7 +112,10 @@ let HomeStore = Reflux.createStore({
     })
 
   },
-
+  scrollWin:function(ev) {
+    ev.preventDefault()
+    document.getElementById(ev.currentTarget.dataset.tabla).scrollLeft += ev.currentTarget.dataset.left
+  },
 
 
 
@@ -123,6 +130,13 @@ let HomeStore = Reflux.createStore({
   navMovil: function(ev){
     ev.preventDefault()
     let x = document.querySelectorAll(".nav-item")
+    x[0].classList.toggle('active')
+  },
+
+  /* Agrega clase active para desplegar sub-menus */
+  navMenu: function(ev){
+    ev.preventDefault()
+    let x = document.querySelectorAll(".index")
     x[0].classList.toggle('active')
   },
 

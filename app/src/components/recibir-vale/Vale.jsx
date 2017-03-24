@@ -19,6 +19,7 @@ class Vale extends React.Component {
           </fieldset> 
 
           <ValeProducto 
+            scrollWin={this.props.scrollWin}
             obj={this.props.obj}
             renderInputOcTotal={this.props.renderInputOcTotal}   
           />

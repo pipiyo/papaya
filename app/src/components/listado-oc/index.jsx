@@ -23,6 +23,7 @@ class ListadoOCIndex extends React.Component {
           />
           <Oc 
           obj={this.props.obj}
+          scrollWin={this.props.scrollWin}
           renderViewMore={this.props.renderViewMore} 
           />
         </div>

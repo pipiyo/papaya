@@ -7,36 +7,48 @@ class ValeProducto extends React.Component {
     super()
   }
   render() {
-      return (         
-        <div class="module-table vale top" data-col="ocho" data-area="ok">
-          <div class="module-table-container">
-            <div class="module-table-content">
-              <div class="module-table-item">Código</div>
-              <div class="module-table-item">Descripción</div>
-              <div class="module-table-item">Observaciones</div>
-              <div class="module-table-item">Stock</div>
-              <div class="module-table-item">Cantidad</div>
-              <div class="module-table-item">Recibido</div>
-              <div class="module-table-item">Entregado</div>
-              <div class="module-table-item">Diferencia</div>
-            </div>
-              {
-                this.props.obj.renderProductos.map( (producto,i) => {
-                  return <ValeProductoItem 
-                  key={i}
-                  number={i}
-                  renderInputOcTotal={this.props.renderInputOcTotal} 
-                  renderInputOc={this.props.renderInputOc}  
-                  stock= {this.props.obj.stock[i]} 
-                  diferencia= {this.props.obj.diferencia[i]} 
-                  recibido= {this.props.obj.recibido[i]} 
-                  cantidad= {this.props.obj.cantidad[i]}
-                  codigo= {this.props.obj.codigos[i]}
-                  producto={producto} />
-                })
-              }
+
+      return (
+        <div>
+          <div class="module-arrow top">
+            <div class="arrow-a"><a href="#" data-left="-100" data-tabla="tabla-vale-recibir" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a></div>
+            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla</h3></div>
+            <div class="arrow-a"><a href="#" data-left="100" data-tabla="tabla-vale-recibir" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a></div>
           </div>
-        </div>
+          <div class="module-table-new" id="tabla-vale-recibir">
+            <table class="vale">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Observaciones</th>
+                    <th>Stock</th>
+                    <th>Cantidad</th>
+                    <th>Recibido</th>
+                    <th>Entregado</th>
+                    <th>Diferencia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {
+                  this.props.obj.renderProductos.map( (producto,i) => {
+                    return <ValeProductoItem 
+                    key={i}
+                    number={i}
+                    renderInputOcTotal={this.props.renderInputOcTotal} 
+                    renderInputOc={this.props.renderInputOc}  
+                    stock= {this.props.obj.stock[i]} 
+                    diferencia= {this.props.obj.diferencia[i]} 
+                    recibido= {this.props.obj.recibido[i]} 
+                    cantidad= {this.props.obj.cantidad[i]}
+                    codigo= {this.props.obj.codigos[i]}
+                    producto={producto} />
+                  })
+                }
+                </tbody>
+              </table>
+          </div>
+        </div>     
       )
 
   }

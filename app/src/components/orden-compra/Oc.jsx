@@ -20,7 +20,7 @@ class Form extends React.Component {
             <a>Eliminar Fila +</a>
           </div>
 
-          <OcProducto />
+          <OcProducto scrollWin={this.props.scrollWin} />
           <div className="module-form button top">
             <div className="item-form button">
                 <input type="submit" value="Enviar"/>

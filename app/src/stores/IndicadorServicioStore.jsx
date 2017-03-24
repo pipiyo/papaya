@@ -14,23 +14,24 @@ let IndicadorServicioStore = Reflux.createStore({
   listenables: [IndicadorServicioActions],
   obj: { 
     servicio : "",
-    ejecutivo: "",
-    total: 0,
+    ejecutivo: [],
+    total: [],
     area: "",
     button: "",
     renderItem: [],
     filtro:{fechaInicio:undefined,fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 0, limitB:100}
   },
   renderReset: function(){
-    document.getElementById("cliente").value = ""
-    document.getElementById("fechaInicio").value = ""
-    document.getElementById("fechaEntrega").value = ""
-    document.getElementById("codigo").value = ""
-    document.getElementById("estado").options[0].selected = "selected"
-    document.getElementById("vendedor").options[0].selected = "selected"
-    document.getElementById("categoria").options[0].selected = "selected"
+    if(document.getElementById("cliente").length){document.getElementById("cliente").value}
+    if(document.getElementById("fechaInicio").length){document.getElementById("fechaInicio").value = ""}
+    if(document.getElementById("fechaEntrega").length){document.getElementById("fechaEntrega").value = ""}
+    if(document.getElementById("codigo").length){document.getElementById("codigo").value = ""}
+    if(document.getElementById("estado").length){document.getElementById("estado").options[0].selected = "selected"}
+    if(document.getElementById("vendedor").length){document.getElementById("vendedor").options[0].selected = "selected"}
+    if(document.getElementById("categoria").length){document.getElementById("categoria").options[0].selected = "selected"}
     this.obj.filtro.limit = 0
     this.obj.renderItem = []
+    this.obj.servicio = ''
     this.obj.filtro.fechaInicio = undefined
     this.obj.filtro.fechaEntrega = undefined
     this.obj.filtro.codigo = null
@@ -42,6 +43,7 @@ let IndicadorServicioStore = Reflux.createStore({
   renderResetMount: function(){
     this.obj.filtro.limit = 0
     this.obj.renderItem = []
+    this.obj.servicio = ''
     this.obj.filtro.fechaInicio = undefined
     this.obj.filtro.fechaEntrega = undefined
     this.obj.filtro.codigo = null
@@ -59,6 +61,7 @@ let IndicadorServicioStore = Reflux.createStore({
       this.renderItem()
       this.trigger(this.obj)
     })
+    
   },
   renderFiltro : function(){
       document.getElementById('btn-buscar').disabled = true
@@ -95,11 +98,9 @@ let IndicadorServicioStore = Reflux.createStore({
     if(moment(date).isValid()){
       document.getElementById("fechaInicio").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaInicio = date
-      //this.renderFiltro();
     }else{
       document.getElementById("fechaInicio").value = ""
       this.obj.filtro.fechaInicio = undefined
-      //this.renderFiltro();
     }
     this.trigger(this.obj)
   },
@@ -107,11 +108,9 @@ let IndicadorServicioStore = Reflux.createStore({
     if(moment(date).isValid()){
       document.getElementById("fechaEntrega").value = moment(date).format("YYYY-MM-DD")
       this.obj.filtro.fechaEntrega = date
-      //this.renderFiltro();
     }else{
       document.getElementById("fechaEntrega").value = ""
       this.obj.filtro.fechaEntrega = undefined
-      //this.renderFiltro();
     }
     this.trigger(this.obj)
   },
@@ -193,9 +192,9 @@ let IndicadorServicioStore = Reflux.createStore({
   },
   renderItem: function(){
     let i
-    for(i=0;this.obj.servicio.length > i ;i++){
-      this.obj.renderItem.push(<Item key={this.obj.servicio[i].CODIGO_SERVICIO} datos={this.obj.servicio[i]} />)
-    } 
+      for(i=0;this.obj.servicio.length > i ;i++){
+        this.obj.renderItem.push(<Item key={this.obj.servicio[i].CODIGO_SERVICIO} datos={this.obj.servicio[i]} />)
+      } 
   }
 })
 

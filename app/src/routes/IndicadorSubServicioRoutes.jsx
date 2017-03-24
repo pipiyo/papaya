@@ -18,8 +18,10 @@ export default class IndicadorSubServicioRoutes extends React.Component {
   	IndicadorSubServicioActions.renderSubServicio(this.props.params.area)
   }
   componentWillReceiveProps(nextProps, nextState){
-    IndicadorSubServicioActions.renderReset()
-    IndicadorSubServicioActions.renderSubServicio(nextProps.params.area)
+    if(nextProps.params.area !== this.props.params.area){
+      IndicadorSubServicioActions.renderReset()
+      IndicadorSubServicioActions.renderSubServicio(nextProps.params.area)
+    }
   }
   renderFiltro(event){
     event.preventDefault()
@@ -43,6 +45,7 @@ export default class IndicadorSubServicioRoutes extends React.Component {
           ejecutivo={this.state.obj.ejecutivo}
         	datos={this.state.obj.renderItem}
           filtro={this.state.obj.filtro}
+          scrollWin={this.props.scrollWin}
           renderFiltro={this.renderFiltro.bind(this)}
           renderFiltroFi={this.renderFiltroFi.bind(this)}
           renderFiltroFe={this.renderFiltroFe.bind(this)}

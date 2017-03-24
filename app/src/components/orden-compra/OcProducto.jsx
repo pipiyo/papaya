@@ -1,31 +1,78 @@
 import React from 'react'
 import OcProductoItem from './OcProductoItem'
-import OcProductoFootItem from './OcProductoFootItem'
-
+import AutocompleteActions from '../../actions/AutocompleteActions'
 class OcProducto extends React.Component {
 
   constructor() {
     super()
   }
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
+  }
   render() {
       return (         
-        <div class="module-table oc" data-col="once" data-area="ok">
-          <div class="module-table-container">
-              <div class="module-table-item">Código</div>
-              <div class="module-table-item">Rocha</div>
-              <div class="module-table-item">Descripción</div>
-              <div class="module-table-item">Observaciones</div>
-              <div class="module-table-item">Stock</div>
-              <div class="module-table-item">Cantidad</div>
-              <div class="module-table-item">Precio Bodega</div>
-              <div class="module-table-item">Precio Unitario</div>
-              <div class="module-table-item">Precio Lista</div>
-              <div class="module-table-item">Descuento</div>
-              <div class="module-table-item">Total</div>
-              <OcProductoItem />
-              <OcProductoFootItem />
+        <div>
+          <div class="module-arrow top">
+            <div class="arrow-a"><a href="#" data-left="-100" data-tabla="tabla-oc-descripction" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a></div>
+            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla</h3></div>
+            <div class="arrow-a"><a href="#" data-left="100" data-tabla="tabla-oc-descripction" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a></div>
           </div>
-        </div>
+          <div class="module-table-new" id="tabla-oc-descripction">
+            <table class="oc">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Rocha</th>
+                    <th>Descripción</th>
+                    <th>Observaciones</th>
+                    <th>Stock</th>
+                    <th>Cantidad</th>
+                    <th>Precio Bodega</th>
+                    <th>Precio Unitario</th>
+                    <th>Precio Lista</th>
+                    <th>Descuento</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <OcProductoItem 
+                autocompleteOff={this.autocompleteOff.bind(this)} 
+                autocomplete={this.autocomplete.bind(this)} 
+                />
+                <tr>
+                    <td class="right" colSpan="10"><p>Sub Total</p></td>
+                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="right" colSpan="10"><p>Descuento %</p></td>
+                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="right" colSpan="10"><p>Descuento $</p></td>
+                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                </tr>
+
+                <tr>
+                    <td class="right" colSpan="10"><p>Iva</p></td>
+                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="right" colSpan="10"><p>Total</p></td>
+                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                </tr>
+                <tr>
+                    <td class="right"><p>Observaciones</p></td>
+                    <td colSpan="10" class="module-table-content-item"><input class="active"  type="text" /></td>
+                </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>  
       )
 
   }

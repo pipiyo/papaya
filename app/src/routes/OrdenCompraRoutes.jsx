@@ -5,6 +5,7 @@ import Reflux from 'reflux'
 import OrdenCompraIndex from '../components/orden-compra'
 
 
+
 export default class OrdenCompraRoutes extends React.Component {
 
   constructor() {
@@ -14,6 +15,7 @@ export default class OrdenCompraRoutes extends React.Component {
   render() {
       return (
         <OrdenCompraIndex
+        	scrollWin={this.props.scrollWin}
         />       
       )
   }

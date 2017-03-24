@@ -34,6 +34,7 @@ export default class RecibirOCRoutes extends React.Component {
 	    return(
 	      <RecibirValeIndex 
 	      obj={this.state.obj}
+        scrollWin={this.props.scrollWin}
 	      renderInput={this.renderInput.bind(this)}
 	      renderInputOcTotal={this.renderInputOcTotal.bind(this)}
         updateVale={this.updateVale.bind(this)}

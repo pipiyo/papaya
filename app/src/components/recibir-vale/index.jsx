@@ -12,7 +12,8 @@ class RecibirValeIndex extends Component {
       return (         
         <div>
           <Title />
-          <Vale 
+          <Vale
+          scrollWin={this.props.scrollWin} 
           obj={this.props.obj}
           renderInputOcTotal={this.props.renderInputOcTotal} 
           renderInput={this.props.renderInput} 

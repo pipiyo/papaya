@@ -17,7 +17,7 @@ module.exports = (io) => {
 
       let q_estado_vale = ''
 
-      if(filtro.servicio.estado){q_estado_servicio = ' and proyecto.ESTADO = "'+filtro.servicio.estado+'"'}
+      if(filtro.servicio.estado){q_estado_servicio = ' and servicio.ESTADO = "'+filtro.servicio.estado+'"'}
       if(filtro.servicio.categoria){q_categoria_servicio = ' and servicio.CATEGORIA = "'+filtro.servicio.categoria+'"'}
 
       if(filtro.oc.estado){q_estado_oc = ' and orden_de_compra.ESTADO = "'+filtro.oc.estado+'"'}

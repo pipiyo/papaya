@@ -2,8 +2,7 @@ import React from 'react'
 import ReactMixin from 'react-mixin'
 import Reflux from 'reflux'
 
-import Autocomplete from '../components/autocomplete'
-
+import IndexAutocomplete from '../components/autocomplete'
 import AutocompleteActions from '../actions/AutocompleteActions'
 import AutocompleteStore from '../stores/AutocompleteStore'
 
@@ -13,24 +12,16 @@ export default class AutoCompleteRoutes extends React.Component {
   constructor() {
     super()
   }
-  componentWillMount(){
-  	AutocompleteActions.autocomplete(this.props.autocomplete)
-  }
-
-  componentWillReceiveProps(nextProps, nextState){
-    AutocompleteActions.autocomplete(nextProps.autocomplete)
+  autocompleteOK(ev) {
+    ev.preventDefault()
+    ev.persist()
+    AutocompleteActions.autocompleteOK(ev,this.props.name,this.props.datos1,this.props.datos2,this.props.datos3,this.props.datos4,this.props.datos5);
   }
 
   render() {
-    if(this.state.obj){
       return (
-        <Autocomplete valor={this.state.obj.valores.datos} />       
+        <IndexAutocomplete autocompleteOK={this.autocompleteOK.bind(this)} name={this.props.name} obj={this.state.obj} />       
       )
-    }else{
-      return (
-        <div><h1>Cargando</h1></div> 
-      )
-    }
   }
 
 }

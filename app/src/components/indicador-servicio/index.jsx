@@ -19,7 +19,8 @@ class IndicadorServicioIndex extends React.Component {
           renderFiltroFe={this.props.renderFiltroFe}
           />
           <Servicio
-          total={this.props.total} 
+          total={this.props.total}
+          scrollWin={this.props.scrollWin} 
           renderViewMore={this.props.renderViewMore}
           area={this.props.area}
           datos={this.props.datos} 

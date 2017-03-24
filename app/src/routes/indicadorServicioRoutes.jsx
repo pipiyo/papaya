@@ -17,9 +17,11 @@ export default class IndicadorSubServicioRoutes extends React.Component {
     IndicadorServicioActions.renderResetMount()
   	IndicadorServicioActions.renderServicio(this.props.params.area)
   }
-  componentWillReceiveProps(nextProps, nextState){
-    IndicadorServicioActions.renderReset()
-    IndicadorServicioActions.renderServicio(nextProps.params.area)
+  componentWillReceiveProps(nextProps){
+    if(nextProps.params.area !== this.props.params.area){
+      IndicadorServicioActions.renderReset()
+      IndicadorServicioActions.renderServicio(nextProps.params.area)
+    }
   }
   renderFiltro(event){
     event.preventDefault()
@@ -38,6 +40,7 @@ export default class IndicadorSubServicioRoutes extends React.Component {
   	if(this.state.obj){
     	return (
         	<IndicadorServicio
+          scrollWin={this.props.scrollWin}
           area={this.props.params.area} 
           total={this.state.obj.total}
           ejecutivo={this.state.obj.ejecutivo}

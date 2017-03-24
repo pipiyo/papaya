@@ -68,7 +68,7 @@ require('./srcApirest/controllers/valeDeEmisionSocket')(io)
 
 require('./srcApirest/controllers/cuadroRochaSocket')(io)
 
-
+require('./srcApirest/controllers/autocompleteSocket')(io)
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))

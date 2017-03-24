@@ -1,7 +1,10 @@
 import Reflux from 'reflux'
 
 let AutocompleteActions = Reflux.createActions([
-	'autocomplete'
+	'autocomplete',
+	'autocompleteOff',
+	'autocompleteOK'
+
 ])
 
 export default AutocompleteActions

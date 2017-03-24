@@ -16,25 +16,36 @@ class Vale extends React.Component {
   }
   render() {
       return (
-        <div class="module-table vale" data-col="nueve" data-area="ok">
-          <div class="module-table-container ">
-            <div class="module-table-content">
-              <div class="module-table-item">Herramientas</div>
-              <div class="module-table-item">Vale</div>
-              <div class="module-table-item">Rocha</div>
-              <div class="module-table-item">Departamento</div>
-              <div class="module-table-item">Empleador</div>
-              <div class="module-table-item">Fecha Ingreso</div>
-              <div class="module-table-item">Fecha Termino</div>
-              <div class="module-table-item">User</div>
-              <div class="module-table-item">Estado</div>
-            </div>
-              {this.props.obj.renderItem}
+        <div>
+          <div class="module-arrow">
+            <div class="arrow-a"><a href="#" data-left="-100" data-tabla="tabla-vale" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a></div>
+            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla</h3></div>
+            <div class="arrow-a"><a href="#" data-left="100" data-tabla="tabla-vale" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a></div>
           </div>
-          <div class="module-table-button">
-            <button class="hidden" id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
-          </div>   
-        </div>
+          <div class="module-table-new" id="tabla-vale">
+            <table class="vale">
+                <thead>
+                  <tr>
+                    <th>Herramientas</th>
+                    <th>Vale</th>
+                    <th>Rocha</th>
+                    <th>Departamento</th>
+                    <th>Empleador</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Fecha Termino</th>
+                    <th>Usuario</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.obj.renderItem}
+                </tbody>
+              </table>
+          </div>
+          <div class="content-view-more">
+            <button class="hidden view-more" id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
+          </div>
+        </div>  
       )
 
   }

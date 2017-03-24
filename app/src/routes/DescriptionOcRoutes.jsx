@@ -20,6 +20,7 @@ export default class DescriptionRochaRoutes extends React.Component {
   	if(this.state.obj){
       return (
          <DescriptionOcIndex 
+         scrollWin={this.props.scrollWin}
          obj={this.state.obj}
         />       
       )

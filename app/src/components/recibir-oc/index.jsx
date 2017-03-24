@@ -14,6 +14,7 @@ class RecibirOcIndex extends Component {
           <Title />
           <Oc 
           obj={this.props.obj}
+          scrollWin={this.props.scrollWin}
           renderInputOcTotal={this.props.renderInputOcTotal} 
           renderInputOc={this.props.renderInputOc} 
           renderInput={this.props.renderInput} 

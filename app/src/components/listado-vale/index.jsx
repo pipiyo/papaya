@@ -20,6 +20,7 @@ class ListadoValeIndex extends React.Component {
           renderFiltroFe={this.props.renderFiltroFe}
          />
          <Vale 
+         scrollWin={this.props.scrollWin}
          obj={this.props.obj}
          renderViewMore={this.props.renderViewMore} 
           />

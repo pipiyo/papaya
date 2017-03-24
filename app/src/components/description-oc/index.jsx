@@ -13,7 +13,10 @@ class DescriptionOcIndex extends React.Component {
         <div>
           <Title />
           <Oc obj={this.props.obj} />
-          <OcProducto obj={this.props.obj} />
+          <OcProducto
+            scrollWin={this.props.scrollWin}
+            obj={this.props.obj} 
+           />
         </div>
       )
 
