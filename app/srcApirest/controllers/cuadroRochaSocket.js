@@ -51,7 +51,7 @@ let insert = `INSERT INTO producto (CODIGO_PRODUCTO, DESCRIPCION, CATEGORIA, COD
 			_.forEach(v.hijos, (vv, kk) => {
 
 
-				insert += `('${vv.cod}','${vv.des}','${vv.cat}','','silla','2',
+				insert += `('${vv.cod}','${vv.des}','${vv.cat}','${v.cod}','silla','2',
 						   '${v.pais}','${v.proveedor}','${v.modelo}','${v.mecanismo}','${v.respaldo}',
 						   '${vv.cod}_img.jpg','${vv.cod}_img_1.jpg','${vv.cod}_img_2.jpg','${vv.cod}.dwg','${vv.cod}.dwg',
 						   '${vv.asiento}','0','${vv.respaldocolor}','0','${vv.estructura}'),`
