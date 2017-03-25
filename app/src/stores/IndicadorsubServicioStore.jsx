@@ -64,7 +64,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
         if(document.getElementById('btn-buscar')){document.getElementById('btn-buscar').disabled = false}
-      }, 3000)
+      }, 2000)
       
       let fechaI = document.getElementById("fechaInicio").value
       let fechaE = document.getElementById("fechaEntrega").value
@@ -191,11 +191,26 @@ let IndicadorSubServicioStore = Reflux.createStore({
       }
     }
   },
+  fechaActual: function(){
+    let hoy = new Date()
+    let dd = hoy.getDate();
+    let mm = hoy.getMonth()+1;
+    let yyyy = hoy.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+    } 
+
+    if(mm<10) {
+      mm='0'+mm
+    } 
+    return yyyy+'-'+mm+'-'+dd
+  },
   renderItem: function(){
     let i
     if(this.obj.renderItem.length <= 0){
       for(i=0;this.obj.subServicio.length > i ;i++){
-        this.obj.renderItem.push(<Item key={this.obj.subServicio[i].CODIGO_SUBSERVICIO} datos={this.obj.subServicio[i]} />)
+        this.obj.renderItem.push(<Item key={this.obj.subServicio[i].CODIGO_SUBSERVICIO} fecha={this.fechaActual()} datos={this.obj.subServicio[i]} />)
       } 
     }
   }

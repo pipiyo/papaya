@@ -185,7 +185,7 @@ module.exports = (io) => {
   /* Update Servicio */
   socket.on('updateServicio', (data) => {
 
-    let okUpdateServicio = '(Se update servicio ' + data.numero + ')'
+    let okUpdateServicio = '(Se actualizo servicio ' + data.numero + ')'
 
 
 

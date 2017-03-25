@@ -2,6 +2,7 @@ import React from 'react'
 import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
 import moment  from 'moment'
+import DialogActions from '../actions/DialogActions'
 
 import SubServicioActions from '../actions/SubServicioActions'
 
@@ -19,7 +20,7 @@ let SubServicioStore = Reflux.createStore({
   obj: { 
     comunas: 'comunas',
     vehiculos: 'vehiculos', 
-    mensaje: '',
+    mensaje: {title:"",texto:"",estado:false},
     item: {fecha : { fechaInicio:moment(), fechaEntrega:moment() } },
     area: null
   },
@@ -30,7 +31,9 @@ let SubServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.mensaje = ''
+      this.obj.mensaje.texto = ''
+      this.obj.mensaje.title = ''
+      this.obj.mensaje.estado = false
       this.obj.search = ''
     })
   },
@@ -41,7 +44,9 @@ let SubServicioStore = Reflux.createStore({
     socket.emit('formingresoservicio', (comunas, vehiculos) => {
       this.obj.comunas = comunas
       this.obj.vehiculos = vehiculos
-      this.obj.mensaje = ''
+      this.obj.mensaje.texto = ''
+      this.obj.mensaje.title = ''
+      this.obj.mensaje.estado = false
       this.obj.search = ''
       this.trigger(this.obj)
     })
@@ -90,9 +95,22 @@ let SubServicioStore = Reflux.createStore({
       if(ev.target.elements['dias']){ev.target.elements['dias'].value = ""}
         
       this.obj.area = ""
-      this.obj.mensaje = okAddSubServicio
+      /* Dialog */
+      this.obj.mensaje.texto = okAddSubServicio
+      this.obj.mensaje.title = 'Felicitaciones'
+      this.obj.mensaje.estado = true
+      setTimeout(this.closeDialog, 8000)
+      DialogActions.dialog(this.obj.mensaje)
+      /* End Dialog */
       this.trigger(this.obj)
     })
+  },
+  closeDialog : function(){
+    this.obj.mensaje.texto = ''
+    this.obj.mensaje.title = ''
+    this.obj.mensaje.estado = false
+    this.trigger(this.obj)
+    DialogActions.dialog(this.obj.mensaje)
   },
   renderFechaInicio: function(fecha){
     this.obj.item.fecha.fechaInicio = fecha

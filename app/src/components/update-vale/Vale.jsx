@@ -22,7 +22,7 @@ class Vale extends React.Component {
             />
           </fieldset> 
 
-          <div class="button">
+          <div class="button top">
             <a href="#" onClick={this.props.addRowVale}>Ingresar Fila +</a>
           </div>
 

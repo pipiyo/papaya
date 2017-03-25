@@ -52,12 +52,6 @@ class Item extends React.Component {
                 <input data-txteditarvale="empleado" id="empleado" type="text" />
             </div>
           </div>
-
-          <div className="module-form button">
-            <div className="item-form button">
-                <input type="button" onClick={this.props.addSubActividad} value="Ingresar nueva"/>
-            </div>
-          </div> 
         </div>  
       )
 

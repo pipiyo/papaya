@@ -2,7 +2,7 @@ import React from 'react'
 import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
 import moment  from 'moment'
-
+import DialogActions from '../actions/DialogActions'
 import AddRochaActions from '../actions/AddRochaActions'
 
 
@@ -13,11 +13,11 @@ const socket = io.connect( `${Env.url}proyecto` )
 let AddRochaStore = Reflux.createStore({
   listenables: [AddRochaActions],
   obj: { 
-    mensaje: '',
     vendedor:'',
     disenador:'',
     cliente:'',
     linea: '',
+    mensaje: {title:"",texto:"",estado:false},
     item: { fecha : { fechaInicio:moment(), fechaEntrega:moment()} },
   },
   completSelect: function() {
@@ -87,9 +87,22 @@ let AddRochaStore = Reflux.createStore({
       ev.target.elements['linea'].options[0].selected = "selected"
      
 
-      this.obj.mensaje = n.mensaje
+      /* Dialog */
+      this.obj.mensaje.texto = n.mensaje
+      this.obj.mensaje.title = 'Felicitaciones'
+      this.obj.mensaje.estado = true
+      setTimeout(this.closeDialog, 8000)
+      DialogActions.dialog(this.obj.mensaje)
+      /* End Dialog */
       this.trigger(this.obj)
     })
+  },
+  closeDialog : function(){
+    this.obj.mensaje.texto = ''
+    this.obj.mensaje.title = ''
+    this.obj.mensaje.estado = false
+    this.trigger(this.obj)
+    DialogActions.dialog(this.obj.mensaje)
   },
   renderRut: function(){
     let numero =  document.getElementById('cliente').options.selectedIndex

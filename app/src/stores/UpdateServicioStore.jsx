@@ -3,6 +3,7 @@ import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
 import UpdateServicioActions from '../actions/UpdateServicioActions'
 import moment  from 'moment'
+import DialogActions from '../actions/DialogActions'
 
 import ItemProduccion from '../components/update-servicio/ItemProduccion.jsx'
 import ItemSillas from '../components/update-servicio/ItemSillas.jsx'
@@ -18,6 +19,7 @@ let UpdateServicioStore = Reflux.createStore({
   obj: {comunas: 'comunas', 
         vehiculos: 'vehiculos', 
         servicio: '',
+        mensaje: {title:"",texto:"",estado:false},
         input : {codigo:null, categoria:null, supervisor:null, estado:null, dias:null, fechaInicio:null, fechaEntrega:null, descripcion:null, observaciones:null, guia: null, comuna : null, vehiculo: null, direccion: null, m3: null, fi:null, tm:null, to:null, os:null, lider:null, instalador1: null, instalador2: null, instalador3: null, puestos: null, ejecutor:null, vale:null, cantidad:null, proceso:null},
         area : null 
       },
@@ -72,8 +74,21 @@ let UpdateServicioStore = Reflux.createStore({
     }
     socket.emit('updateServicio', servicio)
     socket.on('okUpdateServicio', (okUpdateServicio) =>{
-      browserHistory.push('/home')
+      /* Dialog */
+        this.obj.mensaje.texto = okUpdateServicio
+        this.obj.mensaje.title = 'Felicitaciones'
+        this.obj.mensaje.estado = true
+        setTimeout(this.closeDialog, 8000)
+        DialogActions.dialog(this.obj.mensaje)
+      /* End Dialog */
     })
+  },
+  closeDialog : function(){
+    this.obj.mensaje.texto = ''
+    this.obj.mensaje.title = ''
+    this.obj.mensaje.estado = false
+    this.trigger(this.obj)
+    DialogActions.dialog(this.obj.mensaje)
   },
   searchServicio: function(id){
   	socket.emit('searchServicio', id)

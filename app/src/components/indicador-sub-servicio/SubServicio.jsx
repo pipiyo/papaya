@@ -27,6 +27,7 @@ class SubServicio extends React.Component {
             <table data-area="ok">
                 <thead>
                   <tr>
+                    <th>Herramientas</th>
                     <th>Rocha</th>
                     <th>Cliente</th>
                     <th>Ejecutivo</th>

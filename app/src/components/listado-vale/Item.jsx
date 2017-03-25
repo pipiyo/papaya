@@ -17,8 +17,8 @@ class Item extends React.Component {
             <td>{this.props.datos.CODIGO_PROYECTO}</td>
             <td>{this.props.datos.DEPARTAMENTO}</td>
             <td>{this.props.datos.CODIGO_PROYECTO}</td>
-            <td class="nr">{(this.props.datos.FECHA)?this.props.datos.FECHA.substring(0,10):this.props.datos.FECHA}</td>
-            <td class="nr">{(this.props.datos.FECHA_TERMINO)?this.props.datos.FECHA_TERMINO.substring(0,10):this.props.datos.FECHA_TERMINO}</td>
+            <td class="nr center">{(this.props.datos.FECHA)?this.props.datos.FECHA.substring(0,10):this.props.datos.FECHA}</td>
+            <td class={(this.props.datos.FECHA_TERMINO < this.props.fecha)?`nr error center`:`nr center`}>{(this.props.datos.FECHA_TERMINO)?this.props.datos.FECHA_TERMINO.substring(0,10):this.props.datos.FECHA_TERMINO}</td>
             <td>{this.props.datos.NOMBRE_USUARIO}</td>
             <td>{this.props.datos.ESTADO}</td>
         </tr>     
