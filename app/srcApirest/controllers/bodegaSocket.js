@@ -47,12 +47,11 @@ module.exports = (io) => {
         ]
         break;
     case 'sillas':
-        q_bodega = ' and CATEGORIA IN("Adhesivos","Espuma","Sillas","Tela")'
+
+        q_bodega = ' and CATEGORIA IN(20,21)'
         filtro_categoria = [
-          {id:'Adhesivos',name:'Adhesivos'},
-          {id:'Espuma',name:'Espuma'},
-          {id:'Sillas',name:'Sillas'},
-          {id:'Tela',name:'Tela'}
+          {id:'20',name:'Sillas'},
+          {id:'21',name:'Insumo Sillas'}
         ]
         break;
     case 'importado':

@@ -40,6 +40,10 @@ import RecibirOc from './routes/RecibirOCRoutes'
 import RecibirVale from './routes/RecibirValeRoutes'
 import ListadoVale from './routes/ListadoValeRoutes'
 
+
+import BodegaSilla from './routes/BodegaSillaRoutes'
+
+
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
 window.__myapp_container = document.getElementById('app')
@@ -71,6 +75,9 @@ ReactDOM.render((
             <Route path="producto/:id" component={Producto}/>
             <Route path="stock-producto/:bodega/:id" component={StockProducto}/>
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>
+
+            <Route path="bodega-silla" component={BodegaSilla}/>
+
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
             <Route path="listado-oc" component={ListadoOc}/>
