@@ -10,7 +10,7 @@ module.exports = (io) => {
   /* Editar Oc */
   socket.on('updateFechaOc', (data,callback) => {
       pool.getConnection( (err, connection) => {
-            connection.query('UPDATE orden_de_compra SET FECHA_CONFIRMACION = ?, FECHA_ENVIO_VALIJA = ?, ESTADO = ? WHERE CODIGO_OC = ?', [data.fechaConfirmacion, data.fechaActa, data.estado, data.codigo], (err, results) => {
+            connection.query('UPDATE orden_de_compra SET FECHA_CONFIRMACION = ?,ENVIADO = ?, FECHA_ENVIO_VALIJA = ?, ESTADO = ? WHERE CODIGO_OC = ?', [data.fechaConfirmacion, data.enviado, data.fechaActa, data.estado, data.codigo], (err, results) => {
                 connection.release()
                 if (!err){
                   callback({mensaje:`Se ingreso ${data.codigo}`})

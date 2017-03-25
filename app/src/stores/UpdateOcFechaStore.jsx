@@ -15,14 +15,15 @@ let UpdateOcFechaStore = Reflux.createStore({
   obj: { 
     mensaje: '',
     search: '',
-    input : {codigo:"", fechaActa:"", fechaConfirmacion: "", estado: ""},
+    input : {codigo:"", fechaActa:"", fechaConfirmacion: "", estado: "", enviado: ""},
   },
   updateFechaOc: function(ev,bodega){
     let oc = {
       "codigo": this.obj.input.codigo,
       "fechaConfirmacion": ev.target.elements['fechaConfirmacion'].value ,
       "fechaActa": ev.target.elements['fechaActa'].value,
-      "estado": ev.target.elements['estado'].value
+      "estado": ev.target.elements['estado'].value,
+      "enviado" : ev.target.elements['enviado'].value
     }
     socket.emit('updateFechaOc', oc, (n) => {
       this.obj.mensaje = n.mensaje
@@ -35,6 +36,7 @@ let UpdateOcFechaStore = Reflux.createStore({
       this.obj.input.fechaActa= (moment(this.obj.search[0].FECHA_ENVIO_VALIJA).isValid())?moment(this.obj.search[0].FECHA_ENVIO_VALIJA):undefined
       this.obj.input.fechaConfirmacion= (moment(this.obj.search[0].FECHA_CONFIRMACION).isValid())?moment(this.obj.search[0].FECHA_CONFIRMACION):undefined
       this.obj.input.estado = this.obj.search[0].ESTADO
+      this.obj.input.enviado = this.obj.search[0].ENVIADO
       this.obj.input.codigo = id
       this.trigger(this.obj)
     })
