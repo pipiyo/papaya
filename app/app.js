@@ -73,6 +73,9 @@ require('./srcApirest/controllers/autocompleteSocket')(io)
 require('./srcApirest/controllers/emisionOcSocket')(io)
 
 require('./srcApirest/controllers/emisionValeSocket')(io)
+
+require('./srcApirest/controllers/bodegaSillaSocket')(io)
+
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
