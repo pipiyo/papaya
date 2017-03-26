@@ -10,7 +10,6 @@ class Filtro extends React.Component {
   constructor(props) {
     super()
   }
-
   autocomplete(ev){
     ev.persist()
     AutocompleteActions.autocomplete(ev)

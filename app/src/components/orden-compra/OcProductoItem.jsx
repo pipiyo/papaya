@@ -1,34 +1,50 @@
 import React from 'react'
+
 import AutoComplet  from '../../routes/AutoComRoutes'
+import AutocompleteActions from '../../actions/AutocompleteActions'
+import ordenCompraActions from '../../actions/ordenCompraActions'
 
 class OcProductoItem extends React.Component {
 
   constructor() {
     super()
   }
-  render() {
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
+  }
+  autocompleteTotalOC(ev){
+    ev.persist()
+    AutocompleteActions.autocompleteTotalOC()
+  }
+
+  render(){
       return (         
         <tr>
           <td>
-            <input data-complete="producto" onBlur={this.props.autocompleteOff} onChange={this.props.autocomplete} class="active" id="codigo-1" />
-            <AutoComplet name="codigo-1" datos1="descripcion-1" datos2="stock-1" datos3="preciob-1" datos4="preciol-1" datos5="preciou-1" />
+            <input data-countemisionoc="ok" type="text" data-complete="producto" onBlur={this.autocompleteOff.bind(this)}  onChange={this.autocomplete.bind(this)} class="active" id={`emisionoccodigo-${this.props.num}`} />
+            <AutoComplet name={`emisionoccodigo-${this.props.num}`} datos1={`emisionocdescripcion-${this.props.num}`} datos2={`emisionocstock-${this.props.num}`} datos3={`emisionocpreciob-${this.props.num}`} datos4={`emisionocpreciol-${this.props.num}`} datos5={`emisionocpreciou-${this.props.num}`} datos6={`emisionoctotal-${this.props.num}`} datosCantidad={`emisionoccantidad-${this.props.num}`} datosTotalOC='ok' />
           </td>
           <td class="center">
-            <input data-complete="rocha" onBlur={this.props.autocompleteOff} onChange={this.props.autocomplete} class="active medium center" id="rocha-1" />
-            <AutoComplet name="rocha-1"/>
+            <input type="text" data-complete="rocha" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} class="active medium center" id={`emisionocrocha-${this.props.num}`} />
+            <AutoComplet name={`emisionocrocha-${this.props.num}`}/>
           </td>
           <td>
-            <input data-complete="producto1" onBlur={this.props.autocompleteOff} onChange={this.props.autocomplete} class="active" id="descripcion-1" />
-            <AutoComplet name="descripcion-1" datos1="codigo-1" datos2="stock-1" datos3="preciob-1" datos4="preciol-1" datos5="preciou-1" />
+            <input type="text" data-complete="producto1" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} class="active" id={`emisionocdescripcion-${this.props.num}`} />
+            <AutoComplet name={`emisionocdescripcion-${this.props.num}`} datos1={`emisionoccodigo-${this.props.num}`} datos2={`emisionocstock-${this.props.num}`} datos3={`emisionocpreciob-${this.props.num}`} datos4={`emisionocpreciol-${this.props.num}`} datos5={`emisionocpreciou-${this.props.num}`} datos6={`emisionoctotal-${this.props.num}`} datosCantidad={`emisionoccantidad-${this.props.num}`} datosTotalOC='ok' />
           </td>
-          <td><input class="active" id="observaciones-1" /></td>
-          <td class="center"><input class="active small center" id="stock-1" /></td>
-          <td class="center"><input class="active small center" id="cantidad-1" /></td>
-          <td class="center"><input class="active small center" id="preciob-1" /></td>
-          <td class="center"><input class="active small center" id="preciou-1" /></td>
-          <td class="center"><input class="active small center" id="preciol-1" /></td>
-          <td class="center"><input class="active small center" id="descuento-1" /></td>
-          <td class="center"><input class="active small center" id="total-1" /></td>
+          <td><input class="active" id={`emisionocobservaciones-${this.props.num}`} /></td>
+          <td class="center"><input type="text" readOnly class="small center" id={`emisionocstock-${this.props.num}`} /></td>
+          <td class="center"><input type="text" class="active small center" onChange={this.autocompleteTotalOC.bind(this)} id={`emisionoccantidad-${this.props.num}`} /></td>
+          <td class="center"><input type="text" readOnly class="small center" id={`emisionocpreciob-${this.props.num}`} /></td>
+          <td class="center"><input type="text" readOnly class="small center" id={`emisionocpreciou-${this.props.num}`} /></td>
+          <td class="center"><input type="text" class="active small center" onChange={this.autocompleteTotalOC.bind(this)} id={`emisionocpreciol-${this.props.num}`} /></td>
+          <td class="center"><input type="text" class="active small center" onChange={this.autocompleteTotalOC.bind(this)} id={`emisionocdescuento-${this.props.num}`} /></td>
+          <td class="center"><input type="text" readOnly class="small center" id={`emisionoctotal-${this.props.num}`} /></td>
         </tr> 
       )
 

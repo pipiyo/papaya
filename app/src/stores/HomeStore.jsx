@@ -26,7 +26,8 @@ let HomeStore = Reflux.createStore({
             scrollWin: null,
 						showNotification: null,
             activeMenu: null,
-            numberNotification: null
+            numberNotification: null,
+            subSubMenu : null
   },
 
   init: function() {
@@ -78,7 +79,8 @@ let HomeStore = Reflux.createStore({
 						subMenus: this.subMenus,
             scrollWin: this.scrollWin,
 						showNotification: this.showNotification,
-            activeMenu : this.activeMenu
+            activeMenu : this.activeMenu,
+            subSubMenu : this.subSubMenu
                        }
   },
 
@@ -116,10 +118,15 @@ let HomeStore = Reflux.createStore({
     ev.preventDefault()
     document.getElementById(ev.currentTarget.dataset.tabla).scrollLeft += ev.currentTarget.dataset.left
   },
-
-
-
-
+  subSubMenu:function(ev) {
+    ev.preventDefault()
+    let sub, i
+    document.querySelector(`[data-num=${ev.currentTarget.dataset.num}]`).classList.toggle('active')
+    sub = document.querySelectorAll(`[data-numok=${ev.currentTarget.dataset.num}]`)
+    for(i=0;i < sub.length; i++){
+      sub[i].classList.toggle('hidden')
+    }
+  },
 
 
 

@@ -190,10 +190,25 @@ let IndicadorServicioStore = Reflux.createStore({
       }
     }
   },
+  fechaActual: function(){
+    let hoy = new Date()
+    let dd = hoy.getDate();
+    let mm = hoy.getMonth()+1;
+    let yyyy = hoy.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+    } 
+
+    if(mm<10) {
+      mm='0'+mm
+    } 
+    return yyyy+'-'+mm+'-'+dd
+  },
   renderItem: function(){
     let i
       for(i=0;this.obj.servicio.length > i ;i++){
-        this.obj.renderItem.push(<Item key={this.obj.servicio[i].CODIGO_SERVICIO} datos={this.obj.servicio[i]} />)
+        this.obj.renderItem.push(<Item key={this.obj.servicio[i].CODIGO_SERVICIO} fecha={this.fechaActual()} datos={this.obj.servicio[i]} />)
       } 
   }
 })

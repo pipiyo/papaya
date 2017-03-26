@@ -14,9 +14,9 @@ class FilterVale extends React.Component {
                 <label> Estado</label>
                 <select id="estado-vale" >
                   <option value="">Seleccione</option>
-                    <option value="En Proceso">En Proceso</option>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="entregado">Entregado</option>
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="PARCIAL">Parcial</option>
+                    <option value="ENTREGADO">Entregado</option>
                     <option value="Nulo">Nulo</option>
                 </select>
             </div>

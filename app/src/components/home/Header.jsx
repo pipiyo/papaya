@@ -16,7 +16,8 @@ class Header extends React.Component {
             navMenu={this.props.navMenu} 
             logo={`${Env.url}css/images/logos/logo.png`} 
             />
-            <Item 
+            <Item
+            subSubMenu={this.props.subSubMenu} 
             activeMenu={this.props.activeMenu}
             navmovil={this.props.navmovil} 
             menu={ this.props.menu } 

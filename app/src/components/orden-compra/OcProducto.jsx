@@ -6,14 +6,11 @@ class OcProducto extends React.Component {
   constructor() {
     super()
   }
-  autocomplete(ev){
+  autocompleteTotalOC(ev){
     ev.persist()
-    AutocompleteActions.autocomplete(ev)
+    AutocompleteActions.autocompleteTotalOC()
   }
-  autocompleteOff(ev,input){
-    ev.persist()
-    AutocompleteActions.autocompleteOff(ev)
-  }
+  
   render() {
       return (         
         <div>
@@ -40,34 +37,34 @@ class OcProducto extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                <OcProductoItem 
-                autocompleteOff={this.autocompleteOff.bind(this)} 
-                autocomplete={this.autocomplete.bind(this)} 
-                />
+                {this.props.obj.compOc}
                 <tr>
                     <td class="right" colSpan="10"><p>Sub Total</p></td>
-                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                    <td class="module-table-content-item"><input readOnly id="emisionocsubtotal" class="small center" type="text" /></td>
                 </tr>
                 <tr>
                     <td class="right" colSpan="10"><p>Descuento %</p></td>
-                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                    <td class="module-table-content-item"><input id="emisionocdescuentopor" onChange={this.autocompleteTotalOC.bind(this)} class="active small center" type="text" /></td>
                 </tr>
                 <tr>
                     <td class="right" colSpan="10"><p>Descuento $</p></td>
-                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                    <td class="module-table-content-item"><input id="emisionocdescuentopes" onChange={this.autocompleteTotalOC.bind(this)} class="active small center" type="text" /></td>
                 </tr>
-
+                <tr>
+                    <td class="right" colSpan="10"><p>Neto</p></td>
+                    <td class="module-table-content-item"><input id="emisionocneto" readOnly class="small center" type="text" /></td>
+                </tr>
                 <tr>
                     <td class="right" colSpan="10"><p>Iva</p></td>
-                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                    <td class="module-table-content-item"><input id="emisionociva" readOnly class="small center" type="text" /></td>
                 </tr>
                 <tr>
                     <td class="right" colSpan="10"><p>Total</p></td>
-                    <td class="module-table-content-item"><input class="active small center" type="text" /></td>
+                    <td class="module-table-content-item"><input id="emisionoctotalfinal" readOnly class="small center" type="text" /></td>
                 </tr>
                 <tr>
                     <td class="right"><p>Observaciones</p></td>
-                    <td colSpan="10" class="module-table-content-item"><input class="active"  type="text" /></td>
+                    <td colSpan="10" class="module-table-content-item"><input id="emisionocobservaciones" class="active big center" type="text" /></td>
                 </tr>
                 </tbody>
               </table>

@@ -10,7 +10,7 @@ module.exports = (io) => {
   /* Editar Oc */
   socket.on('updateFechaOc', (data,callback) => {
       pool.getConnection( (err, connection) => {
-            connection.query('UPDATE orden_de_compra SET FECHA_CONFIRMACION = ?, FECHA_ENVIO_VALIJA = ?, ESTADO = ? WHERE CODIGO_OC = ?', [data.fechaConfirmacion, data.fechaActa, data.estado, data.codigo], (err, results) => {
+            connection.query('UPDATE orden_de_compra SET FECHA_CONFIRMACION = ?,ENVIADO = ?, FECHA_ENVIO_VALIJA = ?, ESTADO = ? WHERE CODIGO_OC = ?', [data.fechaConfirmacion, data.enviado, data.fechaActa, data.estado, data.codigo], (err, results) => {
                 connection.release()
                 if (!err){
                   callback({mensaje:`Se ingreso ${data.codigo}`})
@@ -50,6 +50,9 @@ module.exports = (io) => {
       })
       if(totalOC <= 0){
         query += `UPDATE orden_de_compra SET ESTADO = "OK", DIFERENCIA_TOTAL = "0" where CODIGO_OC = "${data.codigo}";`
+        query += `UPDATE sub_servicio SET SUB_ESTADO = 'OK' WHERE SUB_OC = '${data.codigo}';`
+      }else{
+        query += `UPDATE sub_servicio SET SUB_ESTADO = 'Parcial' WHERE SUB_OC = '${data.codigo}';`
       }
       pool.getConnection( (err, connection) => {
             connection.query(query, (err, results) => {

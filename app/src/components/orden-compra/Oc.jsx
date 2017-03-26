@@ -10,17 +10,26 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form autoComplete="off" onSubmit="">
+        <form autoComplete="off" onSubmit={this.props.addOc}>
           <fieldset> 
-            <OcItem />
+            <OcItem 
+              obj={this.props.obj}
+              autocompleteOff={this.props.autocompleteOff} 
+              autocomplete={this.props.autocomplete}
+              renderFechaInicio={this.props.renderFechaInicio} 
+              renderFechaEntrega={this.props.renderFechaEntrega}
+              addSubActividad={this.props.addSubActividad}  
+            />
           </fieldset> 
 
           <div class="button">
-            <a>Ingresar Fila +</a>
-            <a>Eliminar Fila +</a>
+            <a href="#" onClick={this.props.addRowOc}>Ingresar Fila +</a>
           </div>
 
-          <OcProducto scrollWin={this.props.scrollWin} />
+          <OcProducto
+            obj={this.props.obj}
+            scrollWin={this.props.scrollWin} 
+          />
           <div className="module-form button top">
             <div className="item-form button">
                 <input type="submit" value="Enviar"/>

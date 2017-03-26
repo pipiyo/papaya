@@ -99,10 +99,25 @@ let ListadoValeStore = Reflux.createStore({
       }
     }
   },
+  fechaActual: function(){
+    let hoy = new Date()
+    let dd = hoy.getDate();
+    let mm = hoy.getMonth()+1;
+    let yyyy = hoy.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+    } 
+
+    if(mm<10) {
+      mm='0'+mm
+    } 
+    return yyyy+'-'+mm+'-'+dd
+  },
   renderItem: function(){
     let i
     for(i=0;this.obj.vale.length > i ;i++){
-      this.obj.renderItem.push(<Item key={this.obj.vale[i].COD_VALE} datos={this.obj.vale[i]} />)
+      this.obj.renderItem.push(<Item fecha={this.fechaActual()} key={this.obj.vale[i].COD_VALE} datos={this.obj.vale[i]} />)
     } 
   }
 })

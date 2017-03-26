@@ -11,6 +11,7 @@ class Item extends React.Component {
   }
   componentDidMount(){
     UpdateOcFechaActions.selectOption(document.getElementById("estado"), this.props.obj.input.estado,true)
+    UpdateOcFechaActions.selectOption(document.getElementById("enviado"), this.props.obj.input.enviado,false)
   }
   render() {
       return (
@@ -27,6 +28,14 @@ class Item extends React.Component {
                   <option value="En Proceso">En Proceso</option>
                   <option value="Nulo">Nulo</option>
                   <option value="Ok">Ok</option>
+                </select>
+            </div>
+
+            <div className="item-form">
+                <label>Envíado a cliente</label>
+                <select id="enviado" >
+                  <option value="0">No</option>
+                  <option value="1">Si</option>               
                 </select>
             </div>
 

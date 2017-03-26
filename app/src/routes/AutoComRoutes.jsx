@@ -15,7 +15,7 @@ export default class AutoCompleteRoutes extends React.Component {
   autocompleteOK(ev) {
     ev.preventDefault()
     ev.persist()
-    AutocompleteActions.autocompleteOK(ev,this.props.name,this.props.datos1,this.props.datos2,this.props.datos3,this.props.datos4,this.props.datos5);
+    AutocompleteActions.autocompleteOK(ev,this.props.name,this.props.datos1,this.props.datos2,this.props.datos3,this.props.datos4,this.props.datos5,this.props.datos6,this.props.datosCantidad,this.props.datosTotalOC);
   }
 
   render() {

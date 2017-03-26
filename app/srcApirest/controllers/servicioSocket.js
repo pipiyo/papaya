@@ -185,7 +185,7 @@ module.exports = (io) => {
   /* Update Servicio */
   socket.on('updateServicio', (data) => {
 
-    let okUpdateServicio = '(Se update servicio ' + data.numero + ')'
+    let okUpdateServicio = '(Se actualizo servicio ' + data.numero + ')'
 
 
 
@@ -269,7 +269,7 @@ module.exports = (io) => {
       if(data.fechaInicio != null && data.fechaEntrega != null){q_fecha = ' and servicio.SUB_FECHA_ENTREGA BETWEEN "'+ data.fechaInicio +'" and "'+ data.fechaEntrega +'"'}
       q_estado = ' and servicio.ESTADO = "'+data.estado+'"'
 
-      let query = 'SELECT proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.DESCRIPCION as SD ,servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.OBSERVACIONES, servicio.ESTADO FROM proyecto,servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+' limit '+data.limit +', '+data.limitB+' ;' 
+      let query = 'SELECT proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.DESCRIPCION as SD ,servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.OBSERVACIONES, servicio.ESTADO FROM proyecto,servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+' order by servicio.FECHA_ENTREGA asc limit '+data.limit +', '+data.limitB+' ;' 
       let query1 = 'SELECT count(servicio.CODIGO_SERVICIO) as total FROM proyecto,servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+';' 
       let query2 = 'SELECT `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` FROM `empleado` where `AREA` = "COMERCIAL" order by NOMBRES;'
       pool.getConnection( (err, connection) => {

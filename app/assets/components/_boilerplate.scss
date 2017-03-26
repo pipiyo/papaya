@@ -410,6 +410,17 @@ a.external-link, .external-link a {
             transition-property: background;
             transition-duration: .3s;
             transition-timing-function: linear;
+            h2{
+                margin: 0;
+                padding: 0;
+                font-size: $fontSmall; 
+                line-height: 170%;
+                font-weight: normal;
+                color: $color_secundario_regular;
+                &:hover{
+                    color: $color_secundario_light;
+                }
+            }
             a{
                 color: $color_corporativo_lighter;
             }
@@ -423,7 +434,7 @@ a.external-link, .external-link a {
             ul{
                 display: none;
                 li{
-                    padding: 0 0 0 3em;
+                    padding: 0 0 0 2.6em;
                     position: relative;
                     &:hover{
                         background:none;
@@ -431,8 +442,37 @@ a.external-link, .external-link a {
                     &:before {
                         content: "\00bb";
                         position: absolute;
-                        left: 35px;
+                        left: 31px;
                         color: $blanco;
+                    }
+                    &.si{
+                        
+                        padding: 0 0 0 3em;
+                        &:before {
+                            content: "\00bb";
+                            position: absolute;
+                            left: 38px;
+                            color: $blanco;
+                        }
+                    }
+                    &.hidden{
+                        display: none;
+                    }
+                    &.title{
+                        padding: 0 0 0 2.8em;
+                        &:before {
+                            content: "\f107";
+                            font-family: FontAwesome;
+                            font-weight: normal;
+                            position: absolute;
+                            left: 31px;
+                            color: $color_secundario_regular;
+                        }
+                        &.active{
+                            &:before {
+                                content: "\f106";
+                            }
+                        }
                     }
                     a{
                         font-size: $fontTiny;
@@ -2255,6 +2295,7 @@ a.external-link, .external-link a {
         border-radius: 10px;
         border-collapse: separate;
         width: 100%;
+        min-width: 100%;
         border-spacing:0;
         border:1px solid rgba(34,36,38,.15);
         font-size: $fontTiny;
@@ -2319,7 +2360,14 @@ a.external-link, .external-link a {
             }
             &.center{
                 text-align: center;
-
+            }
+            &.error{
+                background: #FA5858;
+                color : #fff;
+            }
+            &.ok{
+                background: #58ACFA;
+                color : #fff;
             }
             a{
                 text-decoration: none;
@@ -2336,6 +2384,9 @@ a.external-link, .external-link a {
                 }
                 &.medium{
                     width: 90px;
+                }
+                &.big{
+                    width: 100%;
                 }
             }
         }

@@ -47,6 +47,8 @@ module.exports = (io) => {
       })
       if(totalVale <= 0){
         query += `UPDATE vale_emision SET ESTADO = "ENTREGADO", DIFERENCIA_TOTAL = "0" where COD_VALE = "${data.codigo}";`
+      }else{
+        query += `UPDATE vale_emision SET ESTADO = "PARCIAL", DIFERENCIA_TOTAL = '${totalVale}' where COD_VALE = "${data.codigo}";`
       }
       pool.getConnection( (err, connection) => {
             connection.query(query, (err, results) => {
