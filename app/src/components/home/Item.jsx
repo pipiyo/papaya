@@ -15,8 +15,22 @@ class ItemArea extends Component {
               <ul>
                  {
                    _.map(this.props.items, (item, i) => {
-                     return (
+                    if(item.type == "title"){
+                      return (
+                              <li className="title"
+                                  data-num={`data-${item.num}`}
+                                  onClick={this.props.subSubMenu}
+                                key={i}>
+                                  <h2>
+                                    {item.name}
+                                  </h2>
+                              </li>                       
+                             )     
+                      }else{
+                        return (
                               <li 
+                                className={(item.num != "null")?`si hidden`:`no`}
+                                data-numok={`data-${item.num}`}
                                 data-subclick="ok" 
                                 id={`subMenu${item.name.replace(" ", "")}${i}`} 
                                 onClick={this.props.activeMenuOnClick} 
@@ -26,7 +40,8 @@ class ItemArea extends Component {
                                     {item.name}
                                   </Link>
                               </li>                       
-                             )    
+                             )
+                      }    
                    })
                  }
               </ul>
@@ -55,7 +70,7 @@ class Area extends Component {
                                  </div>
                                  <p>{menu.name}</p>
                                 </a>
-                                <ItemArea items={menu.items} activeMenuOnClick={this.props.activeMenuOnClick} />
+                                <ItemArea subSubMenu={this.props.subSubMenu} items={menu.items} activeMenuOnClick={this.props.activeMenuOnClick} />
                               </li>
                              )    
                    })
@@ -76,7 +91,8 @@ class Item extends Component {
       return (
         <nav className="nav">
           <a onClick={this.props.navmovil} class="btn-burger" href=""> <i class="fa fa-bars" aria-hidden="true"></i> </a>
-            <Area 
+            <Area
+              subSubMenu={this.props.subSubMenu} 
               submenuOnClick={this.props.submenu} 
               activeMenuOnClick={this.props.activeMenu} 
               menus={this.props.menu} />
