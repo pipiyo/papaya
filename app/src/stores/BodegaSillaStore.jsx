@@ -8,9 +8,11 @@ import BodegaSillaActions from '../actions/BodegaSillaActions'
 import Env from '../Config'
 import io from 'socket.io-client'
 
-import Item from '../components/bodega-silla/Item.jsx'
-
 import Filtro from '../components/bodega-silla/Filtro.jsx'
+
+import FiltroHijo from '../components/bodega-silla/FiltroHijo.jsx'
+
+import Item from '../components/bodega-silla/Item.jsx'
 
 import ItemHijo from '../components/bodega-silla/ItemHijo.jsx'
 
@@ -59,7 +61,9 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
 
   this.obj.volver = this.volver
 
-    socket.emit('filtroHijoSilla', this.obj.buscado, event.target.elements[0].value, event.target.elements[1].value, event.target.elements[2].value, ( productos ) => {
+    this.obj.filtro = <FiltroHijo buscar={this.filtroHijoSilla} />
+
+    socket.emit('filtroHijoSilla', this.obj.buscado, event.target.elements[0].value, event.target.elements[1].value, ( productos ) => {
     this.obj.renderItem = []
       _.map( productos, ( producto ) => {
               this.obj.renderItem.push(<ItemHijo 
@@ -80,6 +84,8 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
 
     this.obj.volver = this.volver
 
+
+    this.obj.filtro = <FiltroHijo buscar={this.filtroHijoSilla} />
 
     document.getElementById('botonVolverSilla').classList.remove('hidden')
 
@@ -104,7 +110,17 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
       document.getElementById('botonVolverSilla').classList.add('hidden')
     }
 
-    socket.emit('buscarBodegaSilla', event.target.elements[0].value, event.target.elements[1].value, event.target.elements[2].value, ( productos ) => {
+    this.obj.filtro = <Filtro buscar={this.buscar} />
+
+    socket.emit('buscarBodegaSilla', 
+                                  event.target.elements[0].value /*cod*/, 
+                                  event.target.elements[1].value /*des*/, 
+                                  event.target.elements[2].value /*cat*/,
+                                  event.target.elements[3].value /*pro*/,
+                                  event.target.elements[4].value /*pais*/,
+                                  event.target.elements[5].value /*proveedor*/,
+                                  event.target.elements[6].value /*mecanismo*/,
+                                  event.target.elements[7].value /*respaldo*/, ( productos ) => {
 		this.obj.renderItem = []
       _.map( productos, ( producto ) => {
               this.obj.renderItem.push(<Item 

@@ -6,9 +6,6 @@ class Producto extends Component {
   constructor() {
     super()
   }
-  componentDidUpdate(nextProps){
-    BodegaActions.renderButton(nextProps.obj.total,nextProps.obj.renderItem.length)
-  }
   render() {
       return (
         <div class="module_bodega">

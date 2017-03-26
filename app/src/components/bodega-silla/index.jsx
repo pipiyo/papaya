@@ -15,9 +15,6 @@ class BodegaSonIndex extends Component {
             buscado={this.props.obj.buscado}
             volver={this.props.obj.volver}
             />
-          <Filtro 
-          buscar={this.props.obj.buscar} 
-          />
 
           {this.props.obj.filtro}
 
