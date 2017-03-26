@@ -1070,6 +1070,7 @@ _.forEach( sillasEstructura, (value, key) => {
                                             respaldocolor: value.respaldocolor,
                                             respaldo: value.respaldo.cod,
                                             estructura: value.estructura,
+                                            producto: value.producto.cod,
                                             hijos: [ { 
                                                       cod: `${value.cod}.0.0.${value.estructura},${keyClE}`, 
                                                       des: `${value.des}, estructura ${valueClE}`,
@@ -1102,6 +1103,7 @@ _.forEach( sillasRotas, (value, key) => {
                       respaldocolor: value.respaldocolor,
                       respaldo: value.respaldo.cod,
                       estructura: value.estructura,
+                      producto: value.producto.cod,
                       hijos: [ { 
                                 cod: `${value.cod}.0.0.0`, 
                                 des: value.des,
@@ -1210,6 +1212,7 @@ _.forEach( sillasRotas, (value, key) => {
                                 asiento: value.asiento,
                                 respaldocolor: value.respaldocolor,
                                 estructura: value.estructura,
+                                producto: value.producto.cod,
                                 hijos: listaHijos } )
         })
 

@@ -36,7 +36,7 @@ let insert = `INSERT INTO producto (CODIGO_PRODUCTO, DESCRIPCION, CATEGORIA, COD
 
 			insert += `('${v.cod}','${v.des}','${v.cat}','','generico','2',
 					   '${v.pais}','${v.proveedor}','${v.modelo}','${v.mecanismo}','${v.respaldo}',
-					   '${v.cod}_img.jpg','${v.cod}_img_1.jpg','${v.cod}_img_2.jpg','${v.cod}.dwg','${v.cod}.dwg',`
+					   '${v.cod}_img.jpg','${v.cod}_img_1.jpg','${v.producto}','${v.cod}.dwg','${v.cod}.dwg',`
 
 
 			insert += ( Array.isArray(v.asiento) ) ? `'${v.asiento[0]}','${v.asiento[1]}',` : `'${v.asiento}','0',`
@@ -53,7 +53,7 @@ let insert = `INSERT INTO producto (CODIGO_PRODUCTO, DESCRIPCION, CATEGORIA, COD
 
 				insert += `('${vv.cod}','${vv.des}','${vv.cat}','${v.cod}','silla','2',
 						   '${v.pais}','${v.proveedor}','${v.modelo}','${v.mecanismo}','${v.respaldo}',
-						   '${vv.cod}_img.jpg','${vv.cod}_img_1.jpg','${vv.cod}_img_2.jpg','${vv.cod}.dwg','${vv.cod}.dwg',
+						   '${vv.cod}_img.jpg','${vv.cod}_img_1.jpg','${v.producto}','${vv.cod}.dwg','${vv.cod}.dwg',
 						   '${vv.asiento}','0','${vv.respaldocolor}','0','${vv.estructura}'),`
 
 			})
