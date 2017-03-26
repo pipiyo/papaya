@@ -11,10 +11,16 @@ class BodegaSonIndex extends Component {
   render() {
       return (         
         <div>
-          <Title />
+          <Title 
+            buscado={this.props.obj.buscado}
+            volver={this.props.obj.volver}
+            />
           <Filtro 
-          obj={this.props.obj.buscar} 
+          buscar={this.props.obj.buscar} 
           />
+
+          {this.props.obj.filtro}
+
           <Producto 
           obj={this.props.obj} 
           renderViewMore={this.props.renderViewMore}

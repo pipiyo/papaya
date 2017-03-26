@@ -10,6 +10,8 @@ import io from 'socket.io-client'
 
 import Item from '../components/bodega-silla/Item.jsx'
 
+import Filtro from '../components/bodega-silla/Filtro.jsx'
+
 import ItemHijo from '../components/bodega-silla/ItemHijo.jsx'
 
 const socket = io.connect( `${Env.url}bodega-silla` )
@@ -20,7 +22,10 @@ let BodegaSillaStore = Reflux.createStore({
 
   obj: { 
     renderItem: [],
-    buscar: null
+    filtro: null,
+    buscar: null,
+    buscado: null,
+    volver:null
   },
 
   init: function() {
@@ -40,25 +45,64 @@ let BodegaSillaStore = Reflux.createStore({
     this.getBodegaSilla()
   },
 
-  hijo: function( ev ) {
+
+  volver: function(  ) {
+
+    this.getBodegaSilla()
+
+  },
+
+  filtroHijoSilla: function( event ) {
+    event.preventDefault()
+
+document.getElementById('botonVolverSilla').classList.remove('hidden')
+
+  this.obj.volver = this.volver
+
+    socket.emit('filtroHijoSilla', this.obj.buscado, event.target.elements[0].value, event.target.elements[1].value, event.target.elements[2].value, ( productos ) => {
+    this.obj.renderItem = []
+      _.map( productos, ( producto ) => {
+              this.obj.renderItem.push(<ItemHijo 
+                              key={producto.CODIGO_PRODUCTO}  
+                              bodega={producto} />)
+      })
+      this.trigger(this.obj) 
+    })
+
+  },
+
+  buscarHijoSilla: function( ev ) {
   	console.log( ev.target.dataset.codigo )
+
+    this.obj.buscado = ev.target.dataset.codigo
+    this.obj.buscadodes = ev.target.dataset.descripcion
+    this.obj.buscar = this.filtroHijoSilla
+
+    this.obj.volver = this.volver
+
+
+    document.getElementById('botonVolverSilla').classList.remove('hidden')
 
     socket.emit('buscarHijoSilla', ev.target.dataset.codigo,  ( productos ) => {
 		this.obj.renderItem = []
       _.map( productos, ( producto ) => {
               this.obj.renderItem.push(<ItemHijo 
               								key={producto.CODIGO_PRODUCTO}  
-              								bodega={producto}  />)
+              								bodega={producto} />)
       })
       this.trigger(this.obj)
     })
-
-
 
   },
 
   buscar: function( event ) {
   	event.preventDefault()
+
+    this.obj.buscado = null
+
+    if (document.getElementById('botonVolverSilla')) {
+      document.getElementById('botonVolverSilla').classList.add('hidden')
+    }
 
     socket.emit('buscarBodegaSilla', event.target.elements[0].value, event.target.elements[1].value, event.target.elements[2].value, ( productos ) => {
 		this.obj.renderItem = []
@@ -66,7 +110,7 @@ let BodegaSillaStore = Reflux.createStore({
               this.obj.renderItem.push(<Item 
               								key={producto.CODIGO_PRODUCTO}  
               								bodega={producto}
-              								hijo={this.hijo}  />)
+              								buscarHijoSilla={this.buscarHijoSilla}  />)
       })
       this.trigger(this.obj) 
     })
@@ -75,12 +119,22 @@ let BodegaSillaStore = Reflux.createStore({
 
   getBodegaSilla: function() {
     socket.emit('getBodegaSilla', ( productos ) => {
+      this.obj.buscado = null
     	this.obj.buscar = this.buscar
+
+    this.obj.filtro = <Filtro buscar={this.buscar} />
+
+
+      if (document.getElementById('botonVolverSilla')) {
+        document.getElementById('botonVolverSilla').classList.add('hidden')
+      }
+
+      this.obj.renderItem = []
       _.map( productos, (producto) => {
               this.obj.renderItem.push(<Item 
               								key={producto.CODIGO_PRODUCTO}  
               								bodega={producto}
-              								hijo={this.hijo}  />)
+              								buscarHijoSilla={this.buscarHijoSilla}  />)
       })
       this.trigger(this.obj) 
     })
@@ -135,6 +189,8 @@ let BodegaSillaStore = Reflux.createStore({
   getBodegaHijos: function(idProducto){
     this.obj.filtrarColores = this.filtrarColores
     this.obj.filtro.codigo = idProducto
+  
+
     socket.emit('getBodegaSilla',idProducto, this.obj.filtro, ( productos, cuenta ) => {
 
       this.obj.total = cuenta[0].total
