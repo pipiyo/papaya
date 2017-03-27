@@ -220,12 +220,8 @@ socket.emit('getRochas', ( x, y ) => {
     this.obj.calendario.now = moment()
   }
 
-
       //this.obj.calendario.now = moment()
 
-
-
-    
       this.obj.calendario.mes = moment.months(this.obj.calendario.now.month())
       this.obj.calendario.numeromes = this.obj.calendario.now.month()
       this.obj.calendario.dia = this.obj.calendario.now.daysInMonth()
@@ -247,10 +243,8 @@ if (event) {
     form = {
                   rocha: event.elements[0].value,
                   proyecto: event.elements[1].value,
-                  mas: event.elements[2].value,
-                  menos: event.elements[3].value,
-                  ejecutivo: event.elements[4].value,
-                  cliente: event.elements[5].value,
+                  ejecutivo: event.elements[2].value,
+                  cliente: event.elements[3].value,
                 }
 
 }

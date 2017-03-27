@@ -93,7 +93,8 @@ if (form) {
 						    						 servicio.ESTADO,
 						    						 servicio.NOMBRE_SERVICIO
 												FROM servicio 
-												WHERE servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
+												WHERE servicio.NOMBRE_SERVICIO NOT IN('OC','FI')  
+												AND servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
 						      if (errorCodigoServicio) {
 						        return connection.rollback(function() {
 						          callback( lista )

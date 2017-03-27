@@ -19,14 +19,6 @@ class Filtro extends Component {
                 <input autoComplete="off" id="proyecto" type="text" />
             </div>
             <div class="item-filter">
-                <label>Rango +</label>
-                <input autoComplete="off" id="rango1" type="number" />
-            </div>
-            <div class="item-filter">
-                <label>Rango - </label>
-                <input autoComplete="off" id="rango2" type="number" />
-            </div>
-            <div class="item-filter">
                 <label>Ejecutivo</label>
 
                 <select id="ejecutivo" >

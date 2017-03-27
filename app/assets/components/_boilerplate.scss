@@ -2050,6 +2050,10 @@ a.external-link, .external-link a {
                     background: $color_planificacion;
                     border-right: solid 1px $color_planificacion;  
                 }
+                &.adquisiciones{
+                    background: $color_abastecimiento;
+                    border-right: solid 1px $color_abastecimiento; 
+                }
 
             }
         }
