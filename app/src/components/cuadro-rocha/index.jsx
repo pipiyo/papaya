@@ -20,7 +20,8 @@ class CuadroRochaIndex extends Component {
                 buscar={this.props.obj.buscar} />
            
           <div class="module-cuadro-rocha">
-            <Day obj={this.props.obj.calendario} />
+            <Day 
+              obj={this.props.obj.calendario} />
             <div class="item">
 
             <Proyecto obj={this.props.obj} /> 

@@ -1979,13 +1979,27 @@ a.external-link, .external-link a {
         }
         .mes{
             padding: 3px 2px 3px 2px;
-            width: 800px;
-            min-width: 20px;
             border-bottom:solid 1px $gris;
             border-right: solid 1px $gris;
             p{
                 text-align: center;
                 font-size: $fontSmall;
+            }
+            &.mes28{
+                width: 560px;
+                min-width: 560px;
+            }
+            &.mes29{
+                width: 580px;
+                min-width: 580px;
+            }
+            &.mes30{
+                width: 600px;
+                min-width: 600px; 
+            }
+            &.mes31{
+                width: 620px;
+                min-width: 620px; 
             }
         }
         .day{

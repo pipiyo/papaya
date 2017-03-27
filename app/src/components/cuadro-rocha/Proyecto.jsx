@@ -13,6 +13,8 @@ class ProyectoItem extends Component {
   }
   render() {
 
+//`${this.props.obj.ingresod} ${this.props.obj.entregad} ${i}`
+
       return (         
         <div>
 
@@ -23,6 +25,9 @@ class ProyectoItem extends Component {
             <div class="datos date"><p>{this.props.obj.ingreso}</p></div>
             <div class="datos date"><p>{this.props.obj.entrega}</p></div>
             <div class="datos percentage"><p>{`${this.props.obj.estado}%`}</p></div>
+
+            {this.props.obj.dia}
+
             {/*<div class="day"><p></p></div>
             <div class="day ok"><p></p></div>
             <div class="day ok"><p></p></div>

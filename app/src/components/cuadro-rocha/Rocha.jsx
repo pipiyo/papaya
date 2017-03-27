@@ -10,10 +10,22 @@ class RochaItem extends Component {
       return (         
         <div>
           <div class="info rocha">
-            <div class="datos name" onClick={this.props.showRocha}><p data-indexproyecto={this.props.keyProyecto} data-indexrocha={this.props.index} >{this.props.obj.cp}</p></div>
+            <div class="datos name" 
+              onClick={this.props.showRocha} 
+              data-indexproyecto={this.props.keyProyecto} 
+              data-indexrocha={this.props.index} >
+                <p 
+                  data-indexproyecto={this.props.keyProyecto} 
+                  data-indexrocha={this.props.index} >
+                  {this.props.obj.cp}
+                </p>
+            </div>
             <div class="datos date"><p>{this.props.obj.ingreso}</p></div>
             <div class="datos date"><p>{this.props.obj.entrega}</p></div>
             <div class="datos percentage"><p>{`${this.props.obj.estado}%`}</p></div>
+              
+            {this.props.obj.dia}  
+
             {/*<div class="day"><p></p></div>
             <div class="day ok proyecto"><p></p></div>
             <div class="day ok proyecto"><p></p></div>
