@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
+import AutoComplet  from '../../routes/AutoComRoutes'
+import AutocompleteActions from '../../actions/AutocompleteActions'
 
 class Filtro extends Component {
   constructor() {
     super()
+  }
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
   }
   render() {
       //console.log( this.props.obj.colores )
@@ -17,11 +27,13 @@ class Filtro extends Component {
         
             <div class="item-filter">
                 <label>Código</label>
-                <input autoComplete="off" id="codigo" type="text" />
+                <input autoComplete="off" id="codigo" type="text" data-complete="t2producto" onBlur={this.autocompleteOff.bind(this)}  onChange={this.autocomplete.bind(this)} />
+                <AutoComplet name={`codigo`} />
             </div>
             <div class="item-filter">
                 <label>Descripción</label>
-                <input autoComplete="off" id="descripcion" type="text" />
+                <input autoComplete="off" id="descripcion" type="text" data-complete="t2producto1" onBlur={this.autocompleteOff.bind(this)}  onChange={this.autocomplete.bind(this)} />
+                <AutoComplet name={`descripcion`} />
             </div>
             <div class="item-filter">
                 <label>Categoria</label>

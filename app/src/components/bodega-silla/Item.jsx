@@ -28,12 +28,14 @@ class Item extends Component {
             </div>
             <div class="module_bodega_generico_icon">
               <div>
-                <i 
-                  onClick={this.props.buscarHijoSilla} 
-                  data-descripcion={this.props.bodega.descripcion} 
-                  data-codigo={this.props.bodega.CODIGO_PRODUCTO} 
-                  class="fa fa-eye" 
-                  aria-hidden="true" ></i>
+                <a>
+                  <i 
+                    onClick={this.props.buscarHijoSilla} 
+                    data-descripcion={this.props.bodega.descripcion} 
+                    data-codigo={this.props.bodega.CODIGO_PRODUCTO} 
+                    class="fa fa-eye" 
+                    aria-hidden="true" ></i>
+                  </a>
               </div>
             </div>   
           </div>

@@ -26,6 +26,13 @@ class Item extends Component {
               <div class="cm"><p>Contable {this.props.bodega.CONTABLE}</p></div>
               <div class="cm"><p>Disponible {this.props.bodega.DISPONIBLE}</p></div>
             </div>
+            <div class="module_bodega_generico_icon">
+              <div>
+                <Link class="icon-informe" to={`/home/actualizar-producto-precio/${this.props.bodega.CODIGO_PRODUCTO}`}>
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </Link>
+              </div>
+            </div>  
           </div>
         </div> 
       )

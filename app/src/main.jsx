@@ -25,6 +25,7 @@ import Home from './routes/HomeRoutes'
 import Inicio from './routes/InicioRoutes'
 import AddProducto from './routes/AddProductoRoutes'
 import UpdateProducto from './routes/UpdateProductoRoutes'
+import UpdateProductoPrecio from './routes/UpdateProductoPrecioRoutes'
 import Producto from './routes/ProductoRoutes'
 import StockProducto from './routes/StockPruductoRoutes'
 
@@ -75,6 +76,7 @@ ReactDOM.render((
             <Route path="bodega/:area" component={Bodega}/>
             <Route path="ingreso-producto" component={AddProducto}/>
             <Route path="actualizar-producto/:bodega/:id" component={UpdateProducto}/>
+            <Route path="actualizar-producto-precio/:id" component={UpdateProductoPrecio}/>
             <Route path="producto/:id" component={Producto}/>
             <Route path="stock-producto/:bodega/:id" component={StockProducto}/>
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>

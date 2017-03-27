@@ -51,6 +51,20 @@ module.exports = (io) => {
             }) 
       }) 
   })
+  /* Editar Producto */
+  socket.on('updateProductoPrecio', (data,callback) => {
+      pool.getConnection( (err, connection) => {
+            connection.query('UPDATE producto SET PRECIO = ?, PRECIO_VENTA = ? WHERE CODIGO_PRODUCTO = ?', [data.precio, data.precioVenta, data.codigo], (err, results) => {
+                connection.release()
+                if (!err){
+                  callback({mensaje:`Se actualizo precio ${data.codigo}`})
+                }
+                else{
+                  console.log('Error ' + err)
+                }
+            }) 
+      }) 
+  })
 
   /* Stock Producto */
   socket.on('stockProducto', (data,callback) => {

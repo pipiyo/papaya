@@ -76,7 +76,6 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   },
 
   buscarHijoSilla: function( ev ) {
-  	console.log( ev.target.dataset.codigo )
 
     this.obj.buscado = ev.target.dataset.codigo
     this.obj.buscadodes = ev.target.dataset.descripcion
