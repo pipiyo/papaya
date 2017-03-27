@@ -14,10 +14,25 @@ class ServicioItem extends Component {
       return (         
         <div>
           <div class="info actividad">
-            <div class="datos name" onClick={this.props.showServicio}><p data-indexproyecto={this.props.keyProyecto} data-indexrocha={this.props.keyRocha} data-indexservicio={this.props.index}>{this.props.obj.csnombre}</p></div>
+            <div class="datos name" 
+              onClick={this.props.showServicio} 
+              data-indexproyecto={this.props.keyProyecto} 
+              data-indexrocha={this.props.keyRocha} 
+              data-indexservicio={this.props.index} >
+                <p
+                    data-indexproyecto={this.props.keyProyecto} 
+                    data-indexrocha={this.props.keyRocha} 
+                    data-indexservicio={this.props.index}>
+                  {this.props.obj.csnombre}
+                </p>
+            </div>
             <div class="datos date"><p>{this.props.obj.inicio}</p></div>
             <div class="datos date"><p>{this.props.obj.entrega}</p></div>
             <div class="datos percentage"><p>{`${this.props.obj.estado}%`}</p></div>
+
+            {this.props.obj.dia}
+
+
             {/*<div class="day"><p></p></div>
             <div class="day ok abastecimiento"><p></p></div>
             <div class="day ok abastecimiento"><p></p></div>
@@ -66,17 +81,8 @@ class ServicioItem extends Component {
 
         </div>
       )
-
   }
-
 }
-
-
-
-
-
-
-
 
 
 class Servicio extends Component {

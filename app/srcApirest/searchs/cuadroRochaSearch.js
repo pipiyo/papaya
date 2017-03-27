@@ -54,7 +54,12 @@ if (form) {
 				  lista.np[key] = value.NOMBRE_PROYECTO
 				})
 
-			    connection.query(`SELECT proyecto.CODIGO_PROYECTO, proyecto.NOMBRE_PROYECTO, proyecto.FECHA_INGRESO, proyecto.FECHA_ENTREGA, proyecto.ESTADO
+			    connection.query(`SELECT 
+			    						proyecto.CODIGO_PROYECTO, 
+			    						proyecto.NOMBRE_PROYECTO, 
+			    						proyecto.FECHA_INGRESO, 
+			    						proyecto.FECHA_ENTREGA, 
+			    						proyecto.ESTADO
 	FROM proyecto
 	WHERE proyecto.NOMBRE_PROYECTO IN( ? )
 	AND proyecto.NOMBRE_PROYECTO != ''`, np,  function (errorCodigoProyecto, resultsCodigoProyecto, fieldsCodigoProyecto) {
@@ -75,13 +80,20 @@ if (form) {
 							  					show: false,
 							  					ingreso: value.FECHA_INGRESO,
 							  					entrega: value.FECHA_ENTREGA,
-							  					estado: value.ESTADO
+							  					estado: value.ESTADO,
+							  					dia: null
 							  					 }
 							})
 
-						    connection.query(`SELECT servicio.CODIGO_SERVICIO, servicio.CODIGO_PROYECTO, servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.DESCRIPCION, servicio.ESTADO
-	FROM servicio 
-	WHERE servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
+						    connection.query(`SELECT servicio.CODIGO_SERVICIO, 
+						    						 servicio.CODIGO_PROYECTO, 
+						    						 servicio.FECHA_INICIO, 
+						    						 servicio.FECHA_ENTREGA, 
+						    						 servicio.DESCRIPCION, 
+						    						 servicio.ESTADO,
+						    						 servicio.NOMBRE_SERVICIO
+												FROM servicio 
+												WHERE servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
 						      if (errorCodigoServicio) {
 						        return connection.rollback(function() {
 						          callback( lista )
@@ -98,11 +110,20 @@ if (form) {
 									  					cp: value.CODIGO_PROYECTO,
 									  					inicio: value.FECHA_INICIO,
 									  					entrega: value.FECHA_ENTREGA,
-									  					estado: value.ESTADO
+									  					estado: value.ESTADO,
+									  					nombre: value.NOMBRE_SERVICIO,
+									  					dia: null
 									  				}
 									})
 
-								    connection.query(`SELECT sub_servicio.CODIGO_SUBSERVICIO, sub_servicio.SUB_CODIGO_SERVICIO, sub_servicio.SUB_CODIGO_PROYECTO, sub_servicio.SUB_FECHA_INICIO, sub_servicio.SUB_FECHA_ENTREGA, sub_servicio.SUB_ESTADO
+								    connection.query(`SELECT 
+								    						sub_servicio.CODIGO_SUBSERVICIO, 
+								    						sub_servicio.SUB_CODIGO_SERVICIO, 
+								    						sub_servicio.SUB_CODIGO_PROYECTO, 
+								    						sub_servicio.SUB_FECHA_INICIO, 
+								    						sub_servicio.SUB_FECHA_ENTREGA, 
+								    						sub_servicio.SUB_ESTADO,
+								    						sub_servicio.SUB_NOMBRE_SERVICIO AS nombre
 			FROM sub_servicio 
 			WHERE sub_servicio.SUB_CODIGO_SERVICIO IN( ? )`, cs,  function (errorCodigoSubServicio, resultsCodigoSubServicio, fieldsCodigoSubServicio) {
 								      if (errorCodigoSubServicio) {
