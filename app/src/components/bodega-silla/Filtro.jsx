@@ -17,7 +17,7 @@ class Filtro extends Component {
   render() {
       //console.log( this.props.obj.colores )
       return (
-      <form onSubmit={ this.props.buscar } >
+      <form name="filtroBodegaSilla" onSubmit={ this.props.buscar } >
         <div class="module-filter">
 
 

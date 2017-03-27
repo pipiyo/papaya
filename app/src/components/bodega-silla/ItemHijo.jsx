@@ -8,9 +8,9 @@ class Item extends Component {
   }
   render() {
       return (
-        <div class="module_bodega_generico">
+        <div class="module_bodega_generico hijo">
           <div class="module_bodega_generico_img">
-            <img src="http://lorempixel.com/300/300/" alt="img" />
+            <img src="http://placehold.it/350x300" alt="img" />
           </div>
           <div class="module_bodega_generico_des">
             <h2>Código: <p>{this.props.bodega.CODIGO_PRODUCTO}</p> </h2>
@@ -29,7 +29,7 @@ class Item extends Component {
             <div class="module_bodega_generico_icon">
               <div>
                 <Link class="icon-informe" to={`/home/actualizar-producto-precio/${this.props.bodega.CODIGO_PRODUCTO}`}>
-                  <i class="fa fa-eye" aria-hidden="true"></i>
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
                 </Link>
               </div>
             </div>  

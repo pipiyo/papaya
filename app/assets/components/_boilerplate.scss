@@ -1778,6 +1778,9 @@ a.external-link, .external-link a {
         margin: auto;
         border: solid 1px $gris;
         margin-bottom: 1em;
+        &.hijo{
+            background: #A9F5F2;
+        }
         .module_bodega_generico_img{
             padding: 1em;
             display: table-cell;

@@ -3,7 +3,9 @@ import Reflux from 'reflux'
 let BodegaSillaActions = Reflux.createActions([
   'getBodegaSilla',
   'renderBodegaSilla',
-  'buscar'
+  'buscar',
+  'renderViewMore',
+  'renderButton'
 ])
 
 export default BodegaSillaActions

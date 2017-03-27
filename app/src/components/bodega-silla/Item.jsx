@@ -10,7 +10,7 @@ class Item extends Component {
       return (
         <div class="module_bodega_generico">
           <div class="module_bodega_generico_img">
-            <img src="http://lorempixel.com/300/300/" alt="img" />
+            <img src="http://placehold.it/300x300" alt="img" />
           </div>
           <div class="module_bodega_generico_des">
             <h2>Código: <p>{this.props.bodega.CODIGO_PRODUCTO}</p> </h2>

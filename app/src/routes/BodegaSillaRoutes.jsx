@@ -17,7 +17,9 @@ export default class BodegaSillaRoutes extends Component {
   componentWillMount(){
     BodegaSillaActions.renderBodegaSilla()
   }
-
+  renderViewMore(){
+    BodegaSillaActions.renderViewMore()
+  }
 
 
   render() {
@@ -25,6 +27,7 @@ export default class BodegaSillaRoutes extends Component {
     	return (
           <BodegaSilla 
             obj={this.state.obj}
+            renderViewMore={this.renderViewMore.bind(this)}
           />
     	)
     }else{

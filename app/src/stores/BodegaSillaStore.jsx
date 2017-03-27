@@ -23,11 +23,14 @@ let BodegaSillaStore = Reflux.createStore({
   listenables: [BodegaSillaActions],
 
   obj: { 
+    bodega : "padre",
     renderItem: [],
     filtro: null,
     buscar: null,
     buscado: null,
-    volver:null
+    volver:null,
+    total: 0,
+    search:{limitA:0, limitB:50,"cod":"", des:"", cat:"", pro: "", pais: "", proveedor: "", mecanismo: "",respaldo: ""} 
   },
 
   init: function() {
@@ -76,7 +79,8 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   },
 
   buscarHijoSilla: function( ev ) {
-
+    window.scrollTo(0, 0);
+    this.obj.bodega = "hijo"
     this.obj.buscado = ev.target.dataset.codigo
     this.obj.buscadodes = ev.target.dataset.descripcion
     this.obj.buscar = this.filtroHijoSilla
@@ -102,7 +106,6 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
 
   buscar: function( event ) {
   	event.preventDefault()
-
     this.obj.buscado = null
 
     if (document.getElementById('botonVolverSilla')) {
@@ -110,6 +113,15 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
     }
 
     this.obj.filtro = <Filtro buscar={this.buscar} />
+
+    this.obj.search.cod = event.target.elements[0].value
+    this.obj.search.des = event.target.elements[1].value
+    this.obj.search.cat = event.target.elements[2].value
+    this.obj.search.pro = event.target.elements[3].value
+    this.obj.search.pais = event.target.elements[4].value
+    this.obj.search.proveedor = event.target.elements[5].value
+    this.obj.search.mecanismo = event.target.elements[6].value
+    this.obj.search.respaldo = event.target.elements[7].value
 
     socket.emit('buscarBodegaSilla', 
                                   event.target.elements[0].value /*cod*/, 
@@ -119,9 +131,12 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
                                   event.target.elements[4].value /*pais*/,
                                   event.target.elements[5].value /*proveedor*/,
                                   event.target.elements[6].value /*mecanismo*/,
-                                  event.target.elements[7].value /*respaldo*/, ( productos ) => {
+                                  event.target.elements[7].value /*respaldo*/, 
+                                  this.obj.search.limitA,
+                                  this.obj.search.limitB,( productos ) => {
 		this.obj.renderItem = []
-      _.map( productos, ( producto ) => {
+    this.obj.total = productos.cuenta
+      _.map( productos.productos, ( producto ) => {
               this.obj.renderItem.push(<Item 
               								key={producto.CODIGO_PRODUCTO}  
               								bodega={producto}
@@ -131,11 +146,21 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
     })
 
   },
-
   getBodegaSilla: function() {
+    this.obj.search.cod = ""
+    this.obj.search.des = ""
+    this.obj.search.cat = ""
+    this.obj.search.pro = ""
+    this.obj.search.pais = ""
+    this.obj.search.proveedor = ""
+    this.obj.search.mecanismo = ""
+    this.obj.search.respaldo = ""
+
+    this.obj.bodega = "padre"
+
     socket.emit('getBodegaSilla', ( productos ) => {
       this.obj.buscado = null
-    	this.obj.buscar = this.buscar
+      this.obj.buscar = this.buscar
 
     this.obj.filtro = <Filtro buscar={this.buscar} />
 
@@ -145,7 +170,9 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
       }
 
       this.obj.renderItem = []
-      _.map( productos, (producto) => {
+      this.obj.total = productos.cuenta
+      _.map( productos.productos, (producto) => {
+
               this.obj.renderItem.push(<Item 
               								key={producto.CODIGO_PRODUCTO}  
               								bodega={producto}
@@ -154,7 +181,40 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
       this.trigger(this.obj) 
     })
   },
-
+  renderViewMore: function(){
+  if(this.obj.bodega == "padre"){
+    this.obj.search.limitA += 50
+      socket.emit('buscarBodegaSilla', 
+                                    this.obj.search.cod,
+                                    this.obj.search.des, 
+                                    this.obj.search.cat,
+                                    this.obj.search.pro,
+                                    this.obj.search.pais,
+                                    this.obj.search.proveedor, 
+                                    this.obj.search.mecanismo,
+                                    this.obj.search.respaldo,
+                                    this.obj.search.limitA, 
+                                    this.obj.search.limitB, ( productos ) => {
+        this.obj.total = productos.cuenta
+        _.map( productos.productos, ( producto ) => {
+                this.obj.renderItem.push(<Item 
+                                key={producto.CODIGO_PRODUCTO}  
+                                bodega={producto}
+                                buscarHijoSilla={this.buscarHijoSilla}  />)
+        })
+        this.trigger(this.obj) 
+      })
+    }
+  },
+  renderButton: function(rows,sub){
+    if(document.getElementById("view-more")){
+      if(rows > sub){
+        document.getElementById("view-more").classList.remove("hidden")
+      }else{
+        document.getElementById("view-more").classList.add("hidden")
+      }
+    }
+  },
 
 
 
@@ -185,10 +245,6 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
     this.cleanState()
     this.getBodegaHijos(idProducto)
   },
-  renderViewMore: function(idProducto){
-    this.obj.filtro.limitA += 5
-    this.getBodegaHijos(idProducto)
-  },
   cleanState: function(){
     this.obj.renderItem = []
     this.obj.renderBodega = ''
@@ -217,15 +273,7 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
       this.trigger(this.obj) 
     })
   },
-  renderButton: function(rows,sub){
-    if(document.getElementById("view-more")){
-      if(rows > sub){
-        document.getElementById("view-more").classList.remove("hidden")
-      }else{
-        document.getElementById("view-more").classList.add("hidden")
-      }
-    }
-  }
+  
 
 })
 

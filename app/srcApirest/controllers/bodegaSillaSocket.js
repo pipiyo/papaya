@@ -21,12 +21,18 @@ module.exports = (io) => {
         					WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
         					AND producto.CATEGORIA IN(20,21)
         					AND producto.FAMILIA = 'generico' limit 50;` 
+
+        let query1 = `SELECT count(producto.CODIGO_PRODUCTO) as total
+                  FROM producto, categoria_producto 
+                  WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
+                  AND producto.CATEGORIA IN(20,21)
+                  AND producto.FAMILIA = 'generico'` 
+
         pool.getConnection( (err, connection) => {
-            connection.query( query , (err, rows, fields) => {
+            connection.query( query+query1 , (err, rows, fields) => {
                 connection.release()
                 if (!err){
-                  //callback({productos:rows[0],cuenta:rows[1]})
-                  resolve( rows )
+                  resolve( {productos:rows[0],cuenta:rows[1]} )
                 }else{
                 	reject( err )
                 }
@@ -42,10 +48,9 @@ module.exports = (io) => {
 
 
   /* Buscar Silla */
-  socket.on( 'buscarBodegaSilla', ( codigo, descripcion, categoria, producto, pais, proveedor, mecanismo, respaldo, callback ) => {
+  socket.on( 'buscarBodegaSilla', ( codigo, descripcion, categoria, producto, pais, proveedor, mecanismo, respaldo, limita, limitb, callback ) => {
 ////////////////////
     let promesa = new Promise( (resolve, reject) => {  
-        
 		let buscar_codigo = (codigo.trim().length > 0) ? ` AND producto.CODIGO_PRODUCTO = '${codigo.trim()}' ` : ` `
 		let buscar_descripcion = (descripcion.trim().length > 0) ? ` AND producto.DESCRIPCION = '${descripcion.trim()}' ` : ` `
 		let buscar_categoria = (categoria.trim().length > 0) ? ` = '${categoria}' ` : ` IN(20,21) `
@@ -77,14 +82,27 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
         					${buscar_descripcion}
         					${buscar_codigo}
         					AND producto.FAMILIA = 'generico'
-                  AND producto.TEMPORADA = '2' limit 50;` 
+                  AND producto.TEMPORADA = '2' limit ${limita}, ${limitb};` 
+
+          let query1 = `SELECT count(producto.CODIGO_PRODUCTO) as total
+                  FROM producto, categoria_producto 
+                  WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
+                  AND producto.CATEGORIA ${buscar_categoria}
+                  ${buscar_producto}
+                  ${buscar_pais}
+                  ${buscar_proveedor}
+                  ${buscar_mecanismo}
+                  ${buscar_respaldo}
+                  ${buscar_descripcion}
+                  ${buscar_codigo}
+                  AND producto.FAMILIA = 'generico'
+                  AND producto.TEMPORADA = '2';` 
 
         pool.getConnection( (err, connection) => {
-            connection.query( query , (err, rows, fields) => {
+            connection.query( query+query1 , (err, rows, fields) => {
                 connection.release()
                 if (!err){
-                  //callback({productos:rows[0],cuenta:rows[1]})
-                  resolve( rows )
+                  resolve( {productos:rows[0],cuenta:rows[1]} )
                 }else{
                 	reject( err )
                 }
@@ -109,8 +127,7 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
         					WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
-        					AND producto.CODIGO_GENERICO = '${codigo}' 
-                  limit 50;` 
+        					AND producto.CODIGO_GENERICO = '${codigo}';` 
         pool.getConnection( (err, connection) => {
             connection.query( query, (err, rows, fields) => {
                 connection.release()
@@ -145,8 +162,7 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
                   WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
                   ${buscar_descripcion}
                   ${buscar_codigo}
-                  AND producto.CODIGO_GENERICO = '${generico}'
-                  limit 50;` 
+                  AND producto.CODIGO_GENERICO = '${generico}';` 
         pool.getConnection( (err, connection) => {
             connection.query( query , (err, rows, fields) => {
                 connection.release()
