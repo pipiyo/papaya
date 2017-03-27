@@ -285,10 +285,6 @@ csmax = (moment(moment(vcs.entrega.substring(0,10), 'YYYY-MM-DD')).isBefore(this
                 _.times(this.obj.calendario.dia, (r) => {
                             //console.log(this.props.obj.np, this.props.obj.ingresod, this.props.obj.entregad  )
 
-
-
-
-
 if ( csmin == 'despues' || csmax == 'antes' ) {
         csdia.push( <div 
                        key={`${vcs.csnombre}${r}${vcs.cs}`} 
@@ -373,7 +369,6 @@ if ( cssmin == 'despues' || cssmax == 'antes' ) {
                 </div> )
 }
                 })
-
 
                 this.listaCss[kcs].css.push( {  
                                               estado: vcss.SUB_ESTADO, 
