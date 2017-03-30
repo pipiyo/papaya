@@ -114,6 +114,7 @@ let UpdateOcStore = Reflux.createStore({
         despachar= "La Dehesa"
       break;
     }
+    this.selectOption(document.querySelector(`[data-txteditaroc="tipoiva"]`),this.obj.oc.TIPO_IVA, true)
     this.selectOption(document.querySelector(`[data-txteditaroc="despachar"]`),despachar, true)
     this.selectOption(document.querySelector(`[data-txteditaroc="empresa"]`),this.obj.oc.EMPRESA, true)
   },

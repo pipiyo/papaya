@@ -33,7 +33,7 @@ class Item extends React.Component {
                 <label>Empresa</label>
                 <select required id="empresa">
                   <option value="">Seleccioné</option>
-                  <option value="MULTIOFICINA">Multioficina</option>
+                  <option value="MULTIOFICINA">Rocha S.A</option>
                   <option value="MUEBLES Y DISEÑO">Muebles y diseño</option>
                   <option value="SILLAS Y SILLAS">Sillas y sillas</option>
                   <option value="TRANSPORTE JJ">Transporte jj</option>

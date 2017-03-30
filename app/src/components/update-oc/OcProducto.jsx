@@ -54,7 +54,16 @@ class OcProducto extends React.Component {
                     <td class="module-table-content-item"><input data-txteditaroc="neto" id="editarocneto" readOnly class="small center" type="text" /></td>
                 </tr>
                 <tr>
-                    <td class="right" colSpan="10"><p>Iva</p></td>
+                    <td class="right" colSpan="9">
+                      <p>Iva</p>
+                    </td>
+                    <td>
+                      <select onChange={this.autocompleteTotalUpdateOC.bind(this)} data-txteditaroc="tipoiva" id="editaroctipoiva">
+                        <option value="Iva">Iva</option>
+                        <option value="Iva Retenido">Iva Retenido</option>
+                        <option value="Retencion">Retención</option>
+                      </select>
+                    </td>
                     <td class="module-table-content-item"><input data-txteditaroc="iva" id="editarociva" readOnly class="small center" type="text" /></td>
                 </tr>
                 <tr>

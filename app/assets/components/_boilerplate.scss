@@ -1945,6 +1945,13 @@ a.external-link, .external-link a {
                     border-top: solid 1px $gris; 
                 }     
             }
+            &.desactive{
+                .percentage{
+                    .view,.link{
+                        display: none;
+                    }   
+                }
+            }
         }
         &.rocha{
             width: 100%;
@@ -2082,6 +2089,7 @@ a.external-link, .external-link a {
                 }
             }
         }
+
         .mes{
             background: $color_planificacion;
             color: $blanco;
@@ -2498,6 +2506,17 @@ a.external-link, .external-link a {
             a{
                 text-decoration: none;
                 padding: 0 3px;
+            }
+            select{
+                @include reset-appearance;
+                position:relative;
+                padding: 5px;
+                width: 100%;
+                border:solid 1px $gris;
+                background-image: url(images/app-icons/down-arrow.svg);
+                background-repeat: no-repeat;
+                background-size: 15px 15px;
+                background-position: 98% center;
             }
             input{
                 @include reset-appearance;

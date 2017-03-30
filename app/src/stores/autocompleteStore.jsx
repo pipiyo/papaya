@@ -53,7 +53,7 @@ let AutocompleteStore = Reflux.createStore({
   autocompleteTotalOC(){
     let count = document.querySelectorAll("[data-countemisionoc]").length
     let i, precio, cantidad , uno, descuento, dos, tres, cuatro, preciou, cinco
-    let subtotal, descuentopor, descuentopes, iva, seis, siete, neto, ocho
+    let subtotal, descuentopor, descuentopes, iva, seis, siete, neto, ocho, tipoiva
     let totalfinal = 0
     for(i = 1; i <= count; i++){
       if(document.getElementById(`emisionoccantidad-${i}`) && document.getElementById(`emisionocpreciol-${i}`)){
@@ -106,19 +106,29 @@ let AutocompleteStore = Reflux.createStore({
     document.getElementById(`emisionocneto`).value = siete
 
     iva = this.formatNumber(document.getElementById(`emisionociva`).value)
+    tipoiva = document.getElementById(`emisionoctipoiva`).value
     neto = this.formatNumber(document.getElementById(`emisionocneto`).value)
 
     if(neto){
-      ocho = parseInt(neto) * 19 / 100
-      document.getElementById(`emisionociva`).value = ocho  
-      document.getElementById(`emisionoctotalfinal`).value = parseInt(ocho) + parseInt(neto)
+      if(tipoiva == "Iva"){
+        ocho = parseInt(neto) * 19 / 100
+        document.getElementById(`emisionociva`).value = ocho  
+        document.getElementById(`emisionoctotalfinal`).value = parseInt(ocho) + parseInt(neto)
+      }else if(tipoiva == "Iva Retenido"){
+        document.getElementById(`emisionociva`).value = 0
+        document.getElementById(`emisionoctotalfinal`).value = parseInt(neto)
+      }else if(tipoiva == "Retencion"){
+        ocho = parseInt(neto) * 10 / 100
+        document.getElementById(`emisionociva`).value = ocho  
+        document.getElementById(`emisionoctotalfinal`).value = parseInt(neto) - parseInt(ocho)
+      }
     }
   
   },
   autocompleteTotalUpdateOC(){
     let count = document.querySelectorAll("[data-editaroc]").length
     let i, precio, cantidad , uno, descuento, dos, tres, cuatro, preciou, cinco
-    let subtotal, descuentopor, descuentopes, iva, seis, siete, neto, ocho
+    let subtotal, descuentopor, descuentopes, iva, seis, siete, neto, ocho, tipoiva
     let totalfinal = 0
     for(i = 1; i <= count; i++){
       if(document.getElementById(`editaroccantidad-${i}`) && document.getElementById(`editarocpreciol-${i}`)){
@@ -171,12 +181,22 @@ let AutocompleteStore = Reflux.createStore({
     document.getElementById(`editarocneto`).value = siete
 
     iva = this.formatNumber(document.getElementById(`editarociva`).value)
+    tipoiva = document.getElementById(`editaroctipoiva`).value
     neto = this.formatNumber(document.getElementById(`editarocneto`).value)
 
     if(neto){
-      ocho = parseInt(neto) * 19 / 100
-      document.getElementById(`editarociva`).value = ocho  
-      document.getElementById(`editaroctotalfinal`).value = parseInt(ocho) + parseInt(neto)
+      if(tipoiva == "Iva"){
+        ocho = parseInt(neto) * 19 / 100
+        document.getElementById(`editarociva`).value = ocho  
+        document.getElementById(`editaroctotalfinal`).value = parseInt(ocho) + parseInt(neto)
+      }else if(tipoiva == "Iva Retenido"){
+        document.getElementById(`editarociva`).value = 0
+        document.getElementById(`editaroctotalfinal`).value = parseInt(neto)
+      }else if(tipoiva == "Retencion"){
+        ocho = parseInt(neto) * 10 / 100
+        document.getElementById(`editarociva`).value = ocho  
+        document.getElementById(`editaroctotalfinal`).value = parseInt(neto) - parseInt(ocho)
+      }
     }
   
   },
