@@ -18,7 +18,7 @@ class CuadroRochaRoutes extends Component {
 
   render() {
       return (
-          <CuadroRochaIndex obj={this.state.obj} />       
+          <CuadroRochaIndex obj={this.state.obj} scrollWin={this.props.scrollWin} />       
       )
   }
 
