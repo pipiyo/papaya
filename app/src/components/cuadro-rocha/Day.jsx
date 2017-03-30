@@ -12,26 +12,15 @@ class Day extends Component {
         <div>
 
           <div class="info title-proyecto">
-            <div class="datos name none"><p></p></div>
-            <div class="datos date"><p></p></div>
-            <div class="datos date"><p></p></div>
-            <div class="datos percentage"><p></p></div>
+
 
           <div class={ `mes mes${this.props.obj.dia}` }>
-              <p> <button onClick={this.props.obj.bajarmes} > {`<-`} </button> {this.props.obj.mes} <button onClick={this.props.obj.subirmes} > {`->`} </button> </p>
+              <p> {this.props.obj.mes} </p>
           </div>
-
-
-
-
 
          </div>
 
           <div class="info title-proyecto">
-            <div class="datos name none"><p>Información</p></div>
-            <div class="datos date"><p>Fecha I</p></div>
-            <div class="datos date"><p>Fecha E</p></div>
-            <div class="datos percentage"><p>%</p></div>
 
 
             {

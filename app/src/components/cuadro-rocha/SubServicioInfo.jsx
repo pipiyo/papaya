@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-
-
+import { Link } from 'react-router'
 
 
 class SubServicioItem extends Component {
@@ -12,7 +11,22 @@ class SubServicioItem extends Component {
       return (         
         <div>
           <div class={(!this.props.selected)?`info subactividad`:(this.props.selected == this.props.np)? `info subactividad active`:`info subactividad desactive`}>
-            {this.props.obj.dia}
+            <div class="datos name none" data-npok={this.props.np} onClick={this.props.showSubServicio} ><p>{this.props.obj.css}</p></div>
+            <div class="datos date"><p>{this.props.obj.inicio}</p></div>
+            <div class="datos date"><p>{this.props.obj.entrega}</p></div>
+            <div class="datos percentage">
+              <div class="view">
+                <div class="view-item">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                  <div class="view-item-info">
+                    <p>Descripción: {this.props.obj.css}</p>
+                    <p>Ejecutivo: Luchin</p>
+                  </div>
+                </div>
+              </div>
+              <Link to={`/home/actualizar-subactividad/${this.props.obj.css}`} class="link"href="#"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></Link>
+            </div>
+            <div class="datos percentage"><p></p></div>
           </div>
         </div>
       )
@@ -20,6 +34,7 @@ class SubServicioItem extends Component {
   }
 
 }
+
 
 class SubServicio extends Component {
 

@@ -21,6 +21,7 @@ let CuadroRochaStore = Reflux.createStore({
     showRocha: null,
     showServicio: null,
     showSubServicio: null,
+    selected: null,
     form: {
           ejecutivo: [],
           cliente: [] 
@@ -96,37 +97,41 @@ socket.emit('getRochas', ( x, y ) => {
   },
 
   showProyecto: function(e){
-    CuadroRochaActions._showProyecto(e.target.textContent)
+    CuadroRochaActions._showProyecto(e.target.textContent,e.currentTarget)
   },
-  _showProyecto: function(e){
+  _showProyecto: function(e, i){
     let index = _.findIndex(this.obj.proyectos, { np: `${e}` })
     this.obj.proyectos[index].show = this.obj.proyectos[index].show ? false : true 
+    
+    /* Opacity */
+    if(this.obj.proyectos[index].show){
+      this.obj.selected = i.getAttribute('data-npok')
+    }else{
+      this.obj.selected = null
+    }
     this.trigger( this.obj )
   },
-
-
 
 
   showRocha: function(e){
-    CuadroRochaActions._showRocha(e.target)
+    CuadroRochaActions._showRocha(e.target,e.currentTarget)
   },
-  _showRocha: function(e){
+  _showRocha: function(e,i){
     let index = { 
                   proyecto: e.getAttribute('data-indexproyecto'),
-                  rocha: e.getAttribute('data-indexrocha')
+                  rocha: e.getAttribute('data-indexrocha'),
                 }
 
     this.obj.proyectos[index.proyecto].cp[index.rocha].show = this.obj.proyectos[index.proyecto].cp[index.rocha].show ? false : true 
+    this.obj.selected = i.getAttribute('data-npok')
     this.trigger( this.obj )
   },
 
 
-
-
   showServicio: function(e){
-    CuadroRochaActions._showServicio(e.target)
+    CuadroRochaActions._showServicio(e.target,e.currentTarget)
   },
-  _showServicio: function(e){
+  _showServicio: function(e,i){
 
     let index = { 
                   proyecto: e.getAttribute('data-indexproyecto'),
@@ -135,6 +140,7 @@ socket.emit('getRochas', ( x, y ) => {
                 }
 
     this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show = this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show ? false : true 
+    this.obj.selected = i.getAttribute('data-npok')
     this.trigger( this.obj )
   },
 
@@ -142,15 +148,16 @@ socket.emit('getRochas', ( x, y ) => {
 
 
   showSubServicio: function(e){
-    CuadroRochaActions._showSubServicio(e.target)
+    CuadroRochaActions._showSubServicio(e.target,e.currentTarget)
   },
-  _showSubServicio: function(e){
-    let index = { 
-                  proyecto: e.getAttribute('data-indexproyecto'),
-                  servicio: e.getAttribute('data-indexservicio'),
-                  rocha: e.getAttribute('data-indexrocha')
-                }
-    this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show = this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show ? false : true 
+  _showSubServicio: function(e,i){
+    // let index = { 
+    //               proyecto: e.getAttribute('data-indexproyecto'),
+    //               servicio: e.getAttribute('data-indexservicio'),
+    //               rocha: e.getAttribute('data-indexrocha')
+    //             }
+    // this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show = this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show ? false : true 
+    this.obj.selected = i.getAttribute('data-npok')
     this.trigger( this.obj )
   },
 
@@ -196,7 +203,7 @@ socket.emit('getRochas', ( x, y ) => {
     this.obj.calendario.sumar = this.obj.calendario.sumar - 1
     this.obj.calendario.restar = this.obj.calendario.sumar + 1
 
-  },  
+  },
 
   getProyectos: function(method, event, operator) {
 
@@ -234,6 +241,8 @@ socket.emit('getRochas', ( x, y ) => {
       this.obj.showServicio = this.showServicio
       this.obj.showSubServicio = this.showSubServicio
       this.obj.buscar = this.buscar
+      this.obj.destacado = this.destacado
+      this.obj.selected = null
 
 
 let form = null
