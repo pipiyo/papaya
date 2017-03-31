@@ -93,7 +93,7 @@ if (form) {
 						    						 servicio.ESTADO,
 						    						 servicio.NOMBRE_SERVICIO
 												FROM servicio 
-												WHERE servicio.NOMBRE_SERVICIO NOT IN('OC','FI')  
+												WHERE servicio.NOMBRE_SERVICIO NOT IN('OC','FI','BODEGA')  
 												AND servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
 						      if (errorCodigoServicio) {
 						        return connection.rollback(function() {
@@ -103,7 +103,7 @@ if (form) {
 
 								    let cs = []
 								    cs[0] = []
-									_.forEach(resultsCodigoServicio, (value, key) => {
+									_.forEach(resultsCodigoServicio, (value, key) => {	
 									  cs[0][key] = value.CODIGO_SERVICIO
 									  lista.cs[key] = { 
 									  					cs: value.CODIGO_SERVICIO, 

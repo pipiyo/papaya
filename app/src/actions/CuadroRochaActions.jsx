@@ -7,7 +7,7 @@ let CuadroRochaActions = Reflux.createActions([
   '_showSubServicio',
   '_buscar',
   '_subirmes',
-  '_bajarmes'
+  '_bajarmes',
 ])
 
 export default CuadroRochaActions

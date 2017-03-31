@@ -116,7 +116,7 @@ let HomeStore = Reflux.createStore({
   },
   scrollWin:function(ev) {
     ev.preventDefault()
-    document.getElementById(ev.currentTarget.dataset.tabla).scrollLeft += ev.currentTarget.dataset.left
+    document.getElementById(ev.currentTarget.dataset.tabla).scrollLeft += parseInt(ev.currentTarget.dataset.left)
   },
   subSubMenu:function(ev) {
     ev.preventDefault()

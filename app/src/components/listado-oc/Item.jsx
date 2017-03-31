@@ -16,7 +16,7 @@ class Item extends React.Component {
                                                             {(this.props.datos.ESTADO != "Pendiente")?<a target='_blank' href={`${Env.urlSytem1}pdfOC.php?CODIGO_OC=${this.props.datos.CODIGO_OC}`}> - <i class="fa fa-file-text" aria-hidden="true"></i></a>:""}
                                                             {(this.props.datos.ESTADO == "Pendiente")?<Link to={`/home/actualizar-oc/${this.props.datos.CODIGO_OC}`}> - <i class="fa fa-pencil-square-o" aria-hidden="true"></i></Link>:""}
             </td>
-            <td class={(this.props.datos.ENVIADO)?`nr ok center`:`nr center`}>A{this.props.datos.CODIGO_OC}</td>
+            <td class={(this.props.datos.ENVIADO)?`nr ok center`:`nr center`}>{this.props.datos.CODIGO_OC}</td>
             <td>{this.props.datos.ROCHA_PROYECTO}</td>
             <td>{this.props.datos.VERSION}</td>
             <td>{this.props.datos.NOMBRE_PROVEEDOR}</td>

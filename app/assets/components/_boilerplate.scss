@@ -1877,9 +1877,34 @@ a.external-link, .external-link a {
 
 .module-cuadro-rocha{
     border:solid 1px $gris;
-    overflow-x:scroll;
+    overflow-x:auto;
     width: calc(100% - 1em);
     margin: auto;
+    .module-cuadro-rocha-phone{
+        overflow: auto;
+        min-width: 800px;
+        .content-rocha-info{
+            float: left;
+            width: 600px;
+        }
+        .content-rocha-day{
+            float: left;
+            width: calc(100% - 600px);
+            overflow-x: auto;
+        }
+    }
+    button{
+         @include reset-appearance;
+         width: 20px;
+         height: 20px;
+         border-radius: 50%;
+         color: $blanco;
+         background: $color_corporativo_dark;
+         &:hover{
+          background: $color_corporativo_darker;
+          cursor: pointer;  
+        }
+    }
     .info{
         display: flex;
         &.title-proyecto{
@@ -1888,6 +1913,7 @@ a.external-link, .external-link a {
                 color: $blanco;
                 padding: 3px 2px 3px 2px;
                 p{
+                    white-space: nowrap;
                     font-size: $fontRegularBig;
                 }
             }
@@ -1899,17 +1925,40 @@ a.external-link, .external-link a {
         &.proyecto{
             width: 100%;
             .name{
-                padding: 3px 2px 3px 2px;
+                padding: 3px 12px 3px 2px;
                 p{
+                    white-space: nowrap;
                     font-size: $fontRegularBig;
+                }
+            }
+            &.active{
+                .name{
+                    border-top: solid 1px $gris;
+                }   
+                .date{
+                    border-top: solid 1px $gris; 
+                }
+                .percentage{
+                    border-top: solid 1px $gris; 
+                } 
+                .day{
+                    border-top: solid 1px $gris; 
+                }     
+            }
+            &.desactive{
+                .percentage{
+                    .view,.link{
+                        display: none;
+                    }   
                 }
             }
         }
         &.rocha{
             width: 100%;
             .name{
-                padding: 3px 2px 3px 12px;
+                padding: 3px 12px 3px 22px;
                 p{
+                    white-space: nowrap;
                     font-size: $fontRegular;
                 }
             }
@@ -1917,8 +1966,9 @@ a.external-link, .external-link a {
         &.actividad{
             width: 100%;;
             .name{
-                padding: 3px 2px 3px 22px;
+                padding: 3px 12px 3px 42px;
                 p{
+                    white-space: nowrap;
                     font-size: $fontSmall;
                 }
             }
@@ -1926,15 +1976,24 @@ a.external-link, .external-link a {
         &.subactividad{
             width: 100%;
             .name{
-                padding: 3px 2px 3px 32px;
+                padding: 3px 12px 3px 62px;
                 p{
+                    white-space: nowrap;
                     font-size: $fontTiny;
                 }
             }
         }
+        &.active{
+            opacity: 1;
+        }
+        &.desactive{
+            opacity: 0.1;
+        }
         .name{
+            height: 32px;
             width: 300px;
             min-width: 300px;
+            overflow: hidden;
             position: relative;
             border-bottom:solid 1px $gris;
             border-right: solid 1px $gris;
@@ -1943,8 +2002,8 @@ a.external-link, .external-link a {
                 font-family: FontAwesome;
                 font-weight: normal;
                 position: absolute;
-                font-size: 18px;
-                right: .5em;
+                font-size: 14px;
+                right: .2em;
                 top: 4px;
             }
             &.active{
@@ -1959,6 +2018,7 @@ a.external-link, .external-link a {
             }
         }
         .date{
+            height: 32px;
             padding: 3px 2px 3px 2px;
             width: 100px;
             min-width: 100px;
@@ -1970,6 +2030,8 @@ a.external-link, .external-link a {
             }
         }
         .percentage{
+            position: relative;
+            height: 32px;
             padding: 3px 2px 3px 2px;
             width: 50px;
             min-width: 50px;
@@ -1979,8 +2041,58 @@ a.external-link, .external-link a {
                 text-align: center;
                 font-size: $fontSmall;
             }
+            .link{
+                position: absolute;
+                top: 4px;
+                left: 30px;
+                font-size: 13px;
+                color: $color_sistema;
+                &.center{
+                    left: 18px;
+                }
+            }
+            .view{
+                position: absolute;
+                top: 4px;
+                left: 7px;
+                font-size: 13px;
+                color: $color_sistema;
+                &.center{
+                    left: 18px;
+                }
+                .view-item{
+                    position: relative;
+                    .view-item-info{
+                        padding: 8px;
+                        cursor: pointer;
+                        position: absolute;
+                        background: $color_corporativo_dark;
+                        top: -1px;
+                        min-width: 300px;
+                        z-index: 1;
+                        display: none;
+                        left: 16px;
+                        p{
+                            text-align: left;
+                            color: $blanco;
+                            padding: 0;
+                            margin: 0;
+                            line-height: 130%;
+
+                        }
+                    }
+                    &:hover > {
+                        .view-item-info{
+                            display: block;
+                        }
+                    }
+                }
+            }
         }
+
         .mes{
+            background: $color_planificacion;
+            color: $blanco;
             padding: 3px 2px 3px 2px;
             border-bottom:solid 1px $gris;
             border-right: solid 1px $gris;
@@ -1989,28 +2101,29 @@ a.external-link, .external-link a {
                 font-size: $fontSmall;
             }
             &.mes28{
-                width: 560px;
-                min-width: 560px;
+                width: calc(28px * 25px);
+                min-width: calc(28px * 25px);
             }
             &.mes29{
-                width: 580px;
-                min-width: 580px;
+                width: calc(29px * 25px);
+                min-width: calc(29px * 25px);
             }
             &.mes30{
-                width: 600px;
-                min-width: 600px; 
+                width: calc(30px * 25px);
+                min-width: calc(30px * 25px);
             }
             &.mes31{
-                width: 620px;
-                min-width: 620px; 
+                width: calc(31px * 25px);
+                min-width: calc(31px * 25px); 
             }
         }
         .day{
             padding: 3px 2px 3px 2px;
-            width: 20px;
-            min-width: 20px;
+            width: 25px;
+            height: 32px;
+            min-width: 25px;
             border-bottom:solid 1px $gris;
-            border-right: solid 1px $gris;
+            //border-right: solid 1px $gris;
             p{
                 text-align: center;
                 font-size: $fontSmall;
@@ -2020,39 +2133,39 @@ a.external-link, .external-link a {
                 border-right: solid 1px $negro;
                 &.proyecto{
                     background: $color_rochas;
-                    border-right: solid 1px $color_rochas;  
+                    //border-right: solid 1px $color_rochas;  
                 }
                 &.abastecimiento{
                     background: $color_abastecimiento;
-                    border-right: solid 1px $color_abastecimiento;  
+                    //border-right: solid 1px $color_abastecimiento;  
                 }
                 &.produccion{
                     background: $color_produccion;
-                    border-right: solid 1px $color_produccion;  
+                    //border-right: solid 1px $color_produccion;  
                 }
                 &.despacho{
                     background: $color_despacho;
-                    border-right: solid 1px $color_despacho;  
+                    //border-right: solid 1px $color_despacho;  
                 }
                 &.desarrollo{
                     background: $color_dam;
-                    border-right: solid 1px $color_dam;  
+                    //border-right: solid 1px $color_dam;  
                 }
                 &.instalacion{
                     background: $color_instalaciones;
-                    border-right: solid 1px $color_instalaciones;  
+                    //border-right: solid 1px $color_instalaciones;  
                 }
                 &.sillas{
                     background: $color_sillas;
-                    border-right: solid 1px $color_sillas;  
+                    //border-right: solid 1px $color_sillas;  
                 }
                 &.planificacion{
                     background: $color_planificacion;
-                    border-right: solid 1px $color_planificacion;  
+                    //border-right: solid 1px $color_planificacion;  
                 }
                 &.adquisiciones{
                     background: $color_abastecimiento;
-                    border-right: solid 1px $color_abastecimiento; 
+                    //border-right: solid 1px $color_abastecimiento; 
                 }
 
             }
@@ -2393,6 +2506,17 @@ a.external-link, .external-link a {
             a{
                 text-decoration: none;
                 padding: 0 3px;
+            }
+            select{
+                @include reset-appearance;
+                position:relative;
+                padding: 5px;
+                width: 100%;
+                border:solid 1px $gris;
+                background-image: url(images/app-icons/down-arrow.svg);
+                background-repeat: no-repeat;
+                background-size: 15px 15px;
+                background-position: 98% center;
             }
             input{
                 @include reset-appearance;

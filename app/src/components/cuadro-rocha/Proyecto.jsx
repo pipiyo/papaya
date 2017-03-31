@@ -12,76 +12,27 @@ class ProyectoItem extends Component {
     super()
   }
   render() {
-
 //`${this.props.obj.ingresod} ${this.props.obj.entregad} ${i}`
-
       return (         
         <div>
-
-
-
-        <div class="info proyecto">
-            <div class="datos name" onClick={this.props.showProyecto} ><p>{this.props.obj.np}</p></div>
-            <div class="datos date"><p>{this.props.obj.ingreso}</p></div>
-            <div class="datos date"><p>{this.props.obj.entrega}</p></div>
-            <div class="datos percentage"><p>{`${this.props.obj.estado}%`}</p></div>
-
-            {this.props.obj.dia}
-
-            {/*<div class="day"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day ok"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>
-            <div class="day"><p></p></div>*/}
+          <div class={(!this.props.selected)?`info proyecto`:(this.props.selected == this.props.obj.np)? `info proyecto active`:`info proyecto desactive`}>
+            {this.props.obj.dia} 
           </div> 
 
           { this.props.obj.show ? <Rocha
+                                        selected={this.props.selected}
                                         keyProyecto={this.props.index}  
                                         showRocha={this.props.showRocha} 
                                         showServicio={this.props.showServicio}
                                         showSubServicio={this.props.showSubServicio}
                                         obj={this.props.obj.cp} /> : null }
           
-
         </div>
       )
 
   }
 
 }
-
-
-
 
 
 
@@ -98,7 +49,8 @@ class Proyecto extends Component {
               this.props.obj.proyectos.map( (v, k) => {
                 return( <ProyectoItem 
                                     key={k} 
-                                    index={k} 
+                                    index={k}
+                                    selected={this.props.obj.selected} 
                                     showProyecto={this.props.obj.showProyecto}
                                     showRocha={this.props.obj.showRocha}
                                     showServicio={this.props.obj.showServicio}
