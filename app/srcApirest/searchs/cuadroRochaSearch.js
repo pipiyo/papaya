@@ -59,6 +59,7 @@ if (form) {
 			    						proyecto.NOMBRE_PROYECTO, 
 			    						proyecto.FECHA_INGRESO, 
 			    						proyecto.FECHA_ENTREGA, 
+			    						proyecto.FECHA_CONFIRMACION, 
 			    						proyecto.ESTADO
 	FROM proyecto
 	WHERE proyecto.NOMBRE_PROYECTO IN( ? )
@@ -79,7 +80,7 @@ if (form) {
 							  					cs: [], 
 							  					show: false,
 							  					ingreso: value.FECHA_INGRESO,
-							  					entrega: value.FECHA_ENTREGA,
+							  					entrega: value.FECHA_CONFIRMACION,
 							  					estado: value.ESTADO,
 							  					dia: null
 							  					 }

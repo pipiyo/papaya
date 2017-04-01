@@ -28,12 +28,18 @@ let CuadroRochaStore = Reflux.createStore({
     },
     buscar: null,
     calendario: { 
-                  mes: null,
+                  mes: [],
                   dia: null,
+                  dias: [],
+                  diasproyecto: [],
+                  diaspintar: [],
                   sumar: 0,
                   restar: 0,
                   subirmes: null,
-                  bajarmes: null
+                  bajarmes: null,
+                  now:null,
+                  last: null,
+                  first: null
                     }
   },
 
@@ -188,8 +194,8 @@ socket.emit('getRochas', ( x, y ) => {
 
 
     this.getProyectos('getRochas', null, 'add')
-    this.obj.calendario.sumar = this.obj.calendario.sumar + 1
-    this.obj.calendario.restar = this.obj.calendario.sumar - 1
+    //this.obj.calendario.sumar = this.obj.calendario.sumar + 1
+    //this.obj.calendario.restar = this.obj.calendario.sumar - 1
 
   },  
 
@@ -200,8 +206,8 @@ socket.emit('getRochas', ( x, y ) => {
 
 
     this.getProyectos('getRochas', null, 'subtract')
-    this.obj.calendario.sumar = this.obj.calendario.sumar - 1
-    this.obj.calendario.restar = this.obj.calendario.sumar + 1
+    //this.obj.calendario.sumar = this.obj.calendario.sumar - 1
+    //this.obj.calendario.restar = this.obj.calendario.sumar + 1
 
   },
 
@@ -217,21 +223,121 @@ socket.emit('getRochas', ( x, y ) => {
 
   if ( operator == 'add' ) {
 
-    this.obj.calendario.now = this.obj.calendario.now.add(1, 'months')
+    //this.obj.calendario.now = this.obj.calendario.now.add(1, 'months')
+    this.obj.calendario.last = this.obj.calendario.last.add(1, 'months')
+    
+
 
   }else if( operator == 'subtract' ) {
 
-    this.obj.calendario.now = this.obj.calendario.now.subtract(1, 'months')
+    //this.obj.calendario.now = this.obj.calendario.now.subtract(1, 'months')
+    this.obj.calendario.first = this.obj.calendario.first.subtract(1, 'months')
 
   }else{
-    this.obj.calendario.now = moment()
+    //this.obj.calendario.now = moment()
+    this.obj.calendario.first = moment().subtract(1, 'months')
+    this.obj.calendario.last = moment().add(2, 'months')
   }
+
+
+      //console.log( this.obj.calendario.first.month(), this.obj.calendario.last.month() )
+
+
+
+      //console.log( this.obj.calendario.last.diff(this.obj.calendario.first, 'months' ) )
 
       //this.obj.calendario.now = moment()
 
-      this.obj.calendario.mes = moment.months(this.obj.calendario.now.month())
-      this.obj.calendario.numeromes = this.obj.calendario.now.month()
-      this.obj.calendario.dia = this.obj.calendario.now.daysInMonth()
+
+this.obj.calendario.dias = []
+this.obj.calendario.diaspintar = []
+this.obj.calendario.mes = []
+
+
+                let first = null
+                let last = null
+                let diff = this.obj.calendario.last.diff(this.obj.calendario.first, 'months' )
+
+
+     _.times( this.obj.calendario.first.daysInMonth(), (iii) => {
+                this.obj.calendario.dias.push( <div key={`${iii}day${0}`} class="day">
+                                                   <p>{iii+1}</p>
+                                               </div>  )
+         this.obj.calendario.diaspintar.push({
+                                             fecha: moment(`${this.obj.calendario.first.clone().year()}-${this.obj.calendario.first.clone().month()+1}-${iii+1}`, 'YYYY-MM-DD') 
+                                           })
+         //console.log( moment(`${this.obj.calendario.first.clone().year()}-${this.obj.calendario.first.clone().month()+1}-${iii+1}`, 'YYYY-MM-DD')  )
+     })
+            this.obj.calendario.mes.push(<div 
+                                             key={`${0}mes`} 
+                                             class={ `mes mes${this.obj.calendario.first.clone().daysInMonth()}` }> <p> {`${moment.months(this.obj.calendario.first.clone().month())}`} </p> </div>)
+
+   
+
+for ( let loop = 1; loop <= diff; loop++ ) {
+
+
+
+            this.obj.calendario.mes.push(<div 
+                  key={`${loop}mes`} 
+                  class={ `mes mes${this.obj.calendario.first.clone().add(loop, 'months').daysInMonth()}` }> <p> {`${moment.months(this.obj.calendario.first.clone().add(loop, 'months').month())}`} </p> </div>)
+
+
+
+                _.times( this.obj.calendario.first.clone().add(loop, 'months').daysInMonth(), (ii) => {
+                           this.obj.calendario.dias.push( <div key={`${ii+1}day${loop}`} class="day">
+                                                              <p>{ii+1}</p>
+                                                          </div>  )
+                    this.obj.calendario.diaspintar.push({
+                                                        fecha: moment(`${this.obj.calendario.first.clone().add(loop, 'months').year()}-${this.obj.calendario.first.clone().add(loop, 'months').month()+1}-${ii+1}`, 'YYYY-MM-DD') 
+                                                      })
+                })
+
+             
+
+}
+
+
+//console.log( this.obj.calendario.diaspintar )
+
+
+
+
+/*
+          _.forEach(moment.months(), (value, key) => {
+            if ( key >= this.obj.calendario.first.month() && key <= this.obj.calendario.last.month() ) {
+                _.times( moment().month(key).daysInMonth(), (i) => {
+                           this.obj.calendario.dias.push( <div key={`${i}day${value}${key}`} class="day">
+                                                              <p>{i+1}</p>
+                                                          </div>  )
+
+
+
+            this.obj.calendario.diaspintar.push({
+                                                        año: moment().year(),
+                                                        mes: key+1,
+                                                        dia: i+1,
+                                                        fecha: moment(`${moment().year()}-${key+1}-${i+1}`, 'YYYY-MM-DD')
+                                                      })
+
+
+
+                })
+                       this.obj.calendario.mes.push(<div 
+                                                        key={`${key}mes`} 
+                                                        class={ `mes mes${moment().month(key).daysInMonth()}` }> <p> {`${value}`} </p> </div>)
+            }
+          })
+*/
+
+
+
+
+
+      //this.obj.calendario.mes = moment.months(this.obj.calendario.now.month())
+      this.obj.calendario.dia = moment().daysInMonth()      
+      this.obj.calendario.numeromes = moment().month()
+
 
       this.obj.calendario.subirmes = this.subirmes
       this.obj.calendario.bajarmes =this.bajarmes
@@ -278,22 +384,17 @@ if (event) {
           })
 
 
-
-
-
           _.forEach(y.cs, (vcs, kcs) => {
 
             csmax = null
             csmin = null
             csdia = []
 
+/*
 csmin = (moment(moment(vcs.inicio.substring(0,10), 'YYYY-MM-DD')).isAfter(this.obj.calendario.now, 'month')) ? 'despues' : ( (moment(moment(vcs.inicio.substring(0,10), 'YYYY-MM-DD')).isSame(this.obj.calendario.now, 'month')) ? moment(vcs.inicio.substring(0,10), 'YYYY-MM-DD').format('D') : 'antes' )
 csmax = (moment(moment(vcs.entrega.substring(0,10), 'YYYY-MM-DD')).isBefore(this.obj.calendario.now, 'month')) ? 'antes' : ( (moment(moment(vcs.entrega.substring(0,10), 'YYYY-MM-DD')).isSame(this.obj.calendario.now, 'month')) ? moment(vcs.entrega.substring(0,10), 'YYYY-MM-DD').format('D') : 'despues' )
 
-
                 _.times(this.obj.calendario.dia, (r) => {
-                            //console.log(this.props.obj.np, this.props.obj.ingresod, this.props.obj.entregad  )
-
 if ( csmin == 'despues' || csmax == 'antes' ) {
         csdia.push( <div 
                        key={`${vcs.csnombre}${r}${vcs.cs}`} 
@@ -319,8 +420,32 @@ if ( csmin == 'despues' || csmax == 'antes' ) {
                     <p></p>
                 </div> )
 }
-
                 })
+*/
+
+_.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+    if (moment(dpv.fecha).isBetween(moment(vcs.inicio.substring(0,10), 'YYYY-MM-DD'), moment(vcs.entrega.substring(0,10), 'YYYY-MM-DD'), 'day')) {
+        csdia.push( <div 
+                        key={`${vcs.csnombre}${dpk}${vcs.cs}`} 
+                        class={ `day ok ${vcs.nombre.toLowerCase()}` } >
+                    <p></p>
+                </div> )
+    }else{
+                csdia.push( <div 
+                        key={`${vcs.csnombre}${dpk}${vcs.cs}`} 
+                        class={ `day` } >
+                    <p></p>
+                </div> )
+    }
+})
+
+
+
+
+
+
+
+
 
             this.listaCss[kcs] = {  
                                   estado: null, 
@@ -344,12 +469,10 @@ if ( csmin == 'despues' || csmax == 'antes' ) {
             cssmin = null
             cssdia = []
 
-
+/*
 cssmin = (moment(moment(vcss.SUB_FECHA_INICIO.substring(0,10), 'YYYY-MM-DD')).isAfter(this.obj.calendario.now, 'month')) ? 'despues' : ( (moment(moment(vcss.SUB_FECHA_INICIO.substring(0,10), 'YYYY-MM-DD')).isSame(this.obj.calendario.now, 'month')) ? moment(vcss.SUB_FECHA_INICIO.substring(0,10), 'YYYY-MM-DD').format('D') : 'antes' )
 cssmax = (moment(moment(vcss.SUB_FECHA_ENTREGA.substring(0,10), 'YYYY-MM-DD')).isBefore(this.obj.calendario.now, 'month')) ? 'antes' : ( (moment(moment(vcss.SUB_FECHA_ENTREGA.substring(0,10), 'YYYY-MM-DD')).isSame(this.obj.calendario.now, 'month')) ? moment(vcss.SUB_FECHA_ENTREGA.substring(0,10), 'YYYY-MM-DD').format('D') : 'despues' )
-
-
-                _.times(this.obj.calendario.dia, (x) => {
+_.times(this.obj.calendario.dia, (x) => {
                             //console.log(this.props.obj.np, this.props.obj.ingresod, this.props.obj.entregad  )
 
 if ( cssmin == 'despues' || cssmax == 'antes' ) {
@@ -377,7 +500,26 @@ if ( cssmin == 'despues' || cssmax == 'antes' ) {
                     <p></p>
                 </div> )
 }
-                })
+})
+*/
+
+_.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+    if (moment(dpv.fecha).isBetween(moment(vcss.SUB_FECHA_INICIO.substring(0,10), 'YYYY-MM-DD'), moment(vcss.SUB_FECHA_ENTREGA.substring(0,10), 'YYYY-MM-DD'), 'day')) {
+                cssdia.push( <div 
+                        key={`${vcss.CODIGO_SUBSERVICIO}${dpk}${vcss.SUB_CODIGO_SERVICIO}`} 
+                        class={ `day` } >
+                    <p></p>
+                </div> )
+    }else{
+                cssdia.push( <div 
+                        key={`${vcss.CODIGO_SUBSERVICIO}${dpk}${vcss.SUB_CODIGO_SERVICIO}`} 
+                        class={ `day ok ${vcss.nombre.toLowerCase()}` } >
+                    <p></p>
+                </div> )
+    }
+})
+
+
 
                 this.listaCss[kcs].css.push( {  
                                               estado: vcss.SUB_ESTADO, 
@@ -425,11 +567,10 @@ if ( cssmin == 'despues' || cssmax == 'antes' ) {
             cpdia = []
 
 
-
+/*
   cpmin = (moment(moment(vcp.ingreso.substring(0,10), 'YYYY-MM-DD')).isAfter(this.obj.calendario.now, 'month')) ? 'despues' : ( (moment(moment(vcp.ingreso.substring(0,10), 'YYYY-MM-DD')).isSame(this.obj.calendario.now, 'month')) ? moment(vcp.ingreso.substring(0,10), 'YYYY-MM-DD').format('D') : 'antes' )
   cpmax = (moment(moment(vcp.entrega.substring(0,10), 'YYYY-MM-DD')).isBefore(this.obj.calendario.now, 'month')) ? 'antes' : ( (moment(moment(vcp.entrega.substring(0,10), 'YYYY-MM-DD')).isSame(this.obj.calendario.now, 'month')) ? moment(vcp.entrega.substring(0,10), 'YYYY-MM-DD').format('D') : 'despues' )
                 _.times(this.obj.calendario.dia, (x) => {
-                            //console.log(this.props.obj.np, this.props.obj.ingresod, this.props.obj.entregad  )
 
 if ( cpmin == 'despues' || cpmax == 'antes' ) {
         cpdia.push( <div 
@@ -456,9 +597,28 @@ if ( cpmin == 'despues' || cpmax == 'antes' ) {
                     <p></p>
                 </div> )
 }
+})
+*/
+
+_.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+  if (moment(dpv.fecha).isBetween(moment(vcp.ingreso.substring(0,10), 'YYYY-MM-DD'), moment(vcp.entrega.substring(0,10), 'YYYY-MM-DD'), 'day')) {
+        cpdia.push( <div 
+                        key={`${vcp.cp}${dpk}${vcp.np}`} 
+                        class={ `day ok proyecto` } >
+                    <p></p>
+                </div> )
+    }else{
+        cpdia.push( <div 
+                        key={`${vcp.cp}${dpk}${vcp.np}`} 
+                        class={ `day` } >
+                    <p></p>
+                </div> )
+    }
+})
 
 
-                })
+
+            
 
                 this.obj.proyectos[knp].cp.push({
                                                     np: vcp.np, 
@@ -502,29 +662,53 @@ if ( cpmin == 'despues' || cpmax == 'antes' ) {
             this.obj.proyectos[knp].entrega = maxtime.format('YYYY-MM-DD')
 
 
-            this.obj.proyectos[knp].ingresod = (moment(mintime).isAfter(this.obj.calendario.now, 'month')) ? 'despues' : ( (moment(mintime).isSame(this.obj.calendario.now, 'month')) ? mintime.format('D') : 'antes' )
-            this.obj.proyectos[knp].entregad = (moment(maxtime).isBefore(this.obj.calendario.now, 'month')) ? 'antes' : ( (moment(maxtime).isSame(this.obj.calendario.now, 'month')) ? maxtime.format('D') : 'despues' )
+//this.obj.proyectos[knp].ingresod = (moment(mintime).isAfter(this.obj.calendario.now, 'month')) ? 'despues' : ( (moment(mintime).isSame(this.obj.calendario.now, 'month')) ? mintime.format('D') : 'antes' )
+//this.obj.proyectos[knp].entregad = (moment(maxtime).isBefore(this.obj.calendario.now, 'month')) ? 'antes' : ( (moment(maxtime).isSame(this.obj.calendario.now, 'month')) ? maxtime.format('D') : 'despues' )
 
-
-                _.times(this.obj.calendario.dia, (i) => {
-                    if ( this.obj.proyectos[knp].ingresod == 'despues' || this.obj.proyectos[knp].entregad == 'antes' ) {
-                            this.obj.proyectos[knp].dia.push( <div key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} class={`day`} >
-                                        <p></p>
-                                    </div> )
-                    }else if( this.obj.proyectos[knp].ingresod == 'antes' ){
-                            this.obj.proyectos[knp].dia.push( <div key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} class={ ( ++i <= this.obj.proyectos[knp].entregad  ) ? `day ok` : `day` } >
-                                        <p></p>
-                                    </div> )
-                    }else if( this.obj.proyectos[knp].entregad == 'despues' ){
-                            this.obj.proyectos[knp].dia.push( <div key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} class={ ( ++i >= this.obj.proyectos[knp].ingresod ) ? `day ok` : `day` } >
-                                        <p></p>
-                                    </div> )
-                    }else{
-                            this.obj.proyectos[knp].dia.push( <div key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} class={ ( ++i >= this.obj.proyectos[knp].ingresod && i++ <= this.obj.proyectos[knp].entregad  ) ? `day ok` : `day` } >
-                                        <p></p>
-                                    </div> )
-                    }
-                })
+/*
+_.times(this.obj.calendario.dia, (i) => {
+    if ( this.obj.proyectos[knp].ingresod == 'despues' || this.obj.proyectos[knp].entregad == 'antes' ) {
+            this.obj.proyectos[knp].dia.push( <div 
+                                                  key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} 
+                                                  class={`day`} >
+                        <p></p>
+                    </div> )
+    }else if( this.obj.proyectos[knp].ingresod == 'antes' ){
+            this.obj.proyectos[knp].dia.push( <div 
+                                                  key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} 
+                                                  class={ ( ++i <= this.obj.proyectos[knp].entregad  ) ? `day ok` : `day` } >
+                        <p></p>
+                    </div> )
+    }else if( this.obj.proyectos[knp].entregad == 'despues' ){
+            this.obj.proyectos[knp].dia.push( <div 
+                                                  key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} 
+                                                  class={ ( ++i >= this.obj.proyectos[knp].ingresod ) ? `day ok` : `day` } >
+                        <p></p>
+                    </div> )
+    }else{
+            this.obj.proyectos[knp].dia.push( <div 
+                                                key={`${this.obj.proyectos[knp].np}${i}${this.obj.proyectos[knp].ingreso}`} 
+                                                class={ ( ++i >= this.obj.proyectos[knp].ingresod && i++ <= this.obj.proyectos[knp].entregad  ) ? `day ok` : `day` } >
+                        <p></p>
+                    </div> )
+    }
+})
+*/
+          _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+              if (moment(dpv.fecha).isBetween(mintime, maxtime, 'day')) {
+                  this.obj.proyectos[knp].dia.push( <div 
+                                                      key={`${this.obj.proyectos[knp].np}${dpk}${this.obj.proyectos[knp].ingreso}`} 
+                                                      class={`day ok`} >
+                              <p></p>
+                          </div> )
+              }else{
+                          this.obj.proyectos[knp].dia.push( <div 
+                                                      key={`${this.obj.proyectos[knp].np}${dpk}${this.obj.proyectos[knp].ingreso}`} 
+                                                      class={`day`} >
+                              <p></p>
+                          </div> )
+              }
+          })
             
           })// np 
           _.forEach(this.obj.proyectos, (vnp, knp) => {
