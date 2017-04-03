@@ -13,30 +13,13 @@ class Day extends Component {
 
           <div class="info title-proyecto">
 
-
-          <div class={ `mes mes${this.props.obj.dia}` }>
-              <p> {this.props.obj.mes} </p>
-          </div>
+                   {this.props.obj.mes}  
 
          </div>
 
           <div class="info title-proyecto">
 
-
-            {
-
-                _.times(this.props.obj.dia, (i) => {
-
-                            return( <div key={i} class="day">
-                                <p>{++i}</p>
-                            </div>  )
-
-                })
-
-            }
-
-
-
+                  {this.props.obj.dias}
 
           </div>
         </div>
