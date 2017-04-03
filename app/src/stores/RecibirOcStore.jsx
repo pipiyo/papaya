@@ -13,6 +13,9 @@ let RecibirOcStore = Reflux.createStore({
   listenables: [RecibirOcActions],
   obj: { 
     renderOc: '',
+    recibo: '',
+    devolucion: '',
+    id:'',
     renderProductos: '',
     mensaje: '',
     input : {codigo:"", proveedor:""},
@@ -62,13 +65,16 @@ let RecibirOcStore = Reflux.createStore({
 
     socket.emit('addOcRecibir', oc,JSON.stringify( localStorage.getItem('token')), (n) => {
       this.obj.mensaje = n.mensaje
-      this.trigger(this.obj)
+      this.searchOc(this.obj.id)
     })
   },
   searchOc: function(id){
   	socket.emit('searchOc', id, (n) => {
+      this.obj.recibo = n.recibo
+      this.obj.devolucion = n.devolucion
       this.obj.renderOc = n.oc
       this.obj.renderProductos = n.productos
+      this.obj.id = id
 
       this.obj.input.codigo = this.validador(this.obj.renderOc[0].CODIGO_OC)
       this.obj.input.proveedor = this.validador(this.obj.renderOc[0].NOMBRE_PROVEEDOR)

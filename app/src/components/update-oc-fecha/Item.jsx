@@ -32,7 +32,7 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
-                <label>Envíado a cliente</label>
+                <label>Envíado a proveedor</label>
                 <select id="enviado" >
                   <option value="0">No</option>
                   <option value="1">Si</option>               
