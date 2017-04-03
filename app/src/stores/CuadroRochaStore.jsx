@@ -248,16 +248,13 @@ socket.emit('getRochas', ( x, y ) => {
 
       //this.obj.calendario.now = moment()
 
-
 this.obj.calendario.dias = []
 this.obj.calendario.diaspintar = []
 this.obj.calendario.mes = []
 
-
                 let first = null
                 let last = null
                 let diff = this.obj.calendario.last.diff(this.obj.calendario.first, 'months' )
-
 
      _.times( this.obj.calendario.first.daysInMonth(), (iii) => {
                 this.obj.calendario.dias.push( <div key={`${iii}day${0}`} class="day">
@@ -272,17 +269,11 @@ this.obj.calendario.mes = []
                                              key={`${0}mes`} 
                                              class={ `mes mes${this.obj.calendario.first.clone().daysInMonth()}` }> <p> {`${moment.months(this.obj.calendario.first.clone().month())}`} </p> </div>)
 
-   
-
 for ( let loop = 1; loop <= diff; loop++ ) {
-
-
 
             this.obj.calendario.mes.push(<div 
                   key={`${loop}mes`} 
                   class={ `mes mes${this.obj.calendario.first.clone().add(loop, 'months').daysInMonth()}` }> <p> {`${moment.months(this.obj.calendario.first.clone().add(loop, 'months').month())}`} </p> </div>)
-
-
 
                 _.times( this.obj.calendario.first.clone().add(loop, 'months').daysInMonth(), (ii) => {
                            this.obj.calendario.dias.push( <div key={`${ii+1}day${loop}`} class="day">
@@ -292,8 +283,6 @@ for ( let loop = 1; loop <= diff; loop++ ) {
                                                         fecha: moment(`${this.obj.calendario.first.clone().add(loop, 'months').year()}-${this.obj.calendario.first.clone().add(loop, 'months').month()+1}-${ii+1}`, 'YYYY-MM-DD') 
                                                       })
                 })
-
-             
 
 }
 
@@ -438,13 +427,6 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
                 </div> )
     }
 })
-
-
-
-
-
-
-
 
 
             this.listaCss[kcs] = {  
