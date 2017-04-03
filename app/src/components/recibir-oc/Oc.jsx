@@ -1,7 +1,10 @@
 import React from 'react'
 import OcItem from './OcItem'
 import OcProducto from './OcProducto'
-
+import TitleRecibo from './TitleRecibo'
+import TitleDevolucion from './TitleDevolucion'
+import OcRecibo from './OcRecibo'
+import OcDevolucion from './OcDevolucion'
 class Oc extends React.Component {
 
   constructor() {
@@ -30,6 +33,20 @@ class Oc extends React.Component {
                 <input type="submit" value="Enviar"/>
             </div>
           </div> 
+          <TitleRecibo />
+          <OcRecibo
+            scrollWin={this.props.scrollWin} 
+            obj={this.props.obj}
+            renderInputOc={this.props.renderInputOc}
+            renderInputOcTotal={this.props.renderInputOcTotal}   
+          />
+          <TitleDevolucion />
+          <OcDevolucion
+            scrollWin={this.props.scrollWin} 
+            obj={this.props.obj}
+            renderInputOc={this.props.renderInputOc}
+            renderInputOcTotal={this.props.renderInputOcTotal}   
+          />
         </form> 
       )
 

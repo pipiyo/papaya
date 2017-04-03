@@ -42,7 +42,7 @@ module.exports = (io) => {
 
         if(recibido > 0){
           totalDevolucion = parseInt(data.diferencia[i]) + parseInt(data.entregado[i])
-          query += `INSERT INTO oc_recibo (codigo_oc, total, recibido,fecha_recibido,codigo_producto,user) values ("${data.codigo}","${totalDevolucion}","${recibido}","${data.fecha}","${producto}",".${user.name}");`;
+          query += `INSERT INTO oc_recibo (codigo_oc, total, recibido,fecha_recibido,codigo_producto,user) values ("${data.codigo}","${totalDevolucion}","${recibido}","${data.fecha}","${producto}","${user.name}");`;
         }
 
         query += `UPDATE oc_producto SET oc_producto.CANTIDAD_RECIBIDA = "${total}", oc_producto.DIFERENCIA = "${data.diferencia[i]}", oc_producto.GUIA_DESPACHO = "${data.guia[i]}" where CODIGO_OC = "${data.codigo}" and oc_producto.CODIGO_PRODUCTO = "${producto}"; `
@@ -99,12 +99,14 @@ module.exports = (io) => {
   /* Listar Producto */
   socket.on('searchOc', (id,callback) => {
     let query = `select * from orden_de_compra where CODIGO_OC = '${id}' ;` 
-    let query1 = `select producto.DESCRIPCION, producto.STOCK_ACTUAL, oc_producto.CANTIDAD_RECIBIDA, oc_producto.DIFERENCIA , oc_producto.GUIA_DESPACHO, oc_producto.CODIGO_PRODUCTO,oc_producto.ROCHA, oc_producto.OBSERVACION, oc_producto.CANTIDAD, oc_producto.PRECIO_BODEGA, oc_producto.PRECIO_UNITARIO, oc_producto.PRECIO_LISTA, oc_producto.DESCUENTO, oc_producto.TOTAL from orden_de_compra, oc_producto, producto where producto.CODIGO_PRODUCTO = oc_producto.CODIGO_PRODUCTO and oc_producto.CODIGO_OC = orden_de_compra.CODIGO_OC AND orden_de_compra.CODIGO_OC = '${id}' ` 
+    let query1 = `select producto.DESCRIPCION, producto.STOCK_ACTUAL, oc_producto.CANTIDAD_RECIBIDA, oc_producto.DIFERENCIA , oc_producto.GUIA_DESPACHO, oc_producto.CODIGO_PRODUCTO,oc_producto.ROCHA, oc_producto.OBSERVACION, oc_producto.CANTIDAD, oc_producto.PRECIO_BODEGA, oc_producto.PRECIO_UNITARIO, oc_producto.PRECIO_LISTA, oc_producto.DESCUENTO, oc_producto.TOTAL from orden_de_compra, oc_producto, producto where producto.CODIGO_PRODUCTO = oc_producto.CODIGO_PRODUCTO and oc_producto.CODIGO_OC = orden_de_compra.CODIGO_OC AND orden_de_compra.CODIGO_OC = '${id}';` 
+    let query2 = `select * from oc_devolucion where codigo_oc = '${id}' order by id desc ;` 
+    let query3 = `select * from oc_recibo where codigo_oc = '${id}' order by id desc ;` 
     pool.getConnection( (err, connection) => {
-        connection.query(query+query1, (err, rows, fields) => {
+        connection.query(query+query1+query2+query3, (err, rows, fields) => {
             connection.release()
             if (!err){
-              callback({oc:rows[0],productos:rows[1]})
+              callback({oc:rows[0],productos:rows[1],devolucion:rows[2],recibo:rows[3]})
             }
             else{
               console.log('Error ' + err)
