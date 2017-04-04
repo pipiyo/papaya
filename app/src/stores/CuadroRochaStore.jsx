@@ -598,10 +598,6 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
     }
 })
 
-
-
-            
-
                 this.obj.proyectos[knp].cp.push({
                                                     np: vcp.np, 
                                                     cp: vcp.cp, 
