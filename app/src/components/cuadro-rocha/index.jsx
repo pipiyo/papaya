@@ -48,6 +48,11 @@ class CuadroRochaIndex extends Component {
                 </div>
               </div>
 
+              <input 
+                    type="button"
+                    onClick={this.props.obj.vermas} ></input>
+
+
             </div>
           </div>
 

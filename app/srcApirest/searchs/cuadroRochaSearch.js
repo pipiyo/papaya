@@ -7,6 +7,7 @@ module.exports = ( pool, form, callback ) => {
 			  if (err) { throw err }
 
 let query
+let limit = 50
 if (form) {
 			if (form.proyecto) {
 				query = `SELECT DISTINCT NOMBRE_PROYECTO FROM proyecto WHERE NOMBRE_PROYECTO = '${form.proyecto}' `
@@ -25,13 +26,21 @@ if (form) {
 			if (form.ejecutivo) {
 				query += ` AND EJECUTIVO = '${form.ejecutivo}' `
 			}
-				query += ` limit 50 `
+				
+			if (form.vermas == 0) {
+				query += ` limit ${limit} `
+			}else{
+				query += ` limit ${ ( limit + form.vermas ) } `
+			}
+				
 }else{
 	query = `SELECT DISTINCT NOMBRE_PROYECTO 
 								FROM proyecto 
 								WHERE NOMBRE_PROYECTO != ''
 								LIMIT 50`
+
 }
+
 
 
 			    let lista = { np: [],

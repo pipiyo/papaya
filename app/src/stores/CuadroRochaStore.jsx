@@ -22,9 +22,17 @@ let CuadroRochaStore = Reflux.createStore({
     showServicio: null,
     showSubServicio: null,
     selected: null,
+    vista: 50,
     form: {
           ejecutivo: [],
-          cliente: [] 
+          cliente: [],
+          busqueda: {
+                      rocha: null,
+                      proyecto: null,
+                      ejecutivo: null,
+                      cliente: null,
+                      vermas: 0
+                    }, 
     },
     buscar: null,
     calendario: { 
@@ -89,7 +97,7 @@ socket.emit('getRochas', ( x, y ) => {
 
   getObj: function() {
 
-    this.getProyectos('getRochas', null, null)
+    this.getProyectos('getRochas', null, null, null)
 
 
   },
@@ -179,7 +187,7 @@ socket.emit('getRochas', ( x, y ) => {
   _buscar: function(e) {
 
 
-    this.getProyectos('getRochaFiltro', e)
+    this.getProyectos('getRochaFiltro', e, null, null)
 
 
   },  
@@ -192,8 +200,7 @@ socket.emit('getRochas', ( x, y ) => {
   },  
   _subirmes: function() {
 
-
-    this.getProyectos('getRochas', null, 'add')
+    this.getProyectos('getRochas', null, 'add', null)
     //this.obj.calendario.sumar = this.obj.calendario.sumar + 1
     //this.obj.calendario.restar = this.obj.calendario.sumar - 1
 
@@ -204,14 +211,21 @@ socket.emit('getRochas', ( x, y ) => {
   },  
   _bajarmes: function() {
 
-
-    this.getProyectos('getRochas', null, 'subtract')
+    this.getProyectos('getRochas', null, 'subtract', null)
     //this.obj.calendario.sumar = this.obj.calendario.sumar - 1
     //this.obj.calendario.restar = this.obj.calendario.sumar + 1
 
   },
 
-  getProyectos: function(method, event, operator) {
+  vermas: function() {
+    CuadroRochaActions._vermas()
+  },  
+  _vermas: function() {
+
+    this.getProyectos('getRochas', null, null, 'vermas')
+  },
+
+  getProyectos: function(method, event, operator, vermas) {
 
 //console.log( moment().daysInMonth() )
 
@@ -338,24 +352,27 @@ for ( let loop = 1; loop <= diff; loop++ ) {
       this.obj.buscar = this.buscar
       this.obj.destacado = this.destacado
       this.obj.selected = null
-
-
-let form = null
+      this.obj.vermas = this.vermas
 
 if (event) {
 
-    form = {
-                  rocha: event.elements[0].value,
-                  proyecto: event.elements[1].value,
-                  ejecutivo: event.elements[2].value,
-                  cliente: event.elements[3].value,
-                }
+    this.obj.form.busqueda = null
+
+    this.obj.form.busqueda = {
+                               rocha: event.elements[0].value,
+                               proyecto: event.elements[1].value,
+                               ejecutivo: event.elements[2].value,
+                               cliente: event.elements[3].value,
+                               vermas: 0
+                             }
 
 }
 
+  this.obj.form.busqueda.vermas = (vermas) ? ( this.obj.form.busqueda.vermas + this.obj.vista )  : 0
+
   this.obj.proyectos= []
 
-    socket.emit(method, form, ( y ) => {
+    socket.emit(method, this.obj.form.busqueda, ( y ) => {
 
           let i = 0
           let ok = 0
