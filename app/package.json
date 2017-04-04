@@ -31,6 +31,7 @@
     "express": "^4.15.2",
     "express-graphql": "^0.6.4",
     "express-session": "^1.15.2",
+    "format-number": "^2.0.2",
     "graphql": "^0.9.2",
     "graphql-tag": "^2.0.0",
     "jquery": "^3.2.1",

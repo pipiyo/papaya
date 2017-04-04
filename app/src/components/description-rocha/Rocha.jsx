@@ -1,4 +1,7 @@
 import React from 'react'
+import format from 'format-number'
+let myFormat = format({integerSeparator:'.',decimal: ','})
+
 
 class Rocha extends React.Component {
 
@@ -57,13 +60,13 @@ class Rocha extends React.Component {
               <h3>Total</h3>
             </div>
             <div class="content-informe ext">
-              <div class="opc ext"><h5>Sub total</h5><p>{this.props.obj.renderRocha[0].SUB_TOTAL}</p></div>
-              <div class="opc ext"><h5>Descuento</h5><p>{this.props.obj.renderRocha[0].DESCUENTO}</p></div>
-              <div class="opc ext"><h5>Neto</h5><p>{this.props.obj.renderRocha[0].MONTO}</p></div>
-              <div class="opc ext"><h5>Descuento 2</h5><p>{this.props.obj.renderRocha[0].DESCUENTO2}</p></div>
-              <div class="opc ext"><h5>Neto 2</h5><p>{this.props.obj.renderRocha[0].MONTO2}</p></div>
-              <div class="opc ext"><h5>iva</h5><p>{this.props.obj.renderRocha[0].IVA}</p></div>
-              <div class="opc ext"><h5>Total</h5><p>{this.props.obj.renderRocha[0].TOTAL}</p></div>
+              <div class="opc ext"><h5>Sub total</h5><p>{myFormat(this.props.obj.renderRocha[0].SUB_TOTAL)}</p></div>
+              <div class="opc ext"><h5>Descuento</h5><p>{myFormat(this.props.obj.renderRocha[0].DESCUENTO)}</p></div>
+              <div class="opc ext"><h5>Neto</h5><p>{myFormat(this.props.obj.renderRocha[0].MONTO)}</p></div>
+              <div class="opc ext"><h5>Descuento 2</h5><p>{myFormat(this.props.obj.renderRocha[0].DESCUENTO2)}</p></div>
+              <div class="opc ext"><h5>Neto 2</h5><p>{myFormat(this.props.obj.renderRocha[0].MONTO2)}</p></div>
+              <div class="opc ext"><h5>iva</h5><p>{myFormat(this.props.obj.renderRocha[0].IVA)}</p></div>
+              <div class="opc ext"><h5>Total</h5><p>{myFormat(this.props.obj.renderRocha[0].TOTAL)}</p></div>
             </div>
           </div>   
         </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
-import Env from '../../Config'
+import format from 'format-number'
+let myFormat = format({integerSeparator:'.',decimal: ','})
 
 class Item extends React.Component {
 
@@ -25,7 +26,7 @@ class Item extends React.Component {
             <td class={(this.props.datos.FECHA_CONFIRMACION < this.props.fecha || !this.props.datos.FECHA_CONFIRMACION)?`nr error center`:`nr center`}>{(this.props.datos.FECHA_CONFIRMACION)?this.props.datos.FECHA_CONFIRMACION.substring(0,10):this.props.datos.FECHA_CONFIRMACION}</td>
             <td class="nr center">{(this.props.datos.fecha_recibido)?this.props.datos.fecha_recibido.substring(0,10):this.props.datos.fecha_recibido}</td>
             <td>{this.props.datos.NOMBRE_USUARIO}</td>
-            <td class="right">{this.props.datos.NETO}</td>
+            <td class="right">{myFormat(this.props.datos.NETO)}</td>
             <td>{this.props.datos.FACTURAS}</td>
             <td class="nr">{(this.props.datos.FECHA_ENVIO_VALIJA)?this.props.datos.FECHA_ENVIO_VALIJA.substring(0,10):this.props.datos.FECHA_CONFIRMACION}</td>
             <td>{this.props.datos.ESTADO}</td>

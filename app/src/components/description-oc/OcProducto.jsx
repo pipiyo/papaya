@@ -1,5 +1,7 @@
 import React from 'react'
 import OcProductoItem from './OcProductoItem'
+import format from 'format-number'
+let myFormat = format({integerSeparator:'.',decimal: ','})
 
 class OcProducto extends React.Component {
 
@@ -39,24 +41,24 @@ class OcProducto extends React.Component {
                 }
                 <tr>
                     <td class="right" colSpan="10"><p>Sub Total</p></td>
-                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].SUB_TOTAL}</p></td>
+                    <td class="module-table-content-item"><p>{myFormat(this.props.obj.renderOc[0].SUB_TOTAL)}</p></td>
                 </tr>
                 <tr>
                     <td class="right" colSpan="10"><p>Descuento %</p></td>
-                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].DESCUENTO_OC}</p></td>
+                    <td class="module-table-content-item"><p>{myFormat(this.props.obj.renderOc[0].DESCUENTO_OC)}</p></td>
                 </tr>
                 <tr>
                     <td class="right" colSpan="10"><p>Descuento $</p></td>
-                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].DESCUENTO_2}</p></td>
+                    <td class="module-table-content-item"><p>{myFormat(this.props.obj.renderOc[0].DESCUENTO_2)}</p></td>
                 </tr>
 
                 <tr>
                     <td class="right" colSpan="10"><p>Iva</p></td>
-                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].IVA}</p></td>
+                    <td class="module-table-content-item"><p>{myFormat(this.props.obj.renderOc[0].IVA)}</p></td>
                 </tr>
                 <tr>
                     <td class="right" colSpan="10"><p>Total</p></td>
-                    <td class="module-table-content-item"><p>{this.props.obj.renderOc[0].TOTAL}</p></td>
+                    <td class="module-table-content-item"><p>{myFormat(this.props.obj.renderOc[0].TOTAL)}</p></td>
                 </tr>
                 <tr>
                     <td class="right"><p>Observaciones</p></td>
