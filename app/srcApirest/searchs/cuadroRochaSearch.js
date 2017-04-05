@@ -161,7 +161,8 @@ query = `SELECT DISTINCT proyecto.NOMBRE_PROYECTO AS NOMBRE
 						    						 servicio.DESCRIPCION
 												FROM servicio 
 												WHERE servicio.NOMBRE_SERVICIO NOT IN('OC','FI','BODEGA')  
-												AND servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
+												AND servicio.CODIGO_PROYECTO IN( ? )
+												ORDER BY servicio.NOMBRE_SERVICIO ASC`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
 						      if (errorCodigoServicio) {
 						        return connection.rollback(function() {
 						          callback( lista )

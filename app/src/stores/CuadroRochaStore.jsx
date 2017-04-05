@@ -239,13 +239,13 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
             if (moment(dpv.fecha).isBetween(value.inicio, value.entrega, 'day')) {
               this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].css[key].dia.push( <div 
                                 key={`${value.cs}${dpk}${value.cs}`} 
-                                class={ `day` } >
+                                class={ `day ok ${value.nombre.toLowerCase()}` } >
                             <p></p>
                         </div> )
             }else{
                this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].css[key].dia.push( <div 
                                 key={`${value.cs}${dpk}${value.cs}`} 
-                                class={ `day ok ${value.nombre.toLowerCase()}` } >
+                                class={ `day` } >
                             <p></p>
                         </div> )
             }
