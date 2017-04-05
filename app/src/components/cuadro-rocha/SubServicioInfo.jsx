@@ -11,7 +11,7 @@ class SubServicioItem extends Component {
       return (         
         <div>
           <div class={(!this.props.selected)?`info subactividad`:(this.props.selected == this.props.np)? `info subactividad active`:`info subactividad desactive`}>
-            <div class="datos name none" data-npok={this.props.np} onClick={this.props.showSubServicio} ><p>{this.props.obj.css}</p></div>
+            <div class="datos name none" data-npok={this.props.np} onClick={this.props.showSubServicio} ><p>{this.props.obj.descripcion}</p></div>
             <div class="datos date"><p>{this.props.obj.inicio}</p></div>
             <div class="datos date"><p>{this.props.obj.entrega}</p></div>
             <div class="datos percentage">

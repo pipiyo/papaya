@@ -22,7 +22,7 @@ class ServicioItem extends Component {
                     data-indexproyecto={this.props.keyProyecto} 
                     data-indexrocha={this.props.keyRocha} 
                     data-indexservicio={this.props.index}>
-                  {this.props.obj.csnombre}
+                  {this.props.obj.nombre}
                 </p>
             </div>
             <div class="datos date"><p>{this.props.obj.inicio}</p></div>

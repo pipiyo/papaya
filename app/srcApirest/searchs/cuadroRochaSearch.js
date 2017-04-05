@@ -193,7 +193,7 @@ query = `SELECT DISTINCT proyecto.NOMBRE_PROYECTO AS NOMBRE
 								    						sub_servicio.SUB_FECHA_ENTREGA, 
 								    						sub_servicio.SUB_ESTADO,
 								    						sub_servicio.SUB_NOMBRE_SERVICIO AS nombre,
-								    						sub_servicio.DESCRIPCION
+								    						sub_servicio.SUB_DESCRIPCION
 			FROM sub_servicio 
 			WHERE sub_servicio.SUB_CODIGO_SERVICIO IN( ? )`, cs,  function (errorCodigoSubServicio, resultsCodigoSubServicio, fieldsCodigoSubServicio) {
 								      if (errorCodigoSubServicio) {
