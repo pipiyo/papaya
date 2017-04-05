@@ -2418,11 +2418,12 @@ a.external-link, .external-link a {
 
 }
 /* Module table new */
-
+.scroll-box--wrapped{
+    outline: 0;
+}
 .module-table-new{
     margin: 1em auto 1em auto;
-    overflow-y: auto; 
-    overflow-x: scroll; 
+    overflow: auto; 
     border-radius: 10px;
     width: calc(100% - 1em);
     table{

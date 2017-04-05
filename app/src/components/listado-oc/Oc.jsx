@@ -1,7 +1,7 @@
 import React from 'react'
 import Item from './Item'
-
 import ListadoOcActions from '../../actions/ListadoOcActions'
+import {GenericScrollBox, FastTrack} from 'react-scroll-box'
 
 class OC extends React.Component {
 
@@ -19,34 +19,36 @@ class OC extends React.Component {
         <div>
           <div class="module-arrow">
             <div class="arrow-a"><a href="#" data-left="-100" data-tabla="tabla-listado-oc" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a></div>
-            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla</h3></div>
+            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla o shift + scroll</h3></div>
             <div class="arrow-a"><a href="#" data-left="100" data-tabla="tabla-listado-oc" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a></div>
           </div>
-          <div class="module-table-new" id="tabla-listado-oc">
-            <table class="oc">
-              <thead>
-                <tr>
-                  <th>Herramientas</th>
-                  <th>OC</th>
-                  <th>Rocha</th>
-                  <th>Versión</th>
-                  <th>Proveedor</th>
-                  <th>Fecha Realización</th>
-                  <th>Fecha Entrega</th>
-                  <th>Fecha Confirmación</th>
-                  <th>Fecha Recibo</th>
-                  <th>User</th>
-                  <th>Neto</th>
-                  <th>Factura</th>
-                  <th>Fecha Envio Por Valija</th>         
-                  <th>Estado</th>
-                  </tr>
-              </thead>
-              <tbody>
-                {this.props.obj.renderItem}
-              </tbody>
-            </table>
-          </div>
+          <GenericScrollBox axes="x" captureWheel={false} ref="genericScrollBox" className="scroll-box--wrapped" >
+            <div className="scroll-box__viewport module-table-new" id="tabla-listado-oc">
+              <table class="oc">
+                <thead>
+                  <tr>
+                    <th>Herramientas</th>
+                    <th>OC</th>
+                    <th>Rocha</th>
+                    <th>Versión</th>
+                    <th>Proveedor</th>
+                    <th>Fecha Realización</th>
+                    <th>Fecha Entrega</th>
+                    <th>Fecha Confirmación</th>
+                    <th>Fecha Recibo</th>
+                    <th>User</th>
+                    <th>Neto</th>
+                    <th>Factura</th>
+                    <th>Fecha Envio Por Valija</th>         
+                    <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {this.props.obj.renderItem}
+                </tbody>
+              </table>
+            </div>
+           </GenericScrollBox>
           <div class="content-view-more">
             <button class="hidden view-more" id="btn-view" onClick={this.props.renderViewMore}>Ver más</button>
           </div>

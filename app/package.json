@@ -51,6 +51,7 @@
     "react-dom": "^15.4.2",
     "react-mixin": "^3.0.5",
     "react-router": "^2.8.1",
+    "react-scroll-box": "^0.3.3-beta",
     "reflux": "^6.4.1",
     "request": "^2.81.0",
     "socket.io": "^1.7.3",
