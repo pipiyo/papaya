@@ -1,4 +1,6 @@
 import React from 'react'
+import format from 'format-number'
+let myFormat = format({integerSeparator:'.',decimal: ','})
 
 class OCItem extends React.Component {
 
@@ -15,7 +17,7 @@ class OCItem extends React.Component {
           <td>{(this.props.oc.FECHA_CONFIRMACION)?this.props.oc.FECHA_CONFIRMACION.substring(0,10):this.props.oc.FECHA_CONFIRMACION}</td>
           <td>{this.props.oc.RECLAMO}</td>
           <td>{this.props.oc.ESTADO}</td>
-          <td>{this.props.oc.TOTAL}</td>
+          <td>{myFormat(this.props.oc.TOTAL)}</td>
         </tr> 
       )
 

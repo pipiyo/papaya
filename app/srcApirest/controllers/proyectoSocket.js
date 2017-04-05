@@ -29,63 +29,85 @@ module.exports = (io) => {
   socket.on('addRocha', (proyecto, token, callback) => {
 
     let user = decodeToken(token)
-
-    let producto = {  
-                    CODIGO_PROYECTO: proyecto.codigo,
-                    RUT_CLIENTE: proyecto.rut, 
-                    NOMBRE_CLIENTE: proyecto.cliente, 
-                    OBRA: proyecto.obra,
-                    MONTO: proyecto.monto,
-                    EJECUTIVO: proyecto.ejecutivo,
-                    FECHA_INGRESO: proyecto.fechaInicio,
-                    FECHA_ENTREGA: proyecto.fechaEntrega,    
-                    CONTACTO : proyecto.contacto,
-                    TELEFONO: proyecto.telefono,
-                    MAIL:proyecto.mail,
-                    NOMBRE_PROYECTO: proyecto.nombreProyecto,
-                    ENCARGADO: proyecto.encargado,
-                    DISENADOR: proyecto.disenador,
-                    IVA: proyecto.valoriva,
-                    TIPO_IVA: proyecto.iva,
-                    SUB_TOTAL: proyecto.subtotal,
-                    PUESTOS:proyecto.puestos,
-                    TOTAL: proyecto.total,
-                    MONTO2: proyecto.neto2,
-                    DESCUENTO: proyecto.descuento,
-                    DESCUENTO2: proyecto.descuento2,
-                    DEPARTAMENTO_CREDITO: proyecto.linea,
-                    DEPARTAMENTO: proyecto.departamento,
-                    CODIGO_USUARIO: user.name,
-                    DIRECCION_FACTURACION:proyecto.direccionObra,
-                    ESTADO: "EN PROCESO"
-                  }
+    let query = `SELECT count(*) as total FROM proyecto WHERE NOMBRE_PROYECTO = '${proyecto.nombreProyecto}'`
+    let query1 = `INSERT INTO proyecto (CODIGO_PROYECTO,RUT_CLIENTE,NOMBRE_CLIENTE,OBRA,MONTO,EJECUTIVO,FECHA_INGRESO,FECHA_ENTREGA,CONTACTO,TELEFONO,MAIL,NOMBRE_PROYECTO,ENCARGADO,DISENADOR,IVA,TIPO_IVA,SUB_TOTAL,PUESTOS,TOTAL,MONTO2,DESCUENTO,DESCUENTO2,DEPARTAMENTO_CREDITO,DEPARTAMENTO,CODIGO_USUARIO,DIRECCION_FACTURACION,ESTADO)VALUES('${proyecto.codigo}','${proyecto.rut}','${proyecto.cliente}','${proyecto.obra}','${proyecto.neto}','${proyecto.ejecutivo}','${proyecto.fechaInicio}','${proyecto.fechaEntrega}','${proyecto.contacto}','${proyecto.telefono}','${proyecto.mail}','${proyecto.nombreProyecto}','${proyecto.encargado}','${proyecto.disenador}','${proyecto.valoriva}','${proyecto.iva}','${proyecto.subtotal}','${proyecto.puestos}','${proyecto.total}','${proyecto.neto2}','${proyecto.descuento}','${proyecto.descuento2}','${proyecto.linea}','${proyecto.departamento}','${user.name}','${proyecto.direccionObra}','${'EN PROCESO'}') ;`
 
       pool.getConnection( (err, connection) => {
-            connection.query('INSERT INTO `proyecto` SET ?',producto, (err) => {
-                connection.release()
-                if (!err){
-                  callback({mensaje:`Se ingreso ${proyecto.codigo}`})
-                }
-                else{
-                  callback({mensaje:`Código ya ingresado ${proyecto.codigo}`})
-                }
-            }) 
+        connection.beginTransaction(function(err) {
+            if (err) { throw err }
+            connection.query(query, (error, rows, fields) => {
+              if (error) {
+                return connection.rollback(function() {
+                  throw error;
+                });
+              }
+              if(rows[0].total == 0){
+                query1 += `INSERT INTO madre(NOMBRE, ESTADO) VALUES ('${proyecto.nombreProyecto}','EN PROCESO');`
+              }
+                connection.query(query1, (error) => {
+                    if (error) {
+                      return connection.rollback(function() {
+                        console.log( error );
+                      });
+                    }
+                    connection.commit(function(err) {
+                      if (err) {
+                        return connection.rollback(function() {
+                          console.log(  err );
+                        });
+                      }
+                      callback({mensaje:`Se ingreso Rocha ${proyecto.codigo}`})
+                    })
+                })
+            })     
+        })  
       }) 
   })
 
   /* Editar Proyecto */
   socket.on('updateRocha', (proyecto,callback) => {
-      pool.getConnection( (err, connection) => {
-            connection.query('UPDATE proyecto SET RUT_CLIENTE = ?, NOMBRE_CLIENTE = ?, OBRA = ?, MONTO = ?, EJECUTIVO = ?, FECHA_INGRESO = ?, FECHA_ENTREGA = ?, CONTACTO = ?, TELEFONO = ?, MAIL = ?, NOMBRE_PROYECTO = ?, ENCARGADO = ? , DISENADOR = ? , IVA = ? , TIPO_IVA = ? , SUB_TOTAL = ? , PUESTOS = ? , TOTAL = ? , MONTO2 = ? , DESCUENTO = ? , DESCUENTO2 = ? , DEPARTAMENTO_CREDITO = ? , DEPARTAMENTO = ? , DIRECCION_FACTURACION = ? , ESTADO = ? , FECHA_ACTA = ?, FECHA_CONFIRMACION = ? WHERE CODIGO_PROYECTO = ?', [proyecto.rut, proyecto.cliente, proyecto.obra, proyecto.monto, proyecto.ejecutivo, proyecto.fechaInicio, proyecto.fechaEntrega, proyecto.contacto, proyecto.telefono, proyecto.mail, proyecto.nombreProyecto, proyecto.encargado, proyecto.disenador, proyecto.valoriva, proyecto.iva, proyecto.subtotal, proyecto.puestos, proyecto.total, proyecto.neto2, proyecto.descuento, proyecto.descuento2, proyecto.linea, proyecto.departamento, proyecto.direccionObra, proyecto.estado, proyecto.fechaActa, proyecto.fechaConfirmacion , proyecto.codigo], (err, results) => {
-                connection.release()
-                if (!err){
-                  callback({mensaje:`Se actualizo ${proyecto.codigo}`})
-                }
-                else{
-                  console.log('Error ' + err)
-                }
-            }) 
-      }) 
+    pool.getConnection( (err, connection) => {
+      connection.beginTransaction(function(err) {
+          if (err) { throw err }
+          connection.query('UPDATE proyecto SET RUT_CLIENTE = ?, NOMBRE_CLIENTE = ?, OBRA = ?, MONTO = ?, EJECUTIVO = ?, FECHA_INGRESO = ?, FECHA_ENTREGA = ?, CONTACTO = ?, TELEFONO = ?, MAIL = ?, NOMBRE_PROYECTO = ?, ENCARGADO = ? , DISENADOR = ? , IVA = ? , TIPO_IVA = ? , SUB_TOTAL = ? , PUESTOS = ? , TOTAL = ? , MONTO2 = ? , DESCUENTO = ? , DESCUENTO2 = ? , DEPARTAMENTO_CREDITO = ? , DEPARTAMENTO = ? , DIRECCION_FACTURACION = ? , ESTADO = ? , FECHA_ACTA = ?, FECHA_CONFIRMACION = ? WHERE CODIGO_PROYECTO = ?', [proyecto.rut, proyecto.cliente, proyecto.obra, proyecto.monto, proyecto.ejecutivo, proyecto.fechaInicio, proyecto.fechaEntrega, proyecto.contacto, proyecto.telefono, proyecto.mail, proyecto.nombreProyecto, proyecto.encargado, proyecto.disenador, proyecto.valoriva, proyecto.iva, proyecto.subtotal, proyecto.puestos, proyecto.total, proyecto.neto2, proyecto.descuento, proyecto.descuento2, proyecto.linea, proyecto.departamento, proyecto.direccionObra, proyecto.estado, proyecto.fechaActa, proyecto.fechaConfirmacion , proyecto.codigo], (error, results) => {
+              if (error) {
+                return connection.rollback(function() {
+                  throw error;
+                });
+              }
+              let query1 = `SELECT count(*) as total FROM proyecto WHERE NOMBRE_PROYECTO = '${proyecto.nombreProyecto}' and ESTADO = "EN PROCESO"`
+              connection.query(query1, (error,rows) => {
+                    if (error) {
+                      return connection.rollback(function() {
+                        console.log( error );
+                      });
+                    }
+                    let query2
+                    if(rows[0].total == 0){
+                      query2 = `UPDATE madre SET ESTADO = "OK" WHERE NOMBRE = '${proyecto.nombreProyecto}' ;`
+                    }else{
+                      query2 = `UPDATE madre SET ESTADO = "EN PROCESO" WHERE NOMBRE = '${proyecto.nombreProyecto}' ;`
+                    }
+
+                    connection.query(query2, (error,results) => {
+                      if (error) {
+                        return connection.rollback(function() {
+                          console.log( error );
+                        });
+                      }
+                      connection.commit(function(err) {
+                        if (err) {
+                          return connection.rollback(function() {
+                          throw err;
+                        });
+                        }
+                        callback({mensaje:`Se ingreso actualizo rocha ${proyecto.codigo}`})
+                      })
+                    })
+              })
+          })
+      })  
+    }) 
   })
 
    /* Listar Producto */

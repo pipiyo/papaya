@@ -1,6 +1,7 @@
 import React from 'react'
 import OcProductoItem from './OcProductoItem'
 import AutocompleteActions from '../../actions/AutocompleteActions'
+
 class OcProducto extends React.Component {
 
   constructor() {
@@ -16,7 +17,7 @@ class OcProducto extends React.Component {
         <div>
           <div class="module-arrow top">
             <div class="arrow-a"><a href="#" data-left="-100" data-tabla="tabla-oc-descripction" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a></div>
-            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla</h3></div>
+            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla o shift + scroll</h3></div>
             <div class="arrow-a"><a href="#" data-left="100" data-tabla="tabla-oc-descripction" onClick={this.props.scrollWin}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a></div>
           </div>
           <div class="module-table-new" id="tabla-oc-descripction">

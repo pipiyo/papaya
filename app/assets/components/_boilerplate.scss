@@ -2130,7 +2130,7 @@ a.external-link, .external-link a {
             }
             &.ok{
                 background: $negro;
-                border-right: solid 1px $negro;
+                //border-right: solid 1px $negro;
                 &.proyecto{
                     background: $color_rochas;
                     //border-right: solid 1px $color_rochas;  
@@ -2418,11 +2418,12 @@ a.external-link, .external-link a {
 
 }
 /* Module table new */
-
+.scroll-box--wrapped{
+    outline: 0;
+}
 .module-table-new{
     margin: 1em auto 1em auto;
-    overflow-y: auto; 
-    overflow-x: scroll; 
+    overflow: auto; 
     border-radius: 10px;
     width: calc(100% - 1em);
     table{

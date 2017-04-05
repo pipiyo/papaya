@@ -26,10 +26,10 @@ module.exports = (io) => {
             query = `SELECT DESCRIPCION as DATOS, CODIGO_PRODUCTO as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5, PRECIO as DATOS6  FROM producto WHERE TEMPORADA = 0 AND DESCRIPCION like "%${data.valor}%"  limit 10`;
           break;
       case "t2producto":
-            query = `SELECT CODIGO_PRODUCTO as DATOS, DESCRIPCION as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5, PRECIO as DATOS6  FROM producto WHERE TEMPORADA = 2 AND CODIGO_PRODUCTO like "%${data.valor}%"  limit 10`;
+            query = `SELECT CODIGO_PRODUCTO as DATOS, DESCRIPCION as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5, PRECIO as DATOS6  FROM producto WHERE TEMPORADA = 2 AND CODIGO_PRODUCTO like "%${data.valor}%" and producto.FAMILIA = 'generico'  limit 10`;
           break;
       case "t2producto1":
-            query = `SELECT DESCRIPCION as DATOS, CODIGO_PRODUCTO as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5, PRECIO as DATOS6  FROM producto WHERE TEMPORADA = 2 AND DESCRIPCION like "%${data.valor}%"  limit 10`;
+            query = `SELECT DESCRIPCION as DATOS, CODIGO_PRODUCTO as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5, PRECIO as DATOS6  FROM producto WHERE TEMPORADA = 2 AND DESCRIPCION like "%${data.valor}%" and producto.FAMILIA = 'generico'  limit 10`;
           break;
     }
 

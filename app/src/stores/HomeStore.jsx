@@ -127,12 +127,6 @@ let HomeStore = Reflux.createStore({
       sub[i].classList.toggle('hidden')
     }
   },
-
-
-
-
-
-
   /* Agrega clase active para desplegar sub-menus */
   navMovil: function(ev){
     ev.preventDefault()
