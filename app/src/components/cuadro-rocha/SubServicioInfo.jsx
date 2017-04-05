@@ -19,8 +19,7 @@ class SubServicioItem extends Component {
                 <div class="view-item">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                   <div class="view-item-info">
-                    <p>Descripción: {this.props.obj.css}</p>
-                    <p>Ejecutivo: Luchin</p>
+                    <p>Descripción: {this.props.obj.descripcion}</p>
                   </div>
                 </div>
               </div>

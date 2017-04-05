@@ -28,8 +28,8 @@ class RochaItem extends Component {
                 <div class="view-item">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                   <div class="view-item-info">
-                    <p>Descripción: {this.props.obj.cp}</p>
-                    <p>Ejecutivo: Luchin</p>
+                     <p>Cliente: {this.props.obj.cliente}</p>
+                     <p>Ejecutivo: {this.props.obj.ejecutivo}</p>
                   </div>
                 </div>
               </div>

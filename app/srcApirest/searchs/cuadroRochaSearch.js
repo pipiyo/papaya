@@ -7,11 +7,43 @@ module.exports = ( pool, form, callback ) => {
 			  if (err) { throw err }
 
 let query
+let limit = 50
 if (form) {
+
 			if (form.proyecto) {
-				query = `SELECT DISTINCT NOMBRE_PROYECTO FROM proyecto WHERE NOMBRE_PROYECTO = '${form.proyecto}' `
+				//query = `SELECT DISTINCT NOMBRE_PROYECTO AS NOMBRE FROM proyecto WHERE NOMBRE_PROYECTO = '${form.proyecto}' `
+			
+query = `SELECT DISTINCT proyecto.NOMBRE_PROYECTO AS NOMBRE 
+		FROM proyecto WHERE NOMBRE_PROYECTO IN(SELECT madre.NOMBRE 
+				FROM madre `
+
+
+							if (form.estado) {
+								query += ` WHERE madre.ESTADO = '${form.estado}'
+											AND madre.NOMBRE = '${form.proyecto}' ) `
+							}else{
+								query += ` WHERE madre.ESTADO = 'EN PROCESO'
+											AND madre.NOMBRE = '${form.proyecto}' `
+							}
+
+
+
 			} else {
-				query = `SELECT DISTINCT NOMBRE_PROYECTO FROM proyecto WHERE NOMBRE_PROYECTO != '' `
+				//query = `SELECT DISTINCT NOMBRE_PROYECTO AS NOMBRE FROM proyecto WHERE NOMBRE_PROYECTO != '' `
+			
+query = `SELECT DISTINCT proyecto.NOMBRE_PROYECTO AS NOMBRE 
+		FROM proyecto WHERE NOMBRE_PROYECTO IN(SELECT madre.NOMBRE 
+				FROM madre `
+
+
+							if (form.estado) {
+								query += ` WHERE madre.ESTADO = '${form.estado}' ) `
+							}else{
+								query += ` WHERE madre.ESTADO = 'EN PROCESO' ) `
+							}
+
+
+
 			}
 
 			if (form.rocha) {
@@ -25,20 +57,47 @@ if (form) {
 			if (form.ejecutivo) {
 				query += ` AND EJECUTIVO = '${form.ejecutivo}' `
 			}
-				query += ` limit 50 `
+
+			if (form.vermas == 0) {
+				query += ` limit ${limit} `
+			}else{
+				query += ` limit ${ ( limit + form.vermas ) } `
+			}
+			
+
+
 }else{
+/*
 	query = `SELECT DISTINCT NOMBRE_PROYECTO 
 								FROM proyecto 
 								WHERE NOMBRE_PROYECTO != ''
 								LIMIT 50`
+
+
+	query = `SELECT NOMBRE 
+				FROM madre
+				WHERE ESTADO = 'EN PROCESO'
+				AND NOMBRE_PROYECTO = '${form.proyecto}' 
+				LIMIT 50`
+
+
+
+	query = `SELECT NOMBRE 
+				FROM madre
+				WHERE ESTADO = 'EN PROCESO'
+				LIMIT 50`
+
+*/
 }
+
+
+
 
 
 			    let lista = { np: [],
 			    			   cp:[],
 			    			   cs: [],
 			    			   css: null }
-
 
 			  connection.query(query, function (errorNombreProyecto, resultsNombreProyecto, fieldsNombreProyecto) {
 			    if (errorNombreProyecto) {
@@ -50,8 +109,10 @@ if (form) {
 			    let np = []
 			    np[0] = [] 
 				_.forEach(resultsNombreProyecto, (value, key) => {
-				  np[0][key] = value.NOMBRE_PROYECTO
-				  lista.np[key] = value.NOMBRE_PROYECTO
+				  //np[0][key] = value.NOMBRE_PROYECTO
+				  //lista.np[key] = value.NOMBRE_PROYECTO
+				  np[0][key] = value.NOMBRE
+				  lista.np[key] = value.NOMBRE
 				})
 
 			    connection.query(`SELECT 
@@ -60,7 +121,9 @@ if (form) {
 			    						proyecto.FECHA_INGRESO, 
 			    						proyecto.FECHA_ENTREGA, 
 			    						proyecto.FECHA_CONFIRMACION, 
-			    						proyecto.ESTADO
+			    						proyecto.ESTADO,
+			    						proyecto.NOMBRE_CLIENTE,
+			    						proyecto.EJECUTIVO
 	FROM proyecto
 	WHERE proyecto.NOMBRE_PROYECTO IN( ? )
 	AND proyecto.NOMBRE_PROYECTO != ''`, np,  function (errorCodigoProyecto, resultsCodigoProyecto, fieldsCodigoProyecto) {
@@ -82,6 +145,8 @@ if (form) {
 							  					ingreso: value.FECHA_INGRESO,
 							  					entrega: value.FECHA_CONFIRMACION,
 							  					estado: value.ESTADO,
+							  					cliente: value.NOMBRE_CLIENTE,
+							  					ejecutivo: value.EJECUTIVO,
 							  					dia: null
 							  					 }
 							})
@@ -92,7 +157,8 @@ if (form) {
 						    						 servicio.FECHA_ENTREGA, 
 						    						 servicio.DESCRIPCION, 
 						    						 servicio.ESTADO,
-						    						 servicio.NOMBRE_SERVICIO
+						    						 servicio.NOMBRE_SERVICIO,
+						    						 servicio.DESCRIPCION
 												FROM servicio 
 												WHERE servicio.NOMBRE_SERVICIO NOT IN('OC','FI','BODEGA')  
 												AND servicio.CODIGO_PROYECTO IN( ? )`, cp,  function (errorCodigoServicio, resultsCodigoServicio, fieldsCodigoServicio) {
@@ -114,6 +180,7 @@ if (form) {
 									  					entrega: value.FECHA_ENTREGA,
 									  					estado: value.ESTADO,
 									  					nombre: value.NOMBRE_SERVICIO,
+									  					descripcion: value.DESCRIPCION,
 									  					dia: null
 									  				}
 									})
@@ -125,7 +192,8 @@ if (form) {
 								    						sub_servicio.SUB_FECHA_INICIO, 
 								    						sub_servicio.SUB_FECHA_ENTREGA, 
 								    						sub_servicio.SUB_ESTADO,
-								    						sub_servicio.SUB_NOMBRE_SERVICIO AS nombre
+								    						sub_servicio.SUB_NOMBRE_SERVICIO AS nombre,
+								    						sub_servicio.DESCRIPCION
 			FROM sub_servicio 
 			WHERE sub_servicio.SUB_CODIGO_SERVICIO IN( ? )`, cs,  function (errorCodigoSubServicio, resultsCodigoSubServicio, fieldsCodigoSubServicio) {
 								      if (errorCodigoSubServicio) {

@@ -22,9 +22,18 @@ let CuadroRochaStore = Reflux.createStore({
     showServicio: null,
     showSubServicio: null,
     selected: null,
+    vista: 50,
     form: {
           ejecutivo: [],
-          cliente: [] 
+          cliente: [],
+          busqueda: {
+                      rocha: null,
+                      proyecto: null,
+                      ejecutivo: null,
+                      cliente: null,
+                      estado: null,
+                      vermas: 0
+                    }, 
     },
     buscar: null,
     calendario: { 
@@ -89,7 +98,7 @@ socket.emit('getRochas', ( x, y ) => {
 
   getObj: function() {
 
-    this.getProyectos('getRochas', null, null)
+    this.getProyectos('getRochas', null, null, null)
 
 
   },
@@ -108,7 +117,64 @@ socket.emit('getRochas', ( x, y ) => {
   _showProyecto: function(e, i){
     let index = _.findIndex(this.obj.proyectos, { np: `${e}` })
     this.obj.proyectos[index].show = this.obj.proyectos[index].show ? false : true 
-    
+  
+
+
+
+     _.forEach(this.obj.proyectos[index].cp, (value, key) => {
+        this.obj.proyectos[index].cp[key].dia = []
+            _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+              if (moment(dpv.fecha).isBetween(value.ingreso, value.entrega, 'day')) {
+                    this.obj.proyectos[index].cp[key].dia.push( <div 
+                                    key={`${value.cp}${dpk}${value.np}`} 
+                                    class={ `day ok proyecto` } >
+                                <p></p>
+                            </div> )
+                }else{
+                    this.obj.proyectos[index].cp[key].dia.push( <div 
+                                                  key={`${value.cp}${dpk}${value.np}`} 
+                                                  class={ `day` } >
+                                              <p></p>
+                                          </div> )
+                }
+            })
+     })
+
+/*
+_.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+  if (moment(dpv.fecha).isBetween(value.ingreso, value.entrega, 'day')) {
+        this.obj.proyectos[index].cp[key].dia.push( <div 
+                        key={`${value.cp}${dpk}${value.np}`} 
+                        class={ `day ok proyecto` } >
+                    <p></p>
+                </div> )
+    }else{
+        this.obj.proyectos[index].cp[key].dia.push( <div 
+                                      key={`${value.cp}${dpk}${value.np}`} 
+                                      class={ `day` } >
+                                  <p></p>
+                              </div> )
+    }
+})
+
+                this.obj.proyectos[index].cp[key].dia.push
+
+                this.obj.proyectos[knp].cp.push({
+                                                    np: vcp.np, 
+                                                    cp: vcp.cp, 
+                                                    cs: [], 
+                                                    show: false,
+                                                    ingreso: vcp.ingreso.substring(0,10),
+                                                    entrega: vcp.entrega.substring(0,10),
+                                                    estado: null,
+                                                    dia: cpdia
+                                                })
+*/
+
+
+
+
+
     /* Opacity */
     if(this.obj.proyectos[index].show){
       this.obj.selected = i.getAttribute('data-npok')
@@ -128,6 +194,28 @@ socket.emit('getRochas', ( x, y ) => {
                   rocha: e.getAttribute('data-indexrocha'),
                 }
 
+
+     _.forEach(this.obj.proyectos[index.proyecto].cp[index.rocha].cs, (value, key) => {
+        this.obj.proyectos[index.proyecto].cp[index.rocha].cs[key].dia = []
+        _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+            if (moment(dpv.fecha).isBetween(value.inicio, value.entrega, 'day')) {
+              this.obj.proyectos[index.proyecto].cp[index.rocha].cs[key].dia.push( <div 
+                                key={`${value.csnombre}${dpk}${value.cs}`} 
+                                class={ `day ok ${value.nombre.toLowerCase()}` } >
+                            <p></p>
+                        </div> )
+            }else{
+              this.obj.proyectos[index.proyecto].cp[index.rocha].cs[key].dia.push( <div 
+                                key={`${value.csnombre}${dpk}${value.cs}`} 
+                                class={ `day` } >
+                            <p></p>
+                        </div> )
+            }
+        })
+     })
+
+
+
     this.obj.proyectos[index.proyecto].cp[index.rocha].show = this.obj.proyectos[index.proyecto].cp[index.rocha].show ? false : true 
     this.obj.selected = i.getAttribute('data-npok')
     this.trigger( this.obj )
@@ -144,6 +232,25 @@ socket.emit('getRochas', ( x, y ) => {
                   servicio: e.getAttribute('data-indexservicio'),
                   rocha: e.getAttribute('data-indexrocha')
                 }
+
+     _.forEach(this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].css, (value, key) => {
+        this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].css[key].dia = []
+        _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
+            if (moment(dpv.fecha).isBetween(value.inicio, value.entrega, 'day')) {
+              this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].css[key].dia.push( <div 
+                                key={`${value.cs}${dpk}${value.cs}`} 
+                                class={ `day` } >
+                            <p></p>
+                        </div> )
+            }else{
+               this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].css[key].dia.push( <div 
+                                key={`${value.cs}${dpk}${value.cs}`} 
+                                class={ `day ok ${value.nombre.toLowerCase()}` } >
+                            <p></p>
+                        </div> )
+            }
+        })
+     })
 
     this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show = this.obj.proyectos[index.proyecto].cp[index.rocha].cs[index.servicio].show ? false : true 
     this.obj.selected = i.getAttribute('data-npok')
@@ -179,7 +286,7 @@ socket.emit('getRochas', ( x, y ) => {
   _buscar: function(e) {
 
 
-    this.getProyectos('getRochaFiltro', e)
+    this.getProyectos('getRochaFiltro', e, 'stay', null)
 
 
   },  
@@ -192,8 +299,7 @@ socket.emit('getRochas', ( x, y ) => {
   },  
   _subirmes: function() {
 
-
-    this.getProyectos('getRochas', null, 'add')
+    this.getProyectos('getRochas', null, 'add', null)
     //this.obj.calendario.sumar = this.obj.calendario.sumar + 1
     //this.obj.calendario.restar = this.obj.calendario.sumar - 1
 
@@ -204,14 +310,21 @@ socket.emit('getRochas', ( x, y ) => {
   },  
   _bajarmes: function() {
 
-
-    this.getProyectos('getRochas', null, 'subtract')
+    this.getProyectos('getRochas', null, 'subtract', null)
     //this.obj.calendario.sumar = this.obj.calendario.sumar - 1
     //this.obj.calendario.restar = this.obj.calendario.sumar + 1
 
   },
 
-  getProyectos: function(method, event, operator) {
+  vermas: function() {
+    CuadroRochaActions._vermas()
+  },  
+  _vermas: function() {
+
+    this.getProyectos('getRochas', null, 'stay', 'vermas')
+  },
+
+  getProyectos: function(method, event, operator, vermas) {
 
 //console.log( moment().daysInMonth() )
 
@@ -232,6 +345,10 @@ socket.emit('getRochas', ( x, y ) => {
 
     //this.obj.calendario.now = this.obj.calendario.now.subtract(1, 'months')
     this.obj.calendario.first = this.obj.calendario.first.subtract(1, 'months')
+
+  }else if( operator == 'stay' ){
+
+
 
   }else{
     //this.obj.calendario.now = moment()
@@ -338,24 +455,29 @@ for ( let loop = 1; loop <= diff; loop++ ) {
       this.obj.buscar = this.buscar
       this.obj.destacado = this.destacado
       this.obj.selected = null
-
-
-let form = null
+      this.obj.vermas = this.vermas
 
 if (event) {
 
-    form = {
-                  rocha: event.elements[0].value,
-                  proyecto: event.elements[1].value,
-                  ejecutivo: event.elements[2].value,
-                  cliente: event.elements[3].value,
-                }
+    this.obj.form.busqueda = null
+
+    this.obj.form.busqueda = {
+                               rocha: event.elements[0].value,
+                               proyecto: event.elements[1].value,
+                               ejecutivo: event.elements[2].value,
+                               cliente: event.elements[3].value,
+                               estado: event.elements[4].value,
+                               vermas: 0
+                             }
 
 }
 
+
+  this.obj.form.busqueda.vermas = (vermas) ? ( this.obj.form.busqueda.vermas + this.obj.vista )  : this.obj.form.busqueda.vermas
+
   this.obj.proyectos= []
 
-    socket.emit(method, form, ( y ) => {
+    socket.emit(method, this.obj.form.busqueda, ( y ) => {
 
           let i = 0
           let ok = 0
@@ -411,7 +533,7 @@ if ( csmin == 'despues' || csmax == 'antes' ) {
 }
                 })
 */
-
+/*
 _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
     if (moment(dpv.fecha).isBetween(moment(vcs.inicio.substring(0,10), 'YYYY-MM-DD'), moment(vcs.entrega.substring(0,10), 'YYYY-MM-DD'), 'day')) {
         csdia.push( <div 
@@ -427,17 +549,19 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
                 </div> )
     }
 })
-
+*/
 
             this.listaCss[kcs] = {  
                                   estado: null, 
                                   csnombre: vcs.csnombre, 
+                                  nombre: vcs.nombre,
                                   cs: vcs.cs, 
                                   cp: vcs.cp, 
                                   inicio: vcs.inicio.substring(0,10), 
                                   entrega: vcs.entrega.substring(0,10), 
                                   css: [], 
                                   show: false,
+                                  descripcion: vcs.descripcion,
                                   dia: csdia }
             
 
@@ -484,7 +608,7 @@ if ( cssmin == 'despues' || cssmax == 'antes' ) {
 }
 })
 */
-
+/*
 _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
     if (moment(dpv.fecha).isBetween(moment(vcss.SUB_FECHA_INICIO.substring(0,10), 'YYYY-MM-DD'), moment(vcss.SUB_FECHA_ENTREGA.substring(0,10), 'YYYY-MM-DD'), 'day')) {
                 cssdia.push( <div 
@@ -500,15 +624,15 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
                 </div> )
     }
 })
-
-
-
+*/
                 this.listaCss[kcs].css.push( {  
                                               estado: vcss.SUB_ESTADO, 
+                                              nombre: vcss.nombre,
                                               css: vcss.CODIGO_SUBSERVICIO, 
                                               cs: vcss.SUB_CODIGO_SERVICIO, 
                                               inicio: vcss.SUB_FECHA_INICIO.substring(0,10), 
                                               entrega: vcss.SUB_FECHA_ENTREGA.substring(0,10),
+                                              descripcion: vcs.descripcion,
                                               dia: cssdia  } )
 
                   if (vcss.SUB_ESTADO == 'OK') {
@@ -532,7 +656,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
           let cpdia = []
 
           _.forEach(y.np, (vnp, knp) => {
-            this.obj.proyectos[knp] = { np: vnp, cp: [], show: false, ingreso: null, entrega: null, estado: null, ingresod: null, entregad: null, dia: [] } 
+            this.obj.proyectos[knp] = { np: vnp, cp: [], show: false, ingreso: null, entrega: null, estado: null, ingresod: null, entregad: null, dia: [], cliente: null, ejecutivo: null } 
                      
             min[0] = []
             max[0] = []
@@ -581,7 +705,7 @@ if ( cpmin == 'despues' || cpmax == 'antes' ) {
 }
 })
 */
-
+/*
 _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
   if (moment(dpv.fecha).isBetween(moment(vcp.ingreso.substring(0,10), 'YYYY-MM-DD'), moment(vcp.entrega.substring(0,10), 'YYYY-MM-DD'), 'day')) {
         cpdia.push( <div 
@@ -597,11 +721,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
                 </div> )
     }
 })
-
-
-
-            
-
+*/
                 this.obj.proyectos[knp].cp.push({
                                                     np: vcp.np, 
                                                     cp: vcp.cp, 
@@ -610,6 +730,8 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
                                                     ingreso: vcp.ingreso.substring(0,10),
                                                     entrega: vcp.entrega.substring(0,10),
                                                     estado: null,
+                                                    ejecutivo: vcp.ejecutivo,
+                                                    cliente: vcp.cliente,
                                                     dia: cpdia
                                                 })
 
@@ -638,7 +760,8 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
                   console.log( maxtime.format('YYYY-MM-DD'), maxtime.format('D'), '2016-12-09'   )
                 }
 */
-
+            this.obj.proyectos[knp].ejecutivo = this.obj.proyectos[knp].cp[0].ejecutivo
+            this.obj.proyectos[knp].cliente = this.obj.proyectos[knp].cp[0].cliente
             this.obj.proyectos[knp].estado = ~~( ( ok * 100 ) / i )
             this.obj.proyectos[knp].ingreso = mintime.format('YYYY-MM-DD')
             this.obj.proyectos[knp].entrega = maxtime.format('YYYY-MM-DD')
@@ -712,12 +835,10 @@ _.times(this.obj.calendario.dia, (i) => {
                   i++
                 }
               })// cs
-
-              
               this.obj.proyectos[knp].cp[kcp].estado = ~~( ( ok * 100 ) / i )
 
-
             })// cp
+
           })// np 
                 this.trigger( this.obj )
         })
