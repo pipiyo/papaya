@@ -35,6 +35,20 @@ class Filtro extends Component {
                 <label>Cliente</label>
                 <input autoComplete="off" id="cliente" type="text" />
             </div>
+
+
+            <div class="item-filter">
+                <label>Estado</label>
+
+                <select id="estado" >
+                  <option value="EN PROCESO">En Proceso</option>
+                  <option value="OK">Ok</option>
+                  <option value="NULA">Nulo</option>
+                  <option value="ACTA">Acta</option>
+                </select>
+
+            </div>
+
             <div className="item-filter ">
               <input id="btn-buscar" value="Buscar"  type="submit" />
             </div>
