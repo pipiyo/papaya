@@ -98,7 +98,9 @@ let DetalleInformeStore = Reflux.createStore({
         area = "sillas"
         break
     }
-    document.querySelector(`[data-area="${sub.CODIGO_SUBSERVICIO}"]`).classList.add(area)
+    if(document.querySelector(`[data-area="${sub.CODIGO_SUBSERVICIO}"]`)){
+      document.querySelector(`[data-area="${sub.CODIGO_SUBSERVICIO}"]`).classList.add(area)
+    }
   },
   okEstado: function(sub){
     if(sub.SUB_ESTADO == "OK"){ 
