@@ -6,13 +6,9 @@ class SubActividad extends React.Component {
   constructor() {
     super()
   }
-  componentWillMount(){
-    DetalleInformeActions.renderAreaServicio(this.props.datos)
-    
-  }
-
 
   componentDidMount(){
+    DetalleInformeActions.renderAreaServicio(this.props.datos)
     DetalleInformeActions.okEstado(this.props.datos)
   }
 /*
