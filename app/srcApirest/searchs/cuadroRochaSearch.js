@@ -59,7 +59,7 @@ query = `SELECT DISTINCT proyecto.NOMBRE_PROYECTO AS NOMBRE
 			}
 
 			if (form.vermas == 0) {
-				query += ` limit ${limit} `
+				query += `  limit ${limit} `
 			}else{
 				query += ` limit ${ ( limit + form.vermas ) } `
 			}
