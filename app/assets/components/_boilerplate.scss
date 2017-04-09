@@ -1530,6 +1530,9 @@ a.external-link, .external-link a {
                 &.b{
                     right: 55px; 
                 }
+                &.c{
+                    right: 80px; 
+                }
                 &:hover{
                     color: $color_rochas;
                     cursor: pointer;
