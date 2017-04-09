@@ -5,7 +5,6 @@ let AddRochaActions = Reflux.createActions([
 	'renderFechaInicio',
 	'renderFechaEntrega',
 	'completSelect',
-	'renderRut',
 	'renderTotal'
 ])
 

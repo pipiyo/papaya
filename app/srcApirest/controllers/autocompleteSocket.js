@@ -14,10 +14,10 @@ module.exports = (io) => {
             query = `SELECT CODIGO_PROYECTO as DATOS FROM proyecto WHERE estado = "EN PROCESO" and CODIGO_PROYECTO like "%${data.valor}%"  limit 10`;
           break;
       case "cliente":
-            query = `SELECT NOMBRE_CLIENTE as DATOS FROM cliente WHERE  NOMBRE_CLIENTE like "%${data.valor}%"  limit 10`;
+            query = `SELECT NOMBRE_CLIENTE as DATOS, RUT_CLIENTE as DATOS1, TELEFONO1 as DATOS2, CONTACTO1 AS DATOS3 FROM cliente WHERE  NOMBRE_CLIENTE like "%${data.valor}%"  limit 10`;
           break;
       case "proveedor":
-            query = `SELECT NOMBRE_FANTASIA as DATOS, CODIGO_PROVEEDOR as DATOS1, FORMA_PAGO AS DATOS2  FROM proveedor WHERE  NOMBRE_FANTASIA like "%${data.valor}%"  limit 10`;
+            query = `SELECT NOMBRE_FANTASIA as DATOS, CODIGO_PROVEEDOR as DATOS1, FORMA_PAGO AS DATOS2, CONTACTO1 as DATOS3, TELEFONO1 AS DATOS4  FROM proveedor WHERE  NOMBRE_FANTASIA like "%${data.valor}%"  limit 10`;
           break;
       case "producto":
             query = `SELECT CODIGO_PRODUCTO as DATOS, DESCRIPCION as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5, PRECIO as DATOS6  FROM producto WHERE TEMPORADA = 0 AND CODIGO_PRODUCTO like "%${data.valor}%"  limit 10`;

@@ -129,10 +129,6 @@ let UpdateRochaStore = Reflux.createStore({
       browserHistory.push(`/home/informe-rochas`)
     })
   },
-  renderRut: function(){
-    let numero =  document.getElementById('cliente').options.selectedIndex
-    document.getElementById('rut').value = document.getElementById('cliente').options[numero].value
-  },
   formatNumber : function(numero){
     return numero.replace(/[^0-9.]/g,'')
   },
@@ -228,6 +224,9 @@ let UpdateRochaStore = Reflux.createStore({
       break;
       case "rut":
         this.obj.input.rut = this.validador(valor)
+      break;
+      case "cliente":
+        this.obj.input.cliente = this.validador(valor)
       break;
       case "obra":
         this.obj.input.obra = this.validador(valor)

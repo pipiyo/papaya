@@ -14,7 +14,6 @@ class Form extends React.Component {
           <fieldset> 
             <Item
             renderTotal={this.props.renderTotal}
-            renderRut={this.props.renderRut}
             renderFechaInicio={this.props.renderFechaInicio} 
             renderFechaEntrega={this.props.renderFechaEntrega} 
             obj={this.props.obj}  

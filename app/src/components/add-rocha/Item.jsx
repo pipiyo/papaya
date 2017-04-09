@@ -2,10 +2,21 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
+import AutoComplet  from '../../routes/AutoComRoutes'
+import AutocompleteActions from '../../actions/AutocompleteActions'
+
 class Item extends React.Component {
 
   constructor() {
     super()
+  }
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
   }
   render() {
       return (
@@ -22,14 +33,8 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Cliente</label>
-                <select onChange={this.props.renderRut} required id="cliente">
-                  <option value="">Seleccioné</option>
-                  {
-                    this.props.obj.cliente.map( (cliente) => {
-                      return <option value={`${cliente.RUT_CLIENTE}`} key={`${cliente.CODIGO_CLIENTE}`}>{`${cliente.NOMBRE_CLIENTE}`}</option>
-                    })
-                  }
-                </select>
+                <input required type="text" data-complete="cliente" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} class="active" id="cliente" />
+                <AutoComplet name="cliente" datos1="rut" datos2="telefono" datos3="contacto"  />
             </div>
 
             <div className="item-form">

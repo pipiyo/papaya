@@ -104,10 +104,6 @@ let AddRochaStore = Reflux.createStore({
     this.trigger(this.obj)
     DialogActions.dialog(this.obj.mensaje)
   },
-  renderRut: function(){
-    let numero =  document.getElementById('cliente').options.selectedIndex
-    document.getElementById('rut').value = document.getElementById('cliente').options[numero].value
-  },
   formatNumber : function(numero){
     return numero.replace(/[^0-9.]/g,'')
   },

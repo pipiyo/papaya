@@ -15,7 +15,6 @@ class AddRochaIndex extends React.Component {
           />
           <Form
           obj={this.props.obj}
-          renderRut={this.props.renderRut}
           renderTotal={this.props.renderTotal}
           addRocha={this.props.addRocha}  
           renderFechaInicio={this.props.renderFechaInicio} 
