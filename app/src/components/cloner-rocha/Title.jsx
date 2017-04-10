@@ -10,7 +10,7 @@ class Title extends React.Component {
       return (
         <div>
             <div className="title">
-            	<h3>Formulario actualizar rocha -> {this.props.obj.mensaje.texto } </h3>
+            	<h3>Formulario Clonar rocha -> {this.props.obj.mensaje.texto } </h3>
             </div>
         </div>   
       )

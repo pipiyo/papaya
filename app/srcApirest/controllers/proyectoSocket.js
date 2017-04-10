@@ -157,7 +157,7 @@ module.exports = (io) => {
   socket.on('searchRocha', (id,callback) => {
    
     let query = `SELECT * FROM proyecto WHERE CODIGO_PROYECTO = '${id}';`
-    let query1 = `SELECT * FROM servicio WHERE CODIGO_PROYECTO = '${id}';`
+    let query1 = `SELECT * FROM servicio WHERE CODIGO_PROYECTO = '${id}' and NOMBRE_SERVICIO NOT IN('OC','BODEGA');`
     pool.getConnection( (err, connection) => {
         connection.query(query + query1, (err, rows, fields) => {
             connection.release()
