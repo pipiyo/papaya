@@ -10,7 +10,7 @@ class Nav extends Component {
       return (
           <nav className="nav-config">
 
-            <div className="notificacion-user hidden" onClick={this.props.showNotification}>
+            <div className="notificacion-user hidden" /* onClick={this.props.showNotification} */ >
               {this.props.numberNotification}
               {this.props.notification}
             </div>
@@ -19,10 +19,11 @@ class Nav extends Component {
               <h2>{this.props.user.full_name}</h2>
             </div>
 
-            <div className="img-user" onClick={this.props.user.showUserNav}>
-              {this.props.user.user_nav}
+            <div className="img-user" onClick={this.props.user.logout} /* onClick={this.props.user.showUserNav} */ >
+              { /* this.props.user.user_nav */ }
               <img src={this.props.user.profile_picture} alt="usuario"/>
             </div>
+
           </nav>
       )
 

@@ -71,7 +71,8 @@ let HomeStore = Reflux.createStore({
                           full_name: null,
                           profile_picture: null,
                           user_nav: null,
-                          showUserNav: this.showUserNav
+                          showUserNav: this.showUserNav,
+                          logout: this.logout
                         },
 						active : 'active',
 						navMovil: this.navMovil,
@@ -107,7 +108,8 @@ let HomeStore = Reflux.createStore({
                           full_name: user.name,
                           profile_picture: user.profile_picture,
                           user_nav: null,
-                          showUserNav: this.showUserNav
+                          showUserNav: this.showUserNav,
+                          logout: this.logout
                         }
 
       this.trigger( this.obj )
@@ -160,11 +162,14 @@ let HomeStore = Reflux.createStore({
 
 
   logout: function(){
-    localStorage.clear()
-    browserHistory.push('/')  
+    HomeActions._logout()
   },
 
 
+  _logout: function(){
+    localStorage.clear()
+    browserHistory.push('/')  
+  },  
 
 
 
@@ -175,7 +180,8 @@ let HomeStore = Reflux.createStore({
 
     this.obj.user.user_nav = <User 
                                   hideUserNav={HomeActions.hideUserNav}
-                                  logout={HomeActions.logout} />
+                                  logout={this.logout}
+                                   />
     this.trigger( this.obj )
   },
   hideUserNav: function(click){
