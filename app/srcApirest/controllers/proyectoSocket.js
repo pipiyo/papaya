@@ -83,6 +83,10 @@ module.exports = (io) => {
               if(rows[0].total == 0){
                 query1 += `INSERT INTO madre(NOMBRE, ESTADO) VALUES ('${proyecto.nombreProyecto}','EN PROCESO');`
               }
+              proyecto.servicio.map( (servicio,i) => {
+                query1 += `INSERT INTO servicio(FECHA_PRIMERA_ENTREGA, FECHA_REALIZACION, NOMBRE_SERVICIO, CATEGORIA, SUPERVISOR, FECHA_INICIO, FECHA_ENTREGA, DESCRIPCION, OBSERVACIONES, CODIGO_PROYECTO, DIRECCION, GUIA_DESPACHO, CODIGO_COMUNA,M3, FI, TM, TP,OS, LIDER, PUESTOS, PROCESO, INSTALADOR_1, INSTALADOR_2, INSTALADOR_3, EJECUTOR, VALE, TRANSPORTE, CANTIDAD, RECLAMOS, ESTADO, DIAS, REALIZADOR) VALUES ('${servicio.FECHA_INICIO}','${servicio.FECHA_REALIZACION}','${servicio.NOMBRE_SERVICIO}', '${servicio.CATEGORIA}', '${servicio.SUPERVISOR}', '${servicio.FECHA_INICIO}', '${servicio.FECHA_ENTREGA}', '${servicio.DESCRIPCION}', '${servicio.OBSERVACIONES}', '${proyecto.codigo}' , '${servicio.DIRECCION}', '${servicio.GUIA_DESPACHO}', '${servicio.CODIGO_COMUNA}', '${servicio.M3}', '${servicio.FI}', '${servicio.TM}', '${servicio.TP}', '${servicio.OS}', '${servicio.LIDER}', '${servicio.PUESTOS}', '${servicio.PROCESO}', '${servicio.INSTALADOR_1}', '${servicio.INSTALADOR_2}', '${servicio.INSTALADOR_3}', '${servicio.EJECUTOR}', '${servicio.VALE}', '${servicio.TRANSPORTE}', '${servicio.CANTIDAD}', '${servicio.RECLAMOS}', 'EN PROCESO', '${servicio.DIAS}','${user.name}');`
+              })
+              
                 connection.query(query1, (error) => {
                     if (error) {
                       return connection.rollback(function() {

@@ -134,7 +134,22 @@ let ClonerRochaStore = Reflux.createStore({
       total: ev.target.elements['total'].value,
       iva: ev.target.elements['iva'].value,
       departamento: ev.target.elements['departamento'].value,
+      servicio:[]
     }
+
+    this.obj.servicio.map( (servicio,i) => {
+        if(ev.target.elements[`check-servicio-${i}`]){
+          if(ev.target.elements[`check-servicio-${i}`].checked){
+            proyecto.servicio.push(servicio)
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_ENTREGA = ev.target.elements[`fechaEntrega-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_INICIO = ev.target.elements[`fechaInicio-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_PRIMERA_ENTREGA = ev.target.elements[`fechaEntrega-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_REALIZACION = ev.target.elements[`fechaInicio-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].DESCRIPCION = ev.target.elements[`descripcion-${i}`].value
+          } 
+        }
+    })
+
     socket.emit('clonerRocha',proyecto, JSON.stringify( localStorage.getItem('token')), (n) => {
       ev.target.elements['codigo'].value = ""
       ev.target.elements['rut'].value = ""
