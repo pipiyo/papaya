@@ -19,6 +19,9 @@ let ClonerRochaStore = Reflux.createStore({
     cliente:'',
     linea: '',
     search: '',
+    servicio:[], 
+    fechaInicio:[],
+    fechaEntrega:[],
     input: {codigo:null,
             cliente:null,
             rut:null,
@@ -52,7 +55,15 @@ let ClonerRochaStore = Reflux.createStore({
   searchRocha: function(id){
     socket.emit('searchRocha', id, (n) => {
       this.obj.search = n.rocha
-      
+      this.obj.servicio = n.servicio
+
+      this.obj.fechaInicio= []
+      this.obj.fechaEntrega = []
+
+      this.obj.servicio.map( (servicio,i) => {
+        this.obj.fechaInicio.push((moment(servicio.FECHA_INICIO).isValid())?moment(servicio.FECHA_INICIO):undefined)
+        this.obj.fechaEntrega.push((moment(servicio.FECHA_ENTREGA).isValid())?moment(servicio.FECHA_ENTREGA):undefined)  
+      })
       
       this.obj.input.codigo = this.validador(this.obj.search[0].CODIGO_PROYECTO)
       this.obj.input.cliente = this.validador(this.obj.search[0].NOMBRE_CLIENTE)
@@ -89,6 +100,11 @@ let ClonerRochaStore = Reflux.createStore({
       this.obj.cliente = n.cliente
       this.obj.linea = n.linea
       this.trigger(this.obj)
+    })
+  },
+   completInput: function(){
+    this.obj.servicio.map( (servicio,i) => {
+      document.getElementById(`descripcion-${i}`).value = servicio.DESCRIPCION   
     })
   },
   clonerRocha: function(ev){
@@ -229,8 +245,16 @@ let ClonerRochaStore = Reflux.createStore({
     this.obj.input.fechaInicio = fecha
     this.trigger(this.obj)
   },
+  renderFechaInicioItem: function(fecha,valor){
+    this.obj.fechaInicio[valor] = fecha
+    this.trigger(this.obj)
+  },
   renderFechaEntrega: function(fecha){
     this.obj.input.fechaEntrega = fecha
+    this.trigger(this.obj)
+  },
+  renderFechaEntregaItem: function(fecha,valor){
+    this.obj.fechaEntrega[valor] = fecha
     this.trigger(this.obj)
   },
   validador: function(validador){

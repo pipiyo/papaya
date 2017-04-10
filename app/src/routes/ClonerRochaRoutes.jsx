@@ -39,6 +39,7 @@ export default class UpdateRochaRoutes extends React.Component {
       return (
         <UpdateRochaIndex
         obj={this.state.obj}
+        scrollWin={this.props.scrollWin}
         clonerRocha={this.clonerRocha.bind(this)}
         renderTotal={this.renderTotal.bind(this)}
         renderFechaInicio={this.renderFechaInicio.bind(this)} 

@@ -13,6 +13,7 @@ class Form extends React.Component {
         <form autoComplete="off" onSubmit={this.props.clonerRocha}>
           <fieldset> 
             <Item
+            scrollWin={this.props.scrollWin}
             renderTotal={this.props.renderTotal}
             renderFechaInicio={this.props.renderFechaInicio} 
             renderFechaEntrega={this.props.renderFechaEntrega} 

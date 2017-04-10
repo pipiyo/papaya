@@ -15,6 +15,7 @@ class ClonerRochaIndex extends React.Component {
           />
           <Form
           obj={this.props.obj}
+          scrollWin={this.props.scrollWin}
           renderTotal={this.props.renderTotal}
           clonerRocha={this.props.clonerRocha}  
           renderFechaInicio={this.props.renderFechaInicio} 

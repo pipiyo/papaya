@@ -152,12 +152,13 @@ module.exports = (io) => {
    /* Listar Producto */
   socket.on('searchRocha', (id,callback) => {
    
-    let query = `select * from proyecto where CODIGO_PROYECTO = '${id}' ` 
+    let query = `SELECT * FROM proyecto WHERE CODIGO_PROYECTO = '${id}';`
+    let query1 = `SELECT * FROM servicio WHERE CODIGO_PROYECTO = '${id}';`
     pool.getConnection( (err, connection) => {
-        connection.query(query, (err, rows, fields) => {
+        connection.query(query + query1, (err, rows, fields) => {
             connection.release()
             if (!err){
-              callback({rocha:rows})
+              callback({rocha:rows[0],servicio:rows[1]})
             }
             else{
               console.log('Error ' + err)

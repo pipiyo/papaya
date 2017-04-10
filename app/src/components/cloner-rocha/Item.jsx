@@ -2,6 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 import ClonerRochaActions from '../../actions/ClonerRochaActions'
+import Servicio from './Servicio'
 
 import AutoComplet  from '../../routes/AutoComRoutes'
 import AutocompleteActions from '../../actions/AutocompleteActions'
@@ -233,10 +234,11 @@ class Item extends React.Component {
             <div className="item-form sem-ext">
                 <input value={this.props.obj.input.total} onChange={this.renderInput.bind(this)} id="total" type="text"/>
             </div>
-
-
-
           </div>
+
+          <Servicio 
+          scrollWin={this.props.scrollWin} 
+          obj={this.props.obj} />          
 
           <div className="module-form button">
             <div className="item-form button">

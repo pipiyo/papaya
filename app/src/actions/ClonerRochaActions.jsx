@@ -8,7 +8,10 @@ let ClonerRochaActions = Reflux.createActions([
 	'renderTotal',
 	'searchRocha',
 	'selectOption',
-	'renderInput'
+	'renderInput',
+	'completInput',
+	'renderFechaInicioItem',
+	'renderFechaEntregaItem'
 ])
 
 export default ClonerRochaActions
