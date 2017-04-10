@@ -28,6 +28,7 @@ export default class UpdateServicioRoutes extends React.Component {
         <ServicioIndex 
           input={this.state.obj.input}
           datos={this.state.obj.servicio}
+          sub={this.state.obj.subServicio}
           area={this.state.obj.area}  
           tipo={this.props.params.tipo} 
           updateServicio={this.updateServicio.bind(this)} 

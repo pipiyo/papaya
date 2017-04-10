@@ -9,6 +9,7 @@ import ItemProduccion from '../components/update-servicio/ItemProduccion.jsx'
 import ItemSillas from '../components/update-servicio/ItemSillas.jsx'
 import ItemInstalacion from '../components/update-servicio/ItemInstalacion.jsx'
 import ItemDespacho from '../components/update-servicio/ItemDespacho.jsx'
+import ItemAbastecimiento from '../components/update-servicio/ItemAbastecimiento.jsx'
 
 import Env from '../Config'
 import io from 'socket.io-client'
@@ -19,9 +20,11 @@ let UpdateServicioStore = Reflux.createStore({
   obj: {comunas: 'comunas', 
         vehiculos: 'vehiculos', 
         servicio: '',
+        subServicio: '',
         mensaje: {title:"",texto:"",estado:false},
         input : {codigo:null, categoria:null, supervisor:null, estado:null, dias:null, fechaInicio:null, fechaEntrega:null, descripcion:null, observaciones:null, guia: null, comuna : null, vehiculo: null, direccion: null, m3: null, fi:null, tm:null, to:null, os:null, lider:null, instalador1: null, instalador2: null, instalador3: null, puestos: null, ejecutor:null, vale:null, cantidad:null, proceso:null},
-        area : null 
+        area : null,
+        item: {fecha : { fechaMetales:moment(),fme:false,fme1:false,fechaMuebles:moment(),fmu:false,fmu1:false,fechaEspeciales:moment(),fes:false,fes1:false, fechaSillas:moment(),fsi:false,fsi1:false, fechaTela:moment(),fte:false,fte1:false, fechaVidrio:moment(),fvi:false,fvi1:false, fechaInsumo:moment(),fin:false,fin1:false, fechaImportado:moment(),fim:false,fim1:false } },
       },
   init: function() {
     this.getObj()
@@ -50,6 +53,7 @@ let UpdateServicioStore = Reflux.createStore({
       "fechaInicio": ev.target.elements['fechaInicio'].value,
       "fechaEntrega": ev.target.elements['fechaEntrega'].value,  
       "dias": "0",
+      "rocha": this.obj.servicio[0].CODIGO_PROYECTO,
       "descripcion": ev.target.elements['descripcion'].value ,
       "observacion": ev.target.elements['observacion'].value,
       "numero": ev.target.elements['numero'].value,
@@ -70,9 +74,25 @@ let UpdateServicioStore = Reflux.createStore({
       "vale" : (ev.target.elements['vale']) ? ev.target.elements['vale'].value : "",
       "ejecutor" : (ev.target.elements['ejecutor']) ? ev.target.elements['ejecutor'].value : "", 
       "vehiculo" : (ev.target.elements['vehiculo']) ? ev.target.elements['vehiculo'].value : "", 
-      "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : ""          
+      "cantidad" : (ev.target.elements['cantidad']) ? ev.target.elements['cantidad'].value : "",
+      "checkMetales" : (ev.target.elements['check-metales'] && ev.target.elements['check-metales'].disabled == false) ? (ev.target.elements['check-metales'].checked) ? ev.target.elements['check-metales'].value : "" : "",
+      "checkMuebles" : (ev.target.elements['check-muebles'] && ev.target.elements['check-muebles'].disabled == false) ? (ev.target.elements['check-muebles'].checked) ? ev.target.elements['check-muebles'].value : "" : "",
+      "checkEspeciales" : (ev.target.elements['check-especiales'] && ev.target.elements['check-especiales'].disabled == false ) ? (ev.target.elements['check-especiales'].checked) ? ev.target.elements['check-especiales'].value : "" : "",  
+      "checkSillas" : (ev.target.elements['check-sillas'] && ev.target.elements['check-sillas'].disabled == false) ? (ev.target.elements['check-sillas'].checked) ? ev.target.elements['check-sillas'].value : "" : "",
+      "checkTela" : (ev.target.elements['check-tela'] && ev.target.elements['check-tela'].disabled == false ) ? (ev.target.elements['check-tela'].checked) ? ev.target.elements['check-tela'].value : "" : "", 
+      "checkVidrio" : (ev.target.elements['check-vidrio'] && ev.target.elements['check-vidrio'].disabled == false ) ? (ev.target.elements['check-vidrio'].checked) ? ev.target.elements['check-vidrio'].value : "" : "",  
+      "checkInsumo" : (ev.target.elements['check-insumo'] && ev.target.elements['check-insumo'].disabled == false) ? (ev.target.elements['check-insumo'].checked) ? ev.target.elements['check-insumo'].value : "" : "", 
+      "checkImportado" : (ev.target.elements['check-importado']) ? (ev.target.elements['check-importado'].checked) ? ev.target.elements['check-importado'].value : "" : "",
+      "fechaMetales" : (ev.target.elements['fecha-metales']) ? ev.target.elements['fecha-metales'].value : "",   
+      "fechaMuebles" : (ev.target.elements['fecha-muebles']) ? ev.target.elements['fecha-muebles'].value : "",  
+      "fechaEspeciales" : (ev.target.elements['fecha-especiales']) ? ev.target.elements['fecha-especiales'].value : "",
+      "fechaSillas" : (ev.target.elements['fecha-sillas']) ? ev.target.elements['fecha-sillas'].value : "", 
+      "fechaTela" : (ev.target.elements['fecha-tela']) ? ev.target.elements['fecha-tela'].value : "", 
+      "fechaVidrio" : (ev.target.elements['fecha-vidrio']) ? ev.target.elements['fecha-vidrio'].value : "",
+      "fechaInsumo" : (ev.target.elements['fecha-insumo']) ? ev.target.elements['fecha-insumo'].value : "", 
+      "fechaImportado" : (ev.target.elements['fecha-importado']) ? ev.target.elements['fecha-importado'].value : ""         
     }
-    socket.emit('updateServicio', servicio)
+    socket.emit('updateServicio',servicio, JSON.stringify( localStorage.getItem('token')))
     socket.on('okUpdateServicio', (okUpdateServicio) =>{
       /* Dialog */
         this.obj.mensaje.texto = okUpdateServicio
@@ -93,15 +113,15 @@ let UpdateServicioStore = Reflux.createStore({
   searchServicio: function(id){
   	socket.emit('searchServicio', id)
   	socket.on('okSearchServicio', (okSearchServicio) =>{
-      this.obj.servicio = okSearchServicio
-
+      this.obj.servicio = okSearchServicio.servicio
+      this.obj.subServicio = okSearchServicio.sub
       this.obj.input.codigo = this.validador(this.obj.servicio[0].CODIGO_SERVICIO)
       this.obj.input.dias = this.validador(this.obj.servicio[0].DIAS)
       this.obj.input.categoria = this.validador(this.obj.servicio[0].CATEGORIA)
       this.obj.input.supervisor = this.validador(this.obj.servicio[0].SUPERVISOR)
       this.obj.input.estado = this.validador(this.obj.servicio[0].ESTADO)
-      this.obj.input.fechaInicio = moment(this.obj.servicio[0].FECHA_INICIO)
-      this.obj.input.fechaEntrega = moment(this.obj.servicio[0].FECHA_ENTREGA)
+      this.obj.input.fechaInicio = (moment(this.obj.servicio[0].FECHA_INICIO).isValid())?moment(this.obj.servicio[0].FECHA_INICIO):undefined 
+      this.obj.input.fechaEntrega = (moment(this.obj.servicio[0].FECHA_ENTREGA).isValid())?moment(this.obj.servicio[0].FECHA_ENTREGA):undefined 
       this.obj.input.descripcion = this.validador(this.obj.servicio[0].DESCRIPCION)
       this.obj.input.observaciones = this.validador(this.obj.servicio[0].OBSERVACIONES)
       this.obj.input.guia = this.validador(this.obj.servicio[0].GUIA_DESPACHO)
@@ -122,9 +142,80 @@ let UpdateServicioStore = Reflux.createStore({
       this.obj.input.ejecutor = this.validador(this.obj.servicio[0].EJECUTOR)
       this.obj.input.vale = this.validador(this.obj.servicio[0].VALE)
       this.obj.input.cantidad = this.validador(this.obj.servicio[0].CANTIDAD)
-
       this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
   	})
+  },
+  subServicioFecha: function(sub){
+    this.obj.item.fecha.fme = false
+    this.obj.item.fecha.fme1 = false
+    this.obj.item.fecha.fechaMetales = moment()
+    this.obj.item.fecha.fmu = false
+    this.obj.item.fecha.fmu1 = false
+    this.obj.item.fecha.fechaMuebles = moment()
+    this.obj.item.fecha.fes = false
+    this.obj.item.fecha.fes1 = false
+    this.obj.item.fecha.fechaEspeciales = moment()
+    this.obj.item.fecha.fsi = false
+    this.obj.item.fecha.fsi1 = false
+    this.obj.item.fecha.fechaSillas = moment()
+    this.obj.item.fecha.fte = false
+    this.obj.item.fecha.fte1 = false
+    this.obj.item.fecha.fechaTela = moment()
+    this.obj.item.fecha.fvi = false
+    this.obj.item.fecha.fvi1 = false
+    this.obj.item.fecha.fechaVidrio = moment()
+    this.obj.item.fecha.fin = false
+    this.obj.item.fecha.fin1 = false
+    this.obj.item.fecha.fechaInsumo = moment()
+    this.obj.item.fecha.fim = false
+    this.obj.item.fecha.fim1 = false
+    this.obj.item.fecha.fechaImportado = moment()
+    let i 
+    for(i=0; sub.length > i; i++){
+      switch(sub[i].SUB_DESCRIPCION) {
+        case "Comprar Metales":
+          this.obj.item.fecha.fme = true
+          this.obj.item.fecha.fme1 = true
+          this.obj.item.fecha.fechaMetales = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+        case "Comprar Muebles":
+          this.obj.item.fecha.fmu = true
+          this.obj.item.fecha.fmu1 = true
+          this.obj.item.fecha.fechaMuebles = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+        case "Comprar Especiales":
+          this.obj.item.fecha.fes = true
+          this.obj.item.fecha.fes1 = true
+          this.obj.item.fecha.fechaEspeciales = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+        case "Comprar Sillas":
+          this.obj.item.fecha.fsi = true
+          this.obj.item.fecha.fsi1 = true
+          this.obj.item.fecha.fechaSillas = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+        case "Comprar Tela":
+          this.obj.item.fecha.fte = true
+          this.obj.item.fecha.fte1 = true
+          this.obj.item.fecha.fechaTela = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+        case "Comprar Vidrio":
+          this.obj.item.fecha.fvi = true
+          this.obj.item.fecha.fvi1 = true
+          this.obj.item.fecha.fechaVidrio = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+        case "Comprar Insumo":
+          this.obj.item.fecha.fin = true
+          this.obj.item.fecha.fin1 = true
+          this.obj.item.fecha.fechaInsumo = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+        case "Comprar Importado":
+          this.obj.item.fecha.fim = true
+          this.obj.item.fecha.fim1 = true
+          this.obj.item.fecha.fechaImportado = moment(sub[i].SUB_FECHA_ENTREGA)
+        break;
+      }
+    }
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
   },
   selectOption: function(numero, seleccion, tipo){
     let i
@@ -223,6 +314,75 @@ let UpdateServicioStore = Reflux.createStore({
     this.obj.input.fechaEntrega = fecha
     this.trigger(this.obj)
   },
+  renderFechaMetales: function(fecha){
+    this.obj.item.fecha.fechaMetales = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderFechaMuebles: function(fecha){
+    this.obj.item.fecha.fechaMuebles = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderFechaEspeciales: function(fecha){
+    this.obj.item.fecha.fechaEspeciales = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderFechaSillas: function(fecha){
+    this.obj.item.fecha.fechaSillas = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderFechaTela: function(fecha){
+    this.obj.item.fecha.fechaTela = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderFechaVidrio: function(fecha){
+    this.obj.item.fecha.fechaVidrio = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderFechaInsumo: function(fecha){
+    this.obj.item.fecha.fechaInsumo = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderFechaImportado: function(fecha){
+    this.obj.item.fecha.fechaImportado = fecha
+    this.trigger(this.obj)
+    this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
+  renderCheck: function(ev){
+    switch(ev.target.id) {
+        case "check-metales":
+          this.obj.item.fecha.fme1 = (this.obj.item.fecha.fme1 ) ? false  : true
+        break;
+        case "check-muebles":
+          this.obj.item.fecha.fmu1 = (this.obj.item.fecha.fmu1 ) ? false  : true
+        break;
+        case "check-especiales":
+          this.obj.item.fecha.fes1 = (this.obj.item.fecha.fes1 ) ? false  : true
+        break;
+        case "check-sillas":
+          this.obj.item.fecha.fsi1 = (this.obj.item.fecha.fsi1 ) ? false  : true
+        break;
+        case "check-tela":
+          this.obj.item.fecha.fte1 = (this.obj.item.fecha.fte1 ) ? false  : true
+        break;
+        case "check-vidrio":
+          this.obj.item.fecha.fvi1 = (this.obj.item.fecha.fvi1 ) ? false  : true
+        break;
+        case "check-insumo":
+          this.obj.item.fecha.fin1 = (this.obj.item.fecha.fin1 ) ? false  : true
+        break;
+        case "check-importado":
+          this.obj.item.fecha.fim1 = (this.obj.item.fecha.fim1 ) ? false  : true
+        break;
+      }
+      this.renderArea(this.obj.servicio[0].NOMBRE_SERVICIO)
+  },
   renderArea: function(area){
     switch(area) {
       case "Produccion":
@@ -236,6 +396,9 @@ let UpdateServicioStore = Reflux.createStore({
       break;
       case "Despacho":
         this.obj.area = <ItemDespacho input={this.obj.input} comunas={this.obj.comunas} vehiculos={this.obj.vehiculos} /> 
+      break;
+      case "Adquisiciones":
+        this.obj.area = <ItemAbastecimiento fecha={this.obj.item.fecha} /> 
       break;
       default:
        this.obj.area = ""

@@ -9,6 +9,16 @@ let UpdateServicioActions = Reflux.createActions([
 	'renderFechaInicio',
 	'renderFechaEntrega',
 	'renderInput',
+	'renderCheck',
+	'renderFechaMetales',
+	"renderFechaMuebles", 
+    "renderFechaEspeciales",
+    "renderFechaSillas",
+    "renderFechaTela",
+    "renderFechaVidrio",
+    "renderFechaInsumo",
+    "renderFechaImportado",
+    "subServicioFecha"
 ])
 
 export default UpdateServicioActions

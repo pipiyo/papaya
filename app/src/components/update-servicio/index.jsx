@@ -14,6 +14,7 @@ class ServicioIndex extends React.Component {
         <div>
             <Title />
             <Form
+            sub={this.props.sub}
             input={this.props.input} 
             datos={this.props.datos} 
             tipo={this.props.tipo} 

@@ -8,13 +8,22 @@ class Item extends React.Component {
   constructor(props) {
     super(props)
   }
+
   componentDidMount(){
     UpdateServicioActions.selectOption(document.getElementById("categoria"), this.props.input.categoria,true)
     UpdateServicioActions.selectOption(document.getElementById("estado"), this.props.input.estado,true)
   }
-  componentDidUpdate(){
+  componentDidUpdate(nextProps,nextState){
     UpdateServicioActions.selectOption(document.getElementById("categoria"), this.props.input.categoria,true)
     UpdateServicioActions.selectOption(document.getElementById("estado"), this.props.input.estado,true)
+  }
+  componentWillMount(){
+    UpdateServicioActions.subServicioFecha(this.props.sub)
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.sub !== this.props.sub){
+      UpdateServicioActions.subServicioFecha(nextProps.sub)
+    }
   }
   renderInput(event){
     UpdateServicioActions.renderInput(event.target.id,event.target.value)
