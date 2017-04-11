@@ -45,6 +45,7 @@ module.exports = (io) => {
                       TM: data.tm,
                       TP: data.to,
                       OS: data.os,
+                      FECHA_PRIMERA_ENTREGA: data.fechaEntrega,
                       LIDER: data.lider,
                       PUESTOS: data.puestos,
                       PROCESO: data.proceso,    
@@ -343,8 +344,11 @@ module.exports = (io) => {
         case "técnica":
             q_area = 'and NOMBRE_SERVICIO IN ("Desarrollo")'
             break;
+        case "técnica-especial":
+            q_area = 'and NOMBRE_SERVICIO IN ("Desarrollo-especial")'
+            break;
         case "planificación":
-            q_area = 'and NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas","Planificacion")'
+            q_area = 'and NOMBRE_SERVICIO IN ("FI","Adquisiciones","Desarrollo","Desarrollo-especial","Despacho","Instalacion","Produccion","Sillas","Planificacion")'
             break;
         case "comercial":
             q_area = 'and NOMBRE_SERVICIO IN ("Adquisiciones","Desarrollo","Despacho","Instalacion","Produccion","Sillas")'

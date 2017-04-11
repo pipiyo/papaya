@@ -153,6 +153,9 @@ let IndicadorServicioStore = Reflux.createStore({
       case "técnica":
           area = "desarrollo"
           break
+      case "técnica-especial":
+          area = "desarrollo"
+          break
       case "comercial":
           area = "comercial"
           break       
@@ -161,29 +164,32 @@ let IndicadorServicioStore = Reflux.createStore({
       if(antigua){
         switch (antigua) {
         case "abastecimiento":
-            area1 = "abastecimiento"
-            break
+          area1 = "abastecimiento"
+          break
         case "despacho":
-            area1 = "despacho"
-            break
+          area1 = "despacho"
+          break
         case "instalación":
-            area1 = "instalaciones"
-            break
+          area1 = "instalaciones"
+          break
         case "producción":
-            area1 = "produccion"
-            break
+          area1 = "produccion"
+          break
         case "planificación":
-            area1 = "planificacion"
-            break
+          area1 = "planificacion"
+          break
         case "sillas":
-            area1 = "sillas"
-            break
+          area1 = "sillas"
+          break
         case "técnica":
-            area1 = "desarrollo"
-            break 
+          area1 = "desarrollo"
+          break
+        case "técnica-especial":
+          area1 = "desarrollo"
+          break
         case "comercial":
-            area1 = "comercial"
-            break    
+          area1 = "comercial"
+          break    
         }
         document.querySelector(`[data-area="ok"]`).classList.remove(area)
         document.querySelector(`[data-area="ok"]`).classList.add(area1)

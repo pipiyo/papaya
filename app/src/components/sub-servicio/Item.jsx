@@ -29,8 +29,9 @@ class Item extends React.Component {
               <select required id="area" onChange={this.props.renderArea}>
                 <option value="">Seleccioné</option>
                 <option value="Adquisiciones">Abastecimiento</option>
-                <option value="Bodega">Bodega</option>
+                <option value="FI">FI</option>
                 <option value="Desarrollo">Técnica</option>
+                <option value="Desarrollo-especial">Técnica especial</option>
                 <option value="Despacho">Despacho</option>
                 <option value="Instalacion">Instalación</option>
                 <option value="Planificacion">Planificación</option>

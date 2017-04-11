@@ -154,6 +154,9 @@ let IndicadorSubServicioStore = Reflux.createStore({
       case "técnica":
           area = "desarrollo"
           break
+      case "técnica-especial":
+          area = "desarrollo"
+          break
       case "comercial":
           area = "comercial"
           break       
@@ -180,6 +183,9 @@ let IndicadorSubServicioStore = Reflux.createStore({
             area1 = "sillas"
             break
         case "técnica":
+            area1 = "desarrollo"
+            break
+        case "técnica-especial":
             area1 = "desarrollo"
             break 
         case "comercial":
