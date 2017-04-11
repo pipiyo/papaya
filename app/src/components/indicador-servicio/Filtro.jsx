@@ -71,6 +71,23 @@ class Filtro extends React.Component {
                 <input data-complete="cliente" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} autoComplete="off" id="cliente" type="text"/>
                 <AutoComplet name="cliente" />
             </div>
+            <div class={(this.props.area == "planificación")?`item-filter`:`item-filter hidden`}>
+                <label>Nombre Servicio</label>
+                <select id="servicio" >
+                    <option value="">Seleccione</option>
+                    <option value="Adquisiciones">Abastecimiento</option>
+                    <option value="FI">FI</option>
+                    <option value="Desarrollo">Técnica</option>
+                    <option value="Desarrollo-especial">Técnica especial</option>
+                    <option value="Despacho">Despacho</option>
+                    <option value="Instalacion">Instalación</option>
+                    <option value="Planificacion">Planificación</option>
+                    <option value="Prevención de Riesgos">Prevención de Riesgos</option>
+                    <option value="Produccion">Producción</option>
+                    <option value="Sillas">Sillas</option>
+                    <option value="Sistema">Sistema</option>
+                </select>
+            </div>
             <div className="item-filter ">
               <input id="btn-buscar" value="Buscar" type="submit" />
             </div>

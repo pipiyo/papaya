@@ -12,6 +12,7 @@ class Item extends React.Component {
             <td class="center nr">
                                 {(this.props.datos.SUB_ESTADO.toUpperCase() == "EN PROCESO")?<Link to={`/home/actualizar-subactividad/${this.props.datos.CODIGO_SUBSERVICIO}`}> <i class="fa fa-pencil" aria-hidden="tdue"></i></Link>:""}
             </td>
+            <td>{this.props.datos.SUB_NOMBRE_SERVICIO}</td>
             <td>{this.props.datos.CODIGO_PROYECTO}</td>
             <td>{this.props.datos.NOMBRE_CLIENTE}</td>
             <td>{this.props.datos.EJECUTIVO}</td>

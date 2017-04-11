@@ -12,6 +12,7 @@ class Item extends React.Component {
             <td class="center nr"><Link to={`/home/detalle-actividad/${this.props.datos.CODIGO_SERVICIO}`}> <i class="fa fa-eye" aria-hidden="tdue"></i></Link>
                                 {(this.props.datos.ESTADO.toUpperCase() == "EN PROCESO")?<Link to={`/home/actualizar-actividad/${this.props.datos.CODIGO_SERVICIO}`}> - <i class="fa fa-pencil" aria-hidden="tdue"></i></Link>:""}
             </td>
+            <td>{this.props.datos.NOMBRE_SERVICIO}</td>
             <td>{this.props.datos.CODIGO_PROYECTO}</td>
             <td>{this.props.datos.NOMBRE_CLIENTE}</td>
             <td>{this.props.datos.EJECUTIVO}</td>

@@ -320,6 +320,7 @@ module.exports = (io) => {
       let q_codigo = ""
       let q_vendedor = ""
       let q_categoria = ""
+      let q_servicio = ""
       let q_cliente = ""
       let q_fecha = ""
       let q_estado = ""
@@ -358,12 +359,13 @@ module.exports = (io) => {
       if(data.codigo){q_codigo = ' and proyecto.CODIGO_PROYECTO like "%'+data.codigo +'%"'}
       if(data.vendedor){q_vendedor = ' and proyecto.EJECUTIVO like "%'+data.vendedor +'%"'}
       if(data.categoria){q_categoria = ' and servicio.CATEGORIA like "%'+data.categoria +'%"'}
+      if(data.servicio){q_servicio = ' and servicio.NOMBRE_SERVICIO like "%'+data.servicio +'%"'}
       if(data.cliente){q_cliente = ' and proyecto.NOMBRE_CLIENTE like "%'+data.cliente +'%"'}
       if(data.fechaInicio != null && data.fechaEntrega != null){q_fecha = ' and servicio.SUB_FECHA_ENTREGA BETWEEN "'+ data.fechaInicio +'" and "'+ data.fechaEntrega +'"'}
       q_estado = ' and servicio.ESTADO = "'+data.estado+'"'
 
-      let query = 'SELECT proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.DESCRIPCION as SD ,servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.OBSERVACIONES, servicio.ESTADO FROM proyecto,servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+' order by servicio.FECHA_ENTREGA asc limit '+data.limit +', '+data.limitB+' ;' 
-      let query1 = 'SELECT count(servicio.CODIGO_SERVICIO) as total FROM proyecto,servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO'+q_estado+q_codigo+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+';' 
+      let query = 'SELECT proyecto.CODIGO_PROYECTO , proyecto.NOMBRE_CLIENTE, proyecto.EJECUTIVO, servicio.CODIGO_SERVICIO, servicio.NOMBRE_SERVICIO, servicio.DESCRIPCION as SD ,servicio.FECHA_INICIO, servicio.FECHA_ENTREGA, servicio.OBSERVACIONES, servicio.ESTADO FROM proyecto,servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO'+q_estado+q_codigo+q_servicio+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+' order by servicio.FECHA_ENTREGA asc limit '+data.limit +', '+data.limitB+' ;' 
+      let query1 = 'SELECT count(servicio.CODIGO_SERVICIO) as total FROM proyecto,servicio WHERE proyecto.CODIGO_PROYECTO = servicio.CODIGO_PROYECTO'+q_estado+q_codigo+q_servicio+q_vendedor+q_categoria+q_fecha+q_area+q_cliente+';' 
       let query2 = 'SELECT `NOMBRES`, `APELLIDO_PATERNO`, `APELLIDO_MATERNO` FROM `empleado` where `AREA` = "COMERCIAL" order by NOMBRES;'
       pool.getConnection( (err, connection) => {
           connection.query(query+query1+query2, (err, rows, fields) => {

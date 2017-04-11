@@ -13,7 +13,7 @@ class SubServicio extends React.Component {
   }
   componentDidUpdate(nextProps){
     IndicadorSubServicioActions.renderAreaServicio(nextProps.area, this.props.area)
-    IndicadorSubServicioActions.renderButton(nextProps.total[0].total,nextProps.datos.length)
+    IndicadorSubServicioActions.renderButton(this.props.total[0].total,this.props.datos.length)
   }
   render() {
       return (
@@ -28,6 +28,7 @@ class SubServicio extends React.Component {
                 <thead>
                   <tr>
                     <th>Herramientas</th>
+                    <th>Actividad</th>
                     <th>Rocha</th>
                     <th>Cliente</th>
                     <th>Ejecutivo</th>
