@@ -70,7 +70,7 @@ let IndicadorServicioStore = Reflux.createStore({
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
         if(document.getElementById('btn-buscar')){document.getElementById('btn-buscar').disabled = false}
-      }, 3000)
+      }, 1000)
       
       let fechaI = document.getElementById("fechaInicio").value
       let fechaE = document.getElementById("fechaEntrega").value
