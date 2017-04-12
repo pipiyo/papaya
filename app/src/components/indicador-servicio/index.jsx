@@ -12,6 +12,7 @@ class IndicadorServicioIndex extends React.Component {
         <div>
           <Title area={this.props.area} />
           <Filtro  
+          area={this.props.area}
           ejecutivo={this.props.ejecutivo}
           filtro={this.props.filtro} 
           renderFiltro={this.props.renderFiltro} 

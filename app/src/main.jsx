@@ -17,6 +17,7 @@ import Informe from './routes/InformeRoutes'
 import InformeRocha from './routes/InformeRochaRoutes'
 import AddRocha from './routes/AddRochaRoutes'
 import UpdateRocha from './routes/UpdateRochaRoutes'
+import ClonerRocha from './routes/ClonerRochaRoutes'
 import Notificacion from './routes/NotificacionRoutes'
 import DetalleInforme from './routes/DetalleInformeRoutes'
 import Bodega from './routes/BodegaRoutes'
@@ -91,6 +92,7 @@ ReactDOM.render((
             <Route path="descripcion-oc/:id" component={DescriptionOc}/>
             <Route path="orden-de-compra" component={OrdenCompra}/>
             <Route path="actualizar-rocha/:id" component={UpdateRocha}/>
+            <Route path="copiar-rocha/:id" component={ClonerRocha}/>
             <Route path="recibir-oc/:id" component={RecibirOc}/>
             <Route path="recibir-vale/:id" component={RecibirVale}/>
             <Route path="actualizar-oc/:id" component={UpdateOc}/>

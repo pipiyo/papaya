@@ -19,7 +19,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
     area: "",
     button: "",
     renderItem: [],
-    filtro:{fechaInicio:undefined,fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 0, limitB:100}
+    filtro:{fechaInicio:undefined,fechaEntrega: undefined, codigo: null, estado: "EN PROCESO", vendedor: null, categoria: null, cliente: null, limit: 0, limitB:100, servicio: null}
   },
   renderReset: function(){
     if(document.getElementById("cliente").length){document.getElementById("cliente").value}
@@ -34,6 +34,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
     this.obj.filtro.fechaInicio = undefined
     this.obj.filtro.fechaEntrega = undefined
     this.obj.filtro.codigo = null
+    this.obj.filtro.servicio = null
     this.obj.filtro.estado = "EN PROCESO" 
     this.obj.filtro.vendedor = null
     this.obj.filtro.categoria = null
@@ -45,6 +46,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
     this.obj.filtro.fechaInicio = undefined
     this.obj.filtro.fechaEntrega = undefined
     this.obj.filtro.codigo = null
+    this.obj.filtro.servicio = null
     this.obj.filtro.estado = "EN PROCESO" 
     this.obj.filtro.vendedor = null
     this.obj.filtro.categoria = null
@@ -64,7 +66,7 @@ let IndicadorSubServicioStore = Reflux.createStore({
       document.getElementById('btn-buscar').disabled = true
       setTimeout(function(){ 
         if(document.getElementById('btn-buscar')){document.getElementById('btn-buscar').disabled = false}
-      }, 2000)
+      }, 1000)
       
       let fechaI = document.getElementById("fechaInicio").value
       let fechaE = document.getElementById("fechaEntrega").value
@@ -73,12 +75,14 @@ let IndicadorSubServicioStore = Reflux.createStore({
       let vendedor = document.getElementById("vendedor").value
       let categoria = document.getElementById("categoria").value
       let cliente = document.getElementById("cliente").value
+      let servicio = (document.getElementById("servicio"))?document.getElementById("servicio").value:""
 
       if(codigo != ""){this.obj.filtro.codigo=codigo}else{this.obj.filtro.codigo = null}
       if(vendedor != ""){this.obj.filtro.vendedor=vendedor}else{this.obj.filtro.vendedor= null}   
       if(categoria != ""){this.obj.filtro.categoria = categoria}else{this.obj.filtro.categoria = null}
       if(cliente != ""){this.obj.filtro.cliente =  cliente }else{this.obj.filtro.cliente = null}
-      
+      if(servicio != ""){this.obj.filtro.servicio = servicio }else{this.obj.filtro.servicio = null}
+        
       this.obj.filtro.estado = estado
       this.obj.renderItem = []
       this.obj.filtro.limit = 0
@@ -154,6 +158,9 @@ let IndicadorSubServicioStore = Reflux.createStore({
       case "técnica":
           area = "desarrollo"
           break
+      case "técnica-especial":
+          area = "desarrollo"
+          break
       case "comercial":
           area = "comercial"
           break       
@@ -180,6 +187,9 @@ let IndicadorSubServicioStore = Reflux.createStore({
             area1 = "sillas"
             break
         case "técnica":
+            area1 = "desarrollo"
+            break
+        case "técnica-especial":
             area1 = "desarrollo"
             break 
         case "comercial":

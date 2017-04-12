@@ -3,6 +3,9 @@ import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 import UpdateRochaActions from '../../actions/UpdateRochaActions'
 
+import AutoComplet  from '../../routes/AutoComRoutes'
+import AutocompleteActions from '../../actions/AutocompleteActions'
+
 class Item extends React.Component {
 
   constructor() {
@@ -11,7 +14,6 @@ class Item extends React.Component {
   componentDidMount(){
     UpdateRochaActions.selectOption(document.getElementById("disenador"), this.props.obj.input.disenador,true)
     UpdateRochaActions.selectOption(document.getElementById("ejecutivo"), this.props.obj.input.ejecutivo,true)
-    UpdateRochaActions.selectOption(document.getElementById("cliente"), this.props.obj.input.rut,true)
     UpdateRochaActions.selectOption(document.getElementById("linea"), this.props.obj.input.linea,true)
     UpdateRochaActions.selectOption(document.getElementById("departamento"), this.props.obj.input.departamento,true)
     UpdateRochaActions.selectOption(document.getElementById("encargado"), this.props.obj.input.encargado,true)
@@ -20,6 +22,14 @@ class Item extends React.Component {
   }
   renderInput(event){
     UpdateRochaActions.renderInput(event.target.id,event.target.value)
+  }
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
   }
   render() {
       return (
@@ -36,14 +46,8 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Cliente</label>
-                <select onChange={this.props.renderRut} required id="cliente">
-                  <option value="">Seleccioné</option>
-                  {
-                    this.props.obj.cliente.map( (cliente) => {
-                      return <option value={`${cliente.RUT_CLIENTE}`} key={`${cliente.CODIGO_CLIENTE}`}>{`${cliente.NOMBRE_CLIENTE}`}</option>
-                    })
-                  }
-                </select>
+                <input required type="text" value={this.props.obj.input.cliente} data-complete="cliente" onBlur={this.autocompleteOff.bind(this)} onChange={(event) => {this.renderInput(event);this.autocomplete(event)}} class="active" id="cliente" />
+                <AutoComplet name="cliente" datos1="rut" datos2="telefono" datos3="contacto"  />
             </div>
 
             <div className="item-form">

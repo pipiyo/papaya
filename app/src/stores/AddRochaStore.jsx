@@ -30,11 +30,9 @@ let AddRochaStore = Reflux.createStore({
     })
   },
   addRocha: function(ev){
-    let numero =  document.getElementById('cliente').options.selectedIndex
-
     let proyecto = {
       codigo: ev.target.elements['codigo'].value,
-      cliente: ev.target.elements['cliente'].options[numero].text,
+      cliente: ev.target.elements['cliente'].value,
       rut: ev.target.elements['rut'].value,
       obra: ev.target.elements['obra'].value,
       direccionObra: ev.target.elements['direccion-obra'].value,
@@ -78,12 +76,12 @@ let AddRochaStore = Reflux.createStore({
       ev.target.elements['neto2'].value = ""
       ev.target.elements['valoriva'].value = ""
       ev.target.elements['total'].value = ""
+      ev.target.elements['cliente'].value = ""
       ev.target.elements['departamento'].options[0].selected = "selected"
       ev.target.elements['ejecutivo'].options[0].selected = "selected"
       ev.target.elements['disenador'].options[0].selected = "selected"
       ev.target.elements['encargado'].options[0].selected = "selected"
       ev.target.elements['iva'].options[0].selected = "selected"
-      ev.target.elements['cliente'].options[0].selected = "selected"
       ev.target.elements['linea'].options[0].selected = "selected"
      
 
@@ -103,10 +101,6 @@ let AddRochaStore = Reflux.createStore({
     this.obj.mensaje.estado = false
     this.trigger(this.obj)
     DialogActions.dialog(this.obj.mensaje)
-  },
-  renderRut: function(){
-    let numero =  document.getElementById('cliente').options.selectedIndex
-    document.getElementById('rut').value = document.getElementById('cliente').options[numero].value
   },
   formatNumber : function(numero){
     return numero.replace(/[^0-9.]/g,'')

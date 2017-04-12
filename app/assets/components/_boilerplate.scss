@@ -957,6 +957,9 @@ a.external-link, .external-link a {
         padding: 1em;
         width: 25%;
         position: relative;
+        &.hidden{
+            display: none;
+        }
         @include vertical-tablet-down {
             width: 50%;
         }
@@ -1503,7 +1506,7 @@ a.external-link, .external-link a {
                 font-weight: normal;
                 margin: 0;
                 width: 100%;
-                padding-right: 3em;
+                padding-right: 5em;
                 position:relative;
                 color: $blanco;
                 &.atrasado{
@@ -1529,6 +1532,9 @@ a.external-link, .external-link a {
                 }
                 &.b{
                     right: 55px; 
+                }
+                &.c{
+                    right: 80px; 
                 }
                 &:hover{
                     color: $color_rochas;
@@ -2533,6 +2539,55 @@ a.external-link, .external-link a {
                 }
                 &.big{
                     width: 100%;
+                }
+                &.date{
+                    background-image: url(images/app-icons/calendar.svg);
+                    background-repeat: no-repeat;
+                    background-size: 10px 10px;
+                    background-position: 98% center;
+                }
+            }
+            input[type="checkbox"]:checked{
+                + .checkbox{
+                    width: 28px;
+                    height: 28px;
+                    border: solid 1px $color_valido;
+                    &:before{
+                        content: "\f00c";
+                        font-family: FontAwesome;
+                        color: $color_valido;
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 2px;
+                        left: 7px;
+                    }
+                }
+            }
+            input[type="checkbox"]{
+                display: none;
+                + .checkbox{
+                    position: relative;
+                    background: $blanco;
+                    width: 28px;
+                    height: 28px;
+                    border: solid 1px $gris;
+                }
+            }
+            .opc{
+                .cr-title{
+                    margin-top: .3em;
+                    margin-bottom: .1em;
+                }
+                .name-check,.name-radio{
+                    margin-top: .8em;
+                    float: left;
+                    margin-right: 10px;
+                }
+                .checkbox,.radio{
+                    margin-top: .3em;
+                    float: left;
+                    margin-right: 20px;
                 }
             }
         }

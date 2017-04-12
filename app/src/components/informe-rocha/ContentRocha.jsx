@@ -18,6 +18,7 @@ class ContentRocha extends React.Component {
             <Link class="icon-informe" to={`/home/actividad/${this.props.rocha.CODIGO_PROYECTO}/nueva`}> <i class="fa fa-plus" aria-hidden="true"></i> </Link>
             <Link class="icon-informe a" to={`/home/descripcion-rocha/${this.props.rocha.CODIGO_PROYECTO}`}> <i class="fa fa-eye" aria-hidden="true"></i> </Link>
             <Link class="icon-informe b" to={`/home/actualizar-rocha/${this.props.rocha.CODIGO_PROYECTO}`}> <i class="fa fa-pencil" aria-hidden="true"></i> </Link>
+            <Link class="icon-informe c" to={`/home/copiar-rocha/${this.props.rocha.CODIGO_PROYECTO}`}><i class="fa fa-files-o" aria-hidden="true"></i> </Link>
           </div>
           <div class="content-informe">
             <div class="opc"><h5>Obra</h5><p>{this.props.rocha.OBRA}</p></div>

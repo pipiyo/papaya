@@ -2,7 +2,7 @@ import React from 'react'
 import Title from './Title'
 import Form from './Form'
 
-class AddRochaIndex extends React.Component {
+class ClonerRochaIndex extends React.Component {
 
   constructor() {
     super()
@@ -15,8 +15,9 @@ class AddRochaIndex extends React.Component {
           />
           <Form
           obj={this.props.obj}
+          scrollWin={this.props.scrollWin}
           renderTotal={this.props.renderTotal}
-          addRocha={this.props.addRocha}  
+          clonerRocha={this.props.clonerRocha}  
           renderFechaInicio={this.props.renderFechaInicio} 
           renderFechaEntrega={this.props.renderFechaEntrega}
           />
@@ -27,4 +28,4 @@ class AddRochaIndex extends React.Component {
 
 }
 
-export default AddRochaIndex
+export default ClonerRochaIndex

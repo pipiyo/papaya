@@ -25,9 +25,6 @@ export default class UpdateRochaRoutes extends React.Component {
     event.persist()
     UpdateRochaActions.updateRocha(event);
   }
-  renderRut() {
-    UpdateRochaActions.renderRut();
-  }
   renderTotal() {
     UpdateRochaActions.renderTotal();
   }
@@ -49,7 +46,6 @@ export default class UpdateRochaRoutes extends React.Component {
         <UpdateRochaIndex
         obj={this.state.obj}
         updateRocha={this.updateRocha.bind(this)}
-        renderRut={this.renderRut.bind(this)}
         renderTotal={this.renderTotal.bind(this)}
         renderFechaInicio={this.renderFechaInicio.bind(this)} 
         renderFechaEntrega={this.renderFechaEntrega.bind(this)} 

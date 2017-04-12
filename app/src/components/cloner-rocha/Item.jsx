@@ -1,6 +1,8 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment  from 'moment'
+import ClonerRochaActions from '../../actions/ClonerRochaActions'
+import Servicio from './Servicio'
 
 import AutoComplet  from '../../routes/AutoComRoutes'
 import AutocompleteActions from '../../actions/AutocompleteActions'
@@ -9,6 +11,17 @@ class Item extends React.Component {
 
   constructor() {
     super()
+  }
+  componentDidMount(){
+    ClonerRochaActions.selectOption(document.getElementById("disenador"), this.props.obj.input.disenador,true)
+    ClonerRochaActions.selectOption(document.getElementById("ejecutivo"), this.props.obj.input.ejecutivo,true)
+    ClonerRochaActions.selectOption(document.getElementById("linea"), this.props.obj.input.linea,true)
+    ClonerRochaActions.selectOption(document.getElementById("departamento"), this.props.obj.input.departamento,true)
+    ClonerRochaActions.selectOption(document.getElementById("encargado"), this.props.obj.input.encargado,true)
+    ClonerRochaActions.selectOption(document.getElementById("iva"), this.props.obj.input.iva,true)
+  }
+  renderInput(event){
+    ClonerRochaActions.renderInput(event.target.id,event.target.value)
   }
   autocomplete(ev){
     ev.persist()
@@ -28,38 +41,38 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Código</label>
-                <input required id="codigo" type="text" />
+                <input  required id="codigo" type="text" />
             </div>
 
             <div className="item-form">
                 <label>Cliente</label>
-                <input required type="text" data-complete="cliente" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} class="active" id="cliente" />
+                <input required type="text" value={this.props.obj.input.cliente} data-complete="cliente" onBlur={this.autocompleteOff.bind(this)} onChange={(event) => {this.renderInput(event);this.autocomplete(event)}} class="active" id="cliente" />
                 <AutoComplet name="cliente" datos1="rut" datos2="telefono" datos3="contacto"  />
             </div>
 
             <div className="item-form">
               <label>Rut </label>
-              <input readOnly required id="rut" type="text" />
+              <input value={this.props.obj.input.rut} onChange={this.renderInput.bind(this)} readOnly required id="rut" type="text" />
             </div>
 
             <div className="item-form">
               <label>Obra</label>
-              <input required id="obra" type="text" />
+              <input value={this.props.obj.input.obra} onChange={this.renderInput.bind(this)} required id="obra" type="text" />
             </div>
 
             <div className="item-form">
               <label>Dirección Obra</label>
-              <input required id="direccion-obra" type="text" />
+              <input value={this.props.obj.input.direccionObra} onChange={this.renderInput.bind(this)} required id="direccion-obra" type="text" />
             </div>
 
             <div className="item-form">
               <label>Puestos</label>
-              <input required id="puestos" type="number" />
+              <input value={this.props.obj.input.puestos} onChange={this.renderInput.bind(this)} required id="puestos" type="number" />
             </div>
 
             <div className="item-form">
                 <label>Nombre Proyecto</label>
-                <input id="nombre-proyecto" type="text"/>
+                <input value={this.props.obj.input.nombreProyecto} onChange={this.renderInput.bind(this)} id="nombre-proyecto" type="text"/>
             </div>
 
             <div className="item-form">
@@ -97,15 +110,15 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Telefono</label>
-                <input id="telefono" type="text"/>
+                <input value={this.props.obj.input.telefono} onChange={this.renderInput.bind(this)} id="telefono" type="text"/>
             </div>
             <div className="item-form">
                 <label>Contacto</label>
-                <input id="contacto" type="text"/>
+                <input value={this.props.obj.input.contacto} onChange={this.renderInput.bind(this)} id="contacto" type="text"/>
             </div>
             <div className="item-form">
                 <label>Mail</label>
-                <input id="mail" type="text"/>
+                <input value={this.props.obj.input.mail} onChange={this.renderInput.bind(this)} id="mail" type="text"/>
             </div>
           </div>
 
@@ -154,12 +167,12 @@ class Item extends React.Component {
 
             <div className="item-form">
                 <label>Fecha Inicio</label>
-                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.obj.item.fecha.fechaInicio} onChange={this.props.renderFechaInicio} />
+                <DatePicker readOnly class="date" id="fechaInicio" dateFormat="YYYY-MM-DD" selected={this.props.obj.input.fechaInicio} onChange={this.props.renderFechaInicio} />
             </div>
 
             <div className="item-form">
                 <label>Fecha Entrega</label>
-                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.obj.item.fecha.fechaEntrega} onChange={this.props.renderFechaEntrega} />
+                <DatePicker readOnly class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.obj.input.fechaEntrega} onChange={this.props.renderFechaEntrega} />
             </div>
           </div>
 
@@ -172,35 +185,35 @@ class Item extends React.Component {
                 <label>Sub Total</label>
             </div>
             <div className="item-form sem-ext">
-                <input onChange={this.props.renderTotal} id="subtotal" type="text"/>
+                <input value={this.props.obj.input.subtotal} onChange={this.renderInput.bind(this)} onChange={this.props.renderTotal} id="subtotal" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Descuento</label>
             </div>
             <div className="item-form sem-ext">
-                <input onChange={this.props.renderTotal} id="descuento" type="text"/>
+                <input value={this.props.obj.input.descuento} onChange={this.renderInput.bind(this)} onChange={this.props.renderTotal} id="descuento" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Neto</label>
             </div>
             <div className="item-form sem-ext">
-                <input id="neto" type="text"/>
+                <input value={this.props.obj.input.neto} onChange={this.renderInput.bind(this)} id="neto" type="text"/>
             </div>
 
              <div className="item-form">
                 <label>Descuento 2</label>
             </div>
             <div className="item-form sem-ext">
-                <input onChange={this.props.renderTotal} id="descuento2" type="text"/>
+                <input value={this.props.obj.input.descuento2} onChange={this.renderInput.bind(this)} onChange={this.props.renderTotal} id="descuento2" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Neto 2</label>
             </div>
             <div className="item-form sem-ext">
-                <input id="neto2" type="text"/>
+                <input value={this.props.obj.input.neto2} onChange={this.renderInput.bind(this)} id="neto2" type="text"/>
             </div>
 
             <div className="item-form">
@@ -212,19 +225,20 @@ class Item extends React.Component {
                 </select>
             </div>
             <div className="item-form sem-ext">
-                <input id="valoriva" type="text"/>
+                <input value={this.props.obj.input.valoriva} onChange={this.renderInput.bind(this)} id="valoriva" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Total</label>
             </div>
             <div className="item-form sem-ext">
-                <input id="total" type="text"/>
+                <input value={this.props.obj.input.total} onChange={this.renderInput.bind(this)} id="total" type="text"/>
             </div>
-
-
-
           </div>
+
+          <Servicio 
+          scrollWin={this.props.scrollWin} 
+          obj={this.props.obj} />          
 
           <div className="module-form button">
             <div className="item-form button">

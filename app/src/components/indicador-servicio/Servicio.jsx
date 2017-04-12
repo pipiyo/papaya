@@ -13,7 +13,7 @@ class Servicio extends React.Component {
   }
   componentDidUpdate(nextProps){
     IndicadorServicioActions.renderAreaServicio(nextProps.area, this.props.area)
-    IndicadorServicioActions.renderButton(nextProps.total[0].total,nextProps.datos.length)
+    IndicadorServicioActions.renderButton(this.props.total[0].total,this.props.datos.length)
   }
   render() {
       return (
@@ -28,6 +28,7 @@ class Servicio extends React.Component {
                 <thead>
                   <tr>
                     <th>Herramientas</th>
+                    <th>Actividad</th>
                     <th>Rocha</th>
                     <th>Cliente</th>
                     <th>Ejecutivo</th>

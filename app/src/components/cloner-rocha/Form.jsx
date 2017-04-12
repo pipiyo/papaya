@@ -10,14 +10,13 @@ class Form extends React.Component {
 
   render() {
       return (
-        <form autoComplete="off" onSubmit={this.props.updateRocha}>
+        <form autoComplete="off" onSubmit={this.props.clonerRocha}>
           <fieldset> 
             <Item
+            scrollWin={this.props.scrollWin}
             renderTotal={this.props.renderTotal}
             renderFechaInicio={this.props.renderFechaInicio} 
             renderFechaEntrega={this.props.renderFechaEntrega} 
-            renderFechaActa={this.props.renderFechaActa} 
-            renderFechaConfirmacion={this.props.renderFechaConfirmacion}
             obj={this.props.obj}  
             />
           </fieldset> 

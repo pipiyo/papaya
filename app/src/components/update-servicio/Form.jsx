@@ -13,6 +13,7 @@ class Form extends React.Component {
         <form autoComplete="off" onSubmit={this.props.updateServicio}>
           <fieldset> 
             <Item
+            sub={this.props.sub}
             input={this.props.input}  
             datos={this.props.datos} 
             tipo={this.props.tipo} 

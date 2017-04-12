@@ -3,22 +3,25 @@ import Reflux from 'reflux'
 import { browserHistory } from 'react-router'
 import moment  from 'moment'
 
-import UpdateRochaActions from '../actions/UpdateRochaActions'
-
+import ClonerRochaActions from '../actions/ClonerRochaActions'
+import DialogActions from '../actions/DialogActions'
 
 import Env from '../Config'
 import io from 'socket.io-client'
 const socket = io.connect( `${Env.url}proyecto` )
 
-let UpdateRochaStore = Reflux.createStore({
-  listenables: [UpdateRochaActions],
+let ClonerRochaStore = Reflux.createStore({
+  listenables: [ClonerRochaActions],
   obj: { 
-    mensaje: '',
+    mensaje: {title:"",texto:"",estado:false},
     vendedor:'',
     disenador:'',
     cliente:'',
     linea: '',
     search: '',
+    servicio:[], 
+    fechaInicio:[],
+    fechaEntrega:[],
     input: {codigo:null,
             cliente:null,
             rut:null,
@@ -52,7 +55,15 @@ let UpdateRochaStore = Reflux.createStore({
   searchRocha: function(id){
     socket.emit('searchRocha', id, (n) => {
       this.obj.search = n.rocha
-      
+      this.obj.servicio = n.servicio
+
+      this.obj.fechaInicio= []
+      this.obj.fechaEntrega = []
+
+      this.obj.servicio.map( (servicio,i) => {
+        this.obj.fechaInicio.push((moment(servicio.FECHA_INICIO).isValid())?moment(servicio.FECHA_INICIO):undefined)
+        this.obj.fechaEntrega.push((moment(servicio.FECHA_ENTREGA).isValid())?moment(servicio.FECHA_ENTREGA):undefined)  
+      })
       
       this.obj.input.codigo = this.validador(this.obj.search[0].CODIGO_PROYECTO)
       this.obj.input.cliente = this.validador(this.obj.search[0].NOMBRE_CLIENTE)
@@ -91,7 +102,12 @@ let UpdateRochaStore = Reflux.createStore({
       this.trigger(this.obj)
     })
   },
-  updateRocha: function(ev){
+   completInput: function(){
+    this.obj.servicio.map( (servicio,i) => {
+      document.getElementById(`descripcion-${i}`).value = servicio.DESCRIPCION   
+    })
+  },
+  clonerRocha: function(ev){
     let proyecto = {
       codigo: ev.target.elements['codigo'].value,
       cliente: ev.target.elements['cliente'].value,
@@ -118,14 +134,64 @@ let UpdateRochaStore = Reflux.createStore({
       total: ev.target.elements['total'].value,
       iva: ev.target.elements['iva'].value,
       departamento: ev.target.elements['departamento'].value,
-      estado: ev.target.elements['estado'].value,
-      fechaConfirmacion: ev.target.elements['fechaConfirmacion'].value,
-      fechaActa: ev.target.elements['fechaActa'].value    
+      servicio:[]
     }
-    socket.emit('updateRocha', proyecto, (n) => {
-      this.obj.mensaje = n.mensaje
-      browserHistory.push(`/home/informe-rochas`)
+
+    this.obj.servicio.map( (servicio,i) => {
+        if(ev.target.elements[`check-servicio-${i}`]){
+          if(ev.target.elements[`check-servicio-${i}`].checked){
+            proyecto.servicio.push(servicio)
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_ENTREGA = ev.target.elements[`fechaEntrega-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_INICIO = ev.target.elements[`fechaInicio-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_PRIMERA_ENTREGA = ev.target.elements[`fechaEntrega-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].FECHA_REALIZACION = ev.target.elements[`fechaInicio-${i}`].value
+            proyecto.servicio[proyecto.servicio.length-1].DESCRIPCION = ev.target.elements[`descripcion-${i}`].value
+          } 
+        }
     })
+
+    socket.emit('clonerRocha',proyecto, JSON.stringify( localStorage.getItem('token')), (n) => {
+      ev.target.elements['codigo'].value = ""
+      ev.target.elements['rut'].value = ""
+      ev.target.elements['obra'].value = ""
+      ev.target.elements['direccion-obra'].value = ""
+      ev.target.elements['puestos'].value = ""
+      ev.target.elements['nombre-proyecto'].value = ""
+      ev.target.elements['telefono'].value = ""
+      ev.target.elements['contacto'].value = ""
+      ev.target.elements['mail'].value = ""
+      ev.target.elements['fechaInicio'].value = ""
+      ev.target.elements['fechaEntrega'].value = ""
+      ev.target.elements['subtotal'].value = ""
+      ev.target.elements['descuento'].value = ""
+      ev.target.elements['neto'].value = ""
+      ev.target.elements['descuento2'].value = ""
+      ev.target.elements['neto2'].value = ""
+      ev.target.elements['valoriva'].value = ""
+      ev.target.elements['total'].value = ""
+      ev.target.elements['cliente'].value = ""
+      ev.target.elements['departamento'].options[0].selected = "selected"
+      ev.target.elements['ejecutivo'].options[0].selected = "selected"
+      ev.target.elements['disenador'].options[0].selected = "selected"
+      ev.target.elements['encargado'].options[0].selected = "selected"
+      ev.target.elements['iva'].options[0].selected = "selected"
+      ev.target.elements['linea'].options[0].selected = "selected"
+      /* Dialog */
+      this.obj.mensaje.texto = n.mensaje
+      this.obj.mensaje.title = 'Felicitaciones'
+      this.obj.mensaje.estado = true
+      setTimeout(this.closeDialog, 8000)
+      DialogActions.dialog(this.obj.mensaje)
+      /* End Dialog */
+      this.trigger(this.obj)
+    })
+  },
+  closeDialog : function(){
+    this.obj.mensaje.texto = ''
+    this.obj.mensaje.title = ''
+    this.obj.mensaje.estado = false
+    this.trigger(this.obj)
+    DialogActions.dialog(this.obj.mensaje)
   },
   formatNumber : function(numero){
     return numero.replace(/[^0-9.]/g,'')
@@ -194,16 +260,16 @@ let UpdateRochaStore = Reflux.createStore({
     this.obj.input.fechaInicio = fecha
     this.trigger(this.obj)
   },
+  renderFechaInicioItem: function(fecha,valor){
+    this.obj.fechaInicio[valor] = fecha
+    this.trigger(this.obj)
+  },
   renderFechaEntrega: function(fecha){
     this.obj.input.fechaEntrega = fecha
     this.trigger(this.obj)
   },
-  renderFechaConfirmacion: function(fecha){
-    this.obj.input.fechaConfirmacion = fecha
-    this.trigger(this.obj)
-  },
-  renderFechaActa: function(fecha){
-    this.obj.input.fechaActa = fecha
+  renderFechaEntregaItem: function(fecha,valor){
+    this.obj.fechaEntrega[valor] = fecha
     this.trigger(this.obj)
   },
   validador: function(validador){
@@ -273,4 +339,4 @@ let UpdateRochaStore = Reflux.createStore({
   }
 })
 
-export default UpdateRochaStore
+export default ClonerRochaStore

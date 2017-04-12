@@ -7,7 +7,6 @@ let UpdateRochaActions = Reflux.createActions([
 	'renderFechaConfirmacion',
 	'renderFechaActa',
 	'completSelect',
-	'renderRut',
 	'renderTotal',
 	'searchRocha',
 	'selectOption',

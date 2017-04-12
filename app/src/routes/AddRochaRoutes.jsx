@@ -22,9 +22,6 @@ export default class AddRochaRoutes extends React.Component {
     event.persist()
     AddRochaActions.addRocha(event);
   }
-  renderRut() {
-    AddRochaActions.renderRut();
-  }
   renderTotal() {
     AddRochaActions.renderTotal();
   }
@@ -41,7 +38,6 @@ export default class AddRochaRoutes extends React.Component {
         <AddRochaIndex
         obj={this.state.obj}
         addRocha={this.addRocha.bind(this)}
-        renderRut={this.renderRut.bind(this)}
         renderTotal={this.renderTotal.bind(this)}
         renderFechaInicio={this.renderFechaInicio.bind(this)} 
         renderFechaEntrega={this.renderFechaEntrega.bind(this)}  
