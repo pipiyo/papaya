@@ -5,7 +5,7 @@ let HomeActions = Reflux.createActions([
   'hideNotification',
   '_showUserNav',
   'hideUserNav',
-  'logout',
+  '_logout',
   'getContent'
 ])
 

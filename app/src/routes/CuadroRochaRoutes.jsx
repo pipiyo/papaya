@@ -6,8 +6,6 @@ import CuadroRochaIndex from '../components/cuadro-rocha'
 
 import CuadroRochaStore from '../stores/CuadroRochaStore'
 
-import CuadroRochaActions from '../actions/CuadroRochaActions'
-
 @ReactMixin.decorate(Reflux.connect(CuadroRochaStore, 'obj'))
 class CuadroRochaRoutes extends Component {
 

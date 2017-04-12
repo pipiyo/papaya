@@ -31,8 +31,11 @@ module.exports = (io, request) => {
 
     socket.on('login', ( data, callback, token = null) => {
 
+let userScope = data.userName.toLowerCase()
+userScope = userScope.trim()
+
 User.
-  findOne({ name: data.userName }).
+  findOne({ name: userScope }).
   exec( (err, user) => {
     if (err) throw err
 
@@ -68,7 +71,7 @@ User.
         request.post({
           uri: process.env.apiLogin,
           form: {
-            user: data.userName,
+            user: userScope,
             pass: data.pass
           }
         }, (error, response, auht) => {

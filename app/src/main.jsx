@@ -48,6 +48,7 @@ import UpdateVale from './routes/UpdateValeRoutes'
 
 import BodegaSilla from './routes/BodegaSillaRoutes'
 
+import Bloqueo from './routes/BloqueoRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
@@ -83,6 +84,8 @@ ReactDOM.render((
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>
 
             <Route path="bodega-silla" component={BodegaSilla}/>
+
+            <Route path="bloqueo" component={Bloqueo}/>            
 
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
