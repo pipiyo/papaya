@@ -102,7 +102,16 @@ let ClonerRochaStore = Reflux.createStore({
       this.trigger(this.obj)
     })
   },
-   completInput: function(){
+  completSelectTotal: function(){
+    document.getElementById('descuento').value = this.obj.input.descuento 
+    document.getElementById('subtotal').value = this.obj.input.subtotal
+    document.getElementById('neto').value = this.obj.input.neto
+    document.getElementById('descuento2').value = this.obj.input.descuento2
+    document.getElementById('neto2').value = this.obj.input.neto2
+    document.getElementById('valoriva').value = this.obj.input.valoriva
+    document.getElementById('total').value = this.obj.input.total
+  },
+  completInput: function(){
     this.obj.servicio.map( (servicio,i) => {
       document.getElementById(`descripcion-${i}`).value = servicio.DESCRIPCION   
     })

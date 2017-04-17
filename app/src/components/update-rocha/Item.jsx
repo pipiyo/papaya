@@ -19,6 +19,7 @@ class Item extends React.Component {
     UpdateRochaActions.selectOption(document.getElementById("encargado"), this.props.obj.input.encargado,true)
     UpdateRochaActions.selectOption(document.getElementById("iva"), this.props.obj.input.iva,true)
     UpdateRochaActions.selectOption(document.getElementById("estado"), this.props.obj.input.estado,true)
+    UpdateRochaActions.completSelectTotal()
   }
   renderInput(event){
     UpdateRochaActions.renderInput(event.target.id,event.target.value)
@@ -206,35 +207,35 @@ class Item extends React.Component {
                 <label>Sub Total</label>
             </div>
             <div className="item-form sem-ext">
-                <input value={this.props.obj.input.subtotal} onChange={this.renderInput.bind(this)} onChange={this.props.renderTotal} id="subtotal" type="text"/>
+                <input onChange={this.props.renderTotal} id="subtotal" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Descuento</label>
             </div>
             <div className="item-form sem-ext">
-                <input value={this.props.obj.input.descuento} onChange={this.renderInput.bind(this)} onChange={this.props.renderTotal} id="descuento" type="text"/>
+                <input onChange={this.props.renderTotal} id="descuento" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Neto</label>
             </div>
             <div className="item-form sem-ext">
-                <input value={this.props.obj.input.neto} onChange={this.renderInput.bind(this)} id="neto" type="text"/>
+                <input id="neto" type="text"/>
             </div>
 
              <div className="item-form">
                 <label>Descuento 2</label>
             </div>
             <div className="item-form sem-ext">
-                <input value={this.props.obj.input.descuento2} onChange={this.renderInput.bind(this)} onChange={this.props.renderTotal} id="descuento2" type="text"/>
+                <input  onChange={this.props.renderTotal} id="descuento2" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Neto 2</label>
             </div>
             <div className="item-form sem-ext">
-                <input value={this.props.obj.input.neto2} onChange={this.renderInput.bind(this)} id="neto2" type="text"/>
+                <input id="neto2" type="text"/>
             </div>
 
             <div className="item-form">
@@ -246,18 +247,15 @@ class Item extends React.Component {
                 </select>
             </div>
             <div className="item-form sem-ext">
-                <input value={this.props.obj.input.valoriva} onChange={this.renderInput.bind(this)} id="valoriva" type="text"/>
+                <input  id="valoriva" type="text"/>
             </div>
 
             <div className="item-form">
                 <label>Total</label>
             </div>
             <div className="item-form sem-ext">
-                <input value={this.props.obj.input.total} onChange={this.renderInput.bind(this)} id="total" type="text"/>
+                <input id="total" type="text"/>
             </div>
-
-
-
           </div>
 
           <div className="module-form button">

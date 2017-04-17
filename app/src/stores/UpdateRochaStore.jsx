@@ -127,6 +127,15 @@ let UpdateRochaStore = Reflux.createStore({
       browserHistory.push(`/home/informe-rochas`)
     })
   },
+  completSelectTotal: function(){
+    document.getElementById('descuento').value = this.obj.input.descuento 
+    document.getElementById('subtotal').value = this.obj.input.subtotal
+    document.getElementById('neto').value = this.obj.input.neto
+    document.getElementById('descuento2').value = this.obj.input.descuento2
+    document.getElementById('neto2').value = this.obj.input.neto2
+    document.getElementById('valoriva').value = this.obj.input.valoriva
+    document.getElementById('total').value = this.obj.input.total
+  },
   formatNumber : function(numero){
     return numero.replace(/[^0-9.]/g,'')
   },
