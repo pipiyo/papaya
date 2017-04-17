@@ -101,6 +101,15 @@ class Item extends React.Component {
                   <option value="M&D-CM">Muebles y Diseños CM</option>
                 </select>
             </div>
+            <div className="item-form">
+                <label>OC</label>
+                <input value={this.props.obj.input.oc} onChange={this.renderInput.bind(this)} id="oc" type="text"/>
+            </div>
+
+            <div className="item-form">
+                <label>Condición de pago</label>
+                <input value={this.props.obj.input.pago} onChange={this.renderInput.bind(this)} id="pago" type="text"/>
+            </div>
 
           </div>
 

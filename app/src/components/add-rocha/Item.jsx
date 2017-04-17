@@ -88,6 +88,16 @@ class Item extends React.Component {
                 </select>
             </div>
 
+            <div className="item-form">
+                <label>OC</label>
+                <input id="oc" type="text"/>
+            </div>
+
+            <div className="item-form">
+                <label>Condición de pago</label>
+                <input id="pago" type="text"/>
+            </div>
+
           </div>
 
           <div className="module-form">

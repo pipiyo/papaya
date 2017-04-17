@@ -55,7 +55,9 @@ let AddRochaStore = Reflux.createStore({
       valoriva: ev.target.elements['valoriva'].value,
       total: ev.target.elements['total'].value,
       iva: ev.target.elements['iva'].value,
-      departamento: ev.target.elements['departamento'].value  
+      departamento: ev.target.elements['departamento'].value,
+      oc: ev.target.elements['oc'].value,
+      pago: ev.target.elements['pago'].value   
     }
     socket.emit('addRocha', proyecto, JSON.stringify( localStorage.getItem('token')), (n) => {
       ev.target.elements['codigo'].value = ""
@@ -77,6 +79,8 @@ let AddRochaStore = Reflux.createStore({
       ev.target.elements['valoriva'].value = ""
       ev.target.elements['total'].value = ""
       ev.target.elements['cliente'].value = ""
+      ev.target.elements['oc'].value = ""
+      ev.target.elements['pago'].value = ""
       ev.target.elements['departamento'].options[0].selected = "selected"
       ev.target.elements['ejecutivo'].options[0].selected = "selected"
       ev.target.elements['disenador'].options[0].selected = "selected"
