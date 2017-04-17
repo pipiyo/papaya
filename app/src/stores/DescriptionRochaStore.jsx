@@ -16,9 +16,14 @@ let DescriptionRochaStore = Reflux.createStore({
     renderServicio: '',
     renderOC: '',
     renderVale: '',
-    filtro:{ servicio:{estado:"En Proceso", categoria:null}, oc:{estado:null}, vale:{estado:null} }
+    filtro:{ servicio:{estado:"", categoria:null}, oc:{estado:null}, vale:{estado:null} }
   },
   renderRocha: function(id){
+    this.obj.filtro.servicio.estado = ""
+    this.obj.filtro.servicio.categoria = null
+    this.obj.filtro.vale.estado = null
+    this.obj.filtro.oc.estado = null
+
   	socket.emit('allRocha',id,this.obj.filtro, (n) => {
          this.obj.renderRocha = n.rocha
          this.obj.renderServicio = n.servicio
