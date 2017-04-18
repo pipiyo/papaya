@@ -9,7 +9,7 @@ class Title extends React.Component {
   render() {
       return (
         <div class="title">
-          <h3>Cuadro Proyecto</h3>
+          <h3>Cuadro Proyecto Comercial</h3>
         </div>
       )
 

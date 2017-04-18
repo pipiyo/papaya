@@ -32,6 +32,8 @@ import StockProducto from './routes/StockPruductoRoutes'
 
 import CuadroRocha from './routes/CuadroRochaRoutes'
 
+import CuadroRochaComercial from './routes/CuadroRochaComercialRoutes'
+
 import DescriptionRocha from './routes/DescriptionRochaRoutes'
 import ListadoOc from './routes/ListadoOcRoutes'
 import UpdateOcFecha from './routes/UpdateOcFechaRoutes'
@@ -86,6 +88,8 @@ ReactDOM.render((
             <Route path="bodega-silla" component={BodegaSilla}/>
 
             <Route path="bloqueo" component={Bloqueo}/>            
+
+            <Route path="cuadro-proyecto-comercial" component={CuadroRochaComercial}/>
 
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
