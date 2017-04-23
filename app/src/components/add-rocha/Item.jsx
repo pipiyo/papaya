@@ -34,7 +34,7 @@ class Item extends React.Component {
             <div className="item-form">
                 <label>Cliente</label>
                 <input required type="text" data-complete="cliente" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} class="active" id="cliente" />
-                <AutoComplet name="cliente" datos1="rut" datos2="telefono" datos3="contacto"  />
+                <AutoComplet name="cliente" datos1="rut" datos2="telefono" datos3="contacto" datos4="direccion-obra" />
             </div>
 
             <div className="item-form">
@@ -86,6 +86,16 @@ class Item extends React.Component {
                   <option value="M&D">Muebles Y Diseños</option>
                   <option value="M&D-CM">Muebles y Diseños CM</option>
                 </select>
+            </div>
+
+            <div className="item-form">
+                <label>OC</label>
+                <input id="oc" type="text"/>
+            </div>
+
+            <div className="item-form">
+                <label>Condición de pago</label>
+                <input id="pago" type="text"/>
             </div>
 
           </div>

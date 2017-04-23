@@ -49,7 +49,9 @@ let ClonerRochaStore = Reflux.createStore({
             departamento:null,
             fechaConfirmacion:null,
             fechaActa:null,
-            estado:null  
+            estado:null,
+            oc:null,
+            pago:null  
           },
   },
   searchRocha: function(id){
@@ -93,6 +95,8 @@ let ClonerRochaStore = Reflux.createStore({
       this.obj.input.total= this.validador(this.obj.search[0].TOTAL)
       this.obj.input.departamento= this.validador(this.obj.search[0].DEPARTAMENTO)
       this.obj.input.estado= this.validador(this.obj.search[0].ESTADO)
+      this.obj.input.oc= this.validador(this.obj.search[0].ORDEN_CC)
+      this.obj.input.pago= this.validador(this.obj.search[0].CONDICION_PAGO)
     })
     socket.emit('completSelect', (n) => {
       this.obj.vendedor = n.vendedor
@@ -102,7 +106,16 @@ let ClonerRochaStore = Reflux.createStore({
       this.trigger(this.obj)
     })
   },
-   completInput: function(){
+  completSelectTotal: function(){
+    document.getElementById('descuento').value = this.obj.input.descuento 
+    document.getElementById('subtotal').value = this.obj.input.subtotal
+    document.getElementById('neto').value = this.obj.input.neto
+    document.getElementById('descuento2').value = this.obj.input.descuento2
+    document.getElementById('neto2').value = this.obj.input.neto2
+    document.getElementById('valoriva').value = this.obj.input.valoriva
+    document.getElementById('total').value = this.obj.input.total
+  },
+  completInput: function(){
     this.obj.servicio.map( (servicio,i) => {
       document.getElementById(`descripcion-${i}`).value = servicio.DESCRIPCION   
     })
@@ -134,6 +147,8 @@ let ClonerRochaStore = Reflux.createStore({
       total: ev.target.elements['total'].value,
       iva: ev.target.elements['iva'].value,
       departamento: ev.target.elements['departamento'].value,
+      oc: ev.target.elements['oc'].value,
+      pago: ev.target.elements['pago'].value,
       servicio:[]
     }
 
@@ -333,6 +348,12 @@ let ClonerRochaStore = Reflux.createStore({
       break;
       case "total":
         this.obj.input.total = this.validador(valor)
+      break;
+      case "oc":
+        this.obj.input.oc = this.validador(valor)
+      break;
+      case "pago":
+        this.obj.input.pago = this.validador(valor)
       break;
     }  
     this.trigger(this.obj)

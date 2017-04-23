@@ -11,6 +11,7 @@ class Servicio extends React.Component {
             <table class="planificacion">
                 <thead>
                   <tr>
+                    <th>Herramientas</th>
                     <th>Actividad</th>
                     <th>Código</th>
                     <th>Descripción</th>

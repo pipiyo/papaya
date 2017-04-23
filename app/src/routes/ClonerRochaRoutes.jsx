@@ -25,7 +25,7 @@ export default class UpdateRochaRoutes extends React.Component {
     event.persist()
     ClonerRochaActions.clonerRocha(event);
   }
-  renderTotal() {
+  renderTotal(){
     ClonerRochaActions.renderTotal();
   }
   renderFechaInicio(date){

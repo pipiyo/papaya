@@ -12,6 +12,8 @@ class Item extends React.Component {
   }
   componentWillMount(){
     ServicioActions.renderReclamo(this.props.tipo)
+  }
+  componentDidMount(){
     ServicioActions.renderRochaValue(this.props.rocha)
   }
   componentWillUpdate(nextProps, nextState){
@@ -44,7 +46,7 @@ class Item extends React.Component {
             <div className="item-form">
                 <label>Rocha</label>
                 <input required data-complete="rocha" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)}  id="rocha" type="text" />
-                <AutoComplet name="rocha" />
+                <AutoComplet name="rocha" datos1="direccion" />
             </div>
 
             <div className="item-form">
@@ -98,6 +100,10 @@ class Item extends React.Component {
             <div className="item-form">
                 <label>Observación</label>
                 <input id="observacion" type="text"/>
+            </div>
+            <div className="item-form">
+                <label>Dirección</label>
+                <input type="text" id="direccion" />
             </div>
           </div>
           {this.props.area}

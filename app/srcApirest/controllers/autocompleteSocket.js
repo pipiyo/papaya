@@ -11,10 +11,10 @@ module.exports = (io) => {
     let query 
     switch(data.complete) {
       case "rocha":
-            query = `SELECT CODIGO_PROYECTO as DATOS FROM proyecto WHERE estado = "EN PROCESO" and CODIGO_PROYECTO like "%${data.valor}%"  limit 10`;
+            query = `SELECT CODIGO_PROYECTO as DATOS, DIRECCION_FACTURACION as DATOS1 FROM proyecto WHERE estado = "EN PROCESO" and CODIGO_PROYECTO like "%${data.valor}%"  limit 10`;
           break;
       case "cliente":
-            query = `SELECT NOMBRE_CLIENTE as DATOS, RUT_CLIENTE as DATOS1, TELEFONO1 as DATOS2, CONTACTO1 AS DATOS3 FROM cliente WHERE  NOMBRE_CLIENTE like "%${data.valor}%"  limit 10`;
+            query = `SELECT NOMBRE_CLIENTE as DATOS, RUT_CLIENTE as DATOS1, TELEFONO1 as DATOS2, CONTACTO1 AS DATOS3, DIRECCION AS DATOS4 FROM cliente WHERE  NOMBRE_CLIENTE like "%${data.valor}%"  limit 10`;
           break;
       case "proveedor":
             query = `SELECT NOMBRE_FANTASIA as DATOS, CODIGO_PROVEEDOR as DATOS1, FORMA_PAGO AS DATOS2, CONTACTO1 as DATOS3, TELEFONO1 AS DATOS4  FROM proveedor WHERE  NOMBRE_FANTASIA like "%${data.valor}%"  limit 10`;

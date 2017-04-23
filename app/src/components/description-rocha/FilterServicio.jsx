@@ -13,6 +13,7 @@ class FilterServicio extends React.Component {
             <div class="item-filter">
                 <label> Estado</label>
                 <select id="estado-servicio" >
+                    <option value="">Seleccione</option>
                     <option value="En Proceso">En Proceso</option>
                     <option value="En ruta">En ruta</option>
                     <option value="OK">OK</option>

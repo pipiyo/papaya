@@ -48,11 +48,6 @@ class ItemInstalacion extends React.Component {
           </div>  
 
           <div className="item-form">
-            <label>Dirección</label>
-            <input type="text"  id="direccion" />
-          </div>
-
-          <div className="item-form">
             <label>Comuna</label>
              <select id="comuna">
               <option value="">Seleccioné</option>

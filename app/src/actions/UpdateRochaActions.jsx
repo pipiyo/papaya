@@ -10,7 +10,8 @@ let UpdateRochaActions = Reflux.createActions([
 	'renderTotal',
 	'searchRocha',
 	'selectOption',
-	'renderInput'
+	'renderInput',
+	'completSelectTotal'
 ])
 
 export default UpdateRochaActions
