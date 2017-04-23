@@ -41,6 +41,7 @@ class Filtro extends Component {
                     <option value="">Seleccione</option>
                     <option value="20">Silla</option>
                     <option value="21">Insumo Silla</option>
+                    <option value="22">Servicio Silla</option>
                 </select>
             </div>
             <div class="item-filter">
@@ -69,6 +70,7 @@ class Filtro extends Component {
                     <option value="SO">Silla Operativa</option>
                     <option value="ST">Silla Taburete</option>
                     <option value="SV">Silla Visita</option>
+                    <option value="SR">Servicio</option>
                 </select>
             </div>
             <div class="item-filter">
