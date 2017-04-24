@@ -29,9 +29,7 @@ import UpdateProducto from './routes/UpdateProductoRoutes'
 import UpdateProductoPrecio from './routes/UpdateProductoPrecioRoutes'
 import Producto from './routes/ProductoRoutes'
 import StockProducto from './routes/StockPruductoRoutes'
-
 import CuadroRocha from './routes/CuadroRochaRoutes'
-
 import DescriptionRocha from './routes/DescriptionRochaRoutes'
 import ListadoOc from './routes/ListadoOcRoutes'
 import UpdateOcFecha from './routes/UpdateOcFechaRoutes'
@@ -44,7 +42,8 @@ import RecibirVale from './routes/RecibirValeRoutes'
 import ListadoVale from './routes/ListadoValeRoutes'
 import UpdateOc from './routes/UpdateOcRoutes'
 import UpdateVale from './routes/UpdateValeRoutes'
-
+import ListadoCliente from './routes/ListadoClienteRoutes'
+import AddCliente from './routes/AddClienteRoutes'
 
 import BodegaSilla from './routes/BodegaSillaRoutes'
 
@@ -81,9 +80,9 @@ ReactDOM.render((
             <Route path="producto/:id" component={Producto}/>
             <Route path="stock-producto/:bodega/:id" component={StockProducto}/>
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>
-
+            <Route path="listado-cliente" component={ListadoCliente}/>
+            <Route path="ingreso-cliente" component={AddCliente}/>
             <Route path="bodega-silla" component={BodegaSilla}/>
-
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
             <Route path="listado-oc" component={ListadoOc}/>
