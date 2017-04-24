@@ -13,7 +13,7 @@ class Item extends React.Component {
       return (       
         <tr>
             <td class="center nr">
-              <Link to={`/home/descripcion-oc/${this.props.datos.CODIGO_CLIENTE}`}> <i class="fa fa-eye" aria-hidden="tdue"></i></Link>                                          
+              <Link to={`/home/actualizar-cliente/${this.props.datos.CODIGO_CLIENTE}`}> <i class="fa fa-pencil" aria-hidden="true"></i></Link>                                          
             </td>
             <td>{this.props.datos.NOMBRE_CLIENTE}</td>
             <td class="center nr">{this.props.datos.RUT_CLIENTE}</td>

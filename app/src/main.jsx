@@ -44,6 +44,7 @@ import UpdateOc from './routes/UpdateOcRoutes'
 import UpdateVale from './routes/UpdateValeRoutes'
 import ListadoCliente from './routes/ListadoClienteRoutes'
 import AddCliente from './routes/AddClienteRoutes'
+import UpdateCliente from './routes/UpdateClienteRoutes'
 
 import BodegaSilla from './routes/BodegaSillaRoutes'
 
@@ -82,6 +83,7 @@ ReactDOM.render((
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>
             <Route path="listado-cliente" component={ListadoCliente}/>
             <Route path="ingreso-cliente" component={AddCliente}/>
+            <Route path="actualizar-cliente/:id" component={UpdateCliente}/>
             <Route path="bodega-silla" component={BodegaSilla}/>
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>

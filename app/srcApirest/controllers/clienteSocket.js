@@ -37,12 +37,12 @@ module.exports = (io) => {
   })
 
   /* Editar cliente */
-  socket.on('updateProducto', (data,callback) => {
+  socket.on('updateCliente', (data,callback) => {
       pool.getConnection( (err, connection) => {
-            connection.query('UPDATE producto SET DESCRIPCION = ?, STOCK_MINIMO = ?, STOCK_MAXIMO = ?, PRECIO = ?, UNIDAD_DE_MEDIDA = ?, FORMATO = ?, CATEGORIA  = ? WHERE CODIGO_PRODUCTO = ?', [data.descripcion, data.stockMin, data.stockMax, data.precio, data.um, data.formato, data.categoria, data.codigo], (err, results) => {
+            connection.query('UPDATE cliente SET RUT_CLIENTE = ?, NOMBRE_CLIENTE = ?, RAZON_SOCIAL = ?, GIRO = ?, DIRECCION = ?, CONTACTO1 = ?, TELEFONO1  = ?, TELEFONO2 = ?, CELULAR_CONTACTO1  = ?, FORMA_PAGO  = ? WHERE CODIGO_CLIENTE = ?', [data.rut, data.nombre, data.razon, data.giro, data.direccion, data.contacto, data.telefono1, data.telefono2, data.mail, data.pago, data.codigo], (err, results) => {
                 connection.release()
                 if (!err){
-                  callback({mensaje:`Se ingreso ${data.codigo}`})
+                  callback({mensaje:`Se actualizo ${data.codigo}`})
                 }
                 else{
                   console.log('Error ' + err)
@@ -52,14 +52,14 @@ module.exports = (io) => {
   })
 
   /* Listar cliente */
-  socket.on('searchProducto', (id,callback) => {
+  socket.on('searchCliente', (id,callback) => {
    
-    let query = `select * from producto where CODIGO_PRODUCTO = '${id}' ` 
+    let query = `select * from cliente where CODIGO_CLIENTE = '${id}' ` 
     pool.getConnection( (err, connection) => {
         connection.query(query, (err, rows, fields) => {
             connection.release()
             if (!err){
-              callback({producto:rows})
+              callback({cliente:rows})
             }
             else{
               console.log('Error ' + err)
