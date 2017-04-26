@@ -71,6 +71,8 @@ class Filtro extends Component {
                     <option value="ST">Silla Taburete</option>
                     <option value="SV">Silla Visita</option>
                     <option value="SR">Servicio</option>
+                    <option value="TE">Tela</option>
+                    <option value="ES">Espuma</option>
                 </select>
             </div>
             <div class="item-filter">
@@ -99,6 +101,7 @@ class Filtro extends Component {
                     <option value="SI">Situp</option>
                     <option value="ST">Starway</option>
                     <option value="VC">VC Industrial</option>
+                    <option value="S&S">Sillas&Sillas</option>
                 </select>
             </div>
             <div class="item-filter">
@@ -122,7 +125,7 @@ class Filtro extends Component {
                     <option value="15">Regulable</option>
                     <option value="16">Syncro</option>
                     <option value="17">Abatible</option>
-                    <option value="18">Giratori</option>
+                    <option value="18">Giratoria</option>
                 </select>
             </div>
             <div class="item-filter">

@@ -30,7 +30,7 @@ let BodegaSillaStore = Reflux.createStore({
     buscado: null,
     volver:null,
     total: 0,
-    search:{limitA:0, limitB:50,"cod":"", des:"", cat:"", pro: "", pais: "", proveedor: "", mecanismo: "",respaldo: ""} 
+    search:{limitA:0, limitB:0,"cod":"", des:"", cat:"", pro: "", pais: "", proveedor: "", mecanismo: "",respaldo: ""} 
   },
 
   init: function() {
@@ -79,6 +79,7 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   },
 
   buscarHijoSilla: function( ev ) {
+    this.obj.renderItem = []
     window.scrollTo(0, 0);
     this.obj.bodega = "hijo"
     this.obj.buscado = ev.target.dataset.codigo
@@ -93,7 +94,7 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
     document.getElementById('botonVolverSilla').classList.remove('hidden')
 
     socket.emit('buscarHijoSilla', ev.target.dataset.codigo,  ( productos ) => {
-		this.obj.renderItem = []
+		
       _.map( productos, ( producto ) => {
               this.obj.renderItem.push(<ItemHijo 
               								key={producto.CODIGO_PRODUCTO}  
@@ -107,6 +108,8 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   buscar: function( event ) {
   	event.preventDefault()
     this.obj.buscado = null
+
+ this.obj.search.limitB = 0
 
     if (document.getElementById('botonVolverSilla')) {
       document.getElementById('botonVolverSilla').classList.add('hidden')
@@ -135,10 +138,10 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
                                   this.obj.search.limitA,
                                   this.obj.search.limitB,( productos ) => {
 		this.obj.renderItem = []
-    this.obj.total = productos.cuenta
-      _.map( productos.productos, ( producto ) => {
+    //this.obj.total = productos.cuenta
+      _.map( productos.productos, ( producto, i ) => {
               this.obj.renderItem.push(<Item 
-              								key={producto.CODIGO_PRODUCTO}  
+              								key={`${producto.CODIGO_PRODUCTO}${i}`}  
               								bodega={producto}
               								buscarHijoSilla={this.buscarHijoSilla}  />)
       })
@@ -170,11 +173,11 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
       }
 
       this.obj.renderItem = []
-      this.obj.total = productos.cuenta
-      _.map( productos.productos, (producto) => {
+      //this.obj.total = productos.cuenta
+      _.map( productos.productos, (producto, i) => {
 
               this.obj.renderItem.push(<Item 
-              								key={producto.CODIGO_PRODUCTO}  
+              								key={`${producto.CODIGO_PRODUCTO}${i}`}  
               								bodega={producto}
               								buscarHijoSilla={this.buscarHijoSilla}  />)
       })
@@ -183,7 +186,7 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   },
   renderViewMore: function(){
   if(this.obj.bodega == "padre"){
-    this.obj.search.limitA += 50
+    this.obj.search.limitB += ( this.obj.search.limitB = 0 ) ? 0 : 50
       socket.emit('buscarBodegaSilla', 
                                     this.obj.search.cod,
                                     this.obj.search.des, 
@@ -195,10 +198,11 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
                                     this.obj.search.respaldo,
                                     this.obj.search.limitA, 
                                     this.obj.search.limitB, ( productos ) => {
-        this.obj.total = productos.cuenta
-        _.map( productos.productos, ( producto ) => {
+        //this.obj.total = productos.cuenta
+
+        _.map( productos.productos, ( producto, i ) => {
                 this.obj.renderItem.push(<Item 
-                                key={producto.CODIGO_PRODUCTO}  
+                                key={`${producto.CODIGO_PRODUCTO}${i}`}  
                                 bodega={producto}
                                 buscarHijoSilla={this.buscarHijoSilla}  />)
         })
