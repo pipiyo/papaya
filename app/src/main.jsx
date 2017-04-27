@@ -45,7 +45,9 @@ import UpdateVale from './routes/UpdateValeRoutes'
 import ListadoCliente from './routes/ListadoClienteRoutes'
 import AddCliente from './routes/AddClienteRoutes'
 import UpdateCliente from './routes/UpdateClienteRoutes'
-
+import ListadoProveedor from './routes/ListadoProveedorRoutes'
+import AddProveedor from './routes/AddProveedorRoutes'
+import UpdateProveedor from './routes/UpdateProveedorRoutes'
 import BodegaSilla from './routes/BodegaSillaRoutes'
 
 
@@ -99,6 +101,9 @@ ReactDOM.render((
             <Route path="actualizar-oc/:id" component={UpdateOc}/>
             <Route path="actualizar-vale/:id" component={UpdateVale}/>
             <Route path="vale-emision" component={ValeEmision}/>
+            <Route path="listado-proveedor" component={ListadoProveedor}/>
+            <Route path="ingreso-proveedor" component={AddProveedor}/>
+            <Route path="actualizar-proveedor/:id" component={UpdateProveedor}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

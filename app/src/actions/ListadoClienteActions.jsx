@@ -1,6 +1,6 @@
 import Reflux from 'reflux'
 
-let ListadoOcActions = Reflux.createActions([
+let ListadoClienteActions = Reflux.createActions([
   'renderCliente',
   'renderFiltro',
   'renderViewMore',
@@ -8,4 +8,4 @@ let ListadoOcActions = Reflux.createActions([
   'renderButton',
 ])
 
-export default ListadoOcActions
+export default ListadoClienteActions
