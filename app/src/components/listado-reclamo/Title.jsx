@@ -8,11 +8,9 @@ class Title extends React.Component {
 
   render() {
       return (
-        <div>
-            <div className="title">
-            	<h3>Formulario ingreso reclamo</h3>
-            </div>
-        </div>   
+        <div class="title">
+          <h3>Listado Cliente</h3>
+        </div>
       )
 
   }

@@ -84,6 +84,8 @@ require('./srcApirest/controllers/listadoProveedorSocket')(io)
 
 require('./srcApirest/controllers/proveedorSocket')(io)
 
+require('./srcApirest/controllers/listadoReclamoSocket')(io)
+
   
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))

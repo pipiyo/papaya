@@ -10,7 +10,7 @@ class Title extends React.Component {
       return (
         <div>
             <div className="title">
-            	<h3>Formulario ingreso reclamo</h3>
+            	<h3>Formulario actualiza cliente</h3>
             </div>
         </div>   
       )

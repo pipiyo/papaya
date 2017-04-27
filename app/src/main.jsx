@@ -49,7 +49,8 @@ import ListadoProveedor from './routes/ListadoProveedorRoutes'
 import AddProveedor from './routes/AddProveedorRoutes'
 import UpdateProveedor from './routes/UpdateProveedorRoutes'
 import BodegaSilla from './routes/BodegaSillaRoutes'
-
+import ListadoReclamo from './routes/ListadoReclamoRoutes'
+import UpdateReclamo from './routes/UpdateReclamoRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
@@ -104,6 +105,8 @@ ReactDOM.render((
             <Route path="listado-proveedor" component={ListadoProveedor}/>
             <Route path="ingreso-proveedor" component={AddProveedor}/>
             <Route path="actualizar-proveedor/:id" component={UpdateProveedor}/>
+            <Route path="listado-reclamo" component={ListadoReclamo}/>
+            <Route path="actualizar-reclamo/:id" component={UpdateReclamo}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

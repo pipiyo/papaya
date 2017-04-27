@@ -23,7 +23,6 @@ export default class ReclamoRoutes extends React.Component {
 	render() {
 	  return (
 	    <ReclamoIndex 
-	    mensaje={this.state.obj.mensaje} 
 	    addReclamo={this.addReclamo.bind(this)} 
 	    fecha={this.state.obj.item.fecha}
 	    />       

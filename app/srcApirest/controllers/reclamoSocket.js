@@ -31,10 +31,39 @@ module.exports = (io) => {
               console.log('Error no se pudo ingresar reclamo '+ err)
         })
     })
-
-
-    console.log(data)
     socket.emit('mensaje', mensaje)
+  })
+
+   /* Editar reclamo */
+  socket.on('updateReclamo', (data,callback) => {
+      pool.getConnection( (err, connection) => {
+            connection.query('UPDATE reclamos SET ROCHA = ?, AREA = ?, AREA1 = ?, AREA2 = ?, RAZON = ?, FECHA_INICIO = ?, FECHA_TERMINO  = ?, ESTADO  = ? WHERE CODIGO_RECLAMO = ?', [data.rocha, data.area, data.area1, data.area1, data.razon, data.fechaInicio, data.fechaEntrega, data.estado, data.codigo], (err, results) => {
+                connection.release()
+                if (!err){
+                  callback({mensaje:`Se actualizo ${data.codigo}`})
+                }
+                else{
+                  console.log('Error ' + err)
+                }
+            }) 
+      }) 
+  })
+
+  /* Listar reclamo */
+  socket.on('searchReclamo', (id,callback) => {
+   
+    let query = `select * from reclamos where CODIGO_RECLAMO = '${id}' ` 
+    pool.getConnection( (err, connection) => {
+        connection.query(query, (err, rows, fields) => {
+            connection.release()
+            if (!err){
+              callback({reclamo:rows})
+            }
+            else{
+              console.log('Error ' + err)
+            }
+        }) 
+    })
   })
 
 })

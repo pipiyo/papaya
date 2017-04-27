@@ -6,7 +6,7 @@ module.exports = (io) => {
   .of('/proveedor')
   .on('connection', (socket) => {
 
-  /* Ingresar cliente */
+  /* Ingresar proveedor */
   socket.on('addProveedor', (data,callback) => {
     let cliente = { 
                     CODIGO_PROVEEDOR: data.rut, 
@@ -37,7 +37,7 @@ module.exports = (io) => {
       }) 
   })
 
-  /* Editar cliente */
+  /* Editar proveedor */
   socket.on('updateProveedor', (data,callback) => {
       pool.getConnection( (err, connection) => {
             connection.query('UPDATE proveedor SET RUT_PROVEEDOR = ?, NOMBRE_FANTASIA = ?, RAZON_SOCIAL = ?, GIRO = ?, DIRECCION = ?, CONTACTO1 = ?, TELEFONO1  = ?, TELEFONO2 = ?, CELULAR_CONTACTO1  = ?, FORMA_PAGO  = ? WHERE CODIGO_PROVEEDOR = ?', [data.rut, data.nombre, data.razon, data.giro, data.direccion, data.contacto, data.telefono1, data.telefono2, data.mail, data.pago, data.codigo], (err, results) => {
@@ -52,7 +52,7 @@ module.exports = (io) => {
       }) 
   })
 
-  /* Listar cliente */
+  /* Listar proveedor */
   socket.on('searchProveedor', (id,callback) => {
    
     let query = `select * from proveedor where CODIGO_PROVEEDOR = '${id}' ` 
