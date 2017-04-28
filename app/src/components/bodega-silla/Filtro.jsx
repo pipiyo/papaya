@@ -35,6 +35,13 @@ class Filtro extends Component {
                 <input autoComplete="off" id="descripcion" type="text" data-complete="t2producto1" onBlur={this.autocompleteOff.bind(this)}  onChange={this.autocomplete.bind(this)} />
                 <AutoComplet name={`descripcion`} />
             </div>
+
+            <div class="item-filter">
+                <label>Modelo</label>
+                <input autoComplete="off" id="modelo" type="text" data-complete="sillamodelo" onBlur={this.autocompleteOff.bind(this)}  onChange={this.autocomplete.bind(this)} />
+                <AutoComplet name={`modelo`} />
+            </div>            
+
             <div class="item-filter">
                 <label>Categoria</label>
                 <select id="categoria" >

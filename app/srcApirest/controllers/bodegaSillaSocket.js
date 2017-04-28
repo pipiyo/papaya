@@ -53,7 +53,7 @@ module.exports = (io) => {
 
 
   /* Buscar Silla */
-  socket.on( 'buscarBodegaSilla', ( codigo, descripcion, categoria, producto, pais, proveedor, mecanismo, respaldo, limita, limitb, callback ) => {
+  socket.on( 'buscarBodegaSilla', ( codigo, descripcion, modelo, categoria, producto, pais, proveedor, mecanismo, respaldo, limita, limitb, callback ) => {
 ////////////////////
     let promesa = new Promise( (resolve, reject) => {  
 		let buscar_codigo = (codigo.trim().length > 0) ? ` AND producto.CODIGO_PRODUCTO = '${codigo.trim()}' ` : ` `
@@ -70,6 +70,8 @@ let buscar_proveedor = (proveedor.trim().length > 0) ? ` AND producto.DIMENSION 
 let buscar_mecanismo = (mecanismo.trim().length > 0) ? ` AND producto.TIPO = '${mecanismo.trim()}' ` : ` `
 
 let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '${respaldo.trim()}' ` : ` `
+
+let buscar_modelo = (modelo.trim().length > 0) ? ` AND producto.RELACION = '${modelo.trim()}' ` : ` `
 
 
 limita = limitb-50
@@ -89,6 +91,7 @@ limita = limitb-50
                   ${buscar_mecanismo}
                   ${buscar_respaldo}
         					${buscar_descripcion}
+                  ${buscar_modelo}
         					${buscar_codigo}
         					AND producto.FAMILIA = 'generico'
                   AND producto.TEMPORADA = '2' limit ${limitb}, 50;` 
@@ -108,7 +111,6 @@ limita = limitb-50
                   AND producto.TEMPORADA = '2';` 
 */
 
-  console.log( query )
 
         pool.getConnection( (err, connection) => {
             connection.query( query , (err, rows, fields) => {
@@ -140,7 +142,8 @@ limita = limitb-50
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
         					WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
-        					AND producto.CODIGO_GENERICO = '${codigo}';` 
+        					AND producto.CODIGO_GENERICO = '${codigo}'
+                  limit 50;` 
         pool.getConnection( (err, connection) => {
             connection.query( query, (err, rows, fields) => {
                 connection.release()
@@ -175,7 +178,8 @@ limita = limitb-50
                   WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
                   ${buscar_descripcion}
                   ${buscar_codigo}
-                  AND producto.CODIGO_GENERICO = '${generico}';` 
+                  AND producto.CODIGO_GENERICO = '${generico}'
+                  limit 50;` 
         pool.getConnection( (err, connection) => {
             connection.query( query , (err, rows, fields) => {
                 connection.release()

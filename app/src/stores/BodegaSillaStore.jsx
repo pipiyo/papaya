@@ -30,7 +30,19 @@ let BodegaSillaStore = Reflux.createStore({
     buscado: null,
     volver:null,
     total: 0,
-    search:{limitA:0, limitB:0,"cod":"", des:"", cat:"", pro: "", pais: "", proveedor: "", mecanismo: "",respaldo: ""} 
+    search:{
+            limitA:0, 
+            limitB:0,
+            "cod":"", 
+            des:"", 
+            modelo: null, 
+            cat:"", 
+            pro: "", 
+            pais: "", 
+            proveedor: "", 
+            mecanismo: "",
+            respaldo: ""
+          } 
   },
 
   init: function() {
@@ -79,6 +91,7 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   },
 
   buscarHijoSilla: function( ev ) {
+    this.obj.filtro = null
     this.obj.renderItem = []
     window.scrollTo(0, 0);
     this.obj.bodega = "hijo"
@@ -117,27 +130,31 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
 
     this.obj.filtro = <Filtro buscar={this.buscar} />
 
+    this.obj.renderItem = []
+
     this.obj.search.cod = event.target.elements[0].value
     this.obj.search.des = event.target.elements[1].value
-    this.obj.search.cat = event.target.elements[2].value
-    this.obj.search.pro = event.target.elements[3].value
-    this.obj.search.pais = event.target.elements[4].value
-    this.obj.search.proveedor = event.target.elements[5].value
-    this.obj.search.mecanismo = event.target.elements[6].value
-    this.obj.search.respaldo = event.target.elements[7].value
+    this.obj.search.modelo = event.target.elements[2].value
+    this.obj.search.cat = event.target.elements[3].value
+    this.obj.search.pro = event.target.elements[4].value
+    this.obj.search.pais = event.target.elements[5].value
+    this.obj.search.proveedor = event.target.elements[6].value
+    this.obj.search.mecanismo = event.target.elements[7].value
+    this.obj.search.respaldo = event.target.elements[8].value
 
     socket.emit('buscarBodegaSilla', 
                                   event.target.elements[0].value /*cod*/, 
-                                  event.target.elements[1].value /*des*/, 
-                                  event.target.elements[2].value /*cat*/,
-                                  event.target.elements[3].value /*pro*/,
-                                  event.target.elements[4].value /*pais*/,
-                                  event.target.elements[5].value /*proveedor*/,
-                                  event.target.elements[6].value /*mecanismo*/,
-                                  event.target.elements[7].value /*respaldo*/, 
+                                  event.target.elements[1].value /*des*/,
+                                  event.target.elements[2].value /*modelo*/, 
+                                  event.target.elements[3].value /*cat*/,
+                                  event.target.elements[4].value /*pro*/,
+                                  event.target.elements[5].value /*pais*/,
+                                  event.target.elements[6].value /*proveedor*/,
+                                  event.target.elements[7].value /*mecanismo*/,
+                                  event.target.elements[8].value /*respaldo*/, 
                                   this.obj.search.limitA,
                                   this.obj.search.limitB,( productos ) => {
-		this.obj.renderItem = []
+		
     //this.obj.total = productos.cuenta
       _.map( productos.productos, ( producto, i ) => {
               this.obj.renderItem.push(<Item 
@@ -152,6 +169,7 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   getBodegaSilla: function() {
     this.obj.search.cod = ""
     this.obj.search.des = ""
+    this.obj.search.modelo = null
     this.obj.search.cat = ""
     this.obj.search.pro = ""
     this.obj.search.pais = ""
@@ -189,7 +207,8 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
     this.obj.search.limitB += ( this.obj.search.limitB = 0 ) ? 0 : 50
       socket.emit('buscarBodegaSilla', 
                                     this.obj.search.cod,
-                                    this.obj.search.des, 
+                                    this.obj.search.des,
+                                    this.obj.search.modelo, 
                                     this.obj.search.cat,
                                     this.obj.search.pro,
                                     this.obj.search.pais,

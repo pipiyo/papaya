@@ -31,6 +31,13 @@ module.exports = (io) => {
       case "t2producto1":
             query = `SELECT DESCRIPCION as DATOS, CODIGO_PRODUCTO as DATOS1, STOCK_ACTUAL as DATOS2, PRECIO as DATOS3, PRECIO_SIN_DESCUENTO as DATOS4, PRECIO as DATOS5, PRECIO as DATOS6  FROM producto WHERE TEMPORADA = 2 AND DESCRIPCION like "%${data.valor}%" and producto.FAMILIA = 'generico'  limit 10`;
           break;
+      case "sillamodelo":
+            query = `SELECT RELACION as DATOS 
+                      FROM producto 
+                      WHERE TEMPORADA = 2 
+                      AND RELACION like "%${data.valor}%" 
+                      and producto.FAMILIA = 'generico'  limit 10;`;
+          break;
     }
 
       pool.getConnection( (err, connection) => {
