@@ -7,6 +7,7 @@ class FiltroHijo extends Component {
   render() {
       return (
       <form onSubmit={ this.props.buscar } >
+
         <div class="module-filter">
             <div class="item-filter">
                 <label>Código</label>
