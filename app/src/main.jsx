@@ -51,7 +51,12 @@ import UpdateProveedor from './routes/UpdateProveedorRoutes'
 import BodegaSilla from './routes/BodegaSillaRoutes'
 import ListadoReclamo from './routes/ListadoReclamoRoutes'
 import UpdateReclamo from './routes/UpdateReclamoRoutes'
-
+import ListadoVehiculo from './routes/ListadoVehiculoRoutes'
+import AddVehiculo from './routes/AddVehiculoRoutes'
+import UpdateVehiculo from './routes/UpdateVehiculoRoutes'
+import ListadoLinea from './routes/ListadolineaRoutes'
+import AddLinea from './routes/AddLineaRoutes'
+import UpdateLinea from './routes/UpdateLineaRoutes'
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
 window.__myapp_container = document.getElementById('app')
@@ -107,6 +112,12 @@ ReactDOM.render((
             <Route path="actualizar-proveedor/:id" component={UpdateProveedor}/>
             <Route path="listado-reclamo" component={ListadoReclamo}/>
             <Route path="actualizar-reclamo/:id" component={UpdateReclamo}/>
+            <Route path="listado-vehiculo" component={ListadoVehiculo}/>
+            <Route path="ingreso-vehiculo" component={AddVehiculo}/>
+            <Route path="actualizar-vehiculo/:id" component={UpdateVehiculo}/>
+            <Route path="listado-linea" component={ListadoLinea}/>
+            <Route path="ingreso-linea" component={AddLinea}/>
+            <Route path="actualizar-linea/:id" component={UpdateLinea}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

@@ -86,7 +86,14 @@ require('./srcApirest/controllers/proveedorSocket')(io)
 
 require('./srcApirest/controllers/listadoReclamoSocket')(io)
 
-  
+require('./srcApirest/controllers/listadoVehiculoSocket')(io)
+
+require('./srcApirest/controllers/vehiculoSocket')(io)
+
+require('./srcApirest/controllers/listadoLineaSocket')(io)
+ 
+require('./srcApirest/controllers/lineaSocket')(io)
+
 app.all('*', (request, response, next) => {
   response.sendFile(path.resolve(__dirname, 'bundle', 'index.html'))
 })
