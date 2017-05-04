@@ -15,6 +15,9 @@ module.exports = (io) => {
     let promesa = new Promise( (resolve, reject) => {  
         let query = `SELECT producto.CODIGO_PRODUCTO, 
         					producto.DESCRIPCION, 
+                  producto.POSICION, 
+                  producto.FRENTE, 
+                  producto.TRASCARA, 
         					categoria_producto.nombre as CATEGORIA, 
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
@@ -80,6 +83,9 @@ limita = limitb-50
 
         let query = `SELECT producto.CODIGO_PRODUCTO, 
         					producto.DESCRIPCION, 
+                  producto.POSICION, 
+                  producto.FRENTE, 
+                  producto.TRASCARA, 
         					categoria_producto.nombre as CATEGORIA, 
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
@@ -163,12 +169,19 @@ limita = limitb-50
   })
 
   /* Filtro Hijo Silla */
-  socket.on( 'filtroHijoSilla', ( generico, codigo, descripcion, callback ) => {
+  socket.on( 'filtroHijoSilla', ( generico, asiento, respaldo, estructura, callback ) => {
 ////////////////////
     let promesa = new Promise( (resolve, reject) => {  
         
-    let buscar_codigo = (codigo.trim().length > 0) ? ` AND producto.CODIGO_PRODUCTO = '${codigo.trim()}' ` : ` `
-    let buscar_descripcion = (descripcion.trim().length > 0) ? ` AND producto.DESCRIPCION = '${descripcion.trim()}' ` : ` `
+    //let buscar_codigo = (codigo.trim().length > 0) ? ` AND producto.CODIGO_PRODUCTO = '${codigo.trim()}' ` : ` `
+    //let buscar_descripcion = (descripcion.trim().length > 0) ? ` AND producto.DESCRIPCION = '${descripcion.trim()}' ` : ` `
+
+
+    let buscar_asiento = (asiento.trim().length > 0) ? ` AND producto.POSICION like '${asiento.trim()}%' ` : ` `
+    let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.FRENTE like '${respaldo.trim()}%' ` : ` `
+    let buscar_estructura = (estructura.trim().length > 0) ? ` AND producto.TRASCARA like '${estructura.trim()}%' ` : ` `
+
+
 
         let query = `SELECT producto.CODIGO_PRODUCTO, 
                   producto.DESCRIPCION, 
@@ -176,10 +189,14 @@ limita = limitb-50
                   producto.CATEGORIA as CODIGO_CATEGORIA 
                   FROM producto, categoria_producto 
                   WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
-                  ${buscar_descripcion}
-                  ${buscar_codigo}
+                  ${buscar_asiento}
+                  ${buscar_respaldo}
+                  ${buscar_estructura}
                   AND producto.CODIGO_GENERICO = '${generico}'
                   limit 50;` 
+
+                  console.log( query )
+
         pool.getConnection( (err, connection) => {
             connection.query( query , (err, rows, fields) => {
                 connection.release()

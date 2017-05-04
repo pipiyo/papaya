@@ -45,6 +45,386 @@ let BodegaSillaStore = Reflux.createStore({
           } 
   },
 
+  listacolores: {
+
+      T43: ["T43"],
+      'PU Negro': ["PU NEGRO"],
+
+        TF1:  ["Negro"],
+        TF2:  ["Rojo"],
+        TF3:  ["Azul"],
+        TF4:  ["Café"],
+        TF5:  ["Gris"],
+        TF6:  ["Blanco"],
+        TF7:  [""],
+        TF8:  [""],
+        TF9:  [""],
+        TF10: [""],
+        TF11: [
+            "Negro",
+            "Rojo",
+            "Azul"
+            ],
+        TF12: [
+            "Negro",
+            "Gris"
+            ],
+        TF13: [
+            "Negro",
+            "Azul"
+            ],  
+        TF14: [
+            "Negro",
+            "Rojo"
+            ],
+        
+
+
+      D: [
+        "Butterfly",
+        "Liga",
+        "Pony",
+        "Suerstart",
+        "Turbo"
+      ],
+
+
+
+
+
+        M1: ["Negra"],
+        M2: ["Blanca"],
+        M3: ["Azul"],
+        M4: ["Gris"],
+        M5: ["Verde"],
+        M6: ["Roja"],
+        M7: ["Naranja"],
+        M8: [""],
+        M9: [""],
+        M10:[""], 
+        M11: [
+            "Negro",
+            "Blanco",
+            "Azul",
+            "Gris",
+            "Roja"
+            ],  
+        M12: [
+            "Azul claro",
+            "Naranjo",
+            "Gris"
+            ],
+        M13: [
+            "Negro",
+            "Blanco"
+            ],
+        M14: [
+            "Negro",
+            "Gris"
+            ],
+      
+
+
+        Eco1: ["Negro"],
+        Eco2: ["Blanco"],
+        Eco3: ["Grafito"],
+        Eco4: ["Arena"],
+        Eco5: ["Cuero"],
+        Eco6: [
+            "Negro",
+            "Blanco",
+            "Grafito",
+            "Arena"
+            ],  
+        Eco7: [
+            "Negro",
+            "Blanco"
+            ],    
+        Eco8: [
+            "Negro",
+            "Café"
+            ],    
+        Eco9: [""],
+
+
+      T1: ["Glock"],
+      T2: ["Escorial"],
+      T3: ["Maroqui"],
+      T4: ["Venetto"],
+      T5: ["Venezia"],
+      T6: ["Elasticity"],
+      T7: ["Renna"],
+      T8: ["Pegaso"],
+      T9: ["Serrano"],
+      T10:  ["Frontier"],
+      T11:  ["Tacto Plus"],
+      T12:  ["Cuero Natural"],
+      T13:  ["Liberty"],
+      T14:  ["Normandia"],
+      T15:  ["Versalle"],
+      T16:  ["Paris"],
+      T17:  ["Coventry"],
+      T18:  [""],
+      T19:  [""],
+      T20:  [
+              "Glock",
+              "Escorial",
+              "Maroqui",
+              "Venetto",
+              "Venezia"
+            ],
+      T21: [
+          "Elasticity",
+          "Renna",
+          "Pegaso",
+          "Coventry"
+          ],    
+      T22: [
+          "Renna",
+          "Pegaso",
+          "Coventry"
+          ],    
+      T23: [
+          "Liberty",
+          "Normandia",
+          "Versalle",
+          "Paris"
+          ],    
+      T24: [
+          "Hilat",
+          "Tacto Plus",
+          "Serrano",
+          "Renna",
+          "Lana VC"
+          ],
+
+        P1: ["Negro"],
+        P2: ["Blanco"],
+        P3: ["Café"],
+        P4: ["Gris"],
+        P5: ["Azul"],
+        P6: ["Beige"],
+        P7: ["Amarillo"],
+        P8: ["Naranjo"],
+        P9: ["Rojo"],
+        P10:  ["Verde"],
+        P11:  ["Burdeo"],
+        P12:  ["Marengo"],
+        P13:  ["Sandia"],
+        P14:  ["Guinda"],
+        P15:  ["Arena"],
+        P16:  ["Violeta"],
+        P17:  ["Grafito"],
+        P18:  ["Gris Claro"],
+        P19:  [""],
+        P20:  [""],
+        P21: [
+            "Negro",
+            "Blanco",
+            "Azul",
+            "Beige",
+            "Naranjo",
+            "Rojo",
+            "Verde"
+            ],  
+        P22: [
+            "Negro",
+            "Blanco",
+            "Gris",
+            "Azul",
+            "Naranjo",
+            "Rojo",
+            "Verde",
+            "Arena"
+            ],    
+        P23: [
+            "Negro",
+            "Blanco",
+            "Gris"
+            ],  
+        P24: [
+            "Negro",
+            "Gris",
+            "Azul",
+            "Rojo",
+            "Verde"
+            ],  
+        P25: [
+            "Negro",
+            "Blanco",
+            "Gris",
+            "Azul",
+            "Naranjo",
+            "Verde",
+            "Arena"
+            ],  
+        P26: [
+            "Negro",
+            "Blanco",
+            "Café",
+            "Azul",
+            "Rojo",
+            "Violeta"
+            ],  
+        P27: [
+            "Negro",
+            "Blanco",
+            "Café",
+            "Azul",
+            "Rojo",
+            "Violeta"
+            ],  
+        P28: [
+            "Negro",
+            "Gris",
+            "Azul",
+            "Rojo"
+            ],  
+        P29: [
+            "Beige",
+            "Grafito"
+            ],  
+        P30: [
+            "Negro",
+            "Sandia"
+            ],  
+        P31: [
+            "Negro",
+            "Blanco"
+            ],  
+        P32: [
+            "Negro",
+            "Verde"
+            ],  
+        P33: [
+            "Negro",
+            "Verde",
+            "Sandia"
+            ],    
+        P34: [
+            "Café",
+            "Azul",
+            "Naranjo",
+            "Verde",
+            "Guinda"
+            ],  
+        P35: [
+            "Café",
+            "Azul",
+            "Guinda"
+            ],  
+        P36: [
+            "Negro",
+            "Blanco",
+            "Azul",
+            "Amarillo",
+            "Naranjo",
+            "Rojo",
+            "Verde"
+            ],    
+        P37: [
+            "Negro",
+            "Azul",
+            "Amarillo",
+            "Naranjo",
+            "Gris"
+            ],  
+        P38: [
+            "Blanco",
+            "Gris",
+            "Verde"
+            ],  
+        P39: [
+            "Negro",
+            "Rojo"
+            ],  
+        P40: [
+            "Negro",
+            "Blanco",
+            "Rojo"
+            ],  
+        P41: [
+            "Azul",
+            "Blanco",
+            "Rojo"
+            ],  
+        P42: [
+            "Negro",
+            "Azul"
+            ],  
+        P43: [
+            "Negro",
+            "Gris",
+            "Azul",
+            "Amarillo",
+            "Naranjo",
+            "Rojo",
+            "Burdeo",
+            "Verde Pistacho",
+            "Verde Manzana",
+            "Verde Esmeralda"
+            ],    
+        P44: [
+            "Negro",
+            "Gris",
+            "Azul",
+            "Blanco",
+            "Rojo",
+            "Verde Pistacho"
+            ],  
+        P45: [
+            "Azul",
+            "Verde"
+            ],
+
+      B1: ["Negro"],
+      B2: ["Aluminizada"],
+      B3: ["Cromada"],
+      B4: ["Blanca"],
+      B5: ["Charcole"],
+      B6: ["Gris"],
+      B7: ["Madera"],
+      B8: [""],
+      B9: [""],
+      B10: [""],
+      B11: [""],
+      B12: [
+          "Negro",
+          "Aluminizada"   
+          ],  
+      B13: [
+          "Negro",
+          "Cromada" 
+          ],    
+      B14: [
+          "Cromada",
+          "Aluminizada"
+          ],    
+      B15: [
+          "Negro",
+          "Cromada",
+          "Gris"
+          ],      
+      B16: [
+          "Blanca",
+          "Aluminizada"
+          ],  
+      B17: [
+          "Gris",
+          "Cromada"
+          ],  
+      B18: [
+          "Aluminio",
+          "Charcole"
+          ],  
+      B19: [
+          "Negro",
+          "Aluminio",
+          "Cromada"
+          ],
+
+},
+
   init: function() {
 
   },
@@ -76,9 +456,13 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
 
   this.obj.volver = this.volver
 
-    this.obj.filtro = <FiltroHijo buscar={this.filtroHijoSilla} />
+    this.obj.filtro = <FiltroHijo 
+                                  buscar={this.filtroHijoSilla}
+                                  asiento={this.listacolores[this.obj.buscado_asiento]} 
+                                  respaldo={this.listacolores[this.obj.buscado_respaldo]} 
+                                  estructura={this.listacolores[this.obj.buscado_estructura]} />
 
-    socket.emit('filtroHijoSilla', this.obj.buscado, event.target.elements[0].value, event.target.elements[1].value, ( productos ) => {
+    socket.emit('filtroHijoSilla', this.obj.buscado, ( (event.target.elements[0].value != 'x') ? `${this.obj.buscado_asiento},${event.target.elements[0].value}` : `` ) , ( (event.target.elements[1].value != 'x') ? `${this.obj.buscado_respaldo},${event.target.elements[1].value}` : `` ), ( (event.target.elements[2].value != 'x') ? `${this.obj.buscado_estructura},${event.target.elements[2].value}` : `` ) , ( productos ) => {
     this.obj.renderItem = []
       _.map( productos, ( producto ) => {
               this.obj.renderItem.push(<ItemHijo 
@@ -93,16 +477,26 @@ document.getElementById('botonVolverSilla').classList.remove('hidden')
   buscarHijoSilla: function( ev ) {
     this.obj.filtro = null
     this.obj.renderItem = []
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     this.obj.bodega = "hijo"
     this.obj.buscado = ev.target.dataset.codigo
     this.obj.buscadodes = ev.target.dataset.descripcion
+
+this.obj.buscado_asiento = ev.target.dataset.asiento
+this.obj.buscado_respaldo = ev.target.dataset.respaldo
+this.obj.buscado_estructura = ev.target.dataset.estructura
+
+
     this.obj.buscar = this.filtroHijoSilla
 
     this.obj.volver = this.volver
 
 
-    this.obj.filtro = <FiltroHijo buscar={this.filtroHijoSilla} />
+    this.obj.filtro = <FiltroHijo 
+                                  buscar={this.filtroHijoSilla} 
+                                  asiento={this.listacolores[ev.target.dataset.asiento]} 
+                                  respaldo={this.listacolores[ev.target.dataset.respaldo]} 
+                                  estructura={this.listacolores[ev.target.dataset.estructura]} />
 
     document.getElementById('botonVolverSilla').classList.remove('hidden')
 
