@@ -29,9 +29,7 @@ import UpdateProducto from './routes/UpdateProductoRoutes'
 import UpdateProductoPrecio from './routes/UpdateProductoPrecioRoutes'
 import Producto from './routes/ProductoRoutes'
 import StockProducto from './routes/StockPruductoRoutes'
-
 import CuadroRocha from './routes/CuadroRochaRoutes'
-
 import DescriptionRocha from './routes/DescriptionRochaRoutes'
 import ListadoOc from './routes/ListadoOcRoutes'
 import UpdateOcFecha from './routes/UpdateOcFechaRoutes'
@@ -44,11 +42,22 @@ import RecibirVale from './routes/RecibirValeRoutes'
 import ListadoVale from './routes/ListadoValeRoutes'
 import UpdateOc from './routes/UpdateOcRoutes'
 import UpdateVale from './routes/UpdateValeRoutes'
-
-
+import ListadoCliente from './routes/ListadoClienteRoutes'
+import AddCliente from './routes/AddClienteRoutes'
+import UpdateCliente from './routes/UpdateClienteRoutes'
+import ListadoProveedor from './routes/ListadoProveedorRoutes'
+import AddProveedor from './routes/AddProveedorRoutes'
+import UpdateProveedor from './routes/UpdateProveedorRoutes'
 import BodegaSilla from './routes/BodegaSillaRoutes'
-
 import Bloqueo from './routes/BloqueoRoutes'
+import ListadoReclamo from './routes/ListadoReclamoRoutes'
+import UpdateReclamo from './routes/UpdateReclamoRoutes'
+import ListadoVehiculo from './routes/ListadoVehiculoRoutes'
+import AddVehiculo from './routes/AddVehiculoRoutes'
+import UpdateVehiculo from './routes/UpdateVehiculoRoutes'
+import ListadoLinea from './routes/ListadolineaRoutes'
+import AddLinea from './routes/AddLineaRoutes'
+import UpdateLinea from './routes/UpdateLineaRoutes'
 
 import { Router, Route, Redirect, browserHistory, IndexRoute } from 'react-router'
 
@@ -82,11 +91,11 @@ ReactDOM.render((
             <Route path="producto/:id" component={Producto}/>
             <Route path="stock-producto/:bodega/:id" component={StockProducto}/>
             <Route path="bodega-seleccion/:id" component={BodegaSon}/>
-
+            <Route path="listado-cliente" component={ListadoCliente}/>
+            <Route path="ingreso-cliente" component={AddCliente}/>
+            <Route path="actualizar-cliente/:id" component={UpdateCliente}/>
             <Route path="bodega-silla" component={BodegaSilla}/>
-
             <Route path="bloqueo" component={Bloqueo}/>            
-
             <Route path="cuadro-proyecto" component={CuadroRocha}/>
             <Route path="descripcion-rocha/:id" component={DescriptionRocha}/>
             <Route path="listado-oc" component={ListadoOc}/>
@@ -101,6 +110,17 @@ ReactDOM.render((
             <Route path="actualizar-oc/:id" component={UpdateOc}/>
             <Route path="actualizar-vale/:id" component={UpdateVale}/>
             <Route path="vale-emision" component={ValeEmision}/>
+            <Route path="listado-proveedor" component={ListadoProveedor}/>
+            <Route path="ingreso-proveedor" component={AddProveedor}/>
+            <Route path="actualizar-proveedor/:id" component={UpdateProveedor}/>
+            <Route path="listado-reclamo" component={ListadoReclamo}/>
+            <Route path="actualizar-reclamo/:id" component={UpdateReclamo}/>
+            <Route path="listado-vehiculo" component={ListadoVehiculo}/>
+            <Route path="ingreso-vehiculo" component={AddVehiculo}/>
+            <Route path="actualizar-vehiculo/:id" component={UpdateVehiculo}/>
+            <Route path="listado-linea" component={ListadoLinea}/>
+            <Route path="ingreso-linea" component={AddLinea}/>
+            <Route path="actualizar-linea/:id" component={UpdateLinea}/>
         </Route>
     </Route>
     <Route path="*" component={Servicio} />

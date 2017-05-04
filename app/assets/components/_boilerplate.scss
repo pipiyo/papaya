@@ -2441,6 +2441,7 @@ a.external-link, .external-link a {
         border:1px solid rgba(34,36,38,.15);
         font-size: $fontTiny;
         &.oc{thead{th{background:#41AC8A;color:$blanco;}}}
+        &.reclamo{thead{th{background:$color_reclamos;color:$blanco;}}}
         &.abastecimiento{thead{th{background:$color_abastecimiento;color:$blanco;}}}
         &.sillas{thead{th{background:$color_sillas;color:$blanco;}}}
         &.produccion{thead{th{background:$color_produccion;color:$blanco;}}}

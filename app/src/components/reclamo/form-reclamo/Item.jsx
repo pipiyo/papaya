@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker'
 import moment  from 'moment'
 
 import ReclamoActions from '../../../actions/ReclamoActions'
+import AutoComplet  from '../../../routes/AutoComRoutes'
+import AutocompleteActions from '../../../actions/AutocompleteActions'
 
 class Item extends React.Component {
   constructor() {
@@ -14,6 +16,14 @@ class Item extends React.Component {
   renderFechaEntrega(date){
     ReclamoActions.renderFechaEntrega(date)
   }
+  autocomplete(ev){
+    ev.persist()
+    AutocompleteActions.autocomplete(ev)
+  }
+  autocompleteOff(ev,input){
+    ev.persist()
+    AutocompleteActions.autocompleteOff(ev)
+  }
   render() {
       return (
         <div>
@@ -23,13 +33,9 @@ class Item extends React.Component {
             </div>
 
             <div className="item-form">
-                <label>Numero</label>
-                <input id="reclamo" type="number" />
-            </div>
-
-            <div className="item-form">
                 <label>Rocha</label>
-                <input id="rocha" type="text" />
+                <input autoComplete="off" data-complete="rocha" onBlur={this.autocompleteOff.bind(this)} onChange={this.autocomplete.bind(this)} id="rocha" type="text" />
+                <AutoComplet name="rocha" />
             </div>
 
             <div className="item-form">
@@ -52,8 +58,8 @@ class Item extends React.Component {
                 <option value="">Seleccioné</option>
                 <option value="Faltante material">Faltante material</option>
                 <option value="Acabado diferente">Acabado diferente</option>
-                <option value="Dimensión diferente">Dimensión diferente</option>
-                <option value="Defecto de fábrica">Defecto de fábrica</option>
+                <option value="Dimension diferente">Dimensión diferente</option>
+                <option value="Defecto De Frabica">Defecto de fábrica</option>
                 <option value="diseño de producto">diseño de producto</option>
                 <option value="Daños otros">Daños otros</option>
               </select>
@@ -67,16 +73,6 @@ class Item extends React.Component {
             <div className="item-form">
                 <label>Fecha Entrega</label>
                 <DatePicker class="date" id="fechaEntrega" dateFormat="YYYY-MM-DD" selected={this.props.fecha.fechaEntrega} onChange={this.renderFechaEntrega.bind(this)} />
-            </div>
-
-            <div className="item-form">
-                <label>Días</label>
-                <input type="number" class="date" id="dias" />
-            </div>
-
-            <div className="item-form">
-                <label>Descripción</label>
-                <input id="descripcion" type="text"/>
             </div>
 
             <div className="item-form">
