@@ -35,7 +35,7 @@ let BodegaSillaStore = Reflux.createStore({
             limitB:0,
             "cod":"", 
             des:"", 
-            modelo: null, 
+            modelo: "", 
             cat:"", 
             pro: "", 
             pais: "", 
@@ -563,7 +563,7 @@ this.obj.buscado_estructura = ev.target.dataset.estructura
   getBodegaSilla: function() {
     this.obj.search.cod = ""
     this.obj.search.des = ""
-    this.obj.search.modelo = null
+    this.obj.search.modelo = ""
     this.obj.search.cat = ""
     this.obj.search.pro = ""
     this.obj.search.pais = ""
