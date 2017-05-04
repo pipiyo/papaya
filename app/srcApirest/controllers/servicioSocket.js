@@ -169,9 +169,9 @@ module.exports = (io) => {
                                                    categoria: data.categoria
                                                  } 
                                                })
-
+/*
             notificationInsert(notification, data.area)
-
+*/
           } else {
             console.log('Error no se pudo ingresar servicio '+ err)
           }
