@@ -6,14 +6,14 @@ import _ from 'lodash'
 import moment from 'moment'
 moment.locale('es')
 
-import CuadroRochaActions from '../actions/CuadroRochaActions'
+import CuadroRochaComercialActions from '../actions/CuadroRochaComercialActions'
 
 import Env from '../Config'
 import io from 'socket.io-client'
-const socket = io.connect( `${Env.url}cuadroRocha` )
+const socket = io.connect( `${Env.url}cuadroRochaComercial` )
 
-let CuadroRochaStore = Reflux.createStore({
-  listenables: [CuadroRochaActions],
+let CuadroRochaComercialStore = Reflux.createStore({
+  listenables: [CuadroRochaComercialActions],
 
   obj: {
     proyectos: [],
@@ -98,6 +98,28 @@ socket.emit('getRochas', ( x, y ) => {
 
   getObj: function() {
 
+/*
+ let f = {
+                               rocha: null,
+                               proyecto: null,
+                               ejecutivo: localStorage.getItem('full_name'),
+                               cliente: null,
+                               estado: null,
+                               vermas: 0
+                             }
+*/
+
+    this.obj.form.busqueda = {
+                               rocha: null,
+                               proyecto: null,
+                               ejecutivo: localStorage.getItem('full_name'),
+                               cliente: null,
+                               estado: null,
+                               vermas: 0
+                             }
+
+
+
     this.getProyectos('getRochas', null, null, null)
 
 
@@ -112,7 +134,7 @@ socket.emit('getRochas', ( x, y ) => {
   },
 
   showProyecto: function(e){
-    CuadroRochaActions._showProyecto(e.target.textContent,e.currentTarget)
+    CuadroRochaComercialActions._showProyecto(e.target.textContent,e.currentTarget)
   },
   _showProyecto: function(e, i){
     let index = _.findIndex(this.obj.proyectos, { np: `${e}` })
@@ -186,7 +208,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
 
 
   showRocha: function(e){
-    CuadroRochaActions._showRocha(e.target,e.currentTarget)
+    CuadroRochaComercialActions._showRocha(e.target,e.currentTarget)
   },
   _showRocha: function(e,i){
     let index = { 
@@ -223,7 +245,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
 
 
   showServicio: function(e){
-    CuadroRochaActions._showServicio(e.target,e.currentTarget)
+    CuadroRochaComercialActions._showServicio(e.target,e.currentTarget)
   },
   _showServicio: function(e,i){
 
@@ -261,7 +283,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
 
 
   showSubServicio: function(e){
-    CuadroRochaActions._showSubServicio(e.target,e.currentTarget)
+    CuadroRochaComercialActions._showSubServicio(e.target,e.currentTarget)
   },
   _showSubServicio: function(e,i){
     // let index = { 
@@ -280,7 +302,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
 
   buscar: function(e) {
     e.preventDefault()
-    CuadroRochaActions._buscar(e.target)
+    CuadroRochaComercialActions._buscar(e.target)
   },
 
   _buscar: function(e) {
@@ -295,7 +317,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
 
 
   subirmes: function() {
-    CuadroRochaActions._subirmes()
+    CuadroRochaComercialActions._subirmes()
   },  
   _subirmes: function() {
 
@@ -306,7 +328,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
   },  
 
   bajarmes: function() {
-    CuadroRochaActions._bajarmes()
+    CuadroRochaComercialActions._bajarmes()
   },  
   _bajarmes: function() {
 
@@ -317,7 +339,7 @@ _.forEach(this.obj.calendario.diaspintar, (dpv, dpk) => {
   },
 
   vermas: function() {
-    CuadroRochaActions._vermas()
+    CuadroRochaComercialActions._vermas()
   },  
   _vermas: function() {
 
@@ -847,4 +869,4 @@ _.times(this.obj.calendario.dia, (i) => {
 
 })
 
-export default CuadroRochaStore
+export default CuadroRochaComercialStore

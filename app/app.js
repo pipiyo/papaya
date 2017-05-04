@@ -68,6 +68,8 @@ require('./srcApirest/controllers/valeDeEmisionSocket')(io)
 
 require('./srcApirest/controllers/cuadroRochaSocket')(io)
 
+require('./srcApirest/controllers/cuadroRochaComercialSocket')(io)
+
 require('./srcApirest/controllers/autocompleteSocket')(io)
 
 require('./srcApirest/controllers/emisionOcSocket')(io)
