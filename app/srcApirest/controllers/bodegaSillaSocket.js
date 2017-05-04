@@ -18,6 +18,7 @@ module.exports = (io) => {
                   producto.POSICION, 
                   producto.FRENTE, 
                   producto.TRASCARA, 
+                  producto.RELACION, 
         					categoria_producto.nombre as CATEGORIA, 
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
@@ -86,6 +87,7 @@ limita = limitb-50
                   producto.POSICION, 
                   producto.FRENTE, 
                   producto.TRASCARA, 
+                  producto.RELACION,
         					categoria_producto.nombre as CATEGORIA, 
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
@@ -144,6 +146,7 @@ limita = limitb-50
 
         let query = `SELECT producto.CODIGO_PRODUCTO, 
         					producto.DESCRIPCION, 
+                  producto.RELACION,
         					categoria_producto.nombre as CATEGORIA, 
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
@@ -185,6 +188,7 @@ limita = limitb-50
 
         let query = `SELECT producto.CODIGO_PRODUCTO, 
                   producto.DESCRIPCION, 
+                  producto.RELACION,
                   categoria_producto.nombre as CATEGORIA, 
                   producto.CATEGORIA as CODIGO_CATEGORIA 
                   FROM producto, categoria_producto 
@@ -194,8 +198,6 @@ limita = limitb-50
                   ${buscar_estructura}
                   AND producto.CODIGO_GENERICO = '${generico}'
                   limit 50;` 
-
-                  console.log( query )
 
         pool.getConnection( (err, connection) => {
             connection.query( query , (err, rows, fields) => {

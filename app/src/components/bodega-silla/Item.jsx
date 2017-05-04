@@ -14,6 +14,7 @@ class Item extends Component {
           </div>
           <div class="module_bodega_generico_des">
             <h2>Código: <p>{this.props.bodega.CODIGO_PRODUCTO}</p> </h2>
+            <h2>Modelo: <p>{this.props.bodega.RELACION}</p> </h2>
             <h2>Descripción: <p>{this.props.bodega.DESCRIPCION} ({this.props.bodega.CATEGORIA})</p></h2>
             <div class="module_bodega_generico_stock">
               <div><p>Stock Actual {this.props.bodega.STOCK_ACTUAL}</p></div>

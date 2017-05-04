@@ -84,7 +84,7 @@ User.
                                   name: auht.name,
                                   password: data.pass,
                                   type: auht.type,
-                                  profile_picture: `${pokemonGif(Math.floor(Math.random() * 150) + 1)}`,
+                                  profile_picture: `http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/42/42ea908a8b3eac00fdff247abdb6420a21933839_full.jpg`,
                                   employee: {
                                     rut: auht.employee.rut,
                                     name: auht.employee.name,
