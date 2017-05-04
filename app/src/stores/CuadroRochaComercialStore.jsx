@@ -98,6 +98,28 @@ socket.emit('getRochas', ( x, y ) => {
 
   getObj: function() {
 
+/*
+ let f = {
+                               rocha: null,
+                               proyecto: null,
+                               ejecutivo: localStorage.getItem('full_name'),
+                               cliente: null,
+                               estado: null,
+                               vermas: 0
+                             }
+*/
+
+    this.obj.form.busqueda = {
+                               rocha: null,
+                               proyecto: null,
+                               ejecutivo: localStorage.getItem('full_name'),
+                               cliente: null,
+                               estado: null,
+                               vermas: 0
+                             }
+
+
+
     this.getProyectos('getRochas', null, null, null)
 
 

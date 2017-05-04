@@ -22,11 +22,15 @@ class Filtro extends Component {
                 <label>Ejecutivo</label>
 
                 <select id="ejecutivo" >
-                  <option value="">Seleccioné</option>
+                  
                     {
+                      
+                      <option value={localStorage.getItem('full_name')}>{localStorage.getItem('full_name')}</option>
+                      /*
                       this.props.obj.ejecutivo.map( (v, k) => {
-                        return( <option key={k} value={v.ejecutivo}>{v.ejecutivo}</option> )
+                        return(  )
                       })
+                      */
                     }
                 </select>
 
