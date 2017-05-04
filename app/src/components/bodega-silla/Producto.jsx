@@ -6,7 +6,7 @@ class Producto extends Component {
     super()
   }
   componentDidUpdate(nextProps){
-    BodegaSillaActions.renderButton(nextProps.obj.total[0].total,nextProps.obj.renderItem.length)
+    //BodegaSillaActions.renderButton(nextProps.obj.total[0].total,nextProps.obj.renderItem.length)
   }
   render() {
       return (

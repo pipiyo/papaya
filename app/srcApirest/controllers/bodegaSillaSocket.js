@@ -15,24 +15,32 @@ module.exports = (io) => {
     let promesa = new Promise( (resolve, reject) => {  
         let query = `SELECT producto.CODIGO_PRODUCTO, 
         					producto.DESCRIPCION, 
+                  producto.POSICION, 
+                  producto.FRENTE, 
+                  producto.TRASCARA, 
         					categoria_producto.nombre as CATEGORIA, 
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
         					WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
-        					AND producto.CATEGORIA IN(20,21)
+        					AND producto.CATEGORIA IN(20,21,22)
         					AND producto.FAMILIA = 'generico' limit 50;` 
+
+/*
 
         let query1 = `SELECT count(producto.CODIGO_PRODUCTO) as total
                   FROM producto, categoria_producto 
                   WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
                   AND producto.CATEGORIA IN(20,21)
                   AND producto.FAMILIA = 'generico'` 
+*/
+
 
         pool.getConnection( (err, connection) => {
-            connection.query( query+query1 , (err, rows, fields) => {
+            connection.query( query , (err, rows, fields) => {
                 connection.release()
                 if (!err){
-                  resolve( {productos:rows[0],cuenta:rows[1]} )
+                  resolve( { productos:rows } )
+                  //resolve( {productos:rows[0],cuenta:rows[1]} )
                 }else{
                 	reject( err )
                 }
@@ -48,12 +56,12 @@ module.exports = (io) => {
 
 
   /* Buscar Silla */
-  socket.on( 'buscarBodegaSilla', ( codigo, descripcion, categoria, producto, pais, proveedor, mecanismo, respaldo, limita, limitb, callback ) => {
+  socket.on( 'buscarBodegaSilla', ( codigo, descripcion, modelo, categoria, producto, pais, proveedor, mecanismo, respaldo, limita, limitb, callback ) => {
 ////////////////////
     let promesa = new Promise( (resolve, reject) => {  
 		let buscar_codigo = (codigo.trim().length > 0) ? ` AND producto.CODIGO_PRODUCTO = '${codigo.trim()}' ` : ` `
 		let buscar_descripcion = (descripcion.trim().length > 0) ? ` AND producto.DESCRIPCION = '${descripcion.trim()}' ` : ` `
-		let buscar_categoria = (categoria.trim().length > 0) ? ` = '${categoria}' ` : ` IN(20,21) `
+		let buscar_categoria = (categoria.trim().length > 0) ? ` = '${categoria}' ` : ` IN(20,21,22) `
 
 
 let buscar_producto = (producto.trim().length > 0) ? ` AND producto.RUTA2 = '${producto.trim()}' ` : ` `
@@ -66,9 +74,18 @@ let buscar_mecanismo = (mecanismo.trim().length > 0) ? ` AND producto.TIPO = '${
 
 let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '${respaldo.trim()}' ` : ` `
 
+let buscar_modelo = (modelo.trim().length > 0) ? ` AND producto.RELACION = '${modelo.trim()}' ` : ` `
+
+
+limita = limitb-50
+
+
 
         let query = `SELECT producto.CODIGO_PRODUCTO, 
         					producto.DESCRIPCION, 
+                  producto.POSICION, 
+                  producto.FRENTE, 
+                  producto.TRASCARA, 
         					categoria_producto.nombre as CATEGORIA, 
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
@@ -80,10 +97,11 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
                   ${buscar_mecanismo}
                   ${buscar_respaldo}
         					${buscar_descripcion}
+                  ${buscar_modelo}
         					${buscar_codigo}
         					AND producto.FAMILIA = 'generico'
-                  AND producto.TEMPORADA = '2' limit ${limita}, ${limitb};` 
-
+                  AND producto.TEMPORADA = '2' limit ${limitb}, 50;` 
+/*
           let query1 = `SELECT count(producto.CODIGO_PRODUCTO) as total
                   FROM producto, categoria_producto 
                   WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
@@ -97,12 +115,15 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
                   ${buscar_codigo}
                   AND producto.FAMILIA = 'generico'
                   AND producto.TEMPORADA = '2';` 
+*/
+
 
         pool.getConnection( (err, connection) => {
-            connection.query( query+query1 , (err, rows, fields) => {
+            connection.query( query , (err, rows, fields) => {
                 connection.release()
                 if (!err){
-                  resolve( {productos:rows[0],cuenta:rows[1]} )
+                  resolve( { productos:rows } )
+                  //resolve( {productos:rows[0],cuenta:rows[1]} )
                 }else{
                 	reject( err )
                 }
@@ -127,7 +148,8 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
         					producto.CATEGORIA as CODIGO_CATEGORIA 
         					FROM producto, categoria_producto 
         					WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
-        					AND producto.CODIGO_GENERICO = '${codigo}';` 
+        					AND producto.CODIGO_GENERICO = '${codigo}'
+                  limit 50;` 
         pool.getConnection( (err, connection) => {
             connection.query( query, (err, rows, fields) => {
                 connection.release()
@@ -147,12 +169,19 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
   })
 
   /* Filtro Hijo Silla */
-  socket.on( 'filtroHijoSilla', ( generico, codigo, descripcion, callback ) => {
+  socket.on( 'filtroHijoSilla', ( generico, asiento, respaldo, estructura, callback ) => {
 ////////////////////
     let promesa = new Promise( (resolve, reject) => {  
         
-    let buscar_codigo = (codigo.trim().length > 0) ? ` AND producto.CODIGO_PRODUCTO = '${codigo.trim()}' ` : ` `
-    let buscar_descripcion = (descripcion.trim().length > 0) ? ` AND producto.DESCRIPCION = '${descripcion.trim()}' ` : ` `
+    //let buscar_codigo = (codigo.trim().length > 0) ? ` AND producto.CODIGO_PRODUCTO = '${codigo.trim()}' ` : ` `
+    //let buscar_descripcion = (descripcion.trim().length > 0) ? ` AND producto.DESCRIPCION = '${descripcion.trim()}' ` : ` `
+
+
+    let buscar_asiento = (asiento.trim().length > 0) ? ` AND producto.POSICION like '${asiento.trim()}%' ` : ` `
+    let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.FRENTE like '${respaldo.trim()}%' ` : ` `
+    let buscar_estructura = (estructura.trim().length > 0) ? ` AND producto.TRASCARA like '${estructura.trim()}%' ` : ` `
+
+
 
         let query = `SELECT producto.CODIGO_PRODUCTO, 
                   producto.DESCRIPCION, 
@@ -160,9 +189,14 @@ let buscar_respaldo = (respaldo.trim().length > 0) ? ` AND producto.TERMINO = '$
                   producto.CATEGORIA as CODIGO_CATEGORIA 
                   FROM producto, categoria_producto 
                   WHERE producto.CATEGORIA = categoria_producto.id_categoria_producto 
-                  ${buscar_descripcion}
-                  ${buscar_codigo}
-                  AND producto.CODIGO_GENERICO = '${generico}';` 
+                  ${buscar_asiento}
+                  ${buscar_respaldo}
+                  ${buscar_estructura}
+                  AND producto.CODIGO_GENERICO = '${generico}'
+                  limit 50;` 
+
+                  console.log( query )
+
         pool.getConnection( (err, connection) => {
             connection.query( query , (err, rows, fields) => {
                 connection.release()

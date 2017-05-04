@@ -31,8 +31,11 @@ class Item extends Component {
                 <a>
                   <i 
                     onClick={this.props.buscarHijoSilla} 
-                    data-descripcion={this.props.bodega.descripcion} 
+                    data-descripcion={this.props.bodega.DESCRIPCION} 
                     data-codigo={this.props.bodega.CODIGO_PRODUCTO} 
+                    data-asiento={this.props.bodega.POSICION} 
+                    data-respaldo={this.props.bodega.FRENTE} 
+                    data-estructura={this.props.bodega.TRASCARA} 
                     class="fa fa-eye" 
                     aria-hidden="true" ></i>
                   </a>
