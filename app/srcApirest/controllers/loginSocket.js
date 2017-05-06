@@ -3,6 +3,8 @@ const moment = require('moment')
 const User = require('../models/user')
 const pokemonGif = require('pokemon-gif')
 
+const Promise = require('promise')
+
 module.exports = (io, request) => {
 
   io
@@ -10,6 +12,44 @@ module.exports = (io, request) => {
   .on('connection', (socket) => {
 
     socket.on('checkUser', (token, callback) => {
+////////
+
+const decoded = new Promise((resolve, reject) => {
+    try {
+      const payload = jwt.decode(token, global.secret)
+
+      if (payload.exp <= moment().unix()) {
+        reject({
+          status: 103,
+          message: 'Su tiempo de sesion a expirado, no se duerma!'
+        })
+      }
+
+      payload.exp = moment().add(14, 'days').unix()
+   
+      resolve({
+          status: 101,
+          token: jwt.encode(payload, global.secret),
+          message: 'El token es valido'
+        })
+    
+    } catch (err) {
+      reject({
+          status: 102,
+          message: 'Tenga la amabilidad de loguearse c:'
+        })
+    }
+})
+  decoded
+    .then(response => {
+      callback(response)
+    })
+    .catch(response => {
+      callback(response)
+    })
+
+
+/*
       if (global.token == token && !(token == null) ) {
         callback(true)
       } else{
@@ -17,9 +57,60 @@ module.exports = (io, request) => {
         global.userName = null
         callback(false)
       }
+*/
+
+/////////
+
+
+
+
     })
 
     socket.on('checkToken', (token, callback) => {
+
+
+
+
+const decoded = new Promise((resolve, reject) => {
+    try {
+      const payload = jwt.decode(token, global.secret)
+
+      if (payload.exp <= moment().unix()) {
+        reject({
+          status: 103,
+          message: 'El token ha expirado'
+        })
+      }
+
+      payload.exp = moment().add(14, 'days').unix()
+   
+      resolve({
+          status: 101,
+          token: jwt.encode(payload, global.secret),
+          message: 'El token es valido'
+        })
+    
+    } catch (err) {
+      reject({
+          status: 102,
+          message: 'El token es invalido'
+        })
+    }
+})
+  decoded
+    .then(response => {
+      callback(response)
+    })
+    .catch(response => {
+      callback(response)
+    })
+
+
+
+
+
+
+/*
       if (global.token == token && !(token == null) ) {
         callback(true)
       } else{
@@ -27,6 +118,7 @@ module.exports = (io, request) => {
         global.userName = null
         callback(false)
       }
+*/   
     })
 
     socket.on('login', ( data, callback, token = null) => {
@@ -46,7 +138,8 @@ User.
         token = jwt.encode( { 
                               name: `${user.name}`, 
                               type: `${user.type}`, 
-                              expire: `${moment().format('h:mm:ss')}`,
+                              iat: moment().unix(),
+                              exp: moment().add(14, 'days').unix(),
                               profile_picture: `${user.profile_picture}` }, 
                               global.secret)
 
@@ -106,7 +199,8 @@ User.
                   token = jwt.encode( { 
                                         name: `${doc.name}`, 
                                         type: `${doc.type}`, 
-                                        expire: `${moment().format('h:mm:ss')}`,
+                                        iat: moment().unix(),
+                                        exp: moment().add(14, 'days').unix(),
                                         profile_picture: `${doc.profile_picture}` }, 
                                         global.secret )
 

@@ -43,6 +43,24 @@ let LoginStore = Reflux.createStore({
   }
 */
         socket.emit('checkUser', localStorage.getItem('token') , (request) => {
+
+          switch(request.status) {
+              case 101:
+                  localStorage.setItem('token', request.token)
+                  break
+              case 102:
+                  alert(request.message)
+                  localStorage.clear()
+                  browserHistory.push('/')
+                  break
+              case 103:
+                  alert(request.message)
+                  localStorage.clear()
+                  browserHistory.push('/')
+                  break
+          }
+
+/*
           if (!request) {
               localStorage.removeItem('name')
               localStorage.removeItem('type')
@@ -51,13 +69,25 @@ let LoginStore = Reflux.createStore({
               localStorage.removeItem('profile_picture')
               browserHistory.push('/')
           }
+*/          
         })
   },
   checkToken: function(){
         socket.emit('checkToken', localStorage.getItem('token') , (request) => {
+          
+
+          switch(request.status) {
+              case 101:
+                  localStorage.setItem('token', request.token)
+                  browserHistory.push('/home')
+                  break
+          }
+
+/*
           if (request) {
               browserHistory.push('/home')
           }
+*/          
         })
   }
 })
