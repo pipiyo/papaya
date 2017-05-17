@@ -30,7 +30,7 @@ const decoded = new Promise((resolve, reject) => {
       resolve({
           status: 101,
           token: jwt.encode(payload, global.secret),
-          message: 'El token es valido'
+          message: 'Todo bien papu'
         })
     
     } catch (err) {
