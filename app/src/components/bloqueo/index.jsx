@@ -10,41 +10,56 @@ class BloqueoIndex extends Component {
   }
   render() {
 
+    //console.log( this.props )
+
       return (         
-        <div>
-          <Title />
-          <Filtro />
+          <div class="module-bloqueo">
 
-          <div class="module-arrow">
-            <div class="arrow-b"><h3>Utilice las flechas si es necesario para recorrer la tabla</h3></div>
-          </div>
-           
-          <div class="module-cuadro-rocha">
-            <div class="module-cuadro-rocha-phone">
-
-              <div class="content-rocha-info">
-
-                <div class="item">
-
-
-
-                </div>
-
+              <div>
+                <h1>Guardar</h1>
+                <button onClick={this.props.obj.guardar} >GUARDAME</button>
               </div>
+            
+              <div>
+                <h1>Areas</h1>
+                <lu>
 
-              <div class="content-rocha-day" id="tabla-cuadro-rocha">
-
-                <div class="item">
-                  
-                </div>
-
+                  {
+                    this.props.obj.area.map( (a, i) => {
+                      //console.log( a )
+                      return( <li key={i} > <input class="checkArea" onClick={this.props.obj.checkArea} value={a._id} type="checkbox" /> {a.name} </li> )
+                    })
+                  }
+                </lu>
               </div>
 
 
-            </div>
+              <div class="item-filter">
+                <h1>Contenidos</h1>
+                <lu>
+
+                  {
+                    this.props.obj.content.map( (con, i) => {
+                      //console.log( con )
+                      return( <li key={i} > <input class="checkContent" value={con._id} type="checkbox"/> {con.name}  
+                                <ul>
+                          {
+                            con.items.map( (item, ii) => {
+                              //console.log( con )
+                              return( ( item.type == `title` ) ? <li key={ii} > {`TITULO ${item.num} ${item.name}`}  </li> : <li key={ii} > {item.name}  </li> )
+
+                        
+                            })
+                          }
+                              </ul>
+                             </li> )
+
+                    })
+                  }
+                </lu>
+              </div>
           </div>
 
-        </div>
       )
 
   }
