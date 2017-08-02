@@ -96,7 +96,12 @@ let HomeStore = Reflux.createStore({
 
   getContent: function() {
 
-    socket.emit('getContent', (content, user, number) => {
+
+    let type = localStorage.getItem('type').toLowerCase()
+    type = type[0].toUpperCase() + type.slice(1)
+
+
+    socket.emit('getContent', type,  (content, user, number) => {
 
 /*
       if (number == 0) {
@@ -105,6 +110,7 @@ let HomeStore = Reflux.createStore({
         this.obj.numberNotification = <NumberNotification number={number} />
       }
 */  
+
       this.obj.menu = content
 
       this.obj.user = {

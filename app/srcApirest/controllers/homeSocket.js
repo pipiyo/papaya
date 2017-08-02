@@ -4,6 +4,8 @@ const PubSub = require('pubsub-js')
 const User = require('../models/user')
 const decodeToken = require('./decodeToken')
 
+const Area = require('../models/area')
+
 module.exports = (io) => {
 
   io
@@ -35,14 +37,15 @@ module.exports = (io) => {
 	  })
 */
 
-	  socket.on('getContent', (callback) => {
-
+	  socket.on('getContent', (type, callback) => {
+	  	/*
 		Content.
 		  find({}).
 		  exec( (err, n) => {
 		  	if (err) console.log(err)
 			return n
 		  }).then( (n) => {
+
 		  		Notification.
 				  find({ 'read_by': { $ne: global.userName } }).
 				  count().
@@ -52,6 +55,17 @@ module.exports = (io) => {
 				  		callback(n, user, number)
 				  })
 		  })
+*/
+
+				Area.
+				  findOne({ id_name: `${type}` }).
+				  populate('items').
+				  exec( (err, a) => {
+				  	if (err) console.log(err)
+					callback( a.items, null, null )
+				  })
+
+
 	  })
 
 
